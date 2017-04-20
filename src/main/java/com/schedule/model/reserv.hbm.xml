@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.shedule.model.ReservVO" table="reserv" >
+        
+        <id name="reservNo" column="reservNo">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="reservDateTime" column="reservDateTime" />
+        
+        <property name="noteC" column="noteC" />
+        <property name="notesE" column="notesE" />
+        <property name="employeeNo" column="employeeNo" />
+        <property name="status" column="status" />
+        
+        <set name = "reservLists" table = "reserv_list" lazy="false" cascade="all" inverse="true" >
+   			<key><column name="reservno"></column></key>
+   			<one-to-many class="com.reserv_list.model.ReservListVO"/>
+   		</set>
+   		
+		<many-to-one name="membercarsVO" class = "com.member_cars.model.MemberCarsVO" lazy="false">
+		<column name="carLicense"></column>
+		</many-to-one> 
+        
+        <many-to-one name="employeeVO" class = "com.employee.model.EmployeeVO" lazy="false">
+		<column name="employeeNo"></column>
+		</many-to-one> 
+        
+    </class>
+</hibernate-mapping>
