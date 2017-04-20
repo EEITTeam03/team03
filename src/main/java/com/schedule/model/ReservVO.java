@@ -1,15 +1,32 @@
 package com.schedule.model;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.employee.model.EmployeeVO;
+import com.member_cars.model.MemberCarsVO;
+
+
 
 public class ReservVO implements java.io.Serializable{
 	private Integer reservNo;
 	private Timestamp reservDateTime;
-	private String carLicense;
+	
 	private String noteC;
 	private String notesE;
-	private Integer employeeNo;
+	
 	private Integer status;
+	
+	private MemberCarsVO membercarsVO;
+	private EmployeeVO employeeVO; 
+	public EmployeeVO getEmployeeVO() {
+		return employeeVO;
+	}
+	public void setEmployeeVO(EmployeeVO employeeVO) {
+		this.employeeVO = employeeVO;
+	}
+
 	public Integer getReservNo() {
 		return reservNo;
 	}
@@ -22,12 +39,7 @@ public class ReservVO implements java.io.Serializable{
 	public void setReservDateTime(Timestamp reservDateTime) {
 		this.reservDateTime = reservDateTime;
 	}
-	public String getCarLicense() {
-		return carLicense;
-	}
-	public void setCarLicense(String carLicense) {
-		this.carLicense = carLicense;
-	}
+
 	public String getNoteC() {
 		return noteC;
 	}
@@ -40,11 +52,12 @@ public class ReservVO implements java.io.Serializable{
 	public void setNotesE(String notesE) {
 		this.notesE = notesE;
 	}
-	public Integer getEmployeeNo() {
-		return employeeNo;
+	
+	public MemberCarsVO getMembercarsVO() {
+		return membercarsVO;
 	}
-	public void setEmployeeNo(Integer employeeNo) {
-		this.employeeNo = employeeNo;
+	public void setMembercarsVO(MemberCarsVO membercarsVO) {
+		this.membercarsVO = membercarsVO;
 	}
 	public Integer getStatus() {
 		return status;
