@@ -10,7 +10,7 @@
         
         <set name = "reserves" table = "reserv" lazy="false" cascade="all" inverse="true" >
    			<key><column name="employeeNo"></column></key>
-   			<one-to-many class="com.shedule.model.ReservVO"/>
+   			<one-to-many class="com.schedule.model.ReservVO"/>
    		</set>
 	</class>
 </hibernate-mapping>

@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.shedule.model.ReservVO" table="reserv" >
+    <class name="com.schedule.model.ReservVO" table="reserv" >
         
         <id name="reservNo" column="reservNo">
             <generator class="identity"/>
