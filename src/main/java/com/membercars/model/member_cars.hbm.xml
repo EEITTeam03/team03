@@ -4,9 +4,11 @@
 <hibernate-mapping>
 <class name="com.membercars.model.MemberCarsVO" table="member_cars">
 	<id name="carLicense" column="carLicense"></id>
+	
 	<many-to-one name="memberInfoVO" class="com.memberinfo.model.MemberInfoVO" lazy="false" cascade="all">
     		<column name="memberNo" />
     </many-to-one>
+    
 	<property name="modelNo" column="modelNo" />
 	<set name = "reserves" table = "reserv" lazy="false" cascade="all" inverse="true" >
    			<key><column name="carLicense"></column></key>

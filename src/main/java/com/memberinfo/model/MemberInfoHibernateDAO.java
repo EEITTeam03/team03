@@ -1,25 +1,20 @@
-package com.cartype.model;
+package com.memberinfo.model;
 
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
 import hibernate.util.HibernateUtil;
 
-
-public class CarTypeHibernateDAO implements CarTypeDAO {
-
-	private static final String GET_ALL_STMT = "from CarTypeVO order by modelNo";
-	private static final String GET_BRAND_STMT = "from CarTypeVO where brand LIKE ?";
+public class MemberInfoHibernateDAO implements MemberInfoDAO {
+	
+	private static final String GET_ALL_STMT = "from MemberInfoVO order by memberNo";
+	
 	@Override
-	public void insert(CarTypeVO carTypeVO) {
+	public void insert(MemberInfoVO memberInfoVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(carTypeVO);
+			session.saveOrUpdate(memberInfoVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -28,11 +23,11 @@ public class CarTypeHibernateDAO implements CarTypeDAO {
 	}
 
 	@Override
-	public void update(CarTypeVO carTypeVO) {
+	public void update(MemberInfoVO memberInfoVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(carTypeVO);
+			session.saveOrUpdate(memberInfoVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -41,13 +36,12 @@ public class CarTypeHibernateDAO implements CarTypeDAO {
 	}
 
 	@Override
-	public void delete(String modelNo) {
+	public void delete(Integer memberNo) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("delete CarTypeVO where model_No=?");
-			query.setParameter(0, modelNo);
-			System.out.println("total deleted: " + query.executeUpdate());
+			MemberInfoVO memberInfoVO = (MemberInfoVO) session.get(MemberInfoVO.class, memberNo);
+			session.delete(memberInfoVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -56,44 +50,28 @@ public class CarTypeHibernateDAO implements CarTypeDAO {
 	}
 
 	@Override
-	public CarTypeVO findByPK(String modelNo) {
-		CarTypeVO carTypeVO = null;
+	public MemberInfoVO findByPK(String memberNo) {
+		MemberInfoVO memberInfoVO = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			carTypeVO = (CarTypeVO) session.get(CarTypeVO.class,modelNo);
+			memberInfoVO = (MemberInfoVO) session.get(MemberInfoVO.class, memberNo);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
-		} 
-		return carTypeVO;
-		
+		}
+		return memberInfoVO;
 	}
 
 	@Override
-	public List<CarTypeVO> findByBrand(String brand) {
-		
-		List<CarTypeVO> list = null;
-		
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			Query query = session.createQuery(GET_BRAND_STMT);
-			query.setParameter(0, brand+"%");
-			list = query.list();
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		} 
-		return list;
+	public MemberInfoVO findByPhone(String phone) {
+		return null;
 	}
 
 	@Override
-	public List<CarTypeVO> listAll() {
-		List<CarTypeVO> list = null;
-		
+	public List<MemberInfoVO> listAll() {
+		List<MemberInfoVO> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -103,7 +81,7 @@ public class CarTypeHibernateDAO implements CarTypeDAO {
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
-		} 
+		}
 		return list;
 	}
 

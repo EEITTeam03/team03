@@ -3,18 +3,23 @@ package com.membercars.model;
 import java.util.HashSet;
 import java.util.Set;
 
+
+import com.memberinfo.model.MemberInfoVO;
 import com.schedule.model.ReservVO;
 
 public class MemberCarsVO {
-	private Integer memberNo;
+	private MemberInfoVO memberInfoVO;
 	private String carLicense;
 	private Integer modelNo;
 	private Set<ReservVO> reserves = new HashSet<ReservVO>();
-	public Integer getMemberNo() {
-		return memberNo;
+	
+	
+	public MemberInfoVO getMemberInfoVO() {
+		return memberInfoVO;
 	}
-	public void setMemberNo(Integer memberNo) {
-		this.memberNo = memberNo;
+	public void setMemberInfoVO(MemberInfoVO memberInfoVO) {
+		this.memberInfoVO = memberInfoVO;
+
 	}
 	public String getCarLicense() {
 		return carLicense;

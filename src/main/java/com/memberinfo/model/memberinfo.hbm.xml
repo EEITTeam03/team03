@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.memberinfo.model.MemberInfoVO" table="member_info">
+	<id name="memberNo" column="memberNo"></id>
+	<property name="email" column="email" />
+	<property name="password" column="password" />
+	<property name="memberName" column="memberName" />
+	<property name="phone" column="phone" />
+	<property name="birthday" column="birthday" />
+	<property name="address" column="address" />
+	<property name="effectiveDate" column="effectiveDate" />
+	<set name="memberCars" table="member_cars" lazy="false" cascade="all" >			
+			<key>
+				<column name="memberNo" />
+			</key>
+			<one-to-many class="com.membercars.model.MemberCarsVO" />
+		</set>
+</class>
+</hibernate-mapping>
