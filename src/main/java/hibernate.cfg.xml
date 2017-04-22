@@ -34,11 +34,12 @@
 
 		<!--Java物件與資料庫表格的映射檔 -->
 		<mapping resource="com/schedule/model/reserv.hbm.xml" />
-		<mapping resource="com/member_cars/model/member_cars.hbm.xml" />
+		<mapping resource="com/membercars/model/member_cars.hbm.xml" />
 		<mapping resource="com/employee/model/employee.hbm.xml" />
 		<mapping resource="com/cartype/model/cartype.hbm.xml" />
 		<mapping resource="com/carclass/model/carclass.hbm.xml" />
-		
+		<mapping resource="com/reservlist/model/reserv_list.hbm.xml"/>
+		<mapping resource="com/services/model/services.hbm.xml"/>
 		
 	</session-factory>
 	

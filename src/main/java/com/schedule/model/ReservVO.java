@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.employee.model.EmployeeVO;
-import com.member_cars.model.MemberCarsVO;
+import com.membercars.model.MemberCarsVO;
+import com.reservlist.model.ReservListVO;
 
 
 
@@ -19,7 +20,14 @@ public class ReservVO implements java.io.Serializable{
 	private Integer status;
 	
 	private MemberCarsVO membercarsVO;
-	private EmployeeVO employeeVO; 
+	private EmployeeVO employeeVO;
+	private Set<ReservListVO>reservlists=new HashSet<ReservListVO>();
+	public Set<ReservListVO> getReservlists() {
+		return reservlists;
+	}
+	public void setReservlists(Set<ReservListVO> reservlists) {
+		this.reservlists = reservlists;
+	}
 	public EmployeeVO getEmployeeVO() {
 		return employeeVO;
 	}

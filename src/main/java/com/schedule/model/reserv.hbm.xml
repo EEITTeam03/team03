@@ -17,13 +17,18 @@
         <property name="status" column="status" />
         
    		
-		<many-to-one name="membercarsVO" class = "com.member_cars.model.MemberCarsVO" lazy="false">
+		<many-to-one name="membercarsVO" class = "com.membercars.model.MemberCarsVO" lazy="false">
 		<column name="carLicense"></column>
 		</many-to-one> 
         
         <many-to-one name="employeeVO" class = "com.employee.model.EmployeeVO" lazy="false">
 		<column name="employeeNo"></column>
-		</many-to-one> 
+		</many-to-one>
+		
+		<set name = "reservlists" table = "reserv_list" lazy="false" cascade="all" inverse="true" >
+   			<key><column name="reservNo"></column></key>
+   			<one-to-many class="com.reservlist.model.ReservListVO"/>
+   		</set> 
         
     </class>
 </hibernate-mapping>
