@@ -8,6 +8,7 @@ import hibernate.util.HibernateUtil;
 public class MemberInfoHibernateDAO implements MemberInfoDAO {
 	
 	private static final String GET_ALL_STMT = "from MemberInfoVO order by memberNo";
+	private static final String GET_BY_PHONE = "from MemberInfoVO where phone =?";
 	
 	@Override
 	public void insert(MemberInfoVO memberInfoVO) {
@@ -50,7 +51,7 @@ public class MemberInfoHibernateDAO implements MemberInfoDAO {
 	}
 
 	@Override
-	public MemberInfoVO findByPK(String memberNo) {
+	public MemberInfoVO findByPK(Integer memberNo) {
 		MemberInfoVO memberInfoVO = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
@@ -66,7 +67,21 @@ public class MemberInfoHibernateDAO implements MemberInfoDAO {
 
 	@Override
 	public MemberInfoVO findByPhone(String phone) {
-		return null;
+		MemberInfoVO memberInfoVO = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(GET_BY_PHONE);
+			query.setParameter(0, phone);
+			List<MemberInfoVO> list = query.list();
+			if(list.size() != 0)
+				memberInfoVO = list.get(0);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return memberInfoVO;
 	}
 
 	@Override

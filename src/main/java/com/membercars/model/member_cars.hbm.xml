@@ -9,7 +9,11 @@
     		<column name="memberNo" />
     </many-to-one>
     
-	<property name="modelNo" column="modelNo" />
+	<many-to-one name="carTypeVO" class="com.cartype.model.CarTypeVO" lazy="false" cascade="all">
+    		<column name="modelNo" />
+    </many-to-one>
+	
+	
 	<set name = "reserves" table = "reserv" lazy="false" cascade="all" inverse="true" >
    			<key><column name="carLicense"></column></key>
    			<one-to-many class="com.schedule.model.ReservVO"/>

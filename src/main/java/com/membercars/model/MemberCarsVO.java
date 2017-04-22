@@ -3,23 +3,20 @@ package com.membercars.model;
 import java.util.HashSet;
 import java.util.Set;
 
-
+import com.cartype.model.CarTypeVO;
 import com.memberinfo.model.MemberInfoVO;
 import com.schedule.model.ReservVO;
 
 public class MemberCarsVO {
 	private MemberInfoVO memberInfoVO;
 	private String carLicense;
-	private Integer modelNo;
-	private Set<ReservVO> reserves = new HashSet<ReservVO>();
-	
+	private CarTypeVO carTypeVO;
 	
 	public MemberInfoVO getMemberInfoVO() {
 		return memberInfoVO;
 	}
 	public void setMemberInfoVO(MemberInfoVO memberInfoVO) {
 		this.memberInfoVO = memberInfoVO;
-
 	}
 	public String getCarLicense() {
 		return carLicense;
@@ -27,11 +24,11 @@ public class MemberCarsVO {
 	public void setCarLicense(String carLicense) {
 		this.carLicense = carLicense;
 	}
-	public Integer getModelNo() {
-		return modelNo;
+	public CarTypeVO getCarTypeVO() {
+		return carTypeVO;
 	}
-	public void setModelNo(Integer modelNo) {
-		this.modelNo = modelNo;
+	public void setCarTypeVO(CarTypeVO carTypeVO) {
+		this.carTypeVO = carTypeVO;
 	}
 	public Set<ReservVO> getReserves() {
 		return reserves;
@@ -39,4 +36,8 @@ public class MemberCarsVO {
 	public void setReserves(Set<ReservVO> reserves) {
 		this.reserves = reserves;
 	}
+	private Set<ReservVO> reserves = new HashSet<ReservVO>();
+	
+	
+
 }
