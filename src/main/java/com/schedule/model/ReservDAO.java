@@ -1,11 +1,15 @@
 package com.schedule.model;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 
 import com.membercars.model.MemberCarsVO;
+
+import com.reservlist.model.ReservListVO;
+
 
 import hibernate.util.HibernateUtil;
 
@@ -56,6 +60,13 @@ public class ReservDAO implements ReservDAO_interface {
 			System.out.println(reservVO.getStatus()+",");
 			System.out.println(reservVO.getMembercarsVO().getCarLicense()+",");
 			System.out.println(reservVO.getEmployeeVO().getEmployeeNo());
+			Set<ReservListVO>relists = reservVO.getReservlists();
+			for(ReservListVO lists:relists){
+				System.out.println(lists.getServicesVO().getServNo());
+				System.out.println(lists.getServName());
+				System.out.println(lists.getServPrice());
+				System.out.println(lists.getServTime());
+			}
 		}
 		
 	}

@@ -3,6 +3,7 @@ package com.membercars.model;
 import java.util.HashSet;
 import java.util.Set;
 
+
 import com.memberinfo.model.MemberInfoVO;
 import com.schedule.model.ReservVO;
 
@@ -18,6 +19,7 @@ public class MemberCarsVO {
 	}
 	public void setMemberInfoVO(MemberInfoVO memberInfoVO) {
 		this.memberInfoVO = memberInfoVO;
+
 	}
 	public String getCarLicense() {
 		return carLicense;
