@@ -1,6 +1,9 @@
 package com.memberinfo.model;
 
 import java.sql.Date;
+import java.util.Set;
+
+import com.membercars.model.MemberCarsVO;
 
 public class MemberInfoVO {
 	Integer memberNo;
@@ -11,6 +14,7 @@ public class MemberInfoVO {
 	Date birthday;
 	String address;
 	Date effectiveDate;
+	Set<MemberCarsVO> memberCars;
 	
 	public Integer getMemberNo() {
 		return memberNo;
@@ -60,4 +64,12 @@ public class MemberInfoVO {
 	public void setEffectiveDate(Date effectiveDate) {
 		this.effectiveDate = effectiveDate;
 	}
+	public Set<MemberCarsVO> getMemberCars() {
+		return memberCars;
+	}
+	public void setMemberCars(Set<MemberCarsVO> memberCars) {
+		this.memberCars = memberCars;
+	}
+	
+
 }

@@ -38,7 +38,7 @@
 		<mapping resource="com/employee/model/employee.hbm.xml" />
 		<mapping resource="com/cartype/model/cartype.hbm.xml" />
 		<mapping resource="com/carclass/model/carclass.hbm.xml" />
-		
+		<mapping resource="com/memberinfo/model/memberinfo.hbm.xml" />
 		
 	</session-factory>
 	
