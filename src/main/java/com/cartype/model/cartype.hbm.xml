@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.cartype.model.CarTypeVO" table="Car_Type" >
+        
+        <id name="modelNo" column="modelNo">
+        </id>
+        
+        <property name="brand" column="brand" />
+        <property name="carModel" column="carModel" />
+
+        
+        <many-to-one name="carClassVO" class="com.carclass.model.CarClassVO" lazy="false" cascade="all">
+            <column name="carClass" />
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>
+
