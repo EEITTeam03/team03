@@ -5,6 +5,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 
+import com.member_cars.model.MemberCarsVO;
+
 import hibernate.util.HibernateUtil;
 
 public class ReservDAO implements ReservDAO_interface {
@@ -55,6 +57,7 @@ public class ReservDAO implements ReservDAO_interface {
 			System.out.println(reservVO.getMembercarsVO().getCarLicense()+",");
 			System.out.println(reservVO.getEmployeeVO().getEmployeeNo());
 		}
+		
 	}
 
 }
