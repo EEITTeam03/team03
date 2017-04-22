@@ -47,7 +47,7 @@ public class CarTypeHibernateDAO implements CarTypeDAO {
 			session.beginTransaction();
 			Query query = session.createQuery("delete CarTypeVO where model_No=?");
 			query.setParameter(0, modelNo);
-			System.out.println("�R��������=" + query.executeUpdate());
+			System.out.println("total deleted: " + query.executeUpdate());
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
