@@ -1,4 +1,4 @@
-package com.block_rule.model;
+package com.blockrule.model;
 
 public class BlockRuleVo {
 	private Short blockRuleNo;

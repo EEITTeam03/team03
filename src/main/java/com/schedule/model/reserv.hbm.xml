@@ -17,7 +17,7 @@
         <property name="status" column="status" />
         
    		
-		<many-to-one name="membercarsVO" class = "com.member_cars.model.MemberCarsVO" lazy="false">
+		<many-to-one name="membercarsVO" class = "com.membercars.model.MemberCarsVO" lazy="false">
 		<column name="carLicense"></column>
 		</many-to-one> 
         

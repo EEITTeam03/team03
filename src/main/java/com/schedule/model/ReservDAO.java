@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 
-import com.member_cars.model.MemberCarsVO;
+import com.membercars.model.MemberCarsVO;
 
 import hibernate.util.HibernateUtil;
 

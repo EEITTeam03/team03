@@ -1,4 +1,4 @@
-package com.bock_list.model;
+package com.bocklist.model;
 
 public class BlockListVo {
 	private Integer mamberNo;

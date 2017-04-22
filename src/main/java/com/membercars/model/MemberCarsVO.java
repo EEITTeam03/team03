@@ -1,4 +1,4 @@
-package com.member_cars.model;
+package com.membercars.model;
 
 import java.util.HashSet;
 import java.util.Set;
