@@ -3,7 +3,9 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 <class name="com.memberinfo.model.MemberInfoVO" table="member_info">
-	<id name="memberNo" column="memberNo"></id>
+	<id name="memberNo" column="memberNo">
+		<generator class="identity"/>
+	</id>
 	<property name="email" column="email" />
 	<property name="password" column="password" />
 	<property name="memberName" column="memberName" />
