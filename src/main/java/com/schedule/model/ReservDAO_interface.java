@@ -7,4 +7,5 @@ import com.membercars.model.MemberCarsVO;
 public interface ReservDAO_interface {
 	public ReservVO findByPrimaryKey(Integer reservNo);
 	public List<ReservVO>getAll();
+	public List<Object[]>getSchedule();
 }
