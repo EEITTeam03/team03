@@ -73,6 +73,25 @@ public class ReservDAO implements ReservDAO_interface {
 		return list;
 	}
 
+	@Override
+	public List<Object[]> getSchedule(Integer employeeNo) {
+		// TODO Auto-generated method stub
+		List<Object[]>list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		String sqlquery = "select reservVO.reservNo,reservVO.reservDateTime,reservVO.employeeVO.employeeNo,"
+				+ "reservlistVO.servTime,reservlistVO.servName from ReservVO reservVO,ReservListVO reservlistVO where reservVO.reservNo=reservlistVO.reservVO.reservNo and reservVO.employeeVO.employeeNo="+employeeNo+" order by reservVO.reservDateTime";
+		try{
+			session.beginTransaction();
+			//Query query = session.createSQLQuery("select reserv.reservNo,reservDateTime,employeeNo,servTime,servName from reserv inner join reserv_list  on reserv.reservNo = reserv_list.reservNo");
+			Query query = session.createQuery(sqlquery);	
+			list=query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
 	
 
 	
@@ -96,7 +115,7 @@ public class ReservDAO implements ReservDAO_interface {
 //				System.out.println(lists.getServTime());
 //			}
 //		}
-		List<Object[]>list2 = dao.getSchedule();
+		List<Object[]>list2 = dao.getSchedule(2);
 		for(Object[] aArray:list2){
 			Calendar c=(Calendar)aArray[1];
 			System.out.print(aArray[0]+" ");
