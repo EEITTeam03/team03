@@ -1,6 +1,7 @@
 package com.schedule.model;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,6 +54,25 @@ public class ReservDAO implements ReservDAO_interface {
 		return list;
 	}
 
+	@Override
+	public List<Object[]> getSchedule() {
+		// TODO Auto-generated method stub
+		List<Object[]>list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			//Query query = session.createSQLQuery("select reserv.reservNo,reservDateTime,employeeNo,servTime,servName from reserv inner join reserv_list  on reserv.reservNo = reserv_list.reservNo");
+			Query query = session.createQuery("select reservVO.reservNo,reservVO.reservDateTime,reservVO.employeeVO.employeeNo,"
+					+ "reservlistVO.servTime,reservlistVO.servName from ReservVO reservVO,ReservListVO reservlistVO where reservVO.reservNo=reservlistVO.reservVO.reservNo order by reservVO.reservDateTime");		
+			list=query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+
 	
 
 	
@@ -77,32 +97,16 @@ public class ReservDAO implements ReservDAO_interface {
 //			}
 //		}
 		List<Object[]>list2 = dao.getSchedule();
-//		for(Object[] aArray:list2){
-//			System.out.print((Integer)aArray[0]+" ");
-//			System.out.print((Timestamp)aArray[1]+" ");
-//			System.out.print((Integer)aArray[2]+" ");
-//			System.out.print((Integer)aArray[3]+" ");
-//			System.out.print((String)aArray[4]+" ");
-//		}
-		
-	}
-
-	@Override
-	public List<Object[]> getSchedule() {
-		// TODO Auto-generated method stub
-		List<Object[]>list = null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try{
-			session.beginTransaction();
-			Query query = session.createSQLQuery("select reserv.reservNo,reservDateTime,employeeNo,servTime,servName from reserv inner join reserv_list  on reserv.reservNo = reserv_list.reservNo");
-					
-			list=query.list();
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
+		for(Object[] aArray:list2){
+			Calendar c=(Calendar)aArray[1];
+			System.out.print(aArray[0]+" ");
+			System.out.print(c.get(Calendar.DAY_OF_WEEK)+" ");
+			System.out.print(aArray[2]+" ");
+			System.out.print(aArray[3]+" ");
+			System.out.print(aArray[4]+" ");
+			System.out.println();
 		}
-		return list;
+		
 	}
 
 }
