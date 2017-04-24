@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<a href="testDS">testDS (Azure)</a>
+<a href="testDS">testDS (Azure) (JNDI)</a>
 
 </body>
 </html>
