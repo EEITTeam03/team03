@@ -8,7 +8,5 @@
 </head>
 <body>
 
-<a href="testDS">testDS (Azure) (JNDI)</a>
-hi
 </body>
 </html>
