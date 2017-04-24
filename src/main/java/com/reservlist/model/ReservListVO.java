@@ -6,6 +6,13 @@ import com.schedule.model.ReservVO;
 import com.services.model.ServicesVO;
 
 public class ReservListVO implements Serializable {
+	private Integer reservListNo;
+	public Integer getReservListNo() {
+		return reservListNo;
+	}
+	public void setReservListNo(Integer reservListNo) {
+		this.reservListNo = reservListNo;
+	}
 	private ReservVO reservVO;
 	private ServicesVO servicesVO;
 	private Integer servPrice;
