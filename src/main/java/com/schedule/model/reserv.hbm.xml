@@ -17,11 +17,11 @@
         <property name="status" column="status" />
         
    		
-		<many-to-one name="membercarsVO" class = "com.membercars.model.MemberCarsVO" lazy="false">
+		<many-to-one name="membercarsVO" class = "com.membercars.model.MemberCarsVO" lazy="false" cascade="all">
 		<column name="carLicense"></column>
 		</many-to-one> 
         
-        <many-to-one name="employeeVO" class = "com.employee.model.EmployeeVO" lazy="false">
+        <many-to-one name="employeeVO" class = "com.employee.model.EmployeeVO" lazy="false" cascade="all">
 		<column name="employeeNo"></column>
 		</many-to-one>
 		
