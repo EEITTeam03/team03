@@ -25,8 +25,8 @@ public class ModelTest extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Integer memberNo = (Integer) request.getAttribute("memberNo");
-		Integer memberNo = 6;
+		Integer memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		//Integer memberNo = 4;
 		
 		MemberInfoDAO dao = new MemberInfoHibernateDAO();
 		MemberInfoVO aVO = dao.findByPK(memberNo);

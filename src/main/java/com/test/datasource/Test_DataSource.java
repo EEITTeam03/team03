@@ -20,7 +20,7 @@ public class Test_DataSource extends HttpServlet {
 
 		try {
 			Context ctx = new javax.naming.InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cloudteam3");
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/localteam3");
 			if (ds != null) {
 				Connection conn = ds.getConnection();
 

@@ -11,5 +11,10 @@
 <a href="testDS">testDS (Azure) (JNDI)</a>
 <br>
 <a href="ModelTest">test model</a>
+<br>
+<form action="ModelTest">
+memberNo:<input type="text" name="memberNo">
+<input type="submit" value="go">
+</form>
 </body>
 </html>

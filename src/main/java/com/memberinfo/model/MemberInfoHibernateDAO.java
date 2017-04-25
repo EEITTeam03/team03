@@ -57,6 +57,9 @@ public class MemberInfoHibernateDAO implements MemberInfoDAO {
 		try {
 			session.beginTransaction();
 			memberInfoVO = (MemberInfoVO) session.get(MemberInfoVO.class, memberNo);
+//			Query query = session.createQuery("from MemberInfoVO where memberNo=?");
+//			query.setParameter(0, memberNo);
+//			memberInfoVO =(MemberInfoVO)query.list().get(0);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
