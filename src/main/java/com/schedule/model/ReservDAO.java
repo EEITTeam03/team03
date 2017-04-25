@@ -1,6 +1,7 @@
 package com.schedule.model;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -14,7 +15,7 @@ import org.hibernate.type.StandardBasicTypes;
 
 import com.employee.model.EmployeeVO;
 import com.membercars.model.MemberCarsVO;
-
+import com.memberinfo.model.MemberInfoVO;
 import com.reservlist.model.ReservListVO;
 
 
@@ -55,37 +56,6 @@ public class ReservDAO implements ReservDAO_interface {
 		return list;
 	}
 
-	@Override
-	public void insert(ReservVO reservVO) {
-		// TODO Auto-generated method stub
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try{
-			session.beginTransaction();
-			session.saveOrUpdate(reservVO);
-			session.getTransaction().commit();
-		}catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-	}
-
-	@Override
-	public void update(ReservVO reservVO) {
-		// TODO Auto-generated method stub
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try{
-			session.beginTransaction();
-			session.saveOrUpdate(reservVO);
-			session.getTransaction().commit();
-		}catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-	}
-
-
-
-	
 
 	
 
@@ -93,6 +63,7 @@ public class ReservDAO implements ReservDAO_interface {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ReservDAO dao = new ReservDAO();
+
 		List<ReservVO>list = dao.getAll();
 		for(ReservVO reservVO:list){
 			System.out.println(reservVO.getReservNo()+",");
@@ -105,15 +76,47 @@ public class ReservDAO implements ReservDAO_interface {
 			Set<ReservListVO>relists = reservVO.getReservlists();
 			for(ReservListVO lists:relists){
 				System.out.println(lists.getReservListNo());
+
 				System.out.println(lists.getServicesVO().getServNo());
 				System.out.println(lists.getServName());
 				System.out.println(lists.getServPrice());
 				System.out.println(lists.getServTime());
 			}
 		}
+
 		
 		//dao.delete(2);
 		
 	}
+
+	@Override
+	public void insert(ReservVO reservVO) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(reservVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+	}
+
+	@Override
+	public void update(ReservVO reservVO) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(reservVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+	}
+
+
 
 }

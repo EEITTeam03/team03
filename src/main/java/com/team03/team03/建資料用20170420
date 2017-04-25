@@ -1,0 +1,657 @@
+USE [Team3]
+GO
+
+DROP TABLE [dbo].[block_list]
+DROP TABLE [dbo].[block_rule]
+DROP TABLE [dbo].[feedback]
+DROP TABLE [dbo].[reserv_history]
+DROP TABLE [dbo].[reserv_list]
+DROP TABLE [dbo].[services_carClass]
+DROP TABLE [dbo].[service_step]
+
+DROP TABLE [dbo].[reserv]
+DROP TABLE [dbo].[services]
+DROP TABLE [dbo].[member_cars]
+DROP TABLE [dbo].[member_info]
+DROP TABLE [dbo].[employee]
+DROP TABLE [dbo].[car_type]
+DROP TABLE [dbo].[car_class]
+
+/****** Object:  Table [dbo].[block_list]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[block_list](
+	[memberNo] [int] NOT NULL,
+	[blockRuleNo] [smallint] NOT NULL,
+	[violationDate] [date] NOT NULL,
+	[reservationNo] [int] NOT NULL,
+	[blockState] [nvarchar](2) NOT NULL,
+ CONSTRAINT [PK_block_list] PRIMARY KEY CLUSTERED 
+(
+	[reservationNo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[block_rule]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[block_rule](
+	[blockRuleNo] [smallint] NOT NULL,
+	[blockRule] [nvarchar](10) NOT NULL,
+	[blockLimitTimes] [int] NOT NULL,
+	[blockTime] [int] NOT NULL,
+ CONSTRAINT [PK_block_rule] PRIMARY KEY CLUSTERED 
+(
+	[blockRuleNo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[car_class]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[car_class](
+	[carClass] [nvarchar](5) NOT NULL,
+	[className] [nvarchar](10) NULL,
+ CONSTRAINT [PK_car_class] PRIMARY KEY CLUSTERED 
+(
+	[carClass] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[car_type]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[car_type](
+	[modelNo] [varchar](20) NOT NULL,
+	[brand] [varchar](50) NOT NULL,
+	[carModel] [varchar](20) NOT NULL,
+	[carClass] [nvarchar](5) NOT NULL,
+ CONSTRAINT [PK_car_type] PRIMARY KEY CLUSTERED 
+(
+	[modelNo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[employee]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[employee](
+	[employeeNo] [nvarchar](4) NOT NULL,
+	[employeeName] [nvarchar](30) NOT NULL,
+ CONSTRAINT [PK_employee] PRIMARY KEY CLUSTERED 
+(
+	[employeeNo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[feedback]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[feedback](
+	[feedbackDate] [date] NOT NULL,
+	[memberName] [int] NOT NULL,
+	[reservNo] [int] NOT NULL,
+	[feedback] [nvarchar](200) NULL,
+	[reply] [nvarchar](200) NULL,
+	[readState] [int] NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[member_cars]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[member_cars](
+	[memberNo] [int] NOT NULL,
+	[carLicense] [varchar](20) NOT NULL,
+	[modelNo] [varchar](20) NOT NULL,
+ CONSTRAINT [PK_member_cars_1] PRIMARY KEY CLUSTERED 
+(
+	[carLicense] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[member_info]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[member_info](
+	[memberNo] [int] IDENTITY(1,1) NOT NULL,
+	[email] [varchar](50) NOT NULL,
+	[password] [varchar](50) NOT NULL,
+	[memberName] [nvarchar](15) NOT NULL,
+	[phone] [varchar](20) NOT NULL,
+	[birthday] [date] NOT NULL,
+	[address] [nvarchar](50) NOT NULL,
+	[effectiveDate] [date] NULL,
+ CONSTRAINT [PK_member_info] PRIMARY KEY CLUSTERED 
+(
+	[memberNo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[reserv]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[reserv](
+	[reservNo] [int] IDENTITY(1,1) NOT NULL,
+	[reservDateTime] [datetime] NOT NULL,
+	[carLicense] [varchar](20) NOT NULL,
+	[noteC] [nvarchar](200) NULL,
+	[notesE] [nvarchar](50) NULL,
+	[employeeNo] [nvarchar](4) NOT NULL,
+	[status] [int] NOT NULL,
+ CONSTRAINT [PK_reserv_list] PRIMARY KEY CLUSTERED 
+(
+	[reservNo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[reserv_history]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[reserv_history](
+	[dateTime] [datetime] NOT NULL,
+	[reservNo] [int] NOT NULL,
+	[employeeNo] [nvarchar](4) NOT NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[reserv_list]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[reserv_list](
+	[reservNo] [int] NOT NULL,
+	[servNo] [int] NOT NULL,
+	[servPrice] [int] NOT NULL,
+	[servTime] [int] NOT NULL,
+	[servName] [nvarchar](10) NOT NULL,
+ CONSTRAINT [PK_reserv_list_1] PRIMARY KEY CLUSTERED 
+(
+	[reservNo] ASC,
+	[servNo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[service_step]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[service_step](
+	[servNo] [int] NOT NULL,
+	[servStep] [int] NOT NULL,
+	[stepName] [nvarchar](20) NOT NULL,
+	[stepDescp] [nvarchar](50) NULL,
+	[stepPic] [varbinary](max) NULL,
+	[stepPercent] [int] NOT NULL,
+ CONSTRAINT [PK_service_step] PRIMARY KEY CLUSTERED 
+(
+	[servNo] ASC,
+	[servStep] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[services]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[services](
+	[servNo] [int] NOT NULL,
+	[servTypeNo] [varchar](2) NOT NULL,
+	[servName] [nvarchar](10) NOT NULL,
+	[servDesc] [nvarchar](200) NULL,
+	[servPhoto] [varbinary](max) NULL,
+	[servEffectiveDate] [date] NOT NULL,
+	[servStatus] [varchar](3) NOT NULL,
+ CONSTRAINT [PK_services] PRIMARY KEY CLUSTERED 
+(
+	[servNo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[services_carClass]    Script Date: 2017/4/20 下午 06:24:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[services_carClass](
+	[servNo] [int] NOT NULL,
+	[carClass] [nvarchar](5) NOT NULL,
+	[servPrice] [int] NOT NULL,
+	[servTime] [int] NOT NULL,
+ CONSTRAINT [PK_services_carClass] PRIMARY KEY CLUSTERED 
+(
+	[servNo] ASC,
+	[carClass] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+INSERT [dbo].[block_rule] ([blockRuleNo], [blockRule], [blockLimitTimes], [blockTime]) VALUES (1, N'取消預約', 3, 60)
+INSERT [dbo].[block_rule] ([blockRuleNo], [blockRule], [blockLimitTimes], [blockTime]) VALUES (2, N'預約未到', 2, 90)
+INSERT [dbo].[car_class] ([carClass], [className]) VALUES (N'L', N'大型車')
+INSERT [dbo].[car_class] ([carClass], [className]) VALUES (N'M', N'中型車')
+INSERT [dbo].[car_class] ([carClass], [className]) VALUES (N'S', N'小型車')
+INSERT [dbo].[car_class] ([carClass], [className]) VALUES (N'XL', N'休旅車')
+INSERT [dbo].[car_class] ([carClass], [className]) VALUES (N'XXL', N'商旅車')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1101', N'ALFA ROMEO 愛快羅密歐', N'l47', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1102', N'ALFA ROMEO 愛快羅密歐', N'l59', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1103', N'ALFA ROMEO 愛快羅密歐', N'BRERA', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1104', N'ALFA ROMEO 愛快羅密歐', N'GT', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1105', N'ALFA ROMEO 愛快羅密歐', N'SPIDER', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1201', N'AUDI 奧迪', N'A1', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1202', N'AUDI 奧迪', N'A3', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1203', N'AUDI 奧迪', N'A4', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1204', N'AUDI 奧迪', N'A5', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1205', N'AUDI 奧迪', N'A6', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1206', N'AUDI 奧迪', N'A7', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1207', N'AUDI 奧迪', N'A8', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1208', N'AUDI 奧迪', N'Q3', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1209', N'AUDI 奧迪', N'Q5', N'XL')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1210', N'AUDI 奧迪', N'Q7', N'XL')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1211', N'AUDI 奧迪', N'R8', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1212', N'AUDI 奧迪', N'RS4', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1213', N'AUDI 奧迪', N'RS5', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1214', N'AUDI 奧迪', N'RS6', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1215', N'AUDI 奧迪', N'RS7', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1216', N'AUDI 奧迪', N'S1', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1217', N'AUDI 奧迪', N'S3', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1218', N'AUDI 奧迪', N'S4', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1219', N'AUDI 奧迪', N'S5', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1220', N'AUDI 奧迪', N'S6', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1221', N'AUDI 奧迪', N'S7', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1222', N'AUDI 奧迪', N'S8', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1223', N'AUDI 奧迪', N'TT', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1301', N'Aston Martin 奧斯頓馬丁', N'DB9', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1302', N'Aston Martin 奧斯頓馬丁', N'DB9', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1303', N'Aston Martin 奧斯頓馬丁', N'DBS', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1304', N'Aston Martin 奧斯頓馬丁', N'Rapide S', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1305', N'Aston Martin 奧斯頓馬丁', N'Vanquish', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1306', N'Aston Martin 奧斯頓馬丁', N'Vantage', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1307', N'Aston Martin 奧斯頓馬丁', N'Virage', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1401', N'BMW 汎德', N'1 Series', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1402', N'BMW 汎德', N'2 Series', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1403', N'BMW 汎德', N'3 Series', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1404', N'BMW 汎德', N'3 Series GT', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1405', N'BMW 汎德', N'4 Series 2門', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1406', N'BMW 汎德', N'4 Series 4門', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1407', N'BMW 汎德', N'5 Series', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1408', N'BMW 汎德', N'5 Series GT', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1409', N'BMW 汎德', N'6 Series', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1410', N'BMW 汎德', N'7 Series', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1411', N'BMW 汎德', N'i3', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1412', N'BMW 汎德', N'i8', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1413', N'BMW 汎德', N'M1', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1414', N'BMW 汎德', N'M2', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1415', N'BMW 汎德', N'M3', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1416', N'BMW 汎德', N'M5', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1417', N'BMW 汎德', N'M6', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1418', N'BMW 汎德', N'X1', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1419', N'BMW 汎德', N'X3', N'XL')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1420', N'BMW 汎德', N'X4', N'XL')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1421', N'BMW 汎德', N'X5', N'XL')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1422', N'BMW 汎德', N'X6', N'XL')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1423', N'BMW 汎德', N'Z4', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1501', N'BUICK 別克', N'EXCELLE', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1502', N'BUICK 別克', N'LACROSSE', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1601', N'Bentley 賓利', N'Continental 2門', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1602', N'Bentley 賓利', N'Continental 4門', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1603', N'Bentley 賓利', N'Mulsanne', N'XL')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1701', N'CADILLAC 凱迪拉克', N'CTS', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1702', N'CADILLAC 凱迪拉克', N'STS', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1703', N'CADILLAC 凱迪拉克', N'SRX', N'XL')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1704', N'CADILLAC 凱迪拉克', N'ESCALADE', N'XL')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1705', N'CADILLAC 凱迪拉克', N'DTS', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1706', N'CADILLAC 凱迪拉克', N'DTS-V', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1801', N'CHRYSLER 克萊斯勒', N'TOWN&COUNTRY', N'XL')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1802', N'CHRYSLER 克萊斯勒', N'PT CRUISER', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1803', N'CHRYSLER 克萊斯勒', N'300 C', N'L')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1901', N'DAIHATSU 大發', N'DS3', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1902', N'DAIHATSU 大發', N'DS5', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1903', N'DAIHATSU 大發', N'Sirion', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'1904', N'DAIHATSU 大發', N'Terios', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'2001', N'FERRARI 法拉力', N'458', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'2002', N'FERRARI 法拉力', N'599', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'2003', N'FERRARI 法拉力', N'California', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'2004', N'FERRARI 法拉力', N'F12', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'2005', N'FERRARI 法拉力', N'FF', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'2006', N'FERRARI 法拉力', N'LaFerrari', N'S')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'2101', N'FIAT 飛雅特', N'PANDA', N'M')
+INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'2102', N'FIAT 飛雅特', N'GRANDE PUNTO', N'M')
+INSERT [dbo].[employee] ([employeeNo], [employeeName]) VALUES (N'1', N'周柏元')
+INSERT [dbo].[employee] ([employeeNo], [employeeName]) VALUES (N'2', N'陳致鈞')
+INSERT [dbo].[employee] ([employeeNo], [employeeName]) VALUES (N'3', N'蕭天怡')
+INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (9, N'0536-XB', N'1406')
+INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (3, N'2113-JL', N'2102')
+INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (2, N'2S-1485', N'1501')
+INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (5, N'3317-LS', N'1901')
+INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (9, N'6590-QZ', N'2006')
+INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (5, N'7211-PR', N'1304')
+INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (8, N'7953-66', N'2006')
+INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (4, N'ABC-2780', N'1205')
+INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (7, N'ABC-5678', N'1419')
+INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (1, N'AJG-5528', N'1102')
+INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (6, N'GT-8686', N'1304')
+INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (9, N'YM-8009', N'1702')
+SET IDENTITY_INSERT [dbo].[member_info] ON 
+
+INSERT [dbo].[member_info] ([memberNo], [email], [password], [memberName], [phone], [birthday], [address], [effectiveDate]) VALUES (1, N'Gary123456@gmail.com', N'sa123456', N'蔡小虎', N'28571721', CAST(0xFA110B00 AS Date), N'新北市三重區仁愛街55巷6樓', CAST(0x533A0B00 AS Date))
+INSERT [dbo].[member_info] ([memberNo], [email], [password], [memberName], [phone], [birthday], [address], [effectiveDate]) VALUES (2, N'Tom123456@gmail.com', N'sa123456', N'蕭煌奇', N'22873706', CAST(0x7A080B00 AS Date), N'台北市士林區承德路七段3號', CAST(0xC53A0B00 AS Date))
+INSERT [dbo].[member_info] ([memberNo], [email], [password], [memberName], [phone], [birthday], [address], [effectiveDate]) VALUES (3, N'Jack123456@gmail.com', N'sa123456', N'陳米尼', N'29774433', CAST(0xC3150B00 AS Date), N'台北市大同區哈密街47號6樓', CAST(0x433B0B00 AS Date))
+INSERT [dbo].[member_info] ([memberNo], [email], [password], [memberName], [phone], [birthday], [address], [effectiveDate]) VALUES (4, N'HBK123456@gmail.com', N'sa123456', N'蕭麥可', N'26445874', CAST(0xC1180B00 AS Date), N'台北市中山區錦州街50號1樓', CAST(0x553B0B00 AS Date))
+INSERT [dbo].[member_info] ([memberNo], [email], [password], [memberName], [phone], [birthday], [address], [effectiveDate]) VALUES (5, N'HAHA123456@gmail.com', N'sa123456', N'費玉清', N'29435588', CAST(0x69F40A00 AS Date), N'台北市士林區士商路69號', CAST(0x583B0B00 AS Date))
+INSERT [dbo].[member_info] ([memberNo], [email], [password], [memberName], [phone], [birthday], [address], [effectiveDate]) VALUES (6, N'ConfidentKing@gmail.com', N'sa123456', N'洪英浩', N'29774433', CAST(0x96F90A00 AS Date), N'台北市大同區哈密街47號5樓', CAST(0x3A3C0B00 AS Date))
+INSERT [dbo].[member_info] ([memberNo], [email], [password], [memberName], [phone], [birthday], [address], [effectiveDate]) VALUES (7, N'JavaEasy123456@gmail.com', N'sa123456', N'黃米奇', N'26445874', CAST(0xEF0F0B00 AS Date), N'台北市中山區中山北路二段66號5樓', CAST(0x843C0B00 AS Date))
+INSERT [dbo].[member_info] ([memberNo], [email], [password], [memberName], [phone], [birthday], [address], [effectiveDate]) VALUES (8, N'ShinsukeNakamura@gmail.com', N'sa123456', N'中邑真輔', N'26445874', CAST(0x41F40A00 AS Date), N'台北市北投區吉利街152號3樓', CAST(0xB63C0B00 AS Date))
+INSERT [dbo].[member_info] ([memberNo], [email], [password], [memberName], [phone], [birthday], [address], [effectiveDate]) VALUES (9, N'AJ123456@gmail.com', N'sa123456', N'斯泰爾斯', N'22142288', CAST(0x061D0B00 AS Date), N'新北市三重區五華街71巷33號2樓', CAST(0x043D0B00 AS Date))
+INSERT [dbo].[member_info] ([memberNo], [email], [password], [memberName], [phone], [birthday], [address], [effectiveDate]) VALUES (10, N'SqlQueen@gmail.com', N'sa123456', N'蕭美女', N'25446355', CAST(0x1D160B00 AS Date), N'新北市三重區三和路三段101巷168號1樓', CAST(0x2F3D0B00 AS Date))
+SET IDENTITY_INSERT [dbo].[member_info] OFF
+SET IDENTITY_INSERT [dbo].[reserv] ON 
+
+INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (1, CAST(0x0000A76F008C1360 AS DateTime), N'6590-QZ', N'無', N'無', N'1', 1)
+INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (2, CAST(0x0000A76500BD83A0 AS DateTime), N'ABC-5678', N'無', N'3M蠟', N'2', 2)
+INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (3, CAST(0x0000A76F008C1360 AS DateTime), N'0536-XB', N'無', N'無', N'3', 1)
+INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (4, CAST(0x0000A77B0130DEE0 AS DateTime), N'ABC-2780', N'無', N'水晶鍍膜劑', N'3', 0)
+INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (5, CAST(0x0000A76000D63BC0 AS DateTime), N'3317-LS', N'無', N'無', N'2', 2)
+INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (6, CAST(0x0000A76F00BD83A0 AS DateTime), N'7211-PR', N'無', N'無', N'1', 0)
+INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (16, CAST(0x0000A73C00AD08E0 AS DateTime), N'GT-8686', N'無', N'無', N'2', 0)
+SET IDENTITY_INSERT [dbo].[reserv] OFF
+INSERT [dbo].[reserv_list] ([reservNo], [servNo], [servPrice], [servTime], [servName]) VALUES (1, 2001, 400, 30, N'精緻人工泡沫洗車')
+INSERT [dbo].[reserv_list] ([reservNo], [servNo], [servPrice], [servTime], [servName]) VALUES (2, 1001, 1000, 30, N'引擎室清洗護理')
+INSERT [dbo].[reserv_list] ([reservNo], [servNo], [servPrice], [servTime], [servName]) VALUES (2, 2002, 900, 120, N'精緻全車打蠟')
+INSERT [dbo].[reserv_list] ([reservNo], [servNo], [servPrice], [servTime], [servName]) VALUES (3, 2007, 15000, 300, N'奈米鑽石鍍膜')
+INSERT [dbo].[reserv_list] ([reservNo], [servNo], [servPrice], [servTime], [servName]) VALUES (4, 1002, 850, 60, N'內裝清洗護理')
+INSERT [dbo].[reserv_list] ([reservNo], [servNo], [servPrice], [servTime], [servName]) VALUES (4, 1003, 650, 30, N'玻璃清潔拋光')
+INSERT [dbo].[reserv_list] ([reservNo], [servNo], [servPrice], [servTime], [servName]) VALUES (4, 1004, 600, 30, N'車燈霧化處理')
+INSERT [dbo].[reserv_list] ([reservNo], [servNo], [servPrice], [servTime], [servName]) VALUES (5, 2003, 4000, 180, N'超值清新抗菌組合')
+INSERT [dbo].[reserv_list] ([reservNo], [servNo], [servPrice], [servTime], [servName]) VALUES (6, 2005, 8500, 360, N'3S 鏡面美容')
+INSERT [dbo].[reserv_list] ([reservNo], [servNo], [servPrice], [servTime], [servName]) VALUES (16, 1001, 1000, 30, N'引擎室清洗護理')
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (1001, 1, N'引擎室清洗護理', N'引擎室清洗護理', NULL, 100)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (1002, 1, N'內裝清洗護理', N'內裝清洗護理', NULL, 100)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (1003, 1, N'玻璃清潔拋光', N'玻璃清潔拋光', NULL, 100)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (1004, 1, N'車燈霧化處理', N'車燈霧化處理', NULL, 100)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2001, 1, N'精緻人工泡沫洗車', N'精緻人工泡沫洗車', NULL, 100)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2002, 1, N'精緻全車打蠟', N'精緻人工泡沫洗車', NULL, 30)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2002, 2, N'精緻全車打蠟', N'精緻全車打蠟', NULL, 70)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2003, 1, N'超值清新抗菌組合', N'精緻人工泡沫洗車', NULL, 25)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2003, 2, N'超值清新抗菌組合', N'內裝護理', NULL, 75)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2004, 1, N'2S 鏡面美容', N'精緻人工泡沫洗車', NULL, 20)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2004, 2, N'2S 鏡面美容', N'鏡面腊施工護理', NULL, 45)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2004, 3, N'2S 鏡面美容', N'內裝清潔', NULL, 35)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2005, 1, N'3S 鏡面美容', N'精緻人工泡沫洗車', NULL, 20)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2005, 2, N'3S 鏡面美容', N'矽鍍膜護理', NULL, 45)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2005, 3, N'3S 鏡面美容', N'內裝清潔', NULL, 35)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2006, 1, N'4S 鏡面美容', N'精緻人工泡沫洗車', NULL, 20)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2006, 2, N'4S 鏡面美容', N'鐵弗龍護膜處理', NULL, 45)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2006, 3, N'4S 鏡面美容', N'內裝清潔', NULL, 35)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2007, 1, N'奈米鑽石鍍膜', N'精緻人工泡沫洗車', NULL, 20)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2007, 2, N'奈米鑽石鍍膜', N'奈米鍍膜特殊護理', NULL, 45)
+INSERT [dbo].[service_step] ([servNo], [servStep], [stepName], [stepDescp], [stepPic], [stepPercent]) VALUES (2007, 3, N'奈米鑽石鍍膜', N'內裝清潔', NULL, 35)
+INSERT [dbo].[services] ([servNo], [servTypeNo], [servName], [servDesc], [servPhoto], [servEffectiveDate], [servStatus]) VALUES (1001, N'M', N'引擎室清洗護理', N'施工流程：
+1去除頑強污垢
+2引擎室邊框漂白處理
+3塑膠組件保護處理
+4引擎室內烤漆部份護理
+5金屬部份防鏽處理', NULL, CAST(0xB13C0B00 AS Date), N'1')
+INSERT [dbo].[services] ([servNo], [servTypeNo], [servName], [servDesc], [servPhoto], [servEffectiveDate], [servStatus]) VALUES (1002, N'M', N'內裝清洗護理', N'施工流程：
+噴灑內裝清潔劑於清洗處
+專業技術刷洗需清洗處
+利用高科技海棉擦拭
+塑膠及防水膠條清洗
+皮革保養護理
+可單點各項內裝部位', NULL, CAST(0xB13C0B00 AS Date), N'1')
+INSERT [dbo].[services] ([servNo], [servTypeNo], [servName], [servDesc], [servPhoto], [servEffectiveDate], [servStatus]) VALUES (1003, N'M', N'玻璃清潔拋光', N'施工流程：
+特殊油膜去除劑擦在玻璃上
+研磨拋光玻璃去除油膜
+撥水處理增加撥水性', NULL, CAST(0xB13C0B00 AS Date), N'1')
+INSERT [dbo].[services] ([servNo], [servTypeNo], [servName], [servDesc], [servPhoto], [servEffectiveDate], [servStatus]) VALUES (1004, N'M', N'車燈霧化處理', N'施工流程：
+1車燈拋光劑打磨車燈
+2使用車燈鍍膜劑，於燈殼上形成保護膜', NULL, CAST(0xB13C0B00 AS Date), N'1')
+INSERT [dbo].[services] ([servNo], [servTypeNo], [servName], [servDesc], [servPhoto], [servEffectiveDate], [servStatus]) VALUES (2001, N'S', N'精緻人工泡沫洗車', N'施工流程：
+1.柏油清洗(輕度)
+2.鋼圈清洗並氧化還原
+3.使用中性泡沫洗車精
+4.車內乾濕吸塵
+5.玻璃清潔
+6.儀表板清潔', NULL, CAST(0xB13C0B00 AS Date), N'1')
+INSERT [dbo].[services] ([servNo], [servTypeNo], [servName], [servDesc], [servPhoto], [servEffectiveDate], [servStatus]) VALUES (2002, N'S', N'精緻全車打蠟', N'施工流程：
+1專業級柏油清洗
+2磁土去除車身附著物
+3使用羊毛輪或海綿輪盤施工
+（依車況使用適宜工具）
+4車內乾濕吸塵
+5皮椅護理
+6玻璃清潔
+7儀表板清潔
+8腳踏墊清潔', NULL, CAST(0xB13C0B00 AS Date), N'1')
+INSERT [dbo].[services] ([servNo], [servTypeNo], [servName], [servDesc], [servPhoto], [servEffectiveDate], [servStatus]) VALUES (2003, N'S', N'超值清新抗菌組合', N'施工流程：
+1柏油清洗(輕度)
+2鋼圈清洗並氧化還原
+3使用中性泡沫洗車精
+4車內乾濕吸塵
+5玻璃清潔
+6儀表板清潔
+7皮椅護理
+8除臭抗菌處理', NULL, CAST(0xB13C0B00 AS Date), N'1')
+INSERT [dbo].[services] ([servNo], [servTypeNo], [servName], [servDesc], [servPhoto], [servEffectiveDate], [servStatus]) VALUES (2004, N'S', N'2S 鏡面美容', N'施工流程：
+1專業級柏油清洗
+2磁土去除車身附著物
+3細研磨施工處理
+4鏡面腊施工護理
+5車內乾濕吸塵
+6玻璃擦拭
+7儀表板清潔
+8皮椅護理
+9腳踏墊清潔', NULL, CAST(0xB13C0B00 AS Date), N'1')
+INSERT [dbo].[services] ([servNo], [servTypeNo], [servName], [servDesc], [servPhoto], [servEffectiveDate], [servStatus]) VALUES (2005, N'S', N'3S 鏡面美容', N'施工流程：
+1專業級柏油清洗
+2磁土去除車身附著物
+3視狀況使用粗或細研磨施工
+4拋光平整處理
+5矽鍍膜護理
+6車內乾濕吸塵
+7玻璃擦拭
+8儀表板清潔
+9皮椅護理
+10腳踏墊清潔', NULL, CAST(0xB13C0B00 AS Date), N'1')
+INSERT [dbo].[services] ([servNo], [servTypeNo], [servName], [servDesc], [servPhoto], [servEffectiveDate], [servStatus]) VALUES (2006, N'S', N'4S 鏡面美容', N'施工流程：
+1專業級柏油清洗
+2磁土去除車身附著物
+3粗研磨施工
+4細研磨施工
+5拋光平整處理
+6鐵弗龍護膜處理
+7車內乾濕吸塵
+8玻璃擦拭
+9儀表板清潔
+10皮椅護理
+11腳踏墊清潔', NULL, CAST(0xB13C0B00 AS Date), N'1')
+INSERT [dbo].[services] ([servNo], [servTypeNo], [servName], [servDesc], [servPhoto], [servEffectiveDate], [servStatus]) VALUES (2007, N'S', N'奈米鑽石鍍膜', N'施工流程：
+1專業級柏油清洗
+2磁土去除車身附著物
+3粗研磨施工
+4細研磨施工
+5拋光平整處理
+6漆面增豔處理
+7奈米鍍膜特殊護理
+8車內乾濕吸塵
+9玻璃擦拭
+10儀表板清潔
+11皮椅護理
+12腳踏墊清潔', NULL, CAST(0xB13C0B00 AS Date), N'1')
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1001, N'L', 1000, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1001, N'M', 1000, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1001, N'S', 1000, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1001, N'XL', 1000, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1001, N'XXL', 1000, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1002, N'L', 900, 60)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1002, N'M', 850, 60)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1002, N'S', 800, 60)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1002, N'XL', 950, 60)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1002, N'XXL', 1000, 60)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1003, N'L', 650, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1003, N'M', 650, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1003, N'S', 650, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1003, N'XL', 650, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1003, N'XXL', 800, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1004, N'L', 600, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1004, N'M', 600, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1004, N'S', 600, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1004, N'XL', 600, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (1004, N'XXL', 600, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2001, N'L', 500, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2001, N'M', 450, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2001, N'S', 400, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2001, N'XL', 600, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2001, N'XXL', 750, 30)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2002, N'L', 900, 120)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2002, N'M', 800, 120)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2002, N'S', 800, 120)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2002, N'XL', 900, 120)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2002, N'XXL', 1000, 120)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2003, N'L', 4500, 180)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2003, N'M', 4000, 180)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2003, N'S', 4000, 180)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2003, N'XL', 5000, 180)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2003, N'XXL', 5500, 180)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2004, N'L', 6500, 360)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2004, N'M', 6000, 300)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2004, N'S', 6000, 300)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2004, N'XL', 7000, 360)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2004, N'XXL', 7000, 360)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2005, N'L', 8500, 360)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2005, N'M', 8000, 300)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2005, N'S', 8000, 300)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2005, N'XL', 9000, 360)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2005, N'XXL', 9000, 360)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2006, N'L', 11000, 360)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2006, N'M', 10000, 300)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2006, N'S', 10000, 300)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2006, N'XL', 12000, 360)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2006, N'XXL', 12000, 360)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2007, N'L', 16000, 360)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2007, N'M', 15000, 300)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2007, N'S', 15000, 300)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2007, N'XL', 17000, 360)
+INSERT [dbo].[services_carClass] ([servNo], [carClass], [servPrice], [servTime]) VALUES (2007, N'XXL', 17000, 360)
+ALTER TABLE [dbo].[block_list]  WITH CHECK ADD  CONSTRAINT [FK_block_list_block_rule] FOREIGN KEY([blockRuleNo])
+REFERENCES [dbo].[block_rule] ([blockRuleNo])
+GO
+ALTER TABLE [dbo].[block_list] CHECK CONSTRAINT [FK_block_list_block_rule]
+GO
+ALTER TABLE [dbo].[block_list]  WITH CHECK ADD  CONSTRAINT [FK_block_list_member_info] FOREIGN KEY([memberNo])
+REFERENCES [dbo].[member_info] ([memberNo])
+GO
+ALTER TABLE [dbo].[block_list] CHECK CONSTRAINT [FK_block_list_member_info]
+GO
+ALTER TABLE [dbo].[car_type]  WITH CHECK ADD  CONSTRAINT [FK_car_type_car_class] FOREIGN KEY([carClass])
+REFERENCES [dbo].[car_class] ([carClass])
+GO
+ALTER TABLE [dbo].[car_type] CHECK CONSTRAINT [FK_car_type_car_class]
+GO
+ALTER TABLE [dbo].[member_cars]  WITH CHECK ADD  CONSTRAINT [FK_member_cars_car_type] FOREIGN KEY([modelNo])
+REFERENCES [dbo].[car_type] ([modelNo])
+GO
+ALTER TABLE [dbo].[member_cars] CHECK CONSTRAINT [FK_member_cars_car_type]
+GO
+ALTER TABLE [dbo].[member_cars]  WITH CHECK ADD  CONSTRAINT [FK_member_cars_member_info] FOREIGN KEY([memberNo])
+REFERENCES [dbo].[member_info] ([memberNo])
+GO
+ALTER TABLE [dbo].[member_cars] CHECK CONSTRAINT [FK_member_cars_member_info]
+GO
+ALTER TABLE [dbo].[reserv]  WITH CHECK ADD  CONSTRAINT [FK_reserv_employee] FOREIGN KEY([employeeNo])
+REFERENCES [dbo].[employee] ([employeeNo])
+GO
+ALTER TABLE [dbo].[reserv] CHECK CONSTRAINT [FK_reserv_employee]
+GO
+ALTER TABLE [dbo].[reserv]  WITH CHECK ADD  CONSTRAINT [FK_reserv_member_cars1] FOREIGN KEY([carLicense])
+REFERENCES [dbo].[member_cars] ([carLicense])
+GO
+ALTER TABLE [dbo].[reserv] CHECK CONSTRAINT [FK_reserv_member_cars1]
+GO
+ALTER TABLE [dbo].[reserv_list]  WITH CHECK ADD  CONSTRAINT [FK_reserv_list_reserv] FOREIGN KEY([reservNo])
+REFERENCES [dbo].[reserv] ([reservNo])
+GO
+ALTER TABLE [dbo].[reserv_list] CHECK CONSTRAINT [FK_reserv_list_reserv]
+GO
+ALTER TABLE [dbo].[reserv_list]  WITH CHECK ADD  CONSTRAINT [FK_reserv_list_services] FOREIGN KEY([servNo])
+REFERENCES [dbo].[services] ([servNo])
+GO
+ALTER TABLE [dbo].[reserv_list] CHECK CONSTRAINT [FK_reserv_list_services]
+GO
+ALTER TABLE [dbo].[service_step]  WITH CHECK ADD  CONSTRAINT [FK_service_step_services] FOREIGN KEY([servNo])
+REFERENCES [dbo].[services] ([servNo])
+GO
+ALTER TABLE [dbo].[service_step] CHECK CONSTRAINT [FK_service_step_services]
+GO
+ALTER TABLE [dbo].[services_carClass]  WITH CHECK ADD  CONSTRAINT [FK_services_carClass_car_class] FOREIGN KEY([carClass])
+REFERENCES [dbo].[car_class] ([carClass])
+GO
+ALTER TABLE [dbo].[services_carClass] CHECK CONSTRAINT [FK_services_carClass_car_class]
+GO
+ALTER TABLE [dbo].[services_carClass]  WITH CHECK ADD  CONSTRAINT [FK_services_carClass_services] FOREIGN KEY([servNo])
+REFERENCES [dbo].[services] ([servNo])
+GO
+ALTER TABLE [dbo].[services_carClass] CHECK CONSTRAINT [FK_services_carClass_services]
+GO
+USE [master]
+GO
+ALTER DATABASE [Team3] SET  READ_WRITE 
+GO

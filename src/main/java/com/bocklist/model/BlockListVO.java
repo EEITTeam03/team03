@@ -1,11 +1,15 @@
 package com.bocklist.model;
 
-public class BlockListVo {
+import com.blockrule.model.BlockRuleVO;
+
+public class BlockListVO {
 	private Integer mamberNo;
 	private Short blockRuleNo;
 	private String violationDate;
 	private Integer reservationNo;
 	private String blockState;
+	private BlockRuleVO blockRuleVO;
+	
 	public Integer getMamberNo() {
 		return mamberNo;
 	}
@@ -35,6 +39,12 @@ public class BlockListVo {
 	}
 	public void setBlockState(String blockState) {
 		this.blockState = blockState;
+	}
+	public BlockRuleVO getBlockRuleVO() {
+		return blockRuleVO;
+	}
+	public void setBlockRuleVO(BlockRuleVO blockRuleVO) {
+		this.blockRuleVO = blockRuleVO;
 	}
 	
 }

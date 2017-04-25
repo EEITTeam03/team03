@@ -6,16 +6,8 @@
 
 	<session-factory>
         
-        <!-- 連線池c3p0設定-->
-		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;DatabaseName=Team3</property>
-		<property name="hibernate.connection.username">sa</property>
-		<property name="hibernate.connection.password">sa123456</property>       
-		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
-		<property name="hibernate.c3p0.min_size">5</property>
-		<property name="hibernate.c3p0.max_size">20</property>
-		<property name="hibernate.c3p0.timeout">1800</property>
-		<property name="hibernate.c3p0.max_statements">50</property>
+        <!-- JNDI連線池 (Apache Tomcat 連線池DBCP)設定 -->
+		<property name="hibernate.connection.datasource">java:/comp/env/jdbc/localteam3</property>
         
 		<!--SQL方言,以下使用SQLServer -->
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
@@ -41,9 +33,6 @@
 		<mapping resource="com/reservlist/model/reserv_list.hbm.xml"/>
 		<mapping resource="com/services/model/services.hbm.xml"/>
 		<mapping resource="com/memberinfo/model/memberinfo.hbm.xml" />
-		
-		<mapping resource="com/blockrule/model/blockrule.hbm.xml"/>
-		<mapping resource="com/blocklist/model/blocklist.hbm.xml" />
 		
 	</session-factory>
 	
