@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.blocklist.model.BlockListVO" table="block_list" >
+        
+        <id name="reservationNo" column="reservationNo">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="memberNo" column="memberNo" />
+        <property name="violationDate" column="violationDate" />
+        <property name="reservationNo" column="reservationNo" />
+        <property name="blockState" column="blockState" />
+        
+        <many-to-one name="blockRuleVO" class="com.blockrule.model.BlockRuleVO" lazy="false" >
+            <column name="blockRuleNo" />
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>
+
