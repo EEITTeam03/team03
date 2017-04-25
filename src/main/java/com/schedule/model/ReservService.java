@@ -1,5 +1,7 @@
 package com.schedule.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -59,10 +61,12 @@ public class ReservService {
 		List<ReservVO> list = dao.getAll();
 		List<ReservVO> list2 = new ArrayList<ReservVO>() ;
 		Calendar calendar = Calendar.getInstance();
+		int week = calendar.get(Calendar.WEEK_OF_YEAR);
 		for(ReservVO reserv:list){
-			if(calendar.YEAR==reserv.getReservDateTime().YEAR)
+			if(calendar.get(Calendar.YEAR)==reserv.getReservDateTime().get(Calendar.YEAR))
 			{
-				if(calendar.WEEK_OF_YEAR==reserv.getReservDateTime().WEEK_OF_YEAR)
+				//System.out.println(reserv.getReservDateTime().get(Calendar.YEAR));
+				if(week==reserv.getReservDateTime().get(Calendar.WEEK_OF_YEAR))
 					list2.add(reserv);
 			}
 		}

@@ -85,9 +85,12 @@ public class ReservDAO implements ReservDAO_interface {
 //		}
 		ReservService rs = new ReservService();
 		List<ReservVO>list=rs.getSchedule();
+		
 		for(ReservVO reservVO:list){
-			System.out.println(reservVO.getReservDateTime()+",");
-			System.out.println(reservVO.getEmployeeVO().getEmployeeNo());
+			java.util.Date utilDate = reservVO.getReservDateTime().getTime();
+			System.out.print(reservVO.getReservNo()+", ");
+			System.out.print(new java.text.SimpleDateFormat().format(utilDate)+", ");
+			System.out.println(reservVO.getEmployeeVO().getEmployeeName());
 		}
 		//dao.delete(2);
 		
