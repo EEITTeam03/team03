@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<a href="testDS">testDS (Azure) (JNDI)</a>
-<br>
-<a href="ModelTest">test model</a>
+${memberVO.memberName}
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.schedule.model;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -13,7 +14,7 @@ import org.hibernate.type.StandardBasicTypes;
 
 import com.employee.model.EmployeeVO;
 import com.membercars.model.MemberCarsVO;
-
+import com.memberinfo.model.MemberInfoVO;
 import com.reservlist.model.ReservListVO;
 
 
@@ -54,78 +55,63 @@ public class ReservDAO implements ReservDAO_interface {
 		return list;
 	}
 
-	@Override
-	public List<Object[]> getSchedule() {
-		// TODO Auto-generated method stub
-		List<Object[]>list = null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try{
-			session.beginTransaction();
-			//Query query = session.createSQLQuery("select reserv.reservNo,reservDateTime,employeeNo,servTime,servName from reserv inner join reserv_list  on reserv.reservNo = reserv_list.reservNo");
-			Query query = session.createQuery("select reservVO.reservNo,reservVO.reservDateTime,reservVO.employeeVO.employeeNo,"
-					+ "reservlistVO.servTime,reservlistVO.servName from ReservVO reservVO,ReservListVO reservlistVO where reservVO.reservNo=reservlistVO.reservVO.reservNo order by reservVO.reservDateTime");		
-			list=query.list();
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		return list;
-	}
 
-	@Override
-	public List<Object[]> getSchedule(Integer employeeNo) {
-		// TODO Auto-generated method stub
-		List<Object[]>list = null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		String sqlquery = "select reservVO.reservNo,reservVO.reservDateTime,reservVO.employeeVO.employeeNo,"
-				+ "reservlistVO.servTime,reservlistVO.servName from ReservVO reservVO,ReservListVO reservlistVO where reservVO.reservNo=reservlistVO.reservVO.reservNo and reservVO.employeeVO.employeeNo="+employeeNo+" order by reservVO.reservDateTime";
-		try{
-			session.beginTransaction();
-			//Query query = session.createSQLQuery("select reserv.reservNo,reservDateTime,employeeNo,servTime,servName from reserv inner join reserv_list  on reserv.reservNo = reserv_list.reservNo");
-			Query query = session.createQuery(sqlquery);	
-			list=query.list();
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		return list;
-	}
 	
 
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ReservDAO dao = new ReservDAO();
-//		List<ReservVO>list = dao.getAll();
-//		for(ReservVO reservVO:list){
-//			System.out.println(reservVO.getReservNo()+",");
-//			System.out.println(reservVO.getReservDateTime()+",");
-//			System.out.println(reservVO.getNoteC()+",");
-//			System.out.println(reservVO.getNotesE()+",");
-//			System.out.println(reservVO.getStatus()+",");
-//			System.out.println(reservVO.getMembercarsVO().getCarLicense()+",");
-//			System.out.println(reservVO.getEmployeeVO().getEmployeeNo());
-//			Set<ReservListVO>relists = reservVO.getReservlists();
-//			for(ReservListVO lists:relists){
-//				System.out.println(lists.getServicesVO().getServNo());
-//				System.out.println(lists.getServName());
-//				System.out.println(lists.getServPrice());
-//				System.out.println(lists.getServTime());
-//			}
-//		}
-		List<Object[]>list2 = dao.getSchedule(2);
-		for(Object[] aArray:list2){
-			Calendar c=(Calendar)aArray[1];
-			System.out.print(aArray[0]+" ");
-			System.out.print(c.get(Calendar.DAY_OF_WEEK)+" ");
-			System.out.print(aArray[2]+" ");
-			System.out.print(aArray[3]+" ");
-			System.out.print(aArray[4]+" ");
-			System.out.println();
+		
+		List<ReservVO>list = dao.getAll();
+		for(ReservVO reservVO:list){
+			System.out.println(reservVO.getReservNo()+",");
+			System.out.println(reservVO.getReservDateTime()+",");
+			System.out.println(reservVO.getNoteC()+",");
+			System.out.println(reservVO.getNotesE()+",");
+			System.out.println(reservVO.getStatus()+",");
+			System.out.println(reservVO.getMembercarsVO().getCarLicense()+",");
+			System.out.println(reservVO.getEmployeeVO().getEmployeeNo());
+			Set<ReservListVO>relists = reservVO.getReservlists();
+			for(ReservListVO lists:relists){
+				System.out.println(lists.getServicesVO().getServNo());
+				System.out.println(lists.getServName());
+				System.out.println(lists.getServPrice());
+				System.out.println(lists.getServTime());
+			}
 		}
+
 		
 	}
+
+	@Override
+	public void insert(ReservVO reservVO) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(reservVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+	}
+
+	@Override
+	public void update(ReservVO reservVO) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(reservVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+	}
+
+
 
 }

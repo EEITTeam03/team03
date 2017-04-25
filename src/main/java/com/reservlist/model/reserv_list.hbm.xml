@@ -4,14 +4,16 @@
 
 <hibernate-mapping>
 	<class name="com.reservlist.model.ReservListVO" table="reserv_list">
-	<composite-id>
-	<key-many-to-one name="reservVO" class="com.schedule.model.ReservVO" lazy="false">
+	 <id name="reservListNo" column="reservListNo">
+            <generator class="identity"/>
+        </id>
+	<many-to-one name="reservVO" class="com.schedule.model.ReservVO" lazy="false">
 		<column name="reservNo"/>
-	</key-many-to-one>
-	<key-many-to-one name="servicesVO" class="com.services.model.ServicesVO" lazy="false">
+	</many-to-one>
+	<many-to-one name="servicesVO" class="com.services.model.ServicesVO" lazy="false">
 		<column name="servNo"/>
-	</key-many-to-one>
-	</composite-id>
+	</many-to-one>
+	
 	<property name="servPrice" column="servPrice"></property>
 	<property name="servTime" column="servTime"></property>
 	<property name="servName" column="servName"></property>
