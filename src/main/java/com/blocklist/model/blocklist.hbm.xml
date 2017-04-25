@@ -9,13 +9,16 @@
             <generator class="identity"/>
         </id>
         
-        <property name="memberNo" column="memberNo" />
+        
         <property name="violationDate" column="violationDate" />
-        <property name="reservationNo" column="reservationNo" />
+        
         <property name="blockState" column="blockState" />
         
         <many-to-one name="blockRuleVO" class="com.blockrule.model.BlockRuleVO" lazy="false" >
             <column name="blockRuleNo" />
+        </many-to-one>
+        <many-to-one name="memberInfoVO" class="com.memberinfo.model.MemberInfoVO" lazy="false" >
+            <column name="memberNo" />
         </many-to-one>
         
     </class>

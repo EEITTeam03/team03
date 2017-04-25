@@ -17,7 +17,7 @@
 			<key>
 				<column name="blockRuleNo" />
 			</key>
-			<one-to-many class="com.blocklist.model.BlocklistVO" />
+			<one-to-many class="com.blocklist.model.BlockListVO" />
 		</set>
 
 	</class>

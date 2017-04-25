@@ -1,4 +1,4 @@
-package com.bocklist.model;
+package com.blocklist.model;
 
 import java.util.List;
 

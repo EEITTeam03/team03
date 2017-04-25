@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import com.bocklist.model.BlockListVO;
+
+import com.blocklist.model.BlockListVO;
+
 import hibernate.util.HibernateUtil;
 
 public class BlockRuleHibernateDAO implements BlockRuleDAO_interface {

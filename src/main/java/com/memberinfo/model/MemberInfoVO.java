@@ -3,6 +3,7 @@ package com.memberinfo.model;
 import java.sql.Date;
 import java.util.Set;
 
+import com.blocklist.model.BlockListVO;
 import com.membercars.model.MemberCarsVO;
 
 public class MemberInfoVO {
@@ -15,6 +16,15 @@ public class MemberInfoVO {
 	String address;
 	Date effectiveDate;
 	Set<MemberCarsVO> memberCars;
+	Set<BlockListVO> blockLists;
+	
+	public Set<BlockListVO> getBlockLists() {
+		return blockLists;
+	}
+	public void setBlockLists(Set<BlockListVO> blockLists) {
+		this.blockLists = blockLists;
+	}
+	
 	
 	public Integer getMemberNo() {
 		return memberNo;

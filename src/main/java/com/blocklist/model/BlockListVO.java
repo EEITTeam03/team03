@@ -1,21 +1,23 @@
-package com.bocklist.model;
+package com.blocklist.model;
 
 import com.blockrule.model.BlockRuleVO;
+import com.memberinfo.model.MemberInfoVO;
 
 public class BlockListVO {
-	private Integer mamberNo;
 	private Short blockRuleNo;
 	private String violationDate;
 	private Integer reservationNo;
 	private String blockState;
 	private BlockRuleVO blockRuleVO;
+	private MemberInfoVO memberInfoVO;
 	
-	public Integer getMamberNo() {
-		return mamberNo;
+	public MemberInfoVO getMemberInfoVO() {
+		return memberInfoVO;
 	}
-	public void setMamberNo(Integer mamberNo) {
-		this.mamberNo = mamberNo;
+	public void setMemberInfoVO(MemberInfoVO memberInfoVO) {
+		this.memberInfoVO = memberInfoVO;
 	}
+	
 	public Short getBlockRuleNo() {
 		return blockRuleNo;
 	}

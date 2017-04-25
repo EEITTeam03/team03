@@ -2,7 +2,8 @@ package com.blockrule.model;
 
 import java.util.HashSet;
 import java.util.Set;
-import com.bocklist.model.BlockListVO;
+
+import com.blocklist.model.BlockListVO;
 
 public class BlockRuleVO {
 	private Short blockRuleNo;

@@ -3,7 +3,7 @@ package com.blockrule.model;
 import java.util.List;
 import java.util.Set;
 
-import com.bocklist.model.BlockListVO;
+import com.blocklist.model.BlockListVO;
 
 public interface BlockRuleDAO_interface {
 	public void insert(BlockRuleVO blockRuleVO);

@@ -19,5 +19,11 @@
 			</key>
 			<one-to-many class="com.membercars.model.MemberCarsVO" />
 		</set>
+		<set name="blockLists" table="block_list" lazy="false" cascade="all" >			
+			<key>
+				<column name="memberNo" />
+			</key>
+			<one-to-many class="com.blocklist.model.BlockListVO" />
+		</set>
 </class>
 </hibernate-mapping>
