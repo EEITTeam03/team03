@@ -7,10 +7,10 @@
 	 <id name="reservListNo" column="reservListNo">
             <generator class="identity"/>
         </id>
-	<many-to-one name="reservVO" class="com.schedule.model.ReservVO" lazy="false" cascade="all">
+	<many-to-one name="reservVO" class="com.schedule.model.ReservVO" lazy="false" >
 		<column name="reservNo"/>
 	</many-to-one>
-	<many-to-one name="servicesVO" class="com.services.model.ServicesVO" lazy="false" cascade="all">
+	<many-to-one name="servicesVO" class="com.services.model.ServicesVO" lazy="false" >
 		<column name="servNo"/>
 	</many-to-one>
 	
