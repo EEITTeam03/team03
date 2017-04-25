@@ -9,7 +9,5 @@ public interface ReservDAO_interface {
 	public List<ReservVO>getAll();
 	public void insert(ReservVO reservVO);
 	public void update(ReservVO reservVO);
-	public void delete(Integer reservNo);
-//	public List<Object[]>getSchedule(Integer employeeNo);
-//	List<Object[]> getSchedule();
+//	public void delete(Integer reservNo);
 }

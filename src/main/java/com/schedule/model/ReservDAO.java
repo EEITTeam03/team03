@@ -21,7 +21,7 @@ import com.reservlist.model.ReservListVO;
 import hibernate.util.HibernateUtil;
 
 public class ReservDAO implements ReservDAO_interface {
-
+	private static final String GET_ALL_STMT="from ReservVO order by reservNo";
 	@Override
 	public ReservVO findByPrimaryKey(Integer reservNo) {
 		// TODO Auto-generated method stub
@@ -45,7 +45,7 @@ public class ReservDAO implements ReservDAO_interface {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
-			Query query = session.createQuery("from ReservVO");
+			Query query = session.createQuery(GET_ALL_STMT);
 			list = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -83,23 +83,8 @@ public class ReservDAO implements ReservDAO_interface {
 		}
 	}
 
-	@Override
-	public void delete(Integer reservNo) {
-		// TODO Auto-generated method stub
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try{
-			session.beginTransaction();
-//			Query query = session.createQuery("delete from ReservVO where reservNo=?");
-//			query.setParameter(0, reservNo);
-//			query.executeUpdate();
-			ReservVO reservVO = (ReservVO) session.get(ReservVO.class, reservNo);
-			session.delete(reservVO);
-			session.getTransaction().commit();
-		}catch(RuntimeException ex){
-			session.getTransaction().rollback();
-			throw ex;
-		}
-	}
+
+
 	
 
 	
@@ -127,7 +112,7 @@ public class ReservDAO implements ReservDAO_interface {
 			}
 		}
 		
-		dao.delete(2);
+		//dao.delete(2);
 		
 	}
 
