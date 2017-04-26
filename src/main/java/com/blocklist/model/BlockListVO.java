@@ -4,7 +4,6 @@ import com.blockrule.model.BlockRuleVO;
 import com.memberinfo.model.MemberInfoVO;
 
 public class BlockListVO {
-	private Short blockRuleNo;
 	private String violationDate;
 	private Integer reservationNo;
 	private String blockState;
@@ -18,12 +17,6 @@ public class BlockListVO {
 		this.memberInfoVO = memberInfoVO;
 	}
 	
-	public Short getBlockRuleNo() {
-		return blockRuleNo;
-	}
-	public void setBlockRuleNo(Short blockRuleNo) {
-		this.blockRuleNo = blockRuleNo;
-	}
 	public String getViolationDate() {
 		return violationDate;
 	}

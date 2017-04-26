@@ -1,6 +1,5 @@
 package com.blockrule.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import com.blocklist.model.BlockListVO;
@@ -10,7 +9,7 @@ public class BlockRuleVO {
 	private String blockRule;
 	private Integer blockLimitTimes;
 	private Integer blockTime;
-	private Set<BlockListVO> blockLists = new HashSet<BlockListVO>();
+	private Set<BlockListVO> blockLists;
 
 	
 	public Short getBlockRuleNo() {
