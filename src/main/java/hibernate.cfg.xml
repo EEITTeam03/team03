@@ -45,6 +45,8 @@
 		<mapping resource="com/blockrule/model/blockrule.hbm.xml"/>
 		<mapping resource="com/blocklist/model/blocklist.hbm.xml" />
 		
+		<mapping resource="com/servicestep/model/servicestep.hbm.xml" />
+		<mapping resource="com/servicecarclass/model/servicecarclass.hbm.xml" />
 		
 	</session-factory>
 	
