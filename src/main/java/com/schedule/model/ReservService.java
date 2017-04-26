@@ -64,7 +64,8 @@ public class ReservService {
 		List<ReservVO> list = dao.getAll();
 		List<Map> list2 = new ArrayList<Map>() ;
 		Calendar calendar = Calendar.getInstance();
-//		calendar.set(2017,Calendar.MAY,1 );
+		//calendar.set(2017,Calendar.APRIL,30);
+		//calendar.set(2017,3,25);
 		int week = calendar.get(Calendar.WEEK_OF_YEAR);
 		for(ReservVO reserv:list){
 			if(calendar.get(Calendar.YEAR)==reserv.getReservDateTime().get(Calendar.YEAR))
