@@ -5,7 +5,7 @@ import java.util.List;
 public interface BlockListDAO_interface {
 	public void insert(BlockListVO blockListVO);
 	public void update(BlockListVO blockListVO);
-	public void delete(Short reservationNo);
-	public BlockListVO findByPrimaryKey(Short reservationNo);
+	public void delete(Integer reservationNo);
+	public BlockListVO findByPrimaryKey(Integer reservationNo);
     public List<BlockListVO> getAll();
 }

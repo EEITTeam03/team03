@@ -6,14 +6,13 @@
 	<class name="com.blockrule.model.BlockRuleVO" table="block_rule">
 
 		<id name="blockRuleNo" column="blockRuleNo">
-			<generator class="identity"/>
+<!-- 			<generator class="identity"/> -->
 		</id>
-
 		<property name="blockRule" column="blockRule" />
 		<property name="blockLimitTimes" column="blockLimitTimes" />
 		<property name="blockTime" column="blockTime" />
 
-		<set name="blockLists" table="block_list" lazy="false" cascade="all"  inverse="true"  order-by="reservationNo asc">			
+		<set name="blockLists" table="block_list" lazy="true" cascade="all"  inverse="true"  order-by="reservationNo asc">			
 			<key>
 				<column name="blockRuleNo" />
 			</key>

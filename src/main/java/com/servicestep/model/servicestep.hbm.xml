@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.servicestep.model.ServiceStepVO" table="service_step">
+
+		<id name="servStepNo" column="servStepNo" >
+			<generator class="identity"/>
+		</id>
+		
+		<property name="servStep" column="servStep" />
+		<property name="stepName" column="stepName" />
+		<property name="stepDescp" column="stepDescp" />
+		<property name="stepPic" column="stepPic" />
+		<property name="stepPercent" column="stepPercent" />
+		<!-- <property name="servNo" column="servNo" /> -->
+		<many-to-one name="servicesVO" class="com.services.model.ServicesVO"
+			lazy="false">
+			<column name="servNo"></column>
+		</many-to-one>
+		
+		
+	</class>
+</hibernate-mapping>
+

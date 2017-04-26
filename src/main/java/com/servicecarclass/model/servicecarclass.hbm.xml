@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.servicecarclass.model.ServiceCarClassVO" table="services_carClass">
+
+		<id name="carClassNo" column="carClassNo" >
+			<generator class="identity"/>
+		</id>
+
+		
+		<property name="carClass" column="carClass" />
+		<property name="servPrice" column="servPrice" />
+		<property name="servTime" column="servTime" />
+		
+		
+		<many-to-one name="servicesVO" class="com.services.model.ServicesVO" lazy="false">
+			<column name="servNo"/>
+		</many-to-one>
+
+
+	</class>
+</hibernate-mapping>
+

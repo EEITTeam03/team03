@@ -5,14 +5,12 @@ import java.util.List;
 import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
-
 import com.blocklist.model.BlockListVO;
-
 import hibernate.util.HibernateUtil;
 
 public class BlockRuleHibernateDAO implements BlockRuleDAO_interface {
 	
-	private static final String GET_ALL_STMT = "SELECT blockRuleNo , blockRule, blockLimitTimes, blockTime FROM block_rule";
+	private static final String GET_ALL_STMT = "FROM BlockRuleVO ORDER BY blockRuleNo";
 	
 	
 	@Override
