@@ -19,7 +19,7 @@
 			</key>
 			<one-to-many class="com.membercars.model.MemberCarsVO" />
 		</set>
-		<set name="blockLists" table="block_list" lazy="false" cascade="all" >			
+		<set name="blockLists" table="block_list" lazy="true" cascade="all" >			
 			<key>
 				<column name="memberNo" />
 			</key>

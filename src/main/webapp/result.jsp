@@ -9,6 +9,7 @@
 </head>
 <body>
 ${memberVO.memberName}<br>
+${memberVO.phone}<br>
 ${memberVO.memberCars}<br>
 <c:forEach var="set" items="${memberVO.memberCars}">
 	車牌:  ${set.carLicense}<br>
@@ -18,5 +19,10 @@ ${memberVO.memberCars}<br>
 	車型:  ${set.carTypeVO.carClassVO.className}<br>
 	<hr>
 </c:forEach>
+
+<hr>
+${memberPhone.memberName}<br>
+
+
 </body>
 </html>

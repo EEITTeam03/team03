@@ -15,21 +15,15 @@
 <form action="ModelTest">
 memberNo:<input type="text" name="memberNo">
 <input type="submit" value="go">
+<br>
 </form>
 
-<!--     <Resource name="jdbc/cloudteam3" auth="Container"  -->
-<!--     		  driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"  -->
-<!--     		  maxActive="20" maxIdle="10" maxWait="-1"  -->
-<!--     		  password="$pc27856395" type="javax.sql.DataSource"  -->
-<!--     		  url="jdbc:sqlserver://peter00.database.windows.net:1433;Database=Team3"  -->
-<!--     		  username="pc811218@peter00"/> -->
-    		  
-<!--     <Resource name="jdbc/localteam3" auth="Container"  -->
-<!--     		  driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"  -->
-<!--     		  maxActive="20" maxIdle="10" maxWait="-1"  -->
-<!--     		  password="sa123456" type="javax.sql.DataSource"  -->
-<!--     		  url="jdbc:sqlserver://localhost:1433;Database=Team3"  -->
-<!--     		  username="sa"/> -->
+<form action="PhoneTest">
+memberPhone: <input type="text" name="memberPhone">
+<input type="submit" value="go">
+<br>
+</form>
+
 
 
 
