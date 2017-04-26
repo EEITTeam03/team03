@@ -1,20 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.schedule.model.*"%>
-<%
-	ReservService rs = new  ReservService();
-	List<ReservVO> list = rs.getAll();
-	pageContext.setAttribute("list",list);
-%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Employee's schedule</title>
+<title>Week Schedule</title>
 </head>
 <body>
-	>
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>星期一</th>
+				<th>星期二</th>
+				<th>星期三</th>
+				<th>星期四</th>
+				<th>星期五</th>
+				<th>星期六</th>
+				<th>星期日</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+		</tbody>
+	</table>
 </body>
 </html>

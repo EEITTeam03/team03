@@ -95,7 +95,18 @@
 		<scope>test</scope>
 	</dependency>
     
-    
+    <dependency>
+	<groupId>org.jdom</groupId>
+	<artifactId>jdom2</artifactId>
+	<version>2.0.5</version>
+	</dependency>
+	
+	<dependency>
+    <groupId>com.googlecode.json-simple</groupId>
+    <artifactId>json-simple</artifactId>
+    <version>1.1.1</version>
+	</dependency>
+	
   </dependencies>
   <build>
     <finalName>maven-archetype-webapp-servlet3</finalName>
