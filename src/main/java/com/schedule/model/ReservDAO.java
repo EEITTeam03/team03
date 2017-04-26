@@ -4,7 +4,9 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.hibernate.Hibernate;
@@ -23,6 +25,7 @@ import hibernate.util.HibernateUtil;
 
 public class ReservDAO implements ReservDAO_interface {
 	private static final String GET_ALL_STMT="from ReservVO order by reservNo";
+	
 	@Override
 	public ReservVO findByPrimaryKey(Integer reservNo) {
 		// TODO Auto-generated method stub
@@ -56,7 +59,6 @@ public class ReservDAO implements ReservDAO_interface {
 		return list;
 	}
 
-
 	
 
 	
@@ -83,17 +85,19 @@ public class ReservDAO implements ReservDAO_interface {
 //				System.out.println(lists.getServTime());
 //			}
 //		}
-		ReservService rs = new ReservService();
-		List<ReservVO>list=rs.getSchedule();
-		
-		for(ReservVO reservVO:list){
-			java.util.Date utilDate = reservVO.getReservDateTime().getTime();
-			System.out.print(reservVO.getReservNo()+", ");
-			System.out.print(new java.text.SimpleDateFormat().format(utilDate)+", ");
-			System.out.println(reservVO.getEmployeeVO().getEmployeeName());
+		ReservService reservice = new ReservService();
+		Calendar calendar = Calendar.getInstance();
+		List<Map> list = reservice.getSchedule( calendar);
+		for(Map map:list){
+			Iterator iter = map.entrySet().iterator(); 
+			while (iter.hasNext()) { 
+			    Map.Entry entry = (Map.Entry) iter.next(); 
+			    Object key = entry.getKey(); 
+			    Object val = entry.getValue();
+			    System.out.print(key+":"+val+" ");
+			} 
+			System.out.println();
 		}
-		//dao.delete(2);
-		
 	}
 
 	@Override
@@ -123,7 +127,5 @@ public class ReservDAO implements ReservDAO_interface {
 			throw ex;
 		}
 	}
-
-
 
 }

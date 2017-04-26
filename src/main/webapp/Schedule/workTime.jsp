@@ -8,6 +8,21 @@
 </head>
 <body>
 	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>星期一</th>
+				<th>星期二</th>
+				<th>星期三</th>
+				<th>星期四</th>
+				<th>星期五</th>
+				<th>星期六</th>
+				<th>星期日</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+		</tbody>
 	</table>
 </body>
 </html>

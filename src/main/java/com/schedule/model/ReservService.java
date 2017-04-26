@@ -4,7 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.employee.model.EmployeeVO;
@@ -53,21 +56,47 @@ public class ReservService {
 		return dao.getAll();
 	}
 	
-	public ReservVO getOneEmp(Integer reservNo) {
+	public ReservVO getOneReserv(Integer reservNo) {
 		return dao.findByPrimaryKey(reservNo);
 	}
 	
-	public List<ReservVO>getSchedule(){
+	public List<Map>getSchedule(Calendar calendar){
 		List<ReservVO> list = dao.getAll();
-		List<ReservVO> list2 = new ArrayList<ReservVO>() ;
-		Calendar calendar = Calendar.getInstance();
+		List<Map> list2 = new ArrayList<Map>() ;
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.set(2017,Calendar.MAY,1 );
 		int week = calendar.get(Calendar.WEEK_OF_YEAR);
 		for(ReservVO reserv:list){
 			if(calendar.get(Calendar.YEAR)==reserv.getReservDateTime().get(Calendar.YEAR))
 			{
-				//System.out.println(reserv.getReservDateTime().get(Calendar.YEAR));
 				if(week==reserv.getReservDateTime().get(Calendar.WEEK_OF_YEAR))
-					list2.add(reserv);
+				{
+					 int year=reserv.getReservDateTime().get(Calendar.YEAR);
+					 int month=reserv.getReservDateTime().get(Calendar.MONTH)+1;
+					 int day = reserv.getReservDateTime().get(Calendar.DATE);
+					 int hour = reserv.getReservDateTime().get(Calendar.HOUR);
+					 int minute = reserv.getReservDateTime().get(Calendar.MINUTE);
+					 int dayOfWeek = reserv.getReservDateTime().get(Calendar.DAY_OF_WEEK)-1;
+					 int totalTime=0;
+					 Map map = new LinkedHashMap();
+						map.put("員工姓名", reserv.getEmployeeVO().getEmployeeName());
+						map.put("年", year);
+						map.put("月份", month);
+						map.put("日期", day);
+						map.put("星期", dayOfWeek);
+						map.put("開始時間", hour+":"+minute);
+						List <String> service = new <String>ArrayList();
+					 for(ReservListVO rl:reserv.getReservlists()){
+						 totalTime+=rl.getServTime();
+						 service.add(rl.getServName()+" ");
+					 }
+					int Endminute = (minute+totalTime)%60;
+					int EndHour =hour+ (minute+totalTime)/60;
+					map.put("結束時間", EndHour+":"+Endminute);
+					map.put("總長", totalTime);
+					map.put("服務項目", service);
+					list2.add(map);
+				}
 			}
 		}
 		return list2;
