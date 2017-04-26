@@ -14,7 +14,7 @@
     </many-to-one>
 	
 	
-	<set name = "reserves" table = "reserv" lazy="false" cascade="all" inverse="true" >
+	<set name = "reserves" table = "reserv" lazy="true" cascade="all" inverse="true" >
    			<key><column name="carLicense"></column></key>
    			<one-to-many class="com.schedule.model.ReservVO"/>
    		</set>

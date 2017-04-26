@@ -42,6 +42,9 @@
 		<mapping resource="com/services/model/services.hbm.xml"/>
 		<mapping resource="com/memberinfo/model/memberinfo.hbm.xml" />
 		
+		<mapping resource="com/blockrule/model/blockrule.hbm.xml"/>
+		<mapping resource="com/blocklist/model/blocklist.hbm.xml" />
+		
 		
 	</session-factory>
 	

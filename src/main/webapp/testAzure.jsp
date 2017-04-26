@@ -14,7 +14,14 @@
 <br>
 <form action="ModelTest">
 memberNo:<input type="text" name="memberNo">
+<br>
 <input type="submit" value="go">
+</form>
+
+<form action="PhoneTest">
+memberPhone: <input type="text" name="memberPhone">
+<input type="submit" value="go">
+<br>
 </form>
 
 <!--     <Resource name="jdbc/cloudteam3" auth="Container"  -->
