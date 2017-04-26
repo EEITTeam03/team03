@@ -61,6 +61,36 @@
 	<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
     
+    <script>
+   		$(function(){
+   			var bigd = $("<div></div>").addClass("col-md-4 col-sm-6 portfolio-item");
+   			
+   			
+   			var mya = $("<a></a>").addClass("portfolio-link").attr({"href":"#portfolioModal1","data-toggle":"modal"});
+   			
+   			var smalld = $("<div></div>").addClass("portfolio-hover");
+   			var nd = $("<div></div>").addClass("portfolio-hover-content");
+   			var ii = $("<div></div>").addClass("fa fa-plus fa-3x");
+   			
+   			var smallimg = $("<img>").addClass("img-responsive").attr({"src":"img/portfolio/roundicons.png","alt":""});
+   			   			
+   			nd.append(ii);  
+   			smalld.append(nd);
+   			mya.append([smalld,smallimg]);
+   			
+			var myd = $("<div></div>").addClass("portfolio-caption");
+   			
+			var hword = $("<h4></h4>").text("我是測試");
+			var pword = $("<p></p>").addClass("text-muted").text("Graphic Design");
+			
+			myd.append([hword,pword]);
+			
+			
+			$("#svesall").append([mya,myd]);
+			
+   		})
+    
+    </script>    
       
 </head>
 
@@ -182,7 +212,9 @@
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="svesall">
+            
+            
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
@@ -197,6 +229,9 @@
                         <p class="text-muted">Graphic Design</p>
                     </div>
                 </div>
+                
+                
+                
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
