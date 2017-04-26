@@ -86,8 +86,8 @@ public class ReservDAO implements ReservDAO_interface {
 //			}
 //		}
 		ReservService reservice = new ReservService();
-		Calendar calendar = Calendar.getInstance();
-		List<Map> list = reservice.getSchedule( calendar);
+		
+		List<Map> list = reservice.getScheduleForJSON();
 		for(Map map:list){
 			Iterator iter = map.entrySet().iterator(); 
 			while (iter.hasNext()) { 

@@ -60,10 +60,10 @@ public class ReservService {
 		return dao.findByPrimaryKey(reservNo);
 	}
 	
-	public List<Map>getSchedule(Calendar calendar){
+	public List<Map>getScheduleForJSON(){
 		List<ReservVO> list = dao.getAll();
 		List<Map> list2 = new ArrayList<Map>() ;
-//		Calendar calendar = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance();
 //		calendar.set(2017,Calendar.MAY,1 );
 		int week = calendar.get(Calendar.WEEK_OF_YEAR);
 		for(ReservVO reserv:list){

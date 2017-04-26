@@ -406,7 +406,7 @@ SET IDENTITY_INSERT [dbo].[member_info] OFF
 SET IDENTITY_INSERT [dbo].[reserv] ON 
 
 INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (1, CAST(0x0000A76F008C1360 AS DateTime), N'6590-QZ', N'無', N'無', N'1', 1)
-INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (2, CAST(0x0000A76500BD83A0 AS DateTime), N'ABC-5678', N'無', N'3M蠟', N'2', 2)
+INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (2, CAST(0x0000A76400BD83A0 AS DateTime), N'ABC-5678', N'無', N'3M蠟', N'2', 2)
 INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (3, CAST(0x0000A76F008C1360 AS DateTime), N'0536-XB', N'無', N'無', N'3', 1)
 INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (4, CAST(0x0000A77B0130DEE0 AS DateTime), N'ABC-2780', N'無', N'水晶鍍膜劑', N'3', 0)
 INSERT [dbo].[reserv] ([reservNo], [reservDateTime], [carLicense], [noteC], [notesE], [employeeNo], [status]) VALUES (5, CAST(0x0000A76000D63BC0 AS DateTime), N'3317-LS', N'無', N'無', N'2', 2)

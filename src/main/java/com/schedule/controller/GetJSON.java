@@ -42,9 +42,9 @@ public class GetJSON extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		ReservService reservice = new ReservService();
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(2017,Calendar.MAY,10 );
-		List<Map> list = reservice.getSchedule( calendar);
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.set(2017,Calendar.MAY,10 );
+		List<Map> list = reservice.getScheduleForJSON();
 		 String jsonString = JSONValue.toJSONString(list);  
 		 out.println(jsonString);
 	}
