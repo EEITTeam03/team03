@@ -1,6 +1,8 @@
 package myutil;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -13,5 +15,12 @@ public class MyUtil {
 		Long ms = cal.getTimeInMillis();
 		Date sqlDate = new Date(ms);
 		return sqlDate;
+	}
+	
+	public static Calendar getCalender(String strDate) throws ParseException{
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		cal.setTime(sdf.parse(strDate));
+		return cal;
 	}
 }

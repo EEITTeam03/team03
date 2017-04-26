@@ -1,6 +1,8 @@
 package com.schedule.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -22,9 +24,11 @@ import com.reservlist.model.ReservListVO;
 
 
 import hibernate.util.HibernateUtil;
+import myutil.MyUtil;
 
 public class ReservDAO implements ReservDAO_interface {
 	private static final String GET_ALL_STMT="from ReservVO order by reservNo";
+	private static final String GET_BY_DATE="from ReservVO where reservDateTime < ? order by reservDateTime";
 	
 	@Override
 	public ReservVO findByPrimaryKey(Integer reservNo) {
@@ -64,16 +68,21 @@ public class ReservDAO implements ReservDAO_interface {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		ReservDAO dao = new ReservDAO();
+		ReservDAO dao = new ReservDAO();
 //
 //		List<ReservVO>list = dao.getAll();
+//		Calendar cal;
+//		try {
+//			cal = MyUtil.getCalender("2017-05-10");
+//			List<ReservVO> list = dao.findByDate(cal);
+//			System.out.println(list);
 //		for(ReservVO reservVO:list){
-//			System.out.println(reservVO.getReservNo()+",");
-//			System.out.println(reservVO.getReservDateTime()+",");
-//			System.out.println(reservVO.getNoteC()+",");
-//			System.out.println(reservVO.getNotesE()+",");
-//			System.out.println(reservVO.getStatus()+",");
-//			System.out.println(reservVO.getMembercarsVO().getCarLicense()+",");
+//			System.out.print(reservVO.getReservNo()+",");
+//			System.out.print(reservVO.getReservDateTime()+",");
+//			System.out.print(reservVO.getNoteC()+",");
+//			System.out.print(reservVO.getNotesE()+",");
+//			System.out.print(reservVO.getStatus()+",");
+//			System.out.print(reservVO.getMembercarsVO().getCarLicense()+",");
 //			System.out.println(reservVO.getEmployeeVO().getEmployeeNo());
 //			Set<ReservListVO>relists = reservVO.getReservlists();
 //			for(ReservListVO lists:relists){
@@ -85,19 +94,20 @@ public class ReservDAO implements ReservDAO_interface {
 //				System.out.println(lists.getServTime());
 //			}
 //		}
-		ReservService reservice = new ReservService();
-		Calendar calendar = Calendar.getInstance();
-		List<Map> list = reservice.getSchedule( calendar);
-		for(Map map:list){
-			Iterator iter = map.entrySet().iterator(); 
-			while (iter.hasNext()) { 
-			    Map.Entry entry = (Map.Entry) iter.next(); 
-			    Object key = entry.getKey(); 
-			    Object val = entry.getValue();
-			    System.out.print(key+":"+val+" ");
-			} 
-			System.out.println();
-		}
+//		ReservService reservice = new ReservService();
+//		Calendar calendar = Calendar.getInstance();
+//		List<Map> list = reservice.getSchedule( calendar);
+//		for(Map map:list){
+//			Iterator iter = map.entrySet().iterator(); 
+//			while (iter.hasNext()) { 
+//			    Map.Entry entry = (Map.Entry) iter.next(); 
+//			    Object key = entry.getKey(); 
+//			    Object val = entry.getValue();
+//			    System.out.print(key+":"+val+" ");
+//			} 
+//			System.out.println();
+//		}
+		
 	}
 
 	@Override
@@ -126,6 +136,23 @@ public class ReservDAO implements ReservDAO_interface {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+	}
+
+	@Override
+	public List<ReservVO> findByDate(Calendar cal) {
+		List<ReservVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(GET_BY_DATE);
+			query.setParameter(0, cal);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
 	}
 
 }
