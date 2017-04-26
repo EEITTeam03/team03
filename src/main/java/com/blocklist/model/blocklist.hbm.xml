@@ -6,12 +6,11 @@
     <class name="com.blocklist.model.BlockListVO" table="block_list" >
         
         <id name="reservationNo" column="reservationNo">
-            <generator class="identity"/>
+<!--             <generator class="identity"/> -->
         </id>
         
         
         <property name="violationDate" column="violationDate" />
-        
         <property name="blockState" column="blockState" />
         
         <many-to-one name="blockRuleVO" class="com.blockrule.model.BlockRuleVO" lazy="false" >

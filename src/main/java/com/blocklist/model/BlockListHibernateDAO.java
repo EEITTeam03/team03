@@ -9,7 +9,7 @@ import hibernate.util.HibernateUtil;
 
 public class BlockListHibernateDAO implements BlockListDAO_interface{
 
-	private static final String GET_ALL_STMT = "SELECT mamberNo , blockRuleNo, violationDate, reservationNo, blockState FROM block_list";
+	private static final String GET_ALL_STMT = "FROM BlockListVO ORDER BY reservationNo";
 	
 	@Override
 	public void insert(BlockListVO blockListVO) {
@@ -37,9 +37,8 @@ public class BlockListHibernateDAO implements BlockListDAO_interface{
 		}
 
 	}
-
 	@Override
-	public void delete(Short reservationNo) {
+	public void delete(Integer reservationNo) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -53,7 +52,7 @@ public class BlockListHibernateDAO implements BlockListDAO_interface{
 	}
 
 	@Override
-	public BlockListVO findByPrimaryKey(Short reservationNo) {
+	public BlockListVO findByPrimaryKey(Integer reservationNo) {
 		BlockListVO blockListVO = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
