@@ -16,6 +16,18 @@
    			<key><column name="servNo"></column></key>
    			<one-to-many class="com.reservlist.model.ReservListVO"/>
    		</set> 
+   		
+   			<set name="serviceCarClassVO" table="services_carClass" lazy="false"
+			cascade="all" inverse="true">
+			<key><column name="servNo" /></key>
+			<one-to-many class="com.servicecarclass.model.ServiceCarClassVO" />
+		</set>
+		
+		<set name="serviceStepVO" table="service_step" lazy="false"
+			cascade="all" inverse="true">
+			<key><column name="servNo" /></key>
+			<one-to-many class="servicestep.model.ServiceStepVO" />
+		</set>
 </class>
 
 </hibernate-mapping>
