@@ -11,7 +11,7 @@
 
 		<property name="className" column="ClassName" />
 		
-		<set name="carTypes" table="Car_Type" lazy="false" cascade="all" order-by="modelNo asc">			
+		<set name="carTypes" table="Car_Type" lazy="true" cascade="all" order-by="modelNo asc">			
 			<key>
 				<column name="carClass" />
 			</key>
