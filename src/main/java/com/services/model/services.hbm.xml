@@ -12,18 +12,18 @@
         <property name="servPhoto" column="servPhoto" />
         <property name="servEffectiveDate" column="servEffectiveDate" />
         <property name="servStatus" column="servStatus" />
-        <set name = "reservlists" table = "reserv_list" lazy="false" cascade="all" inverse="true" >
+        <set name = "reservlists" table = "reserv_list" lazy="true" cascade="all" inverse="true" >
    			<key><column name="servNo"></column></key>
    			<one-to-many class="com.reservlist.model.ReservListVO"/>
    		</set> 
    		
-   			<set name="serviceCarClassVO" table="services_carClass" lazy="false"
+   			<set name="serviceCarClassVO" table="services_carClass" lazy="true"
 			cascade="all" inverse="true">
 			<key><column name="servNo" /></key>
 			<one-to-many class="com.servicecarclass.model.ServiceCarClassVO" />
 		</set>
 		
-		<set name="serviceStepVO" table="service_step" lazy="false"
+		<set name="serviceStepVO" table="service_step" lazy="true"
 			cascade="all" inverse="true">
 			<key><column name="servNo" /></key>
 			<one-to-many class="com.servicestep.model.ServiceStepVO" />
