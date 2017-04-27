@@ -10,7 +10,7 @@ public class ServiceCarClassService {
 	public ServiceCarClassService() {
 		dao = new ServiceCarClassDAO_Hibernate();
 	}
-
+//a
 	public ServiceCarClassVO addServiceCarClass(Integer servNo, String carClass, Integer servPrice, Integer servTime,
 			ServicesVO servicesVO) {
 		ServiceCarClassVO serviceCarClassVO = new ServiceCarClassVO();
