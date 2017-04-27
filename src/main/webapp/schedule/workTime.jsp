@@ -10,7 +10,7 @@
 <title>Week Schedule</title>
 </head>
 <body>
-	<table border="1" width='1000'>
+	<table border="1" >
 		<thead>
 			<tr height=00>
 				<th></th>
@@ -179,7 +179,7 @@
 				<td id="21:00-${i}"></td> 
 			</c:forEach>
 			</tr>
-			</tr>
+			
 		</tbody>
 	</table>
 	
@@ -187,13 +187,30 @@
 	<script>
   		$(document).ready(function(){
 			$.getJSON('GetJSON',function(datas){
+				
 				 $.each(datas,function(idx,service){
 // 					   console.log(service.員工姓名);
 // 					   console.log(service.開始時間);
-					  var x =service.開始時間;
-					  x=x.toString();
-					  console.log(x);
-					   $('td[id^="x"]').css("background-color","yellow");
+					var i=0;
+					  var time = service.開始時間+'-'+service.星期;
+					  //console.log(time.substring(0,2));
+					   //var startH =parseInt(time.substring(0,2));
+					   //var endH   =parseInt(service.結束時間.substring(0,2));
+					  // 				parseInt(time.substring(3,4));		
+					  //console.log(parseInt(time.substring(3,4)));
+					  //document.getElementById(time).style.backgroundColor = "red";
+					 var obj = document.getElementById(time);
+					 //obj.rowspan;
+					 obj.innerHTML = obj.innerHTML+"<br><span>"+service.員工姓名+"  "+service.服務項目+"  "+service.結束時間 +"結束<span>";
+					
+// 					 if(service.員工姓名=='周柏元')
+// 						 obj.getElementsByTagName( 'span' )[i].style.backgroundColor='yellow';
+// 					 else if(service.員工姓名=='陳致鈞') obj.getElementsByTagName( 'span' )[i].style.backgroundColor='lightgreen';
+// 					 else obj.getElementsByTagName( 'span' )[i].style.backgroundColor='orange';
+// 					 i++;
+					 
+// 					 var t=service.總長 /30;
+// 					 obj.setAttribute("rowspan",t);
 				   });
 			})
   		});
