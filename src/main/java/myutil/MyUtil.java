@@ -19,7 +19,8 @@ public class MyUtil {
 	
 	public static Calendar getCalender(String strDate) throws ParseException{
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		cal.setTime(sdf.parse(strDate));
 		return cal;
 	}

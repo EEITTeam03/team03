@@ -28,7 +28,7 @@ import myutil.MyUtil;
 
 public class ReservDAO implements ReservDAO_interface {
 	private static final String GET_ALL_STMT="from ReservVO order by reservNo";
-	private static final String GET_BY_DATE="from ReservVO where reservDateTime < ? order by reservDateTime";
+	private static final String GET_BY_DATE="from ReservVO where reservDateTime between ? and ? order by reservDateTime";
 	
 	@Override
 	public ReservVO findByPrimaryKey(Integer reservNo) {
@@ -141,11 +141,15 @@ public class ReservDAO implements ReservDAO_interface {
 	@Override
 	public List<ReservVO> findByDate(Calendar cal) {
 		List<ReservVO> list = null;
+		Calendar cal2 = Calendar.getInstance();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
 			Query query = session.createQuery(GET_BY_DATE);
 			query.setParameter(0, cal);
+			cal2.setTime(cal.getTime());
+			cal2.add(Calendar.DATE, 1);
+			query.setParameter(1, cal2);
 			list = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
