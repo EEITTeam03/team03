@@ -23,12 +23,9 @@
     <meta name="author" content="">
 
     <title>水膜汽車美容</title>
-	<style type="text/css">
-	<!--
-		@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
-	-->
-	</style>
-
+    
+	<!-- 中文字型 CSS -->
+	<link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css" rel="stylesheet">
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -63,31 +60,73 @@
     
     <script>
    		$(function(){
-   			var bigd = $("<div></div>").addClass("col-md-4 col-sm-6 portfolio-item");
-   			
-   			
-   			var mya = $("<a></a>").addClass("portfolio-link").attr({"href":"#portfolioModal1","data-toggle":"modal"});
-   			
-   			var smalld = $("<div></div>").addClass("portfolio-hover");
-   			var nd = $("<div></div>").addClass("portfolio-hover-content");
-   			var ii = $("<div></div>").addClass("fa fa-plus fa-3x");
-   			
-   			var smallimg = $("<img>").addClass("img-responsive").attr({"src":"img/portfolio/roundicons.png","alt":""});
+   			var i = 0;
+   			$.ajax({
+   			    url:'services.xml',
+   			    type: 'GET',
+   			    dataType: 'xml',//資料型態可以不設定，且此型態不可是text或html
+   			    }).done(function(xml){  				   
+   				   $(xml).find("data").each(function(){
+   						i=i+1;
+   				//以下開始動態生成美容項目DIV
+   						var servName=$(this).children("servName").text(); //取得子節點中的servName資料
+   						var servDesc=$(this).children("servDesc").text(); //取得子節點中的servDesc資料
+//    						console.log(servName);
+//    						console.log(servDesc);
+//    						console.log();
+
+   			   			var bigd = $("<div></div>").addClass("col-md-4 col-sm-6 portfolio-item");
    			   			
-   			nd.append(ii);  
-   			smalld.append(nd);
-   			mya.append([smalld,smallimg]);
-   			
-			var myd = $("<div></div>").addClass("portfolio-caption");
-   			
-			var hword = $("<h4></h4>").text("我是測試");
-			var pword = $("<p></p>").addClass("text-muted").text("Graphic Design");
-			
-			myd.append([hword,pword]);
-			
-			
-			$("#svesall").append([mya,myd]);
-			
+   			   			
+   			   			var mya = $("<a></a>").attr({"href":"#portfolioModal"+i,"data-toggle":"modal"}).addClass("portfolio-link");
+   			   			
+   			   			var smalld = $("<div></div>").addClass("portfolio-hover");
+   			   			var nd = $("<div></div>").addClass("portfolio-hover-content");
+   			   			var ii = $("<div></div>").addClass("fa fa-plus fa-3x");
+   			   			
+   			   			var smallimg = $("<img>").addClass("img-responsive").attr({"src":"img/portfolio/roundicons.png","alt":""});
+   			   			   			
+   			   			nd.append(ii);  
+   			   			smalld.append(nd);
+   			   			mya.append([smalld,smallimg]);
+   			   			
+   						var myd = $("<div></div>").addClass("portfolio-caption");
+   			   			
+   						var hword = $("<h4></h4>").text("我是測試");
+   						var pword = $("<p></p>").addClass("text-muted").text("Graphic Design");
+   						
+   						myd.append([hword,pword]);
+   						
+   						bigd.append([mya,myd]);
+   						
+   						$("#svesall").append(bigd);
+   					//結束動態生成美容項目DIV
+   					
+   					//以下開始動態生成點擊美容項目DIV，彈跳出來的介紹DIV
+   					
+   						
+   						var md = $("<div></div>").addClass("modal-dialog");
+   					
+   						var mc = $("<div></div>").addClass("modal-content");
+   					
+   						var cm = $("<div></div>").addClass("close-modal")attr({"data-dismiss":"modal"});
+   						var lr = $("<div></div>").addClass("lr");
+   						var rl = $("<div></div>").addClass("rl");
+   						lr.append(rl);
+   						cm.append(lr);
+   						
+   						
+   						
+   					//結束動態生成點擊美容項目DIV，彈跳出來的介紹DIV	
+   						
+   						
+   						
+   						
+//    						$("footer").after("");
+   						
+   						
+   				   })
+   			 	})						
    		})
     
     </script>    
@@ -206,15 +245,16 @@
     <!-- Portfolio Grid Section -->
     <section id="portfolio" class="bg-light-gray">
         <div class="container">
+        
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">美容服務</h2>
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
             </div>
+            
             <div class="row" id="svesall">
-            
-            
+                       
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
@@ -228,10 +268,8 @@
                         <h4>精緻人工泡沫洗車</h4>
                         <p class="text-muted">Graphic Design</p>
                     </div>
-                </div>
-                
-                
-                
+                </div>                
+                               
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
@@ -246,6 +284,7 @@
                         <p class="text-muted">Website Design</p>
                     </div>
                 </div>
+                
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
@@ -260,6 +299,7 @@
                         <p class="text-muted">Website Design</p>
                     </div>
                 </div>
+                
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
@@ -274,6 +314,7 @@
                         <p class="text-muted">Website Design</p>
                     </div>
                 </div>
+                
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
@@ -288,6 +329,7 @@
                         <p class="text-muted">Website Design</p>
                     </div>
                 </div>
+                
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
@@ -302,6 +344,7 @@
                         <p class="text-muted">Website Design</p>
                     </div>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -830,6 +873,10 @@
 
     <!-- Theme JavaScript -->
     <script src="js/agency.js"></script>
+
+
+
+
 
 </body>
 
