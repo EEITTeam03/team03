@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ServicesService {
 	private ServicesDAO_interface dao;
-	//ㄏㄏ
+	
 	public ServicesService(){
 		dao=new ServicesDAO_Hibernate();
 	}

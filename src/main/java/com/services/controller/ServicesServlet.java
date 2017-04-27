@@ -19,7 +19,7 @@ import com.services.model.ServicesService;
 @WebServlet("/Test")
 public class ServicesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-//ㄏㄏ
+
 	public ServicesServlet(){
 		super();
 	}
