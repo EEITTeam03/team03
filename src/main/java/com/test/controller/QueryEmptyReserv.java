@@ -42,11 +42,7 @@ public class QueryEmptyReserv extends HttpServlet {
 		
 		String strDate = request.getParameter("selectedDate");
 		Calendar cal = null;
-		try {
-			cal = MyUtil.getCalender(strDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		cal = MyUtil.getCalender(strDate);
 		
 		ReservService rsvc = new ReservService();
 		List<ReservVO> list = rsvc.getAllReservByDate(cal);

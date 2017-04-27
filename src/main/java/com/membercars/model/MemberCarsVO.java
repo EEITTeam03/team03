@@ -11,6 +11,7 @@ public class MemberCarsVO {
 	private MemberInfoVO memberInfoVO;
 	private String carLicense;
 	private CarTypeVO carTypeVO;
+	private Set<ReservVO> reserves = new HashSet<ReservVO>();
 	
 	public MemberInfoVO getMemberInfoVO() {
 		return memberInfoVO;
@@ -36,7 +37,6 @@ public class MemberCarsVO {
 	public void setReserves(Set<ReservVO> reserves) {
 		this.reserves = reserves;
 	}
-	private Set<ReservVO> reserves = new HashSet<ReservVO>();
 	
 	
 

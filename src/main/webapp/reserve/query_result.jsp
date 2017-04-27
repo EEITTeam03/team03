@@ -43,7 +43,7 @@ table, th, td {
 <hr>
 
 <h2>剩下時段</h2>
-
+${reserve}
 
 </body>
 </html>

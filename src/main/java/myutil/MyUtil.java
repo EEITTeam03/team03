@@ -17,11 +17,15 @@ public class MyUtil {
 		return sqlDate;
 	}
 	
-	public static Calendar getCalender(String strDate) throws ParseException{
+	public static Calendar getCalender(String strDate) {
 		Calendar cal = Calendar.getInstance();
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		cal.setTime(sdf.parse(strDate));
+		try {
+			cal.setTime(sdf.parse(strDate));
+		} catch (ParseException e) {
+			throw new RuntimeException("日期格式錯誤!");
+		}
 		return cal;
 	}
 }
