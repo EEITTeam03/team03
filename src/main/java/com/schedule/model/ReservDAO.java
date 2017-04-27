@@ -94,7 +94,7 @@ public class ReservDAO implements ReservDAO_interface {
 //				System.out.println(lists.getServTime());
 //			}
 //		}
-<<<<<<< HEAD
+
 		ReservService reservice = new ReservService();
 		
 		List<Map> list = reservice.getScheduleForJSON();
@@ -108,22 +108,7 @@ public class ReservDAO implements ReservDAO_interface {
 			} 
 			System.out.println();
 		}
-=======
-//		ReservService reservice = new ReservService();
-//		Calendar calendar = Calendar.getInstance();
-//		List<Map> list = reservice.getSchedule( calendar);
-//		for(Map map:list){
-//			Iterator iter = map.entrySet().iterator(); 
-//			while (iter.hasNext()) { 
-//			    Map.Entry entry = (Map.Entry) iter.next(); 
-//			    Object key = entry.getKey(); 
-//			    Object val = entry.getValue();
-//			    System.out.print(key+":"+val+" ");
-//			} 
-//			System.out.println();
-//		}
-		
->>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
+
 	}
 
 	@Override
