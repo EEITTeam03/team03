@@ -14,6 +14,8 @@ import com.employee.model.EmployeeVO;
 import com.membercars.model.MemberCarsVO;
 import com.reservlist.model.ReservListVO;
 
+import myutil.MyUtil;
+
 
 
 public class ReservService {
@@ -101,5 +103,9 @@ public class ReservService {
 			}
 		}
 		return list2;
+	}
+
+	public List<ReservVO> getAllReservByDate(Calendar cal){
+		return dao.findByDate(cal);
 	}
 }
