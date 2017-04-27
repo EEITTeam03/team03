@@ -65,7 +65,7 @@ public class ReservService {
 		List<Map> list2 = new ArrayList<Map>() ;
 		Calendar calendar = Calendar.getInstance();
 		//calendar.set(2017,Calendar.APRIL,30);
-		//calendar.set(2017,3,25);
+		calendar.set(2017,3,27);
 		int week = calendar.get(Calendar.WEEK_OF_YEAR);
 		for(ReservVO reserv:list){
 			if(calendar.get(Calendar.YEAR)==reserv.getReservDateTime().get(Calendar.YEAR))
@@ -75,7 +75,7 @@ public class ReservService {
 					 int year=reserv.getReservDateTime().get(Calendar.YEAR);
 					 int month=reserv.getReservDateTime().get(Calendar.MONTH)+1;
 					 int day = reserv.getReservDateTime().get(Calendar.DATE);
-					 int hour = reserv.getReservDateTime().get(Calendar.HOUR);
+					 int hour = reserv.getReservDateTime().get(Calendar.HOUR_OF_DAY);
 					 int minute = reserv.getReservDateTime().get(Calendar.MINUTE);
 					 int dayOfWeek = reserv.getReservDateTime().get(Calendar.DAY_OF_WEEK)-1;
 					 int totalTime=0;
@@ -85,7 +85,10 @@ public class ReservService {
 						map.put("月份", month);
 						map.put("日期", day);
 						map.put("星期", dayOfWeek);
-						map.put("開始時間", hour+":"+minute);
+						if(minute==0)
+							map.put("開始時間", hour+":"+minute+'0');
+						else
+							map.put("開始時間", hour+":"+minute);
 						List <String> service = new <String>ArrayList();
 					 for(ReservListVO rl:reserv.getReservlists()){
 						 totalTime+=rl.getServTime();
@@ -93,7 +96,11 @@ public class ReservService {
 					 }
 					int Endminute = (minute+totalTime)%60;
 					int EndHour =hour+ (minute+totalTime)/60;
-					map.put("結束時間", EndHour+":"+Endminute);
+					if(Endminute==0)
+						map.put("結束時間", EndHour+":"+Endminute+'0');
+					else
+						map.put("結束時間", EndHour+":"+Endminute);
+					
 					map.put("總長", totalTime);
 					map.put("服務項目", service);
 					list2.add(map);
