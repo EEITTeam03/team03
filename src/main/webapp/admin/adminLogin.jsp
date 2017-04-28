@@ -7,7 +7,7 @@
 <title>administrator Login</title>
 </head>
 <body>
-	<form action="loginNG.do" method="post" >  
+	<form action="Loggin.do" method="post" >  
  帳號:<input type="text" name="userid" size='40' value='${param.userid}' />
  <br>　　<small><Font color='red' >${ErrorMsgKey.AccountEmptyError}</Font></small>
  <br/><br/>  

@@ -8,5 +8,6 @@ public interface AdminDAO_interface {
 	public void update(AdminVO adminVO);
 	public void delete(String email);
 	public List<AdminVO>getAll();
-	public AdminVO findByName(String name);
+	public List<AdminVO> findByName(String name);
+	public List<AdminVO> findAdmin(String email , String password);
 }

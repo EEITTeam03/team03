@@ -7,10 +7,13 @@ public class AdminService {
 	public AdminService (){
 		dao = new AdminDAO();
 	}
+	public List<AdminVO> getAdmin(String email , String password){
+		return dao.findAdmin(email, password);
+	}
 	public AdminVO getOne(String email){
 		return dao.findByPK(email);
 	}
-	public AdminVO getOneByName(String name){
+	public List<AdminVO> getOneByName(String name){
 		return dao.findByName(name);
 	}
 	public List<AdminVO>getALL(){
