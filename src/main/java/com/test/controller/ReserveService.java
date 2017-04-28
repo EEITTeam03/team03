@@ -103,7 +103,7 @@ public class ReserveService extends HttpServlet {
 		
 		// 準備轉交
 		request.setAttribute("reserve", reservVO);
-		request.getRequestDispatcher("/reserve/query_result.jsp").forward(request, response);
+		request.getRequestDispatcher("/reserve/success.jsp").forward(request, response);
 
 	}
 
