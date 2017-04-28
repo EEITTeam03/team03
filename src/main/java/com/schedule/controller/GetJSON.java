@@ -21,7 +21,7 @@ import com.schedule.model.ReservService;
 /**
  * Servlet implementation class GetJSON
  */
-@WebServlet("/schedule/GetJSON")
+@WebServlet("/scheduler/GetJSON")
 public class GetJSON extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -47,7 +47,7 @@
 		
 		<mapping resource="com/servicestep/model/servicestep.hbm.xml" />
 		<mapping resource="com/servicecarclass/model/servicecarclass.hbm.xml" />
-		
+		<mapping resource="com/admin/model/admin.hbm.xml" />
 	</session-factory>
 	
 </hibernate-configuration>
