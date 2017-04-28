@@ -1,5 +1,6 @@
 USE [Team3]
 GO
+DROP TABLE [dbo].[admin]
 DROP TABLE [dbo].[block_list]
 DROP TABLE [dbo].[block_rule]
 DROP TABLE [dbo].[feedback]
@@ -17,7 +18,24 @@ DROP TABLE [dbo].[car_type]
 DROP TABLE [dbo].[car_class]
 
 
+/****** Object:  Table [dbo].[admin]    Script Date: 2017/4/28 下午 07:02:11 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[admin](
+	[email] [varchar](50) NULL,
+	[password] [varchar](50) NULL,
+	[name] [varchar](50) NULL,
+	[authority] [int] NULL
+) ON [PRIMARY]
 
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[block_list]    Script Date: 2017/4/28 下午 07:02:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -231,7 +249,7 @@ CREATE TABLE [dbo].[service_step](
 	[stepName] [nvarchar](20) NOT NULL,
 	[stepDescp] [nvarchar](50) NULL,
 	[stepPic] [varbinary](max) NULL,
-	[stepPercent] [int] NOT NULL,
+	[stepPercent] [int] NULL,
 	[servStepNo] [int] IDENTITY(1,1) NOT NULL,
  CONSTRAINT [PK_service_step_1] PRIMARY KEY CLUSTERED 
 (
@@ -284,6 +302,10 @@ CREATE TABLE [dbo].[services_carClass](
 ) ON [PRIMARY]
 
 GO
+INSERT [dbo].[admin] ([email], [password], [name], [authority]) VALUES (N'ya7894495@gmail.com', N'sa123456', N'周柏元', 1)
+INSERT [dbo].[admin] ([email], [password], [name], [authority]) VALUES (N'haha456123@gmail.com', N'sa123456', N'陳致鈞', 0)
+INSERT [dbo].[admin] ([email], [password], [name], [authority]) VALUES (N'iu168555@yahoo.com.tw', N'sa123456', N'蕭天怡', 0)
+INSERT [dbo].[admin] ([email], [password], [name], [authority]) VALUES (N'boss8888@gmail.com', N'sa123456', N'多啦a夢', 1)
 INSERT [dbo].[block_rule] ([blockRuleNo], [blockRule], [blockLimitTimes], [blockTime]) VALUES (1, N'取消預約', 3, 60)
 INSERT [dbo].[block_rule] ([blockRuleNo], [blockRule], [blockLimitTimes], [blockTime]) VALUES (2, N'預約未到', 2, 90)
 INSERT [dbo].[car_class] ([carClass], [className]) VALUES (N'L', N'大型車')

@@ -1,0 +1,9 @@
+{
+"teams":
+	[
+		{"teamName":"瑪莉","teamDesc":"專長鍍膜"},
+		{"teamName":"亨利","teamDesc":"專長打蠟"},
+		{"teamName":"瑞克","teamDesc":"殺喪屍"},
+		{"teamName":"送葬者","teamDesc":"職業級摔角選手"}
+	]
+}

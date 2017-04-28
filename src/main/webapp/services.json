@@ -1,0 +1,12 @@
+{
+"services":
+	[
+		{"servName":"精緻人工泡沫洗車","servDesc":"1"},
+		{"servName":"精緻全車打蠟","servDesc":"2"},
+		{"servName":"超值清新抗菌組合","servDesc":"3"},
+		{"servName":"2S 鏡面美容","servDesc":"4"},
+		{"servName":"3S 鏡面美容","servDesc":"5"},
+		{"servName":"4S 鏡面美容","servDesc":"6"},
+		{"servName":"奈米鑽石鍍膜","servDesc":"7"}
+	]
+}
