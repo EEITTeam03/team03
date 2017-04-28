@@ -180,7 +180,17 @@
         	
         	
         	
-        	
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
+                        <h4>Kay Garland</h4>
+                        <p class="text-muted">Lead Designer</p>
+                    </div>
+                </div>        	
+     
+     
+     
+     
         	
         	
         	

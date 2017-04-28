@@ -60,25 +60,22 @@
     
     <script>
    		$(function(){
-   			var i = 0;
+   			var snumber = 0;
+   			
    			$.ajax({
    			    url:'services.xml',
    			    type: 'GET',
    			    dataType: 'xml',//資料型態可以不設定，且此型態不可是text或html
    			    }).done(function(xml){  				   
    				   $(xml).find("data").each(function(){
-   						i=i+1;
+   						snumber=snumber+1;
    				//以下開始動態生成美容項目DIV
    						var servName=$(this).children("servName").text(); //取得子節點中的servName資料
    						var servDesc=$(this).children("servDesc").text(); //取得子節點中的servDesc資料
-//    						console.log(servName);
-//    						console.log(servDesc);
-//    						console.log();
 
    			   			var bigd = $("<div></div>").addClass("col-md-4 col-sm-6 portfolio-item");
-   			   			
-   			   			
-   			   			var mya = $("<a></a>").attr({"href":"#portfolioModal"+i,"data-toggle":"modal"}).addClass("portfolio-link");
+   			   			   			   			
+   			   			var mya = $("<a></a>").attr({"href":"#portfolioModal"+snumber,"data-toggle":"modal"}).addClass("portfolio-link");
    			   			
    			   			var smalld = $("<div></div>").addClass("portfolio-hover");
    			   			var nd = $("<div></div>").addClass("portfolio-hover-content");
@@ -104,7 +101,7 @@
    					
    					//以下開始動態生成，美容項目點擊後所彈跳出來的介紹DIV
    					
-   						var pmmf = $("<div></div>").addClass("portfolio-modal modal fade").attr({"id":"portfolioModal"+i,"tabindex":"-1","role":"dialog","aria-hidden":"true"});
+   						var pmmf = $("<div></div>").addClass("portfolio-modal modal fade").attr({"id":"portfolioModal"+snumber,"tabindex":"-1","role":"dialog","aria-hidden":"true"});
    					
    						var md = $("<div></div>").addClass("modal-dialog");
    					
@@ -120,7 +117,7 @@
    						var crow = $("<div></div>");
    						var cco = $("<div></div>").addClass("col-lg-8 col-lg-offset-2");
    						var mb = $("<div></div>").addClass("modal-body");
-   						var mbh = $("<h2></h2>").text("服務"+i);   		
+   						var mbh = $("<h2></h2>").text("服務"+snumber);   		
    						var mimg = $("<img>").addClass("img-responsive img-centered").attr({"src":"img/portfolio/roundicons-free.png","alt":""});
    						var mbp = $("<p></p>").text("概述");
    						var bbp = $("<button></button>").attr({"type":"button","data-dismiss":"modal"}).addClass("btn btn-primary");
@@ -142,8 +139,43 @@
    						$("footer").after(pmmf);
    					//結束動態生成	
  						
+
    				   })
-   			 	})						
+   			 	})
+
+    			var tnumber = 0;
+   			 	
+    			$.ajax({
+   			    url:'teams.xml',
+   			    type: 'GET',
+   			    dataType: 'xml',//資料型態可以不設定，且此型態不可是text或html
+   			    }).done(function(xml){  				   
+   				   $(xml).find("data").each(function(){
+   						tnumber = tnumber + 1;
+   		    		//以下開始動態生成團隊成員
+   						var teamName=$(this).children("teamName").text(); //取得子節點中的teamName資料
+   						var teamDesc=$(this).children("teamDesc").text(); //取得子節點中的teamDesc資料   		    			
+	   		   			var cs = $("<div></div>").addClass("col-sm-4");
+	   		   			
+	   		   			var tm = $("<div></div>").addClass("team-member");
+	   		   			
+	   		   			var mimg = $("<img>").addClass("img-responsive img-circle").attr({"src":"img/team/"+tnumber+".jpg","alt":""});
+	   		   			var tmh = $("<h4></h4>").text(teamName);
+	   		   			var tmp = $("<p></p>").addClass("text-muted").text(teamDesc);
+	   		   			
+	   		   			tm.append([mimg,tmh,tmp]);
+	   		   			cs.append(tm);
+	   		   			$("#teamlist").append(cs);
+	   		   			//結束動態生成  	
+ 						
+   				   })
+   			 	})  			 	
+   			 	
+   			 	
+   			 	
+		 	
+   			 	
+   			 	
    		})
     
     </script>    
@@ -365,52 +397,12 @@
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Kay Garland</h4>
-                        <p class="text-muted">Lead Designer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Larry Parker</h4>
-                        <p class="text-muted">Lead Marketer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Diana Pertersen</h4>
-                        <p class="text-muted">Lead Developer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="row" id="teamlist">
+                
+                
+
+                
+                
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -449,47 +441,68 @@
     </aside>
 
     <!-- Contact Section -->
-    <section id="contact">
+    <section id="contact" style="height:1000px">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Contact Us</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading">聯絡我們</h2>
+                    <h3 class="section-subheading text-muted">有任何指教或洽詢服務歡迎來電。</h3>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <form name="sentMessage" id="contactForm" novalidate>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-lg-12 text-center">
-                                <div id="success"></div>
-                                <button type="submit" class="btn btn-xl">Send Message</button>
-                            </div>
-                        </div>
-                    </form>
+                <div class="col-lg-12 text-center">
+                    <h3>地址；</h3>
+                </div>            
+                <div class="col-lg-12 text-center" style="height:500px">
+                    <iframe style="width:80%;height:100%" frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=台北市大安區復興南路一段390號&z=16&output=embed&t='></iframe>
                 </div>
-            </div>
+            </div>  
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                </div>
+            </div>  
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                </div>
+            </div>              
+                                             
+<!--             <div class="row"> -->
+<!--                 <div class="col-lg-12"> -->
+<!--                     <form name="sentMessage" id="contactForm" novalidate> -->
+<!--                         <div class="row"> -->
+<!--                             <div class="col-md-6"> -->
+<!--                                 <div class="form-group"> -->
+<!--                                     <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
+<!--                                 <div class="form-group"> -->
+<!--                                     <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
+<!--                                 <div class="form-group"> -->
+<!--                                     <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                             <div class="col-md-6"> -->
+<!--                                 <div class="form-group"> -->
+<!--                                     <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                             <div class="clearfix"></div> -->
+<!--                             <div class="col-lg-12 text-center"> -->
+<!--                                 <div id="success"></div> -->
+<!--                                 <button type="submit" class="btn btn-xl">Send Message</button> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </form> -->
+<!--                 </div> -->
+<!--             </div> -->
+        
+        
+        
+        
         </div>
     </section>
 
