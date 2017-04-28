@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teams>
+	<data>
+		<teamName>瑪莉</teamName>
+		<teamDesc>專長鍍膜</teamDesc>
+	</data>
+	<data>
+		<teamName>亨利</teamName>
+		<teamDesc>專長打蠟</teamDesc>
+	</data>	
+	<data>
+		<teamName>瑞克</teamName>
+		<teamDesc>殺喪屍</teamDesc>
+	</data>	
+	<data>
+		<teamName>送葬者</teamName>
+		<teamDesc>職業級摔角選手</teamDesc>
+	</data>				
+</teams>
