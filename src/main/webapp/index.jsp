@@ -303,10 +303,13 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#services">服務項目</a>
+                        <a class="page-scroll ff-word" href="#">進行預約</a>
+                    </li>                    
+                    <li>
+                        <a class="page-scroll ff-word" href="#services">各類服務</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#portfolio">美容服務</a>
+                        <a class="page-scroll ff-word" href="#portfolio">美容項目</a>
                     </li>
                     <li>
                         <a class="page-scroll ff-word" href="#about">關於我們</a>
@@ -318,7 +321,7 @@
                         <a class="page-scroll ff-word" href="#contact">聯絡我們</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#test">測試</a>
+                        <a class="page-scroll ff-word" href="#test">登入</a>
                     </li>                                       
                 </ul>
             </div>
@@ -359,8 +362,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">服務項目</h2>
-                    <h3 class="section-subheading text-muted">專業團隊給予您的愛車最佳的護理服務。</h3>
+                    <h2 class="section-heading">各類服務</h2>
+                    <h3 class="section-subheading text-muted">讓您可依照自身需求，選擇自己最適合的服務種類。</h3>
                 </div>
             </div>
             <div class="row text-center">
@@ -370,7 +373,7 @@
                         <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">現場服務</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted">服務員現場為您安排，讓您聽美好音樂，品嚐美味甜點，悠閒等待您的愛車煥然一新。</p>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
@@ -378,7 +381,7 @@
                         <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">預約服務</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted">時間就是金錢，透過網路預約美容服務，讓愛車在指定時間內抵達，給予專業團隊立即為您服務。</p>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
@@ -386,7 +389,7 @@
                         <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">取還車服務</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted">讓生活忙碌的您，無需為愛車美容奔波，本公司專業人員，將會前往您指定的地點取車，並在指定時間內完成美容服務送回指定地點。</p>
                 </div>
             </div>
         </div>
@@ -398,8 +401,8 @@
         
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">美容服務</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading">美容項目</h2>
+                    <h3 class="section-subheading text-muted">專業團隊給予您的愛車最佳的護理服務</h3>
                 </div>
             </div>
             
@@ -414,7 +417,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">關於我們</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">讓您更加了解本公司的過去與未來</h3>
                 </div>
             </div>
             <div class="row">
@@ -426,11 +429,11 @@
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>2009-2011</h4>
-                                    <h4 class="subheading">Our Humble Beginnings</h4>
+                                    <h4>1972-2011</h4>
+                                    <h4 style="font-family:Noto Sans TC; class="subheading">不屈不撓，一步一腳印</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">因為回顧過去的40年，我發現自己一直走在正確的道路上。1972年我19歲 就只因為對「汽車的熱愛」，從路邊洗車的小弟開始，40年來我逐步實現了夢想，創辦並且將事業版圖發展成國際性的「汽車美容王國」。</p>
                                 </div>
                             </div>
                         </li>
@@ -440,47 +443,47 @@
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>March 2011</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
+                                    <h4 style="font-family:Noto Sans TC;">經營理念</h4>
+                                    <h4 style="font-family:Noto Sans TC; class="subheading">誠信、服務 、品質</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">汽車美容中心成立理念為『誠信 服務 品質』，我們相信誠實以待，溫馨服務，選擇對的產品，公司才能永續經營。</p>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/3.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>December 2012</h4>
-                                    <h4 class="subheading">Transition to Full Service</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
                                 <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>July 2014</h4>
-                                    <h4 class="subheading">Phase Two Expansion</h4>
+                                    <h4 style="font-family:Noto Sans TC;">未來目標</h4>
+                                    <h4 style="font-family:Noto Sans TC; class="subheading">不斷努力與學習</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">我一直渴望將卡氏成功打造成為全球汽車美容業的明星品牌，我堅持信念且持續努力，我知道我已帶領所有的卡氏人走在正確的道路上，這個願景指日可待！</p>
                                 </div>
                             </div>
                         </li>
+<!--                         <li class="timeline-inverted"> -->
+<!--                             <div class="timeline-image"> -->
+<!--                                 <img class="img-circle img-responsive" src="img/about/4.jpg" alt=""> -->
+<!--                             </div> -->
+<!--                             <div class="timeline-panel"> -->
+<!--                                 <div class="timeline-heading"> -->
+<!--                                     <h4>July 2014</h4> -->
+<!--                                     <h4 class="subheading">Phase Two Expansion</h4> -->
+<!--                                 </div> -->
+<!--                                 <div class="timeline-body"> -->
+<!--                                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                         </li> -->
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <h4>Be Part
-                                    <br>Of Our
-                                    <br>Story!</h4>
+                                <h4>這是
+                                    <br>我們的
+                                    <br>故事!</h4>
                             </div>
                         </li>
                     </ul>
@@ -495,7 +498,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">團隊成員</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">專業的技術團隊，品質保證</h3>
                 </div>
             </div>
             <div class="row" id="teamlist">
@@ -507,7 +510,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                    <p class="large text-muted">從落地窗看見愛車經美容師巧手，從頭保養後，再次以嶄新的面貌來到眼前，讓您的眼睛為之一亮。</p>
                 </div>
             </div>
         </div>
@@ -542,7 +545,7 @@
     </aside>
 
     <!-- Contact Section -->
-    <section id="contact" style="height:1000px">
+    <section id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -552,21 +555,29 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h3>地址；</h3>
-                </div>            
-                <div class="col-lg-12 text-center" style="height:500px">
-                    <iframe style="width:80%;height:100%" frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=台北市大安區復興南路一段390號&z=16&output=embed&t='></iframe>
-                </div>
-            </div>  
+                    <iframe style="width: 100%;height:350px;" frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=台北市大安區復興南路一段390號&z=16&output=embed&t='></iframe>           
+                </div>            	                
+            </div>
             <div class="row">
-                <div class="col-lg-12 text-center">
+            	<div class="col-xs-1 col-sm-3 col-md-4 col-lg-4 " style="color:white;margin:0 auto;">
+               	
+                </div>            	
+            	<div class="col-xs-10 col-sm-6 col-md-6 col-lg-4" style="color:white;margin:0 auto;">
+            		<br>
+					<ul>
+                		<li style="list-style-type:none;"><i class="fa fa-map-marker"></i> <strong>地址：</strong>台北市大安區復興南路一段390號</li>
+                    	<li style="list-style-type:none;"><i class="fa fa-phone"></i> <strong>電話：</strong>02-2883-2727</li>
+                    	<li style="list-style-type:none;"><i class="fa fa-fax"></i> <strong>傳真：</strong>02-2881-8272</li>
+                    	<li style="list-style-type:none;"><i class="fa fa-envelope-o"></i> <strong>Email：</strong><a href="mailto:classicservice190@gmail.com">classicservice190@gmail.com</a></li>
+                	</ul>              	
                 </div>
-            </div>  
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                </div>
-            </div>              
-                                             
+            	<div class="col-xs-1 col-sm-3 col-md-2 col-lg-4" style="color:white;margin:0 auto;">
+              	
+                </div>                            	                
+            </div>                  
+            		
+            
+                                                                                         
 <!--             <div class="row"> -->
 <!--                 <div class="col-lg-12"> -->
 <!--                     <form name="sentMessage" id="contactForm" novalidate> -->
@@ -606,87 +617,7 @@
         
         </div>
     </section>
-
-    <!-- test -->
-    <section id="test">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/1.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>2009-2011</h4>
-                                    <h4 class="subheading">Our Humble Beginnings</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/2.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>March 2011</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/3.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>December 2012</h4>
-                                    <h4 class="subheading">Transition to Full Service</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>July 2014</h4>
-                                    <h4 class="subheading">Phase Two Expansion</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <h4>Be Part
-                                    <br>Of Our
-                                    <br>Story!</h4>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>    
+   
 
     <footer>
         <div class="container">
@@ -704,8 +635,9 @@
                         </li>
                     </ul>
                 </div>
+               	
                 <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
+                    <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Privacy Policy</a>
                         </li>
                         <li><a href="#">Terms of Use</a>
@@ -713,7 +645,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div>                            
     </footer>
 
     <!-- Portfolio Modals -->
