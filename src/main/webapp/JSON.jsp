@@ -190,10 +190,119 @@
      
      
      
-     
+//    			$.ajax({
+//    			    url:'services.xml',
+//    			    type: 'GET',
+//    			    dataType: 'xml',//資料型態可以不設定，且此型態不可是text或html
+//    			    }).done(function(xml){  				   
+//    				   $(xml).find("data").each(function(){
+//    						snumber=snumber+1;
+//    				//以下開始動態生成美容項目DIV
+//    						var servName=$(this).children("servName").text(); //取得子節點中的servName資料
+//    						var servDesc=$(this).children("servDesc").text(); //取得子節點中的servDesc資料
+
+//    			   			var bigd = $("<div></div>").addClass("col-md-4 col-sm-6 portfolio-item");
+   			   			   			   			
+//    			   			var mya = $("<a></a>").attr({"href":"#portfolioModal"+snumber,"data-toggle":"modal"}).addClass("portfolio-link");
+   			   			
+//    			   			var smalld = $("<div></div>").addClass("portfolio-hover");
+//    			   			var nd = $("<div></div>").addClass("portfolio-hover-content");
+//    			   			var ii = $("<div></div>").addClass("fa fa-plus fa-3x");
+   			   			
+//    			   			var smallimg = $("<img>").addClass("img-responsive").attr({"src":"img/portfolio/roundicons.png","alt":""});
+   			   			   			
+//    			   			nd.append(ii);  
+//    			   			smalld.append(nd);
+//    			   			mya.append([smalld,smallimg]);
+   			   			
+//    						var myd = $("<div></div>").addClass("portfolio-caption");
+   			   			
+//    						var hword = $("<h4></h4>").text("我是測試");
+//    						var pword = $("<p></p>").addClass("text-muted").text("Graphic Design");
+   						
+//    						myd.append([hword,pword]);
+   						
+//    						bigd.append([mya,myd]);
+   						
+//    						$("#svesall").append(bigd);
+//    					//結束動態生成
+   					
+//    					//以下開始動態生成，美容項目點擊後所彈跳出來的介紹DIV
+   					
+//    						var pmmf = $("<div></div>").addClass("portfolio-modal modal fade").attr({"id":"portfolioModal"+snumber,"tabindex":"-1","role":"dialog","aria-hidden":"true"});
+   					
+//    						var md = $("<div></div>").addClass("modal-dialog");
+   					
+//    						var mc = $("<div></div>").addClass("modal-content");
+   					
+//    						var cm = $("<div></div>").addClass("close-modal").attr({"data-dismiss":"modal"});
+//    						var lr = $("<div></div>").addClass("lr");
+//    						var rl = $("<div></div>").addClass("rl");
+//    						lr.append(rl);
+//    						cm.append(lr);
+   						
+//    						var cnt = $("<div></div>").addClass("container");
+//    						var crow = $("<div></div>");
+//    						var cco = $("<div></div>").addClass("col-lg-8 col-lg-offset-2");
+//    						var mb = $("<div></div>").addClass("modal-body");
+//    						var mbh = $("<h2></h2>").text("服務"+snumber);   		
+//    						var mimg = $("<img>").addClass("img-responsive img-centered").attr({"src":"img/portfolio/roundicons-free.png","alt":""});
+//    						var mbp = $("<p></p>").text("概述");
+//    						var bbp = $("<button></button>").attr({"type":"button","data-dismiss":"modal"}).addClass("btn btn-primary");
+//    						var fft = $("<i></i>").addClass("fa fa-times");
+//    						fft.after("離開");
+   						
+//    						bbp.append(fft);
+//    						mb.append([mbh,mimg,mbp,bbp]);
+//    						cco.append(mb);
+//    						crow.append(cco);
+//    						cnt.append(crow);
+   						
+//    						mc.append([cm,cnt]);
+   						
+//    						md.append(mc);
+   						
+//    						pmmf.append(md);
+   						
+//    						$("footer").after(pmmf);
+//    					//結束動態生成	
+ 						
+
+//    				   })
+//    			 	})     
         	
         	
-        	
+ 
+ 
+ 
+ 
+ 
+ 
+//     			$.ajax({
+//    			    url:'teams.xml',
+//    			    type: 'GET',
+//    			    dataType: 'xml',//資料型態可以不設定，且此型態不可是text或html
+//    			    }).done(function(xml){  				   
+//    				   $(xml).find("data").each(function(){
+//    						tnumber = tnumber + 1;
+//    		    		//以下開始動態生成團隊成員
+//    						var teamName=$(this).children("teamName").text(); //取得子節點中的teamName資料
+//    						var teamDesc=$(this).children("teamDesc").text(); //取得子節點中的teamDesc資料   		    			
+// 	   		   			var cs = $("<div></div>").addClass("col-sm-4");
+	   		   			
+// 	   		   			var tm = $("<div></div>").addClass("team-member");
+	   		   			
+// 	   		   			var mimg = $("<img>").addClass("img-responsive img-circle").attr({"src":"img/team/"+tnumber+".jpg","alt":""});
+// 	   		   			var tmh = $("<h4></h4>").text(teamName);
+// 	   		   			var tmp = $("<p></p>").addClass("text-muted").text(teamDesc);
+	   		   			
+// 	   		   			tm.append([mimg,tmh,tmp]);
+// 	   		   			cs.append(tm);
+// 	   		   			$("#teamlist").append(cs);
+// 	   		   			//結束動態生成  	
+ 						
+//    				   })
+//    			 	})        	
         	
         	
 </body>

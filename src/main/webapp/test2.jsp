@@ -11,25 +11,31 @@
 <html id="ie8" dir="ltr" lang="zh-TW">
 <![endif]-->
 <!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
-<html dir="ltr" lang="zh-TW">
-<!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Datepicker - Display month &amp; year menus</title>
+	<script type="text/javascript" src="js/jquery.js"></script> 
+	<script type="text/javascript" src="js/jquery-ui.js"></script> 
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" /> 
 
-<!--[if lt IE 9]>
-<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-</head>
+  
+  
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({
+      	changeMonth: true,
+      	changeYear: true,
+      	dateFormat: 'yy-mm-dd',
+    	yearRange: '-90:+0'
+    });
+  } );
+  </script>
 </head>
 <body>
-<video id="movie" preload controls loop poster="poster.png" width="640" height="360">
-  <source src="video/video_preview_h264.mp4" type="video/mp4" />
-  <source src="Yif-Magic.ogv" type="video/ogg" />
-  <source src="Yif-Magic.webm" type="video/web" />
-
-  您的瀏覽器不支援HTML 5影片播放標籤<video>格式。
-  Your browser doesn't support the <video> tag.
-</video>
+ 
+<p>Date: <input type="text" id="datepicker"></p>
+ 
+ 
 </body>
 </html>
