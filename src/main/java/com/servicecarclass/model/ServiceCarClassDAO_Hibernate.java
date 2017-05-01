@@ -13,7 +13,7 @@ import hibernate.util.HibernateUtil;
 public class ServiceCarClassDAO_Hibernate implements ServiceCarClassDAO_interface {
 
 	private static final String GET_ALL_STMT = "FROM ServiceCarClassVO";
-	private static final String GET_ONE_STMT = "SELECT servNo ,servPrice,servTime,carClass FROM services_carClass WHERE servNo=? AND carClass=?";
+	private static final String GET_ONE_STMT = "FROM ServiceCarClassVO WHERE servNo=? AND carClass=?";
 	private static final String GET_SERs_BYSerNo_STMT = "SELECT servNo,servTypeNo,servName,servDesc,servPhoto,servEffectiveDate,servStatus FROM services WHERE servNo=? order by servNo ";
 	private static final String DELETE = "DELETE ServiceCarClassVO WHERE ServNo=?";
 	@Override
@@ -61,12 +61,17 @@ public class ServiceCarClassDAO_Hibernate implements ServiceCarClassDAO_interfac
 	}
 
 	@Override
-	public ServiceCarClassVO findByPrimaryKey(Integer ServNo) {
+	public ServiceCarClassVO findByServAndClass(Integer servNo,String carClass) {
 		ServiceCarClassVO serCarVO = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			serCarVO = (ServiceCarClassVO) session.get(ServiceCarClassVO.class, ServNo);
+			Query query = session.createQuery(GET_ONE_STMT);
+			query.setParameter(0, servNo);
+			query.setParameter(1, carClass);
+			List<ServiceCarClassVO> list = query.list();
+			if(list.size() != 0)
+				serCarVO = list.get(0);
 			session.getTransaction().commit();
 		} catch (RuntimeException e) {
 			session.getTransaction().rollback();

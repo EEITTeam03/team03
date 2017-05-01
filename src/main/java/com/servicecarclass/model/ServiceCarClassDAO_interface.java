@@ -9,7 +9,7 @@ public interface ServiceCarClassDAO_interface {
 	public void insert(ServiceCarClassVO serCarVO);
 	public void update(ServiceCarClassVO serCarVO);
 	public void delete(Integer servNo,String carClass);
-	public ServiceCarClassVO findByPrimaryKey(Integer servNo);
+	public ServiceCarClassVO findByServAndClass(Integer servNo,String carClass);
 	public List<ServiceCarClassVO> getAll();
 	public Set<ServicesVO> getSerBySerNo(Integer servNo);
 }

@@ -13,7 +13,7 @@ table, th, td {
 </style>
 </head>
 <body>
-<h1>預約確認</h1>
+<h1>預約成功</h1>
 
 預約人: ${reserve.membercarsVO.memberInfoVO.memberName}<br>
 <br>
@@ -49,6 +49,6 @@ table, th, td {
 <h3>總時間: ${range} 分鐘</h3>
 
 
-<input type="button" value="確定預約">
+<!-- <input type="button" value="確定預約"> -->
 </body>
 </html>
