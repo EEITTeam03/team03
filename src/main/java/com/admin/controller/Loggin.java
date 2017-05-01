@@ -81,7 +81,7 @@ public class Loggin extends HttpServlet {
 				session.setAttribute("LoginOK", adm);
 				session.setAttribute("Code", "OK");
 			} else {
-				// NG, userid與密碼的組合錯誤，放一個錯誤訊息到 errorMsgMap 之內
+				//userid與密碼的組合錯誤，放一個錯誤訊息到 errorMsgMap 之內
 				errorMsgMap.put("LoginError", "該帳號不存在或密碼錯誤");
 			}
 		}catch (Exception e) {
@@ -105,7 +105,7 @@ public class Loggin extends HttpServlet {
 				return;
 			}
 		} else {
-			// 如果errorMsgMap不是空的，表示有錯誤，交棒給login.jsp
+			// 如果errorMsgMap不是空的，表示有錯誤，交棒給adminLogin.jsp
 			RequestDispatcher rd = request.getRequestDispatcher("adminLogin.jsp");
 			rd.forward(request, response);
 			return;
