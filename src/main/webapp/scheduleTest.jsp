@@ -30,9 +30,7 @@
     <script type="text/javascript" src="scheduleJS/jqwidgets/globalization/globalize.culture.de-DE.js"></script>
     <script type="text/javascript">   
         $(document).ready(function () {
-        	//init();
         	dataSearch();
-        	//cleanScheduler();
         	$('#btn_search').click(function(){
         		//test();    		
         		dataSearch();
@@ -64,24 +62,23 @@
         	
         	for(var i=0;i<data.length;i++){
         		//alert(JSON.stringify(data[i]));
-        		service = "";
-        		for(var j=0;j<data[i].服務項目.length;j++){
+        		service = data[i].License+" ";					/*	讀車牌	*/
+        		for(var j=0;j<data[i].Item.length;j++){
         			if(j!=0){
         				service += ",";
         			}
-        			service += data[i].服務項目[j];
+        			service += data[i].Item[j];					/*	讀服務項目	*/
         		}
-        		var startTime = (data[i].開始時間).split(":");
-        		var endTime = (data[i].結束時間).split(":");
+        		var startTime = (data[i].Start).split(":");		/*	讀起始時間	*/
+        		var endTime = (data[i].End).split(":");			/*	讀結束時間	*/
         		var appointment ={
                     id: "id"+i,
                     description: service,
-                    location: "",
                     subject: service,
-                    calendar: data[i].員工姓名,
-                    start: new Date(data[i].年, data[i].月份-1, data[i].日期, parseInt(startTime[0]), parseInt(startTime[1]), 0),
-                    end: new Date(data[i].年, data[i].月份-1, data[i].日期, parseInt(endTime[0]), parseInt(endTime[1]), 0),
-//                     readOnly: true,			/* 3. */
+                    calendar: data[i].EmpName,					/*	讀師傅	*/
+                    start: new Date(data[i].Year, data[i].Month-1, data[i].Day, parseInt(startTime[0]), parseInt(startTime[1]), 0),
+                    end: new Date(data[i].Year, data[i].Month-1, data[i].Day, parseInt(endTime[0]), parseInt(endTime[1]), 0),
+                    readOnly: true,			/* 3. */
                     resizable: false,
                     draggable: false
                 };
@@ -89,27 +86,33 @@
         		appointments.push(appointment);
         	}
         	
-        	var source =
-            {	
-                dataType: "array",
-                dataFields: [
-                    { name: 'id', type: 'string' },
-                    { name: 'description', type: 'string' },
-                    { name: 'location', type: 'string' },
-                    { name: 'subject', type: 'string' },
-                    { name: 'calendar', type: 'string' },
-                    { name: 'start', type: 'date' },
-                    { name: 'end', type: 'date' },
-//                     { name: 'readOnly', type: 'boolean' },		/* 2. */
-                    { name: 'resizable', type: 'boolean' },
-                    { name: 'draggable', type: 'boolean' }
-                ],
-                id: 'id',
-                localData: appointments
-            };
+        	var source = getSource();
+        	source.localData = appointments;	//將appointments指向getSource()的localData
+
             createScheduler(source);
         }
-         
+        
+        function getSource(){
+        	var source =
+        		{	
+                    dataType: "array",
+                    dataFields: [
+                        { name: 'id', type: 'string' },
+                        { name: 'description', type: 'string' },
+                        { name: 'subject', type: 'string' },
+                        { name: 'calendar', type: 'string' },
+                        { name: 'start', type: 'date' },
+                        { name: 'end', type: 'date' },
+                        { name: 'readOnly', type: 'boolean' },		/* 2. */
+                        { name: 'resizable', type: 'boolean' },
+                        { name: 'draggable', type: 'boolean' }
+                    ],
+                    id: 'id',
+                    localData: ''
+                };
+        	return source;
+        }
+        
     	function createScheduler(source){
     		$('#scheduler').remove();
     		$('#scheduler_body').append('<div id="scheduler"></div>');	//不能.html('')跟.empty()，只能remove再append
@@ -122,18 +125,28 @@
                 source: adapter,
                 view: 'weekView',
                 showLegend: true,
+                editDialogDateTimeFormatString: 'yyyy/MM/dd HH:mm',		//24小時制
+                //contextMenu: false,		//鎖右鍵
                 ready: function () {
                     $("#scheduler").jqxScheduler('ensureAppointmentVisible', 'id0');
                 },
              	
-/*---------------------------------------------------------------------------------*/
+/*-----------------------------Dialog 與 在地化設定----------------------------------------------------*/
                 // called when the dialog is craeted.
                 editDialogCreate: function (dialog, fields, editAppointment) {
-                    fields.timeZoneContainer.hide();
-                    fields.locationContainer.hide();
-                    fields.repeatContainer.hide();
-                    fields.allDayContainer.hide();
+                    fields.subjectLabel.html("預約項目");
+                    fields.fromLabel.html("起始時間");
+                    fields.toLabel.html("結束時間");
+                    fields.resourceLabel.html("師傅");
                     
+                },editDialogOpen: function (dialog, fields, editAppointment) {
+                	fields.repeatContainer.hide();
+                	fields.repeatLabel.hide();
+                	fields.timeZoneContainer.hide();
+                    fields.locationContainer.hide();
+                    fields.statusContainer.hide();
+                    fields.allDayContainer.hide();
+//                     fields.colorContainer.hide();
                 },
                 localization: {
                     // separator of parts of a date (e.g. '/' in 11/05/1955)
@@ -147,139 +160,37 @@
                         names: ["週日", "週一", "週二", "週三", "週四", "週五", "週六"],
                         // abbreviated day names
                         namesAbbr: ["週日", "週一", "週二", "週三", "週四", "週五", "週六"],
-//                         // shortest day names
+                        // shortest day names
                         namesShort: ["日", "一", "二", "三", "四", "五", "六"]
                     },
                     months: {
                         // full month names (13 months for lunar calendards -- 13th month should be "" if not lunar)
                         names: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月", ""],
                         // abbreviated month names
-//                         namesAbbr: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dez", ""]
+                        namesAbbr: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月", ""]
                     },
-                    // AM and PM designators in one of these forms:
-                    // The usual view, and the upper and lower case versions
-                    //      [standard,lowercase,uppercase]
-                    // The culture does not use AM or PM (likely all standard date formats use 24 hour time)
-                    //      null
-                    AM: ["AM", "am", "AM"],
-                    PM: ["PM", "pm", "PM"],
-                    eras: [
-                    // eras in reverse chronological order.
-                    // name: the name of the era in this culture (e.g. A.D., C.E.)
-                    // start: when the era starts in ticks (gregorian, gmt), null if it is the earliest supported era.
-                    // offset: offset in years from gregorian calendar
-                    { "name": "A.D.", "start": null, "offset": 0 }
-                    ],
                     twoDigitYearMax: 2100,
-                    patterns: {
-                        // short date pattern
-                        d: "M/d/yyyy",
-                        // long date pattern
-                        D: "dddd, MMMM dd, yyyy",
-                        // short time pattern
-                        t: "h:mm tt",
-                        // long time pattern
-                        T: "h:mm:ss tt",
-                        // long date, short time pattern
-                        f: "dddd, MMMM dd, yyyy h:mm tt",
-                        // long date, long time pattern
-                        F: "dddd, MMMM dd, yyyy h:mm:ss tt",
-                        // month/day pattern
-                        M: "MMMM dd",
-                        // month/year pattern
-                        Y: "yyyy MMMM",
-                        // S is a sortable format that does not vary by culture
-                        S: "yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss",
-                        // formatting of dates in MySQL DataBases
-                        ISO: "yyyy-MM-dd hh:mm:ss",
-                        ISO2: "yyyy-MM-dd HH:mm:ss",
-                        d1: "dd.MM.yyyy",
-                        d2: "dd-MM-yyyy",
-                        d3: "dd-MMMM-yyyy",
-                        d4: "dd-MM-yy",
-                        d5: "H:mm",
-                        d6: "HH:mm",
-                        d7: "HH:mm tt",
-                        d8: "dd/MMMM/yyyy",
-                        d9: "MMMM-dd",
-                        d10: "MM-dd",
-                        d11: "MM-dd-yyyy"
-                    },
-                    backString: "Vorhergehende",
-                    forwardString: "Nächster",
-                    toolBarPreviousButtonString: "Vorhergehende",
-                    toolBarNextButtonString: "Nächster",
-                    emptyDataString: "Nokeine Daten angezeigt",
-                    loadString: "Loading...",
-                    clearString: "Löschen",
-                    todayString: "Heute",
                     dayViewString: "日檢視",
                     weekViewString: "週檢視",
                     monthViewString: "月檢視",
-                    timelineDayViewString: "Zeitleiste Day",
-                    timelineWeekViewString: "Zeitleiste Woche",
-                    timelineMonthViewString: "Zeitleiste Monat",
-                    loadingErrorMessage: "Die Daten werden noch geladen und Sie können eine Eigenschaft nicht festgelegt oder eine Methode aufrufen . Sie können tun, dass, sobald die Datenbindung abgeschlossen ist. jqxScheduler wirft die ' bindingComplete ' Ereignis, wenn die Bindung abgeschlossen ist.",
-                    editRecurringAppointmentDialogTitleString: "Bearbeiten Sie wiederkehrenden Termin",
-                    editRecurringAppointmentDialogContentString: "Wollen Sie nur dieses eine Vorkommen oder die Serie zu bearbeiten ?",
-                    editRecurringAppointmentDialogOccurrenceString: "Vorkommen bearbeiten",
-                    editRecurringAppointmentDialogSeriesString: "Bearbeiten Die Serie",
                     editDialogTitleString: "預約單",
                     editDialogCreateTitleString: "加入新預約單",
                     contextMenuEditAppointmentString: "修改預約單",
                     contextMenuCreateAppointmentString: "加入新預約單",
-                    editDialogSubjectString: "預約項目",
+//                     editDialogSubjectString: "預約項目",
 //                     editDialogLocationString: "地點",
-                    editDialogFromString: "起始時間",
-                    editDialogToString: "結束時間",
-//                     editDialogAllDayString: "整天",
-//                     editDialogExceptionsString: "Ausnahmen",
-//                     editDialogResetExceptionsString: "Zurücksetzen auf Speichern",
+//                     editDialogFromString: "起始時間",
+//                     editDialogToString: "結束時間",
                     editDialogDescriptionString: "描述",
-                    editDialogResourceIdString: "師傅",
+//                     editDialogResourceIdString: "師傅",
                     editDialogStatusString: "狀態",
                     editDialogColorString: "顏色",
                     editDialogColorPlaceHolderString: "選擇顏色",
-//                     editDialogTimeZoneString: "時區",
-//                     editDialogSelectTimeZoneString: "Wählen Sie Zeitzone",
                     editDialogSaveString: "保存",
                     editDialogDeleteString: "刪除",
-                    editDialogCancelString: "取消",
-//                     editDialogRepeatString: "重複",
-//                     editDialogRepeatEveryString: "Wiederholen alle",
-//                     editDialogRepeatEveryWeekString: "woche(n)",
-//                     editDialogRepeatEveryYearString: "Jahr (en)",
-//                     editDialogRepeatEveryDayString: "Tag (e)",
-//                     editDialogRepeatNeverString: "從不",
-//                     editDialogRepeatDailyString: "每天",
-//                     editDialogRepeatWeeklyString: "每週",
-//                     editDialogRepeatMonthlyString: "每月",
-//                     editDialogRepeatYearlyString: "每年",
-//                     editDialogRepeatEveryMonthString: "Monate (n)",
-//                     editDialogRepeatEveryMonthDayString: "Day",
-//                     editDialogRepeatFirstString: "erste",
-//                     editDialogRepeatSecondString: "zweite",
-//                     editDialogRepeatThirdString: "dritte",
-//                     editDialogRepeatFourthString: "vierte",
-//                     editDialogRepeatLastString: "letzte",
-//                     editDialogRepeatEndString: "Ende",
-//                     editDialogRepeatAfterString: "Nach",
-//                     editDialogRepeatOnString: "Am",
-//                     editDialogRepeatOfString: "von",
-//                     editDialogRepeatOccurrencesString: "Eintritt (e)",
-//                     editDialogRepeatSaveString: "Vorkommen Speichern",
-//                     editDialogRepeatSaveSeriesString: "Save Series",
-//                     editDialogRepeatDeleteString: "Vorkommen löschen",
-//                     editDialogRepeatDeleteSeriesString: "Series löschen",
-                    editDialogStatuses:
-                    {
-                        free: "有空",
-                        tentative: "暫時的",
-                        busy: "忙碌",
-                        outOfOffice: "不在辦公室"
-                    }
+                    editDialogCancelString: "取消"
                 },
-/*------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------*/
                 resources:
                 {
                     colorScheme: "scheme05",
@@ -292,12 +203,11 @@
                     to: "end",
                     id: "id",
                     description: "description",
-                    location: "location",
                     subject: "subject",
                     resourceId: "calendar",
-//                     readOnly: "readOnly",		/* 1. */
-                    resizable: "resizable",
-                    draggable: "draggable"
+                    readOnly: "readOnly",		/* 1. */	//設唯讀，不可點兩下修改資料
+                    resizable: "resizable",					//設不可調方框大小(更動起始.結束時間)
+                    draggable: "draggable"					//設不可拖曳
                 },
                 views:
                 [
@@ -309,8 +219,9 @@
 	                        	toHour: 19
 	                 },
 	                 timeRuler:{
-	                	 scaleStartHour : 7,	//頁面顯示時間
-	                	 scaleEndHour : 19
+	                	 scaleStartHour : 7,		//頁面顯示時間
+	                	 scaleEndHour : 19,
+	                	 formatString  : "HH:mm"	//24小時制
 	                 }
                     },
                     'monthView'
@@ -321,24 +232,9 @@
     	
     	function cleanScheduler(){
     		var appointments = new Array();
-    		var source =
-            {	
-                dataType: "array",
-                dataFields: [
-                    { name: 'id', type: 'string' },
-                    { name: 'description', type: 'string' },
-                    { name: 'location', type: 'string' },
-                    { name: 'subject', type: 'string' },
-                    { name: 'calendar', type: 'string' },
-                    { name: 'start', type: 'date' },
-                    { name: 'end', type: 'date' },
-//                     { name: 'readOnly', type: 'boolean'  },
-                    { name: 'resizable', type: 'boolean' },
-                    { name: 'draggable', type: 'boolean' }
-                ],
-                id: 'id',
-                localData: appointments
-            };
+    		var source = getSource();
+        	source.localData = appointments;	//將appointments指向getSource的localData
+
     		createScheduler(source);
     	}
     	
