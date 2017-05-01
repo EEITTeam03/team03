@@ -212,12 +212,12 @@
                         <a class="page-scroll ff-word" href="#contact">聯絡我們</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word btn btn-primary btn-xs" style="text-shadow: black 5px 3px 3px;padding:10px;margin:0px 10px 0px 10px" href="#">
+                        <a class="page-scroll ff-word btn btn-primary btn-xs" style="text-shadow: black 5px 3px 3px;padding:10px;margin:0px 10px 0px 10px" href="login.jsp">
   							<span class="glyphicon glyphicon-log-in"></span> 登入
                         </a>
                     </li>                    
                     <li>
-                        <a class="page-scroll ff-word btn btn-primary btn-xs" style="text-shadow: black 5px 3px 3px;padding:10px;margin:0px 10px 0px 10px;" href="#">
+                        <a class="page-scroll ff-word btn btn-primary btn-xs" style="text-shadow: black 5px 3px 3px;padding:10px;margin:0px 10px 0px 10px;" href="register.jsp">
   							<span class="glyphicon glyphicon-user"></span> 免費註冊
                         </a>
                     </li>
