@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Chart</title>
+<title>報表查詢</title>
 </head>
 <body>
 	<jsp:include page="Testhead_nav.jsp" />
@@ -44,7 +44,9 @@
                 </div>
                 <!-- /.row -->
                 <div class="row">
-                	
+                	<div class="blockUI" style="display: none">
+						<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
+				</div>
                 </div>
 			</div>
 		</div>
@@ -52,17 +54,37 @@
 	 <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 	<!-- jQuery -->
-<script src="js/jquery.js"></script>
+<script src="${ctx}/js/jquery.js"></script>
     <script src="js/plugins/flot/jquery.flot.js"></script>
 <!--     <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script> -->
 <!--     <script src="js/plugins/flot/jquery.flot.resize.js"></script> -->
     <script src="js/plugins/flot/jquery.flot.pie.js"></script>
 <!--     <script src="js/plugins/flot/flot-data.js"></script> -->
-    
+    <script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
 	<script type="text/javascript">
+	function loadingBlock(){
+	 	 $.blockUI({ 
+	 		message: $('div.blockUI'),
+   		 	css: { 
+   				border: 'none',
+                left: ($(window).width() - 133) /2 + 'px', 
+				'-webkit-border-radius': '10px', 
+           		'-moz-border-radius': '10px', 
+            	padding: '25px',
+                opacity: 0.7,
+            	width: '133px',
+            	height: '133px'
+            },
+   		 	fadeIn: 0
+   		 }); 
+	 }
+	 function loadingUnblock(){
+	 	$.unblockUI();
+	 	//alert("close block");
+	 }
 	// Flot Pie Chart with Tooltips
 	$(function() {
-		
+		loadingBlock();
 		$.getJSON('${ctx}/ReservListCount',{},function(data){
 			console.log(data);
 		
@@ -113,6 +135,7 @@
 	    tbody.append(tr);
 	    });
 	});
+		loadingUnblock();
 	});
 	</script>
 </body>

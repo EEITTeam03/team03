@@ -1,35 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.feedback.model.*"%>
-<%@ page import = "java.util.*" %>
-<%
-FeedbackService fsvc = new FeedbackService();
-    List<FeedbackVO> list = fsvc.getTop3();
-    pageContext.setAttribute("list",list);
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 增加的內容 -->
-	<!-- Bootstrap Core CSS -->
-    <link href="admin/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="admin/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <!-- Bootstrap Core CSS -->
+    <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
+<!-- Custom Fonts -->
+<link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
 	<!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css" rel="stylesheet">
+<link rel="stylesheet" href="${ctx}/scheduleJS/jqwidgets/styles/jqx.base.css" type="text/css" />
+<link rel="stylesheet" href="${ctx}/scheduleJS/jqwidgets/styles/jqx.ui-sunny.css" type="text/css" />
+	
+<style>
+.fa {
+    font-size: 200%;
+}
+ul[class*="nav navbar-nav side-nav"] {
+	font-size: 125%;
+}
+body,button,h1{
+ font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	    text-transform: uppercase;
+	    font-weight: 400;
+	    font-size:16px;
+	    letter-spacing: 1px;
+	    color: black;
+}
+</style>
+<title>查看排程</title>
+</head>
+<body>
+<jsp:include page="Testhead_nav.jsp"/>
+<div id="wrapper">
+		<div id="page-wrapper">
+		<div id="contentDiv">
+		<h2>查看排程</h2>
+		
+		<button type="submit" id="btn_search" class="btn btn-sm btn-primary">查詢</button>
+		<button type="submit" value="匯出至Excel" id='excelExport' class="btn btn-sm btn-success">匯出至Excel</button>
+<!-- 		<button type="submit" id='test' class="btn btn-sm btn-primary">Test</button> -->
+		<div class="growlUI" style="display: none">
+			<img src="${ctx}/img/loading/check.png" />
+    		<p>預約異動成功</p>
+		</div>
+		<div class="growlUIError" style="display: none">
+    		<p>重新載入</p>
+		</div>
+		<div class="blockUI" style="display: none">
+			<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
+		</div>
+    		<div id="scheduler_body" >
+        	<div id="scheduler"></div>
+    </div>
+  </div>
+  </div>  
+  </div>
 
-<!-- 增加的內容 -->
 
-    <title id='Description'>水膜汽車美容-預約排程表 </title>
-    <link rel="stylesheet" href="${ctx}/scheduleJS/jqwidgets/styles/jqx.base.css" type="text/css" />
-    <link rel="stylesheet" href="${ctx}/scheduleJS/jqwidgets/styles/jqx.ui-sunny.css" type="text/css" />
+    
     <script type="text/javascript" src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="${ctx}/scheduleJS/scripts/demos.js"></script>
     <script type="text/javascript" src="${ctx}/scheduleJS/jqwidgets/jqxcore.js"></script>
@@ -54,22 +88,7 @@ FeedbackService fsvc = new FeedbackService();
     <script type="text/javascript" src="${ctx}/scheduleJS/jqwidgets/globalization/globalize.js"></script>
     <script type="text/javascript" src="${ctx}/scheduleJS/jqwidgets/globalization/globalize.culture.de-DE.js"></script>
     <script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script> 
-    <style>
-.fa {
-    font-size: 200%;
-}
-ul[class*="nav navbar-nav side-nav"] {
-	font-size: 125%;
-}
-body,button,h1{
- font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	    text-transform: uppercase;
-	    font-weight: 400;
-	    font-size:16px;
-	    letter-spacing: 1px;
-	    color: black;
-}
-</style>
+
     <script type="text/javascript">   
     	var globalView = "weekView";
     	var newFields = [];
@@ -614,7 +633,7 @@ body,button,h1{
     	function editToServlet(data,action,addDate){
     		loadingBlock(); 
     		$.ajax({
-        		url: "scheduleTestServlet2",
+        		url: "SchedulerServlet",
         		dataType: "text",	//server端回傳至client端型態
         		data: {'data':data,'status':action},
         		method:"POST",
@@ -728,163 +747,5 @@ body,button,h1{
         	}
         }
     </script>
-</head>
-
-<body>
-<div id="wrapper">
- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="${ctx}/admin/admin_default.jsp">汽車美容後台管理</a>
-            </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                    					<ul class="dropdown-menu message-dropdown">
-                    					<c:if test="${list.size()>0}">
-                        <c:forEach var="fVO" items="${list}" begin="0" end="${list.size()-1}">
-                        <li class="message-preview">
-                            <a href="${ctx}/admin/ListOneFeedback.jsp?feedbackNO=${fVO.feedbackNo}">
-                                <div class="media">
-<!--                                     <span class="pull-left"> -->
-<!--                                         <img class="media-object" src="http://placehold.it/50x50" alt=""> -->
-<!--                                     </span> -->
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>${fVO.memberName}</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i>${fVO.feedbackDate.time}</p>
-                                        <p>${fVO.feedback}</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        </c:forEach>
-                        <li class="message-footer">
-                            <a href="${ctx}/admin/ListAllfeedback.jsp">Read All New Messages</a>
-                        </li>
-                        </c:if>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu alert-dropdown">
-			<!--上方BAR提醒欄位 -->
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">View All</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${admin.name} <b class="caret"></b></a>
-                    <ul class="dropdown-menu" id="mytest">
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="${ctx}/admin/ListAllfeedback.jsp"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="AdminLogout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="${ctx}/scheduleTest3.jsp" id="a_scheduler" ><i class="fa fa-car"></i> 管理工作排程</a>
-                    </li>
-                    <li>
-                        <a href="${ctx}/services/SelectServices.jsp" id="services"><i class="fa fa-fw fa-table"></i> 維護服務項目</a>
-                    </li>
-                    <li>
-                        <a href="${ctx}/admin/chart.jsp" id="a_test"><i class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a>
-                    </li>
-                    <li><a href="#" data-toggle="collapse" data-target="#blocklist">
-							<i class="fa fa-fw fa-edit"></i> 
-								黑名單<i class="fa fa-fw fa-caret-down"></i>
-						</a>
-							<ul id="blocklist" class="collapse nav navbar-nav">
-								<li><a href="${ctx}/admin/maintainBlockList.jsp">新增黑名單</a></li>
-								<li><a href="${ctx}/admin/listAllBlockList.jsp">列出黑名單</a></li>
-<!-- 								<li><a href="">c</a></li> -->
-							</ul>
-						
-					</li>
-
-                    <li>
-						<a href="javascript:;" data-toggle="collapse" data-target="#demo">
-							<i class="fa fa-fw fa-arrows-v"></i> 
-								維護名單<i class="fa fa-fw fa-caret-down"></i>
-						</a>
-						<ul id="demo" class="collapse">
-							<li>
-								<a href="${ctx}/admin/member.jsp">會員</a>
-							</li>
-							<li>
-							<a href="#" data-toggle="collapse" data-target="#demoemp">
-									員工
-								<i class="fa fa-fw fa-caret-down"></i>
-							</a>
-								<ul id="demoemp" class="collapse nav navbar-nav">
-									<li><a href="${ctx}/emp/listAllEmp.jsp">員工清單</a></li>
-<%-- 									<li><a href="${ctx}/emp/updateEmp.jsp">名單維護</a></li> --%>
-									<li><a href="${ctx}/emp/insertEmp.jsp">新增名單</a></li>
-								</ul>
-							</li>
-						</ul></li>
-                    <li>
-                        <a href="${ctx}/admin/ListAllfeedback.jsp"><i class="fa fa-comments-o"></i> 查看意見</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
-
-		<div id="page-wrapper">
-		<div id="contentDiv">
-		<h2>查看排程</h2>
-		
-		<button type="submit" id="btn_search" class="btn btn-sm btn-primary">查詢</button>
-		<button type="submit" value="匯出至Excel" id='excelExport' class="btn btn-sm btn-success">匯出至Excel</button>
-<!-- 		<button type="submit" id='test' class="btn btn-sm btn-primary">Test</button> -->
-		<div class="growlUI" style="display: none">
-			<img src="${ctx}/img/loading/check.png" />
-    		<p>預約異動成功</p>
-		</div>
-		<div class="growlUIError" style="display: none">
-    		<p>重新載入</p>
-		</div>
-		<div class="blockUI" style="display: none">
-			<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
-		</div>
-    		<div id="scheduler_body" >
-        	<div id="scheduler"></div>
-    </div>
-  </div>
-  </div>  
-  </div>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="${ctx}/admin/js/bootstrap.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-<%--     <script src="${ctx}/admin/js/plugins/morris/raphael.min.js"></script> --%>
-<%--     <script src="${ctx}/admin/js/plugins/morris/morris.min.js"></script> --%>
-<%--     <script src="${ctx}/admin/js/plugins/morris/morris-data.js"></script> --%>
 </body>
 </html>

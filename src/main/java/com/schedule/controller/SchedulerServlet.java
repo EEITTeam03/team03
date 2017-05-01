@@ -1,4 +1,4 @@
-package com.test.controller;
+package com.schedule.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,10 +41,10 @@ import myutil.CheckConflict;
 import myutil.MyUtil;
 
 
-@WebServlet(urlPatterns = {"/admin/scheduleTestServlet2","/scheduleTestServlet2"})
-public class scheduleTestServlet2 extends HttpServlet {
+@WebServlet(urlPatterns = {"/admin/SchedulerServlet","/SchedulerServlet"})
+public class SchedulerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public scheduleTestServlet2() {
+    public SchedulerServlet() {
         super();
     }
 
