@@ -79,12 +79,18 @@
 
   <script>
   $( function() {
+	  
     $( "#datepicker" ).datepicker({
       	changeMonth: true,
       	changeYear: true,
       	dateFormat: 'yy-mm-dd',
     	yearRange: '-90:+0'
     });
+    
+    
+    
+    
+    
   } );
   </script>
 
@@ -105,7 +111,7 @@
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand page-scroll" href="#page-top">Car
+				<a class="navbar-brand page-scroll" href="index.jsp">Car
 					Detailing</a>
 			</div>
 	
@@ -141,7 +147,7 @@
 						<div class="panel-body">
 							<div class="flot-chart">
 								<div class="flot-chart-content" id="flot-bar-chart">
-									<form class="form-signin" role="form">
+									<form class="form-signin" role="form" action="" method="post">
 									
 										<br>
 										

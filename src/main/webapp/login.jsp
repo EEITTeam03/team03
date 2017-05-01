@@ -73,7 +73,7 @@
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand page-scroll" href="#page-top">Car
+				<a class="navbar-brand page-scroll" href="index.jsp">Car
 					Detailing</a>
 			</div>
 	
