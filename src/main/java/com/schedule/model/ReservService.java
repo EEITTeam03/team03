@@ -82,15 +82,15 @@ public class ReservService {
 					 int dayOfWeek = reserv.getReservDateTime().get(Calendar.DAY_OF_WEEK)-1;
 					 int totalTime=0;
 					 Map map = new LinkedHashMap();
-						map.put("員工姓名", reserv.getEmployeeVO().getEmployeeName());
-						map.put("年", year);
-						map.put("月份", month);
-						map.put("日期", day);
-						map.put("星期", dayOfWeek);
+						map.put("EmpName", reserv.getEmployeeVO().getEmployeeName());
+						map.put("Year", year);
+						map.put("Month", month);
+						map.put("Day", day);
+						map.put("DayOfWeek", dayOfWeek);
 						if(minute==0)
-							map.put("開始時間", hour+":"+minute+'0');
+							map.put("Start", hour+":"+minute+'0');
 						else
-							map.put("開始時間", hour+":"+minute);
+							map.put("Start", hour+":"+minute);
 						
 						List <String> service = new <String>ArrayList();
 					 for(ReservListVO rl:reserv.getReservlists()){
@@ -101,13 +101,13 @@ public class ReservService {
 					int Endminute = (minute+totalTime)%60;
 					int EndHour =hour+ (minute+totalTime)/60;
 					if(Endminute==0)
-						map.put("結束時間", EndHour+":"+Endminute+'0');
+						map.put("End", EndHour+":"+Endminute+'0');
 					else
-						map.put("結束時間", EndHour+":"+Endminute);
+						map.put("End", EndHour+":"+Endminute);
 					
-					map.put("總長", totalTime);
-					map.put("服務項目", service);
-					map.put("車牌",reserv.getMembercarsVO().getCarLicense());
+					map.put("TotalTime", totalTime);
+					map.put("Item", service);
+					map.put("License",reserv.getMembercarsVO().getCarLicense());
 					list2.add(map);
 				}
 			}
