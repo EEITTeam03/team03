@@ -67,7 +67,7 @@ public class ReservService {
 		List<Map> list2 = new ArrayList<Map>() ;
 		Calendar calendar = Calendar.getInstance();
 		//calendar.set(2017,Calendar.APRIL,30);
-		calendar.set(2017,3,27);
+		calendar.set(2017,4,8);
 		int week = calendar.get(Calendar.WEEK_OF_YEAR);
 		for(ReservVO reserv:list){
 			if(calendar.get(Calendar.YEAR)==reserv.getReservDateTime().get(Calendar.YEAR))
@@ -91,11 +91,13 @@ public class ReservService {
 							map.put("開始時間", hour+":"+minute+'0');
 						else
 							map.put("開始時間", hour+":"+minute);
+						
 						List <String> service = new <String>ArrayList();
 					 for(ReservListVO rl:reserv.getReservlists()){
 						 totalTime+=rl.getServTime();
 						 service.add(rl.getServName()+" ");
 					 }
+					
 					int Endminute = (minute+totalTime)%60;
 					int EndHour =hour+ (minute+totalTime)/60;
 					if(Endminute==0)
@@ -105,6 +107,7 @@ public class ReservService {
 					
 					map.put("總長", totalTime);
 					map.put("服務項目", service);
+					map.put("車牌",reserv.getMembercarsVO().getCarLicense());
 					list2.add(map);
 				}
 			}
