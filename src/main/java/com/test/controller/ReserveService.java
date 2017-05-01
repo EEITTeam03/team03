@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cartype.model.CarTypeVO;
 import com.employee.model.EmployeeVO;
 import com.membercars.model.MemberCarsDAO;
 import com.membercars.model.MemberCarsHibernateDAO;
@@ -18,6 +19,8 @@ import com.membercars.model.MemberCarsVO;
 import com.reservlist.model.ReservListVO;
 import com.schedule.model.ReservDAO;
 import com.schedule.model.ReservVO;
+import com.servicecarclass.model.ServiceCarClassService;
+import com.servicecarclass.model.ServiceCarClassVO;
 import com.services.model.ServicesDAO_Hibernate;
 import com.services.model.ServicesVO;
 
@@ -52,9 +55,14 @@ public class ReserveService extends HttpServlet {
 
 		// 取得車VO
 		MemberCarsVO memberCarsVO = cdao.findByPK(license);
+		reservVO.setMembercarsVO(memberCarsVO);
 
+		
+		 String size = memberCarsVO.getCarTypeVO().getCarClassVO().getCarClass();
+		
 		// 日期-字串轉Calendar
 		Calendar cal = MyUtil.getCalender(selectedDate);
+		reservVO.setReservDateTime(cal);
 
 		// 所選服務的集合-清單
 		Set<ReservListVO> reservSet = new HashSet<ReservListVO>();
@@ -62,11 +70,14 @@ public class ReserveService extends HttpServlet {
 		// 加入一筆單選服務VO
 		Integer singleServiceNo = Integer.parseInt(singleService);
 		ServicesVO singleServiceVO = sdao.findByPrimaryKey(singleServiceNo);
-		ReservListVO singlerlvo = new ReservListVO();
+		ServiceCarClassService svc = new ServiceCarClassService(); //查詢對應大小、服務的價錢和時間SVC
+		
+		ReservListVO singlerlvo = new ReservListVO();    //新增一筆訂單明細物件
 		singlerlvo.setReservVO(reservVO);
 		singlerlvo.setServicesVO(singleServiceVO);
-		singlerlvo.setServPrice(5000);
-		singlerlvo.setServTime(180);
+		ServiceCarClassVO sccVO = svc.getOneServiceCarClass(singleServiceNo,size);
+		singlerlvo.setServPrice(sccVO.getServPrice());
+		singlerlvo.setServTime(sccVO.getServTime());
 		singlerlvo.setServName(singleServiceVO.getServName());
 
 		reservSet.add(singlerlvo);
@@ -78,8 +89,9 @@ public class ReserveService extends HttpServlet {
 			ReservListVO rlvo = new ReservListVO();
 			rlvo.setReservVO(reservVO);
 			rlvo.setServicesVO(servicesVO);
-			rlvo.setServPrice(1000);
-			rlvo.setServTime(60);
+			ServiceCarClassVO sccvo = svc.getOneServiceCarClass(serviceNo, size);
+			rlvo.setServPrice(sccvo.getServPrice());
+			rlvo.setServTime(sccvo.getServTime());
 			rlvo.setServName(servicesVO.getServName());
 
 			reservSet.add(rlvo);
@@ -89,12 +101,13 @@ public class ReserveService extends HttpServlet {
 		EmployeeVO evo = new EmployeeVO();
 		evo.setEmployeeNo(Integer.parseInt(empNo));
 		evo.setEmployeeName("JACK邱華捷");
-
-		// 開始新增到reservVO
-		reservVO.setReservDateTime(cal);
-		reservVO.setMembercarsVO(memberCarsVO);
 		reservVO.setEmployeeVO(evo);
-		reservVO.setStatus(0);
+
+	
+		//狀態為1(未到) 2(進行中) 3(已結束) 0(已取消)
+		reservVO.setStatus(1);
+		
+		//把明細塞到訂單
 		reservVO.setReservlists(reservSet);
 		
 		//新增訂單

@@ -8,9 +8,11 @@
 		<id name="carClassNo" column="carClassNo" >
 			<generator class="identity"/>
 		</id>
-
 		
-		<property name="carClass" column="carClass" />
+		<many-to-one name="carClassVO" class="com.carclass.model.CarClassVO" lazy="false">
+			<column name="carClass"/>
+		</many-to-one>
+		
 		<property name="servPrice" column="servPrice" />
 		<property name="servTime" column="servTime" />
 		

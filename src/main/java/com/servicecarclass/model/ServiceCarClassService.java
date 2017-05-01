@@ -2,6 +2,7 @@ package com.servicecarclass.model;
 
 import java.util.List;
 
+import com.carclass.model.CarClassVO;
 import com.services.model.ServicesVO;
 
 public class ServiceCarClassService {
@@ -11,34 +12,31 @@ public class ServiceCarClassService {
 		dao = new ServiceCarClassDAO_Hibernate();
 	}
 
-	public ServiceCarClassVO addServiceCarClass(Integer servNo, String carClass, Integer servPrice, Integer servTime,
-			ServicesVO servicesVO) {
+	public ServiceCarClassVO addServiceCarClass(ServicesVO servicesVO, CarClassVO carClassVO, Integer servPrice, Integer servTime
+			) {
 		ServiceCarClassVO serviceCarClassVO = new ServiceCarClassVO();
-		serviceCarClassVO.setCarClass(carClass);
+		serviceCarClassVO.setCarClassVO(carClassVO);
 		// serviceCarClassVO.setCarClassNo(carClassNo);
 		serviceCarClassVO.setServicesVO(servicesVO);
-		serviceCarClassVO.setServNo(servNo);
 		serviceCarClassVO.setServPrice(servPrice);
 		serviceCarClassVO.setServTime(servTime);
 		dao.insert(serviceCarClassVO);
 		return serviceCarClassVO;
 	}
 
-	public ServiceCarClassVO updateServiceCarClass(Integer servNo, String carClass, Integer servPrice, Integer servTime,
-			Integer carClassNo, ServicesVO servicesVO) {
+	public ServiceCarClassVO updateServiceCarClass(ServicesVO servicesVO, CarClassVO carClassVO, Integer servPrice, Integer servTime
+			) {
 		ServiceCarClassVO serviceCarClassVO = new ServiceCarClassVO();
-		serviceCarClassVO.setCarClass(carClass);
-		 serviceCarClassVO.setCarClassNo(carClassNo);
+		serviceCarClassVO.setCarClassVO(carClassVO);
 		serviceCarClassVO.setServicesVO(servicesVO);
-		serviceCarClassVO.setServNo(servNo);
 		serviceCarClassVO.setServPrice(servPrice);
 		serviceCarClassVO.setServTime(servTime);
 		dao.update(serviceCarClassVO);
 		return serviceCarClassVO;
 	}
 	
-	public ServiceCarClassVO getOneServiceCarClass(Integer servNo){
-		return dao.findByPrimaryKey(servNo);
+	public ServiceCarClassVO getOneServiceCarClass(Integer servNo, String carClass){
+		return dao.findByServAndClass(servNo, carClass);
 	}
 	
 	public List<ServiceCarClassVO> getAll(){

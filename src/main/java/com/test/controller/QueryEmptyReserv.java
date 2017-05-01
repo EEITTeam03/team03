@@ -41,8 +41,7 @@ public class QueryEmptyReserv extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String strDate = request.getParameter("selectedDate");
-		Calendar cal = null;
-		cal = MyUtil.getCalender(strDate);
+		Calendar cal = MyUtil.getCalender(strDate);
 		
 		ReservService rsvc = new ReservService();
 		List<ReservVO> list = rsvc.getAllReservByDate(cal);
