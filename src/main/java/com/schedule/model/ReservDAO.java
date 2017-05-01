@@ -71,11 +71,7 @@ public class ReservDAO implements ReservDAO_interface {
 		ReservDAO dao = new ReservDAO();
 //
 //		List<ReservVO>list = dao.getAll();
-//		Calendar cal;
-//		try {
-//			cal = MyUtil.getCalender("2017-05-10");
-//			List<ReservVO> list = dao.findByDate(cal);
-//			System.out.println(list);
+		
 //		for(ReservVO reservVO:list){
 //			System.out.print(reservVO.getReservNo()+",");
 //			System.out.print(reservVO.getReservDateTime()+",");
