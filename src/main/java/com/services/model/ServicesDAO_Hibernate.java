@@ -33,6 +33,7 @@ public class ServicesDAO_Hibernate implements ServicesDAO_interface {
 
 	private static final String DELETE = "DELETE FROM ServicesVO where servNo =?";
 
+	private List<ServicesVO> servicesVOList;
 	@Override
 	public void insert(ServicesVO servo) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -257,6 +258,18 @@ public class ServicesDAO_Hibernate implements ServicesDAO_interface {
 			e.printStackTrace();
 		}
 		return parts;
+	}
+	
+	@Override
+	synchronized public boolean servNoExists(Integer servNo) throws IOException {
+		boolean exist = false; // 檢查id是否已經存在
+		for (ServicesVO sb : servicesVOList) {
+			if (sb.getServNo()==servNo) {
+				exist = true;
+				break;
+			}
+		}
+		return exist;
 	}
 
 }
