@@ -13,5 +13,6 @@ public interface ReservDAO_interface {
 	public void update(ReservVO reservVO);
 //	public void delete(Integer reservNo);
 	public List<ReservVO> findByDate(Calendar cal);
+	public List<ReservVO> findByMonth(Calendar cal);
 
 }
