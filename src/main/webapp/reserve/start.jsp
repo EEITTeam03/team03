@@ -32,7 +32,7 @@ table, th, td {
 <td>${car.carTypeVO.carModel}</td>
 <td>${car.carLicense}</td>
 <td><form action="reserve_page.jsp">
-<input type="hidden" name="carlicense" value="${car.carLicense}">
+<input type="hidden" name="license" value="${car.carLicense}">
 <input type="submit" value="select">
 </form></td>
 </tr>

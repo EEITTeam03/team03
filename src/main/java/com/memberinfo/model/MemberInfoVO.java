@@ -7,16 +7,16 @@ import com.blocklist.model.BlockListVO;
 import com.membercars.model.MemberCarsVO;
 
 public class MemberInfoVO {
-	Integer memberNo;
-	String email;
-	String password;
-	String memberName;
-	String phone;
-	Date birthday;
-	String address;
-	Date effectiveDate;
-	Set<MemberCarsVO> memberCars;
-	Set<BlockListVO> blockLists;
+	private Integer memberNo;
+	private String email;
+	private String password;
+	private String memberName;
+	private String phone;
+	private Date birthday;
+	private String address;
+	private Date effectiveDate;
+	private Set<MemberCarsVO> memberCars;
+	private Set<BlockListVO> blockLists;
 	
 	public Set<BlockListVO> getBlockLists() {
 		return blockLists;
