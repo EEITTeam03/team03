@@ -70,40 +70,41 @@ public class ReservDAO implements ReservDAO_interface {
 		// TODO Auto-generated method stub
 		ReservDAO dao = new ReservDAO();
 //
-//		List<ReservVO>list = dao.getAll();
+		List<ReservVO>list = dao.getAll();
 		
-//		for(ReservVO reservVO:list){
-//			System.out.print(reservVO.getReservNo()+",");
-//			System.out.print(reservVO.getReservDateTime()+",");
-//			System.out.print(reservVO.getNoteC()+",");
-//			System.out.print(reservVO.getNotesE()+",");
-//			System.out.print(reservVO.getStatus()+",");
-//			System.out.print(reservVO.getMembercarsVO().getCarLicense()+",");
-//			System.out.println(reservVO.getEmployeeVO().getEmployeeNo());
-//			Set<ReservListVO>relists = reservVO.getReservlists();
-//			for(ReservListVO lists:relists){
-//				System.out.println(lists.getReservListNo());
-//
-//				System.out.println(lists.getServicesVO().getServNo());
-//				System.out.println(lists.getServName());
-//				System.out.println(lists.getServPrice());
-//				System.out.println(lists.getServTime());
-//			}
-//		}
+		for(ReservVO reservVO:list){
+			System.out.print(reservVO.getReservNo()+",");
+			System.out.print(reservVO.getReservDateTime()+",");
+			System.out.print(reservVO.getNoteC()+",");
+			System.out.print(reservVO.getNotesE()+",");
+			System.out.print(reservVO.getStatus()+",");
+			System.out.print(reservVO.getMembercarsVO().getCarLicense()+",");
+			System.out.println(reservVO.getEmployeeVO().getEmployeeNo());
+			Set<ReservListVO>relists = reservVO.getReservlists();
+			System.out.println(relists);
+			for(ReservListVO lists:relists){
+				System.out.println(lists.getReservListNo());
 
-		ReservService reservice = new ReservService();
-		
-		List<Map> list = reservice.getScheduleForJSON();
-		for(Map map:list){
-			Iterator iter = map.entrySet().iterator(); 
-			while (iter.hasNext()) { 
-			    Map.Entry entry = (Map.Entry) iter.next(); 
-			    Object key = entry.getKey(); 
-			    Object val = entry.getValue();
-			    System.out.print(key+":"+val+" ");
-			} 
-			System.out.println();
+				System.out.println(lists.getServicesVO().getServNo());
+				System.out.println(lists.getServName());
+				System.out.println(lists.getServPrice());
+				System.out.println(lists.getServTime());
+			}
 		}
+
+//		ReservService reservice = new ReservService();
+//		
+//		List<Map> list = reservice.getScheduleForJSON();
+//		for(Map map:list){
+//			Iterator iter = map.entrySet().iterator(); 
+//			while (iter.hasNext()) { 
+//			    Map.Entry entry = (Map.Entry) iter.next(); 
+//			    Object key = entry.getKey(); 
+//			    Object val = entry.getValue();
+//			    System.out.print(key+":"+val+" ");
+//			} 
+//			System.out.println();
+//		}
 	}
 
 	@Override

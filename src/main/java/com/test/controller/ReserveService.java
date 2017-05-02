@@ -45,10 +45,11 @@ public class ReserveService extends HttpServlet {
 		String singleService = request.getParameter("service");
 		String ckbox[] = request.getParameterValues("plus");
 		String empNo = request.getParameter("empNo");
-
+		
+		
 		// 全新的訂單物件
 		ReservVO reservVO = new ReservVO();
-
+		
 		// new DAO 
 		ServicesDAO_Hibernate sdao = new ServicesDAO_Hibernate();
 		MemberCarsDAO cdao = new MemberCarsHibernateDAO();
@@ -58,12 +59,16 @@ public class ReserveService extends HttpServlet {
 		reservVO.setMembercarsVO(memberCarsVO);
 
 		
-		 String size = memberCarsVO.getCarTypeVO().getCarClassVO().getCarClass();
+		String size = memberCarsVO.getCarTypeVO().getCarClassVO().getCarClass();
 		
 		// 日期-字串轉Calendar
 		Calendar cal = MyUtil.getCalender(selectedDate);
 		reservVO.setReservDateTime(cal);
-
+		
+		//宣告結束時間
+		Calendar calEnd = Calendar.getInstance();
+		Integer end = 0;
+		
 		// 所選服務的集合-清單
 		Set<ReservListVO> reservSet = new HashSet<ReservListVO>();
 
@@ -79,7 +84,8 @@ public class ReserveService extends HttpServlet {
 		singlerlvo.setServPrice(sccVO.getServPrice());
 		singlerlvo.setServTime(sccVO.getServTime());
 		singlerlvo.setServName(singleServiceVO.getServName());
-
+		
+		end += sccVO.getServTime();
 		reservSet.add(singlerlvo);
 
 		// 加入多筆多選服務VO
@@ -93,10 +99,16 @@ public class ReserveService extends HttpServlet {
 			rlvo.setServPrice(sccvo.getServPrice());
 			rlvo.setServTime(sccvo.getServTime());
 			rlvo.setServName(servicesVO.getServName());
-
+			end += sccvo.getServTime();
+			
 			reservSet.add(rlvo);
 		}
-
+		
+		//加入結束時間
+		long endms = end*60*1000;
+		calEnd.setTimeInMillis(cal.getTimeInMillis() + endms); 
+		reservVO.setReservEndTime(calEnd);
+		
 		// 建立員工(?
 		EmployeeVO evo = new EmployeeVO();
 		evo.setEmployeeNo(Integer.parseInt(empNo));

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.reservlist.model.ReservListVO;
 import com.schedule.model.ReservService;
 import com.schedule.model.ReservVO;
 
@@ -45,6 +46,16 @@ public class QueryEmptyReserv extends HttpServlet {
 		
 		ReservService rsvc = new ReservService();
 		List<ReservVO> list = rsvc.getAllReservByDate(cal);
+		
+		for(ReservVO rvo :list) {
+			Calendar start = rvo.getReservDateTime();
+			Integer total = 0;
+			for(ReservListVO listVO:rvo.getReservlists()) {
+				Integer partTime = listVO.getServTime();
+				total += partTime;
+			}
+			
+		}
 		
 		request.setAttribute("reservList", list);
 		
