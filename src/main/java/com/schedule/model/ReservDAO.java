@@ -71,31 +71,33 @@ public class ReservDAO implements ReservDAO_interface {
 		ReservDAO dao = new ReservDAO();
 //
 
-		Calendar cal2 = Calendar.getInstance();
-		List<ReservVO>list = dao.findByMonth(cal2);
-
+		Calendar cal = Calendar.getInstance();
+		//cal.set(2017,4,8);
+		List<ReservVO>list = dao.findByYear(cal);
+//		List<ReservVO>list = dao.findByWeek(cal);
+		
 //		List<ReservVO>list = dao.getAll();
 
 		
-		for(ReservVO reservVO:list){
-			System.out.print(reservVO.getReservNo()+",");
-			System.out.print(reservVO.getReservDateTime()+",");
-			System.out.print(reservVO.getNoteC()+",");
-			System.out.print(reservVO.getNotesE()+",");
-			System.out.print(reservVO.getStatus()+",");
-			System.out.print(reservVO.getMembercarsVO().getCarLicense()+",");
-			System.out.println(reservVO.getEmployeeVO().getEmployeeNo());
-			Set<ReservListVO>relists = reservVO.getReservlists();
-
-			for(ReservListVO lists:relists){
-				System.out.println(lists.getReservListNo());
-
-				System.out.println(lists.getServicesVO().getServNo());
-				System.out.println(lists.getServName());
-				System.out.println(lists.getServPrice());
-				System.out.println(lists.getServTime());
-			}
-		}
+//		for(ReservVO reservVO:list){
+//			System.out.print(reservVO.getReservNo()+",");
+//			System.out.print(reservVO.getReservDateTime()+",");
+//			System.out.print(reservVO.getNoteC()+",");
+//			System.out.print(reservVO.getNotesE()+",");
+//			System.out.print(reservVO.getStatus()+",");
+//			System.out.print(reservVO.getMembercarsVO().getCarLicense()+",");
+//			System.out.println(reservVO.getEmployeeVO().getEmployeeNo());
+//			Set<ReservListVO>relists = reservVO.getReservlists();
+//
+//			for(ReservListVO lists:relists){
+//				System.out.println(lists.getReservListNo());
+//
+//				System.out.println(lists.getServicesVO().getServNo());
+//				System.out.println(lists.getServName());
+//				System.out.println(lists.getServPrice());
+//				System.out.println(lists.getServTime());
+//			}
+//		}
 
 //		ReservService reservice = new ReservService();
 //		
@@ -162,26 +164,33 @@ public class ReservDAO implements ReservDAO_interface {
 	}
 
 	@Override
-	public List<ReservVO> findByMonth(Calendar cal) {
+	public List<ReservVO> findByYear(Calendar cal) {
 		// TODO Auto-generated method stub
 		List<ReservVO> list = null;
-		Calendar cal2 = Calendar.getInstance();
+		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
+			Calendar cal3 = Calendar.getInstance();
+			//cal3.set(2017,4,8);
 			Query query = session.createQuery(GET_BY_DATE);
-			//query.setParameter(0, cal);
-			//cal2.setTime(cal.getTime());
-			cal.set(Calendar.DATE, cal.getActualMinimum(Calendar.DATE));
-			//System.out.println(cal2.getActualMinimum(Calendar.DATE));
 			
-			System.out.println(cal2.get(Calendar.DATE));
+			//神奇的下一行
+			//System.out.println(cal.get(Calendar.DATE));
+			cal.get(Calendar.DATE);
+			cal.set(Calendar.DAY_OF_YEAR, cal.getActualMinimum(Calendar.DAY_OF_YEAR));						
+			
+			System.out.println(cal.get(Calendar.DAY_OF_YEAR));
 			query.setParameter(0, cal);
-			//			cal2.add(Calendar.DATE, 1);
-			cal2.set(Calendar.DATE, cal2.getActualMaximum(Calendar.DATE));
-			System.out.println(cal2.get(Calendar.DATE));
-			//System.out.println(cal2.get(Calendar.DATE));
-			query.setParameter(1, cal2);
+			
+			//神奇的下一行
+			//System.out.println(cal3.get(Calendar.DATE));
+			
+			cal3.get(Calendar.DATE);
+			cal3.set(Calendar.DAY_OF_YEAR, cal3.getActualMaximum(Calendar.DAY_OF_YEAR));
+			System.out.println(cal3.get(Calendar.DAY_OF_YEAR));
+
+			query.setParameter(1, cal3);
 			
 			list = query.list();
 			session.getTransaction().commit();
@@ -190,6 +199,45 @@ public class ReservDAO implements ReservDAO_interface {
 			throw ex;
 		}
 		return list;
+	}
+
+	@Override
+	public List<ReservVO> findByWeek(Calendar cal) {
+		// TODO Auto-generated method stub
+		List<ReservVO> list = null;
+		Calendar cal3 = Calendar.getInstance();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			
+			session.beginTransaction();
+			
+			//cal3.set(2017,4,8);
+			Query query = session.createQuery(GET_BY_DATE);
+			
+			//神奇的下一行
+			//System.out.println(cal.get(Calendar.DATE));
+			cal.get(Calendar.DATE);
+			cal.set(Calendar.DAY_OF_WEEK, cal.getActualMinimum(Calendar.DAY_OF_WEEK));						
+			
+			System.out.println(cal.get(Calendar.DATE));
+			query.setParameter(0, cal);
+			
+			//神奇的下一行
+			//System.out.println(cal3.get(Calendar.DATE));
+			cal3.get(Calendar.DATE);
+			cal3.set(Calendar.DAY_OF_WEEK, cal3.getActualMaximum(Calendar.DAY_OF_WEEK));
+			System.out.println(cal3.get(Calendar.DATE));
+
+			query.setParameter(1, cal3);
+			
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+		//return null;
 	}
 
 }

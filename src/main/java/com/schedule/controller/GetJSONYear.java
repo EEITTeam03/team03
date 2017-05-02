@@ -2,7 +2,6 @@ package com.schedule.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -16,19 +15,17 @@ import org.json.simple.JSONValue;
 
 import com.schedule.model.ReservService;
 
-
-
 /**
- * Servlet implementation class GetJSON
+ * Servlet implementation class GetJSONYear
  */
-@WebServlet("/scheduler/GetJSON")
-public class GetJSON extends HttpServlet {
+@WebServlet("/scheduler/GetJSONYear")
+public class GetJSONYear extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetJSON() {
+    public GetJSONYear() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,14 +35,15 @@ public class GetJSON extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setHeader("content-type", "text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		ReservService reservice = new ReservService();
 //		Calendar calendar = Calendar.getInstance();
 //		calendar.set(2017,Calendar.MAY,10 );
-		List<Map> list = reservice.getScheduleForJSON();
-//		List<Map> list = reservice.getYearScheduleForJSON();
+//		List<Map> list = reservice.getScheduleForJSON();
+		List<Map> list = reservice.getYearScheduleForJSON();
 		 String jsonString = JSONValue.toJSONString(list);  
 		 out.println(jsonString);
 	}
