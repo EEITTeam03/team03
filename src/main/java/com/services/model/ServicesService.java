@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -78,10 +79,13 @@ public class ServicesService {
 		List<ServicesVO> list = dao.getAll();
 		List<Map> list2 = new ArrayList<Map>();
 		for (ServicesVO asvo : list) {
+			if(asvo.getServPhoto()==null){
+				continue;
+			}
 			Map map = new LinkedHashMap<>();
-			map.put("服務描述:", asvo.getServDesc().replace("\n", "").replace("\r", ""));
+			map.put("服務描述", asvo.getServDesc().replace("\n", "").replace("\r", ""));
 			map.put("服務名稱", asvo.getServName());
-			map.put("照片", asvo.getServPhoto());
+			map.put("照片", Base64.getEncoder().encodeToString(asvo.getServPhoto()));
 			// map.put(key, value);
 			list2.add(map);
 		}
