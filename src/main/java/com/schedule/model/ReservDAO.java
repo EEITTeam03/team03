@@ -70,8 +70,12 @@ public class ReservDAO implements ReservDAO_interface {
 		// TODO Auto-generated method stub
 		ReservDAO dao = new ReservDAO();
 //
+
 		Calendar cal2 = Calendar.getInstance();
 		List<ReservVO>list = dao.findByMonth(cal2);
+
+//		List<ReservVO>list = dao.getAll();
+
 		
 		for(ReservVO reservVO:list){
 			System.out.print(reservVO.getReservNo()+",");
@@ -82,6 +86,7 @@ public class ReservDAO implements ReservDAO_interface {
 			System.out.print(reservVO.getMembercarsVO().getCarLicense()+",");
 			System.out.println(reservVO.getEmployeeVO().getEmployeeNo());
 			Set<ReservListVO>relists = reservVO.getReservlists();
+
 			for(ReservListVO lists:relists){
 				System.out.println(lists.getReservListNo());
 

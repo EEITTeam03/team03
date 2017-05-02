@@ -16,7 +16,7 @@ import com.reservlist.model.ReservListVO;
 public class ReservVO implements java.io.Serializable{
 	private Integer reservNo;
 	private Calendar reservDateTime;
-	
+	private Calendar reservEndTime;
 	private String noteC;
 	private String notesE;
 	
@@ -51,6 +51,12 @@ public class ReservVO implements java.io.Serializable{
 		this.reservDateTime = reservDateTime;
 	}
 
+	public Calendar getReservEndTime() {
+		return reservEndTime;
+	}
+	public void setReservEndTime(Calendar reservEndTime) {
+		this.reservEndTime = reservEndTime;
+	}
 	public String getNoteC() {
 		return noteC;
 	}

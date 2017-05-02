@@ -10,7 +10,7 @@
         </id>
         
         <property name="reservDateTime" column="reservDateTime" />
-        
+        <property name="reservEndTime" column="reservEndTime" />
         <property name="noteC" column="noteC" />
         <property name="notesE" column="notesE" />
         
