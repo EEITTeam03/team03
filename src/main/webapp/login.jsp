@@ -135,7 +135,6 @@
 										</div>
 										
 										<button class="btn btn-lg btn-info btn-block" type="submit">登入</button>
-										
 									</form>	
 								</div>
 							</div>
