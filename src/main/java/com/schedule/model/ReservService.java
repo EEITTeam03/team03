@@ -30,7 +30,7 @@ public class ReservService {
 		
 		reservVO.setReservDateTime(reservDateTime);
 		reservVO.setNoteC(noteC);
-		reservVO.getNotesE();
+		reservVO.setNotesE(notesE);
 		reservVO.setStatus(status);
 		reservVO.setMembercarsVO(membercarsVO);
 		reservVO.setEmployeeVO(employeeVO);
@@ -45,7 +45,7 @@ public class ReservService {
 		reservVO.setReservNo(reservNo);
 		reservVO.setReservDateTime(reservDateTime);
 		reservVO.setNoteC(noteC);
-		reservVO.getNotesE();
+		reservVO.setNotesE(notesE);
 		reservVO.setStatus(status);
 		reservVO.setMembercarsVO(membercarsVO);
 		reservVO.setEmployeeVO(employeeVO);
