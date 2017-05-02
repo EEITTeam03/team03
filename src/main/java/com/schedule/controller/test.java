@@ -39,7 +39,7 @@ public class test extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		//把圖片轉byte陣列，檔案路徑要自己改要抓的圖片路徑
-		FileInputStream fis = new FileInputStream("C:/Users/user/Pictures/Saved Pictures/1.jpg");
+		FileInputStream fis = new FileInputStream("C:/0.jpg");
 		byte[] b = new byte[fis.available()];
 		fis.read(b);
 		fis.close();
