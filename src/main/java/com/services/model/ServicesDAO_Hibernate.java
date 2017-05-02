@@ -1,6 +1,7 @@
 package com.services.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -201,14 +202,14 @@ public class ServicesDAO_Hibernate implements ServicesDAO_interface {
 	}
 
 	@Override
-	synchronized public boolean servNoExists(Integer servo) throws IOException {
+	public boolean servNoExists(Integer serNo) throws IOException {
 		boolean exist = false; // 檢查id是否已經存在
-		for (ServicesVO svo : servicesVOList) {
-			if (svo.getServNo().equals(servo)) {
+		ServicesDAO_Hibernate sdao=new ServicesDAO_Hibernate();
+			if (sdao.findByPrimaryKey(serNo)!=null) {
 				exist = true;
-				break;
+			}else{
+				exist = false;
 			}
-		}
 		return exist;
 	}
 

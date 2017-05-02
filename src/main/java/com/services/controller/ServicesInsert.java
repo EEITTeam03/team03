@@ -26,7 +26,7 @@ import myutil.MyUtil;
 @MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 500, maxRequestSize = 1024
 		* 1024 * 500 * 5)
 @WebServlet("/services.do")
-public class TestServices extends HttpServlet {
+public class ServicesInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -41,7 +41,7 @@ public class TestServices extends HttpServlet {
 		String servTypeNo = "";
 		String servName = "";
 		String servDesc = "";
-		byte[] servPhoto=null;
+		byte[] servPhoto = null;
 		Date servEffectiveDate = null;
 		String servStatus = "";
 		String fileName = "";
@@ -70,7 +70,8 @@ public class TestServices extends HttpServlet {
 						servDesc = value;
 					} else if (fldName.equalsIgnoreCase("servEffectiveDate")) {
 						if (value != null && value.length() != 0)
-							servEffectiveDate = MyUtil.getSqlDate(value, "-");
+							 servEffectiveDate = Date.valueOf(value);
+//							servEffectiveDate = MyUtil.getSqlDate(value, "-");
 
 					} else if (fldName.equalsIgnoreCase("servStatus")) {
 						servStatus = value;
@@ -81,7 +82,7 @@ public class TestServices extends HttpServlet {
 					if (fileName != null && fileName.trim().length() > 0) {
 						sizeInBytes = p.getSize();
 						is = p.getInputStream();
-						servPhoto=new byte[is.available()];
+						servPhoto = new byte[is.available()];
 						is.read(servPhoto);
 						is.close();
 					} else {
@@ -110,49 +111,47 @@ public class TestServices extends HttpServlet {
 		if (servStatus == null || servStatus.trim().length() == 0) {
 			errorMsg.put("errorservStatus", "服務狀態欄必須輸入");
 		}
-		// 如果有錯誤
-		if (!errorMsg.isEmpty()) {
-			// 導向原來輸入資料的畫面，這次會顯示錯誤訊息
-			RequestDispatcher rd = request.getRequestDispatcher("TestServices.jsp");
-			rd.forward(request, response);
-			return;
-		}
+
 		try {
 			// 4. 進行Business Logic運算
 			// RegisterServiceFile類別的功能：
-			// 1.檢查帳號是否已經存在
-			// 2.儲存會員的資料
-			ServicesDAO_Hibernate sdao=new ServicesDAO_Hibernate();
-			ServicesService ss=new ServicesService();
-//			if (sdao.servNoExists(servNo)) {
-//				errorMsg.put("errorIDDup", "此服務編號號已存在，請換新代號");
-//			} else {
-				ServicesVO svo = new ServicesVO(servNo, servTypeNo, servName, servDesc,servPhoto, servEffectiveDate, servStatus);
+			// 1.檢查服務編號是否已經存在
+			// 2.儲存服務編號的資料
+			ServicesDAO_Hibernate sdao = new ServicesDAO_Hibernate();
+			// ServicesService ss = new ServicesService();
+			ServicesVO svo = new ServicesVO(servNo, servTypeNo, servName, servDesc, servPhoto, servEffectiveDate,
+					servStatus);
+			boolean xx = sdao.servNoExists(servNo);
+			if (xx) {
+				errorMsg.put("errorIDDups1", "此服務編號號已存在，請換新代號");
+				// RequestDispatcher rd =
+				// request.getRequestDispatcher("ServicesInsert.jsp");
+				// rd.forward(request, response);
+				// return;
+			} else {
 
 				System.out.println("filename:" + fileName);
 
 				sdao.insert(svo);
-//				ss.addService(servNo, servTypeNo, servName, servDesc, servPhoto, servEffectiveDate, servStatus)
-				// if (true) {
-				// msgOK.put("InsertOK", "<Font
-				// color='red'>新增成功，請開始使用本系統</Font>");
-				// response.sendRedirect("../index.jsp");
-				// return;
-				// } else {
-				// errorMsg.put("errorIDDup", "新增此筆資料有誤(RegisterServlet)");
-				// }
-//			}
+				if (sdao.findByPrimaryKey(servNo)!=null) {
+//					msgOK.put("InsertOK", "<Font color='red'>新增成功，請開始使用本系統</Font>");
+					response.sendRedirect("index.jsp");
+					return;
+				} else {
+					errorMsg.put("errorIDDup", "新增此筆資料有誤(RegisterServlet)");
+				}
+			}
 			// 5.依照 Business Logic 運算結果來挑選適當的畫面
 			if (!errorMsg.isEmpty()) {
 				// 導向原來輸入資料的畫面，這次會顯示錯誤訊息
-				RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("ServicesInsert.jsp");
 				rd.forward(request, response);
 				return;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			errorMsg.put("errorIDDup", e.getMessage());
-			RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+			errorMsg.put("errorIDDups", e.getMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
 		}
 	}
