@@ -41,15 +41,15 @@ public class TestServices extends HttpServlet {
 		String servTypeNo = "";
 		String servName = "";
 		String servDesc = "";
-
+		byte[] servPhoto=null;
 		Date servEffectiveDate = null;
 		String servStatus = "";
 		String fileName = "";
 		long sizeInBytes = 0;
 		InputStream is = null;
-		Collection<Part> parts = request.getParts(); // 取出HTTP multipart request內所有的parts
-		ServicesService ss = new ServicesService();
-		ss.exploreParts(parts, request);
+		Collection<Part> parts = request.getParts(); // 取出HTTP multipart
+														// request內所有的parts
+		ServicesService.exploreParts(parts, request);
 		// 由parts != null來判斷此上傳資料是否為HTTP multipart request
 		if (parts != null) {
 			for (Part p : parts) {
@@ -59,12 +59,9 @@ public class TestServices extends HttpServlet {
 				// 1. 讀取使用者輸入資料
 				if (p.getContentType() == null) {
 					if (fldName.equals("servNo")) {
-						try{
+						if (value != null && value.length() != 0)
 							servNo = Integer.valueOf(value);
-						}catch(NumberFormatException e){
-							e.printStackTrace();
-						}
-						
+
 					} else if (fldName.equalsIgnoreCase("servTypeNo")) {
 						servTypeNo = value;
 					} else if (fldName.equalsIgnoreCase("servName")) {
@@ -72,21 +69,21 @@ public class TestServices extends HttpServlet {
 					} else if (fldName.equalsIgnoreCase("servDesc")) {
 						servDesc = value;
 					} else if (fldName.equalsIgnoreCase("servEffectiveDate")) {
-						try{
+						if (value != null && value.length() != 0)
 							servEffectiveDate = MyUtil.getSqlDate(value, "-");
-						}catch(Exception e){
-							e.printStackTrace();
-						}
-						
+
 					} else if (fldName.equalsIgnoreCase("servStatus")) {
 						servStatus = value;
 					}
 				} else {
-					fileName = ss.getFileName(p); // 此為圖片檔的檔名
-					fileName = ss.adjustFileName(fileName, ServicesService.IMAGE_FILENAME_LENGTH);
+					fileName = ServicesService.getFileName(p); // 此為圖片檔的檔名
+					fileName = ServicesService.adjustFileName(fileName, ServicesService.IMAGE_FILENAME_LENGTH);
 					if (fileName != null && fileName.trim().length() > 0) {
 						sizeInBytes = p.getSize();
 						is = p.getInputStream();
+						servPhoto=new byte[is.available()];
+						is.read(servPhoto);
+						is.close();
 					} else {
 						errorMsg.put("errPicture", "必須挑選圖片檔");
 					}
@@ -125,23 +122,26 @@ public class TestServices extends HttpServlet {
 			// RegisterServiceFile類別的功能：
 			// 1.檢查帳號是否已經存在
 			// 2.儲存會員的資料
-			ServicesDAO_Hibernate rs = new ServicesDAO_Hibernate();
-			if (rs.servNoExists(servNo)) {
-				errorMsg.put("errorIDDup", "此服務編號號已存在，請換新代號");
-			} else {
-				ServicesVO svo = new ServicesVO(servNo, servTypeNo, servName, servDesc, servEffectiveDate, servStatus);
-				
+			ServicesDAO_Hibernate sdao=new ServicesDAO_Hibernate();
+			ServicesService ss=new ServicesService();
+//			if (sdao.servNoExists(servNo)) {
+//				errorMsg.put("errorIDDup", "此服務編號號已存在，請換新代號");
+//			} else {
+				ServicesVO svo = new ServicesVO(servNo, servTypeNo, servName, servDesc,servPhoto, servEffectiveDate, servStatus);
+
 				System.out.println("filename:" + fileName);
-				
-				rs.insert(svo);
-//				if (true) {
-//					msgOK.put("InsertOK", "<Font color='red'>新增成功，請開始使用本系統</Font>");
-//					response.sendRedirect("../index.jsp");
-//					return;
-//				} else {
-//					errorMsg.put("errorIDDup", "新增此筆資料有誤(RegisterServlet)");
-//				}
-			}
+
+				sdao.insert(svo);
+//				ss.addService(servNo, servTypeNo, servName, servDesc, servPhoto, servEffectiveDate, servStatus)
+				// if (true) {
+				// msgOK.put("InsertOK", "<Font
+				// color='red'>新增成功，請開始使用本系統</Font>");
+				// response.sendRedirect("../index.jsp");
+				// return;
+				// } else {
+				// errorMsg.put("errorIDDup", "新增此筆資料有誤(RegisterServlet)");
+				// }
+//			}
 			// 5.依照 Business Logic 運算結果來挑選適當的畫面
 			if (!errorMsg.isEmpty()) {
 				// 導向原來輸入資料的畫面，這次會顯示錯誤訊息

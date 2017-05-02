@@ -75,6 +75,7 @@ function setFocusToUserId(){
       
       <label class="fontSize" >服務照片：</label>
       <Input Type="file" size="40" class="fieldWidth" style="width: 480px;"  name="file1"><BR>
+       <font color="red" size="-1">${MsgMap.errPicture}</font>
       <br/>
       <div id="btnArea" align="center">
          <input type="submit" name="submit" id="submit" value="送出"/>

@@ -4,7 +4,7 @@
 <hibernate-mapping>
 <class name="com.services.model.ServicesVO" table="services">
 	<id name="servNo" column="servNo">
-            <generator class="identity"/>
+           <!--  <generator class="identity"/> -->
         </id>
         <property name="servTypeNo" column="servTypeNo" />
         <property name="servName" column="servName" />
