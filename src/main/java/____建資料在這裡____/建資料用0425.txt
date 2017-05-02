@@ -192,6 +192,7 @@ GO
 CREATE TABLE [dbo].[reserv](
 	[reservNo] [int] IDENTITY(1,1) NOT NULL,
 	[reservDateTime] [datetime] NOT NULL,
+	[reservEndTime] [datetime] ,
 	[carLicense] [varchar](20) NOT NULL,
 	[noteC] [nvarchar](200) NULL,
 	[notesE] [nvarchar](50) NULL,
