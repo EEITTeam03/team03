@@ -141,9 +141,12 @@ public class ReserveService extends HttpServlet {
 			int startHour = aReserve.getReservDateTime().get(Calendar.HOUR_OF_DAY);
 			int endHour = aReserve.getReservEndTime().get(Calendar.HOUR_OF_DAY);
 			
-			if(currentStartHour < endHour || currentEndHour > startHour){
+			if(currentStartHour < startHour){
+				
 				errmsg.add("所選的時段和其他預約有衝突!");
-			} 
+			} else if(currentStartHour > startHour){
+				
+			}
 		}
 		
 		//****************失敗*******************
