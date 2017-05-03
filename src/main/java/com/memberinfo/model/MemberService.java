@@ -97,5 +97,7 @@ public class MemberService {
 	public List<MemberInfoVO> getAll() {
 		return dao.listAll();
 	}
-
+	public MemberInfoVO getOneByEmail(String email){
+		return dao.findByEmail(email);
+	}
 }

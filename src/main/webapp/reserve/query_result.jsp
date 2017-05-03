@@ -18,7 +18,8 @@ table, th, td {
 <table>
 <tr>
 	<th>預約編號</th>
-	<th>預約日期</th>
+	<th>預約日期時間</th>
+	<th>結束日期時間</th>
 	<th>預約狀態</th>
 	<th>預約人</th>
 	<th>車牌</th>
@@ -30,6 +31,7 @@ table, th, td {
 <tr>
 	<td>${aVO.reservNo}</td> 
 	<td>${aVO.reservDateTime.time}</td>
+	<td>${aVO.reservEndTime.time}</td>
 	<td>${aVO.status}</td>
 	<td>${aVO.membercarsVO.memberInfoVO.memberName}</td>
 	<td>${aVO.membercarsVO.carLicense}</td>
