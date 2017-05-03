@@ -18,6 +18,7 @@
 			<th>服務名稱</th>
 			<th>服務有效日期</th>
 			<th>服務狀態</th>
+			<th>服務描述</th>
 			<th>服務照片</th>
 		</tr>
 		<tr align='center' valign='middle'>
@@ -26,8 +27,17 @@
 			<td>${servicesVO.servName}</td>
 			<td>${servicesVO.servEffectiveDate}</td>
 			<td>${servicesVO.servStatus}</td>
-<%-- 			<td>${servicesVO.servDesc}</td> --%>
-			<td><img src='data:image/jpeg;base64,${Base64.getEncoder().encodeToString(servicesVO.servPhoto)}'/></td>
+			<td>${servicesVO.servDesc}</td>
+			<td>
+			<c:choose>
+				<c:when test="${servicesVO.servPhoto !=null}">
+					<img src='data:image/jpeg;base64,${Base64.getEncoder().encodeToString(servicesVO.servPhoto)}' width="150"/>
+				</c:when>
+				<c:when test="${servicesVO.servPhoto==null}">
+					沒有服務照片
+				</c:when>
+			</c:choose>
+			</td>
 
 		</tr>
 	</table>

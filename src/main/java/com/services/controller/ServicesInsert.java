@@ -28,15 +28,11 @@ import myutil.MyUtil;
 @WebServlet("/services/services.do")
 public class ServicesInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);
 	}
-
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -44,7 +40,7 @@ public class ServicesInsert extends HttpServlet {
 		String action = request.getParameter("action");
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		Map<String, String> msgOK = new HashMap<String, String>();
-		if("insert".equals(action)){
+		if ("insert".equals(action)) {
 			HttpSession session = request.getSession();
 			request.setAttribute("MsgMap", errorMsg); // 顯示錯誤訊息
 			session.setAttribute("MsgOK", msgOK); // 顯示正常訊息
@@ -82,7 +78,8 @@ public class ServicesInsert extends HttpServlet {
 						} else if (fldName.equalsIgnoreCase("servEffectiveDate")) {
 							if (value != null && value.length() != 0)
 								servEffectiveDate = Date.valueOf(value);
-							// servEffectiveDate = MyUtil.getSqlDate(value, "-");
+							// servEffectiveDate = MyUtil.getSqlDate(value,
+							// "-");
 
 						} else if (fldName.equalsIgnoreCase("servStatus")) {
 							servStatus = value;
@@ -167,11 +164,11 @@ public class ServicesInsert extends HttpServlet {
 				rd.forward(request, response);
 			}
 		}
-		
+
 		if ("getOne_For_Display".equals(action)) {
 			try {
 				String str = request.getParameter("servNo");
-				Integer servNo=null;
+				Integer servNo = null;
 				servNo = new Integer(str);
 				ServicesService ssForDisplay = new ServicesService();
 				ServicesVO svoForDisplay = ssForDisplay.getOneService(servNo);
@@ -192,22 +189,14 @@ public class ServicesInsert extends HttpServlet {
 				RequestDispatcher fauilerView = request.getRequestDispatcher("SelectServices.jsp");
 				fauilerView.forward(request, response);
 			}
-//			if("insert".equals(action)){
-//				try{
-//					
-//					
-//					Integer servNo = new Integer(request.getParameter("servNo").trim());
-//					String servTypeNo = request.getParameter("servTypeNo");
-//					String servName = request.getParameter("servName");
-//					String servDesc = request.getParameter("servDesc");
-//					byte[] servPhoto = null;
-//					Date servEffectiveDate = Date.valueOf(request.getParameter("servEffectiveDate").trim());
-//					String servStatus = request.getParameter("servStatus");
-//					String fileName = "";
-//				}catch(Exception e){
-//					
-//				}
-//			}
+
+		}
+		if("getOne_For_Update".equals(action)){
+			try{
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 	}
 

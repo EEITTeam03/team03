@@ -17,23 +17,25 @@
 </head>
 <body>
 	<h3>所有服務資料</h3>
-	<table border='1' bordercolor='#CCCCFF' width='800'>
+	<table border='1' bordercolor='#CCCCFF' width='1600'>
 		<tr>
 			<th>服務編號</th>
 			<th>服務類型編號</th>
 			<th>服務名稱</th>
 			<th>服務有效日期</th>
 			<th>服務狀態</th>
+			<th>服務描述</th>
 			<th>服務照片</th>
 			<th colspan="2">選項</th>
 		</tr>
 		<c:forEach var="servicesVO" items="${list}">
 			<tr align='center' valign='middle'>
-				<td>${servicesVO.servNo}</td>
-				<td>${servicesVO.servTypeNo}</td>
-				<td>${servicesVO.servName}</td>
-				<td>${servicesVO.servEffectiveDate}</td>
-				<td>${servicesVO.servStatus}</td>
+				<td width="300">${servicesVO.servNo}</td>
+				<td width="300">${servicesVO.servTypeNo}</td>
+				<td width="300">${servicesVO.servName}</td>
+				<td width="300">${servicesVO.servEffectiveDate}</td>
+				<td width="300">${servicesVO.servStatus}</td>
+				<td width="300">${servicesVO.servDesc}</td>
 				<td>
 				<c:choose>
 					<c:when test="${servicesVO.servPhoto !=null}">
