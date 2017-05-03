@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.services.model.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="java.util.*"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -25,8 +26,8 @@
 			<td>${servicesVO.servName}</td>
 			<td>${servicesVO.servEffectiveDate}</td>
 			<td>${servicesVO.servStatus}</td>
-			<%-- <td>${servicesVO.servDesc}</td> --%>
-			<td>${servicesVO.servPhoto}</td>
+<%-- 			<td>${servicesVO.servDesc}</td> --%>
+			<td><img src='data:image/jpeg;base64,${Base64.getEncoder().encodeToString(servicesVO.servPhoto)}'/></td>
 
 		</tr>
 	</table>

@@ -75,10 +75,6 @@ public class ServicesService {
 	}
 
 	public ServicesVO getOneService(Integer servNo) {
-//		ServicesVO asvoGetOne=new ServicesVO();
-//		Map map=new LinkedHashMap<>();
-//		map.put("單張照片",  Base64.getEncoder().encodeToString(asvoGetOne.getServPhoto()));
-		
 		return dao.findByPrimaryKey(servNo);
 	}
 
