@@ -44,12 +44,11 @@ public class ServicesInsert extends HttpServlet {
 		String action = request.getParameter("action");
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		Map<String, String> msgOK = new HashMap<String, String>();
-		if("services.do".equals(action)){
-			
+		if("insert".equals(action)){
 			HttpSession session = request.getSession();
 			request.setAttribute("MsgMap", errorMsg); // 顯示錯誤訊息
 			session.setAttribute("MsgOK", msgOK); // 顯示正常訊息
-			Integer servNo = null;
+			Integer servNo = 0;
 			String servTypeNo = "";
 			String servName = "";
 			String servDesc = "";
@@ -193,6 +192,22 @@ public class ServicesInsert extends HttpServlet {
 				RequestDispatcher fauilerView = request.getRequestDispatcher("SelectServices.jsp");
 				fauilerView.forward(request, response);
 			}
+//			if("insert".equals(action)){
+//				try{
+//					
+//					
+//					Integer servNo = new Integer(request.getParameter("servNo").trim());
+//					String servTypeNo = request.getParameter("servTypeNo");
+//					String servName = request.getParameter("servName");
+//					String servDesc = request.getParameter("servDesc");
+//					byte[] servPhoto = null;
+//					Date servEffectiveDate = Date.valueOf(request.getParameter("servEffectiveDate").trim());
+//					String servStatus = request.getParameter("servStatus");
+//					String fileName = "";
+//				}catch(Exception e){
+//					
+//				}
+//			}
 		}
 	}
 

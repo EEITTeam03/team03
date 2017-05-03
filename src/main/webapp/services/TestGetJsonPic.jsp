@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,7 +26,26 @@
 			})
 		});
 	</script>
+	<table border="1" bordercolor="#ccccff" width="180">
+	<tr>
 	
+	<td><script type="text/javascript">
+		$(document).ready(function() {
+			$.getJSON('TestGetJsonPic', function(datas) {
+				$.each(datas,function(i,pic){
+					var x = $("<img/>");
+					x.attr('src', 'data:image/jpeg;base64,' + pic.照片);
+					x.attr("width", "180");
+					x.attr("height", "180");
+					$('td').append(x);	
+				})
+			})
+		});
+	</script></td>
+	
+	
+	</tr>
+	</table>
 	
 
 </body>

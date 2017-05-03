@@ -10,7 +10,7 @@
 </head>
 <body bgcolor='white'>
 
-	<table border='1' bordercolor='#CCCCFF' width='800'>
+	<table border='1' bordercolor='#CCCCFF' width='1600'>
 		<tr>
 			<th>服務編號</th>
 			<th>服務類型編號</th>
@@ -25,9 +25,9 @@
 			<td>${servicesVO.servName}</td>
 			<td>${servicesVO.servEffectiveDate}</td>
 			<td>${servicesVO.servStatus}</td>
-			<%-- <td>${servicesVO.servPhoto}</td> --%>
-			<%-- <td>${servicesVO.deptVO.deptno}【${empVO.deptVO.dname}-
-				${empVO.deptVO.loc}】</td> --%>
+			<%-- <td>${servicesVO.servDesc}</td> --%>
+			<td>${servicesVO.servPhoto}</td>
+
 		</tr>
 	</table>
 
