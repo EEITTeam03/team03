@@ -25,7 +25,7 @@ import myutil.MyUtil;
 
 @MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 500, maxRequestSize = 1024
 		* 1024 * 500 * 5)
-@WebServlet("/services.do")
+@WebServlet("/services/services.do")
 public class ServicesInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -135,10 +135,10 @@ public class ServicesInsert extends HttpServlet {
 				sdao.insert(svo);
 				if (sdao.findByPrimaryKey(servNo)!=null) {
 //					msgOK.put("InsertOK", "<Font color='red'>新增成功，請開始使用本系統</Font>");
-					response.sendRedirect("index.jsp");
+					response.sendRedirect("../index.jsp");
 					return;
 				} else {
-					errorMsg.put("errorIDDup", "新增此筆資料有誤(RegisterServlet)");
+					errorMsg.put("errorIDDup", "新增此筆資料有誤");
 				}
 			}
 			// 5.依照 Business Logic 運算結果來挑選適當的畫面
@@ -151,7 +151,7 @@ public class ServicesInsert extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			errorMsg.put("errorIDDups", e.getMessage());
-			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("ServicesInsert.jsp");
 			rd.forward(request, response);
 		}
 	}
