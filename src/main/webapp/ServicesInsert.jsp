@@ -46,7 +46,8 @@ function setFocusToUserId(){
       <!-- 
          注意value屬性的內容以及顯示錯誤訊息的寫法
       -->
-      <font size="-1" color="#FF0000">${MsgMap.errorservNoEmpty}${MsgMap.errorIDDup}</font>
+      <font size="-1" color="#FF0000">${MsgMap.errorservNoEmpty}</font>
+      <font size="-1" color="#FF0000">${MsgMap.errorIDDups1}</font>
       <br/>
       <label class="fontSize" >服務類型編號：</label>
       <input type="text" name="servTypeNo" value="${param.servTypeNo}" class="fieldWidth" style="width: 200px;">

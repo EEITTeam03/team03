@@ -145,13 +145,17 @@ public class ReservDAO implements ReservDAO_interface {
 	@Override
 	public List<ReservVO> findByDate(Calendar cal) {
 		List<ReservVO> list = null;
+		Calendar cal1 = Calendar.getInstance();
+		cal1.setTime(cal.getTime());
+		cal1.set(Calendar.HOUR_OF_DAY,0);
+		cal1.set(Calendar.MINUTE,0);
 		Calendar cal2 = Calendar.getInstance();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
 			Query query = session.createQuery(GET_BY_DATE);
-			query.setParameter(0, cal);
-			cal2.setTime(cal.getTime());
+			query.setParameter(0, cal1);
+			cal2.setTime(cal1.getTime());
 			cal2.add(Calendar.DATE, 1);
 			query.setParameter(1, cal2);
 			list = query.list();

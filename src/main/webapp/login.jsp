@@ -109,28 +109,32 @@
 						<div class="panel-body">
 							<div class="flot-chart">
 								<div class="flot-chart-content" id="flot-bar-chart">
-									<form class="form-signin" role="form">
+									<form class="form-signin" role="form" action='login.do'>
 									
 										<br>
 										
 										<div class="input-group" style="border:1px solid #5bc0de">
 										  	<span class="input-group-addon" style="border-right:1px solid #5bc0de"><i class="glyphicon glyphicon-envelope"></i></span>
-										  	<input id="email" type="text" class="form-control" name="email" placeholder="輸入您的電子郵件">
+										  	<input id="email" type="text" class="form-control" name="email" placeholder="輸入您的電子郵件" value='${param.email}' >
+										  	
 										</div>
 										
 										<br>
 										
 										<div class="input-group" style="border:1px solid #5bc0de">
 										    <span class="input-group-addon" style="border-right:1px solid #5bc0de"><i class="glyphicon glyphicon-lock"></i></span>
-										    <input id="password" type="password" class="form-control" name="password" placeholder="輸入您的密碼">
+										    <input id="password" type="password" class="form-control" name="password" placeholder="輸入您的密碼" value='${param.password}' >
+										    
 										</div>
+												<small><Font color='red'>${ErrorMsgKey.AccountEmptyError}</Font></small>
+										    	<small><Font color='red'>${ErrorMsgKey.PasswordEmptyError}</Font></small>
+										    	<small><Font color='red'>${ErrorMsgKey.LoginError}</Font></small>
 	
 										<div class="checkbox">
 											<label> <input type="checkbox" value="remember-me">記住密碼</label>
 										</div>
 										
 										<button class="btn btn-lg btn-info btn-block" type="submit">登入</button>
-										
 									</form>	
 								</div>
 							</div>

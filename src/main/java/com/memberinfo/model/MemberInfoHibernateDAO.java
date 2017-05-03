@@ -1,8 +1,13 @@
 package com.memberinfo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.admin.model.AdminDAO;
+import com.admin.model.AdminVO;
+
 import hibernate.util.HibernateUtil;
 
 public class MemberInfoHibernateDAO implements MemberInfoDAO {
@@ -98,6 +103,35 @@ public class MemberInfoHibernateDAO implements MemberInfoDAO {
 			throw ex;
 		}
 		return list;
+	}
+	
+	@Override
+	public List<MemberInfoVO> findMember(String email, String password) {
+		// TODO Auto-generated method stub
+		List<MemberInfoVO> list = new ArrayList<MemberInfoVO>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery("from MemberInfoVO where email=? and password=?");
+			query.setParameter(0, email);
+			query.setParameter(1, password);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+	
+	public static void main(String[] args) {
+		
+		MemberInfoHibernateDAO dao = new MemberInfoHibernateDAO();
+		List<MemberInfoVO> mem = dao.findMember("EEITTeam0","P@ssw0rd");
+		for(MemberInfoVO adv :mem){
+			System.out.println(adv.getEmail());
+			System.out.println(adv.getPassword());
+		}
 	}
 
 }

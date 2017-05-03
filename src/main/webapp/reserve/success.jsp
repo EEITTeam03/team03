@@ -19,6 +19,7 @@ table, th, td {
 <br>
 預約編號: ${reserve.reservNo}<br>
 預約日期: ${reserve.reservDateTime.time}<br>
+預約結束時間: ${reserve.reservEndTime.time}<br>
 車牌: ${reserve.membercarsVO.carLicense}<br>
 品牌: ${reserve.membercarsVO.carTypeVO.brand}<br>
 型號: ${reserve.membercarsVO.carTypeVO.carModel}<br>
@@ -46,7 +47,7 @@ table, th, td {
 </table>
 <hr>
 <h3>總金額: ${total} 元 </h3>
-<h3>總時間: ${range} 分鐘</h3>
+<h3>總時間: ${range/60} 小時</h3>
 
 
 <!-- <input type="button" value="確定預約"> -->
