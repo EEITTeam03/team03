@@ -9,6 +9,7 @@
 </head>
 <body>
 	<ul>
+	<li><a href='ListAllServices.jsp'>查看</a>所有服務 </li> <br><br>
 		<jsp:useBean id="ss" scope="page" class="com.services.model.ServicesService" />
 		<li>
 			<FORM METHOD="post" ACTION="services.do">
