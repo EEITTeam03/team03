@@ -20,12 +20,18 @@ $(document).ready(function () {
 	function dataSearch(date,view){
 	    		//loading圖 if此時有就不要做
 	        	$.ajax({
-	        		url: "scheduler/GetJSONYear",
+	        		url: "MyJSON",
 	        		dataType: "json",
 	        		data:{'date':date,'view':view},
 	        		method:"POST",
 	        		success:function(data){
 	        			alert("success");
+	        			$.each(data,function(key,value){
+	        				$.each(value,function(id,good){
+	        					console.log(id);
+	        					console.log(good);
+	        				});
+	        			})
 	        		},
 	        		error:function(data){
 	        			alert("ERROR");
@@ -39,7 +45,7 @@ $(document).ready(function () {
 <from>
 	<input type="text" id="date"/><br>
 	<p>日期 ex:2017-05-01</p><br>
-	<input type="text" id="view"/><br>
+	<input type="text" id="view"/><br><small><Font color='red' >${ErrorMsgKey.NotAcurrateView}</Font></small>
 	<p>view ex: dayView.weekView.monthView</p>
 	<input type="button" id="btn_search" value="submit"/><br>
 
