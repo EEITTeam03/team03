@@ -42,7 +42,7 @@
         
         function dataSearch(){
         	$.ajax({
-        		url: "scheduler/GetJSON",
+        		url: "scheduler/GetJSONYear",
         		dataType: "json",
         		method:"POST",
         		success:function(data){
@@ -119,7 +119,7 @@
     		var date = new Date();
     		var adapter = new $.jqx.dataAdapter(source);
             $("#scheduler").jqxScheduler({
-                date: new $.jqx.date(date.getFullYear(), date.getMonth()+1, date.getDate()),
+                date: new $.jqx.date('todayDate'),
                 width: 850,
                 height: 600,
                 source: adapter,

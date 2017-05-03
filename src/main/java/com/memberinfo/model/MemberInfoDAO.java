@@ -2,6 +2,8 @@ package com.memberinfo.model;
 
 import java.util.List;
 
+import com.admin.model.AdminVO;
+
 public interface MemberInfoDAO {
 	
 	public void insert(MemberInfoVO memberInfoVO);
@@ -10,4 +12,6 @@ public interface MemberInfoDAO {
 	public MemberInfoVO findByPK(Integer memberNo);
 	public MemberInfoVO findByPhone(String phone);
 	public List<MemberInfoVO> listAll();
+	public List<MemberInfoVO> findMember(String email , String password);
+	public MemberInfoVO findByEmail(String email);
 }

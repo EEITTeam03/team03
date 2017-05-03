@@ -70,7 +70,14 @@ public class ReservDAO implements ReservDAO_interface {
 		// TODO Auto-generated method stub
 		ReservDAO dao = new ReservDAO();
 //
+
+		Calendar cal = Calendar.getInstance();
+		//cal.set(2017,4,8);
+		List<ReservVO>list = dao.findByYear(cal);
+//		List<ReservVO>list = dao.findByWeek(cal);
+		
 //		List<ReservVO>list = dao.getAll();
+
 		
 //		for(ReservVO reservVO:list){
 //			System.out.print(reservVO.getReservNo()+",");
@@ -81,6 +88,7 @@ public class ReservDAO implements ReservDAO_interface {
 //			System.out.print(reservVO.getMembercarsVO().getCarLicense()+",");
 //			System.out.println(reservVO.getEmployeeVO().getEmployeeNo());
 //			Set<ReservListVO>relists = reservVO.getReservlists();
+//
 //			for(ReservListVO lists:relists){
 //				System.out.println(lists.getReservListNo());
 //
@@ -91,19 +99,19 @@ public class ReservDAO implements ReservDAO_interface {
 //			}
 //		}
 
-		ReservService reservice = new ReservService();
-		
-		List<Map> list = reservice.getScheduleForJSON();
-		for(Map map:list){
-			Iterator iter = map.entrySet().iterator(); 
-			while (iter.hasNext()) { 
-			    Map.Entry entry = (Map.Entry) iter.next(); 
-			    Object key = entry.getKey(); 
-			    Object val = entry.getValue();
-			    System.out.print(key+":"+val+" ");
-			} 
-			System.out.println();
-		}
+//		ReservService reservice = new ReservService();
+//		
+//		List<Map> list = reservice.getScheduleForJSON();
+//		for(Map map:list){
+//			Iterator iter = map.entrySet().iterator(); 
+//			while (iter.hasNext()) { 
+//			    Map.Entry entry = (Map.Entry) iter.next(); 
+//			    Object key = entry.getKey(); 
+//			    Object val = entry.getValue();
+//			    System.out.print(key+":"+val+" ");
+//			} 
+//			System.out.println();
+//		}
 	}
 
 	@Override
@@ -137,13 +145,17 @@ public class ReservDAO implements ReservDAO_interface {
 	@Override
 	public List<ReservVO> findByDate(Calendar cal) {
 		List<ReservVO> list = null;
+		Calendar cal1 = Calendar.getInstance();
+		cal1.setTime(cal.getTime());
+		cal1.set(Calendar.HOUR_OF_DAY,0);
+		cal1.set(Calendar.MINUTE,0);
 		Calendar cal2 = Calendar.getInstance();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
 			Query query = session.createQuery(GET_BY_DATE);
-			query.setParameter(0, cal);
-			cal2.setTime(cal.getTime());
+			query.setParameter(0, cal1);
+			cal2.setTime(cal1.getTime());
 			cal2.add(Calendar.DATE, 1);
 			query.setParameter(1, cal2);
 			list = query.list();
@@ -153,6 +165,83 @@ public class ReservDAO implements ReservDAO_interface {
 			throw ex;
 		}
 		return list;
+	}
+
+	@Override
+	public List<ReservVO> findByYear(Calendar cal) {
+		// TODO Auto-generated method stub
+		List<ReservVO> list = null;
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Calendar cal3 = Calendar.getInstance();
+			//cal3.set(2017,4,8);
+			Query query = session.createQuery(GET_BY_DATE);
+			
+			//神奇的下一行
+			//System.out.println(cal.get(Calendar.DATE));
+			cal.get(Calendar.DATE);
+			cal.set(Calendar.DAY_OF_YEAR, cal.getActualMinimum(Calendar.DAY_OF_YEAR));						
+			
+			System.out.println(cal.get(Calendar.DAY_OF_YEAR));
+			query.setParameter(0, cal);
+			
+			//神奇的下一行
+			//System.out.println(cal3.get(Calendar.DATE));
+			
+			cal3.get(Calendar.DATE);
+			cal3.set(Calendar.DAY_OF_YEAR, cal3.getActualMaximum(Calendar.DAY_OF_YEAR));
+			System.out.println(cal3.get(Calendar.DAY_OF_YEAR));
+
+			query.setParameter(1, cal3);
+			
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+
+	@Override
+	public List<ReservVO> findByWeek(Calendar cal) {
+		// TODO Auto-generated method stub
+		List<ReservVO> list = null;
+		Calendar cal3 = Calendar.getInstance();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			
+			session.beginTransaction();
+			
+			//cal3.set(2017,4,8);
+			Query query = session.createQuery(GET_BY_DATE);
+			
+			//神奇的下一行
+			//System.out.println(cal.get(Calendar.DATE));
+			cal.get(Calendar.DATE);
+			cal.set(Calendar.DAY_OF_WEEK, cal.getActualMinimum(Calendar.DAY_OF_WEEK));						
+			
+			System.out.println(cal.get(Calendar.DATE));
+			query.setParameter(0, cal);
+			
+			//神奇的下一行
+			//System.out.println(cal3.get(Calendar.DATE));
+			cal3.get(Calendar.DATE);
+			cal3.set(Calendar.DAY_OF_WEEK, cal3.getActualMaximum(Calendar.DAY_OF_WEEK));
+			System.out.println(cal3.get(Calendar.DATE));
+
+			query.setParameter(1, cal3);
+			
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+		//return null;
 	}
 
 }

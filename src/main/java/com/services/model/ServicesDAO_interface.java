@@ -1,5 +1,6 @@
 package com.services.model;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ public interface ServicesDAO_interface {
 	public void insert(ServicesVO servo);
 	public void update(ServicesVO servo);
 	public void delete(Integer servNo);
+	public boolean servNoExists(Integer servo) throws IOException;
 	public ServicesVO findByPrimaryKey(Integer servNo);
 	public List<ServicesVO> findType(String servTypeNo);
 	public List<ServicesVO> findYear(String servEffectiveDate);

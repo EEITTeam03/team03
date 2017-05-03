@@ -101,4 +101,60 @@ public class ServicesVO implements Serializable {
 	public void setReservlists(Set<ReservListVO> reservlists) {
 		this.reservlists = reservlists;
 	}
+	
+	public ServicesVO() {
+
+	}
+
+	public ServicesVO(Integer servNo, String servTypeNo, String servName, String servDesc, Date servEffectiveDate,
+			String servStatus) {
+		super();
+		this.servNo = servNo;
+		this.servTypeNo = servTypeNo;
+		this.servName = servName;
+		this.servDesc = servDesc;
+		this.servEffectiveDate = servEffectiveDate;
+		this.servStatus = servStatus;
+	}
+
+	public ServicesVO(Integer servNo, String servTypeNo, String servName, String servDesc, byte[] servPhoto,
+			Date servEffectiveDate, String servStatus) {
+		super();
+		this.servNo = servNo;
+		this.servTypeNo = servTypeNo;
+		this.servName = servName;
+		this.servDesc = servDesc;
+		this.servPhoto = servPhoto;
+		this.servEffectiveDate = servEffectiveDate;
+		this.servStatus = servStatus;
+	}
+
+	public ServicesVO(Integer servNo, String servTypeNo, String servName, String servDesc, byte[] servPhoto,
+			Date servEffectiveDate, String servStatus, Set<ReservListVO> reservlists) {
+		super();
+		this.servNo = servNo;
+		this.servTypeNo = servTypeNo;
+		this.servName = servName;
+		this.servDesc = servDesc;
+		this.servPhoto = servPhoto;
+		this.servEffectiveDate = servEffectiveDate;
+		this.servStatus = servStatus;
+		this.reservlists = reservlists;
+	}
+
+	public ServicesVO(Integer servNo, String servTypeNo, String servName, String servDesc, byte[] servPhoto,
+			Date servEffectiveDate, String servStatus, Set<ReservListVO> reservlists,
+			Set<ServiceCarClassVO> serviceCarClassVO, Set<ServiceStepVO> serviceStepVO) {
+		super();
+		this.servNo = servNo;
+		this.servTypeNo = servTypeNo;
+		this.servName = servName;
+		this.servDesc = servDesc;
+		this.servPhoto = servPhoto;
+		this.servEffectiveDate = servEffectiveDate;
+		this.servStatus = servStatus;
+		this.reservlists = reservlists;
+		this.serviceCarClassVO = serviceCarClassVO;
+		this.serviceStepVO = serviceStepVO;
+	}
 }

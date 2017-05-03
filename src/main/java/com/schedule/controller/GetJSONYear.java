@@ -1,37 +1,31 @@
-package com.test.controller;
+package com.schedule.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.ParseException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.reservlist.model.ReservListVO;
-import com.schedule.model.ReservService;
-import com.schedule.model.ReservVO;
+import org.json.simple.JSONValue;
 
-import myutil.MyUtil;
+import com.schedule.model.ReservService;
 
 /**
- * Servlet implementation class QueryEmptyReserv
+ * Servlet implementation class GetJSONYear
  */
-@WebServlet("/reserve/QueryReservByDate")
-public class QueryEmptyReserv extends HttpServlet {
+@WebServlet("/scheduler/GetJSONYear")
+public class GetJSONYear extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QueryEmptyReserv() {
+    public GetJSONYear() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,24 +34,18 @@ public class QueryEmptyReserv extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String strDate = request.getParameter("selectedDate");
-		Calendar cal = MyUtil.getCalender(strDate);
-		
-		ReservService rsvc = new ReservService();
-		List<ReservVO> list = rsvc.getAllReservByDate(cal);
-		
-		
-		
-		request.setAttribute("reservList", list);
-		
-		RequestDispatcher sucess = request.getRequestDispatcher("/reserve/query_result.jsp");
-		sucess.forward(request, response);
-		
-		
-//		PrintWriter out =response.getWriter();
-//		out.println(sqlDate.getTime());
-//		out.close();
+		// TODO Auto-generated method stub
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setHeader("content-type", "text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		ReservService reservice = new ReservService();
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.set(2017,Calendar.MAY,10 );
+//		List<Map> list = reservice.getScheduleForJSON();
+		List<Map> list = reservice.getYearScheduleForJSON();
+		 String jsonString = JSONValue.toJSONString(list);  
+		 out.println(jsonString);
 	}
 
 	/**

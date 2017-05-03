@@ -1,8 +1,10 @@
 package com.test.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -11,13 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cartype.model.CarTypeVO;
 import com.employee.model.EmployeeVO;
 import com.membercars.model.MemberCarsDAO;
 import com.membercars.model.MemberCarsHibernateDAO;
 import com.membercars.model.MemberCarsVO;
 import com.reservlist.model.ReservListVO;
 import com.schedule.model.ReservDAO;
+import com.schedule.model.ReservService;
 import com.schedule.model.ReservVO;
 import com.servicecarclass.model.ServiceCarClassService;
 import com.servicecarclass.model.ServiceCarClassVO;
@@ -26,9 +28,7 @@ import com.services.model.ServicesVO;
 
 import myutil.MyUtil;
 
-/**
- * Servlet implementation class ReserveService
- */
+
 @WebServlet("/reserve/ReserveService")
 public class ReserveService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -39,16 +39,26 @@ public class ReserveService extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		List<String> errmsg = new ArrayList<String>();
+		request.setAttribute("errorMsg", errmsg);
+		
 		String license = request.getParameter("license");
 		String selectedDate = request.getParameter("selectedDate");
+		String selectedTime = request.getParameter("selectedTime");
 		String singleService = request.getParameter("service");
 		String ckbox[] = request.getParameterValues("plus");
 		String empNo = request.getParameter("empNo");
+		
+		
+		//日期-字串轉Calendar
+		Calendar cal = MyUtil.getCalender(selectedDate,selectedTime);
+		
 
+		
 		// 全新的訂單物件
 		ReservVO reservVO = new ReservVO();
-
+		
 		// new DAO 
 		ServicesDAO_Hibernate sdao = new ServicesDAO_Hibernate();
 		MemberCarsDAO cdao = new MemberCarsHibernateDAO();
@@ -56,14 +66,16 @@ public class ReserveService extends HttpServlet {
 		// 取得車VO
 		MemberCarsVO memberCarsVO = cdao.findByPK(license);
 		reservVO.setMembercarsVO(memberCarsVO);
-
 		
-		 String size = memberCarsVO.getCarTypeVO().getCarClassVO().getCarClass();
+		String size = memberCarsVO.getCarTypeVO().getCarClassVO().getCarClass();
 		
-		// 日期-字串轉Calendar
-		Calendar cal = MyUtil.getCalender(selectedDate);
+		//放入日期
 		reservVO.setReservDateTime(cal);
-
+		
+		//宣告結束時間
+		Calendar calEnd = Calendar.getInstance();
+		Integer end = 0;
+		
 		// 所選服務的集合-清單
 		Set<ReservListVO> reservSet = new HashSet<ReservListVO>();
 
@@ -79,7 +91,8 @@ public class ReserveService extends HttpServlet {
 		singlerlvo.setServPrice(sccVO.getServPrice());
 		singlerlvo.setServTime(sccVO.getServTime());
 		singlerlvo.setServName(singleServiceVO.getServName());
-
+		
+		end += sccVO.getServTime();
 		reservSet.add(singlerlvo);
 
 		// 加入多筆多選服務VO
@@ -93,10 +106,16 @@ public class ReserveService extends HttpServlet {
 			rlvo.setServPrice(sccvo.getServPrice());
 			rlvo.setServTime(sccvo.getServTime());
 			rlvo.setServName(servicesVO.getServName());
-
+			end += sccvo.getServTime();
+			
 			reservSet.add(rlvo);
 		}
-
+		
+		//加入結束時間
+		long endms = end*60*1000;
+		calEnd.setTimeInMillis(cal.getTimeInMillis() + endms);
+		reservVO.setReservEndTime(calEnd);
+		
 		// 建立員工(?
 		EmployeeVO evo = new EmployeeVO();
 		evo.setEmployeeNo(Integer.parseInt(empNo));
@@ -110,7 +129,51 @@ public class ReserveService extends HttpServlet {
 		//把明細塞到訂單
 		reservVO.setReservlists(reservSet);
 		
-		//新增訂單
+		
+		//查詢當日預約-檢查有無重複 
+		ReservService rsvc = new ReservService();
+		List<ReservVO> list = rsvc.getAllReservByDate(cal);
+		for(ReservVO aReserve :list){
+			Calendar acal = aReserve.getReservDateTime();
+			Calendar acalEnd = aReserve.getReservEndTime();
+			long tstart = cal.getTimeInMillis();
+			long tend = calEnd.getTimeInMillis();
+			long xstart = acal.getTimeInMillis();
+			long xend = acalEnd.getTimeInMillis();
+			if(xstart < tstart && xend <= tstart){
+				//System.out.println("OK前");
+			}else if (xstart > tstart && xstart >= tend){
+				//System.out.println("OK後");
+			}else {
+				errmsg.add("所選的時段重複!");
+			}
+//		for(ReservVO aReserve :list){
+//			Calendar acal = aReserve.getReservDateTime();
+//			Calendar acalEnd = aReserve.getReservEndTime();
+//			//long et = acalEnd.getTimeInMillis()-1;
+//			
+//			if(acal.before(cal) && acalEnd.before(cal)){
+//				//System.out.println("OK前");
+//			}else if (acal.after(cal) && acal.after(calEnd)){
+//				//System.out.println("OK後");
+//			}else {
+//				errmsg.add("所選的時段重複!");
+//			}
+			
+		
+				
+		}
+		
+		//****************失敗*******************
+		if (errmsg.size() != 0) {
+			request.setAttribute("reservVO", reservVO);
+			request.getRequestDispatcher("/reserve/reserve_page.jsp")
+			.forward(request, response);
+			return;
+		}
+		
+		
+		//***********資料都正確-新增訂單*************
 		ReservDAO rdao = new ReservDAO();
 		rdao.insert(reservVO);
 		

@@ -45,6 +45,7 @@ public class GetJSON extends HttpServlet {
 //		Calendar calendar = Calendar.getInstance();
 //		calendar.set(2017,Calendar.MAY,10 );
 		List<Map> list = reservice.getScheduleForJSON();
+//		List<Map> list = reservice.getYearScheduleForJSON();
 		 String jsonString = JSONValue.toJSONString(list);  
 		 out.println(jsonString);
 	}
