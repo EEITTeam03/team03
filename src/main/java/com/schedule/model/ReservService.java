@@ -182,6 +182,7 @@ public class ReservService {
 					 int dayOfWeek = reserv.getReservDateTime().get(Calendar.DAY_OF_WEEK)-1;
 					 int totalTime=0;
 					 Map map = new LinkedHashMap();
+					 	map.put("reservNo", reserv.getReservNo());
 						map.put("EmpName", reserv.getEmployeeVO().getEmployeeName());
 						map.put("Year", year);
 						map.put("Month", month);
