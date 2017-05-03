@@ -60,9 +60,31 @@
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 
+<!-- 驗證 -->
+<script src="js/jquery.validate.js" type="text/javascript"></script>
+
+
+<script>
+  $(function(){
+    
+    $("#cmxform").validate();
+    
+  });
+</script>
+
+<style>
+	.error{
+		color:red;
+	}	
+</style>
+
+
+
 <!--[if lt IE 9]>
 	<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	
+	
 </head>
 <body id="page-top" class="index">
 	<!-- Navigation -->
@@ -109,22 +131,34 @@
 						<div class="panel-body">
 							<div class="flot-chart">
 								<div class="flot-chart-content" id="flot-bar-chart">
+<<<<<<< HEAD
+									<form id="cmxform" class="form-signin" role="form">
+=======
 									<form class="form-signin" role="form" action='login.do'>
+>>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
 									
 										<br>
 										
 										<div class="input-group" style="border:1px solid #5bc0de">
 										  	<span class="input-group-addon" style="border-right:1px solid #5bc0de"><i class="glyphicon glyphicon-envelope"></i></span>
+<<<<<<< HEAD
+										  	<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件">
+=======
 										  	<input id="email" type="text" class="form-control" name="email" placeholder="輸入您的電子郵件" value='${param.email}' >
 										  	
+>>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
 										</div>
 										
 										<br>
 										
 										<div class="input-group" style="border:1px solid #5bc0de">
 										    <span class="input-group-addon" style="border-right:1px solid #5bc0de"><i class="glyphicon glyphicon-lock"></i></span>
+<<<<<<< HEAD
+										    <input id="password" type="password" class="form-control required" name="password" placeholder="輸入您的密碼">
+=======
 										    <input id="password" type="password" class="form-control" name="password" placeholder="輸入您的密碼" value='${param.password}' >
 										    
+>>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
 										</div>
 												<small><Font color='red'>${ErrorMsgKey.AccountEmptyError}</Font></small>
 										    	<small><Font color='red'>${ErrorMsgKey.PasswordEmptyError}</Font></small>
@@ -147,10 +181,7 @@
 	
 			</div>
 		</div>
-	</section>
-	
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+	</section>	
 
     <!-- Bootstrap Core JavaScript -->
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

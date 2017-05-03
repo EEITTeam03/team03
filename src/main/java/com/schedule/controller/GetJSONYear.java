@@ -2,6 +2,7 @@ package com.schedule.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -40,10 +41,10 @@ public class GetJSONYear extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		ReservService reservice = new ReservService();
-//		Calendar calendar = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance();
 //		calendar.set(2017,Calendar.MAY,10 );
 //		List<Map> list = reservice.getScheduleForJSON();
-		List<Map> list = reservice.getYearScheduleForJSON();
+		List<Map> list = reservice.getYearScheduleForJSON(calendar);
 		 String jsonString = JSONValue.toJSONString(list);  
 		 out.println(jsonString);
 	}

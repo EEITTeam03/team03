@@ -51,6 +51,7 @@ public class JavaMail extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//請求者的名稱、帳號、密碼
+		response.setCharacterEncoding("UTF-8");
 		String userId = request.getParameter("email");
 		String userName = (String) request.getAttribute("accountName");
 		String userPswd = (String) request.getAttribute("accountPswd"); 

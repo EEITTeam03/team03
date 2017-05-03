@@ -79,7 +79,8 @@ function setFocusToUserId(){
        <font color="red" size="-1">${MsgMap.errPicture}</font>
       <br/>
       <div id="btnArea" align="center">
-         <input type="submit" name="submit" id="submit" value="送出"/>
+         <input type="submit" value="送出"/>
+         <input type="hidden" name="action" value="insert">
          <input type="reset" name="cancel" id="cancel" value="重填">
       </div>
       <br/>

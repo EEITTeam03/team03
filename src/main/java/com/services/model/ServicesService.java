@@ -31,7 +31,10 @@ public class ServicesService {
 			Date servEffectiveDate, String servStatus) {
 		ServicesVO servicesVO = new ServicesVO();
 		ServicesService ss = new ServicesService();
-		File f = new File(ss.getFileName(part));
+		String fileName="";
+		fileName=ss.getFileName(part);
+		fileName=ss.adjustFileName(fileName, ss.IMAGE_FILENAME_LENGTH);
+		File f = new File(fileName);
 		InputStream in;
 		try {
 			in = new FileInputStream(f);
@@ -77,7 +80,9 @@ public class ServicesService {
 
 	public List<Map> getServicesForJson() {
 		List<ServicesVO> list = dao.getAll();
+		
 		List<Map> list2 = new ArrayList<Map>();
+		
 		for (ServicesVO asvo : list) {
 			if(asvo.getServPhoto()==null){
 				continue;
