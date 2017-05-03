@@ -26,6 +26,17 @@ public class Test {
 		cal2.setTimeInMillis(date.getTime()+4*60*60*1000);
 		System.out.println(cal2);
 		
+		
+		System.out.println(cal1.before(cal2));
+		System.out.println(cal2.before(cal1));
+		System.out.println(cal1.after(cal2));
+		System.out.println(cal2.after(cal1));
+		
+		System.out.println("-------------");
+		if(cal1.getTimeInMillis() < cal2.getTimeInMillis())
+			System.out.println("QQ");
+		if(cal1.before(cal2) && cal2.before(cal1))
+			System.out.println("go");
 	}
 
 }
