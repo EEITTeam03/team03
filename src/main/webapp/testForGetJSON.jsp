@@ -40,7 +40,7 @@ $(document).ready(function () {
 	<input type="text" id="date"/><br>
 	<p>日期 ex:2017-05-01</p><br>
 	<input type="text" id="view"/><br>
-	<p>view ex: weekView.monthView</p>
+	<p>view ex: dayView.weekView.monthView</p>
 	<input type="button" id="btn_search" value="submit"/><br>
 
 </from>
