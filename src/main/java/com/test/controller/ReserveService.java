@@ -28,9 +28,7 @@ import com.services.model.ServicesVO;
 
 import myutil.MyUtil;
 
-/**
- * Servlet implementation class ReserveService
- */
+
 @WebServlet("/reserve/ReserveService")
 public class ReserveService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -135,18 +133,35 @@ public class ReserveService extends HttpServlet {
 		//查詢當日預約-檢查有無重複 
 		ReservService rsvc = new ReservService();
 		List<ReservVO> list = rsvc.getAllReservByDate(cal);
-		int currentStartHour = cal.get(Calendar.HOUR_OF_DAY);
-		int currentEndHour = calEnd.get(Calendar.HOUR_OF_DAY);
 		for(ReservVO aReserve :list){
-			int startHour = aReserve.getReservDateTime().get(Calendar.HOUR_OF_DAY);
-			int endHour = aReserve.getReservEndTime().get(Calendar.HOUR_OF_DAY);
-			
-			if(currentStartHour < startHour){
-				
-				errmsg.add("所選的時段和其他預約有衝突!");
-			} else if(currentStartHour > startHour){
-				
+			Calendar acal = aReserve.getReservDateTime();
+			Calendar acalEnd = aReserve.getReservEndTime();
+			long tstart = cal.getTimeInMillis();
+			long tend = calEnd.getTimeInMillis();
+			long xstart = acal.getTimeInMillis();
+			long xend = acalEnd.getTimeInMillis();
+			if(xstart < tstart && xend <= tstart){
+				//System.out.println("OK前");
+			}else if (xstart > tstart && xstart >= tend){
+				//System.out.println("OK後");
+			}else {
+				errmsg.add("所選的時段重複!");
 			}
+//		for(ReservVO aReserve :list){
+//			Calendar acal = aReserve.getReservDateTime();
+//			Calendar acalEnd = aReserve.getReservEndTime();
+//			//long et = acalEnd.getTimeInMillis()-1;
+//			
+//			if(acal.before(cal) && acalEnd.before(cal)){
+//				//System.out.println("OK前");
+//			}else if (acal.after(cal) && acal.after(calEnd)){
+//				//System.out.println("OK後");
+//			}else {
+//				errmsg.add("所選的時段重複!");
+//			}
+			
+		
+				
 		}
 		
 		//****************失敗*******************
