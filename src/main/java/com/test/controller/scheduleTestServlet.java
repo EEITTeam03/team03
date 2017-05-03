@@ -49,8 +49,7 @@ public class scheduleTestServlet extends HttpServlet {
 		
 		HashMap<String,String> map = new HashMap<String,String>();
 		map = new Gson().fromJson(json, new TypeToken<HashMap<String,String>>() {}.getType());
-		System.out.println("reservNo:"+map.get("reservNo"));
-		System.out.println("id:"+map.get("id"));
+		System.out.println("reservNo:"+map.get("id"));
 		System.out.println("calendar:"+map.get("calendar"));
 		System.out.println(getLocalTimeFromUTC(map.get("start")).getTime());	//從頁面得到的資料與預約訂單有時差8小時
 		System.out.println(getLocalTimeFromUTC(map.get("end")).getTime());		//從頁面得到的資料與預約訂單有時差8小時

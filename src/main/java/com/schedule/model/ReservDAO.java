@@ -210,6 +210,12 @@ public class ReservDAO implements ReservDAO_interface {
 		// TODO Auto-generated method stub
 		List<ReservVO> list = null;
 		Calendar cal3 = Calendar.getInstance();
+		cal3.setTime(cal.getTime());	
+		/*Calendar沒辦法new，只能使用他的方法取得該物件
+		 但用getInstance()會取到今天日期，
+		 因此testForGetJSON.jsp 只能輸入:2017-05-03以前的值，且區間不是會是week。---輸入3/20會出現0320~0503的所有資料。
+		=>加上 cal3.setTime(cal.getTime()); 將指定日期設給Calendar
+		 */
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			

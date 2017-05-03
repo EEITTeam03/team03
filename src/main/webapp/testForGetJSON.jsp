@@ -32,6 +32,7 @@ $(document).ready(function () {
 	        					console.log(good);
 	        				});
 	        			})
+	        			alert(JSON.stringify(data));
 	        		},
 	        		error:function(data){
 	        			alert("ERROR");
