@@ -100,4 +100,16 @@ public class MemberService {
 	public MemberInfoVO getOneByEmail(String email){
 		return dao.findByEmail(email);
 	}
+	public String randomPswd(){
+		int num=0;
+		char c;
+		String str="";
+		for(int i=0;i<8;i++){
+			num = (int)(Math.random() * 75);
+			num+=48;
+			c=(char)num;
+			str = c+str;
+		}
+		return str;
+	}
 }
