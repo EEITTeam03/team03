@@ -16,7 +16,15 @@ public class MemberCarsHibernateDAO implements MemberCarsDAO {
 	@Override
 	public void update(MemberCarsVO memberCarsVO) {
 		// TODO Auto-generated method stub
-
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(memberCarsVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
 	}
 
 	@Override

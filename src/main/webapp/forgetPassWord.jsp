@@ -13,6 +13,9 @@
 		<input id="email" type="text" name="email" placeholder="輸入您的電子郵件" value='${param.email}'>
 		<small><Font color='red' >${ErrorMsgKey.AccountError}</Font></small>
 		</div>
+		<input id="phone" type="text" name="phone" placeholder="輸入您的手機" value='${param.phone}'>
+		<small><Font color='red' >${ErrorMsgKey.PhoneError}</Font></small>
+		</div>
 		<div class="g-recaptcha" data-sitekey="6Lejoh8UAAAAADgia1z4Q_N9Cd2TwPa9K_uMHnzH"></div>
 		<button type="submit">送出</button><small><Font color='red'>${ErrorMsgKey.RobotFail}</Font></small>
 		<br /> <small><Font color='red'>${ErrorMsgKey.Error}</Font></small> <br />
