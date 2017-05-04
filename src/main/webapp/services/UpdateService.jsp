@@ -37,9 +37,12 @@
 			</td>
 		</tr>
 		<tr>
+		<jsp:useBean id="SS" scope="page" class="com.services.model.ServicesService" />
 			<td>服務狀態:</td>
 			<td>
-			<input type="TEXT" name="servStatus" size="45" value="<%=servicesVO.getServStatus()%>" /></td>
+			<input type="TEXT" name="servStatus" size="45" value="<%=servicesVO.getServStatus()%>" />
+				
+			</td>
 		</tr>
 		<tr>
 			<td>服務描述:</td>
