@@ -68,6 +68,12 @@
 	<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+
+<style>
+label {
+	font-size: 150%;
+}
+</style>
 </head>
 
 <body id="page-top" class="index">
@@ -83,7 +89,7 @@
 					<span class="sr-only">Toggle navigation</span> Menu <i
 						class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand page-scroll" href="#page-top">Car
+				<a class="navbar-brand page-scroll" href="index.jsp">Car
 					Detailing</a>
 			</div>
 
@@ -130,45 +136,49 @@
 
 	<!-- Header -->
 	<header>
-		<!--     <div style="position: absolute;"> -->
-		<video autoplay loop muted class="fillWidth" style="width: 100%;">
+		<div style="position: absolute;opacity:0.8">
+			<video autoplay loop muted class="fillWidth" style="width: 100%;">
 
-			<source src="video/file.mp4" type="video/mp4" />
-			Your browser does not support the video tag. I suggest you upgrade
-			your browser.
-			<source src="video/video_preview_h264.wmv" type="video/wmv" />
-			Your browser does not support the video tag. I suggest you upgrade
-			your browser.
-			<!-- object標籤內解決 -->
-			<object>
-				<embed src="video/video_preview_h264.mp4"
-					type="application/x-shockwave-flash" allowfullscreen="false"
-					allowscriptaccess="always"
-					style="width: 100%; height: 100%; z-index: -1" loop="true" />
-			</object>
-
-
-		</video>
-		<!-- 		</div>					 -->
+				<source src="video/file.mp4" type="video/mp4" />
+				Your browser does not support the video tag. I suggest you upgrade
+				your browser.
+				<source src="video/video_preview_h264.wmv" type="video/wmv" />
+				Your browser does not support the video tag. I suggest you upgrade
+				your browser.
+				<!-- object標籤內解決 -->
+				<object>
+					<embed src="video/video_preview_h264.mp4"
+						type="application/x-shockwave-flash" allowfullscreen="false"
+						allowscriptaccess="always"
+						style="width: 100%; height: 100%; z-index: -1" loop="true" />
+				</object>
 
 
+			</video>
+		</div>
+
+	
+	<div class="container">
+	<div style="height:10em">
+	</div>
+	</div>
 
 
 	</header>
 
 
 
-	<div class="container">
+	<div class="container" style="width: 80%;">
 		<div class="row">
-			<h2 class="col-sm-4 col-sm-offset-5">開始預約</h2>
+			<h2 class="col-sm-offset-5">開始預約</h2>
 		</div>
 
-		<div class="row">
+		<div class="row col-sm-offset-2">
 
 			<form class="form-horizontal" action="ReserveService">
 				<div class="form-group">
 					<label for="inputLicense" class="col-sm-2 control-label">車牌</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						<input type="text" name="license" id="inputLicense"
 							class="form-control" placeholder="請輸入車牌" value="${param.license}">
 					</div>
@@ -178,7 +188,7 @@
 
 				<div class="form-group">
 					<label for="datepicker" class="col-sm-2 control-label">預約日期</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						<input type="text" name="selectedDate" id="datepicker"
 							class="form-control" value="${param.selectedDate}"
 							placeholder="選擇日期">
@@ -187,7 +197,7 @@
 
 				<div class="form-group">
 					<label for="selectedTime" class="col-sm-2 control-label">時間</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						<input type="text" name="selectedTime" id="selectedTime"
 							class="form-control" value="${param.selectedTime}"
 							placeholder="選擇時間(HH:mm)">
@@ -196,7 +206,7 @@
 
 				<div class="form-group">
 					<label for="service" class="col-sm-2 control-label">主要服務</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						<select name="service" id="service" class="form-control">
 							<option id="2001" value="2001">2001</option>
 							<option id="2002" value="2002">2002</option>
@@ -209,7 +219,7 @@
 
 				<div class="form-group">
 					<label for="plus" class="col-sm-2 control-label">加選服務</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						<select name="plus" id="plus" class="form-control"
 							multiple="multiple">
 							<option id="1001" value="1001">1001</option>
@@ -222,7 +232,7 @@
 
 				<div class="form-group">
 					<label class="col-sm-2 control-label">選擇員工</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						<label class="radio-inline"><input type="radio"
 							name="empNo" value="1">1號員工</label> <label class="radio-inline"><input
 							type="radio" name="empNo" value="2">2號員工</label> <label
@@ -231,54 +241,54 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-4 col-sm-offset-5">
+					<div class="col-sm-4 col-sm-offset-3">
 						<input type="submit" value="送出預約" class="btn btn-xl">
 					</div>
 				</div>
 			</form>
 			<c:forEach var="msg" items="${errorMsg}">
-				<h3 class="col-sm-4 col-sm-offset-5" style="color:red">${msg}</h3>
+				<h3 class="col-sm-6 col-sm-offset-3" style="color: red">${msg}</h3>
 			</c:forEach>
 		</div>
 	</div>
 
 	<!-- Services Section -->
-	<section id="services">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<h2 class="section-heading">各類服務</h2>
-					<h3 class="section-subheading text-muted">讓您可依照自身需求，選擇自己最適合的服務種類。</h3>
-				</div>
-			</div>
-			<div class="row text-center">
-				<div class="col-md-4">
-					<span class="fa-stack fa-4x"> <i
-						class="fa fa-circle fa-stack-2x text-primary"></i> <i
-						class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-					</span>
-					<h4 class="service-heading">現場服務</h4>
-					<p class="text-muted">服務員現場為您安排，讓您聽美好音樂，品嚐美味甜點，悠閒等待您的愛車煥然一新。</p>
-				</div>
-				<div class="col-md-4">
-					<span class="fa-stack fa-4x"> <i
-						class="fa fa-circle fa-stack-2x text-primary"></i> <i
-						class="fa fa-laptop fa-stack-1x fa-inverse"></i>
-					</span>
-					<h4 class="service-heading">預約服務</h4>
-					<p class="text-muted">時間就是金錢，透過網路預約美容服務，讓愛車在指定時間內抵達，給予專業團隊立即為您服務。</p>
-				</div>
-				<div class="col-md-4">
-					<span class="fa-stack fa-4x"> <i
-						class="fa fa-circle fa-stack-2x text-primary"></i> <i
-						class="fa fa-lock fa-stack-1x fa-inverse"></i>
-					</span>
-					<h4 class="service-heading">取還車服務</h4>
-					<p class="text-muted">讓生活忙碌的您，無需為愛車美容奔波，本公司專業人員，將會前往您指定的地點取車，並在指定時間內完成美容服務送回指定地點。</p>
-				</div>
-			</div>
-		</div>
-	</section>
+<!-- 	<section id="services"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-lg-12 text-center"> -->
+<!-- 					<h2 class="section-heading">各類服務</h2> -->
+<!-- 					<h3 class="section-subheading text-muted">讓您可依照自身需求，選擇自己最適合的服務種類。</h3> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="row text-center"> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 					<span class="fa-stack fa-4x"> <i -->
+<!-- 						class="fa fa-circle fa-stack-2x text-primary"></i> <i -->
+<!-- 						class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i> -->
+<!-- 					</span> -->
+<!-- 					<h4 class="service-heading">現場服務</h4> -->
+<!-- 					<p class="text-muted">服務員現場為您安排，讓您聽美好音樂，品嚐美味甜點，悠閒等待您的愛車煥然一新。</p> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 					<span class="fa-stack fa-4x"> <i -->
+<!-- 						class="fa fa-circle fa-stack-2x text-primary"></i> <i -->
+<!-- 						class="fa fa-laptop fa-stack-1x fa-inverse"></i> -->
+<!-- 					</span> -->
+<!-- 					<h4 class="service-heading">預約服務</h4> -->
+<!-- 					<p class="text-muted">時間就是金錢，透過網路預約美容服務，讓愛車在指定時間內抵達，給予專業團隊立即為您服務。</p> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 					<span class="fa-stack fa-4x"> <i -->
+<!-- 						class="fa fa-circle fa-stack-2x text-primary"></i> <i -->
+<!-- 						class="fa fa-lock fa-stack-1x fa-inverse"></i> -->
+<!-- 					</span> -->
+<!-- 					<h4 class="service-heading">取還車服務</h4> -->
+<!-- 					<p class="text-muted">讓生活忙碌的您，無需為愛車美容奔波，本公司專業人員，將會前往您指定的地點取車，並在指定時間內完成美容服務送回指定地點。</p> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</section> -->
 
 
 
