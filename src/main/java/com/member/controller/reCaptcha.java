@@ -93,7 +93,7 @@ public class reCaptcha extends HttpServlet {
 			if (mem != null) {
 				if (webdata.indexOf("true") > 0) {
 					request.setAttribute("accountName", mem.getMemberName());
-					request.setAttribute("accountPswd", mem.getPassword());
+					request.setAttribute("Member", mem);
 					RequestDispatcher rd = request.getRequestDispatcher("JavaMail.do");
 					rd.forward(request, response);
 					return;
