@@ -6,7 +6,7 @@
 
 <%
 	ServicesService ssjsp = new ServicesService();
-	List<ServicesVO> list = ssjsp.getAll();
+	List<ServicesVO> list = ssjsp.getAllForUser();
 	pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>

@@ -39,6 +39,7 @@ public class ServicesInsert extends HttpServlet {
 		String action = request.getParameter("action");
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		Map<String, String> msgOK = new HashMap<String, String>();
+
 		if ("insert".equals(action)) {
 			HttpSession session = request.getSession();
 			request.setAttribute("MsgMap", errorMsg); // 顯示錯誤訊息
@@ -207,7 +208,9 @@ public class ServicesInsert extends HttpServlet {
 		}
 		if ("update".equals(action)) {
 			try {
-				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				/***************************
+				 * 1.接收請求參數 - 輸入格式的錯誤處理
+				 **********************/
 				Integer servNo = new Integer(request.getParameter("servNo"));
 				String servTypeNo = request.getParameter("servTypeNo");
 				String servName = request.getParameter("servName");
@@ -216,15 +219,15 @@ public class ServicesInsert extends HttpServlet {
 				String servStatus = request.getParameter("servStatus");
 				byte[] servPhoto = null;
 				String fileName = "";
-				
+
 				long sizeInBytes = 0;
 				InputStream is = null;
 				Collection<Part> parts = request.getParts();
 				ServicesService.exploreParts(parts, request);
 				try {
 					for (Part p : parts) {
-//						String fldName = p.getName();
-//						String value = request.getParameter(fldName);
+						// String fldName = p.getName();
+						// String value = request.getParameter(fldName);
 						if (p.getContentType() != null) {
 							fileName = ServicesService.getFileName(p); // 此為圖片檔的檔名
 							fileName = ServicesService.adjustFileName(fileName, ServicesService.IMAGE_FILENAME_LENGTH);
@@ -252,27 +255,67 @@ public class ServicesInsert extends HttpServlet {
 				servicesVO.setServPhoto(servPhoto);
 				servicesVO.setServStatus(servStatus);
 				servicesVO.setServTypeNo(servTypeNo);
-				if(!errorMsg.isEmpty()){
+				if (!errorMsg.isEmpty()) {
 					request.setAttribute("servicesVO", servicesVO); // 含有輸入格式錯誤的ServicesVOO物件,也存入request
-					RequestDispatcher failureView = request
-							.getRequestDispatcher("/services/UpdateService.jsp");
-					failureView.forward(request,response);
-					return; //程式中斷
+					RequestDispatcher failureView = request.getRequestDispatcher("/services/UpdateService.jsp");
+					failureView.forward(request, response);
+					return; // 程式中斷
 				}
-				/***************************2.開始修改資料*****************************************/
-				ServicesService ss= new ServicesService();
-				servicesVO = ss.updateService(servNo, servTypeNo, servName, servDesc, servPhoto, servEffectiveDate, servStatus);
-				/***************************3.修改完成,準備轉交(Send the Success view)*************/
+				/*************************** 2.開始修改資料 *****************************************/
+				ServicesService ss = new ServicesService();
+				servicesVO = ss.updateService(servNo, servTypeNo, servName, servDesc, servPhoto, servEffectiveDate,
+						servStatus);
+				/***************************
+				 * 3.修改完成,準備轉交(Send the Success view)
+				 *************/
 				request.setAttribute("servicesVO", servicesVO);
-				String url ="ListAllServices.jsp";
-				String url1 ="ListOneServices.jsp";
+				String url = "ListAllServices.jsp";
+				String url1 = "ListOneServices.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url1);
 				successView.forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-				errorMsg.put("errorservPhoto", "修改資料失敗:"+e.getMessage());
-				RequestDispatcher failureView = request
-						.getRequestDispatcher("/services/UpdateService.jsp");
+				errorMsg.put("errorservPhoto", "修改資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = request.getRequestDispatcher("/services/UpdateService.jsp");
+				failureView.forward(request, response);
+			}
+		}
+		if ("offshelf".equals(action)) {
+			try {
+				/***************************
+				 * 1.接收請求參數 
+				 **********************/
+				Integer servNo = new Integer(request.getParameter("servNo"));
+				ServicesService ss= new ServicesService();
+				ServicesVO servicesVO = ss.getOneService(servNo);
+				String servTypeNo = servicesVO.getServTypeNo();
+				String servName = servicesVO.getServName();
+				String servDesc = servicesVO.getServDesc();
+				Date servEffectiveDate = servicesVO.getServEffectiveDate();
+				String servStatus = "0";
+				byte[] servPhoto = servicesVO.getServPhoto();
+				if (!errorMsg.isEmpty()) {
+					request.setAttribute("servicesVO", servicesVO); // 含有輸入格式錯誤的ServicesVOO物件,也存入request
+					String url = "ListAllServices.jsp";
+					RequestDispatcher failureView = request.getRequestDispatcher(url);
+					failureView.forward(request, response);
+					return; // 程式中斷
+				}
+				/*************************** 2.開始修改資料 *****************************************/
+				servicesVO = ss.updateService(servNo, servTypeNo, servName, servDesc, servPhoto, servEffectiveDate,
+						servStatus);
+				/***************************
+				 * 3.修改完成,準備轉交(Send the Success view)
+				 *************/
+				request.setAttribute("servicesVO", servicesVO);
+				String url = "ListAllServices.jsp";
+				String url1 = "ListOneServices.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url);
+				successView.forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsg.put("errorservPhoto", "修改資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = request.getRequestDispatcher("/services/UpdateService.jsp");
 				failureView.forward(request, response);
 			}
 		}
