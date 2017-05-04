@@ -33,73 +33,77 @@
     	globalView = "weekView";
         $(document).ready(function () {
         	init();
+        	$('#loading_data').hide();		//隱藏loading圖
         	$('#btn_search').click(function(){
         		dataClean();
         		dataSearch("2017-05-01",globalView); //weekly
         	});
+        	$("#excelExport").click(function () {
+                $("#scheduler").jqxScheduler('exportData', 'xls');
+            });
         	/*---------測試用之後刪除-模擬傳送給資料庫一個日期，撈出此日期的當周資料,並回傳顯示在畫面上---START-----*/
-        	$('#btn_search1').click(function(){
-        		dataClean();
-        		dataSearchTest1(); //weekly
-        	});
-        	$('#btn_search2').click(function(){
-        		dataClean();
-        		dataSearchTest2(); //weekly
-        	});
-        	$('#btn_search3').click(function(){
-        		dataClean();
-        		dataSearchTest3(); //weekly
-        	});
-        	$('#btn_search4').click(function(){
-        		dataClean();
-        		dataSearchTest4(); //weekly
-        	});
-        	$('#btn_search5').click(function(){
-        		dataClean();
-        		dataSearchTest5(); //weekly
-        	});
+//         	$('#btn_search1').click(function(){
+//         		dataClean();
+//         		dataSearchTest1(); //weekly
+//         	});
+//         	$('#btn_search2').click(function(){
+//         		dataClean();
+//         		dataSearchTest2(); //weekly
+//         	});
+//         	$('#btn_search3').click(function(){
+//         		dataClean();
+//         		dataSearchTest3(); //weekly
+//         	});
+//         	$('#btn_search4').click(function(){
+//         		dataClean();
+//         		dataSearchTest4(); //weekly
+//         	});
+//         	$('#btn_search5').click(function(){
+//         		dataClean();
+//         		dataSearchTest5(); //weekly
+//         	});
         	
         	$('#btn_clean').click(function(){
         		dataClean();
         	});
         });
         
-        function dataSearchTest(date){	//若日期為5/3，帶入當週資料(此假設資料庫撈出0430~0506的資料只有一筆:5/9預約 師傅蕭天怡)
-        	if(date=='2017-05-10'){
-        		$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id11","start":new Date("2017-05-09T02:30:00.000Z"),"end":new Date("2017-05-09T03:00:00.000Z"),"id":"id11","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"蕭天怡","resizable":false,"draggable":false,"isSys":"true"});
-        	}else if(date=='2017-05-03'){
-        		$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id01","start":new Date("2017-05-02T02:30:00.000Z"),"end":new Date("2017-05-02T03:00:00.000Z"),"id":"id01","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"陳致鈞","resizable":false,"draggable":false,"isSys":"true"});
-        	}else if(date=='2017-05-17'){
-        		$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id21","start":new Date("2017-05-16T02:30:00.000Z"),"end":new Date("2017-05-16T03:00:00.000Z"),"id":"id21","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"蕭天怡","resizable":false,"draggable":false,"isSys":"true"});
-        	}else if(date=='2017-05-24'){
-        		$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id31","start":new Date("2017-05-23T02:30:00.000Z"),"end":new Date("2017-05-23T03:00:00.000Z"),"id":"id31","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"周柏元","resizable":false,"draggable":false,"isSys":"true"});
-        	}else if(date=='2017-04-26'){
-        		$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id311","start":new Date("2017-04-26T02:30:00.000Z"),"end":new Date("2017-04-26T03:00:00.000Z"),"id":"id311","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"蕭天怡","resizable":false,"draggable":false,"isSys":"true"});
-        	}else{
-        		$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id41","start":new Date("2017-05-30T02:30:00.000Z"),"end":new Date("2017-05-30T03:00:00.000Z"),"id":"id41","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"陳致鈞","resizable":false,"draggable":false,"isSys":"true"});
-        	}
+//         function dataSearchTest(date){	//若日期為5/3，帶入當週資料(此假設資料庫撈出0430~0506的資料只有一筆:5/9預約 師傅蕭天怡)
+//         	if(date=='2017-05-10'){
+//         		$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id11","start":new Date("2017-05-09T02:30:00.000Z"),"end":new Date("2017-05-09T05:00:00.000Z"),"id":"id11","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"蕭天怡","resizable":false,"draggable":false,"isSys":"true"});
+//         	}else if(date=='2017-05-03'){
+//         		$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id01","start":new Date("2017-05-02T02:30:00.000Z"),"end":new Date("2017-05-02T05:00:00.000Z"),"id":"id01","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"陳致鈞","resizable":false,"draggable":false,"isSys":"true"});
+//         	}else if(date=='2017-05-17'){
+//         		$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id21","start":new Date("2017-05-16T02:30:00.000Z"),"end":new Date("2017-05-16T03:00:00.000Z"),"id":"id21","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"蕭天怡","resizable":false,"draggable":false,"isSys":"true"});
+//         	}else if(date=='2017-05-24'){
+//         		$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id31","start":new Date("2017-05-23T02:30:00.000Z"),"end":new Date("2017-05-23T03:00:00.000Z"),"id":"id31","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"周柏元","resizable":false,"draggable":false,"isSys":"true"});
+//         	}else if(date=='2017-04-26'){
+//         		$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id311","start":new Date("2017-04-26T02:30:00.000Z"),"end":new Date("2017-04-26T03:00:00.000Z"),"id":"id311","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"蕭天怡","resizable":false,"draggable":false,"isSys":"true"});
+//         	}else{
+//         		$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id41","start":new Date("2017-05-30T02:30:00.000Z"),"end":new Date("2017-05-30T03:00:00.000Z"),"id":"id41","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"陳致鈞","resizable":false,"draggable":false,"isSys":"true"});
+//         	}
         	
-        }
+//         }
         
-        function dataSearchTest1(){
-        	$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id1777","id":"id1777","start":new Date("2017-05-01T02:30:00.000Z"),"end":new Date("2017-05-01T03:00:00.000Z"),"description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"蕭天怡","resizable":false,"draggable":false,"isSys":"true"});
-        }
+//         function dataSearchTest1(){
+//         	$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id1777","id":"id1777","start":new Date("2017-05-01T02:30:00.000Z"),"end":new Date("2017-05-01T03:00:00.000Z"),"description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"蕭天怡","resizable":false,"draggable":false,"isSys":"true"});
+//         }
         
-        function dataSearchTest2(){
-        	$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id0","start":new Date("2017-05-02T02:30:00.000Z"),"end":new Date("2017-05-02T03:00:00.000Z"),"id":"id0","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"陳致鈞","resizable":false,"draggable":false,"isSys":"true"});
-        }
+//         function dataSearchTest2(){
+//         	$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id0","start":new Date("2017-05-02T02:30:00.000Z"),"end":new Date("2017-05-02T03:00:00.000Z"),"id":"id0","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"陳致鈞","resizable":false,"draggable":false,"isSys":"true"});
+//         }
         
-        function dataSearchTest3(){
-        	$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id2","start":new Date("2017-05-03T02:30:00.000Z"),"end":new Date("2017-05-03T03:00:00.000Z"),"id":"id2","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"周柏元","resizable":false,"draggable":false,"isSys":"true"});
-        }
+//         function dataSearchTest3(){
+//         	$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id2","start":new Date("2017-05-03T02:30:00.000Z"),"end":new Date("2017-05-03T03:00:00.000Z"),"id":"id2","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"周柏元","resizable":false,"draggable":false,"isSys":"true"});
+//         }
         
-        function dataSearchTest4(){
-        	$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id3","start":new Date("2017-05-04T02:30:00.000Z"),"end":new Date("2017-05-04T03:00:00.000Z"),"id":"id3","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"周柏元","resizable":false,"draggable":false,"isSys":"true"});
-        }
+//         function dataSearchTest4(){
+//         	$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id3","start":new Date("2017-05-04T02:30:00.000Z"),"end":new Date("2017-05-04T03:00:00.000Z"),"id":"id3","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"周柏元","resizable":false,"draggable":false,"isSys":"true"});
+//         }
         
-        function dataSearchTest5(){
-        	$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id4","start":new Date("2017-05-05T02:30:00.000Z"),"end":new Date("2017-05-05T03:00:00.000Z"),"id":"id4","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"蕭天怡","resizable":false,"draggable":false,"isSys":"true"});
-        }
+//         function dataSearchTest5(){
+//         	$('#scheduler').jqxScheduler('addAppointment',{"addSys":"id4","start":new Date("2017-05-05T02:30:00.000Z"),"end":new Date("2017-05-05T03:00:00.000Z"),"id":"id4","description":"GT-8686 引擎室清洗護理 ","subject":"GT-8686 引擎室清洗護理 ","calendar":"蕭天怡","resizable":false,"draggable":false,"isSys":"true"});
+//         }
         /*---------測試用之後刪除-模擬傳送給資料庫一個日期，撈出此日期的當周資料,並回傳顯示在畫面上---END-----*/
         
         function init(){
@@ -207,7 +211,7 @@
 //                     readOnly: "readOnly",		/* 1. */	//設唯讀，不可點兩下修改資料
                     resizable: "resizable",					//設不可調方框大小(更動起始.結束時間)
                     draggable: "draggable",					//設不可拖曳
-                    location:"addSys"
+                    borderColor:"addSys"
                 },
                 views:
                 [
@@ -226,7 +230,7 @@
                     },
                     'monthView'
                 ]
-				
+                
             });
     	}
     	
@@ -244,7 +248,7 @@
                         { name: 'readOnly', type: 'boolean' },		/* 2. */
                         { name: 'resizable', type: 'boolean' },
                         { name: 'draggable', type: 'boolean' },
-                        { name: 'location', type: 'string' }
+                        { name: 'addSys', type: 'string' }
                     ],
                     id: 'id',
                     localData: data
@@ -280,9 +284,9 @@
     			
     			//當跳頁時 先clean在search當頁的資料	//***已設定***跳頁時不會去刪除新增資料庫,人工手動的save add delete才會
     			dataClean();
-    			//dataSearch(date.toString().substring(0, 10),globalView);
+    			dataSearch(date.toString().substring(0, 10),globalView);
     			//------------↑傳日期跟區間，servlet 請接  date(ex:2017-05-03),view(ex:weekView,monthView)
-    			dataSearchTest(date.toString().substring(0, 10));	//--↑模擬上方功能，測試用之後刪(line40~103)
+//     			dataSearchTest(date.toString().substring(0, 10));	//--↑模擬上方功能，測試用之後刪(line40~103)
     		});
     		
     		//換檢視模式時
@@ -290,6 +294,7 @@
     			var newViewType = event.args.newViewType;
     			//alert("viewChange");
     			globalView = newViewType;
+    			dataSearch(date.toString().substring(0, 10),globalView);
     		});
     	}
     	
@@ -299,9 +304,10 @@
     		$('#scheduler').on('appointmentChange', function (event) { 
     			var args = event.args; var appointment = args.appointment; 
     			alert("Save");
-    			var reservNo = $('#scheduler').jqxScheduler('getAppointmentProperty', appointment.originalData.id, "reservNo");
-				appointment.originalData.reservNo = reservNo;
-        		alert(JSON.stringify(appointment.originalData));
+//     			appointment.originalData.id = appointment.originalData.addSys;
+				appointment.id = appointment.originalData.addSys;
+				$('#scheduler').jqxScheduler('setAppointmentProperty', appointment.originalData.id, "location","");
+    			alert(JSON.stringify(appointment.originalData));
         		editToServlet(JSON.stringify(appointment.originalData),"update");
     		});
     		//刪除事件
@@ -309,9 +315,7 @@
     			var args = event.args; var appointment = args.appointment;
     			if(!$('#scheduler').jqxScheduler('getAppointmentProperty', appointment.originalData.id, "delSys")){	//沒有delSys=true時
     				alert("Delete");
-    				var reservNo = $('#scheduler').jqxScheduler('getAppointmentProperty', appointment.originalData.id, "reservNo");
-    				appointment.originalData.reservNo = reservNo;
-        			alert(JSON.stringify(appointment.originalData));
+    				alert(JSON.stringify(appointment.originalData));
         			editToServlet(JSON.stringify(appointment.originalData),"delete");
     			}
     		});
@@ -320,22 +324,20 @@
     			var args = event.args; var appointment = args.appointment;
     			if(appointment.originalData.addSys == null || "" == appointment.originalData.addSys ){	//沒有addSys=true時
     				alert("Add");
-    				var reservNo = $('#scheduler').jqxScheduler('getAppointmentProperty', appointment.originalData.id, "reservNo");
-    				appointment.originalData.reservNo = reservNo;
-        			alert(JSON.stringify(appointment.originalData));
+    				alert(JSON.stringify(appointment.originalData));
         			addDate = appointment.originalData.end.toISOString().substring(0, 10);
         			editToServlet(JSON.stringify(appointment.originalData),"insert",addDate);
     			}else{
-    				$('#scheduler').jqxScheduler('setAppointmentProperty', appointment.originalData.id, "reservNo", appointment.originalData.addSys);
-            		$('#scheduler').jqxScheduler('setAppointmentProperty', appointment.originalData.id, "addSys", true);
-            		$('#scheduler').jqxScheduler('setAppointmentProperty', appointment.originalData.id, "location","");
+//     				appointment.originalData.id = appointment.originalData.addSys;
+    				appointment.id = appointment.originalData.addSys;
+    				$('#scheduler').jqxScheduler('setAppointmentProperty', appointment.originalData.id, "addSys", true);
     			}
     		});
     	}
     	
     	/*-------人工在畫面值皆新增預約時觸發事件(寫入資料庫後會同步刷新頁面資料)-------*/
     	function editToServlet(data,action,addDate){
-    		//loading圖
+//     		$('#loading_data').show();			//顯示loading圖
     		$.ajax({
         		url: "test/scheduleTestServlet",
         		dataType: "text",	//server端回傳至client端型態
@@ -348,12 +350,12 @@
         				//dataSearch(addDate,globalView);	//--傳日期跟區間，servlet 請接  date(ex:2017-05-03),view(ex:weekView,monthView)
             			dataSearchTest(addDate);			//--↑模擬上方功能，測試用之後刪(line40~103)
         			}else{
-        				//關掉loading
+//         				$('#loading_data').hide();
         			}
-        		},
+        		},        		
         		error:function(data){
-        			alert("ERROR");
-        			//關掉loading
+        			//alert("ERROR");
+//         			$('#loading_data').hide();		//關掉loading圖
         			//alert(JSON.stringify(data));
         		}
         	});
@@ -361,20 +363,20 @@
     	
     	/*-------(上下週.上下月.週檢視.月檢視.人工異動預約單  時觸發),傳日期'date'跟區間'view'至servlet-------*/
     	function dataSearch(date,view){
-    		//loading圖 if此時有就不要做
+//     		$('#loading_data').show();
         	$.ajax({
-        		url: "scheduler/GetJSONYear",
+        		url: "MyJSON",
         		dataType: "json",
         		data:{'date':date,'view':view},
         		method:"POST",
         		success:function(data){
         			//alert(JSON.stringify(data));
         			showData(data);
-        			//關掉loading
+//         			$('#loading_data').hide();//關掉loading
         		},
         		error:function(data){
         			alert("ERROR");
-        			//關掉loading
+//         			$('#loading_data').hide();
         			//alert(JSON.stringify(data));
         		}
         	});	
@@ -393,7 +395,7 @@
         		var startTime = (data[i].Start).split(":");		/*	讀起始時間	*/
         		var endTime = (data[i].End).split(":");			/*	讀結束時間	*/
         		var appointment ={
-                    id: data[i].reservNo,
+                    id: data[i].ReservNo,
                     description: service,
                     subject: service,
                     calendar: data[i].EmpName,					/*	讀師傅	*/
@@ -402,7 +404,7 @@
                     readOnly: true,			/* 3. */
                     resizable: false,
                     draggable: false,
-                    addSys:data[i].reservNo
+                    addSys:data[i].ReservNo
                 };
         		//alert(JSON.stringify(appointment));
         		$('#scheduler').jqxScheduler('addAppointment', appointment);
@@ -411,10 +413,13 @@
     	
         /*-------全頁資料清除 且不會異動到資料庫------*/
     	function dataClean(){
-        	var jsonData = $("#scheduler").jqxScheduler('getDataAppointments');
+        	var jsonData = $("#scheduler").jqxScheduler('getAppointments');
         	for(var i=0;i<jsonData.length;i++){
-        		$('#scheduler').jqxScheduler('setAppointmentProperty', jsonData[i].id, "delSys", true); // 多傳參數(set isSys=true) 讓事件知道此為系統動作
-        		$('#scheduler').jqxScheduler('deleteAppointment', jsonData[i].id);
+        		alert(jsonData[i].id);
+        		alert(jsonData[i].originalData.id);
+//         		$('#scheduler').jqxScheduler('setAppointmentProperty', jsonData[i].id, "delSys", true); // 多傳參數(set isSys=true) 讓事件知道此為系統動作
+//         		$('#scheduler').jqxScheduler('deleteAppointment', jsonData[i].id);
+        		$('#scheduler').jqxScheduler('deleteAppointment',jsonData[i].originalData.id);
         	}
         }
     </script>
@@ -428,5 +433,7 @@
 	<input type="button" id="btn_search5" value="查詢5" />
 	<input type="button" id="btn_clean" value="清除"/>
     <div id="scheduler"></div>
+    <input type="button" value="匯出至Excel" id='excelExport' />
+    <div><img id="loading_data" src="img/loading/ajax-loader.gif" /></div>
 </body>
 </html>
