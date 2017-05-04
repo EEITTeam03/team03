@@ -29,8 +29,9 @@
     <script type="text/javascript" src="scheduleJS/jqwidgets/globalization/globalize.js"></script>
     <script type="text/javascript" src="scheduleJS/jqwidgets/globalization/globalize.culture.de-DE.js"></script>
     <script type="text/javascript">   
-    	globalView = "weekView";
-    	newFields = [];
+    	var globalView = "weekView";
+    	var newFields = [];
+    	var isSave = false;
         $(document).ready(function () {
         	init();
         	$('#loading_data').hide();		//隱藏loading圖
@@ -157,6 +158,7 @@
                     }
                     
                 },editDialogOpen: function (dialog, fields, editAppointment) {
+                	isSave=false;
                 	fields.repeatContainer.hide();
                 	fields.repeatLabel.hide();
                 	fields.timeZoneContainer.hide();
@@ -196,7 +198,7 @@
                     }
                 },
                 editDialogClose: function (dialog, fields, editAppointment) {
-                	if(editAppointment!=null){
+                	if(editAppointment!=null && isSave){
                 		for(var i=0;i<newFields.length;i++){
                     		eval('$objField=fields.'+newFields[i].fieldID+';');
                     		fieldVal = "";
@@ -366,6 +368,7 @@
 			//Save 事件
 			$('#scheduler').on('appointmentChange', function (event) { 
 				var args = event.args; var appointment = args.appointment; 
+				isSave = true;
 				$('#scheduler').jqxScheduler('closeDialog');
 				alert("Save");
 				appointment.id = appointment.originalData.addSys;
