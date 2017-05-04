@@ -17,6 +17,7 @@ public interface ServicesDAO_interface {
 	public List<ServicesVO> findYear(String servEffectiveDate);
 	public List<ServicesVO> findMonth(String servEffectiveDate);
 	public List<ServicesVO> getAll();
+	public List<ServicesVO> getAllForUser();
 	public List<ServicesVO> getAllType();
 	public List<ServicesVO> getAllDate();
 	

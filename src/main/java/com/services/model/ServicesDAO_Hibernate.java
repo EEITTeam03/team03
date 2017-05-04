@@ -15,7 +15,9 @@ import hibernate.util.HibernateUtil;
 
 public class ServicesDAO_Hibernate implements ServicesDAO_interface {
 	// 照servNo去選全部
-	private static final String GET_ALL_STMT = "FROM ServicesVO order by servNo";
+	private static final String GET_ALL_STMT = "FROM ServicesVO order by servNo ";
+	//有上架的服務，要顯示給使用者看的
+	private static final String GET_ALL_ON_STMT = "FROM ServicesVO where servStatus>0 order by servNo ";
 	// 照去選全部
 	private static final String GET_ALL_servTypeNo_STMT = "FROM ServicesVO order by servTypeNo";
 	// 選取所有日期去排序的
@@ -148,6 +150,21 @@ public class ServicesDAO_Hibernate implements ServicesDAO_interface {
 		try {
 			session.beginTransaction();
 			Query query = (Query) session.createQuery(GET_ALL_STMT);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return list;
+	}
+	@Override
+	public List<ServicesVO> getAllForUser() {
+		List<ServicesVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = (Query) session.createQuery(GET_ALL_ON_STMT);
 			list = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException e) {

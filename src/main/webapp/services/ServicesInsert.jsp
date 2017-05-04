@@ -14,6 +14,16 @@ function setFocusToUserId(){
 </script>
 </head>
 <body onLoad="setFocusToUserId()" >
+<table border='1' width='800'>
+		<thead align='center' valign='middle'>
+			<tr>
+				<td>所有服務資料</td>
+			</tr>
+		</thead>
+		<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
+			<td><a href="SelectServices.jsp">回搜尋服務頁</a></td>
+		</tr>
+	</table>
 <c:set var="funcName" value="REG" scope="session"/>
   <div id="content"> 
   <Table width="700" border='2' cellspacing="0" bgColor='#E7CDFF'>
