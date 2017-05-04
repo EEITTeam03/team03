@@ -100,9 +100,12 @@
 		border:5px white solid;
 	}
 	.img-border{
-		border:5px #8ecbff outset;
+		border:5px red outset;
 	}	
-	
+	.divBorder{
+	    border-width: 8px;
+		border:8px #a94442 dashed;
+	}
 </style>
 
 <script>	
@@ -317,11 +320,13 @@
 	<section id="services">
 	
 		<div class="container">
-			<div id="brandImgs" class="row">
+			<div id="brandImgs" class="row divBorder">
 			
 	
 			</div>
-		</div>	
+		</div>
+			
+		<br>
 		
 		<div class="container">
 			<div class="row">
