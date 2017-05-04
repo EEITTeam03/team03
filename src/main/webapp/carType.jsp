@@ -215,6 +215,7 @@
         $(this).addClass("img-border");
         var imgVal = $(this).attr("value");
         $("#selBrand").val(imgVal);
+        SelectCarModel();
 
     });
 
