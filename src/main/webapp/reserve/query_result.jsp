@@ -26,6 +26,7 @@ table, th, td {
 	<th>汽車品牌</th>
 	<th>汽車型號</th>
 	<th>車型大小</th>
+	<th>須輔</th>
 <tr>
 <c:forEach var="aVO" items="${reservList}">
 <tr>
@@ -38,6 +39,7 @@ table, th, td {
 	<td>${aVO.membercarsVO.carTypeVO.brand}</td>
 	<td>${aVO.membercarsVO.carTypeVO.carModel}</td>
 	<td>${aVO.membercarsVO.carTypeVO.carClassVO.className}</td>
+	<td>${aVO.employeeVO.employeeName}</td>
 </tr>	
 </c:forEach>
 </table>

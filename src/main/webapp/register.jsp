@@ -169,102 +169,67 @@
 						<div class="panel-body">
 							<div class="flot-chart">
 								<div class="flot-chart-content" id="flot-bar-chart">
-<<<<<<< HEAD
-									<form id="cmxform" class="form-signin" role="form" action="" method="post">
-=======
-									<form class="form-signin" role="form" action="MemberServlet" method="post">
->>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
+
+									<form id="cmxform" class="form-signin" role="form" action="MemberServlet" method="post">
 									
 										<br>
 										
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										  	<span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-user"></i></span>
-<<<<<<< HEAD
-										  	<input id="name" type="text" class="form-control required" name="name" placeholder="輸入您的姓名">
-=======
-										  	<input id="name" type="text" class="form-control" name="name" placeholder="輸入您的姓名" value='${param.name}'>
->>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
+
+										  	<input id="name" type="text" class="form-control required" name="name" placeholder="輸入您的姓名" value='${param.name}'>
+											<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>
 										</div>										
 										
 										<br>
 										
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										  	<span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-envelope"></i></span>
-<<<<<<< HEAD
-										  	<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件">
-=======
-										  	<input id="email" type="text" class="form-control" name="email" placeholder="輸入您的電子郵件" value='${param.email}'>
->>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
+
+										  	<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件" value='${param.email}'>
+											<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>
 										</div>
 										
 										<br>
 										
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-lock"></i></span>
-<<<<<<< HEAD
-										    <input id="password" type="password" class="form-control required" name="password" placeholder="輸入您的密碼">
-=======
-										    <input id="password" type="password" class="form-control" name="password" placeholder="輸入您的密碼" value='${param.password}'>
->>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
+
+										    <input id="password" type="password" class="form-control required" name="password" placeholder="輸入您的密碼" value='${param.password}'>
+										    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>										
 										</div>
 										
 										<br>
 										
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-phone"></i></span>
-<<<<<<< HEAD
-										    <input id="phone" class="form-control required" name="phone" placeholder="輸入您的電話">
-=======
-										    <input id="phone" type="phone" class="form-control" name="phone" placeholder="輸入您的電話" value='${param.phone}'>
->>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
+
+										    <input id="phone" class="form-control required" name="phone" placeholder="輸入您的電話" value='${param.phone}'>
+										    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>
+
 										</div>
 										
 										<br>										
 
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>
-<<<<<<< HEAD
-										    <input id="datepicker" class="form-control required dateISO" name="datepicker" placeholder="輸入您的出生年月日">
-=======
-										    <input id="datepicker" type="datepicker" class="form-control" name="datepicker" placeholder="輸入您的出生年月日" value='${param.birthday}'>
-										</div>
-										
-										<br>
-										
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>
-										    <input id="address" type="text" class="form-control" name="address" placeholder="輸入您的地址" value='${param.address}'>
-										</div>
-										
-										<br>
-										
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>
-										    <input id="license" type="text" class="form-control" name="license" placeholder="輸入您的車牌" value='${param.license}'>
->>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
-										</div>
-										
-										<br>																									
-<<<<<<< HEAD
 
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-globe"></i></span>
-										    <input id="address" class="form-control required" name="address" placeholder="輸入您的地址">
+										    <input id="datepicker" class="form-control required dateISO" name="datepicker" placeholder="輸入您的出生年月日" value='${param.birthday}'>
+										    <small><Font color='red' >${ErrorMsgKey.BirthdayEmptyError}</Font></small><br>
 										</div>
 										
 										<br>
 										
-										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >下一步</button>
-=======
-										<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>
-										<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>
-										<small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>
-										<small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>
-										<small><Font color='red' >${ErrorMsgKey.BirthdayEmptyError}</Font></small><br>
-										<small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>
+										<div class="input-group" style="border:1px solid #FFB6C1">
+										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>
+										    <input id="address" type="text" class="form-control required" name="address" placeholder="輸入您的地址" value='${param.address}'>
+										    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>
+										</div>
+										
+										<br>																																			
+																	
 										<input type="hidden" name="action" value="insert">
-										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >送出</button>
->>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
+										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >下一步</button>
 										
 									</form>	
 								</div>
