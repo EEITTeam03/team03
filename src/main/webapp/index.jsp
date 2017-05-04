@@ -57,6 +57,29 @@
 	<!--[if lt IE 9]>
 	<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	<style type="text/css">
+		.button-in{
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}
+		.button-out{
+		    color: white;
+		    background-color: #fed136;
+		    border-color: #fed136;
+		    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;			
+		}
+		.btn:hover{
+			color: #fed136;
+		}
+		
+	</style>
+
     
     <script>
    		$(function(){
@@ -168,6 +191,28 @@
    				
    			})  			
    			
+//    			//穿過某元素觸發事件
+//    			$(".btn").mouseenter(function(){
+//    				$("button").removeClass("button-out");
+//    				$("button").addClass("button-in");
+//    			});
+   			
+//    			//離開某元素觸發事件
+//    			$(".btn").mouseleave(function(){
+//    				$("button").removeClass("button-in");
+//    				$("button").addClass("button-out"); 				
+//      		});  
+   			
+   		    $(document).on('mouseenter', '.btn', function(event){
+   		        $(this).removeClass("button-out");
+   		     	$(this).addClass("button-in");
+   		    });  			
+ 
+   		    $(document).on('mouseleave', '.btn', function(event){
+   		        $(this).removeClass("button-in");
+   		     	$(this).addClass("button-out");
+   		    }); 
+   			
    		})
     
     </script>    
@@ -194,7 +239,7 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#">進行預約</a>                    	
+                        <a class="page-scroll ff-word" href="start_reserve.jsp">進行預約</a>                    	
                     </li>                    
                     <li>
                         <a class="page-scroll ff-word" href="#services">各類服務</a>
@@ -212,14 +257,18 @@
                         <a class="page-scroll ff-word" href="#contact">聯絡我們</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word btn btn-primary btn-xs" style="text-shadow: black 5px 3px 3px;padding:10px;margin:0px 10px 0px 10px" href="login.jsp">
-  							<span class="glyphicon glyphicon-log-in"></span> 登入
-                        </a>
+                    	<button id="btn1" class="page-scroll ff-word button-out btn btn-xs" onclick="location.href='login.jsp'" style="padding:8px;margin:5px 10px 5px 10px">
+   		
+							<span class="glyphicon glyphicon-log-in"></span> 登入															
+                        
+                        </button>
                     </li>                    
                     <li>
-                        <a class="page-scroll ff-word btn btn-primary btn-xs" style="text-shadow: black 5px 3px 3px;padding:10px;margin:0px 10px 0px 10px;" href="register.jsp">
-  							<span class="glyphicon glyphicon-user"></span> 免費註冊
-                        </a>
+                    	<button id="btn2" class="page-scroll ff-word button-out btn btn-xs" onclick="location.href='register.jsp'" style="padding:8px;margin:5px 10px 5px 10px">
+   		
+							<span class="glyphicon glyphicon-user"></span> 免費註冊															
+                        
+                        </button>                    
                     </li>
 <!--                     <li> -->
 <!--                         <a class="ff-word" style="text-shadow: black 5px 3px 3px;color:#FFFF66;" href="#"> -->

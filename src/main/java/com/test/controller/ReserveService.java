@@ -3,8 +3,10 @@ package com.test.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.employee.model.EmployeeVO;
 import com.membercars.model.MemberCarsDAO;
@@ -29,7 +32,7 @@ import com.services.model.ServicesVO;
 import myutil.MyUtil;
 
 
-@WebServlet("/reserve/ReserveService")
+@WebServlet("/ReserveService")
 public class ReserveService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -39,6 +42,8 @@ public class ReserveService extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+//		HttpSession session = request.getSession();
 		
 		List<String> errmsg = new ArrayList<String>();
 		request.setAttribute("errorMsg", errmsg);
@@ -50,7 +55,13 @@ public class ReserveService extends HttpServlet {
 		String ckbox[] = request.getParameterValues("plus");
 		String empNo = request.getParameter("empNo");
 		
-		
+//		Map<String,String> par = new HashMap<>();
+//		par.put("license",license);
+//		par.put("selectedDate",selectedDate);
+//		par.put("selectedTime",selectedTime);
+//		par.put("singleService",singleService);
+//		par.put("empNo",empNo);
+//		session.setAttribute("par", par);
 		//日期-字串轉Calendar
 		Calendar cal = MyUtil.getCalender(selectedDate,selectedTime);
 		
@@ -131,7 +142,7 @@ public class ReserveService extends HttpServlet {
 		reservVO.setReservlists(reservSet);
 		
 		
-		//查詢當日預約-檢查有無重複 
+		//查詢當日預約-檢查有無重複 (不同師傅可)
 		ReservService rsvc = new ReservService();
 		List<ReservVO> list = rsvc.getAllReservByDateAndEmp(cal, emp);
 		for(ReservVO aReserve :list){
@@ -170,9 +181,12 @@ public class ReserveService extends HttpServlet {
 		
 		//****************失敗*******************
 		if (errmsg.size() != 0) {
+//			request.getSession().setAttribute("reservVO", reservVO);
+//			response.sendRedirect(request.getContextPath()+"/start_reserve.jsp");
 			request.setAttribute("reservVO", reservVO);
-			request.getRequestDispatcher("/reserve/reserve_page.jsp")
+			request.getRequestDispatcher("/start_reserve.jsp")
 			.forward(request, response);
+//			request.getRequestDispatcher("/reserve/reserve_page.jsp")
 			return;
 		}
 		
