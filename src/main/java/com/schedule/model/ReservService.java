@@ -60,7 +60,7 @@ public class ReservService {
 	}
 	
 	public List<ReservVO>AllOrderByTime(Calendar cal){
-		return dao.getAllOrderByTime(cal);
+		return dao.findTimeByDate(cal);
 	}
 	
 	public ReservVO getOneReserv(Integer reservNo) {

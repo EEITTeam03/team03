@@ -30,7 +30,8 @@ public class ReservDAO implements ReservDAO_interface {
 	private static final String GET_ALL_STMT="from ReservVO order by reservNo";
 	private static final String GET_BY_DATE="from ReservVO where reservDateTime between ? and ? order by reservDateTime";
 	private static final String GET_BY_DATE_EMP="from ReservVO where reservDateTime between ? and ? AND employeeNo=? order by reservDateTime";
-	private static final String ALL_STMT_Time="from ReservVO where reservDateTime > ? order by reservDateTime";
+	private static final String ALL_STMT_Time="select min(reservDateTime) from ReservVO where reservDateTime > ? ";
+	private static final String GET_TIME_BY_DATE="from ReservVO where reservDateTime between ? and ? order by reservDateTime";
 	@Override
 	public ReservVO findByPrimaryKey(Integer reservNo) {
 		// TODO Auto-generated method stub
@@ -71,10 +72,13 @@ public class ReservDAO implements ReservDAO_interface {
 		// TODO Auto-generated method stub
 		ReservDAO dao = new ReservDAO();
 //
-
-		Calendar cal = Calendar.getInstance();
-		//cal.set(2017,4,8);
-		List<ReservVO>list = dao.findByYear(cal);
+		//測findTimeByDate
+//		Calendar cal = Calendar.getInstance();
+//		cal.set(2017,4,10);
+//		
+//		List<ReservVO>list = dao.findTimeByDate(cal);
+		
+//		List<ReservVO>list = dao.findByYear(cal);
 //		List<ReservVO>list = dao.findByWeek(cal);
 		
 //		List<ReservVO>list = dao.getAll();
@@ -280,13 +284,39 @@ public class ReservDAO implements ReservDAO_interface {
 	}
 
 	@Override
-	public List<ReservVO> getAllOrderByTime(Calendar cal) {
-		List<ReservVO>list = null;
+	public List<Object> getAllOrderByTime(Calendar cal) {
+		List<Object>list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
 			Query query = session.createQuery(ALL_STMT_Time);
 			query.setParameter(0, cal);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+
+	@Override
+	public List<ReservVO> findTimeByDate(Calendar cal) {
+		
+		List<ReservVO> list = null;
+		Calendar cal1 = Calendar.getInstance();
+		cal1.setTime(cal.getTime());
+		cal1.set(Calendar.HOUR_OF_DAY,0);
+		cal1.set(Calendar.MINUTE,0);
+		Calendar cal2 = Calendar.getInstance();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(GET_TIME_BY_DATE);
+			query.setParameter(0, cal1);
+			cal2.setTime(cal1.getTime());
+			cal2.add(Calendar.DATE, 1);
+			query.setParameter(1, cal2);
 			list = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
