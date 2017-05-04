@@ -226,13 +226,6 @@
 										    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>
 										</div>
 										
-										<br>
-										
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>
-										    <input id="license" type="text" class="form-control" name="license" placeholder="輸入您的車牌" value='${param.license}'>
-										</div>
-										
 										<br>																																			
 																	
 										<input type="hidden" name="action" value="insert">
