@@ -426,12 +426,6 @@
 </head>
 <body id="scheduler_body" class='default'>
 	<input type="button" id="btn_search" value="查詢" />
-	<input type="button" id="btn_search1" value="查詢1" />
-	<input type="button" id="btn_search2" value="查詢2" />
-	<input type="button" id="btn_search3" value="查詢3" />
-	<input type="button" id="btn_search4" value="查詢4" />
-	<input type="button" id="btn_search5" value="查詢5" />
-	<input type="button" id="btn_clean" value="清除"/>
     <div id="scheduler"></div>
     <input type="button" value="匯出至Excel" id='excelExport' />
     <div><img id="loading_data" src="img/loading/ajax-loader.gif" /></div>
