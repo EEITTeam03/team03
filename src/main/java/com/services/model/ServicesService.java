@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Provider.Service;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -16,7 +17,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
-
 public class ServicesService {
 	private ServicesDAO_interface dao;
 	public static final int IMAGE_FILENAME_LENGTH = 20;
@@ -26,14 +26,13 @@ public class ServicesService {
 		dao = new ServicesDAO_Hibernate();
 	}
 
-	// TODO 還沒經過測試，晚點測
 	public ServicesVO addService(Integer servNo, String servTypeNo, String servName, String servDesc, byte[] servPhoto,
 			Date servEffectiveDate, String servStatus) {
 		ServicesVO servicesVO = new ServicesVO();
 		ServicesService ss = new ServicesService();
-		String fileName="";
-		fileName=ss.getFileName(part);
-		fileName=ss.adjustFileName(fileName, ss.IMAGE_FILENAME_LENGTH);
+		String fileName = "";
+		fileName = ss.getFileName(part);
+		fileName = ss.adjustFileName(fileName, ss.IMAGE_FILENAME_LENGTH);
 		File f = new File(fileName);
 		InputStream in;
 		try {
@@ -58,16 +57,21 @@ public class ServicesService {
 
 			e.printStackTrace();
 		}
-		//
-		// servicesVO.setServNo(servNo);
-		// servicesVO.setServTypeNo(servTypeNo);
-		// servicesVO.setServName(servName);
-		// servicesVO.setServDesc(servDesc);
-		// servicesVO.setServEffectiveDate(servEffectiveDate);
-		// servicesVO.setServPhoto(servPhoto);
-		// servicesVO.setServStatus(servStatus);
-		// dao.insert(servicesVO);
 		return servicesVO;
+	}
+
+	public ServicesVO updateService(Integer servNo, String servTypeNo, String servName, String servDesc,
+			byte[] servPhoto, Date servEffectiveDate, String servStatus) {
+		ServicesVO servicesVO = new ServicesVO();
+		servicesVO.setServNo(servNo);
+		servicesVO.setServTypeNo(servTypeNo);
+		servicesVO.setServName(servName);
+		servicesVO.setServDesc(servDesc);
+		servicesVO.setServEffectiveDate(servEffectiveDate);
+		servicesVO.setServPhoto(servPhoto);
+		servicesVO.setServStatus(servStatus);
+		dao.update(servicesVO);
+		return dao.findByPrimaryKey(servNo);
 	}
 
 	public List<ServicesVO> getAll() {
@@ -80,11 +84,11 @@ public class ServicesService {
 
 	public List<Map> getServicesForJson() {
 		List<ServicesVO> list = dao.getAll();
-		
+
 		List<Map> list2 = new ArrayList<Map>();
-		
+
 		for (ServicesVO asvo : list) {
-			if(asvo.getServPhoto()==null){
+			if (asvo.getServPhoto() == null) {
 				continue;
 			}
 			Map map = new LinkedHashMap<>();
@@ -133,7 +137,7 @@ public class ServicesService {
 				if (contentType != null) { // 表示該part為檔案
 					// 取出上傳檔案的檔名
 					String filename = ServicesService.getFileName(part);
-					
+
 					// 將上傳的檔案寫入到location屬性所指定的資料夾
 					if (filename != null && filename.trim().length() > 0) {
 						part.write(filename);
