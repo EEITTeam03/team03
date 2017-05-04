@@ -30,7 +30,7 @@ public class ReservDAO implements ReservDAO_interface {
 	private static final String GET_ALL_STMT="from ReservVO order by reservNo";
 	private static final String GET_BY_DATE="from ReservVO where reservDateTime between ? and ? order by reservDateTime";
 	private static final String GET_BY_DATE_EMP="from ReservVO where reservDateTime between ? and ? AND employeeNo=? order by reservDateTime";
-	
+	private static final String ALL_STMT_Time="from ReservVO where reservDateTime > ? order by reservDateTime";
 	@Override
 	public ReservVO findByPrimaryKey(Integer reservNo) {
 		// TODO Auto-generated method stub
@@ -269,6 +269,23 @@ public class ReservDAO implements ReservDAO_interface {
 			cal2.add(Calendar.DATE, 1);
 			query.setParameter(1, cal2);
 			query.setParameter(2, empNo);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+
+	@Override
+	public List<ReservVO> getAllOrderByTime(Calendar cal) {
+		List<ReservVO>list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(ALL_STMT_Time);
+			query.setParameter(0, cal);
 			list = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {

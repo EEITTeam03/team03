@@ -11,7 +11,7 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		
-		$.getJSON('test',function(datas){
+		$.getJSON('GetImageFromJSON',function(datas){
 			//console.log(datas.img1);
 			var x = $("<img/>");
 			x.attr('src','data:image/jpeg;base64,'+datas.img1);

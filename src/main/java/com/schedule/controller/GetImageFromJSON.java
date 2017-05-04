@@ -19,13 +19,13 @@ import org.json.simple.JSONValue;
  * Servlet implementation class test
  */
 @WebServlet("/admin/test")
-public class test extends HttpServlet {
+public class GetImageFromJSON extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public test() {
+    public GetImageFromJSON() {
         super();
         // TODO Auto-generated constructor stub
     }

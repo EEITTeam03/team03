@@ -59,6 +59,10 @@ public class ReservService {
 		return dao.getAll();
 	}
 	
+	public List<ReservVO>AllOrderByTime(Calendar cal){
+		return dao.getAllOrderByTime(cal);
+	}
+	
 	public ReservVO getOneReserv(Integer reservNo) {
 		return dao.findByPrimaryKey(reservNo);
 	}
