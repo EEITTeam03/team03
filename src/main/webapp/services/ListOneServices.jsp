@@ -10,7 +10,16 @@
 <title>服務單筆資料</title>
 </head>
 <body bgcolor='white'>
-
+<table border='1' width='800'>
+		<thead align='center' valign='middle'>
+			<tr>
+				<td>所有服務資料</td>
+			</tr>
+		</thead>
+		<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
+			<td><a href="SelectServices.jsp">回搜尋服務頁</a></td>
+		</tr>
+	</table>
 	<table border='1' bordercolor='#CCCCFF' width='1600'>
 		<tr>
 			<th>服務編號</th>

@@ -22,7 +22,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>註冊會員</title>
+<title>車種資料</title>
 
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
@@ -86,14 +86,49 @@
 	
 /* 	註冊資料時，nav導覽列的未完成的步驟樣式設定 */
 	.undone-step{
-    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: white;
+	    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	    text-transform: uppercase;
+	    font-weight: 400;
+	    letter-spacing: 1px;
+	    color: white;
 	}
 	.error{
 		color:red;
+	}
+	.img-responsive{
+		margin:0 auto;
+		border:5px white solid;
+	}
+	.img-border{
+		border:5px red outset;
+	}	
+	.divScroll{
+		height:350px;
+		overflow: scroll
+	}	
+	#brandImgs::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		background-color: #F5F5F5;
+	}
+	
+	#brandImgs::-webkit-scrollbar
+	{
+		width: 10px;
+		background-color: #F5F5F5;
+	}
+	
+	#brandImgs::-webkit-scrollbar-thumb
+	{
+		background-color: #F90;	
+		background-image: -webkit-linear-gradient(45deg,
+		                                          rgba(255, 255, 255, .2) 25%,
+												  transparent 25%,
+												  transparent 50%,
+												  rgba(255, 255, 255, .2) 50%,
+												  rgba(255, 255, 255, .2) 75%,
+												  transparent 75%,
+												  transparent)
 	}	
 	
 </style>
@@ -112,9 +147,23 @@
 					var selectBrand=$("select:eq(0) > option:last-child");
 					
 					if(bContainer != brand){
-					var op=$("<option></option>").attr({"value":picNo}).text(brand);
-					selectBrand.after(op);
-					bContainer = brand ;
+						//以下開始動態生成廠牌資料
+						var op=$("<option></option>").attr({"id":picNo,"value":picNo}).text(brand);
+						selectBrand.after(op);
+						bContainer = brand ;
+						//結束
+						
+						//以下開始動態生成廠牌圖片	
+						var bigd = $("<div></div>").addClass("col-xs-4 col-sm-3 col-md-2 col-lg-2");
+						var mya = $("<a></a>").attr({"href":"#"});
+						var smallimg = $("<img>").addClass("img-responsive").attr({"value":picNo,"src":"img/car/"+picNo+".gif","alt":""});					   
+	
+						mya.append(smallimg)
+						bigd.append(mya);
+						
+						$("#brandImgs").append(bigd);
+						//結束
+					
 					}				  					   				  					
    				})
    			 		$("select:eq(0) > option:first-child").attr({"selected":"true"});
@@ -182,34 +231,59 @@
 
 	}
 	
+	//偵測Table的X按鈕被點擊時，觸發事件
     $(document).on('click', '.delete', function(event){
         $(this).parent().parent().remove();
     });
-	
+    
+	//偵測廠牌圖片被點擊時，觸發事件
+    $(document).on('click', '.img-responsive', function(event){
+
+    	$(".img-border").removeClass("img-border");
+        $(this).addClass("img-border");
+        var imgVal = $(this).attr("value");
+        $("#selBrand").val(imgVal);
+        SelectCarModel();
+
+    });
 
     $(document).on('click', '.add', function(event){
 		var carLicense = $("#carLicense").val().trim();//目前輸入的車牌號碼   	
 		var opValue1 = $("select:eq(0) :selected").text();//Select現在選到的廠牌
 		var opValue2 = $("select:eq(1) :selected").text();//Select現在選到的車系
 		var carSize = $("#carSize").val();//input現在的車型
+		var str = $("select:eq(0) > option:first-child").text();//得到字串→請選擇您的愛車廠牌
+		
+        if($("#carLicense").val().trim() == ""){
+        	$("#name-error").text("這是必填欄位");       	
+        }else{
+        	$("#name-error").text("");  
+        }
+        if(opValue1.trim() == str.trim()){
+        	$("#brand-error").text("請選擇愛車廠牌");
+        }else{
+        	$("#brand-error").text("");
+        }
+		if($("#carLicense").val().trim() != "" && opValue1.trim() != str.trim()){
+    		var tr = $("<tr></tr>")
+    		var td1 = $("<td>" + carLicense + "</td>");		
+    		var td2 = $("<td>" + opValue1 + "</td>");			
+    		var td3 = $("<td>" + opValue2 + "</td>");	
+    		var td4 = $("<td>" + carSize + "</td>");	
+    		var td5 = $("<td></td>");	
+    		
+    		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
+    		var span = $("<span></span>").addClass("glyphicon glyphicon-remove");
+    		
+    		button.append(span);
+    		td5.append(button);
+    		
+    		tr.append([td1,td2,td3,td4,td5]);
+    		
+    		$("#cardatas > tbody").append(tr);
+    		$("#carLicense").val("");//清空車牌			       	
+        }
 
-		var tr = $("<tr></tr>")
-		var td1 = $("<td>" + carLicense + "</td>");		
-		var td2 = $("<td>" + opValue1 + "</td>");			
-		var td3 = $("<td>" + opValue2 + "</td>");	
-		var td4 = $("<td>" + carSize + "</td>");	
-		var td5 = $("<td></td>");	
-		
-		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
-		var span = $("<span></span>").addClass("glyphicon glyphicon-remove");
-		
-		button.append(span);
-		td5.append(button);
-		
-		tr.append([td1,td2,td3,td4,td5]);
-		
-		$("#cardatas > tbody").append(tr);
-		$("#carLicense").val("");//清空車牌
     });   
 															
     $(document).on('blur', '.input-value', function(event){
@@ -269,11 +343,21 @@
 	</nav>
 
 	<section id="services">
+	
+<!-- 		<div class="container"> -->
+<!-- 			<div id="brandImgs" class="row divBorder"> -->
+			
+	
+<!-- 			</div> -->
+<!-- 		</div> -->
+			
+<!-- 		<br> -->
+		
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
+				<div class="col-sm-2 col-md-2 col-lg-1"></div>
 	
-				<div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-10">
 					<div class="panel panel-danger" style="border-color:salmon">
 						<div class="panel-heading" style="background-color:salmon;border-color:salmon;color:white;">
 							<h3 class="panel-title">車種資料</h3>
@@ -283,6 +367,14 @@
 							<div class="flot-chart">
 								<div class="flot-chart-content" id="flot-bar-chart">
 									<form id="cmxform" class="form-signin" role="form" action="" method="post">
+										
+										<div id="brandImgs" class="row divScroll">
+										
+								
+										</div>										
+										
+										<br>
+										
 										<div class="row">
 											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 												<span>請輸入您的車牌：</span>
@@ -295,7 +387,7 @@
 										<div class="row">
 										
 											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">										
-												<select name="select" size="1" onchange="SelectCarModel()" style="width:40%;">
+												<select id="selBrand" name="select" size="1" onchange="SelectCarModel()" style="width:40%;">
 											      <option value="">請選擇您的愛車廠牌</option>
 								      
 												</select>
@@ -304,7 +396,7 @@
 												  									      
 												</select>
 												<input id="carSize" type="text" name="carSize" placeholder="車型" readonly="value" style="width:10%;">
-																								
+												<label id="brand-error" class="error"></label>												
 											</div>											
 										
 										</div>														
@@ -354,7 +446,7 @@
 					</div>	
 				</div>
 				
-				<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
+				<div class="col-sm-2 col-md-2 col-lg-1"></div>
 	
 			</div>
 		</div>

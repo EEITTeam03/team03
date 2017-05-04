@@ -77,6 +77,9 @@ public class ServicesService {
 	public List<ServicesVO> getAll() {
 		return dao.getAll();
 	}
+	public List<ServicesVO> getAllForUser() {
+		return dao.getAllForUser();
+	}
 
 	public ServicesVO getOneService(Integer servNo) {
 		return dao.findByPrimaryKey(servNo);
