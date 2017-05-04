@@ -60,13 +60,16 @@ public class reCaptcha extends HttpServlet {
 		request.setAttribute("ErrorMsgKey", errorMsgMap);
 		// 1. 讀取使用者輸入資料
 		String userId = request.getParameter("email");
-
+		String userPhone = request.getParameter("phone");
 		// 2. 進行必要的資料轉換
 		// 無
 		// 3. 檢查使用者輸入資料
 		// 如果 userId 欄位為空白，放一個錯誤訊息到 errorMsgMap 之內
 		if (userId == null || userId.trim().length() == 0) {
 			errorMsgMap.put("AccountError", "帳號欄必須輸入");
+		}
+		if (userPhone == null || userPhone.trim().length() == 0) {
+			errorMsgMap.put("PhoneError", "車牌號碼必須輸入");
 		}
 		if (!errorMsgMap.isEmpty()) {
 			RequestDispatcher rd = request.getRequestDispatcher("forgetPassWord.jsp");
@@ -90,10 +93,11 @@ public class reCaptcha extends HttpServlet {
 		try {
 			MemberService ms = new MemberService();
 			MemberInfoVO mem = ms.getOneByEmail(userId);
-			if (mem != null) {
+			if (mem != null && (userPhone.equals(mem.getPhone()))) {
 				if (webdata.indexOf("true") > 0) {
 					request.setAttribute("accountName", mem.getMemberName());
 					request.setAttribute("Member", mem);
+					System.out.println(mem.getMemberNo());
 					RequestDispatcher rd = request.getRequestDispatcher("JavaMail.do");
 					rd.forward(request, response);
 					return;
@@ -103,7 +107,7 @@ public class reCaptcha extends HttpServlet {
 					errorMsgMap.put("RobotFail", "認證失敗");
 			}else {
 				//userid與密碼的組合錯誤，放一個錯誤訊息到 errorMsgMap 之內
-				errorMsgMap.put("AccountError", "該帳號不存在");
+				errorMsgMap.put("Error", "該帳號不存在或手機輸入錯誤");
 			}
 		} catch (Exception e) {
 			errorMsgMap.put("Error", "reCaptcha->NamingException:" + e.getMessage());

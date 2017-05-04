@@ -79,7 +79,7 @@ public class MemberService {
 		memberinfoVO.setPhone(phone);
 		memberinfoVO.setBirthday(birthday);
 		memberinfoVO.setAddress(address);
-		
+		memberinfoVO.setMemberCars(dao.findByPK(memberNo).getMemberCars());
 
 		dao.update(memberinfoVO);
 

@@ -50,11 +50,12 @@ public class scheduleTestServlet extends HttpServlet {
 		HashMap<String,String> map = new HashMap<String,String>();
 		map = new Gson().fromJson(json, new TypeToken<HashMap<String,String>>() {}.getType());
 		System.out.println("reservNo:"+map.get("id"));
-		System.out.println("calendar:"+map.get("calendar"));
-		System.out.println(getLocalTimeFromUTC(map.get("start")).getTime());	//從頁面得到的資料與預約訂單有時差8小時
-		System.out.println(getLocalTimeFromUTC(map.get("end")).getTime());		//從頁面得到的資料與預約訂單有時差8小時
-		System.out.println("subject:"+map.get("subject"));
-		System.out.println("description:"+map.get("description"));
+		System.out.println("師傅:"+map.get("calendar"));
+		System.out.println("起始時間:"+getLocalTimeFromUTC(map.get("start")).getTime());	//從頁面得到的資料與預約訂單有時差8小時
+		System.out.println("結束時間:"+getLocalTimeFromUTC(map.get("end")).getTime());		//從頁面得到的資料與預約訂單有時差8小時
+		System.out.println("車牌:"+map.get("subject"));
+		System.out.println("服務項目(一或多筆):"+map.get("description"));
+//		System.out.println("訂單狀態:"+map.get("status"));	//暫無
 		System.out.println("-------------------------------------------------");
 			
 		PrintWriter out = response.getWriter();

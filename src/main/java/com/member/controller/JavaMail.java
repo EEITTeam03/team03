@@ -56,7 +56,7 @@ public class JavaMail extends HttpServlet {
 		String userId = request.getParameter("email");
 		String userName = (String) request.getAttribute("accountName");
 		MemberInfoVO mem = (MemberInfoVO)request.getAttribute("Member"); 
-		
+		//System.out.println(mem.getMemberNo());
 		String host = "smtp.gmail.com";
 		  int port = 587;
 		  final String username = "eeit9306@gmail.com";
@@ -76,13 +76,14 @@ public class JavaMail extends HttpServlet {
 		  try {
 			  
 			  MemberService ms = new MemberService();
-			  ms.updatemem(mem.getMemberNo(), mem.getEmail(), ms.randomPswd(), mem.getMemberName(), mem.getPhone(), mem.getBirthday(), mem.getAddress());
+			  String str = ms.randomPswd();
+			  ms.updatemem(mem.getMemberNo(), mem.getEmail(), str, mem.getMemberName(), mem.getPhone(), mem.getBirthday(), mem.getAddress());
 			  //ms.getOneByEmail(userId);	
 		   Message message = new MimeMessage(session);
 		   message.setFrom(new InternetAddress("eeit9306@gmail.com"));
 		   message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
 		   message.setSubject("你的密碼已寄送");
-		   message.setText("Dear "+userName+", \n\n 您的密碼是"+ms.randomPswd());
+		   message.setText("Dear "+userName+", \n\n 您的密碼是"+str);
 
 		   Transport transport = session.getTransport("smtp");
 		   transport.connect(host, port, username, password);
