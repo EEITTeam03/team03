@@ -22,7 +22,7 @@
 <br>
 <br>
 <h2>開始預約</h2>
-<form action="ReserveService">
+<form action="/ReserveService">
 	車牌: ${param.license}
 	<input type="hidden" name="license" value="${param.license}"><br>
 	選擇日期: <input type="Date" name="selectedDate" value="${param.selectedDate}"><br>

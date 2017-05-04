@@ -239,7 +239,7 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#">進行預約</a>                    	
+                        <a class="page-scroll ff-word" href="start_reserve.jsp">進行預約</a>                    	
                     </li>                    
                     <li>
                         <a class="page-scroll ff-word" href="#services">各類服務</a>
