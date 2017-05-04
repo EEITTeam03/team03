@@ -176,23 +176,24 @@ public class ReservDAO implements ReservDAO_interface {
 		try{
 			session.beginTransaction();
 			Calendar cal3 = Calendar.getInstance();
+			cal3.setTime(cal.getTime());
 			//cal3.set(2017,4,8);
 			Query query = session.createQuery(GET_BY_DATE);
 			
 			//神奇的下一行
 			//System.out.println(cal.get(Calendar.DATE));
 			cal.get(Calendar.DATE);
-			cal.set(Calendar.DAY_OF_YEAR, cal.getActualMinimum(Calendar.DAY_OF_YEAR));						
+			cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));						
 			
-			System.out.println(cal.get(Calendar.DAY_OF_YEAR));
+			System.out.println(cal.get(Calendar.DAY_OF_MONTH));
 			query.setParameter(0, cal);
 			
 			//神奇的下一行
 			//System.out.println(cal3.get(Calendar.DATE));
 			
 			cal3.get(Calendar.DATE);
-			cal3.set(Calendar.DAY_OF_YEAR, cal3.getActualMaximum(Calendar.DAY_OF_YEAR));
-			System.out.println(cal3.get(Calendar.DAY_OF_YEAR));
+			cal3.set(Calendar.DAY_OF_MONTH, cal3.getActualMaximum(Calendar.DAY_OF_MONTH));
+			System.out.println(cal3.get(Calendar.DAY_OF_MONTH));
 
 			query.setParameter(1, cal3);
 			
