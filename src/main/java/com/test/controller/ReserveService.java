@@ -118,7 +118,8 @@ public class ReserveService extends HttpServlet {
 		
 		// 建立員工(?
 		EmployeeVO evo = new EmployeeVO();
-		evo.setEmployeeNo(Integer.parseInt(empNo));
+		int emp = Integer.parseInt(empNo); 
+		evo.setEmployeeNo(emp);
 		evo.setEmployeeName("JACK邱華捷");
 		reservVO.setEmployeeVO(evo);
 
@@ -132,21 +133,24 @@ public class ReserveService extends HttpServlet {
 		
 		//查詢當日預約-檢查有無重複 
 		ReservService rsvc = new ReservService();
-		List<ReservVO> list = rsvc.getAllReservByDate(cal);
+		List<ReservVO> list = rsvc.getAllReservByDateAndEmp(cal, emp);
 		for(ReservVO aReserve :list){
+			int aemp = aReserve.getEmployeeVO().getEmployeeNo();
 			Calendar acal = aReserve.getReservDateTime();
 			Calendar acalEnd = aReserve.getReservEndTime();
 			long tstart = cal.getTimeInMillis();
 			long tend = calEnd.getTimeInMillis();
 			long xstart = acal.getTimeInMillis();
 			long xend = acalEnd.getTimeInMillis();
-			if(xstart < tstart && xend <= tstart){
-				//System.out.println("OK前");
-			}else if (xstart > tstart && xstart >= tend){
-				//System.out.println("OK後");
-			}else {
-				errmsg.add("所選的時段重複!");
-			}
+			
+				if(xstart < tstart && xend <= tstart){
+					//System.out.println("OK前");
+				}else if (xstart > tstart && xstart >= tend){
+					//System.out.println("OK後");
+				}else {
+					errmsg.add("所選的時段重複!");
+				}
+			
 //		for(ReservVO aReserve :list){
 //			Calendar acal = aReserve.getReservDateTime();
 //			Calendar acalEnd = aReserve.getReservEndTime();

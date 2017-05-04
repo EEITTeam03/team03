@@ -24,15 +24,16 @@ public class ReservService {
 		dao = new ReservDAO();
 	}
 	
-	public ReservVO addReserv(Calendar reservDateTime,String noteC,String notesE,Integer status
-			,MemberCarsVO membercarsVO,EmployeeVO employeeVO,Set<ReservListVO>reservlists){
+	public ReservVO addReserv(Calendar reservDateTime,MemberCarsVO membercarsVO ,String noteC,String notesE
+			,EmployeeVO employeeVO,Integer status, Set<ReservListVO>reservlists){
+		
 		ReservVO reservVO=new ReservVO();
 		
 		reservVO.setReservDateTime(reservDateTime);
+		reservVO.setMembercarsVO(membercarsVO);
 		reservVO.setNoteC(noteC);
 		reservVO.setNotesE(notesE);
 		reservVO.setStatus(status);
-		reservVO.setMembercarsVO(membercarsVO);
 		reservVO.setEmployeeVO(employeeVO);
 		reservVO.setReservlists(reservlists);
 		dao.insert(reservVO);
@@ -275,5 +276,9 @@ public class ReservService {
 	
 	public List<ReservVO> getAllReservByDate(Calendar cal){
 		return dao.findByDate(cal);
+	}
+	
+	public List<ReservVO> getAllReservByDateAndEmp(Calendar cal, Integer empNo){
+		return dao.findByDateAndEmp(cal, empNo);
 	}
 }
