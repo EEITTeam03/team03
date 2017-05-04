@@ -15,5 +15,6 @@ public interface ReservDAO_interface {
 	public List<ReservVO> findByDate(Calendar cal);
 	public List<ReservVO> findByYear(Calendar cal);
 	public List<ReservVO> findByWeek(Calendar cal);
+	public List<ReservVO> findByDateAndEmp(Calendar cal,Integer empNo);
 
 }
