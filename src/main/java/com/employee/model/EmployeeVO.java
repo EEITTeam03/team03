@@ -9,8 +9,22 @@ public class EmployeeVO implements Serializable {
 	private Integer employeeNo;
 	private String employeeName;
 	private Set<ReservVO> reserves = new HashSet<ReservVO>();
-	
-	
+	private byte[] employeePhoto;
+	private String employeeDesc;
+		
+
+	public String getEmployeeDesc() {
+		return employeeDesc;
+	}
+	public void setEmployeeDesc(String employeeDesc) {
+		this.employeeDesc = employeeDesc;
+	}
+	public byte[] getEmployeePhoto() {
+		return employeePhoto;
+	}
+	public void setEmployeePhoto(byte[] employeePhoto) {
+		this.employeePhoto = employeePhoto;
+	}
 	public Set<ReservVO> getReserves() {
 		return reserves;
 	}

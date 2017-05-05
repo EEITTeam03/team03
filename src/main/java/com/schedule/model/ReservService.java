@@ -150,12 +150,16 @@ public class ReservService {
 					else
 						map.put("Start", hour+":"+minute);
 					
-					List<Integer> servNolist =new ArrayList<Integer>();
+					List<Integer> servNolistM =new ArrayList<Integer>();
+					List<Integer> servNolistS =new ArrayList<Integer>();
 					List<String> service = new <String>ArrayList();
 					for (ReservListVO rl : reserv.getReservlists()) {
 						totalTime += rl.getServTime();
 						service.add(rl.getServName() + " ");
-						servNolist.add(rl.getServicesVO().getServNo());
+						if(rl.getServicesVO().getServNo() <2000){
+							servNolistM.add(rl.getServicesVO().getServNo());
+						}else
+							servNolistS.add(rl.getServicesVO().getServNo());
 					}
 				
 				int Endminute = (minute+totalTime)%60;
@@ -166,7 +170,8 @@ public class ReservService {
 					map.put("End", EndHour+":"+Endminute);
 				
 				map.put("TotalTime", totalTime);
-				map.put("ServNo", servNolist);
+				map.put("CheckBox", servNolistS);
+				map.put("Radio", servNolistM);
 				map.put("Item", service);
 				map.put("License",reserv.getMembercarsVO().getCarLicense());
 				map.put("NoteC", reserv.getNoteC());
@@ -207,12 +212,16 @@ public class ReservService {
 						else
 							map.put("Start", hour+":"+minute);
 						
-						List<Integer> servNolist =new ArrayList<Integer>();
+						List<Integer> servNolistM =new ArrayList<Integer>();
+						List<Integer> servNolistS =new ArrayList<Integer>();
 						List<String> service = new <String>ArrayList();
 						for (ReservListVO rl : reserv.getReservlists()) {
 							totalTime += rl.getServTime();
 							service.add(rl.getServName() + " ");
-							servNolist.add(rl.getServicesVO().getServNo());
+							if(rl.getServicesVO().getServNo() <2000){
+								servNolistM.add(rl.getServicesVO().getServNo());
+							}else
+								servNolistS.add(rl.getServicesVO().getServNo());
 						}
 					
 					int Endminute = (minute+totalTime)%60;
@@ -223,7 +232,8 @@ public class ReservService {
 						map.put("End", EndHour+":"+Endminute);
 					
 					map.put("TotalTime", totalTime);
-					map.put("ServNo", servNolist);
+					map.put("CheckBox", servNolistS);
+					map.put("Radio", servNolistM);
 					map.put("Item", service);
 					map.put("License",reserv.getMembercarsVO().getCarLicense());
 					map.put("NoteC", reserv.getNoteC());
@@ -260,12 +270,16 @@ public class ReservService {
 				map.put("Start", hour + ":" + minute + '0');
 			else
 				map.put("Start", hour + ":" + minute);
-			List<Integer> servNolist =new ArrayList<Integer>();
+			List<Integer> servNolistM =new ArrayList<Integer>();
+			List<Integer> servNolistS =new ArrayList<Integer>();
 			List<String> service = new <String>ArrayList();
 			for (ReservListVO rl : reserv.getReservlists()) {
 				totalTime += rl.getServTime();
 				service.add(rl.getServName() + " ");
-				servNolist.add(rl.getServicesVO().getServNo());
+				if(rl.getServicesVO().getServNo() <2000){
+					servNolistM.add(rl.getServicesVO().getServNo());
+				}else
+					servNolistS.add(rl.getServicesVO().getServNo());
 			}
 
 			int Endminute = (minute + totalTime) % 60;
@@ -276,7 +290,8 @@ public class ReservService {
 				map.put("End", EndHour + ":" + Endminute);
 
 			map.put("TotalTime", totalTime);
-			map.put("ServNo", servNolist);
+			map.put("CheckBox", servNolistS);
+			map.put("Radio", servNolistM);
 			map.put("Item", service);
 			map.put("License", reserv.getMembercarsVO().getCarLicense());
 			map.put("NoteC", reserv.getNoteC());
