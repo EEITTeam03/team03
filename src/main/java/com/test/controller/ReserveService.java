@@ -62,6 +62,7 @@ public class ReserveService extends HttpServlet {
 //		par.put("singleService",singleService);
 //		par.put("empNo",empNo);
 //		session.setAttribute("par", par);
+		
 		//日期-字串轉Calendar
 		Calendar cal = MyUtil.getCalender(selectedDate,selectedTime);
 		
@@ -197,7 +198,7 @@ public class ReserveService extends HttpServlet {
 		
 		// 準備轉交
 		request.setAttribute("reserve", reservVO);
-		request.getRequestDispatcher("/reserve/success.jsp").forward(request, response);
+		request.getRequestDispatcher("/reserve_success.jsp").forward(request, response);
 
 	}
 
