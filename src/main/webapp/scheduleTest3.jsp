@@ -142,7 +142,7 @@
                     fields.resourceLabel.html("師傅");
                     
                     for(var i=0;i<newFields.length;i++){
-                    	alert(JSON.stringify(newFields));
+//                     	alert(JSON.stringify(newFields));
                     	if(newFields[i].type=='text'){
                     		$newField = fields.locationLabel.parent().clone();
                             $('div',$newField).eq(0).html(newFields[i].fieldName);
@@ -183,7 +183,7 @@
                             	$newField.show();
                             }
                     	}else{
-                    		alert('目前不支援:'+newFields[i].type);
+//                     		alert('目前不支援:'+newFields[i].type);
                     	}
                     }
                     
@@ -318,7 +318,11 @@
 	                	 formatString  : "HH:mm"	//24小時制
 	                 }
                     },
-                    'monthView'
+                    {type:'monthView',
+                    	workTime:{	fromDayOfWeek: 1,
+                        	toDayOfWeek: 6		//工作日:一到六
+                 		}
+                    }
                 ]
                 
             });
@@ -400,7 +404,7 @@
 				appointment.id = appointment.originalData.addSys;
 // 				var jsonFinal = JSON.parse(JSON.stringify(appointment.originalData));
 // 				jsonFinal.id = (appointment.id);
-				alert(JSON.stringify(getFinalJson(appointment)));
+				alert("修改資料:"+JSON.stringify(getFinalJson(appointment)));
 				editToServlet(JSON.stringify(getFinalJson(appointment)),"update");
 			});
 			//刪除事件
@@ -410,7 +414,7 @@
 					alert("Delete");
 // 					var jsonFinal = JSON.parse(JSON.stringify(appointment.originalData));
 // 					jsonFinal.id = (appointment.id);
-					alert(JSON.stringify(getFinalJson(appointment)));
+					alert("刪除資料"+JSON.stringify(getFinalJson(appointment)));
 					editToServlet(JSON.stringify(getFinalJson(appointment)),"delete");
 				}
 			});
@@ -421,7 +425,7 @@
 				if(appointment.originalData.addSys == null || "" == appointment.originalData.addSys ){ //沒有addSys=true時
 					$('#scheduler').jqxScheduler('closeDialog');
 					alert("Add");
-					alert(JSON.stringify(appointment.originalData));
+					alert("新增資料:"+JSON.stringify(appointment.originalData));
 					addDate = appointment.originalData.end.toISOString().substring(0, 10);
 // 					var jsonFinal = JSON.parse(JSON.stringify(appointment.originalData));
 // 					jsonFinal.id = (appointment.id);
@@ -447,7 +451,7 @@
     	function editToServlet(data,action,addDate){
     		$('#loading_data').show();			//顯示loading圖
     		$.ajax({
-        		url: "test/scheduleTestServlet2",
+        		url: "scheduleTestServlet2",
         		dataType: "text",	//server端回傳至client端型態
         		data: {'data':data,'status':action},
         		method:"POST",
@@ -480,6 +484,11 @@
         			//alert(JSON.stringify(data));
         			showData(data);
         			$('#loading_data').hide();//關掉loading
+        			if(view=='monthView'){
+        				$('tr',$('tbody',$('#tablescheduler'))).each(function(){
+        					$('td',$(this)).eq(5).prop('class','jqx-cell jqx-grid-cell jqx-item jqx-center-align jqx-top-align');
+        				});
+        			}
         		},
         		error:function(data){
         			alert("ERROR");
@@ -543,10 +552,13 @@
         }
     </script>
 </head>
-<body id="scheduler_body" class='default'>
+<body>
 	<input type="button" id="btn_search" value="查詢" />
-    <div id="scheduler"></div>
-    <input type="button" value="匯出至Excel" id='excelExport' />
+	<input type="button" value="匯出至Excel" id='excelExport' />
     <div><img id="loading_data" src="img/loading/ajax-loader.gif" /></div>
+    <div id="scheduler_body" >
+        <div id="scheduler"></div>
+    </div>
+    
 </body>
 </html>
