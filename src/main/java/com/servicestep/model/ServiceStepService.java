@@ -40,6 +40,19 @@ public class ServiceStepService {
 		return dao.findByPrimaryKey(servStepNo);
 
 	}
+	public ServiceStepVO updateServiceStep(Integer servStep, String stepName, String stepDescp, byte[] stepPic,
+			 Integer servStepNo, ServicesVO servicesVO) {
+		ServiceStepVO serviceStepVO = new ServiceStepVO();
+		serviceStepVO.setServStep(servStep);
+		serviceStepVO.setStepDescp(stepDescp);
+		serviceStepVO.setStepName(stepName);
+		serviceStepVO.setServStepNo(servStepNo);
+		serviceStepVO.setStepPic(stepPic);
+		serviceStepVO.setServicesVO(servicesVO);
+		dao.update(serviceStepVO);
+		return dao.findByPrimaryKey(servStepNo);
+
+	}
 
 	public ServiceStepVO getOneServiceStep(Integer servNo) {
 		return dao.findByPrimaryKey(servNo);

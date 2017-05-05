@@ -14,6 +14,7 @@ public class MemberInfoHibernateDAO implements MemberInfoDAO {
 	
 	private static final String GET_ALL_STMT = "from MemberInfoVO order by memberNo";
 	private static final String GET_BY_PHONE = "from MemberInfoVO where phone =?";
+	private static final String GET_BY_EMAIL = "from MemberInfoVO where email =?";
 	
 	@Override
 	public void insert(MemberInfoVO memberInfoVO) {
@@ -133,6 +134,25 @@ public class MemberInfoHibernateDAO implements MemberInfoDAO {
 			System.out.println(adv.getEmail());
 			System.out.println(adv.getPassword());
 		}
+	}
+
+	@Override
+	public MemberInfoVO findByEmail(String email) {
+		MemberInfoVO memberInfoVO = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(GET_BY_EMAIL);
+			query.setParameter(0, email);
+			List<MemberInfoVO> list = query.list();
+			if(list.size() != 0)
+				memberInfoVO = list.get(0);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return memberInfoVO;
 	}
 
 }

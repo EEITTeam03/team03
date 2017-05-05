@@ -72,6 +72,7 @@ public class MemberService {
 			java.sql.Date birthday, String address, java.sql.Date effectiveDate) {
 
 		MemberInfoVO memberinfoVO = new MemberInfoVO();
+
 		memberinfoVO.setMemberNo(memberNo);
 		memberinfoVO.setMemberName(memberName);
 		memberinfoVO.setEmail(email);
@@ -82,12 +83,16 @@ public class MemberService {
 		memberinfoVO.setEffectiveDate(effectiveDate);
 		memberinfoVO.setMemberCars(dao.findByPK(memberNo).getMemberCars());
 //		memberinfoVO.setBlockLists(dao.findByPK(memberNo).getBlockLists());
+	
+
+		
+
 		dao.update(memberinfoVO);
 
 		return dao.findByPK(memberNo);
 	}
 
-	public void deleteMem(Integer memberNo) {
+	public void deleteEmp(Integer memberNo) {
 		dao.delete(memberNo);
 	}
 
@@ -98,5 +103,19 @@ public class MemberService {
 	public List<MemberInfoVO> getAll() {
 		return dao.listAll();
 	}
-
+	public MemberInfoVO getOneByEmail(String email){
+		return dao.findByEmail(email);
+	}
+	public String randomPswd(){
+		int num=0;
+		char c;
+		String str="";
+		for(int i=0;i<8;i++){
+			num = (int)(Math.random() * 75);
+			num+=48;
+			c=(char)num;
+			str = c+str;
+		}
+		return str;
+	}
 }

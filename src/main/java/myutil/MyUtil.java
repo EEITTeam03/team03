@@ -11,7 +11,7 @@ public class MyUtil {
 	public static Date getSqlDate(String strDate,String splitSign){
 		String[] strArray = strDate.split(splitSign);
 		Calendar cal = 
-		new GregorianCalendar(Integer.parseInt(strArray[0]),Integer.parseInt(strArray[1]),Integer.parseInt(strArray[2]));
+		new GregorianCalendar(Integer.parseInt(strArray[0]),Integer.parseInt(strArray[1])-1,Integer.parseInt(strArray[2]));
 		Long ms = cal.getTimeInMillis();
 		Date sqlDate = new Date(ms);
 		return sqlDate;
@@ -19,10 +19,21 @@ public class MyUtil {
 	
 	public static Calendar getCalender(String strDate) {
 		Calendar cal = Calendar.getInstance();
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			cal.setTime(sdf.parse(strDate));
+		} catch (ParseException e) {
+			throw new RuntimeException("日期格式錯誤!");
+		}
+		return cal;
+	}
+	
+	
+	public static Calendar getCalender(String strDate , String strTime) {
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		try {
+			cal.setTime(sdf.parse(strDate+" "+strTime));
 		} catch (ParseException e) {
 			throw new RuntimeException("日期格式錯誤!");
 		}

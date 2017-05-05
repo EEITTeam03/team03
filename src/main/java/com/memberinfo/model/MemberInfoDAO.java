@@ -13,4 +13,5 @@ public interface MemberInfoDAO {
 	public MemberInfoVO findByPhone(String phone);
 	public List<MemberInfoVO> listAll();
 	public List<MemberInfoVO> findMember(String email , String password);
+	public MemberInfoVO findByEmail(String email);
 }

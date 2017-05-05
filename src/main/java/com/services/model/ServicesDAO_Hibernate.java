@@ -1,6 +1,7 @@
 package com.services.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +15,9 @@ import hibernate.util.HibernateUtil;
 
 public class ServicesDAO_Hibernate implements ServicesDAO_interface {
 	// 照servNo去選全部
-	private static final String GET_ALL_STMT = "FROM ServicesVO order by servNo";
+	private static final String GET_ALL_STMT = "FROM ServicesVO order by servNo ";
+	// 有上架的服務，要顯示給使用者看的
+	private static final String GET_ALL_ON_STMT = "FROM ServicesVO where servStatus>0 order by servNo ";
 	// 照去選全部
 	private static final String GET_ALL_servTypeNo_STMT = "FROM ServicesVO order by servTypeNo";
 	// 選取所有日期去排序的
@@ -29,6 +32,7 @@ public class ServicesDAO_Hibernate implements ServicesDAO_interface {
 	private static final String DELETE = "DELETE FROM ServicesVO where servNo =?";
 
 	private List<ServicesVO> servicesVOList;
+
 	@Override
 	public void insert(ServicesVO servo) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -201,15 +205,33 @@ public class ServicesDAO_Hibernate implements ServicesDAO_interface {
 	}
 
 	@Override
-	synchronized public boolean servNoExists(Integer servo) throws IOException {
+	public boolean servNoExists(Integer serNo) throws IOException {
 		boolean exist = false; // 檢查id是否已經存在
-		for (ServicesVO svo : servicesVOList) {
-			if (svo.getServNo().equals(servo)) {
-				exist = true;
-				break;
-			}
+		ServicesDAO_Hibernate sdao = new ServicesDAO_Hibernate();
+		if (sdao.findByPrimaryKey(serNo) != null) {
+			exist = true;
+		} else {
+			exist = false;
 		}
 		return exist;
+	}
+
+	// 後來加入的方法都放這之下-----------------------
+
+	@Override
+	public List<ServicesVO> getAllForUser() {
+		List<ServicesVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = (Query) session.createQuery(GET_ALL_ON_STMT);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return list;
 	}
 
 }

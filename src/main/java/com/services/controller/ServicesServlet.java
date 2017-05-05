@@ -16,7 +16,7 @@ import org.json.simple.JSONValue;
 import com.services.model.ServicesService;
 
 
-@WebServlet("/Test")
+@WebServlet("/services/TestGetJsonPic")
 public class ServicesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

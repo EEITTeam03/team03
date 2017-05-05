@@ -17,12 +17,20 @@ public class MemberCarsHibernateDAO implements MemberCarsDAO {
 	public void update(MemberCarsVO memberCarsVO) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+<<<<<<< HEAD
 		try{
 			session.beginTransaction();
 			session.saveOrUpdate(memberCarsVO);
 			session.getTransaction().commit();
 		}catch(RuntimeException ex){
 			ex.printStackTrace();
+=======
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(memberCarsVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+>>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
 			session.getTransaction().rollback();
 			throw ex;
 		}
