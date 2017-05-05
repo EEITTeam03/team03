@@ -45,20 +45,6 @@
 					</c:when>
 					</c:choose></td>
 
-				<td>
-					<FORM METHOD="post" ACTION="servicestep.do">
-						<input type="submit" value="修改"> 
-						<input type="hidden" name="servNo" value="${serviceStepVO.servStepNo}">
-						<input type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
-				</td>
-				<!-- 				<td> -->
-				<!-- 					<FORM METHOD="post" ACTION="services.do"> -->
-				<!-- 						<input type="submit" value="下架">  -->
-				<%-- 						<input type="hidden" name="servNo" value="${serviceStepVO.servicesVO.servNo}">  --%>
-				<!-- 						<input type="hidden" name="action" value="offshelf"> -->
-				<!-- 					</FORM> -->
-				<!-- 				</td> -->
 			</tr>
 		</c:forEach>
 	</table>

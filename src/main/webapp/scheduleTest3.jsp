@@ -56,30 +56,60 @@
         
         function addNewFields(){
         	newFields = [];
-        	newFields.push({'fieldID':'test1','fieldName':'測試欄位1','type':'text','hidden':'hidden'});
-        	newFields.push({'fieldID':'test2','fieldName':'測試欄位2','type':'radio','values':searchXXX1Date()});
-        	newFields.push({'fieldID':'test3','fieldName':'測試欄位3','type':'checkbox','values':searchXXX2Date()});
+        	newFields.push({'fieldID':'status','fieldName':'Status','type':'text','hidden':'hidden'});
+        	newFields.push({'fieldID':'serviceS','fieldName':'綜合服務(單選)','type':'radio','values':searchXXX1Date()});
+        	newFields.push({'fieldID':'serviceM','fieldName':'單一服務(多選)','type':'checkbox','values':searchXXX2Date()});
         }
         function searchXXX1Date(){
-        	//請用ajax查
-        	fromAjax = [{'servNo':'1001','servName':'引擎室清洗護理'},{'servNo':'1002','servName':'內裝清洗護理'},{'servNo':'1003','servName':'玻璃清潔拋光'},{'servNo':'1004','servName':'車燈霧化處理'}];
-
-        	finalData = [];
-        	for(var i=0;i<fromAjax.length;i++){
-        		if(i==0){
-        			finalData.push({'name':fromAjax[i].servName,'value':fromAjax[i].servNo,'checked':'checked'});
-        		}else{
-        			finalData.push({'name':fromAjax[i].servName,'value':fromAjax[i].servNo});
+        	var fromAjax;
+        	var finalData = [];
+        	$.ajax({
+        		url: "OptionServlet",
+        		dataType: "json",
+        		data: {'option':'radio'},
+        		method:"POST",
+        		success:function(data){
+        			fromAjax = data;
+        			for(var i=0;i<fromAjax.length;i++){
+                		if(i==0){
+                			finalData.push({'name':fromAjax[i].ServName,'value':fromAjax[i].ServNo,'checked':'checked'});	//,'checked':'checked'
+                		}else{
+                			finalData.push({'name':fromAjax[i].ServName,'value':fromAjax[i].ServNo});
+                		}
+                	}
+        		},
+        		error:function(data){
+        			alert("ERROR");
+        			//alert(JSON.stringify(data));
         		}
-        	}
+        	});	
+        	//[{'servNo':'1001','servName':'引擎室清洗護理'},{'servNo':'1002','servName':'內裝清洗護理'},{'servNo':'1003','servName':'玻璃清潔拋光'},{'servNo':'1004','servName':'車燈霧化處理'}];
         	
         	return finalData;
         }
         
 		function searchXXX2Date(){
-			//請用ajax查
+			var fromAjax;
+        	var finalData = [];
+        	$.ajax({
+        		url: "OptionServlet",
+        		dataType: "json",
+        		data: {'option':'checkbox'},
+        		method:"POST",
+        		success:function(data){
+        			fromAjax = data;
+        			for(var i=0;i<fromAjax.length;i++){
+                		finalData.push({'name':fromAjax[i].ServName,'value':fromAjax[i].ServNo});
+                	}
+        		},
+        		error:function(data){
+        			alert("ERROR");
+        			//alert(JSON.stringify(data));
+        		}
+        	});	
+			//[{'name':'測試CheckBox1','value':'1'},{'name':'測試CheckBox2','value':'2'},{'name':'測試CheckBox3','value':'3'},{'name':'測試CheckBox4','value':'4'}];
 			
-			return [{'name':'測試CheckBox1','value':'1'},{'name':'測試CheckBox2','value':'2'},{'name':'測試CheckBox3','value':'3'},{'name':'測試CheckBox4','value':'4'}];
+			return finalData;
         }
         
         /*畫面載入時建立Scheduler*/
@@ -166,7 +196,7 @@
                     fields.statusContainer.hide();
                     fields.allDayContainer.hide();
                     fields.resourceLabel.show();
-                    //fields.colorContainer.hide();
+                    fields.colorContainer.hide();
                     for(var i=0;i<newFields.length;i++){
                     	eval('$objField=fields.'+newFields[i].fieldID+';');
                     	$('input[type="text"]',$objField).each(function(){
@@ -244,12 +274,7 @@
                     editDialogCreateTitleString: "加入新預約單",
                     contextMenuEditAppointmentString: "修改預約單",
                     contextMenuCreateAppointmentString: "加入新預約單",
-                    //editDialogSubjectString: "預約項目",
-                    //editDialogLocationString: "地點",
-                    //editDialogFromString: "起始時間",
-                    //editDialogToString: "結束時間",
                     editDialogDescriptionString: "描述",
-                    //editDialogResourceIdString: "師傅",
                     editDialogStatusString: "狀態",
                     editDialogColorString: "顏色",
                     editDialogColorPlaceHolderString: "選擇顏色",
@@ -391,6 +416,7 @@
 			//增加事件
 			$('#scheduler').on('appointmentAdd', function (event) { 
 				var args = event.args; var appointment = args.appointment;
+				isSave = true;
 				if(appointment.originalData.addSys == null || "" == appointment.originalData.addSys ){ //沒有addSys=true時
 					$('#scheduler').jqxScheduler('closeDialog');
 					alert("Add");
@@ -465,23 +491,22 @@
         function showData(data){
         	for(var i=0;i<data.length;i++){
         		//alert(JSON.stringify(data[i]));
-        		service = "";					/*	讀車牌	*/
-        		for(var j=0;j<data[i].Item.length;j++){
+        		serviceM = "";					/*	讀車牌	*/
+        		for(var j=0;j<data[i].CheckBox.length;j++){
         			if(j!=0){
-        				service += ",";
+        				serviceM += ",";
         			}
-        			service += data[i].Item[j];					/*	讀服務項目	*/
+        			serviceM += data[i].CheckBox[j];					/*	讀服務項目	*/
         		}
         		var startTime = (data[i].Start).split(":");		/*	讀起始時間	*/
         		var endTime = (data[i].End).split(":");			/*	讀結束時間	*/
         		var appointment ={
                     id: data[i].ReservNo,
-                    description: service,
+                    description: "NoteC: "+data[i].NoteC + ", NoteE: "+data[i].NoteE,
                     subject:  data[i].License,
                     calendar: data[i].EmpName,					/*	讀師傅	*/
                     start: new Date(data[i].Year, data[i].Month-1, data[i].Day, parseInt(startTime[0]), parseInt(startTime[1]), 0),
                     end: new Date(data[i].Year, data[i].Month-1, data[i].Day, parseInt(endTime[0]), parseInt(endTime[1]), 0),
-//                     status: data[i].Status,
 //                     readOnly: true,			/* 3. */
 //                     resizable: false,
 //                     draggable: false,
@@ -489,8 +514,8 @@
                 };
         		//alert(JSON.stringify(appointment));
         		$('#scheduler').jqxScheduler('addAppointment', appointment);
-        		
-        		setFinalAppointment(data[i].ReservNo,{'test1':data[i].License,'test2':'1003','test3':'1,3,4'})
+        		var serviceS = ""+data[i].Radio;
+        		setFinalAppointment(data[i].ReservNo,{'status':data[i].Status,'serviceS':serviceS,'serviceM':serviceM})
         	}
         }
     	

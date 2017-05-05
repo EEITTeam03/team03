@@ -150,11 +150,17 @@ public class ReservService {
 					else
 						map.put("Start", hour+":"+minute);
 					
-					List <String> service = new <String>ArrayList();
-				 for(ReservListVO rl:reserv.getReservlists()){
-					 totalTime+=rl.getServTime();
-					 service.add(rl.getServName()+" ");
-				 }
+					List<Integer> servNolistM =new ArrayList<Integer>();
+					List<Integer> servNolistS =new ArrayList<Integer>();
+					List<String> service = new <String>ArrayList();
+					for (ReservListVO rl : reserv.getReservlists()) {
+						totalTime += rl.getServTime();
+						service.add(rl.getServName() + " ");
+						if(rl.getServicesVO().getServNo() < 2000){
+							servNolistM.add(rl.getServicesVO().getServNo());
+						}else
+							map.put("Radio",rl.getServicesVO().getServNo());
+					}
 				
 				int Endminute = (minute+totalTime)%60;
 				int EndHour =hour+ (minute+totalTime)/60;
@@ -164,10 +170,12 @@ public class ReservService {
 					map.put("End", EndHour+":"+Endminute);
 				
 				map.put("TotalTime", totalTime);
+				//map.put("Radio", servNolistS);
+				map.put("CheckBox", servNolistM);
 				map.put("Item", service);
 				map.put("License",reserv.getMembercarsVO().getCarLicense());
 				map.put("NoteC", reserv.getNoteC());
-				map.put("NoteC", reserv.getNotesE());
+				map.put("NoteE", reserv.getNotesE());
 				map.put("Status", reserv.getStatus());
 				list2.add(map);
 			}
@@ -204,11 +212,17 @@ public class ReservService {
 						else
 							map.put("Start", hour+":"+minute);
 						
-						List <String> service = new <String>ArrayList();
-					 for(ReservListVO rl:reserv.getReservlists()){
-						 totalTime+=rl.getServTime();
-						 service.add(rl.getServName()+" ");
-					 }
+						List<Integer> servNolistM =new ArrayList<Integer>();
+						List<Integer> servNolistS =new ArrayList<Integer>();
+						List<String> service = new <String>ArrayList();
+						for (ReservListVO rl : reserv.getReservlists()) {
+							totalTime += rl.getServTime();
+							service.add(rl.getServName() + " ");
+							if(rl.getServicesVO().getServNo() <2000){
+								servNolistM.add(rl.getServicesVO().getServNo());
+							}else
+								map.put("Radio",rl.getServicesVO().getServNo());
+						}
 					
 					int Endminute = (minute+totalTime)%60;
 					int EndHour =hour+ (minute+totalTime)/60;
@@ -218,10 +232,12 @@ public class ReservService {
 						map.put("End", EndHour+":"+Endminute);
 					
 					map.put("TotalTime", totalTime);
+					//map.put("Radio", servNolistS);
+					map.put("CheckBox", servNolistM);
 					map.put("Item", service);
 					map.put("License",reserv.getMembercarsVO().getCarLicense());
 					map.put("NoteC", reserv.getNoteC());
-					map.put("NoteC", reserv.getNotesE());
+					map.put("NoteE", reserv.getNotesE());
 					map.put("Status", reserv.getStatus());
 					list2.add(map);
 				}
@@ -243,6 +259,7 @@ public class ReservService {
 			int totalTime = 0;
 			Map map = new LinkedHashMap();
 			map.put("ReservNo", reserv.getReservNo());
+			//			map.put("servNo", reserv.getReservlists());
 			map.put("EmpName", reserv.getEmployeeVO().getEmployeeName());
 			map.put("EmpNo", reserv.getEmployeeVO().getEmployeeNo());
 			map.put("Year", year);
@@ -253,11 +270,16 @@ public class ReservService {
 				map.put("Start", hour + ":" + minute + '0');
 			else
 				map.put("Start", hour + ":" + minute);
-
+			List<Integer> servNolistM =new ArrayList<Integer>();
+			List<Integer> servNolistS =new ArrayList<Integer>();
 			List<String> service = new <String>ArrayList();
 			for (ReservListVO rl : reserv.getReservlists()) {
 				totalTime += rl.getServTime();
 				service.add(rl.getServName() + " ");
+				if(rl.getServicesVO().getServNo() <2000){
+					servNolistM.add(rl.getServicesVO().getServNo());
+				}else
+					map.put("Radio",rl.getServicesVO().getServNo());;
 			}
 
 			int Endminute = (minute + totalTime) % 60;
@@ -268,10 +290,12 @@ public class ReservService {
 				map.put("End", EndHour + ":" + Endminute);
 
 			map.put("TotalTime", totalTime);
+			//map.put("Radio", servNolistS);
+			map.put("CheckBox", servNolistM);
 			map.put("Item", service);
 			map.put("License", reserv.getMembercarsVO().getCarLicense());
 			map.put("NoteC", reserv.getNoteC());
-			map.put("NoteC", reserv.getNotesE());
+			map.put("NoteE", reserv.getNotesE());
 			map.put("Status", reserv.getStatus());
 			list2.add(map);
 		}

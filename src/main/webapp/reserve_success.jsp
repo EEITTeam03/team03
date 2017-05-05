@@ -73,6 +73,9 @@
 label {
 	font-size: 150%;
 }
+table, th, td {
+	font-size: 120%;
+}
 </style>
 </head>
 
@@ -136,7 +139,7 @@ label {
 
 	<!-- Header -->
 	<header>
-		<div style="position: absolute;opacity:0.3">
+		<div style="position: absolute; opacity: 0.3">
 			<video autoplay loop muted class="fillWidth" style="width: 100%;">
 
 				<source src="video/file.mp4" type="video/mp4" />
@@ -157,11 +160,10 @@ label {
 			</video>
 		</div>
 
-	
-	<div class="container">
-	<div style="height:10em">
-	</div>
-	</div>
+
+		<div class="container">
+			<div style="height: 10em"></div>
+		</div>
 
 
 	</header>
@@ -170,125 +172,120 @@ label {
 
 	<div class="container" style="width: 80%;">
 		<div class="row">
-			<h2 class="col-sm-offset-5">開始預約</h2>
+			<h2 class="col-sm-offset-5">預約成功</h2>
 		</div>
+		<div class="row">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>項目</th>
+						<th>內容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">預約人</th>
+						<td>${reserve.membercarsVO.memberInfoVO.memberName}</td>
+					</tr>
+					<tr>
+						<th scope="row">預約編號</th>
+						<td>${reserve.reservNo}</td>
+					</tr>
+					<tr>
+						<th scope="row">預約日期</th>
+						<td>${reserve.reservDateTime.time}</td>
+					</tr>
+					<tr>
+						<th scope="row">結束時間</th>
+						<td>${reserve.reservEndTime.time}</td>
+					</tr>
+					<tr>
+						<th scope="row">品牌</th>
+						<td>${reserve.membercarsVO.carTypeVO.brand}</td>
+					</tr>
+					<tr>
+						<th scope="row">型號</th>
+						<td>${reserve.membercarsVO.carTypeVO.carModel}</td>
+					</tr>
+					<tr>
+						<th scope="row">服務技師</th>
+						<td>${reserve.employeeVO.employeeName}</td>
+					</tr>
 
-		<div class="row col-sm-offset-2">
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<h2 class="col-sm-offset-5">服務明細</h2>
+		</div>
+		<div class="row">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>服務編號</th>
+						<th>服務名稱</th>
+						<th>服務價格</th>
+						<th>服務時間</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="aitem" items="${reserve.reservlists}">
+						<tr>
+							<td>${aitem.servicesVO.servNo}</td>
+							<td>${aitem.servicesVO.servName}</td>
+							<td>${aitem.servPrice}元</td>
+							<td>${aitem.servTime}分鐘</td>
+						</tr>
+						<c:set var="total" value="${total+aitem.servPrice}"></c:set>
+						<c:set var="range" value="${range+aitem.servTime}"></c:set>
+					</c:forEach>
 
-			<form class="form-horizontal" action="ReserveService">
-				<div class="form-group">
-					<label for="inputLicense" class="col-sm-2 control-label">車牌</label>
-					<div class="col-sm-6">
-						<input type="text" name="license" id="inputLicense"
-							class="form-control" placeholder="請輸入車牌" value="${param.license}">
-					</div>
-				</div>
-
-
-
-				<div class="form-group">
-					<label for="datepicker" class="col-sm-2 control-label">預約日期</label>
-					<div class="col-sm-6">
-						<input type="text" name="selectedDate" id="datepicker"
-							class="form-control" value="${param.selectedDate}"
-							placeholder="選擇日期">
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="selectedTime" class="col-sm-2 control-label">時間</label>
-					<div class="col-sm-6">
-						<input type="text" name="selectedTime" id="selectedTime"
-							class="form-control" value="${param.selectedTime}"
-							placeholder="選擇時間(HH:mm)">
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="service" class="col-sm-2 control-label">主要服務</label>
-					<div class="col-sm-6">
-						<select name="service" id="service" class="form-control">
-							<option id="2001" value="2001">2001</option>
-							<option id="2002" value="2002">2002</option>
-							<option id="2003" value="2003">2003</option>
-							<option id="2004" value="2004">2004</option>
-							<option id="2005" value="2005">2005</option>
-						</select>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="plus" class="col-sm-2 control-label">加選服務</label>
-					<div class="col-sm-6">
-						<select name="plus" id="plus" class="form-control"
-							multiple="multiple">
-							<option id="1001" value="1001">1001</option>
-							<option id="1002" value="1002">1002</option>
-							<option id="1003" value="1003">1003</option>
-							<option id="1004" value="1004">1004</option>
-						</select>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-sm-2 control-label">選擇員工</label>
-					<div class="col-sm-6">
-						<label class="radio-inline"><input type="radio"
-							name="empNo" value="1">1號員工</label> <label class="radio-inline"><input
-							type="radio" name="empNo" value="2">2號員工</label> <label
-							class="radio-inline"><input type="radio" name="empNo"
-							value="3">3號員工</label>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-4 col-sm-offset-3">
-						<input type="submit" value="送出預約" class="btn btn-xl">
-					</div>
-				</div>
-			</form>
-			<c:forEach var="msg" items="${errorMsg}">
-				<h3 class="col-sm-6 col-sm-offset-3" style="color: red">${msg}</h3>
-			</c:forEach>
+				</tbody>
+			</table>
+			<div class="col-sm-offset-8">
+				<h3>總金額: ${total} 元</h3>
+				<h3>總時間: ${range/60} 小時</h3>
+			</div>
 		</div>
 	</div>
 
 	<!-- Services Section -->
-<!-- 	<section id="services"> -->
-<!-- 		<div class="container"> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-lg-12 text-center"> -->
-<!-- 					<h2 class="section-heading">各類服務</h2> -->
-<!-- 					<h3 class="section-subheading text-muted">讓您可依照自身需求，選擇自己最適合的服務種類。</h3> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="row text-center"> -->
-<!-- 				<div class="col-md-4"> -->
-<!-- 					<span class="fa-stack fa-4x"> <i -->
-<!-- 						class="fa fa-circle fa-stack-2x text-primary"></i> <i -->
-<!-- 						class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i> -->
-<!-- 					</span> -->
-<!-- 					<h4 class="service-heading">現場服務</h4> -->
-<!-- 					<p class="text-muted">服務員現場為您安排，讓您聽美好音樂，品嚐美味甜點，悠閒等待您的愛車煥然一新。</p> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-md-4"> -->
-<!-- 					<span class="fa-stack fa-4x"> <i -->
-<!-- 						class="fa fa-circle fa-stack-2x text-primary"></i> <i -->
-<!-- 						class="fa fa-laptop fa-stack-1x fa-inverse"></i> -->
-<!-- 					</span> -->
-<!-- 					<h4 class="service-heading">預約服務</h4> -->
-<!-- 					<p class="text-muted">時間就是金錢，透過網路預約美容服務，讓愛車在指定時間內抵達，給予專業團隊立即為您服務。</p> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-md-4"> -->
-<!-- 					<span class="fa-stack fa-4x"> <i -->
-<!-- 						class="fa fa-circle fa-stack-2x text-primary"></i> <i -->
-<!-- 						class="fa fa-lock fa-stack-1x fa-inverse"></i> -->
-<!-- 					</span> -->
-<!-- 					<h4 class="service-heading">取還車服務</h4> -->
-<!-- 					<p class="text-muted">讓生活忙碌的您，無需為愛車美容奔波，本公司專業人員，將會前往您指定的地點取車，並在指定時間內完成美容服務送回指定地點。</p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</section> -->
+	<!-- 	<section id="services"> -->
+	<!-- 		<div class="container"> -->
+	<!-- 			<div class="row"> -->
+	<!-- 				<div class="col-lg-12 text-center"> -->
+	<!-- 					<h2 class="section-heading">各類服務</h2> -->
+	<!-- 					<h3 class="section-subheading text-muted">讓您可依照自身需求，選擇自己最適合的服務種類。</h3> -->
+	<!-- 				</div> -->
+	<!-- 			</div> -->
+	<!-- 			<div class="row text-center"> -->
+	<!-- 				<div class="col-md-4"> -->
+	<!-- 					<span class="fa-stack fa-4x"> <i -->
+	<!-- 						class="fa fa-circle fa-stack-2x text-primary"></i> <i -->
+	<!-- 						class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i> -->
+	<!-- 					</span> -->
+	<!-- 					<h4 class="service-heading">現場服務</h4> -->
+	<!-- 					<p class="text-muted">服務員現場為您安排，讓您聽美好音樂，品嚐美味甜點，悠閒等待您的愛車煥然一新。</p> -->
+	<!-- 				</div> -->
+	<!-- 				<div class="col-md-4"> -->
+	<!-- 					<span class="fa-stack fa-4x"> <i -->
+	<!-- 						class="fa fa-circle fa-stack-2x text-primary"></i> <i -->
+	<!-- 						class="fa fa-laptop fa-stack-1x fa-inverse"></i> -->
+	<!-- 					</span> -->
+	<!-- 					<h4 class="service-heading">預約服務</h4> -->
+	<!-- 					<p class="text-muted">時間就是金錢，透過網路預約美容服務，讓愛車在指定時間內抵達，給予專業團隊立即為您服務。</p> -->
+	<!-- 				</div> -->
+	<!-- 				<div class="col-md-4"> -->
+	<!-- 					<span class="fa-stack fa-4x"> <i -->
+	<!-- 						class="fa fa-circle fa-stack-2x text-primary"></i> <i -->
+	<!-- 						class="fa fa-lock fa-stack-1x fa-inverse"></i> -->
+	<!-- 					</span> -->
+	<!-- 					<h4 class="service-heading">取還車服務</h4> -->
+	<!-- 					<p class="text-muted">讓生活忙碌的您，無需為愛車美容奔波，本公司專業人員，將會前往您指定的地點取車，並在指定時間內完成美容服務送回指定地點。</p> -->
+	<!-- 				</div> -->
+	<!-- 			</div> -->
+	<!-- 		</div> -->
+	<!-- 	</section> -->
 
 
 

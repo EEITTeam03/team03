@@ -52,7 +52,7 @@
 		</table>
 		<br> 
 		<input type="hidden" name="action" value="update"> 
-		<input type="hidden" name="servNo" value="${serviceStepVO.getServicesVO().getServNo}"> 
+		<input type="hidden" name="servStepNo" value="${serviceStepVO.servStepNo}"> 
 		<input type="submit" value="送出修改">
 	</FORM>
 </body>

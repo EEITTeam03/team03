@@ -9,17 +9,21 @@ public class EmployeeService {
 	public EmployeeService(){
 		dao = new EmployeeDAO();
 	}
-	public EmployeeVO addEmp(Integer employeeNo,String employeeName){
+	public EmployeeVO addEmp(Integer employeeNo,String employeeName,byte[] employeePhoto,String employeeDesc){
 		EmployeeVO emp = new EmployeeVO();
 		emp.setEmployeeNo(employeeNo);
 		emp.setEmployeeName(employeeName);
+		emp.setEmployeePhoto(employeePhoto);
+		emp.setEmployeeDesc(employeeDesc);
 		dao.insert(emp);
 		return emp;
 	}
-	public EmployeeVO updateEmp(Integer employeeNo,String employeeName){
+	public EmployeeVO updateEmp(Integer employeeNo,String employeeName,byte[] employeePhoto,String employeeDesc){
 		EmployeeVO emp = new EmployeeVO();
 		emp.setEmployeeNo(employeeNo);
 		emp.setEmployeeName(employeeName);
+		emp.setEmployeePhoto(employeePhoto);
+		emp.setEmployeeDesc(employeeDesc);
 		dao.update(emp);
 		return emp;
 	}
