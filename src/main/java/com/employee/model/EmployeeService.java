@@ -1,6 +1,10 @@
 package com.employee.model;
 
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.schedule.model.ReservVO;
 
@@ -36,5 +40,23 @@ public class EmployeeService {
 	
 	public EmployeeVO getOneEmp(Integer employeeNo) {
 		return dao.findByPrimaryKey(employeeNo);
+	}
+	public List<Map> getEmpJSON(){
+		List<EmployeeVO>list = dao.getAll();
+		List<Map>mapList = new ArrayList<Map>();
+		Map map = null;
+		String str= null;
+		for(EmployeeVO empVO:list){
+			map = new LinkedHashMap();
+			map.put("empNo",empVO.getEmployeeNo() );
+			map.put("empName", empVO.getEmployeeName());
+			if(empVO.getEmployeePhoto()!=null){
+			str = Base64.getEncoder().encodeToString(empVO.getEmployeePhoto());
+			map.put("empPhoto", str);
+			}
+			map.put("employeeDesc", empVO.getEmployeeDesc());
+			mapList.add(map);
+		}
+		return mapList;
 	}
 }
