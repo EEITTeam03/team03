@@ -82,8 +82,8 @@ public class JavaMail extends HttpServlet {
 		   Message message = new MimeMessage(session);
 		   message.setFrom(new InternetAddress("eeit9306@gmail.com"));
 		   message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		   message.setSubject("你的密碼已寄送");
-		   message.setText("Dear "+userName+", \n\n 您的密碼是"+str);
+		   message.setSubject("Check your password");
+		   message.setText("Dear "+userName+", \n\n your password is "+str);
 
 		   Transport transport = session.getTransport("smtp");
 		   transport.connect(host, port, username, password);

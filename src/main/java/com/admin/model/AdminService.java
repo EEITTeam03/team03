@@ -19,19 +19,21 @@ public class AdminService {
 	public List<AdminVO>getALL(){
 		return dao.getAll();
 	}
-	public AdminVO insertAdmin(String email,String password,String name){
+	public AdminVO insertAdmin(String email,String password,String name,Integer authority){
 		AdminVO adminVO = new AdminVO();
 		adminVO.setEmail(email);
 		adminVO.setName(name);
 		adminVO.setPassword(password);
+		adminVO.setAuthority(authority);
 		dao.insert(adminVO);
 		return  adminVO;
 	}
-	public AdminVO updateAdmin(String email,String password,String name){
+	public AdminVO updateAdmin(String email,String password,String name,Integer authority){
 		AdminVO adminVO = new AdminVO();
 		adminVO.setEmail(email);
 		adminVO.setName(name);
 		adminVO.setPassword(password);
+		adminVO.setAuthority(authority);
 		dao.update(adminVO);
 		return  dao.findByPK(email);
 	}

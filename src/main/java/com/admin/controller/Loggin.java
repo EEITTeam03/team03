@@ -101,7 +101,7 @@ public class Loggin extends HttpServlet {
 						//後台網頁還沒做好所以先連到index
 						//後台網頁還沒做好所以先連到index
 						//後台網頁還沒做好所以先連到index
-						request.getContextPath()+"/index.jsp"));
+						request.getContextPath()+"/admin/admin_default.jsp"));
 				return;
 			}
 		} else {
