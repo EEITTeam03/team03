@@ -20,23 +20,23 @@ public class MemberService {
 		return dao.findMember(email, password);
 	}
 	
-	public MemberInfoVO insertmem(String memberName, String password, String email, String phone, java.sql.Date birthday, String address, java.sql.Date effectiveDate) {
-
-		MemberInfoVO memberinfoVO = new MemberInfoVO();
-
-		memberinfoVO.setMemberName(memberName);
-		memberinfoVO.setEmail(email);
-		memberinfoVO.setPassword(password);
-		memberinfoVO.setPhone(phone);
-		memberinfoVO.setBirthday(birthday);
-		memberinfoVO.setAddress(address);
-		memberinfoVO.setEffectiveDate(effectiveDate);
-		
-
-		dao.insert(memberinfoVO);
-
-		return memberinfoVO;
-	}
+//	public MemberInfoVO insertmem(String memberName, String password, String email, String phone, java.sql.Date birthday, String address, java.sql.Date effectiveDate) {
+//
+//		MemberInfoVO memberinfoVO = new MemberInfoVO();
+//
+//		memberinfoVO.setMemberName(memberName);
+//		memberinfoVO.setEmail(email);
+//		memberinfoVO.setPassword(password);
+//		memberinfoVO.setPhone(phone);
+//		memberinfoVO.setBirthday(birthday);
+//		memberinfoVO.setAddress(address);
+//		memberinfoVO.setEffectiveDate(effectiveDate);
+//		
+//
+//		dao.insert(memberinfoVO);
+//
+//		return memberinfoVO;
+//	}
 	
 	public MemberInfoVO insertMemAndCar
 		(String memberName,String email , String password, String phone, java.sql.Date birthday, 
@@ -68,10 +68,10 @@ public class MemberService {
 		return memberinfoVO;
 	}
 
-	public MemberInfoVO updatemem(Integer memberNo, String email, String password, String memberName, String phone, java.sql.Date birthday, String address) {
+	public MemberInfoVO updateMem(Integer memberNo, String memberName, String email, String password, String phone,
+			java.sql.Date birthday, String address, java.sql.Date effectiveDate) {
 
 		MemberInfoVO memberinfoVO = new MemberInfoVO();
-
 		memberinfoVO.setMemberNo(memberNo);
 		memberinfoVO.setMemberName(memberName);
 		memberinfoVO.setEmail(email);
@@ -79,14 +79,15 @@ public class MemberService {
 		memberinfoVO.setPhone(phone);
 		memberinfoVO.setBirthday(birthday);
 		memberinfoVO.setAddress(address);
-		
-
+		memberinfoVO.setEffectiveDate(effectiveDate);
+		memberinfoVO.setMemberCars(dao.findByPK(memberNo).getMemberCars());
+//		memberinfoVO.setBlockLists(dao.findByPK(memberNo).getBlockLists());
 		dao.update(memberinfoVO);
 
 		return dao.findByPK(memberNo);
 	}
 
-	public void deleteEmp(Integer memberNo) {
+	public void deleteMem(Integer memberNo) {
 		dao.delete(memberNo);
 	}
 

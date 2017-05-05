@@ -13,7 +13,7 @@
 	<property name="birthday" column="birthday" />
 	<property name="address" column="address" />
 	<property name="effectiveDate" column="effectiveDate" />
-	<set name="memberCars" table="member_cars" lazy="false" cascade="all" >			
+	<set name="memberCars" table="member_cars" lazy="true" cascade="all" >			
 			<key>
 				<column name="memberNo" />
 			</key>
