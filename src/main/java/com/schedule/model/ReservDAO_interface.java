@@ -18,5 +18,9 @@ public interface ReservDAO_interface {
 	public List<ReservVO> findByDateAndEmp(Calendar cal,Integer empNo);
 	public List<Object>getAllOrderByTime(Calendar cal);
 	public List<ReservVO> findTimeByDate(Calendar cal);
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
 }

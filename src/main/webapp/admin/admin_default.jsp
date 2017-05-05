@@ -90,7 +90,7 @@ ul[class*="nav navbar-nav side-nav"] {
                         <a href="#"><i class="fa fa-car"></i> 管理工作排程</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-table"></i> 維護服務項目</a>
+                        <a href="../services/SelectServices.jsp"><i class="fa fa-fw fa-table"></i> 維護服務項目</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a>

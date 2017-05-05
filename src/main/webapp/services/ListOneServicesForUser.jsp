@@ -10,7 +10,7 @@
 <title>服務單筆資料</title>
 </head>
 <body bgcolor='white'>
-	<table border='1' width='800'>
+<table border='1' width='800'>
 		<thead align='center' valign='middle'>
 			<tr>
 				<td>所有服務資料</td>
@@ -29,7 +29,6 @@
 			<th>服務狀態</th>
 			<th>服務描述</th>
 			<th>服務照片</th>
-			<th colspan="2">選項</th>
 		</tr>
 		<tr align='center' valign='middle'>
 			<td>${servicesVO.servNo}</td>
@@ -38,30 +37,17 @@
 			<td>${servicesVO.servEffectiveDate}</td>
 			<td>${servicesVO.servStatus}</td>
 			<td>${servicesVO.servDesc}</td>
-			<td><c:choose>
-					<c:when test="${servicesVO.servPhoto !=null}">
-						<img
-							src='data:image/jpeg;base64,${Base64.getEncoder().encodeToString(servicesVO.servPhoto)}'
-							width="150" />
-					</c:when>
-					<c:when test="${servicesVO.servPhoto==null}">
+			<td>
+			<c:choose>
+				<c:when test="${servicesVO.servPhoto !=null}">
+					<img src='data:image/jpeg;base64,${Base64.getEncoder().encodeToString(servicesVO.servPhoto)}' width="150"/>
+				</c:when>
+				<c:when test="${servicesVO.servPhoto==null}">
 					沒有服務照片
 				</c:when>
-				</c:choose></td>
-			<td>
-				<FORM METHOD="post" ACTION="services.do">
-					<input type="submit" value="修改"> <input type="hidden"
-						name="servNo" value="${servicesVO.servNo}"> <input
-						type="hidden" name="action" value="getOne_For_Update">
-				</FORM>
+			</c:choose>
 			</td>
-			<td>
-				<FORM METHOD="post" ACTION="services.do">
-					<input type="submit" value="下架"> <input type="hidden"
-						name="servNo" value="${servicesVO.servNo}"> <input
-						type="hidden" name="action" value="offshelf">
-				</FORM>
-			</td>
+
 		</tr>
 	</table>
 

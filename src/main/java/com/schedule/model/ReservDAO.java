@@ -71,8 +71,13 @@ public class ReservDAO implements ReservDAO_interface {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ReservDAO dao = new ReservDAO();
+<<<<<<< HEAD
 //
 		//測findTimeByDate
+=======
+//
+		//測findTimeByDate
+>>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
 //		Calendar cal = Calendar.getInstance();
 //		cal.set(2017,4,10);
 //		

@@ -181,9 +181,16 @@ public class ServicesInsert extends HttpServlet {
 					return;
 				}
 				request.setAttribute("servicesVO", svoForDisplay);
-				String url = "ListOneServices.jsp";
-				RequestDispatcher successView = request.getRequestDispatcher(url);
-				successView.forward(request, response);
+				if(svoForDisplay.getServStatus()=="1"){
+					String url = "ListOneServicesForUser.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+				}else{
+					String url = "ListOneServices.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+				}
+				
 			} catch (Exception e) {
 				errorMsg.put("errorInfo", "無法取得資料");
 				RequestDispatcher fauilerView = request.getRequestDispatcher("SelectServices.jsp");

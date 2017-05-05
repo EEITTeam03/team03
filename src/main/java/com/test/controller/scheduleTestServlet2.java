@@ -27,14 +27,14 @@ import com.schedule.model.ReservVO;
 /**
  * Servlet implementation class scheduleTestServlet
  */
-@WebServlet("/test/scheduleTestServlet")
-public class scheduleTestServlet extends HttpServlet {
+@WebServlet("/test/scheduleTestServlet2")
+public class scheduleTestServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public scheduleTestServlet() {
+    public scheduleTestServlet2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -55,6 +55,10 @@ public class scheduleTestServlet extends HttpServlet {
 		System.out.println("結束時間:"+getLocalTimeFromUTC(map.get("end")).getTime());		//從頁面得到的資料與預約訂單有時差8小時
 		System.out.println("車牌:"+map.get("subject"));
 		System.out.println("服務項目(一或多筆):"+map.get("description"));
+		
+		System.out.println("這是測試1:"+map.get("test1"));
+		System.out.println("這是測試2:"+map.get("test2"));
+		System.out.println("這是測試3:"+map.get("test3"));
 //		System.out.println("訂單狀態:"+map.get("status"));	//暫無
 		System.out.println("-------------------------------------------------");
 			
@@ -86,3 +90,4 @@ public class scheduleTestServlet extends HttpServlet {
 		  return cal;
 	}
 }
+
