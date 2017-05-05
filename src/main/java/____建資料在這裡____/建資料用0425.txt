@@ -107,19 +107,23 @@ CREATE TABLE [dbo].[car_type](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[employee]    Script Date: 2017/4/24 下午 08:57:29 ******/
+/****** Object:  Table [dbo].[employee]    Script Date: 2017/5/5 上午 10:45:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+SET ANSI_PADDING ON
+GO
 CREATE TABLE [dbo].[employee](
 	[employeeNo] [nvarchar](4) NOT NULL,
 	[employeeName] [nvarchar](30) NOT NULL,
+	[employeeDesc] [nvarchar](200) NULL,
+	[employeePhoto] [varbinary](max) NULL,
  CONSTRAINT [PK_employee] PRIMARY KEY CLUSTERED 
 (
 	[employeeNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
 /****** Object:  Table [dbo].[feedback]    Script Date: 2017/4/24 下午 08:57:29 ******/
@@ -674,9 +678,9 @@ INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass], [carLogo]) 
 INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass], [carLogo]) VALUES (N'5917', N'VW 福斯', N'Touareg', N'XL', NULL)
 INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass], [carLogo]) VALUES (N'5918', N'VW 福斯', N'Touran', N'XL', NULL)
 INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass], [carLogo]) VALUES (N'5919', N'VW 福斯', N'Vento', N'S', NULL)
-INSERT [dbo].[employee] ([employeeNo], [employeeName]) VALUES (N'1', N'周柏元')
-INSERT [dbo].[employee] ([employeeNo], [employeeName]) VALUES (N'2', N'陳致鈞')
-INSERT [dbo].[employee] ([employeeNo], [employeeName]) VALUES (N'3', N'蕭天怡')
+INSERT [dbo].[employee] ([employeeNo], [employeeName], [employeeDesc], [employeePhoto]) VALUES (N'1', N'周柏元', N'入行年資：5年多，具有日本鍍膜協會（Japan Coating Association)專業技術認證', NULL)
+INSERT [dbo].[employee] ([employeeNo], [employeeName], [employeeDesc], [employeePhoto]) VALUES (N'2', N'陳致鈞', N'入行年資：3年多，具有丙級車輛塗裝技術士證照', NULL)
+INSERT [dbo].[employee] ([employeeNo], [employeeName], [employeeDesc], [employeePhoto]) VALUES (N'3', N'蕭天怡', N'入行年資：4年多，具有汽車檢驗員證照', NULL)
 INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (9, N'0536-XB', N'1406')
 INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (3, N'2113-JL', N'2102')
 INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (2, N'2S-1485', N'1501')
