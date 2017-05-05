@@ -55,14 +55,14 @@ public class ServiceStepServlet extends HttpServlet {
 		}
 		if ("update".equals(action)) {
 			try {
-				Integer servNo = new Integer(request.getParameter("servNo"));
-				Integer servStep = Integer.valueOf(request.getParameter("servStep"));
+				Integer servStepNo = new Integer(request.getParameter("servStepNo"));
+				Integer servNo = Integer.valueOf(request.getParameter("servNo"));
 				String stepName = request.getParameter("stepName");
 				String stepDescp = request.getParameter("stepDescp");
 
 				byte[] stepPic = null;
 				ServiceStepVO serviceStepVO = new ServiceStepVO();
-				Integer servStepNo = serviceStepVO.getServStepNo();
+				Integer servStep = serviceStepVO.getServStep();
 				String fileName = "";
 
 				long sizeInBytes = 0;
@@ -100,14 +100,14 @@ public class ServiceStepServlet extends HttpServlet {
 				serviceStepVO.setStepPic(stepPic);
 				serviceStepVO.setServStep(servStepNo);
 				serviceStepVO.setServStep(servStep);
-				if (!errorMsg.isEmpty()) {
-					request.setAttribute("servicesVO", servicesVO); // 含有輸入格式錯誤的ServicesVOO物件,也存入request
-					RequestDispatcher failureView = request.getRequestDispatcher("/services/UpdateServiceStep.jsp");
-					failureView.forward(request, response);
-					return; // 程式中斷
-				}
+//				if (!errorMsg.isEmpty()) {
+//					request.setAttribute("servicesVO", servicesVO); // 含有輸入格式錯誤的ServicesVOO物件,也存入request
+//					RequestDispatcher failureView = request.getRequestDispatcher("/services/UpdateServiceStep.jsp");
+//					failureView.forward(request, response);
+//					return; // 程式中斷
+//				}
 				ServiceStepService sss = new ServiceStepService();
-				serviceStepVO = sss.updateServiceStep(servStepNo, stepName, stepDescp, stepPic, servStepNo, servicesVO);
+				serviceStepVO = sss.updateServiceStep(servStep, stepName, stepDescp, stepPic, servStepNo, servicesVO);
 				request.setAttribute("serviceStepVO", serviceStepVO);
 				String url = "ListAllServiceStep.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);

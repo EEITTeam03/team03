@@ -10,4 +10,6 @@ public interface ServiceStepDAO_interface {
 	public void delete(Integer servNo);
 	public ServiceStepVO findByPrimaryKey(Integer servNo);
 	public List<ServiceStepVO> getAll();
+	
+	public ServiceStepVO findByPrimaryKeyServStepNo(Integer servStepNo);
 }

@@ -77,6 +77,7 @@ public class ServicesService {
 	public List<ServicesVO> getAll() {
 		return dao.getAll();
 	}
+
 	public List<ServicesVO> getAllForUser() {
 		return dao.getAllForUser();
 	}
@@ -91,13 +92,16 @@ public class ServicesService {
 		List<Map> list2 = new ArrayList<Map>();
 
 		for (ServicesVO asvo : list) {
+			String s = "0";
 			if (asvo.getServPhoto() == null) {
+				continue;
+			} else if (asvo.getServStatus().equals(s)) {
 				continue;
 			}
 			Map map = new LinkedHashMap<>();
-			map.put("服務描述", asvo.getServDesc().replace("\n", "").replace("\r", ""));
-			map.put("服務名稱", asvo.getServName());
-			map.put("照片", Base64.getEncoder().encodeToString(asvo.getServPhoto()));
+			map.put("servDesc", asvo.getServDesc().replace("\n", "").replace("\r", ""));
+			map.put("servName", asvo.getServName());
+			map.put("servPhoto", Base64.getEncoder().encodeToString(asvo.getServPhoto()));
 			// map.put(key, value);
 			list2.add(map);
 		}
@@ -158,4 +162,35 @@ public class ServicesService {
 		}
 	}
 
+	public List<Map> getServicesForRadio() {
+		List<ServicesVO> list = dao.getAll();
+
+		List<Map> list2 = new ArrayList<Map>();
+
+		for (ServicesVO asvo : list) {
+			Map map = new LinkedHashMap<>();
+			if (asvo.getServNo() > 2000) {
+				map.put("ServNo", asvo.getServNo());
+				map.put("ServName", asvo.getServName());
+				list2.add(map);
+			}
+		}
+		return list2;
+	}
+
+	public List<Map> getServicesForCheckbox() {
+		List<ServicesVO> list = dao.getAll();
+
+		List<Map> list2 = new ArrayList<Map>();
+
+		for (ServicesVO asvo : list) {
+			Map map = new LinkedHashMap<>();
+			if (asvo.getServNo() < 2000) {
+				map.put("ServNo", asvo.getServNo());
+				map.put("ServName", asvo.getServName());
+				list2.add(map);
+			}
+		}
+		return list2;
+	}
 }

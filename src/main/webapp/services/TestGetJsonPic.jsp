@@ -15,11 +15,11 @@
 			$.getJSON('TestGetJsonPic', function(datas) {
 				$.each(datas, function(i, pic) {
 					var x = $("<img/>");
-					x.attr('src', 'data:image/jpeg;base64,' + pic.照片);
+					x.attr('src', 'data:image/jpeg;base64,' + pic.servPhoto);
 					x.attr("width", "180");
 					x.attr("height", "180");
-					var y = $("<h6></h6>").text("服務描述:" + pic.服務描述);
-					var z = $("<h1></h1>").text("服務名稱:" + pic.服務名稱);
+					var y = $("<h6></h6>").text("服務描述:" + pic.servDesc);
+					var z = $("<h1></h1>").text("服務名稱:" + pic.servName);
 					$('body').append(z).append(x).append(y);
 				})
 

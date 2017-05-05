@@ -88,4 +88,19 @@ public class ServiceStepDAO_Hibernate implements ServiceStepDAO_interface {
 		}
 		return list;
 	}
+
+	@Override
+	public ServiceStepVO findByPrimaryKeyServStepNo(Integer servStepNo) {
+		ServiceStepVO serviceStepVO = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			serviceStepVO = (ServiceStepVO) session.get(ServiceStepVO.class, servStepNo);
+			session.getTransaction().commit();
+		}catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return serviceStepVO;
+	}
 }
