@@ -309,12 +309,12 @@
                     {type:'weekView',
                      workTime:{	fromDayOfWeek: 1,
 	                        	toDayOfWeek: 6,		//工作日:一到六
-	                        	fromHour: 7,		//營業時間:7~19
-	                        	toHour: 19
+	                        	fromHour: 9,		//營業時間:9~21
+	                        	toHour: 21
 	                 },
 	                 timeRuler:{
-	                	 scaleStartHour : 7,		//頁面顯示時間
-	                	 scaleEndHour : 19,
+	                	 scaleStartHour : 9,		//頁面顯示時間
+	                	 scaleEndHour : 21,
 	                	 formatString  : "HH:mm"	//24小時制
 	                 }
                     },
@@ -384,6 +384,7 @@
     			var date = event.args.date; 
     			//alert("viewChange");
     			globalView = newViewType;
+    			dataClean();
     			dataSearch(date.toString().substring(0, 10),globalView);
     		});
     	}

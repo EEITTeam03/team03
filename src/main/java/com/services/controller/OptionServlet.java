@@ -28,7 +28,7 @@ public class OptionServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setHeader("content-type", "text/html;charset=UTF-8");
+		response.setHeader("content-type", "text/plain;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String option= request.getParameter("option");
