@@ -56,13 +56,13 @@ public class ServiceStepServlet extends HttpServlet {
 		if ("update".equals(action)) {
 			try {
 				Integer servStepNo = new Integer(request.getParameter("servStepNo"));
-				Integer servNo = Integer.valueOf(request.getParameter("servNo"));
+//				Integer servStepNo = servNo;
 				String stepName = request.getParameter("stepName");
 				String stepDescp = request.getParameter("stepDescp");
 
 				byte[] stepPic = null;
-				ServiceStepVO serviceStepVO = new ServiceStepVO();
-				Integer servStep = serviceStepVO.getServStep();
+				
+				Integer servStep = Integer.valueOf(request.getParameter("servStep"));
 				String fileName = "";
 
 				long sizeInBytes = 0;
@@ -93,8 +93,9 @@ public class ServiceStepServlet extends HttpServlet {
 					System.out.println("出錯啦!");
 				}
 				ServicesVO servicesVO = new ServicesVO();
-				servicesVO.setServNo(servNo);
-				serviceStepVO.setServicesVO(servicesVO);
+				ServiceStepVO serviceStepVO = new ServiceStepVO();
+				servicesVO.setServNo(servStepNo);
+//				serviceStepVO.setServicesVO(servicesVO);
 				serviceStepVO.setStepDescp(stepDescp);
 				serviceStepVO.setStepName(stepName);
 				serviceStepVO.setStepPic(stepPic);

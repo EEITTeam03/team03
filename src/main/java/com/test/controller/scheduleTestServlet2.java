@@ -49,17 +49,16 @@ public class scheduleTestServlet2 extends HttpServlet {
 		
 		HashMap<String,String> map = new HashMap<String,String>();
 		map = new Gson().fromJson(json, new TypeToken<HashMap<String,String>>() {}.getType());
-		System.out.println("reservNo:"+map.get("id"));
+		System.out.println("reservNo:"+map.get("id"));		//update.delete會收到原預約編號，save新增會收到系統產生的亂數ex:2025-25-30-21-22
 		System.out.println("師傅:"+map.get("calendar"));
 		System.out.println("起始時間:"+getLocalTimeFromUTC(map.get("start")).getTime());	//從頁面得到的資料與預約訂單有時差8小時
 		System.out.println("結束時間:"+getLocalTimeFromUTC(map.get("end")).getTime());		//從頁面得到的資料與預約訂單有時差8小時
 		System.out.println("車牌:"+map.get("subject"));
-		System.out.println("服務項目(一或多筆):"+map.get("description"));
+		System.out.println("NoteC與NoteE: "+map.get("description"));
 		
-		System.out.println("這是測試1:"+map.get("test1"));
-		System.out.println("這是測試2:"+map.get("test2"));
-		System.out.println("這是測試3:"+map.get("test3"));
-//		System.out.println("訂單狀態:"+map.get("status"));	//暫無
+		System.out.println("Status:"+map.get("status"));	//update.delete會收到原預約單的Status代碼，save新增會收到空的""
+		System.out.println("綜合服務(單選):"+map.get("serviceS"));
+		System.out.println("單一服務(多選):"+map.get("serviceM"));
 		System.out.println("-------------------------------------------------");
 			
 		PrintWriter out = response.getWriter();
