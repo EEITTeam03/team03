@@ -156,10 +156,10 @@ public class ReservService {
 					for (ReservListVO rl : reserv.getReservlists()) {
 						totalTime += rl.getServTime();
 						service.add(rl.getServName() + " ");
-						if(rl.getServicesVO().getServNo() <2000){
+						if(rl.getServicesVO().getServNo() < 2000){
 							servNolistM.add(rl.getServicesVO().getServNo());
 						}else
-							servNolistS.add(rl.getServicesVO().getServNo());
+							map.put("Radio",rl.getServicesVO().getServNo());
 					}
 				
 				int Endminute = (minute+totalTime)%60;
@@ -170,8 +170,8 @@ public class ReservService {
 					map.put("End", EndHour+":"+Endminute);
 				
 				map.put("TotalTime", totalTime);
-				map.put("CheckBox", servNolistS);
-				map.put("Radio", servNolistM);
+				//map.put("Radio", servNolistS);
+				map.put("CheckBox", servNolistM);
 				map.put("Item", service);
 				map.put("License",reserv.getMembercarsVO().getCarLicense());
 				map.put("NoteC", reserv.getNoteC());
@@ -221,7 +221,7 @@ public class ReservService {
 							if(rl.getServicesVO().getServNo() <2000){
 								servNolistM.add(rl.getServicesVO().getServNo());
 							}else
-								servNolistS.add(rl.getServicesVO().getServNo());
+								map.put("Radio",rl.getServicesVO().getServNo());
 						}
 					
 					int Endminute = (minute+totalTime)%60;
@@ -232,8 +232,8 @@ public class ReservService {
 						map.put("End", EndHour+":"+Endminute);
 					
 					map.put("TotalTime", totalTime);
-					map.put("CheckBox", servNolistS);
-					map.put("Radio", servNolistM);
+					//map.put("Radio", servNolistS);
+					map.put("CheckBox", servNolistM);
 					map.put("Item", service);
 					map.put("License",reserv.getMembercarsVO().getCarLicense());
 					map.put("NoteC", reserv.getNoteC());
@@ -279,7 +279,7 @@ public class ReservService {
 				if(rl.getServicesVO().getServNo() <2000){
 					servNolistM.add(rl.getServicesVO().getServNo());
 				}else
-					servNolistS.add(rl.getServicesVO().getServNo());
+					map.put("Radio",rl.getServicesVO().getServNo());;
 			}
 
 			int Endminute = (minute + totalTime) % 60;
@@ -290,8 +290,8 @@ public class ReservService {
 				map.put("End", EndHour + ":" + Endminute);
 
 			map.put("TotalTime", totalTime);
-			map.put("CheckBox", servNolistS);
-			map.put("Radio", servNolistM);
+			//map.put("Radio", servNolistS);
+			map.put("CheckBox", servNolistM);
 			map.put("Item", service);
 			map.put("License", reserv.getMembercarsVO().getCarLicense());
 			map.put("NoteC", reserv.getNoteC());
