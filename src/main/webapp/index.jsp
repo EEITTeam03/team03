@@ -77,7 +77,14 @@
 		.btn:hover{
 			color: #fed136;
 		}
-		
+		.img-services{
+			width:360px;
+			height:260px;
+		}
+		.big-img-services{
+			width:700px;
+			height:500px;
+		}		
 	</style>
 
     
@@ -85,13 +92,14 @@
    		$(function(){
    			var snumber = 0;
    			
-   			$.getJSON('services.json',function(json){
-   				$.each(json.services,function(idx,services){
+   			$.getJSON('services/TestGetJsonPic',function(json){
+
+   				$.each(json,function(idx,services){
 						
 		   				//以下開始動態生成美容項目DIV
 		   						var servName = services.servName;
 		   						var servDesc = services.servDesc;
-
+		   						
 		   			   			var bigd = $("<div></div>").addClass("col-md-4 col-sm-6 portfolio-item");
 		   			   			   			   			
 		   			   			var mya = $("<a></a>").attr({"href":"#portfolioModal"+snumber,"data-toggle":"modal"}).addClass("portfolio-link");
@@ -100,7 +108,7 @@
 		   			   			var nd = $("<div></div>").addClass("portfolio-hover-content");
 		   			   			var ii = $("<div></div>").addClass("fa fa-plus fa-3x");
 		   			   			
-		   			   			var smallimg = $("<img>").addClass("img-responsive").attr({"src":"img/portfolio/roundicons.png","alt":""});
+		   			   			var smallimg = $("<img>").addClass("img-responsive img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":""});
 		   			   			   			
 		   			   			nd.append(ii);  
 		   			   			smalld.append(nd);
@@ -108,7 +116,7 @@
 		   			   			
 		   						var myd = $("<div></div>").addClass("portfolio-caption");
 		   			   			
-		   						var hword = $("<h4></h4>").text("我是測試");
+		   						var hword = $("<h4></h4>").text(servName);
 		   						var pword = $("<p></p>").addClass("text-muted").text("Graphic Design");
 		   						
 		   						myd.append([hword,pword]);
@@ -137,12 +145,12 @@
 		   						var crow = $("<div></div>");
 		   						var cco = $("<div></div>").addClass("col-lg-8 col-lg-offset-2");
 		   						var mb = $("<div></div>").addClass("modal-body");
-		   						var mbh = $("<h2></h2>").text("服務"+snumber);   		
-		   						var mimg = $("<img>").addClass("img-responsive img-centered").attr({"src":"img/portfolio/roundicons-free.png","alt":""});
-		   						var mbp = $("<p></p>").text("概述");
+		   						var mbh = $("<h2></h2>").text(servName);   		
+		   						var mimg = $("<img>").addClass("img-responsive img-centered big-img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":""});
+		   						var mbp = $("<p></p>").text(servDesc);
 		   						var bbp = $("<button></button>").attr({"type":"button","data-dismiss":"modal"}).addClass("btn btn-primary");
-		   						var fft = $("<i></i>").addClass("fa fa-times");
-		   						fft.after("離開");
+		   						var fft = $("<i></i>").addClass("fa fa-times").text("離開");
+		   						
 		   						
 		   						bbp.append(fft);
 		   						mb.append([mbh,mimg,mbp,bbp]);
