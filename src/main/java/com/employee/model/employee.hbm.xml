@@ -7,7 +7,8 @@
             
         </id>
         <property name="employeeName" column="employeeName" />
-        
+         <property name="employeeDesc" column="employeeDesc" />
+         <property name="employeePhoto" column="employeePhoto" />
         <set name = "reserves" table = "reserv" lazy="true" cascade="all" inverse="true" >
    			<key><column name="employeeNo"></column></key>
    			<one-to-many class="com.schedule.model.ReservVO"/>
