@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 
 <!--[if IE 6]>
 <html id="ie6" dir="ltr" lang="zh-TW">
@@ -264,13 +265,29 @@
                     <li>
                         <a class="page-scroll ff-word" href="#contact">聯絡我們</a>
                     </li>
-                    <li>
-                    	<button id="btn1" class="page-scroll ff-word button-out btn btn-xs" onclick="location.href='login.jsp'" style="padding:8px;margin:5px 10px 5px 10px">
-   		
+						<!--	未登入	-->
+				<c:if test="${empty Code}">                    
+                    <li>                    
+	                    <button id="btn1" class="page-scroll ff-word button-out btn btn-xs" onclick="location.href='login.jsp'" style="padding:7px;margin:5px 10px 5px 10px">
+	   		
 							<span class="glyphicon glyphicon-log-in"></span> 登入															
-                        
-                        </button>
-                    </li>                    
+	                        
+	                    </button>
+	                </li> 
+				</c:if>
+
+						<!--	已登入	-->
+				<c:if test="${!empty Code}">                    
+                    <li>                    
+	                    <button id="btn1" class="page-scroll ff-word button-out btn btn-xs" onclick="location.href='login.jsp'" style="padding:7px;margin:5px 10px 5px 10px">
+	   		
+							<span class="glyphicon glyphicon-log-in"></span> 登入															
+	                        
+	                    </button>
+	                </li> 
+				</c:if>							
+						
+           				                                      
                     <li>
                     	<button id="btn2" class="page-scroll ff-word button-out btn btn-xs" onclick="location.href='register.jsp'" style="padding:8px;margin:5px 10px 5px 10px">
    		
