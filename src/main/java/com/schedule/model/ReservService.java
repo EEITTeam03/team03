@@ -170,8 +170,8 @@ public class ReservService {
 					map.put("End", EndHour+":"+Endminute);
 				
 				map.put("TotalTime", totalTime);
-				map.put("CheckBox", servNolistS);
-				map.put("Radio", servNolistM);
+				map.put("Radio", servNolistS);
+				map.put("CheckBox", servNolistM);
 				map.put("Item", service);
 				map.put("License",reserv.getMembercarsVO().getCarLicense());
 				map.put("NoteC", reserv.getNoteC());
@@ -232,8 +232,8 @@ public class ReservService {
 						map.put("End", EndHour+":"+Endminute);
 					
 					map.put("TotalTime", totalTime);
-					map.put("CheckBox", servNolistS);
-					map.put("Radio", servNolistM);
+					map.put("Radio", servNolistS);
+					map.put("CheckBox", servNolistM);
 					map.put("Item", service);
 					map.put("License",reserv.getMembercarsVO().getCarLicense());
 					map.put("NoteC", reserv.getNoteC());
@@ -290,8 +290,8 @@ public class ReservService {
 				map.put("End", EndHour + ":" + Endminute);
 
 			map.put("TotalTime", totalTime);
-			map.put("CheckBox", servNolistS);
-			map.put("Radio", servNolistM);
+			map.put("Radio", servNolistS);
+			map.put("CheckBox", servNolistM);
 			map.put("Item", service);
 			map.put("License", reserv.getMembercarsVO().getCarLicense());
 			map.put("NoteC", reserv.getNoteC());
