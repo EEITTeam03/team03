@@ -10,6 +10,7 @@ import com.services.model.ServicesVO;
 
 public class ServiceStepDAO_Hibernate implements ServiceStepDAO_interface {
 	private static final String GET_ALL_STMT = "FROM ServiceStepVO order by servNo";
+	private static final String GET_ONE_STMT = "FROM ServiceStepVO order by servNo=?";
 	private static final String DELETE = "DELETE ServicesVO WHERE servNo=?";
 
 	@Override
@@ -71,6 +72,22 @@ public class ServiceStepDAO_Hibernate implements ServiceStepDAO_interface {
 		return serviceStepVO;
 
 	}
+	@Override
+	public List<ServiceStepVO> findByServNo() {
+		List<ServiceStepVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query=session.createQuery(GET_ONE_STMT);
+			list=query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return list;
+
+	}
 
 	@Override
 	public List<ServiceStepVO> getAll() {
@@ -103,4 +120,6 @@ public class ServiceStepDAO_Hibernate implements ServiceStepDAO_interface {
 		}
 		return serviceStepVO;
 	}
+
+	
 }

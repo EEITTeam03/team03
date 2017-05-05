@@ -68,4 +68,7 @@ public class ServiceStepService {
 	public List<ServiceStepVO> getAll() {
 		return dao.getAll();
 	}
+	public List<ServiceStepVO> getfindbyServNO() {
+		return dao.findByServNo();
+	}
 }

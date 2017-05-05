@@ -120,7 +120,26 @@ public class ServiceStepServlet extends HttpServlet {
 				failureView.forward(request, response);
 			}
 		}
-
+		
+		if("getOne_For_Display".equals(action)){
+			String str = request.getParameter("servNo");
+			Integer servNo=null;
+			servNo = new Integer(str);
+			ServiceStepService sssForDisplay=new ServiceStepService();
+			ServiceStepVO ssvoForDisplay=sssForDisplay.getOneServiceStep(servNo);
+			if(ssvoForDisplay==null){
+				errorMsg.put("errorservNo", "查無資料");
+			}
+			if(!errorMsg.isEmpty()){
+				RequestDispatcher fauilerView = request.getRequestDispatcher("SelectServices.jsp");
+				fauilerView.forward(request, response);
+				return;
+			}
+			request.setAttribute("serviceStepVO", ssvoForDisplay);
+			String url ="ListOneServiceStep.jsp";
+			RequestDispatcher successView=request.getRequestDispatcher(url);
+			successView.forward(request, response);
+		}
 	}
 
 }

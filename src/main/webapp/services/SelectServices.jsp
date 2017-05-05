@@ -104,7 +104,7 @@ ul[class*="nav navbar-nav side-nav"] {
                     </li>
 
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> 維護名單<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="#" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> 維護名單<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
                                 <a href="#">會員</a>
@@ -142,6 +142,9 @@ ul[class*="nav navbar-nav side-nav"] {
 <!--                             </li> -->
 <!--                         </ol> -->
                     </div>
+                    </div>
+                    
+            <div class="row">        
 <ul>
 	<li><a href='ListAllServices.jsp'>查看</a>所有服務 (後台)</li> <br><br>
 	<li><a href='ListAllServiceStep.jsp'>查看</a>所有服務步驟 (後台)</li> <br><br>

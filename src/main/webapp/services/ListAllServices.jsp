@@ -147,6 +147,8 @@ ul[class*="nav navbar-nav side-nav"] {
 <!--                             </li> -->
                          </ol>
                     </div>
+                    </div>
+                    <div class="row">
 	<table border='1' bordercolor='#CCCCFF' width='1600'>
 		<tr>
 			<th>服務編號</th>
