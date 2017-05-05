@@ -40,7 +40,7 @@ public class MemberServlet extends HttpServlet {
 				String password = req.getParameter("password");
 				String phone = req.getParameter("phone");
 				String address = req.getParameter("address");
-				String carLicense = req.getParameter("license");
+//				String carLicense = req.getParameter("license");
 
 				
 				if (name == null || name.trim().length() == 0) {
@@ -67,9 +67,9 @@ public class MemberServlet extends HttpServlet {
 				}
 				java.sql.Date effectiveDate =  new java.sql.Date(System.currentTimeMillis());
 				
-				if (carLicense == null || carLicense.trim().length() == 0) {
-					errorMsgMap.put("CarLicenseEmptyError", "請輸入車牌號碼");
-				}
+//				if (carLicense == null || carLicense.trim().length() == 0) {
+//					errorMsgMap.put("CarLicenseEmptyError", "請輸入車牌號碼");
+//				}
 
 				MemberInfoVO memberinfoVO = null;
 
@@ -84,10 +84,10 @@ public class MemberServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				MemberService memberSvc = new MemberService();
-				memberinfoVO = memberSvc.insertMemAndCar(name, email, password, phone, birthday, address, effectiveDate, carLicense);
+				memberinfoVO = memberSvc.insertMemAndCar(name, email, password, phone, birthday, address, effectiveDate);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/index.jsp";
+				String url = "carType.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
@@ -275,7 +275,7 @@ public class MemberServlet extends HttpServlet {
 			try {
 				/***************************1.接收請求參數**********************/
 				Integer memberNo = new Integer(req.getParameter("memberNo"));
-				
+//				String carLicense = req.getParameter("carLicense");
 				
 				/***************************2.開始刪除資料***************************************/
 				MemberService memberSvc = new MemberService();

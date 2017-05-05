@@ -6,14 +6,18 @@ import java.util.Set;
 
 import com.cartype.model.CarTypeHibernateDAO;
 import com.cartype.model.CarTypeVO;
+import com.membercars.model.MemberCarsDAO;
+import com.membercars.model.MemberCarsHibernateDAO;
 import com.membercars.model.MemberCarsVO;
 
 public class MemberService {
 	
 	private MemberInfoDAO dao;
+	private MemberCarsDAO dao1;
 
 	public MemberService() {
 		dao = new MemberInfoHibernateDAO();
+		dao1 = new MemberCarsHibernateDAO();
 	}
 
 	public List<MemberInfoVO> getMember(String email , String password){
@@ -40,7 +44,7 @@ public class MemberService {
 	
 	public MemberInfoVO insertMemAndCar
 		(String memberName,String email , String password, String phone, java.sql.Date birthday, 
-		 String address, java.sql.Date effectiveDate, String license) {
+		 String address, java.sql.Date effectiveDate) {
 		
 		MemberInfoVO memberinfoVO = new MemberInfoVO();
 		Set<MemberCarsVO> memberCars = new HashSet<MemberCarsVO>();
@@ -52,16 +56,16 @@ public class MemberService {
 		memberinfoVO.setBirthday(birthday);
 		memberinfoVO.setAddress(address);
 		memberinfoVO.setEffectiveDate(effectiveDate);
-		memberinfoVO.setMemberCars(memberCars);
+//		memberinfoVO.setMemberCars(memberCars);
 		
-		MemberCarsVO membercarsVO = new MemberCarsVO();
-		membercarsVO.setMemberInfoVO(memberinfoVO);
-		membercarsVO.setCarLicense(license);
-		CarTypeHibernateDAO ctdao = new CarTypeHibernateDAO();
-		CarTypeVO cartypeVO = ctdao.findByPK("1220");
-		membercarsVO.setCarTypeVO(cartypeVO);
-		
-		memberCars.add(membercarsVO);
+//		MemberCarsVO membercarsVO = new MemberCarsVO();
+//		membercarsVO.setMemberInfoVO(memberinfoVO);
+//		membercarsVO.setCarLicense(license);
+//		CarTypeHibernateDAO ctdao = new CarTypeHibernateDAO();
+//		CarTypeVO cartypeVO = ctdao.findByPK("1220");
+//		membercarsVO.setCarTypeVO(cartypeVO);
+//		
+//		memberCars.add(membercarsVO);
 		
 		dao.insert(memberinfoVO);
 
@@ -82,7 +86,7 @@ public class MemberService {
 		memberinfoVO.setAddress(address);
 		memberinfoVO.setEffectiveDate(effectiveDate);
 		memberinfoVO.setMemberCars(dao.findByPK(memberNo).getMemberCars());
-//		memberinfoVO.setBlockLists(dao.findByPK(memberNo).getBlockLists());
+		memberinfoVO.setBlockLists(dao.findByPK(memberNo).getBlockLists());
 	
 
 		
@@ -92,7 +96,19 @@ public class MemberService {
 		return dao.findByPK(memberNo);
 	}
 
-	public void deleteEmp(Integer memberNo) {
+	public void deleteMem(Integer memberNo) {
+		
+		MemberInfoVO memberinfoVO = new MemberInfoVO();
+//		MemberCarsVO membercarsVO = new MemberCarsVO();
+		
+		
+		memberinfoVO.setMemberNo(memberNo);
+//		membercarsVO.setMemberInfoVO(memberinfoVO);
+//		membercarsVO.setCarLicense(carLicense);
+
+//		memberinfoVO.setBlockLists(dao.findByPK(memberNo).getBlockLists());
+		
+//		dao1.delete(carLicense);
 		dao.delete(memberNo);
 	}
 

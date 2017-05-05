@@ -1,8 +1,12 @@
 package com.membercars.model;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.hibernate.Session;
+
+import com.memberinfo.model.MemberInfoVO;
+
 import hibernate.util.HibernateUtil;
 
 public class MemberCarsHibernateDAO implements MemberCarsDAO {
@@ -17,20 +21,13 @@ public class MemberCarsHibernateDAO implements MemberCarsDAO {
 	public void update(MemberCarsVO memberCarsVO) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-<<<<<<< HEAD
+
 		try{
 			session.beginTransaction();
 			session.saveOrUpdate(memberCarsVO);
 			session.getTransaction().commit();
 		}catch(RuntimeException ex){
 			ex.printStackTrace();
-=======
-		try {
-			session.beginTransaction();
-			session.saveOrUpdate(memberCarsVO);
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
->>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
 			session.getTransaction().rollback();
 			throw ex;
 		}
@@ -39,7 +36,17 @@ public class MemberCarsHibernateDAO implements MemberCarsDAO {
 	@Override
 	public void delete(String carLicense) {
 		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
+		try{
+			session.beginTransaction();
+			session.delete(carLicense);
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			ex.printStackTrace();
+			session.getTransaction().rollback();
+			throw ex;
+		}
 	}
 
 	@Override
@@ -59,6 +66,13 @@ public class MemberCarsHibernateDAO implements MemberCarsDAO {
 
 	@Override
 	public List<MemberCarsVO> listAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberInfoVO> findNewMember(String email, String password, String memberName, String phone,
+			Date birthday, String address, Date effectiveDate) {
 		// TODO Auto-generated method stub
 		return null;
 	}

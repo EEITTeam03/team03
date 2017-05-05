@@ -52,6 +52,7 @@ public class MemberInfoHibernateDAO implements MemberInfoDAO {
 			session.delete(memberInfoVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
+			ex.printStackTrace();
 			session.getTransaction().rollback();
 			throw ex;
 		}

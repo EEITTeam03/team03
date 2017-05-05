@@ -77,7 +77,7 @@ public class JavaMail extends HttpServlet {
 			  
 			  MemberService ms = new MemberService();
 			  String str = ms.randomPswd();
-			  ms.updatemem(mem.getMemberNo(), mem.getEmail(), str, mem.getMemberName(), mem.getPhone(), mem.getBirthday(), mem.getAddress());
+			  ms.updateMem(mem.getMemberNo(), mem.getEmail(), str, mem.getMemberName(), mem.getPhone(), mem.getBirthday(), mem.getAddress(), mem.getEffectiveDate());
 			  //ms.getOneByEmail(userId);	
 		   Message message = new MimeMessage(session);
 		   message.setFrom(new InternetAddress("eeit9306@gmail.com"));
