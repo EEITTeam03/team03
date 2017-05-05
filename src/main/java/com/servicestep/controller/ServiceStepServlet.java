@@ -1,9 +1,8 @@
 package com.servicestep.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -13,10 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
-import com.services.model.ServicesService;
-import com.services.model.ServicesVO;
 import com.servicestep.model.ServiceStepService;
 import com.servicestep.model.ServiceStepVO;
 
@@ -37,109 +33,32 @@ public class ServiceStepServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		Map<String, String> msgOK = new HashMap<String, String>();
-		
-		if ("getOne_For_Update".equals(action)) {
+		if ("getMany_ServiceStep_ByServNo".equals(action)) {
 			try {
-				Integer servNo = new Integer(request.getParameter("servNo"));
-				ServiceStepService sss = new ServiceStepService();
-				ServiceStepVO serviceStepVO = sss.getOneServiceStep(servNo);
-				request.setAttribute("serviceStepVO", serviceStepVO);
-				String url = "/services/UpdateServiceStep.jsp";
-				RequestDispatcher successView = request.getRequestDispatcher(url);
-				successView.forward(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-				RequestDispatcher failureView = request.getRequestDispatcher("/services/UpdateServiceStep.jsp");
-				failureView.forward(request, response);
-			}
-		}
-		if ("update".equals(action)) {
-			try {
-				Integer servStepNo = new Integer(request.getParameter("servStepNo"));
-//				Integer servStepNo = servNo;
-				String stepName = request.getParameter("stepName");
-				String stepDescp = request.getParameter("stepDescp");
-
-				byte[] stepPic = null;
-				
-				Integer servStep = Integer.valueOf(request.getParameter("servStep"));
-				String fileName = "";
-
-				long sizeInBytes = 0;
-				InputStream is = null;
-				Collection<Part> parts = request.getParts();
-				ServicesService.exploreParts(parts, request);
-				try {
-					for (Part p : parts) {
-						// String fldName = p.getName();
-						// String value = request.getParameter(fldName);
-						if (p.getContentType() != null) {
-							fileName = ServicesService.getFileName(p); // 此為圖片檔的檔名
-							fileName = ServicesService.adjustFileName(fileName, ServicesService.IMAGE_FILENAME_LENGTH);
-							if (fileName != null && fileName.trim().length() > 0) {
-								sizeInBytes = p.getSize();
-								is = p.getInputStream();
-								stepPic = new byte[is.available()];
-								is.read(stepPic);
-								is.close();
-								System.out.println("已上傳圖片");
-							} else {
-								errorMsg.put("errPicture", "必須挑選圖片檔");
-							}
-						}
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("出錯啦!");
+				String str = request.getParameter("servNo");
+				Integer servNo = Integer.valueOf(str);
+				ServiceStepService sssForDisplay = new ServiceStepService();
+				List<ServiceStepVO> serviceStepVO = sssForDisplay.getMoreServiceStepbyFK(servNo);
+				if (serviceStepVO == null) {
+					errorMsg.put("errorservNo", "查無資料");
 				}
-				ServicesVO servicesVO = new ServicesVO();
-				ServiceStepVO serviceStepVO = new ServiceStepVO();
-				servicesVO.setServNo(servStepNo);
-//				serviceStepVO.setServicesVO(servicesVO);
-				serviceStepVO.setStepDescp(stepDescp);
-				serviceStepVO.setStepName(stepName);
-				serviceStepVO.setStepPic(stepPic);
-				serviceStepVO.setServStep(servStepNo);
-				serviceStepVO.setServStep(servStep);
-//				if (!errorMsg.isEmpty()) {
-//					request.setAttribute("servicesVO", servicesVO); // 含有輸入格式錯誤的ServicesVOO物件,也存入request
-//					RequestDispatcher failureView = request.getRequestDispatcher("/services/UpdateServiceStep.jsp");
-//					failureView.forward(request, response);
-//					return; // 程式中斷
-//				}
-				ServiceStepService sss = new ServiceStepService();
-				serviceStepVO = sss.updateServiceStep(servStep, stepName, stepDescp, stepPic, servStepNo, servicesVO);
-				request.setAttribute("serviceStepVO", serviceStepVO);
-				String url = "ListAllServiceStep.jsp";
+				if (!errorMsg.isEmpty()) {
+					RequestDispatcher fauilerView = request.getRequestDispatcher("SelectServices.jsp");
+					fauilerView.forward(request, response);
+					return;
+				}
+				request.setAttribute("serviceStepList", serviceStepVO);
+
+				String url = "ListOneServiceStep.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);
 				successView.forward(request, response);
 			} catch (Exception e) {
-				e.printStackTrace();
-				errorMsg.put("errorservPhoto", "修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = request.getRequestDispatcher("/services/UpdateServiceStep.jsp");
-				failureView.forward(request, response);
-			}
-		}
-		
-		if("getOne_For_Display".equals(action)){
-			String str = request.getParameter("servNo");
-			Integer servNo=null;
-			servNo = new Integer(str);
-			ServiceStepService sssForDisplay=new ServiceStepService();
-			ServiceStepVO ssvoForDisplay=sssForDisplay.getOneServiceStep(servNo);
-			if(ssvoForDisplay==null){
-				errorMsg.put("errorservNo", "查無資料");
-			}
-			if(!errorMsg.isEmpty()){
+				errorMsg.put("errorInfo", "無法取得資料");
 				RequestDispatcher fauilerView = request.getRequestDispatcher("SelectServices.jsp");
 				fauilerView.forward(request, response);
-				return;
 			}
-			request.setAttribute("serviceStepVO", ssvoForDisplay);
-			String url ="ListOneServiceStep.jsp";
-			RequestDispatcher successView=request.getRequestDispatcher(url);
-			successView.forward(request, response);
-		}
-	}
 
+		}
+
+	}
 }

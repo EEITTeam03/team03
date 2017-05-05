@@ -26,7 +26,7 @@
 			<!-- 			<th>服務步驟編號</th> -->
 			<th>步驟描述</th>
 			<th>步驟照片</th>
-			<th colspan="2">選項</th>
+<!-- 			<th colspan="2">選項</th> -->
 		</tr>
 		<c:forEach var="serviceStepVO" items="${list}">
 			<tr align='center' valign='middle'>
