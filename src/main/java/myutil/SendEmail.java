@@ -35,12 +35,12 @@ public class SendEmail {
 			}
 		});
 		try {
-
+			int m = cal.get(Calendar.MONTH)+1;
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("eeit9306@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
 			message.setSubject("您的車明天有預約洗車服務");
-			message.setText("Dear " + userName + ", \n\n 您預約的時間是" + cal.get(Calendar.MONTH)+"月"
+			message.setText("Dear " + userName + ", \n\n 您預約的時間是" + m+"月"
 					+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE));
 
 			Transport transport = session.getTransport("smtp");
