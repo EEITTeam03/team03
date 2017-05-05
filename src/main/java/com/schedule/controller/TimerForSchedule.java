@@ -27,7 +27,7 @@ import myutil.SendEmail;
 @WebServlet(value="/Timer.do", loadOnStartup=1)
 public class TimerForSchedule extends HttpServlet {
 	Timer timer ; 
-    int count = 0;        
+//    int count = 0;        
     public void destroy(){
         timer.cancel();
     }
@@ -44,7 +44,7 @@ public class TimerForSchedule extends HttpServlet {
         ReservService rs = new ReservService();
         //List<Object>list = null;
             public void run(){
-                System.out.println("This is Task"+ count);
+//                System.out.println("This is Task"+ count);
                 System.out.println("工作排定的時間 = " + new Date(scheduledExecutionTime()));
                 System.out.println("工作執行的時間 = " + new Date() + "\n");                
                 Calendar calendar = Calendar.getInstance();
@@ -61,7 +61,7 @@ public class TimerForSchedule extends HttpServlet {
                 	}
                 }
 
-                count++;
+//                count++;
             }
         };
         timer.scheduleAtFixedRate(task, cal.getTime(), 60*60*1000*24); 
