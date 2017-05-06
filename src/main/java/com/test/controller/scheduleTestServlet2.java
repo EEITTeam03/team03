@@ -27,7 +27,7 @@ import com.schedule.model.ReservVO;
 /**
  * Servlet implementation class scheduleTestServlet
  */
-@WebServlet(urlPatterns = {"/scheduleTestServlet2","/admin/scheduleTestServlet2"})
+@WebServlet(urlPatterns = {"/admin/scheduleTestServlet2","/scheduleTestServlet2"})
 public class scheduleTestServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

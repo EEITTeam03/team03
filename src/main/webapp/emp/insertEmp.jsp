@@ -8,6 +8,7 @@
 <title>員工資料新增 </title>
 </head>
 <body>
+	<h1>新增員工資料</h1>
 	<c:if test = "${not empty errorMsgs}">
 	<font color = 'red'>請修正以下錯誤:
 	<ul>

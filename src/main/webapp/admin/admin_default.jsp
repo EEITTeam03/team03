@@ -16,6 +16,32 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- ***排程表引用開始*** -->
+   	<link rel="stylesheet" href="/team03/scheduleJS/jqwidgets/styles/jqx.base.css" type="text/css" />
+	<script type="text/javascript" src="/team03/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
+	<!-- ***排程表引用結束*** -->
+	<script type="text/javascript">
+		$(document).ready(function () {
+			init();
+		});	
+	
+		function init(){
+			initClick();
+		}
+		
+		function initClick(){
+			$('#a_scheduler').click(function(){
+				$('#contentDiv').load('/team03/scheduleTest3.jsp');
+			});
+			$('#XXX').click(function(){
+				//超連結連到xxx.jsp,顯示在contentDiv,如此jQuery.boostrap框架只需載入一次
+				//程式跟框架可分開修改
+				//引用的link.script使用絕對路徑.若資料夾不同servlet的urlpattrens也要注意
+				$('#contentDiv').load('/team03/XXX.jsp');
+			});
+		}
+	</script>
 
 <style>
 .fa {
@@ -87,13 +113,13 @@ ul[class*="nav navbar-nav side-nav"] {
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="#"><i class="fa fa-car"></i> 管理工作排程</a>
+                        <a href="#" id="a_scheduler" ><i class="fa fa-car"></i> 管理工作排程</a>
                     </li>
                     <li>
                         <a href="../services/SelectServices.jsp"><i class="fa fa-fw fa-table"></i> 維護服務項目</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a>
+                        <a href="#" id="a_test"><i class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-fw fa-edit"></i> 管理黑名單</a>
@@ -139,6 +165,14 @@ ul[class*="nav navbar-nav side-nav"] {
                         </ol>
                     </div>
                 </div>
+			<div class="row">
+          		<div class="col-lg-12">
+          			<div id="contentDiv">
+            		</div>
+          		
+          		
+          		</div>
+          </div>
                 <!-- /.row -->
                 
                 

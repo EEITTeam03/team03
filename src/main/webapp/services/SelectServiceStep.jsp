@@ -14,8 +14,8 @@
 		<li>
 		<FORM METHOD="post" ACTION="servicestep.do">
 				<b>選擇服務編號(後台):</b> <select size="1" name="servNo">
-					<c:forEach var="serviceStepVO" items="${sss.all}">
-						<option value="${serviceStepVO.servicesVO.servNo}">${serviceStepVO.servicesVO.servNo}
+					<c:forEach var="distInt" items="${sss.dist}">
+						<option value="${distInt}">${distInt}
 					</c:forEach>
 				</select> 
 				<input type="submit" value="送出"> 
