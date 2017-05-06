@@ -19,7 +19,7 @@ import com.employee.model.EmployeeVO;
 /**
  * Servlet implementation class GetEmpJSON
  */
-@WebServlet("/emp/GetEmpJSON.do")
+@WebServlet(urlPatterns = {"/emp/GetEmpJSON.do","/admin/emp/GetEmpJSON.do"})
 public class GetEmpJSON extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
