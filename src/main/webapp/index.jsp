@@ -348,7 +348,7 @@
 				<c:if test="${!empty Code}"> 
 					<li id="nav-log-in" class="dropdown">     
 						<button type="button" class="page-scroll ff-word button-out btn btn-xs dropdown-toggle fun-btn" data-toggle="dropdown" aria-expanded="false">
-							<span class="glyphicon glyphicon-user"></span>蔡瑋倫
+							<span class="glyphicon glyphicon-user"></span>${memberInfo.memberName}
 						</button>
 						<ul class="dropdown-menu" role="menu">
 						    <li><a href="#">訂單查詢</a></li>

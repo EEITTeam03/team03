@@ -60,7 +60,8 @@ public class LoginServlet extends HttpServlet {
 			MemberService svc = new MemberService();
 			List<MemberInfoVO> mem = svc.getMember(email, password);
 			if (mem != null && mem.size() != 0) {
-				session.setAttribute("LoginOK", mem);
+				MemberInfoVO memberInfoVO = mem.get(0);
+				session.setAttribute("memberInfo", memberInfoVO);
 				session.setAttribute("Code", "OK");
 			} else {
 				errorMsgMap.put("LoginError", "該帳號不存在或密碼錯誤");
