@@ -11,4 +11,5 @@ public interface ServiceStepDAO_interface {
 	public ServiceStepVO findByPrimaryKey(Integer servStepNo);
 	public List<ServiceStepVO> getAll();
 	public List<ServiceStepVO> findByForeignKey(Integer servNo);
+	public List<Object> getDist();
 }

@@ -1,6 +1,8 @@
 package com.servicestep.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +14,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
+import com.services.model.ServicesService;
+import com.services.model.ServicesVO;
 import com.servicestep.model.ServiceStepService;
 import com.servicestep.model.ServiceStepVO;
 
@@ -49,7 +54,7 @@ public class ServiceStepServlet extends HttpServlet {
 				}
 				request.setAttribute("serviceStepList", serviceStepVO);
 
-				String url = "ListOneServiceStep.jsp";
+				String url = "ListChooseServiceStep.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);
 				successView.forward(request, response);
 			} catch (Exception e) {
@@ -58,6 +63,92 @@ public class ServiceStepServlet extends HttpServlet {
 				fauilerView.forward(request, response);
 			}
 
+		}
+
+		if ("getOne_For_Update".equals(action)) {
+			try {
+				Integer servStepNo = new Integer(request.getParameter("servStepNo"));
+				ServiceStepService serStepservice = new ServiceStepService();
+				ServiceStepVO serviceStepVO = serStepservice.getOneSeviceStep(servStepNo);
+				request.setAttribute("serviceStepVO", serviceStepVO);
+				String url = "/services/UpdateServiceStep.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url);
+				successView.forward(request, response);
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+				RequestDispatcher failerView = request.getRequestDispatcher("/services/UpdateServiceStep.jsp");
+				failerView.forward(request, response);
+			}
+
+		}
+		if ("update".equals(action)) {
+			try {
+				
+				Integer servStepNo = new Integer(request.getParameter("servStepNo"));
+				Integer servStep = Integer.valueOf(request.getParameter("servStep"));
+				String stepName = request.getParameter("stepName");
+				String stepDescp = request.getParameter("stepDescp");
+				byte[] stepPic = null;
+				String fileName = "";
+
+				long sizeInBytes = 0;
+				InputStream is = null;
+				Collection<Part> parts = request.getParts();
+				ServicesService.exploreParts(parts, request);
+				try {
+					for (Part p : parts) {
+						// String fldName = p.getName();
+						// String value = request.getParameter(fldName);
+						if (p.getContentType() != null) {
+							fileName = ServicesService.getFileName(p); // 此為圖片檔的檔名
+							fileName = ServicesService.adjustFileName(fileName, ServicesService.IMAGE_FILENAME_LENGTH);
+							if (fileName != null && fileName.trim().length() > 0) {
+								sizeInBytes = p.getSize();
+								is = p.getInputStream();
+								stepPic = new byte[is.available()];
+								is.read(stepPic);
+								is.close();
+								System.out.println("已上傳圖片");
+							} else {
+								errorMsg.put("errPicture", "必須挑選圖片檔");
+							}
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("出錯啦!");
+				}
+				ServiceStepVO serviceStepVO = new ServiceStepVO();
+				ServiceStepService servStepservice=new ServiceStepService();
+				ServicesVO servicesVO =servStepservice.getOneSeviceStep(servStep).getServicesVO();
+				serviceStepVO.setServStepNo(servStepNo);
+				serviceStepVO.setServStep(servStep);
+				serviceStepVO.setStepName(stepName);
+				serviceStepVO.setStepPic(stepPic);
+				// serviceStepVO.setServicesVO(servicesVO);
+				if (!errorMsg.isEmpty()) {
+					request.setAttribute("serviceStepVO", serviceStepVO);
+					RequestDispatcher failureView = request.getRequestDispatcher("/services/UpdateServiceStep.jsp");
+					failureView.forward(request, response);
+					return; // 程式中斷
+				}
+				try {
+					serviceStepVO = servStepservice.UpdateServiceStep(servStepNo, servStep, stepName, stepDescp, stepPic,
+							servicesVO);
+					request.setAttribute("serviceStepVO", serviceStepVO);
+					String url = "ListOneServiceStep.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+				} catch (RuntimeException e) {
+					request.setAttribute("serviceStepVO", serviceStepVO);
+					RequestDispatcher failerView = request.getRequestDispatcher("/services/UpdateServiceStep.jsp");
+					failerView.forward(request, response);
+				}
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+				RequestDispatcher failerView = request.getRequestDispatcher("/services/UpdateServiceStep.jsp");
+				failerView.forward(request, response);
+			}
 		}
 
 	}

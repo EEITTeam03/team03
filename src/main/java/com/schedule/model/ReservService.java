@@ -1,6 +1,5 @@
 package com.schedule.model;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,6 +22,24 @@ public class ReservService {
 	public ReservService(){
 		dao = new ReservDAO();
 	}
+	
+	public ReservVO addReservAndList(Calendar reservDateTime,Calendar reservEndTime,MemberCarsVO membercarsVO ,String noteC,String notesE
+			,EmployeeVO employeeVO,Integer status, Set<ReservListVO>reservlists) {
+		
+		ReservVO reservVO = new ReservVO();
+		reservVO.setReservDateTime(reservDateTime);
+		reservVO.setReservEndTime(reservEndTime);
+		reservVO.setMembercarsVO(membercarsVO);
+		reservVO.setNoteC(noteC);
+		reservVO.setNotesE(notesE);
+		reservVO.setStatus(status);
+		reservVO.setEmployeeVO(employeeVO);
+		
+		reservVO.setReservlists(reservlists);
+		
+		return reservVO;
+	}
+	
 	
 	public ReservVO addReserv(Calendar reservDateTime,MemberCarsVO membercarsVO ,String noteC,String notesE
 			,EmployeeVO employeeVO,Integer status, Set<ReservListVO>reservlists){

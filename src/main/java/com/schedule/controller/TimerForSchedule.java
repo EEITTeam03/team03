@@ -57,7 +57,7 @@ public class TimerForSchedule extends HttpServlet {
 //                		mcv.getMemberInfoVO().getMemberName();
 //                		mcv.getMemberInfoVO().getEmail();
 //                		rv.getReservDateTime();
-                		SendEmail.setProps(mcv.getMemberInfoVO().getEmail(), mcv.getMemberInfoVO().getMemberName(),rv.getReservDateTime());
+                		 new SendEmail().setProps(mcv.getMemberInfoVO().getEmail(), mcv.getMemberInfoVO().getMemberName(),rv.getReservDateTime());
                 	}
                 }
 
