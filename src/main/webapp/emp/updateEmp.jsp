@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.employee.model.*"%>
+<%@ page import = "java.util.*" %>
+<%
+    EmployeeService empSvc = new EmployeeService();
+    List<EmployeeVO> list = empSvc.getAll();
+    pageContext.setAttribute("list",list);
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +17,19 @@
 </head>
 <body>
 	<h1>修改員工資料</h1>
+		<h3>選一個員工</h3>
+	<div>
+	<FORM METHOD="get" ACTION="updateEmp.jsp" name="chooseEmp">
+	<select size="1" name="empno">
+			<c:forEach var="empVO" items="${list}">
+				<option value="${empVO.employeeNo}">${empVO.employeeName}
+			</c:forEach>
+		</select>
+		
+		<input type="submit" value="確定"></FORM>
+		</FORM>
+	</div>
+	<br>
 	<c:if test = "${not empty errorMsgs}">
 	<font color = 'red'>請修正以下錯誤:
 	<ul>
