@@ -4,30 +4,30 @@
 <html>
 <head>
     <title id='Description'>水膜汽車美容-預約排程表 </title>
-    <link rel="stylesheet" href="scheduleJS/jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="scheduleJS/scripts/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="scheduleJS/scripts/demos.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxcore.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxbuttons.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxscrollbar.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxdata.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxdata.export.js"></script>	
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxdate.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxscheduler.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxscheduler.api.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxdatetimeinput.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxmenu.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxcalendar.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxtooltip.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxwindow.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxcheckbox.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxlistbox.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxdropdownlist.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxnumberinput.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxradiobutton.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/jqxinput.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/globalization/globalize.js"></script>
-    <script type="text/javascript" src="scheduleJS/jqwidgets/globalization/globalize.culture.de-DE.js"></script>
+    <link rel="stylesheet" href="/team03/scheduleJS/jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="/team03/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/scripts/demos.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxdata.export.js"></script>	
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxdate.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxscheduler.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxscheduler.api.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/globalization/globalize.culture.de-DE.js"></script>
     <script type="text/javascript">   
     	var globalView = "weekView";
     	var newFields = [];
@@ -67,6 +67,7 @@
         		url: "OptionServlet",
         		dataType: "json",
         		data: {'option':'radio'},
+        		async:false,
         		method:"POST",
         		success:function(data){
         			fromAjax = data;
@@ -96,6 +97,7 @@
         		dataType: "json",
         		data: {'option':'checkbox'},
         		method:"POST",
+        		async:false,
         		success:function(data){
         			fromAjax = data;
         			for(var i=0;i<fromAjax.length;i++){
@@ -350,23 +352,25 @@
                 };
         	return source;
         }
-    	
+    	/*-------create時 讀取所有師傅-------*/
     	function getCalendar(){
-    		var calendars = [{'calendar':'蕭天怡'},{'calendar':'陳致鈞'},{'calendar':'周柏元'}];
-    	  /*----目前寫死，之後改善
-    		$.ajax({
-        		url: "請創一個Servlet 去找師傅名單",
-        		dataType: "text",	//server端回傳至client端型態
-        		data: ,
-        		method:"POST",
-        		success: function(data){
-        			
-        		},
-        		error:function(data){
-        			
-        		}
-        	});
-    	  ------------------*/
+    		//var calendars = [{'calendar':'蕭天怡'},{'calendar':'陳致鈞'},{'calendar':'周柏元'}];
+    		var fromAjax;
+    		var calendars = [];
+	    		$.ajax({
+	        		url: "emp/GetEmpJSON.do",
+	        		dataType: "json",
+	        		method:"POST",
+	        		async:false,	//有return要設async:false
+	        		success: function(data){
+	        			fromAjax = data;
+	        			for(var i=0;i<fromAjax.length;i++){
+	        				calendars.push({'calendar':""+fromAjax[i].empName});
+	                	}
+	        		},
+	        		error:function(data){	
+	        		}
+	        	});
     		return calendars;
     	}
     	
@@ -555,7 +559,7 @@
 <body>
 	<input type="button" id="btn_search" value="查詢" />
 	<input type="button" value="匯出至Excel" id='excelExport' />
-    <div><img id="loading_data" src="img/loading/ajax-loader.gif" /></div>
+    <div><img id="loading_data" src="/team03/img/loading/ajax-loader.gif" /></div>
     <div id="scheduler_body" >
         <div id="scheduler"></div>
     </div>

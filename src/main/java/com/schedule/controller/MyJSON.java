@@ -23,7 +23,8 @@ import myutil.MyUtil;
 /**
  * Servlet implementation class MyJSON
  */
-@WebServlet(urlPatterns = {"/MyJSON","/admin/MyJSON"})
+@WebServlet(urlPatterns = {"/admin/MyJSON","/MyJSON"})
+
 public class MyJSON extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
