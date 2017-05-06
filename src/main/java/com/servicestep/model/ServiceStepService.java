@@ -1,5 +1,6 @@
 package com.servicestep.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.services.model.ServicesVO;
@@ -47,5 +48,16 @@ public class ServiceStepService {
 
 	public List<ServiceStepVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<Integer> getDist(){
+		 List<Object> list=dao.getDist();
+		 List<Integer> IntegerGetDist=new ArrayList<Integer>();
+		 for(Object alist : list){
+			 Integer svo = null;
+			 svo = (Integer)alist;
+			 IntegerGetDist.add(svo);
+		 }
+		return IntegerGetDist;
 	}
 }

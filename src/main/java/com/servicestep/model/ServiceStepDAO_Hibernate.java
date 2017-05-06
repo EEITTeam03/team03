@@ -11,6 +11,8 @@ import com.services.model.ServicesVO;
 public class ServiceStepDAO_Hibernate implements ServiceStepDAO_interface {
 	private static final String GET_ALL_STMT = "FROM ServiceStepVO order by servNo";
 	private static final String GET_ONE_STMT = "FROM ServiceStepVO where servNo=?";
+	private static final String GET_DISTINCT = "Select distinct servicesVO.servNo FROM ServiceStepVO";
+    
 	private static final String DELETE = "DELETE ServicesVO WHERE servNo=?";
 
 	@Override
@@ -76,6 +78,21 @@ public class ServiceStepDAO_Hibernate implements ServiceStepDAO_interface {
 		try {
 			session.beginTransaction();
 			Query query=session.createQuery(GET_ALL_STMT);
+			list=query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return list;
+	}
+	@Override
+	public List<Object> getDist() {
+		List<Object> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query=session.createQuery(GET_DISTINCT);
 			list=query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException e) {

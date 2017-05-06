@@ -43,20 +43,22 @@ public class Test {
 //		if(cal1.before(cal2) && cal2.before(cal1))
 //			System.out.println("go");
 		
-		ServiceStepDAO_Hibernate sdao=new ServiceStepDAO_Hibernate();
-		ServicesVO ssvo=new ServicesVO();
-		ssvo.setServNo(1001);
-		ServiceStepVO svo=new ServiceStepVO();
-		svo.setStepName("aa");
-		svo.setStepPic(null);
-		svo.setServStep(2);
-		svo.setStepDescp("bb");
-		svo.setServicesVO(ssvo);
-		ServiceStepService sss=new ServiceStepService();
+//		ServiceStepDAO_Hibernate sdao=new ServiceStepDAO_Hibernate();
+//		ServicesVO ssvo=new ServicesVO();
+//		ssvo.setServNo(1001);
+//		ServiceStepVO svo=new ServiceStepVO();
+//		svo.setStepName("aa");
+//		svo.setStepPic(null);
+//		svo.setServStep(2);
+//		svo.setStepDescp("bb");
+//		svo.setServicesVO(ssvo);
+//		ServiceStepService sss=new ServiceStepService();
 //		sss.addServiceStep();
-		sdao.insert(svo);
-		System.out.println("完成");
-		
+//		sdao.insert(svo);
+//		System.out.println("完成");
+		ServiceStepService sss= new ServiceStepService();
+		sss.getDist();
+		System.out.println(sss.getDist());
 		
 	}
 
