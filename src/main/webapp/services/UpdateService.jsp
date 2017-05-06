@@ -146,7 +146,7 @@ ul[class*="nav navbar-nav side-nav"] {
 <!--                             </li> -->
                         </ol>
                     </div>
-<FORM METHOD="post" ACTION="services.do" enctype="multipart/form-data" name="form1">
+<FORM METHOD="post" ACTION="services.do" enctype="multipart/form-data" name="form1" id="form1">
 	<table border="0">
 		<tr>
 			<td>服務編號:<font color=red><b>*</b></font></td>
@@ -179,7 +179,9 @@ ul[class*="nav navbar-nav side-nav"] {
 		<tr>
 			<td>服務描述:</td>
 			<td>
-			<input type="TEXT" name="servDesc" size="45"value="<%=servicesVO.getServDesc()%>" /></td>
+				<textarea rows="5" cols="30" name="servDesc" form="form1"><%=servicesVO.getServDesc()%></textarea>
+<%-- 			<input type="TEXT" name="servDesc" size="45"value="<%=servicesVO.getServDesc()%>" /> --%>
+			</td>
 		</tr>
 
 		<tr>

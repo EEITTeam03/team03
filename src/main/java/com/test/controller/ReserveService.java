@@ -3,10 +3,8 @@ package com.test.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -14,8 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.employee.model.EmployeeService;
 import com.employee.model.EmployeeVO;
 import com.membercars.model.MemberCarsDAO;
 import com.membercars.model.MemberCarsHibernateDAO;
@@ -29,9 +27,11 @@ import com.servicecarclass.model.ServiceCarClassVO;
 import com.services.model.ServicesDAO_Hibernate;
 import com.services.model.ServicesVO;
 
+import myutil.CheckConflict;
 import myutil.MyUtil;
+import myutil.SendEmail;
 
-
+			  
 @WebServlet("/ReserveService")
 public class ReserveService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -55,13 +55,6 @@ public class ReserveService extends HttpServlet {
 		String ckbox[] = request.getParameterValues("plus");
 		String empNo = request.getParameter("empNo");
 		
-//		Map<String,String> par = new HashMap<>();
-//		par.put("license",license);
-//		par.put("selectedDate",selectedDate);
-//		par.put("selectedTime",selectedTime);
-//		par.put("singleService",singleService);
-//		par.put("empNo",empNo);
-//		session.setAttribute("par", par);
 		
 		//日期-字串轉Calendar
 		Calendar cal = MyUtil.getCalender(selectedDate,selectedTime);
@@ -74,7 +67,7 @@ public class ReserveService extends HttpServlet {
 		// new DAO 
 		ServicesDAO_Hibernate sdao = new ServicesDAO_Hibernate();
 		MemberCarsDAO cdao = new MemberCarsHibernateDAO();
-
+		
 		// 取得車VO
 		MemberCarsVO memberCarsVO = cdao.findByPK(license);
 		reservVO.setMembercarsVO(memberCarsVO);
@@ -90,7 +83,7 @@ public class ReserveService extends HttpServlet {
 		
 		// 所選服務的集合-清單
 		Set<ReservListVO> reservSet = new HashSet<ReservListVO>();
-
+		
 		// 加入一筆單選服務VO
 		Integer singleServiceNo = Integer.parseInt(singleService);
 		ServicesVO singleServiceVO = sdao.findByPrimaryKey(singleServiceNo);
@@ -128,14 +121,13 @@ public class ReserveService extends HttpServlet {
 		calEnd.setTimeInMillis(cal.getTimeInMillis() + endms);
 		reservVO.setReservEndTime(calEnd);
 		
-		// 建立員工(?
-		EmployeeVO evo = new EmployeeVO();
+		// 查他選的員工
 		int emp = Integer.parseInt(empNo); 
-		evo.setEmployeeNo(emp);
-		evo.setEmployeeName("JACK邱華捷");
+		EmployeeService esvc = new EmployeeService();
+		EmployeeVO evo = esvc.getOneEmp(emp);
 		reservVO.setEmployeeVO(evo);
-
-	
+		
+		
 		//狀態為1(未到) 2(進行中) 3(已結束) 0(已取消)
 		reservVO.setStatus(1);
 		
@@ -144,41 +136,12 @@ public class ReserveService extends HttpServlet {
 		
 		
 		//查詢當日預約-檢查有無重複 (不同師傅可)
-		ReservService rsvc = new ReservService();
-		List<ReservVO> list = rsvc.getAllReservByDateAndEmp(cal, emp);
-		for(ReservVO aReserve :list){
-			int aemp = aReserve.getEmployeeVO().getEmployeeNo();
-			Calendar acal = aReserve.getReservDateTime();
-			Calendar acalEnd = aReserve.getReservEndTime();
-			long tstart = cal.getTimeInMillis();
-			long tend = calEnd.getTimeInMillis();
-			long xstart = acal.getTimeInMillis();
-			long xend = acalEnd.getTimeInMillis();
-			
-				if(xstart < tstart && xend <= tstart){
-					//System.out.println("OK前");
-				}else if (xstart > tstart && xstart >= tend){
-					//System.out.println("OK後");
-				}else {
-					errmsg.add("所選的時段重複!");
-				}
-			
-//		for(ReservVO aReserve :list){
-//			Calendar acal = aReserve.getReservDateTime();
-//			Calendar acalEnd = aReserve.getReservEndTime();
-//			//long et = acalEnd.getTimeInMillis()-1;
-//			
-//			if(acal.before(cal) && acalEnd.before(cal)){
-//				//System.out.println("OK前");
-//			}else if (acal.after(cal) && acal.after(calEnd)){
-//				//System.out.println("OK後");
-//			}else {
-//				errmsg.add("所選的時段重複!");
-//			}
-			
-		
-				
+		CheckConflict ccf = new CheckConflict();
+		boolean conflict = ccf.checkDateAndEmp(cal, calEnd, emp);
+		if(conflict) {
+				errmsg.add("所選的時段重複!");
 		}
+			
 		
 		//****************失敗*******************
 		if (errmsg.size() != 0) {
@@ -193,8 +156,13 @@ public class ReserveService extends HttpServlet {
 		
 		
 		//***********資料都正確-新增訂單*************
+//		ReservService resvc = new ReservService();
+//		resvc.addReservAndList(cal, calEnd, memberCarsVO, "", "", evo, 1, reservSet);
 		ReservDAO rdao = new ReservDAO();
 		rdao.insert(reservVO);
+		
+		//寄信通知
+		new SendEmail().reserveOK(reservVO);
 		
 		// 準備轉交
 		request.setAttribute("reserve", reservVO);
