@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>員工資料新增 </title>
+<title>員工資料修改 </title>
 </head>
 <body>
-	<h1>新增員工資料</h1>
+	<h1>修改員工資料</h1>
 	<c:if test = "${not empty errorMsgs}">
 	<font color = 'red'>請修正以下錯誤:
 	<ul>
@@ -18,12 +18,11 @@
 	</ul>
 	</font>
 	</c:if>
-	<FORM METHOD="post" ACTION="emp.do" name="form1" enctype="multipart/form-data">
+	<FORM METHOD="post" ACTION="emp.do" name="form2" enctype="multipart/form-data">
 <table border="0">
 	<tr>
-		<td>員工編號:</td>
-		<td><input type="TEXT" name="empNo" size="45" 
-			value="${param.empNo}" /></td>
+		<td>員工編號:<font color=red><b>*</b></font></td>
+		<td>${param.empno}</td>
 	</tr>
 	<tr>
 		<td>員工姓名:</td>
@@ -43,7 +42,8 @@
 	</tr>
 </table>
 <br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
+<input type="hidden" name="empno" value="${param.empno}">
+<input type="hidden" name="action" value="update">
+<input type="submit" value="送出修改"></FORM>
 </body>
 </html>
