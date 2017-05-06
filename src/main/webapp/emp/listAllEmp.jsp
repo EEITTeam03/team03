@@ -29,7 +29,7 @@
 			<td>${empVO.employeeNo}</td>
 			<td>${empVO.employeeName}</td>
 			<td>${empVO.employeeDesc}</td>
-			<c:if test="${empVO.employeePhoto==null}"></c:if>
+			<c:if test="${empVO.employeePhoto==null}"><td></td></c:if>
 			<c:if test="${empVO.employeePhoto!=null}"><td><img src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(empVO.employeePhoto)}" width="300"/></td></c:if>
 		</tr>
 	</c:forEach>

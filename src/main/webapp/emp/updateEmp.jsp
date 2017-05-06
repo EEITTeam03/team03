@@ -22,7 +22,7 @@
 	<FORM METHOD="get" ACTION="updateEmp.jsp" name="chooseEmp">
 	<select size="1" name="empno">
 			<c:forEach var="empVO" items="${list}">
-				<option value="${empVO.employeeNo}">${empVO.employeeName}
+				<option value="${empVO.employeeNo}" ${(empVO.employeeNo == param.empno)? 'selected':''}>${empVO.employeeName}
 			</c:forEach>
 		</select>
 		
