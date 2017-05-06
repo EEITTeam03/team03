@@ -25,15 +25,15 @@ public class ServiceStepService {
 	}
 
 	public ServiceStepVO UpdateServiceStep(Integer servStepNo, Integer servStep, String stepName, String stepDescp,
-			byte[] stepPic, Integer servNo) {
+			byte[] stepPic, ServicesVO servicesVO) {
 		ServiceStepVO serviceStepVO = new ServiceStepVO();
 		serviceStepVO.setServStepNo(servStepNo);
 		serviceStepVO.setServStep(servStep);
 		serviceStepVO.setStepDescp(stepDescp);
 		serviceStepVO.setStepName(stepName);
 		serviceStepVO.setStepPic(stepPic);
-		ServicesVO servicesVO = new ServicesVO();
-		servicesVO.setServNo(servNo);
+		serviceStepVO.setServicesVO(servicesVO);
+		dao.update(serviceStepVO);
 		return dao.findByPrimaryKey(servStepNo);
 	}
 
