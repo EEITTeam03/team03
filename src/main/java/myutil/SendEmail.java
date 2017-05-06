@@ -82,7 +82,7 @@ public class SendEmail {
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(memberEmail));
 			message.setSubject("親愛的"+name+"，感謝您的預約");
-			sbd.append("親愛的 "+name+"\n");
+			sbd.append(name+"\n");
 			sbd.append("感謝您的預約"+"\n");
 			sbd.append("--------------"+"\n");
 			sbd.append("預約日期為: "+month+"月"+date+"日"+"\n");
@@ -91,6 +91,8 @@ public class SendEmail {
 			sbd.append("師傅: "+emp+"\n");
 			sbd.append("--------------"+"\n");
 			sbd.append("\n\n\n"+"期待您的光臨!");
+			sbd.append("\n\n\n"+"預約可以隨時在網站查詢 :\n");
+			sbd.append("http://car03.azurewebsites.net/team03 \n");
 			message.setText(sbd.toString());
 			
 			Transport transport = session.getTransport("smtp");
