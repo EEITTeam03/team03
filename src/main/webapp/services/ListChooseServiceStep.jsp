@@ -33,8 +33,7 @@
 			<th colspan="2">選項</th>
 		</tr>
 
-<%-- 		<c:forEach var="serviceStepVO" items="${serviceStepList}"> --%>
-<%-- 		</c:forEach> --%>
+		<c:forEach var="serviceStepVO" items="${serviceStepList}">
 			<tr align='center' valign='middle'>
 				<td>${serviceStepVO.servicesVO.servNo}</td>
 				<td>${serviceStepVO.servStep}</td>
@@ -60,15 +59,16 @@
 							<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" ACTION="services.do"> -->
-<!-- 						<input type="submit" value="下架"> <input type="hidden" -->
-<%-- 							name="servNo" value="${servicesVO.servNo}">  --%>
-<!-- 							<input type="hidden" name="action" value="offshelf"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
+				<td>
+					<FORM METHOD="post" ACTION="services.do">
+						<input type="submit" value="下架"> <input type="hidden"
+							name="servNo" value="${servicesVO.servNo}"> 
+							<input type="hidden" name="action" value="offshelf">
+					</FORM>
+				</td>
 			</tr>
 
+		</c:forEach>
 	</table>
 
 </body>
