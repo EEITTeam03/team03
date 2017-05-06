@@ -63,7 +63,7 @@
 		    color: #fed136;
 		    background-color: transparent;
 		    border-color: #fed136;
-		    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 		    text-transform: uppercase;
 		    font-weight: 700;						
 		}
@@ -71,7 +71,7 @@
 		    color: white;
 		    background-color: #fed136;
 		    border-color: #fed136;
-		    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 		    text-transform: uppercase;
 		    font-weight: 700;			
 		}
@@ -85,7 +85,26 @@
 		.big-img-services{
 			width:700px;
 			height:500px;
+		}
+		.nav-fut-li{
+			width: 114px;
+			height: 50px;
+			text-align: center;
+			margin:0px 0px 0px 15px ;
+		}
+		.menu-fut-li{
+			width: 114px;
+			height: 50px;
+			text-align: center;
+			margin:10px 0px 0px 5px ;
 		}		
+		.fun-btn{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;		
+		}		
+		
 	</style>
 
     
@@ -198,30 +217,72 @@
    					   				  					
    				})
    				
-   			})  			
+   			})
+			
+   			//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
+			var wdth = $(window).width();
+			if(wdth<975){					
+	   		        $("#nav-log-in").addClass("menu-fut-li");
+	   		  		$("#nav-register").addClass("menu-fut-li");
+			}
+			if(wdth>=975){
+	   		        $("#nav-log-in").addClass("nav-fut-li");
+	   		  		$("#nav-register").addClass("nav-fut-li"); 
+			}
+			//結束
+			
+			//不斷監控(監聽)螢幕大小，藉此判斷登入、註冊按鈕是在nav上或者在menu內，來設定不同的樣式
+	   		$(window).resize(function() {
+				var wdth = $(window).width();
+				var logIn = $("#nav-log-in").attr("class");
+				var regst = $("#nav-register").attr("class");
+				var numln = null;
+				var numrn = null;
+				var numlm = null;
+				var numrm =	null;
+
+				console.log(logIn);
+				console.log(regst);				
+				
+				if(logIn != undefined){
+					numln =	logIn.indexOf("nav-fut-li");
+					numlm =	logIn.indexOf("menu-fut-li");
+				}				
+				
+				//當會員登入後，註冊按鈕會不存在，所以不用去比對註冊按鈕的class
+				if(regst != undefined){
+					numrn =	regst.indexOf("nav-fut-li");
+					numrm =	regst.indexOf("menu-fut-li");
+				}
+
+				if( (wdth < 975) && (numln > -1) && (numrn > -1) ){
+   	   		        $("#nav-log-in").removeClass("nav-fut-li");
+   	   		  		$("#nav-register").removeClass("nav-fut-li");					
+   	   		        $("#nav-log-in").addClass("menu-fut-li");
+   	   		  		$("#nav-register").addClass("menu-fut-li");
+				}
+				if( (wdth >= 975) && (numlm > -1) && (numrm > -1) ){
+   	   		        $("#nav-log-in").removeClass("menu-fut-li");
+   	   		  		$("#nav-register").removeClass("menu-fut-li");
+   	   		        $("#nav-log-in").addClass("nav-fut-li");
+   	   		  		$("#nav-register").addClass("nav-fut-li"); 	   		  		
+				}
+	   		});
+	   			//結束  			  
    			
-//    			//穿過某元素觸發事件
-//    			$(".btn").mouseenter(function(){
-//    				$("button").removeClass("button-out");
-//    				$("button").addClass("button-in");
-//    			});
-   			
-//    			//離開某元素觸發事件
-//    			$(".btn").mouseleave(function(){
-//    				$("button").removeClass("button-in");
-//    				$("button").addClass("button-out"); 				
-//      		});  
-   			
+   			//穿過登入、註冊按紐時觸發事件，改變樣式
    		    $(document).on('mouseenter', '.btn', function(event){
    		        $(this).removeClass("button-out");
    		     	$(this).addClass("button-in");
    		    });  			
- 
+   			//離開登入、註冊按紐時觸發事件，改變樣式
    		    $(document).on('mouseleave', '.btn', function(event){
    		        $(this).removeClass("button-in");
    		     	$(this).addClass("button-out");
    		    }); 
-   			
+   		    
+   		    
+   		    
    		})
     
     </script>    
@@ -267,46 +328,36 @@
                     </li>
 						<!--	未登入	-->
 				<c:if test="${empty Code}">                    
-                    <li>                    
-	                    <button id="btn1" class="page-scroll ff-word button-out btn btn-xs" onclick="location.href='login.jsp'" style="padding:7px;margin:5px 10px 5px 10px">
+                    <li id="nav-log-in" class="">                    
+	                    <button class="page-scroll ff-word button-out btn btn-xs fun-btn" onclick="location.href='login.jsp'">
 	   		
 							<span class="glyphicon glyphicon-log-in"></span> 登入															
 	                        
 	                    </button>
-	                </li> 
-				</c:if>
-
-						<!--	已登入	-->
-				<c:if test="${!empty Code}">                    
-                    <li>                    
-	                    <button id="btn1" class="page-scroll ff-word button-out btn btn-xs" onclick="location.href='login.jsp'" style="padding:7px;margin:5px 10px 5px 10px">
-	   		
-							<span class="glyphicon glyphicon-log-in"></span> 登入															
-	                        
-	                    </button>
-	                </li> 
-				</c:if>							
-						
-           				                                      
-                    <li>
-                    	<button id="btn2" class="page-scroll ff-word button-out btn btn-xs" onclick="location.href='register.jsp'" style="padding:8px;margin:5px 10px 5px 10px">
+	                </li>
+                    <li id="nav-register" class="">
+                    	<button class="page-scroll ff-word button-out btn btn-xs fun-btn" onclick="location.href='register.jsp'">
    		
 							<span class="glyphicon glyphicon-user"></span> 免費註冊															
                         
                         </button>                    
-                    </li>
-<!--                     <li> -->
-<!--                         <a class="ff-word" style="text-shadow: black 5px 3px 3px;color:#FFFF66;" href="#"> -->
-<!--   							<span class="glyphicon glyphicon-log-in"></span> 登入 -->
-<!--                         </a> -->
-<!--                     </li>                     -->
-<!--                     <li> -->
-<!--                         <a class="ff-word" style="text-shadow: black 5px 3px 3px;color:#FFFF66;" href="#"> -->
-<!--   							<span class="glyphicon glyphicon-user"></span> 免費註冊 -->
-<!--                         </a> -->
-<!--                     </li>                                          -->
-                                                         
-                </ul>             
+                    </li>	                 
+				</c:if>
+
+						<!--	已登入	-->
+				<c:if test="${!empty Code}"> 
+					<li id="nav-log-in" class="dropdown">     
+						<button type="button" class="page-scroll ff-word button-out btn btn-xs dropdown-toggle fun-btn" data-toggle="dropdown" aria-expanded="false">
+							<span class="glyphicon glyphicon-user"></span>蔡瑋倫
+						</button>
+						<ul class="dropdown-menu" role="menu">
+						    <li><a href="#">訂單查詢</a></li>
+						    <li><a href="#">修改資料</a></li>
+						    <li class="divider"></li>
+						    <li><a href="#">登出</a></li>
+						</ul>				              
+	 				</li>
+				</c:if>							
                 
             </div>
             <!-- /.navbar-collapse -->
@@ -321,7 +372,7 @@
         
 			<source src="video/file.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
 			<source src="video/video_preview_h264.wmv" type="video/wmv" />Your browser does not support the video tag. I suggest you upgrade your browser.
-		<!-- object標籤內解決 -->
+			<!-- object標籤內解決 -->
 			<object>
      			<embed src="video/video_preview_h264.mp4" type= "application/x-shockwave-flash" allowfullscreen="false" allowscriptaccess="always" style="width:100%;height:100%;z-index:-1" loop="true" />
  			</object> 
