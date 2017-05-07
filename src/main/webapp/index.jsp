@@ -58,26 +58,7 @@
 	<!--[if lt IE 9]>
 	<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<style type="text/css">
-		.button-in{
-		    color: #fed136;
-		    background-color: transparent;
-		    border-color: #fed136;
-		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		    text-transform: uppercase;
-		    font-weight: 700;						
-		}
-		.button-out{
-		    color: white;
-		    background-color: #fed136;
-		    border-color: #fed136;
-		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		    text-transform: uppercase;
-		    font-weight: 700;			
-		}
-		.btn:hover{
-			color: #fed136;
-		}
+	<style type="text/css">	
 		.img-services{
 			width:360px;
 			height:260px;
@@ -102,9 +83,60 @@
 			width: 100%;
 			height: 100%;
 			padding:0px;
-			margin:0px auto;		
+			margin:0px auto;
+		    color: white;
+		    background-color: #fed136;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;					
 		}		
-		
+		.fun-btn:hover{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}
+		.mem-btn{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border:0px;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;					
+		}
+		.mem-btn:hover{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}	
+		.dropdown-menu {
+		    color: #fed136;
+		    background-color: #222222;
+			text-align: center;
+ 		    min-width: 114px; 
+		}				
+		.dropdown:hover .dropdown-menu {
+			
+			display: block;
+		}		
 	</style>
 
     
@@ -270,18 +302,16 @@
 	   		});
 	   			//結束  			  
    			
-   			//穿過登入、註冊按紐時觸發事件，改變樣式
-   		    $(document).on('mouseenter', '.btn', function(event){
-   		        $(this).removeClass("button-out");
-   		     	$(this).addClass("button-in");
-   		    });  			
-   			//離開登入、註冊按紐時觸發事件，改變樣式
-   		    $(document).on('mouseleave', '.btn', function(event){
-   		        $(this).removeClass("button-in");
-   		     	$(this).addClass("button-out");
-   		    }); 
-   		    
-   		    
+//    			//穿過登入、註冊按紐時觸發事件，改變樣式
+//    		    $(document).on('mouseenter', '.btn', function(event){
+//    		        $(this).removeClass("button-out");
+//    		     	$(this).addClass("button-in");
+//    		    });  			
+//    			//離開登入、註冊按紐時觸發事件，改變樣式
+//    		    $(document).on('mouseleave', '.btn', function(event){
+//    		        $(this).removeClass("button-in");
+//    		     	$(this).addClass("button-out");
+//    		    });   			  		     
    		    
    		})
     
@@ -329,14 +359,14 @@
 						<!--	未登入	-->
 				<c:if test="${empty Code}">                    
                     <li id="nav-log-in" class="">                    
-	                    <button class="page-scroll ff-word button-out btn btn-xs fun-btn" onclick="location.href='login.jsp'">
+	                    <button class="page-scroll ff-word btn btn-xs fun-btn" onclick="location.href='login.jsp'">
 	   		
 							<span class="glyphicon glyphicon-log-in"></span> 登入															
 	                        
 	                    </button>
 	                </li>
                     <li id="nav-register" class="">
-                    	<button class="page-scroll ff-word button-out btn btn-xs fun-btn" onclick="location.href='register.jsp'">
+                    	<button class="page-scroll ff-word btn btn-xs fun-btn" onclick="location.href='register.jsp'">
    		
 							<span class="glyphicon glyphicon-user"></span> 免費註冊															
                         
@@ -347,18 +377,20 @@
 						<!--	已登入	-->
 				<c:if test="${!empty Code}"> 
 					<li id="nav-log-in" class="dropdown">     
-						<button type="button" class="page-scroll ff-word button-out btn btn-xs dropdown-toggle fun-btn" data-toggle="dropdown" aria-expanded="false">
-							<span class="glyphicon glyphicon-user"></span>${memberInfo.memberName}
+						<button class="page-scroll ff-word dropdown-toggle mem-btn" data-toggle="dropdown">
+							<li class="glyphicon glyphicon-user"></li>&nbsp;&nbsp;&nbsp;${memberInfo.memberName}
 						</button>
+						
 						<ul class="dropdown-menu" role="menu">
-						    <li><a href="#">訂單查詢</a></li>
+						    <li><a href="orderStatus.jsp">訂單狀態</a></li>
 						    <li><a href="#">修改資料</a></li>
 						    <li class="divider"></li>
 						    <li><a href="#">登出</a></li>
 						</ul>				              
 	 				</li>
-				</c:if>							
-                
+				</c:if>
+											
+                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
