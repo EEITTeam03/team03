@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.memberinfo.model.MemberInfoVO;
 import com.memberinfo.model.MemberService;
 
+import myutil.SendEmail;
+
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -55,47 +57,17 @@ public class JavaMail extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		String userId = request.getParameter("email");
 		String userName = (String) request.getAttribute("accountName");
+		String subject = "Check your password";
 		MemberInfoVO mem = (MemberInfoVO)request.getAttribute("Member"); 
 		//System.out.println(mem.getMemberNo());
-		String host = "smtp.gmail.com";
-		  int port = 587;
-		  final String username = "eeit9306@gmail.com";
-		  final String password = "EEITTeam03";//your password
-		  
-		  Properties props = new Properties();
-		  props.put("mail.smtp.host", host);
-		  props.put("mail.smtp.auth", "true");
-		  props.put("mail.smtp.starttls.enable", "true");
-		  props.put("mail.smtp.port", port);
-		  Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-			    protected PasswordAuthentication getPasswordAuthentication() {
-			        return new PasswordAuthentication(username, password);
-			    }
-			});
-
-		  try {
-			  
+		SendEmail se = new SendEmail();	
 			  MemberService ms = new MemberService();
 			  String str = ms.randomPswd();
 			  ms.updatemem(mem.getMemberNo(), mem.getEmail(), str, mem.getMemberName(), mem.getPhone(), mem.getBirthday(), mem.getAddress());
 			  //ms.getOneByEmail(userId);	
-		   Message message = new MimeMessage(session);
-		   message.setFrom(new InternetAddress("eeit9306@gmail.com"));
-		   message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		   message.setSubject("Check your password");
-		   message.setText("Dear "+userName+", \n\n your password is "+str);
-
-		   Transport transport = session.getTransport("smtp");
-		   transport.connect(host, port, username, password);
-
-		   Transport.send(message);
-
-		   System.out.println("寄送email結束.");
+		   se.sendPassword(userId, subject, userName, str);
 		   RequestDispatcher rd = request.getRequestDispatcher("success.jsp");
 			rd.forward(request, response);
-		  } catch (MessagingException e) {
-		   throw new RuntimeException(e);
-		  }
 	}
 
 
