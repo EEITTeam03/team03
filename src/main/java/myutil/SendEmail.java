@@ -37,19 +37,34 @@ public class SendEmail {
 			}
 		});
 	}
+	public void sendPassword(String clientId,String subject,String clientName,String pswd){
+		try { 
+			MimeMessage message = new MimeMessage(session);
+		   message.setFrom(new InternetAddress(username));
+		   message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(clientId));
+		   message.setSubject("Check your password","utf-8");
+		   message.setContent("Dear "+clientName+", \n\n your password is "+pswd, "text/html;charset=UTF-8");
+		   Transport transport = session.getTransport("smtp");
+		   transport.connect(host, port, username, password);
+
+		   Transport.send(message);
+		   System.out.println("寄送email結束.");
+		}catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	
-	
-	public void setProps(String userId,String userName,Calendar cal) {
+	public void setProps(String userId,String clientName,Calendar cal) {
 		
 		
 		try {
 			int m = cal.get(Calendar.MONTH)+1;
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("eeit9306@gmail.com"));
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-			message.setSubject("您的車明天有預約洗車服務");
-			message.setText("Dear " + userName + ", \n\n 您預約的時間是" + m+"月"
-					+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE));
+			message.setSubject("您的車明天有預約洗車服務","utf-8");
+			message.setContent("Dear " + clientName + ", \n\n 您預約的時間是" + m+"月"
+					+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE), "text/html;charset=UTF-8");
 
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, port, username, password);
@@ -77,11 +92,11 @@ public class SendEmail {
 		Integer date = start.get(Calendar.DATE);
 		
 		StringBuilder sbd = new StringBuilder();
-		Message message = new MimeMessage(session);
+		MimeMessage message = new MimeMessage(session);
 		try {
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(memberEmail));
-			message.setSubject("親愛的"+name+"，感謝您的預約");
+			message.setSubject("親愛的"+name+"，感謝您的預約","utf-8");
 			sbd.append(name+"\n");
 			sbd.append("感謝您的預約"+"\n");
 			sbd.append("--------------"+"\n");
@@ -93,7 +108,7 @@ public class SendEmail {
 			sbd.append("\n\n\n"+"期待您的光臨!");
 			sbd.append("\n\n\n"+"預約可以隨時在網站查詢 :\n");
 			sbd.append("http://car03.azurewebsites.net/team03 \n");
-			message.setText(sbd.toString());
+			message.setContent(sbd.toString(), "text/html;charset=UTF-8");
 			
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, port, username, password);

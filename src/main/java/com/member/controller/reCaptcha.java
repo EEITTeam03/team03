@@ -97,7 +97,7 @@ public class reCaptcha extends HttpServlet {
 				if (webdata.indexOf("true") > 0) {
 					request.setAttribute("accountName", mem.getMemberName());
 					request.setAttribute("Member", mem);
-					System.out.println(mem.getMemberNo());
+					//System.out.println(mem.getMemberNo());
 					RequestDispatcher rd = request.getRequestDispatcher("JavaMail.do");
 					rd.forward(request, response);
 					return;
@@ -107,7 +107,7 @@ public class reCaptcha extends HttpServlet {
 					errorMsgMap.put("RobotFail", "認證失敗");
 			}else {
 				//userid與密碼的組合錯誤，放一個錯誤訊息到 errorMsgMap 之內
-				errorMsgMap.put("Error", "該帳號不存在或手機輸入錯誤");
+				errorMsgMap.put("Error", "該帳號不存在或電話號碼輸入錯誤");
 			}
 		} catch (Exception e) {
 			errorMsgMap.put("Error", "reCaptcha->NamingException:" + e.getMessage());
