@@ -43,7 +43,7 @@ public class SendEmail {
 		   message.setFrom(new InternetAddress(username));
 		   message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(clientId));
 		   message.setSubject("Check your password","utf-8");
-		   message.setContent("Dear "+clientName+", \n\n your password is "+pswd, "text/html;charset=UTF-8");
+		   message.setContent("Dear "+clientName+", <br><br> your password is "+pswd, "text/html;charset=UTF-8");
 		   Transport transport = session.getTransport("smtp");
 		   transport.connect(host, port, username, password);
 
@@ -63,7 +63,7 @@ public class SendEmail {
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
 			message.setSubject("您的車明天有預約洗車服務","utf-8");
-			message.setContent("Dear " + clientName + ", \n\n 您預約的時間是" + m+"月"
+			message.setContent("Dear " + clientName + ", <br><br> 您預約的時間是" + m+"月"
 					+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE), "text/html;charset=UTF-8");
 
 			Transport transport = session.getTransport("smtp");
@@ -97,17 +97,17 @@ public class SendEmail {
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(memberEmail));
 			message.setSubject("親愛的"+name+"，感謝您的預約","utf-8");
-			sbd.append(name+"\n");
-			sbd.append("感謝您的預約"+"\n");
-			sbd.append("--------------"+"\n");
-			sbd.append("預約日期為: "+month+"月"+date+"日"+"\n");
-			sbd.append("預約編號: "+no+"\n");
-			sbd.append("預約車輛: "+car+"\n");
-			sbd.append("師傅: "+emp+"\n");
-			sbd.append("--------------"+"\n");
-			sbd.append("\n\n\n"+"期待您的光臨!");
-			sbd.append("\n\n\n"+"預約可以隨時在網站查詢 :\n");
-			sbd.append("http://car03.azurewebsites.net/team03 \n");
+			sbd.append(name+"<br>");
+			sbd.append("感謝您的預約"+"<br>");
+			sbd.append("--------------"+"<br>");
+			sbd.append("預約日期為: "+month+"月"+date+"日"+"<br>");
+			sbd.append("預約編號: "+no+"<br>");
+			sbd.append("預約車輛: "+car+"<br>");
+			sbd.append("師傅: "+emp+"<br>");
+			sbd.append("--------------"+"<br>");
+			sbd.append("<br><br><br>"+"期待您的光臨!");
+			sbd.append("<br><br><br>"+"預約可以隨時在網站查詢 :<br>");
+			sbd.append("http://car03.azurewebsites.net/team03 <br>");
 			message.setContent(sbd.toString(), "text/html;charset=UTF-8");
 			
 			Transport transport = session.getTransport("smtp");
