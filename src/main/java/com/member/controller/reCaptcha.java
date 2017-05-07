@@ -69,7 +69,7 @@ public class reCaptcha extends HttpServlet {
 			errorMsgMap.put("AccountError", "帳號欄必須輸入");
 		}
 		if (userPhone == null || userPhone.trim().length() == 0) {
-			errorMsgMap.put("PhoneError", "車牌號碼必須輸入");
+			errorMsgMap.put("PhoneError", "電話號碼必須輸入");
 		}
 		if (!errorMsgMap.isEmpty()) {
 			RequestDispatcher rd = request.getRequestDispatcher("forgetPassWord.jsp");
