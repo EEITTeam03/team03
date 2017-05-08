@@ -2,13 +2,18 @@ package com.membercars.model;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 
 import hibernate.util.HibernateUtil;
 
 public class MemberCarsHibernateDAO implements MemberCarsDAO {
-
+	
+	private static final String GET_ALL_STMT = "from MemberCarsVO order by memberNo";
+	private static final String GET_BY_MEM = "from MemberCarsVO where memberNo=?";
+	
+	
 	@Override
 	public void insert(MemberCarsVO memberCarsVO) {
 		// TODO Auto-generated method stub
@@ -74,8 +79,34 @@ public class MemberCarsHibernateDAO implements MemberCarsDAO {
 
 	@Override
 	public List<MemberCarsVO> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<MemberCarsVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(GET_ALL_STMT);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+
+	@Override
+	public List<MemberCarsVO> findByMember(String memberNo) {
+		List<MemberCarsVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(GET_BY_MEM);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
 	}
 
 }

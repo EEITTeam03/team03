@@ -13,6 +13,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -29,6 +30,8 @@ import javax.swing.ImageIcon;
 
 import com.memberinfo.model.MemberInfoVO;
 
+import myutil.MyUtil;
+
 //import com.github.sarxos.webcam.Webcam;
 
 
@@ -38,60 +41,53 @@ import com.memberinfo.model.MemberInfoVO;
 @WebServlet("/VideoServlet")
 public class VideoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public VideoServlet() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
-		ServletContext 權限控管Application = request.getServletContext();
-		HttpSession 權限控管Session = request.getSession();
-		
-		/*其他地方會做的事情*/
-		//當登入成功時可能會做的事情,一直都在即使跳頁 (15min or your setting)
-//		權限控管Session.setAttribute("user", "黃大叔");
-		權限控管Session.setAttribute("user", "張大媽");
-		
-		//今天輪到洗 張大媽 的車了~~~ (當時間到的時候,做的事情 ex:9:00)
-		//Listener(ServletContext) 當啟動時那些時間要去做 
-		//取得Application 的關鍵字 contextEvent.getServletContext();
-		//排成的關鍵物件 ScheduledExecutorService
-		//要做的事情? 到資料庫查詢目前正在處裡的使用者 將他寫入Application (如下)
-//		權限控管Application.setAttribute("user", null);
-//		權限控管Application.setAttribute("user", "黃大叔");
-		
-		/*此地方要做的事情*/
-		//判斷 Session 使用者是不是現在有權限看的人
-		String session使用者名稱 = (String)權限控管Session.getAttribute("user");
-		String 目前有權限的人 = (String)權限控管Application.getAttribute("user");
+		//取得權限控管Application
+		ServletContext sysApplication = request.getServletContext();
+//		HttpSession 權限控管Session = request.getSession();
 		
 		// set the proper content type for MJPG
 		//設定ContentType以及時串流(multipart)的方式
 		response.setContentType("multipart/x-mixed-replace; boundary=--BoundaryString");
 		OutputStream out = response.getOutputStream();
 
-		
+		/*	若ip從WEB-INF/properties/team03.properties讀取		*/
 		//String ip = ((Properties)request.getServletContext().getAttribute("prop")).getProperty("cameraIp");
 		
+		/*	在VideoServlet網址列設定ip: ?cip=......	*/
 		if(null != request.getParameter("cip")){
 			request.getServletContext().setAttribute("cip",request.getParameter("cip"));
 		}
 		String ip = (String)request.getServletContext().getAttribute("cip");
 
-		
+		//測試用的記得拔
+//		if(null != request.getParameter("nowApp")){
+//			SetSystemSchedule s = new SetSystemSchedule();
+//			s.TodayReservListDelete(sysApplication,"1330","10");
+//			s.TodayReservListInsert(sysApplication,"1330","8");
+//		}
 		/*IP攝影機 手機版本*/
+		/*檢查此會員是否為此時段有預約的會員*/
+		System.out.println("!!!!!!!!!!!!VideoServlet當前時間(單位半小時)"+MyUtil.getNowTimeFormat());
+		List<String> nowInServMember= (List<String>)sysApplication.getAttribute(MyUtil.getNowTimeFormat());
 		MemberInfoVO menberInfo = (MemberInfoVO)request.getSession().getAttribute("memberInfo");
-		while(null != menberInfo){
-		//while(session使用者名稱.equals(目前有權限的人)){
+		//nowInServMember(目前正在進行美容服務的會員)有無包含現在這個session的memberNo
+		while(null != menberInfo && nowInServMember.contains(""+menberInfo.getMemberNo())){
+			//每三十分轉換
+			nowInServMember= (List<String>)sysApplication.getAttribute(MyUtil.getNowTimeFormat());
+			menberInfo = (MemberInfoVO)request.getSession().getAttribute("memberInfo");
+	
+		/*下兩行只檢查有無登入，是會員就有權限
+		MemberInfoVO menberInfo = (MemberInfoVO)request.getSession().getAttribute("memberInfo");
+		while(null != menberInfo){	*/
 			InputStream inputStream;
 			try {
 				HttpURLConnection urlConnection = (HttpURLConnection) new URL("http://"+ip+"/shot.jpg?username=sky&password=ray").openConnection();
@@ -107,11 +103,9 @@ public class VideoServlet extends HttpServlet {
 			if(!makeMJPEG(out,baos.toByteArray())){
 				break;
 			};
-			目前有權限的人 = (String)權限控管Application.getAttribute("user");
 		}
 		
-		ImageIcon icon = new ImageIcon(request.getServletContext().getRealPath("img/carWash.jpg"));
-//		ImageIcon icon = new ImageIcon(application.getResource("../../../img/carWash.jpg"));
+		ImageIcon icon = new ImageIcon(request.getServletContext().getRealPath("img/carWash.jpg"));	//沒有權限時(監視器停止時)顯示給用戶的畫面
 		BufferedImage bimage = new BufferedImage(icon.getImage().getWidth(null), icon.getImage().getHeight(null), BufferedImage.TYPE_INT_RGB);
 		Graphics2D bGr = bimage.createGraphics();
 		bGr.drawImage(icon.getImage(), 0, 0, null);

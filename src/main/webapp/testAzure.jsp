@@ -28,5 +28,13 @@ memberPhone: <input type="text" name="memberPhone">
 
 <h1>${ctx}</h1>
 
+
+<form>
+<input type="checkbox" name="cccc" value="1">1
+<input type="checkbox" name="cccc" value="2">2
+<input type="checkbox" name="cccc" value="3">3
+<input type="submit" value="go">
+</form>
+
 </body>
 </html>

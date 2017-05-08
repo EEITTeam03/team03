@@ -41,7 +41,7 @@ public class MyUtil {
 		return cal;
 	}
 	
-	/*要寫到Util.java*/
+	/*scheduler for admin*/
 	public static Calendar getLocalTimeFromUTC(String timeUTC){
 		  TimeZone utc = TimeZone.getTimeZone("UTC");
 		  SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -58,6 +58,7 @@ public class MyUtil {
 		  return cal;
 	}
 	
+	/*系統排程for TodayReservList*/
 /*	public static String getNowTimeFormat(){
 		Calendar now = Calendar.getInstance();
 		int hr = now.get(Calendar.HOUR_OF_DAY);
@@ -72,13 +73,13 @@ public class MyUtil {
 		
 		return (hr>9?(""+hr):("0"+hr))+(min>9?(""+min):("0"+min));
 	}*/
-	
+	/*系統排程for TodayReservList*/
 	public static String getNowTimeFormat(){
 		Calendar now = Calendar.getInstance();
 		  
 		return getHHmmFormat(now);
 	}
-		 
+	/*系統排程for TodayReservList*/ 
 	public static String getHHmmFormat(Calendar time){
 		int hr = time.get(Calendar.HOUR_OF_DAY);
 		int min = time.get(Calendar.MINUTE);

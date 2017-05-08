@@ -1,5 +1,7 @@
 package com.membercars.model;
 
+import java.util.List;
+
 public class MembercarsService {
 	private MemberCarsDAO dao;
 	public MembercarsService(){
@@ -7,5 +9,9 @@ public class MembercarsService {
 	}
 	public MemberCarsVO getOneByPK(String carLicense){
 		return dao.findByPK(carLicense);
-	};
+	}
+	
+	public List<MemberCarsVO> getListByMember(String memberNo){
+		return dao.findByMember(memberNo);
+	}
 }
