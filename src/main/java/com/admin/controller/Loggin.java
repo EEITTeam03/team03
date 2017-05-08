@@ -78,8 +78,9 @@ public class Loggin extends HttpServlet {
 			AdminService svc = new AdminService();
 			List<AdminVO> adm = svc.getAdmin(userId,password);
 			if (adm != null && adm.size()!=0) {
-				session.setAttribute("LoginOK", adm);
-				session.setAttribute("Code", "OK");
+				AdminVO admin = adm.get(0);
+				session.setAttribute("admin", admin);
+				session.setAttribute("adminLogin", "OK");
 			} else {
 				//userid與密碼的組合錯誤，放一個錯誤訊息到 errorMsgMap 之內
 				errorMsgMap.put("LoginError", "該帳號不存在或密碼錯誤");
