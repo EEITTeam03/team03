@@ -1,9 +1,8 @@
 {
 "teams":
 	[
-		{"teamName":"瑪莉","teamDesc":"專長鍍膜"},
-		{"teamName":"亨利","teamDesc":"專長打蠟"},
-		{"teamName":"瑞克","teamDesc":"殺喪屍"},
-		{"teamName":"送葬者","teamDesc":"職業級摔角選手"}
+		{"teamName":"周柏元","teamDesc":"入行年資：5年多，具有日本鍍膜協會（Japan Coating Association)專業技術認證","teamPic":"1"},
+		{"teamName":"陳致鈞","teamDesc":"入行年資：3年多，具有丙級車輛塗裝技術士證照","teamPic":"2"},
+		{"teamName":"蕭天怡","teamDesc":"入行年資：4年多，具有汽車檢驗員證照","teamPic":"3"}
 	]
 }

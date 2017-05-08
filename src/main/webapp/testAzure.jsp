@@ -24,8 +24,9 @@ memberPhone: <input type="text" name="memberPhone">
 <br>
 </form>
 
-<a href="/xxx">test root</a>
+<a href="${ctx}/index.jsp">test root</a>
 
+<h1>${ctx}</h1>
 
 </body>
 </html>

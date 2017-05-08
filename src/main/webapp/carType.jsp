@@ -134,6 +134,7 @@
 </style>
 
 <script>	
+	var modelNo = null;
 	
 	$(function(){				
 		var tnumber = 1;
@@ -220,8 +221,9 @@
   			 	
 				if(brand.indexOf(opValue1) > -1 && carModel.indexOf(opValue2) > -1){					
 					carClass = carTypes.carClass;
-					
+					modelNo = carTypes.modelNo;//送去後端的值
 					$("#carSize").attr({"value":carClass});
+
 					return false;//等於break
 				}
   			 	
@@ -266,24 +268,27 @@
         }
 		if($("#carLicense").val().trim() != "" && opValue1.trim() != str.trim()){
     		var tr = $("<tr></tr>")
-    		var td1 = $("<td>" + carLicense + "</td>");		
+    		var td1 = $("<td>" + carLicense + "</td>").addClass('haha');		
     		var td2 = $("<td>" + opValue1 + "</td>");			
     		var td3 = $("<td>" + opValue2 + "</td>");	
     		var td4 = $("<td>" + carSize + "</td>");	
     		var td5 = $("<td></td>");	
     		
     		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
+    		var inp = $("<input></input>").attr({"type":"hidden","value":modelNo});
     		var span = $("<span></span>").addClass("glyphicon glyphicon-remove");
     		
     		button.append(span);
-    		td5.append(button);
+    		td5.append([button,inp]);
     		
     		tr.append([td1,td2,td3,td4,td5]);
+    		
+    		console.log(tr.children('.haha').text());
     		
     		$("#cardatas > tbody").append(tr);
     		$("#carLicense").val("");//清空車牌			       	
         }
-
+		
     });   
 															
     $(document).on('blur', '.input-value', function(event){
@@ -299,6 +304,8 @@
 // 					console.log(bContainer != brand);
 // 					bContainer = brand;
 // 					console.log("--------------------------");   		
+
+$("#cardatas > tr.children('.haha').text()");
 </script>	
 	
 </head>
@@ -366,7 +373,7 @@
 						<div class="panel-body">
 							<div class="flot-chart">
 								<div class="flot-chart-content" id="flot-bar-chart">
-									<form id="cmxform" class="form-signin" role="form" action="" method="post">
+									<form id="cmxform" class="form-signin" role="form" action="CarLicense" method="post">
 										
 										<div id="brandImgs" class="row divScroll">
 										
@@ -378,7 +385,8 @@
 										<div class="row">
 											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 												<span>請輸入您的車牌：</span>
-												<input id="carLicense" class="input-value" type="text" name="carLicense" style="width:10%;">
+												<input id="carLicense" class="input-value" type="text" name="carLicense" value='${param.carLicense}' style="width:10%;">
+												<small><Font color='red' >${ErrorMsgKey.carLicenseEmptyError}</Font></small>
 												<span class="label label-default">至少一筆汽車資料</span>
 												<label id="name-error" class="error"></label>																						
 											</div>
@@ -435,7 +443,10 @@
 											</div>																																
 										</div>										
 										<br>
-																				
+										
+										<input type="hidden" name="action" value="insert">									
+										
+										<input type="hidden" name="action" value='${param.memberinfoVO}'>
 										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >完成</button>																				
 
 									</form>	
