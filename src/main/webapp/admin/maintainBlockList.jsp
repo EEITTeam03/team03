@@ -18,21 +18,22 @@
 	<div>
 		<form action="maintain.do" method="post">
 			車牌:<input type="text" name="license" size='40'
-				value='${param.license}' /> <br> <small><Font
-				color='red'>${ErrorMsgKey.LicenseEmptyError}</Font></small> <br /> 
+				value='${param.license}' />  <small><Font
+				color='red'>${ErrorMsgKey.LicenseError}</Font></small> <br /> 
 			違反規則:<select size="1" name="blockRuleNo">
 				<c:forEach var="blockRuleVO" items="${list}">
 					<option value="${blockRuleVO.blockRuleNo}">${blockRuleVO.blockRule}
 				</c:forEach>
-			</select> <br> <small><Font color='red'>${ErrorMsgKey.BlockRuleNoEmptyError}</Font></small>
+			</select> <small><Font color='red'>${ErrorMsgKey.BlockRuleNoError}</Font></small>
 			<br /> 違反日期:<input type="date" name="violationDate" size='40'
-				value='${param.violationDate}' /> <br> <small><Font
-				color='red'>${ErrorMsgKey.violationDateEmptyError}</Font></small> <br />
-			訂單編號:<input type="text" name="reservationNo" size='40'
-				value='${param.reservationNo}' /> <br> <small><Font
-				color='red'>${ErrorMsgKey.reservationNoEmptyError}</Font></small> <br /> <small><Font
-				color='red'>${ErrorMsgKey.MaintainError}</Font></small> <br /> <input
-				type="submit" value="送出" /> <br />
+				value='${param.violationDate}' />  <small><Font
+				color='red'>${ErrorMsgKey.ViolationDateError}</Font></small> <br />
+			預約編號:<input type="text" name="reservationNo" size='40'
+				value='${param.reservationNo}' />  <small><Font
+				color='red'>${ErrorMsgKey.ReservationNoError}</Font></small> <br /> <small><Font
+				color='red'>${ErrorMsgKey.MaintainError}</Font></small> <br /> 
+				<input type="hidden" name="action" value="insert">
+				<input type="submit" value="送出" /> <br />
 		</form>
 	</div>
 </body>

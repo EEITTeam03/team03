@@ -50,7 +50,8 @@ public class TestHB {
 //			System.out.println("***>");
 //		
 //		}
-	
-	
+	MemberService svc = new MemberService();
+	MemberInfoVO vo = svc.getOneMem(5);
+	System.out.println(vo.getMemberName());
 	}
 }
