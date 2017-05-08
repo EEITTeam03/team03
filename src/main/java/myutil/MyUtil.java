@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class MyUtil {
 	
@@ -38,5 +39,52 @@ public class MyUtil {
 			throw new RuntimeException("日期格式錯誤!");
 		}
 		return cal;
+	}
+	
+	/*要寫到Util.java*/
+	public static Calendar getLocalTimeFromUTC(String timeUTC){
+		  TimeZone utc = TimeZone.getTimeZone("UTC");
+		  SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		  f.setTimeZone(utc);
+		  Calendar cal = Calendar.getInstance();
+		  
+		  try {
+		   cal.setTime(f.parse(timeUTC));
+		  } catch (ParseException e) {
+		   //日期格式錯誤無法轉換
+		   e.printStackTrace();
+		  }
+		  
+		  return cal;
+	}
+	
+/*	public static String getNowTimeFormat(){
+		Calendar now = Calendar.getInstance();
+		int hr = now.get(Calendar.HOUR_OF_DAY);
+		int min = now.get(Calendar.MINUTE);
+		
+//		if(min>30){
+//			min = 30;
+//		}else{
+//			min = 0;
+//		}
+		min = min>30?30:0;
+		
+		return (hr>9?(""+hr):("0"+hr))+(min>9?(""+min):("0"+min));
+	}*/
+	
+	public static String getNowTimeFormat(){
+		Calendar now = Calendar.getInstance();
+		  
+		return getHHmmFormat(now);
+	}
+		 
+	public static String getHHmmFormat(Calendar time){
+		int hr = time.get(Calendar.HOUR_OF_DAY);
+		int min = time.get(Calendar.MINUTE);
+		
+		min = min>=30?30:0;
+		  
+		return (hr>9?(""+hr):("0"+hr))+(min>9?(""+min):("0"+min));
 	}
 }

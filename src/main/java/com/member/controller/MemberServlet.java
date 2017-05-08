@@ -40,7 +40,7 @@ public class MemberServlet extends HttpServlet {
 				String password = req.getParameter("password");
 				String phone = req.getParameter("phone");
 				String address = req.getParameter("address");
-//				String carLicense = req.getParameter("license");
+				String carLicense = req.getParameter("license");
 
 				
 				if (name == null || name.trim().length() == 0) {
@@ -67,9 +67,9 @@ public class MemberServlet extends HttpServlet {
 				}
 				java.sql.Date effectiveDate =  new java.sql.Date(System.currentTimeMillis());
 				
-//				if (carLicense == null || carLicense.trim().length() == 0) {
-//					errorMsgMap.put("CarLicenseEmptyError", "請輸入車牌號碼");
-//				}
+				if (carLicense == null || carLicense.trim().length() == 0) {
+					errorMsgMap.put("CarLicenseEmptyError", "請輸入車牌號碼");
+				}
 
 //				MemberInfoVO memberinfoVO = null;
 				
@@ -93,24 +93,16 @@ public class MemberServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				MemberService memberSvc = new MemberService();
-//				memberinfoVO = memberSvc.insertMemAndCar(name, email, password, phone, birthday, address, effectiveDate);
+//				memberinfoVO = memberSvc.insertMemAndCar(name, email, password, phone, birthday, address, effectiveDate, carLicense);
 				
+				
+				/***************************3.準備轉交(Send the Success view)***********/
 				req.setAttribute("memberinfoVO", memberinfoVO);
-				
-				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String requestURI = (String) req.getAttribute("target");
-				if (requestURI != null) {
-					requestURI = (requestURI.length() == 0 ? req.getContextPath() : requestURI);
-					res.sendRedirect(res.encodeRedirectURL(requestURI));
-					return;
-				} else {
-					res.sendRedirect(res.encodeRedirectURL(req.getContextPath() + "/carType.jsp"));
-					return;
-				}
+				req.getRequestDispatcher("/carType.jsp").forward(req, res);
 				
 //				String url = "carType.jsp";
 //				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
-//				successView.forward(req, res);				
+//				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
