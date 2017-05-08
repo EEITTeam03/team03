@@ -57,13 +57,12 @@ public class CarLicenseServlet extends HttpServlet {
 			
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-//				String name = req.getParameter("name");
-//				String email = req.getParameter("email");
-//				String password = req.getParameter("password");
-//				String phone = req.getParameter("phone");
-//				String birthday = req.getParameter("datepicker");
-//				String address = req.getParameter("address");
-//				String effectiveDate = req.getParameter("effectiveDate");
+				String name = req.getParameter("name");
+				String email = req.getParameter("email");
+				String password = req.getParameter("password");
+				String phone = req.getParameter("phone");
+				String birthday = req.getParameter("datepicker");
+				String address = req.getParameter("address");
 				
 				String carLicense = req.getParameter("carLicense");
 				
@@ -93,7 +92,7 @@ public class CarLicenseServlet extends HttpServlet {
 				
 				
 				req.getAttribute("memberinfoVO");
-				
+
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/index.jsp";
