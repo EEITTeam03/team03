@@ -1,5 +1,7 @@
 package com.blocklist.model;
 
+import java.util.List;
+
 import com.blockrule.model.BlockRuleVO;
 import com.memberinfo.model.MemberInfoVO;
 
@@ -20,5 +22,8 @@ public class BlockListService {
 	}
 	public Long countBlockListVO(MemberInfoVO memberInfoVO){
 		return dao.countBlockList(memberInfoVO);
+	}
+	public List<BlockListVO> getAllBlockList(){
+		return dao.getAll();
 	}
 }
