@@ -226,18 +226,20 @@
    			
 
 
-    		var tnumber = 1;
+    		
 
    			$.getJSON('teams.json',function(json){
    				$.each(json.teams,function(idx,teams){
    		    		//以下開始動態生成團隊成員
 					var teamName = teams.teamName;
-					var teamDesc = teams.teamDesc;	    			
+					var teamDesc = teams.teamDesc;
+					var teamPic = teams.teamPic;
+					console.log(teamPic);
    		   			var cs = $("<div></div>").addClass("col-sm-4");
    		   			
    		   			var tm = $("<div></div>").addClass("team-member");
    		   			
-   		   			var mimg = $("<img>").addClass("img-responsive img-circle").attr({"src":"img/team/"+tnumber+".jpg","alt":""});
+   		   			var mimg = $("<img>").addClass("img-responsive img-circle").attr({"src":"img/team/"+teamPic+".jpg","alt":""});
    		   			var tmh = $("<h4></h4>").text(teamName);
    		   			var tmp = $("<p></p>").addClass("text-muted").text(teamDesc);
    		   			
@@ -245,7 +247,7 @@
    		   			cs.append(tm);
    		   			$("#teamlist").append(cs);   					
    					
-   		   			tnumber = tnumber + 1;
+   		   			
    					   				  					
    				})
    				
@@ -385,7 +387,7 @@
 						    <li><a href="orderStatus.jsp">訂單狀態</a></li>
 						    <li><a href="#">修改資料</a></li>
 						    <li class="divider"></li>
-						    <li><a href="#">登出</a></li>
+						    <li><a href="LogOut">登出</a></li>
 						</ul>				              
 	 				</li>
 				</c:if>
