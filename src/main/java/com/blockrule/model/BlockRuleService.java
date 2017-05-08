@@ -12,4 +12,7 @@ public class BlockRuleService {
 	public List<BlockRuleVO> getAllRule(){
 		return dao.getAll();
 	}
+	public BlockRuleVO getOneByPK(Short RuleNo){
+		return dao.findByPrimaryKey(RuleNo);
+	}
 }
