@@ -27,8 +27,9 @@ table, th, td {
 	<th>汽車型號</th>
 	<th>車型大小</th>
 	<th>須輔</th>
+	<th>XXX</th>
 <tr>
-<c:forEach var="aVO" items="${reservList}">
+<c:forEach var="aVO" items="${reservList}" varStatus="status">
 <tr>
 	<td>${aVO.reservNo}</td> 
 	<td>${aVO.reservDateTime.time}</td>
@@ -40,7 +41,8 @@ table, th, td {
 	<td>${aVO.membercarsVO.carTypeVO.carModel}</td>
 	<td>${aVO.membercarsVO.carTypeVO.carClassVO.className}</td>
 	<td>${aVO.employeeVO.employeeName}</td>
-</tr>	
+	<td><input type="button" value="xxxx" id="${status.count}"></td>
+</tr>
 </c:forEach>
 </table>
 
