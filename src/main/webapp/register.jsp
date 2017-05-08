@@ -170,7 +170,7 @@
 							<div class="flot-chart">
 								<div class="flot-chart-content" id="flot-bar-chart">
 
-									<form id="cmxform" class="form-signin" role="form" action="MemberServlet" method="post">
+									<form id="cmxform" class="form-signin" role="form" action="MemberNext" method="post">
 									
 										<br>
 										

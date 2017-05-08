@@ -44,7 +44,7 @@ public class MemberService {
 	
 	public MemberInfoVO insertMemAndCar
 		(String memberName,String email , String password, String phone, java.sql.Date birthday, 
-		 String address, java.sql.Date effectiveDate ,String license,String model) {
+		 String address, java.sql.Date effectiveDate ,String models[],String[] licenses) {
 		
 		MemberInfoVO memberinfoVO = new MemberInfoVO();
 		Set<MemberCarsVO> memberCars = new HashSet<MemberCarsVO>();
@@ -58,14 +58,17 @@ public class MemberService {
 		memberinfoVO.setEffectiveDate(effectiveDate);
 		memberinfoVO.setMemberCars(memberCars);
 		
-		MemberCarsVO membercarsVO = new MemberCarsVO();
-		membercarsVO.setMemberInfoVO(memberinfoVO);
-		membercarsVO.setCarLicense(license);
 		CarTypeHibernateDAO ctdao = new CarTypeHibernateDAO();
-		CarTypeVO cartypeVO = ctdao.findByPK("1220");
-		membercarsVO.setCarTypeVO(cartypeVO);
 		
-		memberCars.add(membercarsVO);
+		for (int i=0;i<licenses.length;i++) {
+			MemberCarsVO membercarsVO = new MemberCarsVO();
+			membercarsVO.setMemberInfoVO(memberinfoVO);
+			membercarsVO.setCarLicense(licenses[i]);
+			CarTypeVO cartypeVO = ctdao.findByPK(models[i]);
+			membercarsVO.setCarTypeVO(cartypeVO);
+			
+			memberCars.add(membercarsVO);
+		}
 		
 		dao.insert(memberinfoVO);
 

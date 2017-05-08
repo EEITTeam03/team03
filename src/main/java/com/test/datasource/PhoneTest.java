@@ -26,7 +26,9 @@ public class PhoneTest extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String memberPhone = request.getParameter("memberPhone");
+//		String memberPhone = request.getParameter("memberPhone");
+		String[] memberPhones = request.getParameterValues("memberPhone");
+		String memberPhone= memberPhones[0];
 		//Integer memberNo = 4;
 		
 		MemberInfoDAO dao = new MemberInfoHibernateDAO();

@@ -169,6 +169,12 @@ label {
 
 
 	<div class="container" style="width: 80%;">
+	
+		<div class="row" id="showcar">
+			
+		</div>
+		
+		
 		<div class="row">
 			<h2 class="col-sm-offset-5">開始預約</h2>
 		</div>
@@ -346,6 +352,8 @@ label {
 				dateFormat : 'yy-mm-dd',
 				yearRange : '-90:+0'
 			});
+			
+			
 		});
 	</script>
 
