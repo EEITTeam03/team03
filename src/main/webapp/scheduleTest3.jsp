@@ -57,6 +57,7 @@
         
         function addNewFields(){
         	newFields = [];
+        	newFields.push({'fieldID':'empNo','fieldName':'empNo','type':'text','hidden':'hidden'});
         	newFields.push({'fieldID':'status','fieldName':'Status','type':'text','hidden':'hidden'});
         	newFields.push({'fieldID':'serviceS','fieldName':'綜合服務(單選)','type':'radio','values':searchXXX1Date()});
         	newFields.push({'fieldID':'serviceM','fieldName':'單一服務(多選)','type':'checkbox','values':searchXXX2Date()});
@@ -531,7 +532,8 @@
         		//alert(JSON.stringify(appointment));
         		$('#scheduler').jqxScheduler('addAppointment', appointment);
         		var serviceS = ""+data[i].Radio;
-        		setFinalAppointment(data[i].ReservNo,{'status':data[i].Status,'serviceS':serviceS,'serviceM':serviceM})
+        		var empNo = ""+data[i].EmpNo;
+        		setFinalAppointment(data[i].ReservNo,{'empNo':empNo ,'status':data[i].Status,'serviceS':serviceS,'serviceM':serviceM})
         	}
         }
     	
