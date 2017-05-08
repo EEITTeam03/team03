@@ -14,6 +14,8 @@
 <head>
 <title>所有服務項目</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+
 </head>
 <body>
 <table border='1' bordercolor='#CCCCFF' width='1600'>
@@ -63,5 +65,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
 </body>
 </html>
