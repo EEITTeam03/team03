@@ -134,6 +134,7 @@
 </style>
 
 <script>	
+	var modelNo = null;
 	
 	$(function(){				
 		var tnumber = 1;
@@ -220,8 +221,9 @@
   			 	
 				if(brand.indexOf(opValue1) > -1 && carModel.indexOf(opValue2) > -1){					
 					carClass = carTypes.carClass;
-					
+					modelNo = carTypes.modelNo;//送去後端的值
 					$("#carSize").attr({"value":carClass});
+
 					return false;//等於break
 				}
   			 	
@@ -273,10 +275,11 @@
     		var td5 = $("<td></td>");	
     		
     		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
+    		var inp = $("<input></input>").attr({"type":"hidden","value":modelNo});
     		var span = $("<span></span>").addClass("glyphicon glyphicon-remove");
     		
     		button.append(span);
-    		td5.append(button);
+    		td5.append([button,inp]);
     		
     		tr.append([td1,td2,td3,td4,td5]);
     		
