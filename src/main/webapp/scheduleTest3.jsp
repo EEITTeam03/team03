@@ -5,6 +5,7 @@
 <head>
     <title id='Description'>水膜汽車美容-預約排程表 </title>
     <link rel="stylesheet" href="/team03/scheduleJS/jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="/team03/scheduleJS/jqwidgets/styles/jqx.ui-sunny.css" type="text/css" />
     <script type="text/javascript" src="/team03/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="/team03/scheduleJS/scripts/demos.js"></script>
     <script type="text/javascript" src="/team03/scheduleJS/jqwidgets/jqxcore.js"></script>
@@ -127,6 +128,7 @@
                 height: 600,
                 source: adapter,
                 view: 'weekView',
+                theme: 'ui-sunny',
                 showLegend: true,
                 editDialogDateTimeFormatString: 'yyyy/MM/dd HH:mm',		//24小時制
                 
