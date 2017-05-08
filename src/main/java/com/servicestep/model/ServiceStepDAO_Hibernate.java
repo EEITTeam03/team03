@@ -79,7 +79,10 @@ public class ServiceStepDAO_Hibernate implements ServiceStepDAO_interface {
 			session.beginTransaction();
 			Query query=session.createQuery(GET_ALL_STMT);
 			list=query.list();
-			session.getTransaction().commit();
+			if(list!=null){
+				session.getTransaction().commit();
+			}
+//			session.getTransaction().commit();
 		} catch (RuntimeException e) {
 			session.getTransaction().rollback();
 			throw e;

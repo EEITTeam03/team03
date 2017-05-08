@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.membercars.model.CarService;
 import com.membercars.model.MemberCarsVO;
 import com.memberinfo.model.MemberInfoVO;
 import com.memberinfo.model.MemberService;
@@ -22,14 +21,14 @@ import com.memberinfo.model.MemberService;
 /**
  * Servlet implementation class CarLicense
  */
-@WebServlet("/CarLicense")
-public class CarLicenseServlet extends HttpServlet {
+@WebServlet("/MemberNext")
+public class MemberNext extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CarLicenseServlet() {
+    public MemberNext() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -64,46 +63,48 @@ public class CarLicenseServlet extends HttpServlet {
 				String birthday = req.getParameter("datepicker");
 				String address = req.getParameter("address");
 				
-				String carLicense = req.getParameter("carLicense");
+//				String carLicense = req.getParameter("carLicense");
 				
-				String memberinfoVO = (String) req.getAttribute("memberinfoVO");
+//				String memberinfoVO = (String) req.getAttribute("memberinfoVO");
 				
 //				if (carLicense == null || carLicense.trim().length() == 0) {
 //					errorMsgMap.put("carLicenseEmptyError", "請輸入車牌");
 //				}
 				
-
-				MemberCarsVO memberCarsVO = null;
-
 //				java.sql.Date bday = Date.valueOf(birthday);
 //				java.sql.Date eday = Date.valueOf(effectiveDate);
+
+//				MemberInfoVO memberInfoVO = new MemberInfoVO();
+//				
+//				memberInfoVO.setMemberName(name);
+//				memberInfoVO.setEmail(email);
+//				memberInfoVO.setPassword(password);
+//				memberInfoVO.setPhone(phone);
+//				memberInfoVO.setBirthday(bday);
+//				memberInfoVO.setAddress(address);
+				
 				
 				// Send the use back to the form, if there were errors
-				if (!errorMsgMap.isEmpty()) {
-					req.setAttribute("memberCarsVO", memberCarsVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("carType.jsp");
-					failureView.forward(req, res);
-					return;
-				}
-				
-				/***************************2.開始新增資料***************************************/
-				CarService carSvc = new CarService();
+//				if (!errorMsgMap.isEmpty()) {
+//					req.setAttribute("memberCarsVO", memberCarsVO); // 含有輸入格式錯誤的empVO物件,也存入req
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("register.jsp");
+//					failureView.forward(req, res);
+//					return;
+//				}
 				
 				
-				req.getAttribute("memberinfoVO");
-
-				
-				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/index.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				//還差effectiveDate和memberCars沒設
+				/***************************3.設定一半,準備轉交(Send the Success view)***********/
+				String url = "/carType.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				errorMsgMap.put(e.getMessage(), "其他錯誤");
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("carType.jsp");
+						.getRequestDispatcher("register.jsp");
 				failureView.forward(req, res);
 			}
 		}

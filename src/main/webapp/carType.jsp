@@ -275,11 +275,12 @@
     		var td5 = $("<td></td>");	
     		
     		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
-    		var inp = $("<input></input>").attr({"type":"hidden","value":modelNo});
+    		var inp = $("<input></input>").attr({"type":"hidden","value":modelNo,"name":"modelNo"});
+    		var licenses = $("<input></input>").attr({"type":"hidden","value":carLicense,"name":"licenses"});
     		var span = $("<span></span>").addClass("glyphicon glyphicon-remove");
     		
     		button.append(span);
-    		td5.append([button,inp]);
+    		td5.append([button,inp,licenses]);
     		
     		tr.append([td1,td2,td3,td4,td5]);
     		
@@ -373,7 +374,7 @@ $("#cardatas > tr.children('.haha').text()");
 						<div class="panel-body">
 							<div class="flot-chart">
 								<div class="flot-chart-content" id="flot-bar-chart">
-									<form id="cmxform" class="form-signin" role="form" action="" method="get">
+									<form id="cmxform" class="form-signin" role="form" action="MemberServlet" method="post">
 										
 										<div id="brandImgs" class="row divScroll">
 										
@@ -443,7 +444,12 @@ $("#cardatas > tr.children('.haha').text()");
 											</div>																																
 										</div>										
 										<br>
-										
+										<input type="hidden" name="name" value="${param.name}">
+										<input type="hidden" name="email" value="${param.email}">
+										<input type="hidden" name="password" value="${param.password}">
+										<input type="hidden" name="phone" value="${param.phone}">
+										<input type="hidden" name="datepicker" value="${param.datepicker}">
+										<input type="hidden" name="address" value="${param.address}">
 										<input type="hidden" name="action" value="insert">									
 										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >完成</button>																				
 

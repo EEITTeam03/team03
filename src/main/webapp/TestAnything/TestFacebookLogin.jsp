@@ -1,103 +1,139 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script>
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else {
-      // The person is not logged into your app or we are unable to tell.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    }
-  }
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"/>
+<form action="../MemberServlet">
+	<div id="fb-root"></div>
+	<script>
+		//原始的寫法----
+		//   function statusChangeCallback(response) {
+		//     console.log('statusChangeCallback');
+		//     console.log(response);
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
+		//     if (response.status === 'connected') {
 
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '1319189648197282',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.9' // use graph api version 2.8
-  });
+		//       testAPI();
+		//     } else {
+		//       document.getElementById('status').innerHTML = 'Please log ' +
+		//         'into this app.';
+		//     }
+		//   }
 
-  // Now that we've initialized the JavaScript SDK, we call 
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
+		//   function checkLoginState() {
+		//     FB.getLoginStatus(function(response) {
+		//       statusChangeCallback(response);
+		//     });
+		//   }
 
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
+		//   window.fbAsyncInit = function() {
+		//   FB.init({
+		//     appId      : '1319189648197282',
+		//     cookie     : true,  // enable cookies to allow the server to access 
+		//                         // the session
+		//     xfbml      : true,  // parse social plugins on this page
+		//     version    : 'v2.9' // use graph api version 2.8
+		//   });
 
-  };
+		//   FB.getLoginStatus(function(response) {
+		//     statusChangeCallback(response);
+		//   });
 
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/zh_TW/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+		//   };
 
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-//       console.log('Successful login for: ' + response.name);
-//       document.getElementById('status').innerHTML =
-//         'Thanks for logging in, ' + response.name + '!';
-    	window.top.location.href = 
-    		"http://www.facebook.com/connect/uiserver.php?app_id=" 
-    				+ encodeURIComponent("1319189648197282") 
-    				+ "&next=" 
-    				+ encodeURIComponent("http://localhost:8080/maven-archetype-webapp-servlet3/index.jsp") + 
-    				"&display=popup&perms=email,public_profile&fbconnect=1&method=permissions.request";
-    	console.log('Successful login for: ' + response.name);
-    	console.log('Successful login for: ' + response.email);
-    	console.log('Successful login for: ' + response.id);
-    });
-  }
-</script>
+		//   (function(d, s, id) {
+		//     var js, fjs = d.getElementsByTagName(s)[0];
+		//     if (d.getElementById(id)) return;
+		//     js = d.createElement(s); js.id = id;
+		//     js.src = "//connect.facebook.net/zh_TW/sdk.js";
+		//     fjs.parentNode.insertBefore(js, fjs);
+		//   }(document, 'script', 'facebook-jssdk'));
 
+		//   function testAPI() {
+		//     console.log('Welcome!  Fetching your information.... ');
+		//     FB.api('/me', function(response) {
+		//     	window.top.location.href = 
+		//     		"http://www.facebook.com/connect/uiserver.php?app_id="
+		//     				+ encodeURIComponent("1319189648197282") 
+		//     				+ "&next=" 
+		//     				+ encodeURIComponent("http://localhost:8080/maven-archetype-webapp-servlet3/index.jsp") + 
+		//     				"&display=popup&perms=email,public_profile&fbconnect=1&method=permissions.request";
+		//     	}
+		//     )}
+
+		//亂寫一通
+		//load facebook sdk
+		FB.getLoginStatus(function(response) {
+			if (response.authResponse) {
+				var accessToken = response.authResponse.accessToken;
+				FB.api('/me', function(response) {
+					checkMember(response.id, response.name, response.email,
+							response.birthday);
+				});
+			} else {
+				FB.login(function(response) {
+					if (response.authResponse) {
+						FB.api('/me', function(response) {
+							checkMember(response.id, response.name,
+									response.email, response.birthday);
+						});
+					} else {
+						alert('登入失敗!');
+					}
+				}, {
+					scope : 'id,name,email,user_birthday'
+				});
+			}
+		});
+
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '1319189648197282',
+				cookie : true,
+				xfbml : true,
+				version : 'v2.9'
+			});
+		};
+		// Load the SDK asynchronously
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id))
+				return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, "script", "facebook-jssdk"));
+
+		function checkMember(memberName, email, password, phone, birthday,address) {
+			$.ajax({
+				url : 'register.jsp',
+
+				type : 'POST',
+
+				data : {
+					memberName : memberName,
+					email : email,
+					password : "password",
+					phone : phone,
+					birthday : birthday,
+					address : address
+				},
+
+				dateType : 'html',
+			})
+
+		}
+	</script>
+</form>
 </head>
 <body>
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
-
-<div id="status">
-</div>
+	<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> -->
+	<!-- </fb:login-button> -->
+	<button onClick="checkMember()">登入facebook</button>
+	<div id="status"></div>
 </body>
 </html>
