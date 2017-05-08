@@ -154,6 +154,50 @@
 		.dropdown:hover .dropdown-menu {
 			
 			display: block;
+		}
+		/* 調整滑入table資料時，所顯示的顏色 */
+		.table-hover tbody tr:hover td {
+		    background-color: rgba(245,152,157,.25);
+		}				
+		/* Table Head */
+		table thead th {
+			background-color: #9E0039;
+			color: #fff;
+			border-bottom-width: 0;
+			background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.25) 100%);
+		}
+		
+		/* Column Style */
+		table td {
+			color: #000;
+		}
+		/* Heading and Column Style */
+		table tr, table th {
+			border-width: 0px;
+			text-align: center;
+			vertical-align:middle;
+			
+		}
+		
+		/* Padding and font style */
+		table td, table th {
+
+			font-size: 15px;
+			font-family: Noto Sans TC;
+			font-weight: bold;
+			
+		}		
+		
+		tbody tr:nth-child(2n-1) { 
+ 			background: #fff; 
+ 		} 
+		table tr:nth-child(2n) {
+			background: #eee;
+		}
+		
+		.table{
+			text-align:center;
+			
 		}		
 	</style>
 
@@ -216,11 +260,43 @@
 			}
  		});
  			//結束  	
-    
-    
-    
-    
-    
+   		
+		$.getJSON('orderStatus.json',function(json){
+			
+   			$.each(json.list,function(idx,orderStatus){
+   				
+  			 	var reservNo = orderStatus.reservNo;//JSON第N筆拿到的預約編號	
+  			 	var memberName = orderStatus.memberName;//JSON第N筆拿到的預約人名字	
+  			 	var reservDateTime = orderStatus.reservDateTime;//JSON第N筆拿到的預約日期	
+  			 	var reservEndTime = orderStatus.reservEndTime;//JSON第N筆拿到的結束時間
+  			 	var brand = orderStatus.brand;//JSON第N筆拿到的廠牌
+  			 	var carModel = orderStatus.carModel;//JSON第N筆拿到的車系
+  			 	var employeeName = orderStatus.employeeName;//JSON第N筆拿到的員工姓名
+  			 	
+  	    		var tr = $("<tr></tr>")
+  	    		var td1 = $("<td>" + reservNo + "</td>");		
+  	    		var td2 = $("<td>" + memberName + "</td>");			
+  	    		var td3 = $("<td>" + reservDateTime + "</td>");	
+  	    		var td4 = $("<td>" + reservEndTime + "</td>");	
+  	    		var td5 = $("<td>" + brand + "</td>");	
+  	    		var td6 = $("<td>" + carModel + "</td>");
+  	    		var td7 = $("<td>" + employeeName + "</td>");  	    		
+  	    		var td8 = $("<td></td>");
+  	    		
+  	    		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
+  	    		var span = $("<span></span>").addClass("glyphicon glyphicon-th-list");
+  	    		
+  	    		button.append(span);
+  	    		td8.append(button);
+  	    		
+  	    		tr.append([td1,td2,td3,td4,td5,td6,td7,td8]);
+  			 	
+  	    		$("table > tbody").append(tr);
+   			})
+   				
+   		}) 			
+ 			
+ 			
   } );
   
   
@@ -232,7 +308,7 @@
 	
 	
 </style>	
-	
+		
 </head>
 <body id="page-top" class="index">
 	<!-- Navigation -->
@@ -312,88 +388,82 @@
 		</div>
 	</nav>
 
+	<!-- Header -->
+	<header>
+		<div style="position: absolute;opacity:0.3">
+			<video autoplay loop muted class="fillWidth" style="width: 100%;">
+
+				<source src="video/file.mp4" type="video/mp4" />
+				Your browser does not support the video tag. I suggest you upgrade
+				your browser.
+				<source src="video/video_preview_h264.wmv" type="video/wmv" />
+				Your browser does not support the video tag. I suggest you upgrade
+				your browser.
+				<!-- object標籤內解決 -->
+				<object>
+					<embed src="video/video_preview_h264.mp4"
+						type="application/x-shockwave-flash" allowfullscreen="false"
+						allowscriptaccess="always"
+						style="width: 100%; height: 100%; z-index: -1" loop="true" />
+				</object>
+			</video>
+		</div>
+
+	</header>
+
+
 	<section id="services">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
 	
-				<div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
-					<div class="panel panel-danger" style="border-color:salmon">
-						<div class="panel-heading" style="background-color:salmon;border-color:salmon;color:white;">
-							<h3 class="panel-title">註冊會員</h3>
-						</div>
-						
-						<div class="panel-body">
-							<div class="flot-chart">
-								<div class="flot-chart-content" id="flot-bar-chart">
-
-									<form id="cmxform" class="form-signin" role="form" action="MemberServlet" method="post">
-									
-										<br>
-										
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										  	<span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-user"></i></span>
-
-										  	<input id="name" type="text" class="form-control required" name="name" placeholder="輸入您的姓名" value='${param.name}'>
-											<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>
-										</div>										
-										
-										<br>
-										
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										  	<span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-envelope"></i></span>
-
-										  	<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件" value='${param.email}'>
-											<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>
-										</div>
-										
-										<br>
-										
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-lock"></i></span>
-
-										    <input id="password" type="password" class="form-control required" name="password" placeholder="輸入您的密碼" value='${param.password}'>
-										    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>										
-										</div>
-										
-										<br>
-										
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-phone"></i></span>
-
-										    <input id="phone" class="form-control required" name="phone" placeholder="輸入您的電話" value='${param.phone}'>
-										    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>
-
-										</div>
-										
-										<br>										
-
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>
-
-										    <input id="datepicker" class="form-control required dateISO" name="datepicker" placeholder="輸入您的出生年月日" value='${param.birthday}'>
-										    <small><Font color='red' >${ErrorMsgKey.BirthdayEmptyError}</Font></small><br>
-										</div>
-										
-										<br>
-										
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>
-										    <input id="address" type="text" class="form-control required" name="address" placeholder="輸入您的地址" value='${param.address}'>
-										    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>
-										</div>
-										
-										<br>																																			
-																	
-										<input type="hidden" name="action" value="insert">
-										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >下一步</button>
-										
-									</form>	
-								</div>
-							</div>
-						</div>
-						
-					</div>	
+				<div class="col-xs-10 col-sm-8 col-md-8 col-lg-8 table-responsive">
+					<table class="table table-hover" style="width:500px">
+						<thead>
+							<tr>
+								<th>預約編號</th>
+								<th>預約人</th>
+								<th>預約日期</th>
+								<th>結束時間</th>
+								<th>廠牌</th>
+								<th>車系</th>
+								<th>服務技師</th>
+								<th>操作</th>
+							</tr>
+						</thead>																
+						<tbody>
+<!-- 							<tr> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 								<td>測試</td> -->
+<!-- 							</tr>																									 -->
+						</tbody>
+					</table>
 				</div>
 				
 				<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
