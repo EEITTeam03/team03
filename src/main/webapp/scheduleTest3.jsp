@@ -61,6 +61,7 @@
         	newFields.push({'fieldID':'status','fieldName':'Status','type':'text','hidden':'hidden'});
         	newFields.push({'fieldID':'serviceS','fieldName':'綜合服務(單選)','type':'radio','values':searchXXX1Date()});
         	newFields.push({'fieldID':'serviceM','fieldName':'單一服務(多選)','type':'checkbox','values':searchXXX2Date()});
+        	newFields.push({'fieldID':'noteE','fieldName':'員工備註','type':'text'});
         }
         function searchXXX1Date(){
         	var fromAjax;
@@ -519,7 +520,7 @@
         		var endTime = (data[i].End).split(":");			/*	讀結束時間	*/
         		var appointment ={
                     id: data[i].ReservNo,
-                    description: "NoteC: "+data[i].NoteC + ", NoteE: "+data[i].NoteE,
+                    description: data[i].NoteC,
                     subject:  data[i].License,
                     calendar: data[i].EmpName,					/*	讀師傅	*/
                     start: new Date(data[i].Year, data[i].Month-1, data[i].Day, parseInt(startTime[0]), parseInt(startTime[1]), 0),
@@ -533,7 +534,7 @@
         		$('#scheduler').jqxScheduler('addAppointment', appointment);
         		var serviceS = ""+data[i].Radio;
         		var empNo = ""+data[i].EmpNo;
-        		setFinalAppointment(data[i].ReservNo,{'empNo':empNo ,'status':data[i].Status,'serviceS':serviceS,'serviceM':serviceM})
+        		setFinalAppointment(data[i].ReservNo,{'empNo':empNo ,'status':data[i].Status,'serviceS':serviceS,'serviceM':serviceM, 'noteE': data[i].NoteE})
         	}
         }
     	
