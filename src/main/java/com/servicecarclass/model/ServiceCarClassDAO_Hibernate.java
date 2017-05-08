@@ -6,6 +6,7 @@ import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.carclass.model.CarClassVO;
 import com.services.model.ServicesVO;
 
 import hibernate.util.HibernateUtil;
@@ -16,6 +17,7 @@ public class ServiceCarClassDAO_Hibernate implements ServiceCarClassDAO_interfac
 	private static final String GET_ONE_STMT = "FROM ServiceCarClassVO WHERE servNo=? AND carClass=?";
 	private static final String GET_SERs_BYSerNo_STMT = "SELECT servNo,servTypeNo,servName,servDesc,servPhoto,servEffectiveDate,servStatus FROM services WHERE servNo=? order by servNo ";
 	private static final String DELETE = "DELETE ServiceCarClassVO WHERE ServNo=?";
+	private static final String GET_ONE = "FROM ServiceCarClassVO WHERE servicesVO=? AND carClassVO=?";
 	@Override
 	public void insert(ServiceCarClassVO serCarVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -114,6 +116,27 @@ public class ServiceCarClassDAO_Hibernate implements ServiceCarClassDAO_interfac
 //
 //		return set;
 		return null;
+	}
+
+	@Override
+	public ServiceCarClassVO findOne(ServicesVO servicesVO, CarClassVO carClassVO) {
+		ServiceCarClassVO serCarVO = null;
+		List<ServiceCarClassVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(GET_ONE);
+			query.setParameter(0, servicesVO);
+			query.setParameter(1, carClassVO);
+			list = query.list();
+			serCarVO = list.get(0);
+			session.getTransaction().commit();
+		}catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
+		
+		return serCarVO;
 	}
 
 //	@Override

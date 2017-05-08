@@ -42,4 +42,8 @@ public class ServiceCarClassService {
 	public List<ServiceCarClassVO> getAll(){
 		return dao.getAll();
 	}
+
+	public ServiceCarClassVO getOne(ServicesVO servicesVO, CarClassVO carClassVO) {
+		return dao.findOne(servicesVO, carClassVO);
+	}
 }
