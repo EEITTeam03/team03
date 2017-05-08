@@ -5,10 +5,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+		$(document).ready(function () {
+			init();
+		});	
+	
+		function init(){
+			initClick();
+		}
+		
+		function initClick(){
+			$('#a_searchAllService').click(function(){
+				$('#contentDiv').load('${ctx}/services/ListAllServices.jsp');
+			});
+		}
+	</script>
 </head>
 <body>
 	<ul>
-		<li><a href='${ctx}/services/ListAllServices.jsp'>查看</a>所有服務 (後台)</li>
+		<li><a href='#' id="a_searchAllService">查看</a>所有服務 (後台)</li>
 		<br>
 		<li><a href='${ctx}/services/ServicesInsert.jsp'>新增</a>服務 (後台)</li>
 		<br>
