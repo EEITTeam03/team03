@@ -373,7 +373,7 @@ $("#cardatas > tr.children('.haha').text()");
 						<div class="panel-body">
 							<div class="flot-chart">
 								<div class="flot-chart-content" id="flot-bar-chart">
-									<form id="cmxform" class="form-signin" role="form" action="CarLicense" method="post">
+									<form id="cmxform" class="form-signin" role="form" action="" method="get">
 										
 										<div id="brandImgs" class="row divScroll">
 										
@@ -445,8 +445,6 @@ $("#cardatas > tr.children('.haha').text()");
 										<br>
 										
 										<input type="hidden" name="action" value="insert">									
-										
-										<input type="hidden" name="action" value='${param.memberinfoVO}'>
 										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >完成</button>																				
 
 									</form>	
