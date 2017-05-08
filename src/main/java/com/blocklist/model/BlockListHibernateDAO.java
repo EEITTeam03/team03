@@ -5,11 +5,16 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.memberinfo.model.MemberInfoVO;
+import com.memberinfo.model.MemberService;
+
 import hibernate.util.HibernateUtil;
 
 public class BlockListHibernateDAO implements BlockListDAO_interface{
 
 	private static final String GET_ALL_STMT = "FROM BlockListVO ORDER BY reservationNo";
+	private static final String COUNT_MEMBERNO = "SELECT COUNT (memberInfoVO) FROM BlockListVO where memberInfoVO=?";
 	
 	@Override
 	public void insert(BlockListVO blockListVO) {
@@ -82,4 +87,31 @@ public class BlockListHibernateDAO implements BlockListDAO_interface{
 		return list;
 	}
 
+	@Override
+	public Long countBlockList(MemberInfoVO miv) {
+		// TODO Auto-generated method stub
+		List<Object> list = new ArrayList<Object>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Long counter = null;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(COUNT_MEMBERNO);
+			query.setParameter(0, miv);
+			list = query.list();
+			counter = (Long)list.get(0);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		
+		return counter;
+	}
+//	public static void main(String[]args){
+//		MemberService ms = new MemberService();
+//		 MemberInfoVO miv= ms.getOneMem(9);
+//		 BlockListHibernateDAO dao = new BlockListHibernateDAO();
+//		 System.out.println(dao.countBlockList(miv));
+//		 
+//	}
 }

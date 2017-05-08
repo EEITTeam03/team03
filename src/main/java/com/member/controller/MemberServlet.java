@@ -93,7 +93,7 @@ public class MemberServlet extends HttpServlet {
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgMap.isEmpty()) {
-					req.setAttribute("memberinfoVO", memberinfoVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					req.setAttribute("memberinfoVO", memberinfoVO); // 含有輸入格式錯誤的memberinfoVO物件,也存入req
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("register.jsp");
 					failureView.forward(req, res);
@@ -106,7 +106,7 @@ public class MemberServlet extends HttpServlet {
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/index.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
