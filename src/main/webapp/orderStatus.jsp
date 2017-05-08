@@ -76,6 +76,12 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
 	<style type="text/css">	
 		.img-services{
 			width:360px;
@@ -175,17 +181,14 @@
 		table tr, table th {
 			border-width: 0px;
 			text-align: center;
-			vertical-align:middle;
-			
+			vertical-align:middle;			
 		}
 		
 		/* Padding and font style */
 		table td, table th {
-
 			font-size: 15px;
 			font-family: Noto Sans TC;
-			font-weight: bold;
-			
+			font-weight: bold;			
 		}		
 		
 		tbody tr:nth-child(2n-1) { 
@@ -193,12 +196,7 @@
  		} 
 		table tr:nth-child(2n) {
 			background: #eee;
-		}
-		
-		.table{
-			text-align:center;
-			
-		}		
+		}			
 	</style>
 
 
@@ -207,10 +205,17 @@
 <!-- 驗證 -->
 <script src="js/jquery.validate.js" type="text/javascript"></script>
 
+
+
+
+
   <script>
+  
+  
   $( function() {
 	  
-			//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
+		
+	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
 		var wdth = $(window).width();
 		if(wdth<975){					
  		        $("#nav-log-in").addClass("menu-fut-li");
@@ -273,18 +278,21 @@
   			 	var carModel = orderStatus.carModel;//JSON第N筆拿到的車系
   			 	var employeeName = orderStatus.employeeName;//JSON第N筆拿到的員工姓名
   			 	
+  			 	
+  			 	
   	    		var tr = $("<tr></tr>")
-  	    		var td1 = $("<td>" + reservNo + "</td>");		
-  	    		var td2 = $("<td>" + memberName + "</td>");			
-  	    		var td3 = $("<td>" + reservDateTime + "</td>");	
-  	    		var td4 = $("<td>" + reservEndTime + "</td>");	
-  	    		var td5 = $("<td>" + brand + "</td>");	
-  	    		var td6 = $("<td>" + carModel + "</td>");
-  	    		var td7 = $("<td>" + employeeName + "</td>");  	    		
-  	    		var td8 = $("<td></td>");
+  	    		var td1 = $("<td style=vertical-align:middle;>" + reservNo + "</td>");		
+  	    		var td2 = $("<td style=vertical-align:middle;>" + memberName + "</td>");			
+  	    		var td3 = $("<td style=vertical-align:middle;>" + reservDateTime + "</td>");	
+  	    		var td4 = $("<td style=vertical-align:middle;>" + reservEndTime + "</td>");	
+  	    		var td5 = $("<td style=vertical-align:middle;>" + brand + "</td>");	
+  	    		var td6 = $("<td style=vertical-align:middle;>" + carModel + "</td>");
+  	    		var td7 = $("<td style=vertical-align:middle;>" + employeeName + "</td>");  	    		
+  	    		var td8 = $("<td style=vertical-align:middle;></td>");
   	    		
-  	    		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
+  	    		var button = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","data-container":"body"});
   	    		var span = $("<span></span>").addClass("glyphicon glyphicon-th-list");
+  	    		 	    		
   	    		
   	    		button.append(span);
   	    		td8.append(button);
@@ -293,15 +301,42 @@
   			 	
   	    		$("table > tbody").append(tr);
    			})
+   			
+//    			$(".ser-list").popover({
+//    			    trigger:"focus",
+//    			    placement:"bottom",
+//    			 	placement:"right",
+//    			    html:true,
+//    			    content:'<p style="width: 500px;">html:true会解析html标签哦，<a href="http://www.51xuediannao.com/" target="_blank">懒人建站</a></p><p>你也试试吧！</p>'
+//    			});  			
    				
    		}) 			
- 			
+ 		var tte = 0;
+   	    $(document).on("mouseenter", ".ser-list", function(event){
+   	    	tte=tte+1;
+   	    	
+				$(this).popover({
+			    trigger:"focus",
+			    placement:"bottom",
+			 	placement:"right",
+			    html:true,
+			    content:"<p style='width: 500px;'>"+tte+"</p>"
+			});  		
+			
+   	    	
+   	    });
+//   	    $(document).on('blur', '.ser-list', function(event){
+ 	    
+//    	    	$(this).popover("hide");			
+			
+   	    	
+//    	    });  		
+
  			
   } );
   
   
   </script>
-
 
 <style>
 	
@@ -353,7 +388,7 @@
                     <li id="nav-log-in" class="">                    
 	                    <button class="page-scroll ff-word btn btn-xs fun-btn" onclick="location.href='login.jsp'">
 	   		
-							<span class="glyphicon glyphicon-log-in"></span> 登入															
+							<span class="glyphicon glyphicon-log-in"></span> 登入														
 	                        
 	                    </button>
 	                </li>
@@ -415,10 +450,8 @@
 	<section id="services">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
-	
-				<div class="col-xs-10 col-sm-8 col-md-8 col-lg-8 table-responsive">
-					<table class="table table-hover" style="width:500px">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
+					<table class="table table-hover">
 						<thead>
 							<tr>
 								<th>預約編號</th>
@@ -464,10 +497,10 @@
 <!-- 							</tr>																									 -->
 						</tbody>
 					</table>
+					
+					
 				</div>
 				
-				<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
-	
 			</div>
 		</div>
 	</section>
