@@ -1,6 +1,8 @@
 package com.blocklist.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,19 +21,22 @@ import com.blockrule.model.BlockRuleVO;
 import com.membercars.model.MemberCarsVO;
 import com.membercars.model.MembercarsService;
 import com.memberinfo.model.MemberInfoVO;
+import com.memberinfo.model.MemberService;
 import com.schedule.model.ReservService;
+
+import myutil.MyUtil;
 
 /**
  * Servlet implementation class maintain
  */
 @WebServlet("/admin/maintain.do")
-public class maintain extends HttpServlet {
+public class Maintain extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public maintain() {
+    public Maintain() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -122,16 +127,20 @@ public class maintain extends HttpServlet {
 					
 					HttpSession session = request.getSession();
 					
-					if(bls.countBlockListVO(miv) >= 3){
-						
-						
+					if((bls.countBlockListVO(miv)%3)==0){
+//						java.util.Date date = DateFormat.getDateInstance().parse(violationDate);
+						java.util.Calendar calendar = MyUtil.getCalender(violationDate);
+						calendar.add(Calendar.MONTH,3);
+						//java.sql.Date sqlDate= (java.sql.Date)calendar.getInstance().getTime();
+						java.sql.Date sqlDate = new java.sql.Date(calendar.getTimeInMillis());
+						MemberService msvc = new MemberService();
+						msvc.updateMem(miv.getMemberNo(), miv.getMemberName(), miv.getEmail(), miv.getPassword(), miv.getPhone(), miv.getBirthday(), miv.getAddress(), sqlDate);
 					};
 					
 					String url = "/listAllBlockList.jsp";
 					RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交listAllBlockList.jsp
 					successView.forward(request, response);
-				
-				
+					
 			}catch (Exception e) {
 				errorMsgMap.put(e.getMessage(), "其他錯誤");
 				RequestDispatcher failureView = request

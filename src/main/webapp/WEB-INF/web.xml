@@ -9,10 +9,9 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-   <listener>
-	<listener-class>
+  <listener>
+    <listener-class>
              system.listener.ContextListener
         </listener-class>
-   </listener>
+  </listener>
 </web-app>
