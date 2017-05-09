@@ -82,28 +82,28 @@ public class scheduleTestServlet2 extends HttpServlet {
 		HashMap<String,String> map = new HashMap<String,String>();
 		map = new Gson().fromJson(json, new TypeToken<HashMap<String,String>>(){}.getType());
 		
-		Integer reservNo= Integer.valueOf(map.get("id"));
+		Integer reservNo= Integer.valueOf(map.get("id")); //取得預約編號
 		ReservService rs = new ReservService();
 		//ReservVO rvo= rs.getOneReserv(reservNo);
 		
-		Calendar scalendar = MyUtil.getLocalTimeFromUTC(map.get("start"));
-		Calendar OldEnd = MyUtil.getLocalTimeFromUTC(map.get("end"));
+		Calendar scalendar = MyUtil.getLocalTimeFromUTC(map.get("start")); //取得預約時間
+		Calendar OldEnd = MyUtil.getLocalTimeFromUTC(map.get("end")); //取得原本的結束時間
 		
-		Integer empNo= Integer.valueOf(map.get("empNo"));
+		Integer empNo= Integer.valueOf(map.get("empNo")); //取得員工編號
 		EmployeeService es = new EmployeeService();
 		EmployeeVO eVO = es.getOneEmp(empNo);
 		
-		String license = map.get("subject");
+		String license = map.get("subject"); //取得車牌
 		MembercarsService mcs = new MembercarsService();
 		MemberCarsVO mcv = mcs.getOneByPK(license);
 		
-		String noteC = map.get("description");
+		String noteC = map.get("description"); //取得noteC
 		
-		String notesE = map.get("noteE");
+		String notesE = map.get("noteE"); //取得notesE
 		
-		Integer status =Integer.valueOf( map.get("status"));
+		Integer status =Integer.valueOf( map.get("status")); //取得預約狀態
 		
-		String serviceS = map.get("serviceS");
+		String serviceS = map.get("serviceS"); //取得單選的服務
 		Integer SS = Integer.valueOf(serviceS);
 		
 		
@@ -114,23 +114,23 @@ public class scheduleTestServlet2 extends HttpServlet {
 		Integer sTime=0;
 		if(sccVO.getServTime()!=null) sTime = sccVO.getServTime(); //得到單選服務的時間了
 		
-		String serviceM = map.get("serviceM");
+		String serviceM = map.get("serviceM"); //取得多選服務
 		List<Integer> list = new ArrayList<Integer>();
 		Integer mTime=0;
 		Integer MM=null;
 		if(serviceM.length()!=0){
 			String[] M= serviceM.split(",");
-			
+			//計算多選服務的時間
 			for(int i=0;i<M.length;i++){
 				MM = Integer.valueOf(M[i]);
 				ServiceCarClassVO mmVO = sccs.getOneServiceCarClass(MM,carSize );
-				mTime += mmVO.getServTime();
+				mTime += mmVO.getServTime(); 
 				list.add(MM);
 			}
 		}
 		
-		Integer TTime = sTime + mTime;
-		
+		Integer TTime = sTime + mTime; //單選和多選總共需要的時間
+		//計算新的結束時間
 		Calendar ecalendar = Calendar.getInstance();
 		ecalendar.setTime(scalendar.getTime());
 		ecalendar.add(Calendar.HOUR_OF_DAY, TTime/60);
@@ -142,7 +142,7 @@ public class scheduleTestServlet2 extends HttpServlet {
 		
 		ReservVO rvo = new ReservVO();
 		
-		
+		//判端預約有沒有衝突，若沒衝突則update
 		if(cc.checkDateAndEmpUpdate(scalendar, ecalendar, empNo, reservNo)==false){
 			rls.deleteListByNo(reservNo);//先把舊預約的ReservList刪除
 			Set<ReservListVO>reservlists=new HashSet<ReservListVO>();

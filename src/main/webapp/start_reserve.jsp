@@ -68,7 +68,7 @@
 	<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
-
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css">
 <style>
 label {
 	font-size: 150%;
@@ -193,9 +193,10 @@ label {
 
 
 				<div class="form-group">
-					<label for="datepicker" class="col-sm-2 control-label">預約日期</label>
+					<label for="datepicker" class="col-sm-2 control-label">選擇預約日期</label>
 					<div class="col-sm-6">
-						<input type="text" name="selectedDate" id="datepicker"
+						<div id="datepicker"></div>
+						<input type="hidden" name="selectedDate" id="selectedDate" 
 							class="form-control" value="${param.selectedDate}"
 							placeholder="選擇日期">
 					</div>
@@ -348,9 +349,16 @@ label {
 		$(function() {
 			$("#datepicker").datepicker({
 				changeMonth : true,
-				changeYear : true,
+				changeYear : false,
 				dateFormat : 'yy-mm-dd',
-				yearRange : '-90:+0'
+				yearRange : '-0:+0',
+				monthNamesShort: [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ],
+				maxDate: "+3m",
+				minDate : new Date(),
+				onSelect : function(dateText,inst){
+					console.log(dateText);
+					$("#selectedDate").val(dateText);
+				}
 			});
 			
 			
