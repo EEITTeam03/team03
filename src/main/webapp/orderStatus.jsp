@@ -208,7 +208,7 @@
   
   
   $( function() {
-	  
+
 		
 	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
 		var wdth = $(window).width();
@@ -290,16 +290,32 @@
   	    		var btnServ = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","data-container":"body"});
   	    		var span1 = $("<span></span>").addClass("glyphicon glyphicon-list-alt");
   	    		var cts = (+new Date());//現在時間(毫秒)
-  	    		var rdts = Date.parse(reservDateTime);//預約日期毫秒
-  	    		var rets = Date.parse(reservEndTime);//結束日期毫秒
+  	    		
+  	    		var rdts = Date.parse(reservDateTime);//預約日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
+  	    		var rdtshr = (new Date(reservDateTime)).getHours();//預約日期取出小時
+  	    		var rdtsmin = (new Date(reservDateTime)).getMinutes();//預約日期取出分鐘
+  	    		var rdtssec = (new Date(reservDateTime)).getSeconds();//預約日期取出毫秒
+  	    		rdts = rdts + (rdtshr*60*60) + (rdtsmin*60) + rdtssec;//預約日期加總換算成毫秒
+  	    		var rets = Date.parse(reservEndTime);//結束日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
+  	    		var retshr = (new Date(reservEndTime)).getHours();//結束日期取出小時
+  	    		var retsmin = (new Date(reservEndTime)).getMinutes();//結束日期取出分鐘
+  	    		var retssec = (new Date(reservEndTime)).getSeconds();//結束日期取出毫秒
+  	    		rets = rets + (retshr*60*60) + (retsmin*60) + retssec;//預約日期加總換算成毫秒
+  	    		
+//   	    		console.log("現在時間"+cts);
+//   	    		console.log("預約日期"+rdts);
+//   	    		console.log("預約日期小時"+rdtshr);
+//   	    		console.log("預約日期分"+rdtsmin);
+//   	    		console.log("預約日期秒"+rdtssec);
+  	    			console.log("window.open(surveillance.jsp?a="+reservNo+",觀看愛車)");
   	    		//監控按鈕
   	    		if(cts > rdts && cts < rets){
-	  	    		var btnMit = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","onclick":"window.open('index.jsp','觀看愛車');"});	  		    		
+	  	    		var btnMit = $("<button onclick='opsurveillance(this.value)'></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","value":reservNo});	
   	    		}else{
   	    			var btnMit = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","disabled":"true"}); 	    			
   	    		}
   	    		var span2 = $("<span></span>").addClass("glyphicon glyphicon-facetime-video");  
-
+//,"name":"btnMit","value":reservNo
   	    		
   	    		var serTbe = $("<Table style='width:350px;'></Table>");
   	    		
@@ -356,8 +372,16 @@
    			})
 			
    		}) 	   		  	 	
- 			
+ 	
+
+   		
+   		
+   		
   } );
+  
+	function opsurveillance(value){		
+		window.open("surveillance.jsp?a="+value,"觀看愛車");
+	}
   
   
   </script>
@@ -392,19 +416,19 @@
                         <a class="page-scroll ff-word" href="start_reserve.jsp">進行預約</a>                    	
                     </li>                    
                     <li>
-                        <a class="page-scroll ff-word" href="#services">各類服務</a>
+                        <a class="page-scroll ff-word" href="#services">各類服務0</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#portfolio">美容項目</a>
+                        <a class="page-scroll ff-word" href="#portfolio">美容項0目</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#about">關於我們</a>
+                        <a class="page-scroll ff-word" href="#about">關於我們0</a>
                     </li>
                     <li>
                         <a class="page-scroll ff-word" href="#team">團隊成員</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#contact">聯絡我們</a>
+                        <a class="page-scroll ff-word" href="#contact">聯絡我0們</a>
                     </li>
                     
 						<!--	未登入	-->

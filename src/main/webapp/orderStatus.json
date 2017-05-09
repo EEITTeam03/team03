@@ -2,7 +2,7 @@
 "list":
 	[
 		{"reservNo":"16","memberName":"蕭麥可","reservDateTime":"2017-05-09 13:00:00.000",
-		"reservEndTime":"2017-05-09 18:00:00.000","brand":"AUDI 奧迪","carModel":"A3","employeeName":"蕭天怡",
+		"reservEndTime":"2017-05-10 19:00:00.000","brand":"AUDI 奧迪","carModel":"A3","employeeName":"蕭天怡",
 		"reserv_list":[
 						{"reservNo":"18","servNo":"2003","servPrice":"5500","servTime":"180","servName":"超值清新抗菌組合"},
 						{"reservNo":"18","servNo":"1002","servPrice":"1000","servTime":"70","servName":"內裝清洗護理"}

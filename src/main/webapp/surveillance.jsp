@@ -23,7 +23,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>訂單狀態</title>
+<title>觀看愛車</title>
 
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
@@ -172,19 +172,61 @@
   $( function() {
 	  
 		
+	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
+		var wdth = $(window).width();
+		if(wdth<975){					
+		        $("#nav-log-in").addClass("menu-fut-li");
+		  		$("#nav-register").addClass("menu-fut-li");
+		}
+		if(wdth>=975){
+		        $("#nav-log-in").addClass("nav-fut-li");
+		  		$("#nav-register").addClass("nav-fut-li"); 
+		}
+		//結束
+		
+		//不斷監控(監聽)螢幕大小，藉此判斷登入、註冊按鈕是在nav上或者在menu內，來設定不同的樣式
+		$(window).resize(function() {
+			var wdth = $(window).width();
+			var logIn = $("#nav-log-in").attr("class");
+			var regst = $("#nav-register").attr("class");
+			var numln = null;
+			var numrn = null;
+			var numlm = null;
+			var numrm =	null;
 
- 		});
- 				
-   		
-		$.getJSON('orderStatus.json',function(json){
+//			console.log(logIn);
+//			console.log(regst);				
 			
-   			$.each(json.list,function(idx,orderStatus){
-   				
-  			 	
+			if(logIn != undefined){
+				numln =	logIn.indexOf("nav-fut-li");
+				numlm =	logIn.indexOf("menu-fut-li");
+			}				
 			
-   		}) 	   		  	 	
- 			
-  } );
+			//當會員登入後，註冊按鈕會不存在，所以不用去比對註冊按鈕的class
+			if(regst != undefined){
+				numrn =	regst.indexOf("nav-fut-li");
+				numrm =	regst.indexOf("menu-fut-li");
+			}
+
+			if( (wdth < 975) && (numln > -1) && (numrn > -1) ){
+	   		        $("#nav-log-in").removeClass("nav-fut-li");
+	   		  		$("#nav-register").removeClass("nav-fut-li");					
+	   		        $("#nav-log-in").addClass("menu-fut-li");
+	   		  		$("#nav-register").addClass("menu-fut-li");   		  		
+	   		  		
+			}
+			if( (wdth >= 975) && (numlm > -1) && (numrm > -1) ){
+	   		        $("#nav-log-in").removeClass("menu-fut-li");
+	   		  		$("#nav-register").removeClass("menu-fut-li");
+	   		        $("#nav-log-in").addClass("nav-fut-li");
+	   		  		$("#nav-register").addClass("nav-fut-li"); 
+			}
+		});
+			//結束  	
+ 		
+	 		  	 	
+			
+} );
   
   
   </script>
@@ -303,7 +345,8 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
 
-					
+					<h5>${param.a}</h5>
+					 <input class="" type="submit" value="Submit" />
 					
 				</div>
 				
