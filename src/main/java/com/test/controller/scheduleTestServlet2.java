@@ -77,6 +77,7 @@ public class scheduleTestServlet2 extends HttpServlet {
 //		System.out.println("綜合服務(單選):"+map.get("serviceS"));
 //		System.out.println("單一服務(多選):"+map.get("serviceM"));
 //		System.out.println("-------------------------------------------------");
+		PrintWriter out = response.getWriter();
 		String json = request.getParameter("data");
 		HashMap<String,String> map = new HashMap<String,String>();
 		map = new Gson().fromJson(json, new TypeToken<HashMap<String,String>>(){}.getType());
@@ -182,12 +183,11 @@ public class scheduleTestServlet2 extends HttpServlet {
 			//rs.updateReserv(reservNo, scalendar, noteC, notesE, status, membercarsVO, employeeVO, reservlists)
 		} else{
 			System.out.println("預約時間衝突");
+			out.println("預約時間衝突");
 			return;
 		}
-		
-			
-		PrintWriter out = response.getWriter();
-		out.println("傳送成功");
+
+		out.println("修改成功");
 	}
 
 	/**
@@ -198,20 +198,20 @@ public class scheduleTestServlet2 extends HttpServlet {
 		doGet(request, response);
 	}
 	/*要寫到Util.java*/
-	public static Calendar getLocalTimeFromUTC(String timeUTC){
-		  TimeZone utc = TimeZone.getTimeZone("UTC");
-		  SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-		  f.setTimeZone(utc);
-		  Calendar cal = Calendar.getInstance();
-		  
-		  try {
-		   cal.setTime(f.parse(timeUTC));
-		  } catch (ParseException e) {
-		   //日期格式錯誤無法轉換
-		   e.printStackTrace();
-		  }
-		  
-		  return cal;
-	}
+//	public static Calendar getLocalTimeFromUTC(String timeUTC){
+//		  TimeZone utc = TimeZone.getTimeZone("UTC");
+//		  SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+//		  f.setTimeZone(utc);
+//		  Calendar cal = Calendar.getInstance();
+//		  
+//		  try {
+//		   cal.setTime(f.parse(timeUTC));
+//		  } catch (ParseException e) {
+//		   //日期格式錯誤無法轉換
+//		   e.printStackTrace();
+//		  }
+//		  
+//		  return cal;
+//	}
 }
 
