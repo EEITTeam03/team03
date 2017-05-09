@@ -15,10 +15,27 @@
 <title>所有服務項目</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
+  <!-- Bootstrap Core CSS -->
+    <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
-<table border='1' bordercolor='#CCCCFF' width='1600'>
+
+<div id="wrapper">
+<div id="page-wrapper">
+<div class="row">
+<div class="col-lg-8">
+<div class="table-responsive">
+
+
+<table class="table table-bordered table-hover">
+<thead>
 		<tr>
 			<th>服務編號</th>
 			<th>服務類型編號</th>
@@ -29,6 +46,7 @@
 			<th>服務照片</th>
 			<th colspan="2">選項</th>
 		</tr>
+		</thead>
 		<c:forEach var="servicesVO" items="${list}">
 			<tr align='center' valign='middle'>
 				<td width="300">${servicesVO.servNo}</td>
@@ -65,6 +83,16 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
+</div>
+</div>
+</div>
+</div>
+	 <!-- jQuery -->
+    <script src="${ctx}/admin/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="${ctx}/admin/js/bootstrap.min.js"></script>
 	
 </body>
 </html>
