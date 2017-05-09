@@ -5,135 +5,76 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"/>
-<form action="../MemberServlet">
-	<div id="fb-root"></div>
-	<script>
-		//原始的寫法----
-		//   function statusChangeCallback(response) {
-		//     console.log('statusChangeCallback');
-		//     console.log(response);
-
-		//     if (response.status === 'connected') {
-
-		//       testAPI();
-		//     } else {
-		//       document.getElementById('status').innerHTML = 'Please log ' +
-		//         'into this app.';
-		//     }
-		//   }
-
-		//   function checkLoginState() {
-		//     FB.getLoginStatus(function(response) {
-		//       statusChangeCallback(response);
-		//     });
-		//   }
-
-		//   window.fbAsyncInit = function() {
-		//   FB.init({
-		//     appId      : '1319189648197282',
-		//     cookie     : true,  // enable cookies to allow the server to access 
-		//                         // the session
-		//     xfbml      : true,  // parse social plugins on this page
-		//     version    : 'v2.9' // use graph api version 2.8
-		//   });
-
-		//   FB.getLoginStatus(function(response) {
-		//     statusChangeCallback(response);
-		//   });
-
-		//   };
-
-		//   (function(d, s, id) {
-		//     var js, fjs = d.getElementsByTagName(s)[0];
-		//     if (d.getElementById(id)) return;
-		//     js = d.createElement(s); js.id = id;
-		//     js.src = "//connect.facebook.net/zh_TW/sdk.js";
-		//     fjs.parentNode.insertBefore(js, fjs);
-		//   }(document, 'script', 'facebook-jssdk'));
-
-		//   function testAPI() {
-		//     console.log('Welcome!  Fetching your information.... ');
-		//     FB.api('/me', function(response) {
-		//     	window.top.location.href = 
-		//     		"http://www.facebook.com/connect/uiserver.php?app_id="
-		//     				+ encodeURIComponent("1319189648197282") 
-		//     				+ "&next=" 
-		//     				+ encodeURIComponent("http://localhost:8080/maven-archetype-webapp-servlet3/index.jsp") + 
-		//     				"&display=popup&perms=email,public_profile&fbconnect=1&method=permissions.request";
-		//     	}
-		//     )}
-
-		//亂寫一通
-		//load facebook sdk
-		FB.getLoginStatus(function(response) {
-			if (response.authResponse) {
-				var accessToken = response.authResponse.accessToken;
-				FB.api('/me', function(response) {
-					checkMember(response.id, response.name, response.email,
-							response.birthday);
-				});
-			} else {
-				FB.login(function(response) {
-					if (response.authResponse) {
-						FB.api('/me', function(response) {
-							checkMember(response.id, response.name,
-									response.email, response.birthday);
-						});
-					} else {
-						alert('登入失敗!');
-					}
-				}, {
-					scope : 'id,name,email,user_birthday'
-				});
-			}
-		});
-
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId : '1319189648197282',
-				cookie : true,
-				xfbml : true,
-				version : 'v2.9'
-			});
-		};
-		// Load the SDK asynchronously
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id))
-				return;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "//connect.facebook.net/en_US/sdk.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, "script", "facebook-jssdk"));
-
-		function checkMember(memberName, email, password, phone, birthday,address) {
-			$.ajax({
-				url : 'register.jsp',
-
-				type : 'POST',
-
-				data : {
-					memberName : memberName,
-					email : email,
-					password : "password",
-					phone : phone,
-					birthday : birthday,
-					address : address
-				},
-
-				dateType : 'html',
-			})
-
-		}
-	</script>
-</form>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"/> -->
 </head>
 <body>
-	<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> -->
-	<!-- </fb:login-button> -->
-	<button onClick="checkMember()">登入facebook</button>
+<script type="text/javascript">
+//檢查是否連接facebook了
+function statusChangeCallback(response){
+	 console.log('statusChangeCallback');
+	 console.log(response);
+	 if(response.status ==='connected'){
+		 login(response.authResponse.accessToken);
+	 }else if(response.status === 'not_authorized'){
+		 console.log('已登入facebook但未登入網頁');
+	 }else{
+		 console.log("未登入Facebook");
+	 }
+}
+//檢查登入狀態
+function checkLoginState(){
+	FB.getLoginStatus(function(response) {
+		statusChangeCallback(response);
+	});
+}
+//讀入使用此api的appid &版本
+window.fbAsyncInit= function(){
+	 FB.init({
+		    appId      : '1319189648197282',
+		    cookie     : true, 
+		    xfbml      : true, //解析這個頁面的社交套件
+		    version    : 'v2.9'
+		  });
+};
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/zh_TW/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+function loginNEMI(token){
+	 console.log('取得資料中...');
+	 //步驟一:建立XMLHttpRequest物件
+	 var xhr=new XMLHttpRequest();
+	 //步驟二:發出HTTP請求
+	 xhr.open("POST", "/login", true);
+	 //setRequestHeader()設定內容類型，因為POST要發送的資料會放在請求的本體中，所以你必須告知發送的資料類型為何，接著在send()時，將要發送的資料，作為send()的引數傳入。
+	 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	 xhr.onreadystatechange=function()
+	    {
+	      if(xhr.readyState === 4 && xhr.status === 200)
+	      {
+	          if(JSON.parse(xhr.responseText).status === "ok")
+	            location.href="${ctx}/index.jsp";
+	          else
+	            alert("something wrong!");
+	      }  
+	    };
+	    xhr.send("token="+token);
+	}
+	//scope裡面放的是要求使用者的哪些資料權限
+function fbLogin(){
+	FB.login(function(response) {
+		statusChangeCallback(response);
+		console.log("回傳值"+response);
+		}, { scope: 'email', 
+		    return_scopes: true});
+}
+
+</script>
+	
+	<button type="button" onClick="fbLogin()">你自行客製化的按鈕</button>
 	<div id="status"></div>
 </body>
 </html>
