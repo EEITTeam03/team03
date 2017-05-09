@@ -94,12 +94,13 @@ public class MemberCarsHibernateDAO implements MemberCarsDAO {
 	}
 
 	@Override
-	public List<MemberCarsVO> findByMember(String memberNo) {
+	public List<MemberCarsVO> findByMember(Integer memberNo) {
 		List<MemberCarsVO> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery(GET_BY_MEM);
+			query.setParameter(0, memberNo);
 			list = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {

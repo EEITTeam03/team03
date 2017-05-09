@@ -9,6 +9,6 @@ public interface MemberCarsDAO {
 	public void delete(String carLicense);
 	public MemberCarsVO findByPK(String carLicense);
 	public List<MemberCarsVO> listAll();
-	public List<MemberCarsVO> findByMember(String memberNo);
+	public List<MemberCarsVO> findByMember(Integer memberNo);
 
 }

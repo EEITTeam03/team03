@@ -11,7 +11,7 @@ public class MembercarsService {
 		return dao.findByPK(carLicense);
 	}
 	
-	public List<MemberCarsVO> getListByMember(String memberNo){
+	public List<MemberCarsVO> getListByMember(Integer memberNo){
 		return dao.findByMember(memberNo);
 	}
 }
