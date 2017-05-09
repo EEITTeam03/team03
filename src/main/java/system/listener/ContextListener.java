@@ -38,7 +38,7 @@ public class ContextListener implements ServletContextListener {
     	Calendar reSetTime = Calendar.getInstance();
     	//隔天的半夜一點
     	reSetTime.add(Calendar.DATE, 1);
-    	reSetTime.set(Calendar.HOUR, 1);
+    	reSetTime.set(Calendar.HOUR_OF_DAY, 1);
     	reSetTime.set(Calendar.MINUTE, 0);
     	reSetTime.set(Calendar.SECOND, 0);
     	reSetTime.set(Calendar.MILLISECOND, 0);
