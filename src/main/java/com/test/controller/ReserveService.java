@@ -19,6 +19,7 @@ import com.employee.model.EmployeeVO;
 import com.membercars.model.MemberCarsDAO;
 import com.membercars.model.MemberCarsHibernateDAO;
 import com.membercars.model.MemberCarsVO;
+import com.memberinfo.model.MemberInfoVO;
 import com.reservlist.model.ReservListVO;
 import com.schedule.model.ReservDAO;
 import com.schedule.model.ReservVO;
@@ -162,8 +163,11 @@ public class ReserveService extends HttpServlet {
 		rdao.insert(reservVO);
 		
 		//寄信通知
-		new SendEmail().reserveOK(reservVO);
-		
+		 SendEmail se= new SendEmail();
+		 se.reserveOK(reservVO);
+		//預約即將到期寄信通知
+		 MemberInfoVO mivo = memberCarsVO.getMemberInfoVO();
+		 se.setProps(mivo.getEmail(), mivo.getMemberName(), cal);	
 		// 準備轉交
 		request.setAttribute("reserve", reservVO);
 		request.getRequestDispatcher("/reserve_success.jsp").forward(request, response);

@@ -63,12 +63,24 @@ public class SendEmail {
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
 			message.setSubject("您的車明天有預約洗車服務","utf-8");
+			if(cal.get(Calendar.MINUTE)==0){
+				message.setContent("Dear " + clientName + ", <br><br> 您預約的時間是" + m+"月"
+						+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":00", "text/html;charset=UTF-8");
+			}else{
 			message.setContent("Dear " + clientName + ", <br><br> 您預約的時間是" + m+"月"
 					+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE), "text/html;charset=UTF-8");
-
+			}
+			//得到預約前一天
+			Calendar lastDay = Calendar.getInstance();
+			lastDay.setTime(cal.getTime());
+			lastDay.set(Calendar.HOUR_OF_DAY, 0);
+			lastDay.set(Calendar.MINUTE,0);
+			lastDay.add(Calendar.DATE, -1);
+			//設定預約前一天寄信
+			message.setSentDate(lastDay.getTime());
+			
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, port, username, password);
-
 			Transport.send(message);
 
 			System.out.println("寄送email結束.");
