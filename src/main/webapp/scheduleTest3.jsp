@@ -33,6 +33,7 @@
     	var globalView = "weekView";
     	var newFields = [];
     	var isSave = false;
+    	var AddData = {};
         $(document).ready(function () {
         	init();
         	$('#loading_data').hide();		//隱藏loading圖
@@ -249,6 +250,22 @@
                     		});
                     		$('#scheduler').jqxScheduler('setAppointmentProperty', editAppointment.originalData.id, newFields[i].fieldID, fieldVal.substring(1));
                     	}
+                	//Add時
+                	}else if(isSave){
+                		for(var i=0;i<newFields.length;i++){
+                    		eval('$objField=fields.'+newFields[i].fieldID+';');
+                    		fieldVal = "";
+                    		$('input[type="text"]',$objField).each(function(){
+                    			fieldVal += ","+$(this).val();
+                    		});
+                    		
+                    		$('input[type="radio"],input[type="checkbox"]',$objField).each(function(){
+                    			if($(this).prop('checked')){
+                    				fieldVal += ","+$(this).val();
+                    			}
+                    		});
+                    		eval('AddData.'+newFields[i].fieldID+'="'+fieldVal.substring(1)+'"');
+                    	}
                 	}
                 },
                 localization: {
@@ -433,11 +450,14 @@
 				if(appointment.originalData.addSys == null || "" == appointment.originalData.addSys ){ //沒有addSys=true時
 					$('#scheduler').jqxScheduler('closeDialog');
 					alert("Add");
-					alert("新增資料:"+JSON.stringify(appointment.originalData));
+					appointment.id = appointment.originalData.id;
+					alert("新增資料:"+JSON.stringify(getFinalJson(appointment,'A')));
 					addDate = appointment.originalData.end.toISOString().substring(0, 10);
 // 					var jsonFinal = JSON.parse(JSON.stringify(appointment.originalData));
 // 					jsonFinal.id = (appointment.id);
-					editToServlet(JSON.stringify(getFinalJson(appointment)),"insert",addDate);
+					editToServlet(JSON.stringify(getFinalJson(appointment,'A')),"insert",addDate);
+					//清空新增資料
+					AddData = {};
 				}else{
 					appointment.id = appointment.originalData.addSys;
 					$('#scheduler').jqxScheduler('setAppointmentProperty', appointment.originalData.id, "addSys", true);
@@ -445,11 +465,15 @@
 			});
 		}
     	
-    	function getFinalJson(appointment){
+    	function getFinalJson(appointment,action){
     		var jsonFinal = JSON.parse(JSON.stringify(appointment.originalData));
     		jsonFinal.id = (appointment.id);
     		for(var i=0;i<newFields.length;i++){
-    			eval("jsonFinal."+newFields[i].fieldID+"=$('#scheduler').jqxScheduler('getAppointmentProperty', appointment.originalData.id, '"+newFields[i].fieldID+"');");
+    			if(action=='A'){
+    				eval("jsonFinal."+newFields[i].fieldID+"=AddData."+newFields[i].fieldID);
+    			}else{
+    				eval("jsonFinal."+newFields[i].fieldID+"=$('#scheduler').jqxScheduler('getAppointmentProperty', appointment.originalData.id, '"+newFields[i].fieldID+"');");
+    			}
     		}
     		
     		return jsonFinal;

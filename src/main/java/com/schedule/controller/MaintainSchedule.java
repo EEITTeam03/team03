@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.carclass.model.CarClassHibernateDAO;
 import com.carclass.model.CarClassVO;
+import com.employee.model.EmployeeService;
+import com.employee.model.EmployeeVO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.membercars.model.MemberCarsVO;
@@ -49,8 +51,11 @@ public class MaintainSchedule extends HttpServlet {
 		Integer reservNo= Integer.valueOf(map.get("id"));
 		
 		Calendar Scalendar = MyUtil.getLocalTimeFromUTC(map.get("start"));
+		Calendar OldEnd = MyUtil.getLocalTimeFromUTC(map.get("end"));
 		
-		String empNo = map.get("empNo");
+		Integer empNo= Integer.valueOf(map.get("empNo"));
+		EmployeeService es = new EmployeeService();
+		EmployeeVO eVO = es.getOneEmp(empNo);
 		
 		String license = map.get("subject");
 		MembercarsService mcs = new MembercarsService();
@@ -64,32 +69,31 @@ public class MaintainSchedule extends HttpServlet {
 		
 		String serviceS = map.get("serviceS");
 		Integer SS = Integer.valueOf(serviceS);
-		ServicesService svs = new ServicesService();
-		ServicesVO ssVO= svs.getOneService(SS);
-		
+
 		String serviceM = map.get("serviceM");
-		
-		//用MemberCarsVO萬里尋母servTime
 		String carSize= mcv.getCarTypeVO().getCarClassVO().getCarClass();
-		CarClassHibernateDAO ccdao = new CarClassHibernateDAO();
-		CarClassVO ccVO= ccdao.findByPK(carSize);
 		
 		ServiceCarClassService sccs = new ServiceCarClassService();
-		ServiceCarClassVO sccVO = sccs.getOne(ssVO, ccVO);
-		Integer sTime = sccVO.getServTime(); //得到單選服務的時間了
-		
+		ServiceCarClassVO sccVO = sccs.getOneServiceCarClass(SS, carSize);
+		Integer sTime=0;
+		if(sccVO.getServTime()!=null) sTime = sccVO.getServTime(); //得到單選服務的時間了
+
 		String[] M= serviceM.split(",");
 		Integer mTime=0; 
 		for(int i=0;i<M.length;i++){
 			Integer MM = Integer.valueOf(M[i]);
-			ssVO = svs.getOneService(MM);
-			sccVO = sccs.getOne(ssVO, ccVO);
+			sccVO = sccs.getOneServiceCarClass(MM,carSize );
 			mTime += sccVO.getServTime();
 		}
 		
-		Integer TTime = sTime+ mTime;
+		Integer TTime = sTime + mTime;
 		
-		//剩reservList
+		Calendar Ecalendar = Calendar.getInstance();
+		Ecalendar.setTime(Scalendar.getTime());
+		Ecalendar.add(Calendar.HOUR_OF_DAY, TTime/60);
+		Ecalendar.add(Calendar.MINUTE, TTime%60);
+		
+		
 		
 		
 		
