@@ -427,10 +427,11 @@
 				$('#scheduler').jqxScheduler('closeDialog');
 				alert("Save");
 				appointment.id = appointment.originalData.addSys;
+				addDate = appointment.originalData.start.toISOString().substring(0, 10);
 // 				var jsonFinal = JSON.parse(JSON.stringify(appointment.originalData));
 // 				jsonFinal.id = (appointment.id);
 				alert("修改資料:"+JSON.stringify(getFinalJson(appointment)));
-				editToServlet(JSON.stringify(getFinalJson(appointment)),"update");
+				editToServlet(JSON.stringify(getFinalJson(appointment)),"update",addDate);
 			});
 			//刪除事件
 			$('#scheduler').on('appointmentDelete', function (event) { 
@@ -439,8 +440,9 @@
 					alert("Delete");
 // 					var jsonFinal = JSON.parse(JSON.stringify(appointment.originalData));
 // 					jsonFinal.id = (appointment.id);
+					addDate = appointment.originalData.end.toISOString().substring(0, 10);
 					alert("刪除資料"+JSON.stringify(getFinalJson(appointment)));
-					editToServlet(JSON.stringify(getFinalJson(appointment)),"delete");
+					editToServlet(JSON.stringify(getFinalJson(appointment)),"delete",addDate);
 				}
 			});
 			//增加事件
@@ -489,12 +491,12 @@
         		method:"POST",
         		success: function(data){
         			alert("success");
-        			if(action == 'insert'){
+//         			if(action == 'insert'){
         				dataClean();
         				dataSearch(addDate,globalView);
-        			}else{
-        				$('#loading_data').hide();
-        			}
+//         			}else{
+//         				$('#loading_data').hide();
+//         			}
         		},        		
         		error:function(data){
         			//alert("ERROR");
