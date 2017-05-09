@@ -23,6 +23,7 @@ import com.servicecarclass.model.ServiceCarClassVO;
 import com.services.model.ServicesService;
 import com.services.model.ServicesVO;
 
+import myutil.CheckConflict;
 import myutil.MyUtil;
 
 /**
@@ -50,7 +51,7 @@ public class MaintainSchedule extends HttpServlet {
 		
 		Integer reservNo= Integer.valueOf(map.get("id"));
 		
-		Calendar Scalendar = MyUtil.getLocalTimeFromUTC(map.get("start"));
+		Calendar scalendar = MyUtil.getLocalTimeFromUTC(map.get("start"));
 		Calendar OldEnd = MyUtil.getLocalTimeFromUTC(map.get("end"));
 		
 		Integer empNo= Integer.valueOf(map.get("empNo"));
@@ -88,12 +89,19 @@ public class MaintainSchedule extends HttpServlet {
 		
 		Integer TTime = sTime + mTime;
 		
-		Calendar Ecalendar = Calendar.getInstance();
-		Ecalendar.setTime(Scalendar.getTime());
-		Ecalendar.add(Calendar.HOUR_OF_DAY, TTime/60);
-		Ecalendar.add(Calendar.MINUTE, TTime%60);
+		Calendar ecalendar = Calendar.getInstance();
+		ecalendar.setTime(scalendar.getTime());
+		ecalendar.add(Calendar.HOUR_OF_DAY, TTime/60);
+		ecalendar.add(Calendar.MINUTE, TTime%60);
 		
-		
+		CheckConflict cc = new CheckConflict();
+		if(cc.checkDateAndEmpUpdate(scalendar, ecalendar, empNo, reservNo)==false){
+			
+			
+		} else{
+			System.out.println("預約時間衝突");
+			return;
+		}
 		
 		
 		
