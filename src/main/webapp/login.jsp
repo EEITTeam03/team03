@@ -160,7 +160,7 @@
 										<button class="btn btn-lg btn-info btn-block" type="submit">登入</button>
 										<small><Font color='red'>${ErrorMsgKey.LoginError}</Font></small>
 									</form>	
-									<div style="padding-top:15px" align="center"><a href="forgetPassWord.jsp" class="btn btn-primary btn-lg" role="button" >忘記密碼</a></div>
+									<div style="padding-top:15px" align="center"><a href="forgetPassWord.jsp" class="btn btn-danger" role="button" >忘記密碼</a></div>
 								</div>
 							</div>
 						</div>
