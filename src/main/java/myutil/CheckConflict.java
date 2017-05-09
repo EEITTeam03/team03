@@ -48,7 +48,7 @@ public class CheckConflict {
 					// System.out.println("前OK");
 				} else if (xstart > tstart && xstart >= tend) {
 					// System.out.println("後OK");
-				} else if (xstart == tstart && xend == tend) {
+				} else if (xstart == tstart) {
 
 				} else {
 					return true;
