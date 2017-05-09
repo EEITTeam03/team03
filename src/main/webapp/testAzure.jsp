@@ -33,8 +33,9 @@ memberPhone: <input type="text" name="memberPhone">
 <input type="checkbox" name="cccc" value="1">1
 <input type="checkbox" name="cccc" value="2">2
 <input type="checkbox" name="cccc" value="3">3
+<input type="hidden" name="hide" value="get">
 <input type="submit" value="go">
 </form>
-
+<h2>${param.hide}</h2>
 </body>
 </html>
