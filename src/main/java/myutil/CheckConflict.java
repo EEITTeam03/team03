@@ -32,6 +32,39 @@ public class CheckConflict {
 		return false;
 	}
 	
+	public boolean checkDateAndEmpUpdate(Calendar cal, Calendar calEnd, Integer emp,Integer reservNo) {
+
+		ReservService rsvc = new ReservService();
+		List<ReservVO> list = rsvc.getAllReservByDateAndEmp(cal, emp);
+		for (ReservVO aReserve : list) {
+			Calendar acal = aReserve.getReservDateTime();
+			Calendar acalEnd = aReserve.getReservEndTime();
+			long tstart = cal.getTimeInMillis();
+			long tend = calEnd.getTimeInMillis();
+			long xstart = acal.getTimeInMillis();
+			long xend = acalEnd.getTimeInMillis();
+			if (aReserve.getReservNo() == reservNo) {
+				if (xstart < tstart && xend <= tstart) {
+					// System.out.println("前OK");
+				} else if (xstart > tstart && xstart >= tend) {
+					// System.out.println("後OK");
+				} else if (xstart == tstart) {
+
+				} else {
+					return true;
+				}
+			} else {
+				if (xstart < tstart && xend <= tstart) {
+					// System.out.println("前OK");
+				} else if (xstart > tstart && xstart >= tend) {
+					// System.out.println("後OK");
+				} else {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 //	for(ReservVO aReserve :list){
 //	Calendar acal = aReserve.getReservDateTime();
 //	Calendar acalEnd = aReserve.getReservEndTime();
