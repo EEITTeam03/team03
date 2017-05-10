@@ -61,8 +61,8 @@
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.css" /> -->
-<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.css" />
+<!-- <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"> -->
 
 <!--[if lt IE 9]>
 	<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -229,7 +229,7 @@ label {
 
 				<div class="form-group">
 					<label for="selectedTime" class="col-sm-2 control-label">時間</label>
-					<div class="col-sm-6">
+					<div class="col-sm-6" id="divtime">
 <!-- 						<div id="timepicker"></div> -->
 						<input id="timepicker" name="selectedTime" value="${param.selectedTime}" class="form-control">
 <!-- 						<input type="text" name="selectedTime" id="selectedTime" -->
@@ -364,8 +364,8 @@ label {
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"
 		integrity="sha384-mE6eXfrb8jxl0rzJDBRanYqgBxtJ6Unn4/1F7q4xRRyIw7Vdg9jP4ycT7x1iVsgb"
 		crossorigin="anonymous"></script>
-<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.js"></script> -->
-	<script src="js/jquery.datetimepicker.full.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.js"></script>
+<!-- 	<script src="js/jquery.datetimepicker.full.min.js"></script> -->
 	
 	<!-- Contact Form JavaScript -->
 	<script src="js/jqBootstrapValidation.js"></script>
@@ -390,20 +390,24 @@ label {
 				}
 			});
 			
-// 			$("#timepicker").timepicker({
-// 				appendTo:$("#xx"),
-// 				className:"form-control",
-// 				show2400:true,
-// 				disableTextInput:true
-// 			});
-
-			jQuery('#timepicker').datetimepicker({
-				 datepicker:false,
-				 allowTimes:[
-				  '12:00', '13:00', '15:00', 
-				  '17:00', '17:05', '17:20', '19:00', '20:00'
-				 ]
+			$("#timepicker").timepicker({
+				appendTo:$("#divtime"),
+				className:"form-control",
+				timeFormat:'H:i',
+				minTime: new Date(),
+				maxTime:'21:00',
+				step:30,
+				show2400:true,
+				disableTextInput:true
 			});
+
+// 			jQuery('#timepicker').datetimepicker({
+// 				 datepicker:false,
+// 				 allowTimes:[
+// 				  '12:00', '13:00', '15:00', 
+// 				  '17:00', '17:05', '17:20', '19:00', '20:00'
+// 				 ]
+// 			});
 			
 			
 			//傳會員編號，取得Cars
