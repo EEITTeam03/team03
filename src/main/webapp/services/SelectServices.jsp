@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<script type="text/javascript" src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="${ctx}/admin/js/jquery.js"></script>
 <script type="text/javascript">
 		$(document).ready(function () {
 			init();
@@ -20,17 +20,24 @@
 			$('#a_searchAllService').click(function(){
 				$('#contentDiv').load('${ctx}/services/ListAllServices.jsp');
 			});
+			$('#a_InsertService').click(function(){
+				$('#contentDiv').load('${ctx}/services/ServicesInsert.jsp');
+			});
+			$('#a_searchAllServiceStep').click(function(){
+				$('#contentDiv').load('${ctx}/services/ListAllServiceStep.jsp');
+			});
 		}
 		
 	</script>
 </head>
 <body>
+<div class="row">
 	<ul>
 		<li><a href='#'  id="a_searchAllService">查看</a>所有服務 (後台)</li>
 		<br>
-		<li><a href='${ctx}/services/ServicesInsert.jsp'>新增</a>服務 (後台)</li>
+		<li><a href='#'   id="a_InsertService">新增</a>服務 (後台)</li>
 		<br>
-		<li><a href='${ctx}/services/ListAllServiceStep.jsp'>查看</a>所有服務步驟 (後台)</li>
+		<li><a href='#'   id="a_searchAllServiceStep">查看</a>所有服務步驟 (後台)</li>
 		<br>
 		<li><a href='${ctx}/services/ListAllServiceStepForUser.jsp'>查看</a>所有服務 (前台)</li>
 		<br>
@@ -47,7 +54,7 @@
 					</c:forEach>
 				</select>
 	
-				<button type="submit" class="btn btn-lg btn-primary">送出</button>
+				<button type="submit" class="btn btn-sm btn-primary">送出</button>
 				<input type="hidden" name="action" value="getOne_For_Display">
 				
 			</FORM>
@@ -60,7 +67,7 @@
 						<option value="${servicesVO.servNo}">${servicesVO.servNo}
 					</c:forEach>
 				</select> 
-				<button type="submit" class="btn btn-lg btn-primary">送出</button>
+				<button type="submit" class="btn btn-sm btn-primary">送出</button>
 				<input type="hidden" name="action" value="getOne_For_Display">
 			</FORM>
 		</li>
@@ -76,10 +83,11 @@
 						<option value="${distInt}">${distInt}
 					</c:forEach>
 				</select> 
-				<button type="submit" class="btn btn-lg btn-primary">送出</button>
+				<button type="submit" class="btn btn-sm btn-primary">送出</button>
 				<input type="hidden"name="action" value="getMany_ServiceStep_ByServNo">
 			</FORM>
 		</li>
 	</ul>
+	</div>
 </body>
 </html>

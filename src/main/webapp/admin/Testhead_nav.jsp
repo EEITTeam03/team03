@@ -122,10 +122,10 @@ ul[class*="nav navbar-nav side-nav"] {
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
-						<!-- 						<div id="contentDiv"></div> -->
+					<div id="contentDiv"></div>
 
 
-						<!-- 					</div> -->
+								
 					</div>
 					<!-- /.row -->
 
