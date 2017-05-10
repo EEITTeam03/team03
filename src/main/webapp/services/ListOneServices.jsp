@@ -9,7 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>服務單筆資料</title>
 </head>
+<link ></a>
 <body bgcolor='white'>
+<div id="contentDiv">
 	<table border='1' width='800'>
 		<thead align='center' valign='middle'>
 			<tr>
@@ -64,6 +66,6 @@
 			</td>
 		</tr>
 	</table>
-
+</div>
 </body>
 </html>

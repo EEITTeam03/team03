@@ -208,7 +208,7 @@
   
   
   $( function() {
-
+		
 		
 	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
 		var wdth = $(window).width();
@@ -225,8 +225,8 @@
 		//不斷監控(監聽)螢幕大小，藉此判斷登入、註冊按鈕是在nav上或者在menu內，來設定不同的樣式
  		$(window).resize(function() {
 			var wdth = $(window).width();
-			var logIn = $("#nav-log-in").attr("class");
-			var regst = $("#nav-register").attr("class");
+			var logIn = $("#nav-log-in").attr("class");//先加空的class
+			var regst = $("#nav-register").attr("class");//先加空的class
 			var numln = null;
 			var numrn = null;
 			var numlm = null;
@@ -307,7 +307,7 @@
 //   	    		console.log("預約日期小時"+rdtshr);
 //   	    		console.log("預約日期分"+rdtsmin);
 //   	    		console.log("預約日期秒"+rdtssec);
-  	    			console.log("window.open(surveillance.jsp?a="+reservNo+",觀看愛車)");
+//   	    			console.log("window.open(surveillance.jsp?a="+reservNo+",觀看愛車)");
   	    		//監控按鈕
   	    		if(cts > rdts && cts < rets){
 	  	    		var btnMit = $("<button onclick='opsurveillance(this.value)'></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","value":reservNo});	
@@ -315,7 +315,7 @@
   	    			var btnMit = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","disabled":"true"}); 	    			
   	    		}
   	    		var span2 = $("<span></span>").addClass("glyphicon glyphicon-facetime-video");  
-//,"name":"btnMit","value":reservNo
+
   	    		
   	    		var serTbe = $("<Table style='width:350px;'></Table>");
   	    		
@@ -380,7 +380,7 @@
   } );
   
 	function opsurveillance(value){		
-		window.open("surveillance.jsp?a="+value,"觀看愛車");
+		window.open("surveillance.jsp?reservNo="+value,"觀看愛車");
 	}
   
   

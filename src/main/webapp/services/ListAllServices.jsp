@@ -14,7 +14,7 @@
 <head>
 <title>所有服務項目</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   
+   <script type="text/javascript" src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
   <!-- Bootstrap Core CSS -->
     <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
 
@@ -26,13 +26,7 @@
 
 </head>
 <body>
-
-<div id="wrapper">
-<div id="page-wrapper">
-<div class="row">
-<div class="col-lg-8">
 <div class="table-responsive">
-
 
 <table class="table table-bordered table-hover">
 <thead>
@@ -49,17 +43,18 @@
 		</thead>
 		<c:forEach var="servicesVO" items="${list}">
 			<tr align='center' valign='middle'>
-				<td width="300">${servicesVO.servNo}</td>
-				<td width="300">${servicesVO.servTypeNo}</td>
-				<td width="300">${servicesVO.servName}</td>
-				<td width="300">${servicesVO.servEffectiveDate}</td>
-				<td width="300">${servicesVO.servStatus}</td>
-				<td width="300">${servicesVO.servDesc}</td>
-				<td><c:choose>
+				<td width="200">${servicesVO.servNo}</td>
+				<td width="200">${servicesVO.servTypeNo}</td>
+				<td width="200">${servicesVO.servName}</td>
+				<td width="200">${servicesVO.servEffectiveDate}</td>
+				<td width="200">${servicesVO.servStatus}</td>
+				<td width="600">${servicesVO.servDesc}</td>
+				<td width="200">
+				<c:choose>
 						<c:when test="${servicesVO.servPhoto !=null}">
 							<img
 								src='data:image/jpeg;base64,${Base64.getEncoder().encodeToString(servicesVO.servPhoto)}'
-								width="150" />
+								width="200" />
 						</c:when>
 						<c:when test="${servicesVO.servPhoto==null}">
 						沒有服務照片
@@ -67,14 +62,14 @@
 					</c:choose></td>
 
 				<td>
-					<FORM METHOD="post" ACTION="services.do">
+					<FORM METHOD="post" ACTION="${ctx}/services/services.do">
 						<input type="submit" value="修改"> 
 						<input type="hidden" name="servNo" value="${servicesVO.servNo}"> 
 						<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
 				<td>
-					<FORM METHOD="post" ACTION="services.do">
+					<FORM METHOD="post" ACTION="${ctx}/services/services.do">
 						<input type="submit" value="下架"> 
 						<input type="hidden" name="servNo" value="${servicesVO.servNo}"> 
 						<input type="hidden" name="action" value="offshelf">
@@ -84,15 +79,6 @@
 		</c:forEach>
 	</table>
 	</div>
-</div>
-</div>
-</div>
-</div>
-	 <!-- jQuery -->
-    <script src="${ctx}/admin/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="${ctx}/admin/js/bootstrap.min.js"></script>
 	
 </body>
 </html>

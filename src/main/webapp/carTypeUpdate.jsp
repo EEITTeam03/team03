@@ -22,7 +22,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>車種資料</title>
+<title>修改車種資料</title>
 
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
@@ -169,10 +169,43 @@
    				})
    			 		$("select:eq(0) > option:first-child").attr({"selected":"true"});
    				
-   			})  			
+   			})
+
+  			//讀取會員的車種資料
+	  		var no=$("#no").text();
+			$.getJSON("GetCars",{"no":no},function(json){
+				$.each(json,function(idx,GetCars){
+					
+		    		var tr = $("<tr></tr>")
+		    		var td1 = $("<td>" + GetCars.license + "</td>");		
+		    		var td2 = $("<td>" + GetCars.brand + "</td>");			
+		    		var td3 = $("<td>" + GetCars.model + "</td>");	
+		    		var td4 = $("<td>" + GetCars.carClass + "</td>");	
+		    		var td5 = $("<td></td>");	
+		    		
+		    		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
+		    		var inp = $("<input></input>").attr({"type":"hidden","value":GetCars.modelNo,"name":"modelNo"});
+		    		var licenses = $("<input></input>").attr({"type":"hidden","value":GetCars.license,"name":"licenses"});
+		    		var span = $("<span></span>").addClass("glyphicon glyphicon-remove");
+		    		
+		    		button.append(span);
+		    		td5.append([button,inp,licenses]);
+		    		
+		    		tr.append([td1,td2,td3,td4,td5]);
+	
+		    		$("#cardatas > tbody").append(tr);
+		    		
+					console.log(GetCars);				
+		    				    		
+				});				
+			}); 			
+ 			//結束   			
+   			
    			
    		})
 	
+   		
+   		
 	function SelectCarModel(){
 		var str = $("select:eq(0) > option:first-child").text();//得到字串→請選擇您的愛車廠牌
 		var opValue=$("select:eq(0) :selected");
@@ -284,7 +317,6 @@
     		
     		tr.append([td1,td2,td3,td4,td5]);
     		
-    		
     		$("#cardatas > tbody").append(tr);
     		$("#carLicense").val("");//清空車牌			       	
         }
@@ -298,8 +330,11 @@
         	$("#name-error").text("");
         }
     });   		
- 		
+	
 
+	  		
+			 			
+  
 </script>	
 	
 </head>
@@ -322,7 +357,7 @@
 					<li class="hidden"><a href="#page-top"></a></li>
 					<li><a class="page-scroll ff-word btn btn-primary btn-xs"
 						style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px"
-						href="register.jsp"> 基本資料
+						href="MemberUpdate.jsp"> 基本資料
 					</a></li>
 					<li class="page-scroll ff-word" style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;color:white;">
 						<span class="glyphicon glyphicon-arrow-right"></span>
@@ -345,14 +380,6 @@
 
 	<section id="services">
 	
-<!-- 		<div class="container"> -->
-<!-- 			<div id="brandImgs" class="row divBorder"> -->
-			
-	
-<!-- 			</div> -->
-<!-- 		</div> -->
-			
-<!-- 		<br> -->
 		
 		<div class="container">
 			<div class="row">
@@ -361,7 +388,7 @@
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-10">
 					<div class="panel panel-danger" style="border-color:salmon">
 						<div class="panel-heading" style="background-color:salmon;border-color:salmon;color:white;">
-							<h3 class="panel-title">車種資料</h3>
+							<h3 class="panel-title">修改車種資料</h3>
 						</div>
 						
 						<div class="panel-body">
@@ -461,6 +488,6 @@
 	</section>
 	
 
-
+	<span hidden="hide" id="no">${memberInfo.memberNo}</span>
 </body>
 </html>
