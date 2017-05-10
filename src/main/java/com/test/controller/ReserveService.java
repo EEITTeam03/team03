@@ -142,7 +142,7 @@ public class ReserveService extends HttpServlet {
 				errmsg.add("所選的時段重複!");
 		}
 			
-		
+			
 		//****************失敗*******************
 		if (errmsg.size() != 0) {
 //			request.getSession().setAttribute("reservVO", reservVO);
