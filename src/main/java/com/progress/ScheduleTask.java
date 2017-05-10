@@ -1,9 +1,7 @@
 package com.progress;
 
-import java.util.Calendar;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletContext;
@@ -18,9 +16,10 @@ public class ScheduleTask {
 		this.application = application;
 	}
 	
-	public ScheduledFuture addTask (long delay, long breakTime) {
-		  return scheduler.scheduleWithFixedDelay(new Shot(), delay, breakTime, TimeUnit.MILLISECONDS);
-	}
+	public ScheduledExecutorService addTask (long delay, long breakTime) {
+		  scheduler.scheduleWithFixedDelay(new Shot(), delay, breakTime, TimeUnit.MILLISECONDS);
+		  return scheduler;
+	 }
 	
 	private class Shot implements Runnable {
 		public Shot() {}
