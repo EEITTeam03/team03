@@ -105,26 +105,49 @@ label {
 					<li><a class="page-scroll ff-word" href="#about">關於我們</a></li>
 					<li><a class="page-scroll ff-word" href="#team">團隊成員</a></li>
 					<li><a class="page-scroll ff-word" href="#contact">聯絡我們</a></li>
-					<li><a class="page-scroll ff-word btn btn-primary btn-xs"
-						style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px"
-						href="login.jsp"> <span class="glyphicon glyphicon-log-in"></span>
-							登入
-					</a></li>
-					<li><a class="page-scroll ff-word btn btn-primary btn-xs"
-						style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;"
-						href="register.jsp"> <span class="glyphicon glyphicon-user"></span>
-							免費註冊
-					</a></li>
-					<!--                     <li> -->
-					<!--                         <a class="ff-word" style="text-shadow: black 5px 3px 3px;color:#FFFF66;" href="#"> -->
-					<!--   							<span class="glyphicon glyphicon-log-in"></span> 登入 -->
-					<!--                         </a> -->
-					<!--                     </li>                     -->
-					<!--                     <li> -->
-					<!--                         <a class="ff-word" style="text-shadow: black 5px 3px 3px;color:#FFFF66;" href="#"> -->
-					<!--   							<span class="glyphicon glyphicon-user"></span> 免費註冊 -->
-					<!--                         </a> -->
-					<!--                     </li>                                          -->
+<!-- 					<li><a class="page-scroll ff-word btn btn-primary btn-xs" -->
+<!-- 						style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px" -->
+<!-- 						href="login.jsp"> <span class="glyphicon glyphicon-log-in"></span> -->
+<!-- 							登入 -->
+<!-- 					</a></li> -->
+<!-- 					<li><a class="page-scroll ff-word btn btn-primary btn-xs" -->
+<!-- 						style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;" -->
+<!-- 						href="register.jsp"> <span class="glyphicon glyphicon-user"></span> -->
+<!-- 							免費註冊 -->
+<!-- 					</a></li> -->
+						<!--	未登入	-->
+				<c:if test="${empty Code}">                    
+                    <li id="nav-log-in" class="">                    
+	                    <button class="page-scroll ff-word btn btn-xs fun-btn" onclick="location.href='login.jsp'">
+	   		
+							<span class="glyphicon glyphicon-log-in"></span> 登入															
+	                        
+	                    </button>
+	                </li>
+                    <li id="nav-register" class="">
+                    	<button class="page-scroll ff-word btn btn-xs fun-btn" onclick="location.href='register.jsp'">
+   		
+							<span class="glyphicon glyphicon-user"></span> 免費註冊															
+                        
+                        </button>                    
+                    </li>	                 
+				</c:if>
+
+						<!--	已登入	-->
+				<c:if test="${!empty Code}"> 
+					<li id="nav-log-in" class="dropdown">     
+						<button class="page-scroll ff-word dropdown-toggle mem-btn" data-toggle="dropdown">
+							<li class="glyphicon glyphicon-user"></li>&nbsp;&nbsp;&nbsp;${memberInfo.memberName}
+						</button>
+						
+						<ul class="dropdown-menu" role="menu">
+						    <li><a href="orderStatus.jsp">訂單狀態</a></li>
+						    <li><a href="#">修改資料</a></li>
+						    <li class="divider"></li>
+						    <li><a href="LogOut">登出</a></li>
+						</ul>				              
+	 				</li>
+				</c:if>
 
 				</ul>
 
@@ -156,7 +179,6 @@ label {
 
 			</video>
 		</div>
-
 	
 	<div class="container">
 	<div style="height:10em">
@@ -165,27 +187,30 @@ label {
 
 
 	</header>
+	
 
-
-
+	
 	<div class="container" style="width: 80%;">
 	
-		<div class="row" id="showcar">
-			
-		</div>
 		
+		<span id="no" hidden="hide">${memberInfo.memberNo}</span>
 		
 		<div class="row">
-			<h2 class="col-sm-offset-5">開始預約</h2>
+			<h2 class="col-sm-offset-5">開始預約</h2> 
 		</div>
-
+		
+		<div class="row">
+			<div class="col-sm-6" id="chooseCar"></div>
+		</div>
+		
 		<div class="row col-sm-offset-2">
 
 			<form class="form-horizontal" action="ReserveService">
 				<div class="form-group">
 					<label for="inputLicense" class="col-sm-2 control-label">車牌</label>
 					<div class="col-sm-6">
-						<input type="text" name="license" id="inputLicense"
+						<h4 class="col-sm-4" id="showLicense"></h4>
+						<input type="hidden" name="license" id="inputLicense"
 							class="form-control" placeholder="請輸入車牌" value="${param.license}">
 					</div>
 				</div>
@@ -351,7 +376,7 @@ label {
 				changeMonth : true,
 				changeYear : false,
 				dateFormat : 'yy-mm-dd',
-				yearRange : '-0:+0',
+				yearRange : '-0:+1',
 				monthNamesShort: [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ],
 				maxDate: "+3m",
 				minDate : new Date(),
@@ -361,7 +386,28 @@ label {
 				}
 			});
 			
-			
+			//傳會員編號，取得Cars
+			var no = $("#no").text();
+			//console.log(no);
+			$.getJSON('GetCars',{"no":no},function(data){
+				//console.log(data);
+				var row = $("#chooseCar");
+				//show data
+				$.each(data,function(idx,car){
+// 					console.log(car.license);
+// 					console.log(car.brand);
+// 					console.log(car.model);
+					var one = $("<div></div>");
+					$("<p></p>").html(car.license+"<br>"+car.brand+"<br>"+car.model).appendTo(one);
+					var btn = $("<button></button>").addClass("btn btn-danger");
+					btn.text("select").click(function(){
+						$("#inputLicense").val(car.license);
+						$("#showLicense").text(car.license);
+					});
+					one.append(btn);
+					row.append(one);
+				})
+			});
 			
 		});
 	</script>

@@ -2,7 +2,10 @@ package com.membercars.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.membercars.model.MemberCarsVO;
 import com.membercars.model.MembercarsService;
 
@@ -30,25 +30,41 @@ public class GetCars extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-//		MemberInfoVO memberInfoVO = (MemberInfoVO) request.getSession().getAttribute("memberInfo");
-		
-//		if(memberInfoVO != null) {
+			
+			String no = request.getParameter("no");
 			MembercarsService svc = new MembercarsService();
 //			Integer no = memberInfoVO.getMemberNo();
-			List<MemberCarsVO> list = svc.getListByMember(9);
+			List<MemberCarsVO> list = svc.getListByMember(Integer.parseInt(no));
 			
+			List<Map<String,Object>> carList = new ArrayList<>();
+//			Map<String,Map<String,Object>> carMap = new HashMap<>();
 			
-			Gson gson = new GsonBuilder().create();
-			String json = gson.toJson(list);
-			out.print(json);
+			for(MemberCarsVO aVO:list){
+				Map<String,Object> cars = new HashMap<>();
+				cars.put("license",aVO.getCarLicense());
+				cars.put("brand", aVO.getCarTypeVO().getBrand());
+				cars.put("model",aVO.getCarTypeVO().getCarModel());
+				carList.add(cars);
+//				carMap.put(aVO.getCarLicense(), cars);
+			}
+			
+			String jsonString = JSONValue.toJSONString(carList);
+			out.print(jsonString);
+			
+//			Gson gson = new GsonBuilder().create();
+//			String json = gson.toJson(list);
+//			System.out.println(json);
+//			out.print(json);
 //			JSONObject json = new JSONObject();
-//			String jsonString = JSONValue.toJSONString(list);
-//			out.print(jsonString);
-//		}
 		
-		
+//			ObjectMapper objMapper = new ObjectMapper();
+//			objMapper.enable(SerializationFeature.INDENT_OUTPUT);
+//			
+//			String json = objMapper.writeValueAsString(list);
+//			out.print(json);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
