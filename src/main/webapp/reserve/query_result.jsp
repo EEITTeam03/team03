@@ -5,17 +5,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+ <link href="${ctx}/css/bootstrap.min.css" rel="stylesheet">
 <title>Result</title>
 <style>
-table, th, td {
-   border: 1px solid black;
-}
+ table, th, td { 
+    border: 1px solid black;
+ } 
 </style>
 </head>
 <body>
 
 <h2>查詢結果</h2>
 <table>
+<thead>
 <tr>
 	<th>預約編號</th>
 	<th>預約日期時間</th>
@@ -28,7 +31,8 @@ table, th, td {
 	<th>車型大小</th>
 	<th>須輔</th>
 	<th>XXX</th>
-<tr>
+</tr>
+</thead>
 <c:forEach var="aVO" items="${reservList}" varStatus="status">
 <tr>
 	<td>${aVO.reservNo}</td> 
@@ -49,7 +53,6 @@ table, th, td {
 <hr>
 
 <h2>剩下時段</h2>
-
 
 </body>
 </html>

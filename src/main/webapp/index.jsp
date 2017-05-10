@@ -385,7 +385,7 @@
 						
 						<ul class="dropdown-menu" role="menu">
 						    <li><a href="orderStatus.jsp">訂單狀態</a></li>
-						    <li><a href="#">修改資料</a></li>
+						    <li><a href="Update.jsp">修改資料</a></li>
 						    <li class="divider"></li>
 						    <li><a href="LogOut">登出</a></li>
 						</ul>				              

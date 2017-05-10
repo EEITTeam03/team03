@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
 		$(document).ready(function () {
 			init();
@@ -19,11 +21,12 @@
 				$('#contentDiv').load('${ctx}/services/ListAllServices.jsp');
 			});
 		}
+		
 	</script>
 </head>
 <body>
 	<ul>
-		<li><a href='#' id="a_searchAllService">查看</a>所有服務 (後台)</li>
+		<li><a href='#'  id="a_searchAllService">查看</a>所有服務 (後台)</li>
 		<br>
 		<li><a href='${ctx}/services/ServicesInsert.jsp'>新增</a>服務 (後台)</li>
 		<br>
