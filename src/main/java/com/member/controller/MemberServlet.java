@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.membercars.model.MemberCarsVO;
+import com.membercars.model.MembercarsService;
 import com.memberinfo.model.MemberInfoVO;
 import com.memberinfo.model.MemberService;
 
@@ -69,9 +71,9 @@ public class MemberServlet extends HttpServlet {
 				}
 				java.sql.Date effectiveDate =  new java.sql.Date(System.currentTimeMillis());
 				
-//				if (carLicense == null || carLicense.trim().length() == 0) {
-//					errorMsgMap.put("CarLicenseEmptyError", "請輸入車牌號碼");
-//				}
+				if (licenses == null || licenses.length == 0) {
+					errorMsgMap.put("CarLicenseEmptyError", "請輸入車牌號碼");
+				}
 
 				
 				
@@ -304,6 +306,70 @@ public class MemberServlet extends HttpServlet {
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				errorMsgMap.put(e.getMessage(), "刪除資料失敗:");
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("MemberUpdate.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("getOne_For_Cars".equals(action)) {
+			Map<String, String> errorMsgMap = new HashMap<String, String>();
+			req.setAttribute("ErrorMsgKey", errorMsgMap);
+			
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				String str = req.getParameter("memberNo");
+				
+				if (str == null || str.trim().length() == 0) {
+					errorMsgMap.put("NameEmptyError", "請輸入會員編號");
+				}
+				
+				// Send the use back to the form, if there were errors
+				if (!errorMsgMap.isEmpty()) {
+					
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("MemberUpdate.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				Integer memberNo = null;
+				try {
+					memberNo = new Integer(str);
+				} catch (Exception e) {
+					errorMsgMap.put("ErrorMsgKey", "員工編號格式不正確");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgMap.isEmpty()) {
+					
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("MemberUpdate.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				/***************************2.開始新增資料***************************************/
+				MembercarsService memberSvc = new MembercarsService();
+				MemberCarsVO membercarsVO = (MemberCarsVO) memberSvc.getListByMember(memberNo);
+				if (membercarsVO == null) {
+					errorMsgMap.put("ErrorMsgKey", "查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgMap.isEmpty()) {
+					
+					RequestDispatcher failureView = req
+							.getRequestDispatcher(".jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				req.setAttribute("membercarsVO", membercarsVO);
+				String url = "MemberUpdate.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				successView.forward(req, res);				
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgMap.put(e.getMessage(), "無法取得資料:");
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("MemberUpdate.jsp");
 				failureView.forward(req, res);

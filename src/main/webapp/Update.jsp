@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <!--[if IE 6]>
 <html id="ie6" dir="ltr" lang="zh-TW">
@@ -56,8 +56,8 @@
     <![endif]-->
 
 <link href="css/revision.css" rel="stylesheet">
-<link rel="stylesheet" href="ui.datepicker.css" type="text/css" media="screen" title="core css file" charset="utf-8" />
- 
+<!-- <link rel="stylesheet" href="ui.datepicker.css" type="text/css" media="screen" title="core css file" charset="utf-8" /> -->
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/blitzer/theme.css" id="THEME_CSS"/>
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <script src="vendor/jquery/jquery.min.js"></script>
@@ -80,18 +80,25 @@
   <script>
   $( function() {
 	  
-    $( "#datepicker" ).datepicker({
-      	changeMonth: true,
-      	changeYear: true,
-      	dateFormat: 'yy-mm-dd',
-    	yearRange: '-90:+0'
+
+    
+	var no=$("#no").text(); 
+    $.getJSON("GetCars",{"no":no},function(data){
+    	console.log(data);
+    	alert(data);
+    	console.log(data[0].brand);
+//     	console.log(data.length);
+    	console.log(data[0].license);
+    	console.log(data[0].model);
     });
+    console.log(no);
     
     
     
     
-    
-  } );
+  });
+  
+  
   </script>
 
 
@@ -153,56 +160,93 @@
 									
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										  	<span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-user"></i></span>
-										  	<input id="name" type="text" class="form-control" name="name" placeholder="輸入您的姓名" value='${param.memberName}'>
+										  	<input id="name" type="text" class="form-control" name="name" placeholder="輸入您的姓名" value='${memberInfo.memberName}' readonly>
+											<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>
 										</div>										
 										
 										<br>
 										
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										  	<span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-envelope"></i></span>
-										  	<input id="email" type="text" class="form-control" name="email" placeholder="輸入您的電子郵件" value='${param.email}'>
+										  	<input id="email" type="text" class="form-control" name="email" placeholder="輸入您的電子郵件" value='${memberInfo.email}' readonly>
+											<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>
 										</div>
 										
 										<br>
 										
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-lock"></i></span>
-										    <input id="password" type="password" class="form-control" name="password" placeholder="輸入您的密碼" value='${param.password}'>
+										    <input id="password" type="password" class="form-control" name="password" placeholder="輸入您的密碼" value='${memberInfo.password}'>
+											<small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>
 										</div>
 										
 										<br>
 										
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-phone"></i></span>
-										    <input id="phone" type="phone" class="form-control" name="phone" placeholder="輸入您的電話" value='${param.phone}'>
+										    <input id="phone" type="phone" class="form-control" name="phone" placeholder="輸入您的電話" value='${memberInfo.phone}' readonly>
+											<small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>
 										</div>
 										
 										<br>										
 
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>
-										    <input id="datepicker" type="datepicker" class="form-control" name="datepicker" placeholder="輸入您的出生年月日" value='${param.birthday}'>
+										    <input id="datepicker" type="datepicker" class="form-control" name="datepicker" placeholder="輸入您的出生年月日" value='${memberInfo.birthday}' readonly>
+											<small><Font color='red' >${ErrorMsgKey.BirthdayEmptyError}</Font></small><br>
 										</div>
 										
 										<br>
 										
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>
-										    <input id="address" type="text" class="form-control" name="address" placeholder="輸入您的地址" value='${param.address}'>
+										    <input id="address" type="text" class="form-control" name="address" placeholder="輸入您的地址" value='${memberInfo.address}'>
+											<small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>
 										</div>
 										
 										
 										<br>																									
-										<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>
-										<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>
-										<small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>
-										<small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>
-										<small><Font color='red' >${ErrorMsgKey.BirthdayEmptyError}</Font></small><br>
-										<small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>
+										
+										
+										<div class="row">
+											<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+											</div>
+											<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+												<button class="btn btn-lg btn-danger add" type="button" style="color:white;">
+													<span class="glyphicon glyphicon-plus"></span>												
+												</button>
+											</div>
+											<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+											</div>																						
+										</div>
+										
+										<br>
+										
+										<div class="row">
+											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+												<div class="table-responsive">
+													<table id="cardatas" class="table table-hover">
+												      <thead>
+												        <tr>
+												          <th>車牌</th>
+												          <th>廠牌</th>
+												          <th>車系</th>
+												          <th>車型</th>
+												          <th>操作</th>
+												        </tr>
+												      </thead>
+												      <tbody>
+
+												      </tbody>
+												  </table>
+												</div>
+											</div>
+										</div>
+										
 										<input type="hidden" name="action" value="update">
 										<input type="hidden" name="memberNo" value="${param.memberNo}">
 										<input type="hidden" name="effectiveDate" value="${param.effectiveDate}">
-										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >確認送出</button>
+										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >修改完成</button>
 										
 									</form>	
 								</div>
@@ -219,6 +263,6 @@
 	</section>
 	
 
-
+<span hidden="hide" id="no">${memberInfo.memberNo}</span>
 </body>
 </html>

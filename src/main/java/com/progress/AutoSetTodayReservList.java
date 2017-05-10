@@ -17,8 +17,8 @@ public class AutoSetTodayReservList {
 	//半夜12點的時候去跑
 	public void TodayReservListInit(ServletContext application){
 		
-//		for(int i=0;i<=23;i++){
-		for(int i=9;i<=20;i++){	//營業時間
+		for(int i=0;i<=23;i++){
+//		for(int i=9;i<=20;i++){	//營業時間
 			List<String> list1 = new ArrayList<String>();
 			List<String> list2 = new ArrayList<String>();
 			//洗掉昨天的 重製今天的
