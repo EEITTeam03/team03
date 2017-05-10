@@ -106,6 +106,10 @@ public class MemberService {
 	public MemberInfoVO getOneMem(Integer memberNo) {
 		return dao.findByPK(memberNo);
 	}
+	
+	public MemberInfoVO getOneCars(Integer memberNo) {
+		return dao.findByPK(memberNo);
+	}
 
 	public List<MemberInfoVO> getAll() {
 		return dao.listAll();
