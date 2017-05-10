@@ -298,13 +298,7 @@
         	$("#name-error").text("");
         }
     });   		
-// 	var modelNo = "";//if判斷完後，需傳遞到後端的值   		
-// 					console.log(bContainer);
-// 					console.log(brand);
-// 					console.log(bContainer != brand);
-// 					bContainer = brand;
-// 					console.log("--------------------------");   		
-
+ 		
 
 </script>	
 	

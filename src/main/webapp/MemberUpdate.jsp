@@ -197,50 +197,13 @@
 										    <input id="address" type="text" class="form-control" name="address" placeholder="輸入您的地址" value='${memberInfo.address}'>
 											<small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>
 										</div>
-										
-										
-										<br>																									
-										
-										
-										<div class="row">
-											<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-											</div>
-											<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-												<button class="btn btn-lg btn-danger add" type="button" style="color:white;">
-													<span class="glyphicon glyphicon-plus"></span>												
-												</button>
-											</div>
-											<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-											</div>																						
-										</div>
-										
-										<br>
-										
-										<div class="row">
-											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-												<div class="table-responsive">
-													<table id="cardatas" class="table table-hover">
-												      <thead>
-												        <tr>
-												          <th>車牌</th>
-												          <th>廠牌</th>
-												          <th>車系</th>
-												          <th>車型</th>
-												          <th>操作</th>
-												        </tr>
-												      </thead>
-												      <tbody>
-
-												      </tbody>
-												  </table>
-												</div>
-											</div>
-										</div>
+									
+										<br>																													
 										
 										<input type="hidden" name="action" value="update">
 										<input type="hidden" name="memberNo" value="${param.memberNo}">
 										<input type="hidden" name="effectiveDate" value="${param.effectiveDate}">
-										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >修改完成</button>
+										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >下一步</button>
 										
 									</form>	
 								</div>

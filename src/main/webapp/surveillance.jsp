@@ -223,20 +223,15 @@
 			}
 		});
 			//結束  	
- 			
+ 			var timeAll = 0;
    			$.getJSON('surveillance.json',function(json){   				   				
    				$.each(json.service_step,function(idx,service_step){
    		    		//以下開始動態生成團隊成員
-// 					console.log(service_step.servTime);
-   		   			  			   			
-//    		   			var sball = $("<span></span>").addClass((service_step.servTime)/3);
-   		   			var sball = $("<span style='-webkit-user-select: none;color:rgba(255, 0, 0, 0)'>00000</span>").attr({"value":service_step.servTime/3});
-   		   			var dline = $("<div></div>");
+ 					timeAll = timeAll + (service_step.servTime / 3 * 60) ;
+   		   			var dline = $("<div style='-webkit-user-select: none;color:rgba(255, 0, 0, 0)'>"+ timeAll +"</div>");
+   		   			var sball = $("<span style='-webkit-user-select: none;color:rgba(255, 0, 0, 0)'>"+ timeAll +"</span>");
    					
-   		   			$("#progressBar").append([sball,dline]);
-   		   			
-   					
-   		   			
+   		   			$("#progressBar").append([dline,sball]);   		   				   			
    					   				  					
    				})
    				
@@ -367,7 +362,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
 					
 					<div id="progressBar" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					
+						<span></span>
 					
 					
 					<%-- 					<h5>${param.reservNo}</h5> --%>
