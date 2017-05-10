@@ -33,8 +33,12 @@ public class GetCars extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-			
 			String no = request.getParameter("no");
+			if(no == null) {
+				out.print("no input");
+				return;
+			}
+			
 			MembercarsService svc = new MembercarsService();
 //			Integer no = memberInfoVO.getMemberNo();
 			List<MemberCarsVO> list = svc.getListByMember(Integer.parseInt(no));
@@ -45,12 +49,14 @@ public class GetCars extends HttpServlet {
 			for(MemberCarsVO aVO:list){
 				Map<String,Object> cars = new HashMap<>();
 				cars.put("license",aVO.getCarLicense());
+				cars.put("modelNo", aVO.getCarTypeVO().getModelNo());
 				cars.put("brand", aVO.getCarTypeVO().getBrand());
 				cars.put("model",aVO.getCarTypeVO().getCarModel());
+				cars.put("carClass", aVO.getCarTypeVO().getCarClassVO().getCarClass());
 				carList.add(cars);
 //				carMap.put(aVO.getCarLicense(), cars);
 			}
-			
+			//柏元你今天的褲子很好看
 			String jsonString = JSONValue.toJSONString(carList);
 			out.print(jsonString);
 			
@@ -65,6 +71,8 @@ public class GetCars extends HttpServlet {
 //			
 //			String json = objMapper.writeValueAsString(list);
 //			out.print(json);
+		
+			
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
