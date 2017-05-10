@@ -1,5 +1,3 @@
-<%-- <%@page import="com.servicestep.model.ServiceStepVO"%> --%>
-<%-- <%@page import="com.servicestep.model.ServiceStepService"%> --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -15,10 +13,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <script type="text/javascript" src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
+  <!-- Bootstrap Core CSS -->
+    <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
 <title>服務工法程序</title>
 </head>
 <body>
-	<table border='1' bordercolor='#CCCCFF' width='1600'>
+<div class="table-responsive">
+	<table class="table table-bordered table-hover">
 		<tr>
 			<th>服務編號</th>
 			<th>服務步驟</th>
@@ -52,15 +61,9 @@
 						<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
-				<!-- 				<td> -->
-				<!-- 					<FORM METHOD="post" ACTION="services.do"> -->
-				<!-- 						<input type="submit" value="下架">  -->
-				<%-- 						<input type="hidden" name="servNo" value="${serviceStepVO.servicesVO.servNo}">  --%>
-				<!-- 						<input type="hidden" name="action" value="offshelf"> -->
-				<!-- 					</FORM> -->
-				<!-- 				</td> -->
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
 </body>
 </html>
