@@ -42,7 +42,7 @@ public class ContextListener implements ServletContextListener {
     	/**********ApplicationListener伺服器啟動時呼叫排程任務ScheduleTask*************/
     	Calendar reSetTime = Calendar.getInstance();
     	//隔天的半夜一點
-//    	reSetTime.add(Calendar.DATE, 1);
+    	reSetTime.add(Calendar.DATE, 1);
     	reSetTime.setTime(reSetTime.getTime());
     	reSetTime.set(Calendar.HOUR_OF_DAY, 1);
     	reSetTime.set(Calendar.MINUTE, 0);
