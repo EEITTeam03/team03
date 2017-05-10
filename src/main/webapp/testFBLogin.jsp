@@ -9,7 +9,7 @@
 <body>
  <div id="status">
 </div>
-
+<script type="text/javascript" src="scheduleJS/scripts/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
 		//檢查是否連接facebook了
 		function statusChangeCallback(response) {
@@ -20,31 +20,26 @@
 				// 				var accessToken = response.authResponse.accessToken;
 				// 				login(response.authResponse.accessToken);
 				FB.api('/me', function(response) {
-					console.log(JSON.stringify(response));
+// 					console.log(JSON.stringify(response));
 					var myJSONText = JSON.stringify(response);
-					console.log(myJSONText)
-					
+					var xx = JSON.parse(myJSONText)
+ 					console.log(xx.id);
+					$.ajax({
+						url:'CheckFBLogin',
+						type:'POST',
+						data:{'id':xx.id,'name':xx.name,'email':xx.email},
+						success:function(data){
+							alert(data);
+							
+
+						},error:function(data){
+		        			alert("ERROR");
+		        		}
+					});
 				},{
 					fields : 'id,name,email'
 				});
-// 				 $.ajax({
-
-// 		              url: '',
-
-// 		              type: 'POST',
-
-// 		              data: { uid: uid, cname: cname, email: email, birthday: birthday },
-
-// 		              dateType: 'html',
-
-// 		              success: function () {
-
-// 		                    //檢查資料庫並新增完之後就看要幹嘛
-
-// 		               }
-
-//		       })
-
+				
 			} else if (response.status === 'not_authorized') {
 				console.log('已登入facebook但未登入網頁');
 			} else {
