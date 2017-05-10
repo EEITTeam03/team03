@@ -18,21 +18,6 @@ public class MemberInfoVO {
 	private Set<MemberCarsVO> memberCars;
 	private Set<BlockListVO> blockLists;
 	
-//	public MemberInfoVO() {
-//		
-//	}
-//	public MemberInfoVO(Integer memberNo, String email, String password, String memberName, String phone, Date birthday,
-//			String address, Date effectiveDate) {
-//		super();
-//		this.memberNo = memberNo;
-//		this.email = email;
-//		this.password = password;
-//		this.memberName = memberName;
-//		this.phone = phone;
-//		this.birthday = birthday;
-//		this.address = address;
-//		this.effectiveDate = effectiveDate;
-//	}
 	public Set<BlockListVO> getBlockLists() {
 		return blockLists;
 	}

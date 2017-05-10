@@ -90,7 +90,7 @@ public class CarLicenseServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				CarService carSvc = new CarService();
-				memberCarsVO = carSvc.insert(carLicense);
+				
 				
 				req.getAttribute("memberinfoVO");
 				

@@ -227,7 +227,7 @@
 										</div>
 										
 										<br>																																			
-										<input type="hidden" name="memberinfoVO" value='${param.memberinfoVO}'>					
+
 										<input type="hidden" name="action" value="insert">
 										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >下一步</button>
 										

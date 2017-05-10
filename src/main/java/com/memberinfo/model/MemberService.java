@@ -97,18 +97,6 @@ public class MemberService {
 	}
 
 	public void deleteMem(Integer memberNo) {
-		
-		MemberInfoVO memberinfoVO = new MemberInfoVO();
-//		MemberCarsVO membercarsVO = new MemberCarsVO();
-		
-		
-		memberinfoVO.setMemberNo(memberNo);
-//		membercarsVO.setMemberInfoVO(memberinfoVO);
-//		membercarsVO.setCarLicense(carLicense);
-
-//		memberinfoVO.setBlockLists(dao.findByPK(memberNo).getBlockLists());
-		
-//		dao1.delete(carLicense);
 		dao.delete(memberNo);
 	}
 
