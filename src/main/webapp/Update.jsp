@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <!--[if IE 6]>
 <html id="ie6" dir="ltr" lang="zh-TW">
@@ -56,8 +56,8 @@
     <![endif]-->
 
 <link href="css/revision.css" rel="stylesheet">
-<link rel="stylesheet" href="ui.datepicker.css" type="text/css" media="screen" title="core css file" charset="utf-8" />
- 
+<!-- <link rel="stylesheet" href="ui.datepicker.css" type="text/css" media="screen" title="core css file" charset="utf-8" /> -->
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/blitzer/theme.css" id="THEME_CSS"/>
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <script src="vendor/jquery/jquery.min.js"></script>
@@ -80,14 +80,20 @@
   <script>
   $( function() {
 	  
-    $( "#datepicker" ).datepicker({
-      	changeMonth: true,
-      	changeYear: true,
-      	dateFormat: 'yy-mm-dd',
-    	yearRange: '-90:+0'
-    });
+
     
-	
+	var no=$("#no").text(); 
+    $.getJSON("GetCars",{"no":no},function(data){
+    	console.log(data);
+    	alert(data);
+    	console.log(data[0].brand);
+//     	console.log(data.length);
+    	console.log(data[0].license);
+    	console.log(data[0].model);
+    });
+    console.log(no);
+    
+    
     
     
   });
@@ -257,6 +263,6 @@
 	</section>
 	
 
-
+<span hidden="hide" id="no">${memberInfo.memberNo}</span>
 </body>
 </html>
