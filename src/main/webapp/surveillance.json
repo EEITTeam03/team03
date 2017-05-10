@@ -1,0 +1,11 @@
+{
+	"service_step":
+		[
+			{"servNo":1002,"servStep":"1","stepDescp":"噴灑藥劑去汙","stepPic":"null","servTime":"60"},
+			{"servNo":1002,"servStep":"2","stepDescp":"高科技海棉擦拭","stepPic":"null","servTime":"60"},
+			{"servNo":1002,"servStep":"3","stepDescp":"皮革保養護理","stepPic":"null","servTime":"60"},
+			{"servNo":2003,"servStep":"1","stepDescp":"中性泡沫洗車","stepPic":"null","servTime":"180"},
+			{"servNo":2003,"servStep":"2","stepDescp":"皮革保養護理","stepPic":"null","servTime":"180"},
+			{"servNo":2003,"servStep":"3","stepDescp":"除臭抗菌處理","stepPic":"null","servTime":"180"}
+		]
+}	
