@@ -14,10 +14,12 @@ public class CarService {
 	}
 	
 	public List<MemberInfoVO> getMember(String email , String password, String memberName, String phone, java.sql.Date birthday, String address, java.sql.Date effectiveDate){
-		return dao.findNewMember(email, password, memberName, phone, birthday, address, effectiveDate);
+		return dao.findAddMember(email, password, memberName, phone, birthday, address, effectiveDate);
 	}
 	
 	public MemberCarsVO insert(String carLicense) {
+		
+		
 		
 		MemberCarsVO membercarsVO = new MemberCarsVO();
 		

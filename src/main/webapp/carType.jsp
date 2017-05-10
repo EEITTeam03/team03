@@ -301,6 +301,8 @@
 // 					console.log(bContainer != brand);
 // 					bContainer = brand;
 // 					console.log("--------------------------");   		
+
+$("#cardatas > tr.children('.haha').text()");
 </script>	
 	
 </head>
@@ -438,7 +440,10 @@
 											</div>																																
 										</div>										
 										<br>
-										<input type="hidden" name="action" value="insert">										
+										
+										<input type="hidden" name="action" value="insert">									
+										
+										<input type="hidden" name="action" value='${param.memberinfoVO}'>
 										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >完成</button>																				
 
 									</form>	

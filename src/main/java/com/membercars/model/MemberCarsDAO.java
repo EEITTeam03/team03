@@ -12,7 +12,7 @@ public interface MemberCarsDAO {
 	public void delete(String carLicense);
 	public MemberCarsVO findByPK(String carLicense);
 	public List<MemberCarsVO> listAll();
-	public List<MemberInfoVO> findNewMember(String email, String password, String memberName, String phone,
+	public List<MemberInfoVO> findAddMember(String email, String password, String memberName, String phone,
 			Date birthday, String address, Date effectiveDate);
 
 }

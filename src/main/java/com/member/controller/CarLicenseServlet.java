@@ -57,16 +57,18 @@ public class CarLicenseServlet extends HttpServlet {
 			
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String name = req.getParameter("name");
-				String email = req.getParameter("email");
-				String password = req.getParameter("password");
-				String phone = req.getParameter("phone");
-				String birthday = req.getParameter("datepicker");
-				String address = req.getParameter("address");
-				String effectiveDate = req.getParameter("effectiveDate");
+//				String name = req.getParameter("name");
+//				String email = req.getParameter("email");
+//				String password = req.getParameter("password");
+//				String phone = req.getParameter("phone");
+//				String birthday = req.getParameter("datepicker");
+//				String address = req.getParameter("address");
+//				String effectiveDate = req.getParameter("effectiveDate");
 				
 				String carLicense = req.getParameter("carLicense");
-
+				
+				String memberinfoVO = (String) req.getAttribute("memberinfoVO");
+				
 //				if (carLicense == null || carLicense.trim().length() == 0) {
 //					errorMsgMap.put("carLicenseEmptyError", "請輸入車牌");
 //				}
@@ -74,8 +76,8 @@ public class CarLicenseServlet extends HttpServlet {
 
 				MemberCarsVO memberCarsVO = null;
 
-				java.sql.Date bday = Date.valueOf(birthday);
-				java.sql.Date eday = Date.valueOf(effectiveDate);
+//				java.sql.Date bday = Date.valueOf(birthday);
+//				java.sql.Date eday = Date.valueOf(effectiveDate);
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgMap.isEmpty()) {
@@ -87,14 +89,11 @@ public class CarLicenseServlet extends HttpServlet {
 				}
 				
 				/***************************2.開始新增資料***************************************/
-				CarService svc = new CarService();
-				List<MemberInfoVO> mem = svc.getMember(email, password, name, phone, bday, address, eday);
-				if (mem != null && mem.size() != 0) {
-					req.setAttribute("memberOK", mem);
-					req.setAttribute("Code", "OK");
-				}
 				CarService carSvc = new CarService();
 				memberCarsVO = carSvc.insert(carLicense);
+				
+				req.getAttribute("memberinfoVO");
+				
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/index.jsp";

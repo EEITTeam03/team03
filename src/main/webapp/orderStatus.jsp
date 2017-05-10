@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 
 <!--[if IE 6]>
 <html id="ie6" dir="ltr" lang="zh-TW">
@@ -22,7 +23,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>註冊會員</title>
+<title>訂單狀態</title>
 
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
@@ -75,42 +76,159 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+	<style type="text/css">	
+		.img-services{
+			width:360px;
+			height:260px;
+		}
+		.big-img-services{
+			width:700px;
+			height:500px;
+		}
+		.nav-fut-li{
+			width: 114px;
+			height: 50px;
+			text-align: center;
+			margin:0px 0px 0px 15px ;
+		}
+		.menu-fut-li{
+			width: 114px;
+			height: 50px;
+			text-align: center;
+			margin:10px 0px 0px 5px ;
+		}		
+		.fun-btn{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: white;
+		    background-color: #fed136;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;					
+		}		
+		.fun-btn:hover{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}
+		.mem-btn{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border:0px;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;					
+		}
+		.mem-btn:hover{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}	
+		.dropdown-menu {
+		    color: #fed136;
+		    background-color: #222222;
+			text-align: center;
+ 		    min-width: 114px; 
+		}				
+		.dropdown:hover .dropdown-menu {
+			
+			display: block;
+		}		
+	</style>
+
+
+
+
 <!-- 驗證 -->
 <script src="js/jquery.validate.js" type="text/javascript"></script>
 
   <script>
   $( function() {
 	  
-    $( "#datepicker" ).datepicker({
-      	changeMonth: true,
-      	changeYear: true,
-      	dateFormat: 'yy-mm-dd',
-    	yearRange: '-90:+0'
-    });
+			//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
+		var wdth = $(window).width();
+		if(wdth<975){					
+ 		        $("#nav-log-in").addClass("menu-fut-li");
+ 		  		$("#nav-register").addClass("menu-fut-li");
+		}
+		if(wdth>=975){
+ 		        $("#nav-log-in").addClass("nav-fut-li");
+ 		  		$("#nav-register").addClass("nav-fut-li"); 
+		}
+		//結束
+		
+		//不斷監控(監聽)螢幕大小，藉此判斷登入、註冊按鈕是在nav上或者在menu內，來設定不同的樣式
+ 		$(window).resize(function() {
+			var wdth = $(window).width();
+			var logIn = $("#nav-log-in").attr("class");
+			var regst = $("#nav-register").attr("class");
+			var numln = null;
+			var numrn = null;
+			var numlm = null;
+			var numrm =	null;
+
+			console.log(logIn);
+			console.log(regst);				
+			
+			if(logIn != undefined){
+				numln =	logIn.indexOf("nav-fut-li");
+				numlm =	logIn.indexOf("menu-fut-li");
+			}				
+			
+			//當會員登入後，註冊按鈕會不存在，所以不用去比對註冊按鈕的class
+			if(regst != undefined){
+				numrn =	regst.indexOf("nav-fut-li");
+				numrm =	regst.indexOf("menu-fut-li");
+			}
+
+			if( (wdth < 975) && (numln > -1) && (numrn > -1) ){
+	   		        $("#nav-log-in").removeClass("nav-fut-li");
+	   		  		$("#nav-register").removeClass("nav-fut-li");					
+	   		        $("#nav-log-in").addClass("menu-fut-li");
+	   		  		$("#nav-register").addClass("menu-fut-li");
+			}
+			if( (wdth >= 975) && (numlm > -1) && (numrm > -1) ){
+	   		        $("#nav-log-in").removeClass("menu-fut-li");
+	   		  		$("#nav-register").removeClass("menu-fut-li");
+	   		        $("#nav-log-in").addClass("nav-fut-li");
+	   		  		$("#nav-register").addClass("nav-fut-li"); 	   		  		
+			}
+ 		});
+ 			//結束  	
     
-    $("#cmxform").validate();
+    
+    
+    
     
   } );
+  
+  
   </script>
 
 
 <style>
-	.ui-datepicker-month{
-		color:black;
-	}
-	.ui-datepicker-year{
-		color:black;
-	}
-	.undone-step{
-    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: white;
-	}
-	.error{
-		color:red;
-	}
+	
 	
 	
 </style>	
@@ -132,23 +250,62 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll ff-word btn btn-primary btn-xs"
-						style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px"
-						href="#"> 基本資料
-					</a></li>
-					<li class="page-scroll ff-word" style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;color:white;">
-						<span class="glyphicon glyphicon-arrow-right"></span>
-					</li>
-					<li class="page-scroll ff-word undone-step" style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;color:white;">
-					車種資料			
-					</li>
-					<li class="page-scroll ff-word" style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;color:white;">
-						<span class="glyphicon glyphicon-arrow-right"></span>
-					</li>
-					<li class="page-scroll ff-word undone-step" style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;color:white;">
-					完成			
-					</li>										
+                   <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll ff-word" href="start_reserve.jsp">進行預約</a>                    	
+                    </li>                    
+                    <li>
+                        <a class="page-scroll ff-word" href="#services">各類服務</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll ff-word" href="#portfolio">美容項目</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll ff-word" href="#about">關於我們</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll ff-word" href="#team">團隊成員</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll ff-word" href="#contact">聯絡我們</a>
+                    </li>
+                    
+						<!--	未登入	-->
+				<c:if test="${empty Code}">                    
+                    <li id="nav-log-in" class="">                    
+	                    <button class="page-scroll ff-word btn btn-xs fun-btn" onclick="location.href='login.jsp'">
+	   		
+							<span class="glyphicon glyphicon-log-in"></span> 登入															
+	                        
+	                    </button>
+	                </li>
+                    <li id="nav-register" class="">
+                    	<button class="page-scroll ff-word btn btn-xs fun-btn" onclick="location.href='register.jsp'">
+   		
+							<span class="glyphicon glyphicon-user"></span> 免費註冊															
+                        
+                        </button>                    
+                    </li>	                 
+				</c:if>
+
+						<!--	已登入	-->
+				<c:if test="${!empty Code}"> 
+					<li id="nav-log-in" class="dropdown">     
+						<button class="page-scroll ff-word dropdown-toggle mem-btn" data-toggle="dropdown">
+							<li class="glyphicon glyphicon-user"></li>&nbsp;&nbsp;&nbsp;${memberInfo.memberName}
+						</button>
+						
+						<ul class="dropdown-menu" role="menu">
+						    <li><a href="orderStatus">訂單狀態</a></li>
+						    <li><a href="#">修改資料</a></li>
+						    <li class="divider"></li>
+						    <li><a href="#">登出</a></li>
+						</ul>				              
+	 				</li>
+				</c:if>                    
+                    										
 				</ul>
 			</div>
 	
@@ -227,7 +384,7 @@
 										</div>
 										
 										<br>																																			
-										<input type="hidden" name="memberinfoVO" value='${param.memberinfoVO}'>					
+																	
 										<input type="hidden" name="action" value="insert">
 										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >下一步</button>
 										

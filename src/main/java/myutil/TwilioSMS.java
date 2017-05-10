@@ -8,7 +8,7 @@ public class TwilioSMS {
 
     // Find your Account Sid and Auth Token at twilio.com/console
 	public static final String ACCOUNT_SID = "ACaeb5a588d9c603aade15044f41b7ccb1";
-	  public static final String AUTH_TOKEN = "260067cd3b5ca045ee6de811b4ed2364";
+	public static final String AUTH_TOKEN = "260067cd3b5ca045ee6de811b4ed2364";
 
 	
 	public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class TwilioSMS {
 		 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 		 
 		 Message message = Message.creator(
-				 	new PhoneNumber("+886972217353"),  //to
+				 	new PhoneNumber("+886958584817"),  //to
 			        new PhoneNumber("+13343846257"),  //from
 			        "Hello SQL Queen!!! 瞻創楷").create();
 		 

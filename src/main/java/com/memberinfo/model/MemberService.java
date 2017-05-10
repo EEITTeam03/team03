@@ -13,11 +13,11 @@ import com.membercars.model.MemberCarsVO;
 public class MemberService {
 	
 	private MemberInfoDAO dao;
-	private MemberCarsDAO dao1;
+//	private MemberCarsDAO dao1;
 
 	public MemberService() {
 		dao = new MemberInfoHibernateDAO();
-		dao1 = new MemberCarsHibernateDAO();
+//		dao1 = new MemberCarsHibernateDAO();
 	}
 
 	public List<MemberInfoVO> getMember(String email , String password){
@@ -47,7 +47,7 @@ public class MemberService {
 		 String address, java.sql.Date effectiveDate) {
 		
 		MemberInfoVO memberinfoVO = new MemberInfoVO();
-		Set<MemberCarsVO> memberCars = new HashSet<MemberCarsVO>();
+//		Set<MemberCarsVO> memberCars = new HashSet<MemberCarsVO>();
 		
 		memberinfoVO.setMemberName(memberName);
 		memberinfoVO.setEmail(email);

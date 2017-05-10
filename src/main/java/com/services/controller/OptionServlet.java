@@ -18,7 +18,7 @@ import com.services.model.ServicesService;
 /**
  * Servlet implementation class OptionServlet
  */
-@WebServlet("/OptionServlet")
+@WebServlet(urlPatterns = {"/admin/OptionServlet","/OptionServlet"})
 public class OptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

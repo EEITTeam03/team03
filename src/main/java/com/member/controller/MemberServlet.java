@@ -71,8 +71,17 @@ public class MemberServlet extends HttpServlet {
 //					errorMsgMap.put("CarLicenseEmptyError", "請輸入車牌號碼");
 //				}
 
-				MemberInfoVO memberinfoVO = null;
-
+//				MemberInfoVO memberinfoVO = null;
+				
+				MemberInfoVO memberinfoVO = new MemberInfoVO();
+				
+				memberinfoVO.setMemberName(name);
+				memberinfoVO.setEmail(email);
+				memberinfoVO.setPassword(password);
+				memberinfoVO.setPhone(phone);
+				memberinfoVO.setBirthday(birthday);
+				memberinfoVO.setAddress(address);
+				memberinfoVO.setEffectiveDate(effectiveDate);
 				// Send the use back to the form, if there were errors
 				if (!errorMsgMap.isEmpty()) {
 					req.setAttribute("memberinfoVO", memberinfoVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -84,12 +93,24 @@ public class MemberServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				MemberService memberSvc = new MemberService();
-				memberinfoVO = memberSvc.insertMemAndCar(name, email, password, phone, birthday, address, effectiveDate);
+//				memberinfoVO = memberSvc.insertMemAndCar(name, email, password, phone, birthday, address, effectiveDate);
+				
+				req.setAttribute("memberinfoVO", memberinfoVO);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "carType.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
-				successView.forward(req, res);				
+				String requestURI = (String) req.getAttribute("target");
+				if (requestURI != null) {
+					requestURI = (requestURI.length() == 0 ? req.getContextPath() : requestURI);
+					res.sendRedirect(res.encodeRedirectURL(requestURI));
+					return;
+				} else {
+					res.sendRedirect(res.encodeRedirectURL(req.getContextPath() + "/carType.jsp"));
+					return;
+				}
+				
+//				String url = "carType.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+//				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {

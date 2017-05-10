@@ -14,7 +14,17 @@ public class MemberCarsHibernateDAO implements MemberCarsDAO {
 	@Override
 	public void insert(MemberCarsVO memberCarsVO) {
 		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
+		try{
+			session.beginTransaction();
+			session.saveOrUpdate(memberCarsVO);
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			ex.printStackTrace();
+			session.getTransaction().rollback();
+			throw ex;
+		}
 	}
 
 	@Override
@@ -71,7 +81,7 @@ public class MemberCarsHibernateDAO implements MemberCarsDAO {
 	}
 
 	@Override
-	public List<MemberInfoVO> findNewMember(String email, String password, String memberName, String phone,
+	public List<MemberInfoVO> findAddMember(String email, String password, String memberName, String phone,
 			Date birthday, String address, Date effectiveDate) {
 		// TODO Auto-generated method stub
 		return null;

@@ -7,9 +7,9 @@ import com.services.model.ServicesVO;
 public interface ServiceStepDAO_interface {
 	public void insert(ServiceStepVO serviceStepVO);
 	public void update(ServiceStepVO serviceStepVO);
-	public void delete(Integer servNo);
-	public ServiceStepVO findByPrimaryKey(Integer servNo);
+	public void delete(Integer servStepNo);
+	public ServiceStepVO findByPrimaryKey(Integer servStepNo);
 	public List<ServiceStepVO> getAll();
-	
-	public ServiceStepVO findByPrimaryKeyServStepNo(Integer servStepNo);
+	public List<ServiceStepVO> findByForeignKey(Integer servNo);
+	public List<Object> getDist();
 }
