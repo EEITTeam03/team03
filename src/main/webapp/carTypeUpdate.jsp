@@ -22,7 +22,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>車種資料</title>
+<title>修改車種資料</title>
 
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
@@ -169,10 +169,41 @@
    				})
    			 		$("select:eq(0) > option:first-child").attr({"selected":"true"});
    				
-   			})  			
+   			})
+
+  			//讀取會員的車種資料
+	  		var no=$("#no").text();
+			$.getJSON("GetCars",{"no":no},function(json){
+				$.each(json,function(idx,GetCars){
+					
+		    		var tr = $("<tr></tr>")
+		    		var td1 = $("<td>" + GetCars.carLicense + "</td>");		
+		    		var td2 = $("<td>" + opValue1 + "</td>");			
+		    		var td3 = $("<td>" + opValue2 + "</td>");	
+		    		var td4 = $("<td>" + carSize + "</td>");	
+		    		var td5 = $("<td></td>");	
+		    		
+		    		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
+		    		var inp = $("<input></input>").attr({"type":"hidden","value":modelNo,"name":"modelNo"});
+		    		var licenses = $("<input></input>").attr({"type":"hidden","value":carLicense,"name":"licenses"});
+		    		var span = $("<span></span>").addClass("glyphicon glyphicon-remove");
+		    		
+		    		button.append(span);
+		    		td5.append([button,inp,licenses]);
+		    		
+		    		tr.append([td1,td2,td3,td4,td5]);
+		    		
+					console.log(GetCars);				
+		    				    		
+				});				
+			}); 			
+ 			//結束   			
+   			
    			
    		})
 	
+   		
+   		
 	function SelectCarModel(){
 		var str = $("select:eq(0) > option:first-child").text();//得到字串→請選擇您的愛車廠牌
 		var opValue=$("select:eq(0) :selected");
@@ -284,7 +315,6 @@
     		
     		tr.append([td1,td2,td3,td4,td5]);
     		
-    		
     		$("#cardatas > tbody").append(tr);
     		$("#carLicense").val("");//清空車牌			       	
         }
@@ -298,14 +328,11 @@
         	$("#name-error").text("");
         }
     });   		
-// 	var modelNo = "";//if判斷完後，需傳遞到後端的值   		
-// 					console.log(bContainer);
-// 					console.log(brand);
-// 					console.log(bContainer != brand);
-// 					bContainer = brand;
-// 					console.log("--------------------------");   		
+	
 
-
+	  		
+			 			
+  
 </script>	
 	
 </head>
@@ -351,14 +378,6 @@
 
 	<section id="services">
 	
-<!-- 		<div class="container"> -->
-<!-- 			<div id="brandImgs" class="row divBorder"> -->
-			
-	
-<!-- 			</div> -->
-<!-- 		</div> -->
-			
-<!-- 		<br> -->
 		
 		<div class="container">
 			<div class="row">
@@ -467,6 +486,6 @@
 	</section>
 	
 
-
+	<span hidden="hide" id="no">${memberInfo.memberNo}</span>
 </body>
 </html>
