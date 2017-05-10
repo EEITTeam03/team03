@@ -193,7 +193,7 @@ public class ReservService {
 				map.put("License",reserv.getMembercarsVO().getCarLicense());
 				map.put("NoteC", reserv.getNoteC());
 				map.put("NoteE", reserv.getNotesE());
-				map.put("Status", reserv.getStatus());
+				if(reserv.getStatus()!=0)map.put("Status", reserv.getStatus());
 				list2.add(map);
 			}
 	return list2;
@@ -255,7 +255,7 @@ public class ReservService {
 					map.put("License",reserv.getMembercarsVO().getCarLicense());
 					map.put("NoteC", reserv.getNoteC());
 					map.put("NoteE", reserv.getNotesE());
-					map.put("Status", reserv.getStatus());
+					if(reserv.getStatus()!=0)map.put("Status", reserv.getStatus());
 					list2.add(map);
 				}
 		return list2;
@@ -313,7 +313,7 @@ public class ReservService {
 			map.put("License", reserv.getMembercarsVO().getCarLicense());
 			map.put("NoteC", reserv.getNoteC());
 			map.put("NoteE", reserv.getNotesE());
-			map.put("Status", reserv.getStatus());
+			if(reserv.getStatus()!=0)map.put("Status", reserv.getStatus());
 			list2.add(map);
 		}
 		return list2;
