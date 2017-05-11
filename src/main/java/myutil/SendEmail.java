@@ -38,12 +38,17 @@ public class SendEmail {
 		});
 	}
 	public void sendPassword(String clientId,String subject,String clientName,String pswd){
+		StringBuilder sbd = new StringBuilder(); 
 		try { 
 			MimeMessage message = new MimeMessage(session);
 		   message.setFrom(new InternetAddress(username));
 		   message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(clientId));
 		   message.setSubject("Check your password","utf-8");
-		   message.setContent("Dear "+clientName+", <br><br> your password is "+pswd, "text/html;charset=UTF-8");
+//		   message.setContent("Dear "+clientName+", <br><br> your password is "+pswd, "text/html;charset=UTF-8");
+		   sbd.append("Dear "+clientName+", <br><br> your password is "+pswd+"<br><br>");
+		   sbd.append("Link to Our Website<br>");
+		   sbd.append("http://car03.azurewebsites.net/team03 <br>");
+		   message.setContent(sbd.toString(), "text/html;charset=UTF-8");
 		   Transport transport = session.getTransport("smtp");
 		   transport.connect(host, port, username, password);
 
@@ -56,19 +61,29 @@ public class SendEmail {
 	
 	public void setProps(String userId,String clientName,Calendar cal) {
 		
-		
+		StringBuilder sbd = new StringBuilder(); 
 		try {
 			int m = cal.get(Calendar.MONTH)+1;
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-			message.setSubject("您的車明天有預約洗車服務","utf-8");
+			message.setSubject("您的車明天有預約水膜汽車美容的洗車服務","utf-8");
 			if(cal.get(Calendar.MINUTE)==0){
-				message.setContent("Dear " + clientName + ", <br><br> 您預約的時間是" + m+"月"
-						+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":00", "text/html;charset=UTF-8");
+//				message.setContent("Dear " + clientName + ", <br><br> 您預約的時間是" + m+"月"
+//						+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":00", "text/html;charset=UTF-8");
+				sbd.append("Dear " + clientName + ", <br><br> 您預約的時間是" + m+"月"
+						+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":00<br><br>");
+				sbd.append("Link to Our Website<br>");
+				   sbd.append("http://car03.azurewebsites.net/team03 <br>");
+				   message.setContent(sbd.toString(), "text/html;charset=UTF-8");
+				   //System.out.println("testtest");
 			}else{
-			message.setContent("Dear " + clientName + ", <br><br> 您預約的時間是" + m+"月"
-					+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE), "text/html;charset=UTF-8");
+				sbd.append("Dear " + clientName + ", <br><br> 您預約的時間是" + m+"月"
+					+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+"<br><br>");
+			   sbd.append("Link to Our Website<br>");
+			   sbd.append("http://car03.azurewebsites.net/team03 <br>");
+			   message.setContent(sbd.toString(), "text/html;charset=UTF-8");
+			   //System.out.println("testtest2");
 			}
 			//得到預約前一天
 			Calendar lastDay = Calendar.getInstance();
