@@ -30,37 +30,37 @@ public class ProgressTest {
 			int servNo = alist.getServicesVO().getServNo();
 			String servName = alist.getServName();
 			int servTime = alist.getServTime();
-//			System.out.print("服務項目代號:"+ servNo+",");
-//			System.out.print("項目名:"+ servName+",");
-//			System.out.println("時間"+servTime);
-			map.put("servNo", servNo);
-			map.put("servName", servName);
-			map.put("servTime", servTime);
 			
 			
 			stepList = stepService.getMoreServiceStepbyFK(servNo);
+			List<Map> innerlist = new ArrayList<>();
 			
-//			for(ServiceStepVO blist : stepList){
-//				int servStep = blist.getServStep();
-//				String stepDescp = blist.getStepDescp();
-//				System.out.print("步驟: "+ servStep+",");
-//				System.out.println(stepDescp);
+			map.put("servNo", servNo);		//服務代號
+			map.put("servName", servName);	//服務名
+			map.put("servTime", servTime);
+			map.put("servStep", innerlist);
+			
+			for(ServiceStepVO astep:stepList) {
+				int step = astep.getServStep();
+				String descp = astep.getStepDescp();
+				Map stepMap = new LinkedHashMap<>();
+				stepMap.put("step", step);
+				stepMap.put("descp", descp);
+				innerlist.add(stepMap);
+				
+			}
+//			for(int j=0;j<stepList.size();j++){
+//				
+//				int servStep = stepList.get(j).getServStep();
+//				String stepDescp = stepList.get(j).getStepDescp();
+//				map.put("servNo", servNo);		//服務代號
+//				map.put("servName", servName);	//服務名
+//				map.put("servTime", servTime);
 //				map.put("servStep", servStep);
 //				map.put("stepDescp", stepDescp);
-//				
-//				list2.add(map);
-//			}
-			
-			for(int i=0;i<stepList.size();i++){
-				
-//				int servStep = stepList.get(i).getServStep();
-				String stepDescp = stepList.get(i).getStepDescp();
-//				map.put("servStep"+i, servStep);
-				map.put("stepDescp_"+(i+1), stepDescp);
-				
 				list2.add(map);
-			}
-			
+//					
+//			}
 		}
 		return list2;
 	}
