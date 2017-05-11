@@ -1,14 +1,18 @@
 package com.employee.model;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.schedule.model.ReservVO;
+
 import hibernate.util.HibernateUtil;
 
 public class EmployeeDAO implements EmployeeDAO_interface {
 	private static final String GET_ALL_STMT = "from EmployeeVO order by employeeNo";
+	private static final String GET_EMPNO_STMT = "from EmployeeVO where employeeName = ?";
 
 	@Override
 	public void insert(EmployeeVO employeeVO) {
@@ -111,7 +115,28 @@ public class EmployeeDAO implements EmployeeDAO_interface {
 //		emp = dao.findByPrimaryKey(2);
 //		System.out.println(emp.getEmployeeNo());
 //		System.out.println(emp.getEmployeeName());
+		
+//		List<EmployeeVO>list = dao.findNoByName("蕭天怡");
+//		for(EmployeeVO emp2:list){
+//			 System.out.println(emp2.getEmployeeNo());
+//		}
+	}
 
+	@Override
+	public List<EmployeeVO> findNoByName(String employeeName) {
+		List<EmployeeVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(GET_EMPNO_STMT);
+			query.setParameter(0,employeeName);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}	
+		return list;
 	}
 
 }
