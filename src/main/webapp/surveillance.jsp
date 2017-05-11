@@ -161,7 +161,42 @@
 			
 			display: block;
 		}
-
+	
+        #progressBar>span{
+			
+			width:80px;
+			
+			height:80px; 
+			
+			border-radius:99em;
+			
+			background-color:black;
+         
+            color:#fff;
+            
+            background:green;
+        } 
+        
+        .btn-node{
+        	width:80px;
+			
+			height:80px; 
+			
+			border-radius:99em;			
+         
+			border:0px;
+            
+            background:#999;                     
+        } 
+        .btn-line{
+        	width:80px;
+			
+			height:10px;
+			
+			border:0px;
+			
+			background:#999;
+        }      
 	</style>
 
 
@@ -223,21 +258,55 @@
 			}
 		});
 			//結束  	
- 			var timeAll = 0;
+ 			var stageTime = 0;
    			$.getJSON('surveillance.json',function(json){   				   				
    				$.each(json.service_step,function(idx,service_step){
-   		    		//以下開始動態生成團隊成員
- 					timeAll = timeAll + (service_step.servTime / 3 * 60) ;
-   		   			var dline = $("<div style='-webkit-user-select: none;color:rgba(255, 0, 0, 0)'>"+ timeAll +"</div>");
-   		   			var sball = $("<span style='-webkit-user-select: none;color:rgba(255, 0, 0, 0)'>"+ timeAll +"</span>");
+   		    		  					
+   	  	    		var rdts = Date.parse(service_step.reservDateTime);//預約日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
+   	  	    		var rdtshr = (new Date(service_step.reservDateTime)).getHours();//預約日期取出小時
+   	  	    		var rdtsmin = (new Date(service_step.reservDateTime)).getMinutes();//預約日期取出分鐘
+   	  	    		var rdtssec = (new Date(service_step.reservDateTime)).getSeconds();//預約日期取出毫秒
+   	  	    		rdts = rdts + (rdtshr*60*60) + (rdtsmin*60) + rdtssec;//預約日期加總換算成毫秒
+   	  	    		var rets = Date.parse(service_step.reservEndTime);//結束日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
+   	  	    		var retshr = (new Date(service_step.reservEndTime)).getHours();//結束日期取出小時
+   	  	    		var retsmin = (new Date(service_step.reservEndTime)).getMinutes();//結束日期取出分鐘
+   	  	    		var retssec = (new Date(service_step.reservEndTime)).getSeconds();//結束日期取出毫秒
+   	  	    		rets = rets + (retshr*60*60) + (retsmin*60) + retssec;//結束日期加總換算成毫秒
+   	  	    		
+   	  	    		
+   	  	    		var cts = (+new Date());//現在時間(毫秒)
+   					stageTime = stageTime + (service_step.servTime / 3 * 60) ;//階段時間換算成毫秒
+   					var operatingTime = cts - rdts ;//已經工作多少時間
    					
-   		   			$("#progressBar").append([dline,sball]);   		   				   			
+   					//已經工作的時間若大於該階段時間，代表完成這個階段，節點圓與階段線就為完成顏色。反之，為未完成顏色
+   					if(operatingTime > stageTime){
+	 					var td1 =  $("<td></td>");
+	   		   			var bline = $("<button></button>").addClass("btn-line").attr({"value":stageTime,"disabled":"disabled"});
+	   		   			var td2 =  $("<td></td>");
+	   		   			var bball =$("<button></button>").addClass("btn-node").attr({"value":stageTime,"disabled":"disabled"}); 
+	   		   			bline.css("background:green");
+	   		   			bball.css("background:green"); 		   			   		   			
+	   		   			td1.append(bline); 
+	   		   			td2.append(bball); 
+	   		   			$("table tr:nth-child(2)").append([td1,td2]);
+   					}else{
+   	 					var td1 =  $("<td></td>");
+   	   		   			var bline = $("<button></button>").addClass("btn-line").attr({"value":stageTime,"disabled":"disabled"});
+   	   		   			var td2 =  $("<td></td>");
+   	   		   			var bball =$("<button></button>").addClass("btn-node").attr({"value":stageTime,"disabled":"disabled"}); 
+   	   		   			bline.css("background:#999");
+   	   		   			bball.css("background:#999"); 		   			   		   			
+   	   		   			td1.append(bline); 
+   	   		   			td2.append(bball); 
+   	   		   			$("table tr:nth-child(2)").append([td1,td2]);   						
+   						
+   						
+   					}
+   		   			//結束
+   		   			
    					   				  					
    				})
-   				
-   				var sballend = $("<span></span>");
-   				$("#progressBar").append(sballend);
-   				
+	
    			})			
 			
    			console.log($("span").attr("value"));	 	
@@ -283,13 +352,13 @@
                         <a class="page-scroll ff-word" href="#portfolio">美容項目</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#about">關於我們</a>
+                        <a class="page-scroll ff-word" href="#about">關於0我們</a>
                     </li>
                     <li>
                         <a class="page-scroll ff-word" href="#team">團隊成員</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#contact">聯絡我們</a>
+                        <a class="page-scroll ff-word" href="#contact">聯絡我0們</a>
                     </li>
                     
 						<!--	未登入	-->
@@ -354,19 +423,40 @@
 		</div>
 
 	</header>
+	<section id="services">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							
+					
 
+				</div>
+				
+			</div>
+		</div>
+	</section>
 
 	<section id="services">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					
-					<div id="progressBar" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<span></span>
-					
-					
+					<table>
+						<tr>
+						
+						</tr>
+						<tr>
+							<td>
+								<button class="btn-node" disabled="disabled"></button>
+							</td>  				          
+						</tr>				      				      				      
+					</table>
+						
+						
+						
+											
 					<%-- 					<h5>${param.reservNo}</h5> --%>
-					</div>
+					
 
 				</div>
 				
