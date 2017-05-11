@@ -67,8 +67,9 @@ public class JavaMail extends HttpServlet {
 			  ms.updateMem(mem.getMemberNo(), mem.getMemberName(), mem.getEmail(), str, mem.getPhone(), mem.getBirthday(), mem.getAddress(), mem.getEffectiveDate());
 			  //ms.getOneByEmail(userId);	
 		   se.sendPassword(userId, subject, userName, str);
-		   RequestDispatcher rd = request.getRequestDispatcher("success.jsp");
-			rd.forward(request, response);
+//		   RequestDispatcher rd = request.getRequestDispatcher("success.jsp");
+//			rd.forward(request, response);
+		   response.sendRedirect("success.jsp");
 	}
 
 

@@ -59,7 +59,7 @@
 				<li class="hidden"><a href="#page-top"></a></li>
 				<li><a class="page-scroll ff-word btn btn-primary btn-xs"
 					style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px"
-					href="#"> <span class="glyphicon glyphicon-log-in"></span> 登入
+					href="index.jsp"> <span class="glyphicon glyphicon-log-in"></span> 登入
 				</a></li>
 				<li><a class="page-scroll ff-word btn btn-primary btn-xs"
 					style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;"
@@ -73,7 +73,7 @@
 	<section id="services" style="text-align:center">
 	<h1 style="color:#fa8072">您的新密碼已寄出，請至Email信箱確認</h1>
 	<br>
-	<button type="button" class="btn btn-lg btn-primary" style="background-color:#00bfff"><a href="index.jsp" style="color:white">回首頁</a></button>
+	<input type="button" value="回首頁" onclick="location.href='index.jsp'" class="btn btn-lg btn-primary" style="background-color:#00bfff">
 	</section>
 </body>
 </html>
