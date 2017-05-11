@@ -200,11 +200,11 @@ label {
 <%-- 		<span id="no" hidden="hide">${memberInfo.memberNo}</span> --%>
 		
 		<div class="row">
-			<h2 class="col-sm-offset-5">開始預約</h2> 
+			<h2 class="service-heading text-center">開始預約</h2> 
 		</div>
 		
 		<div class="row">
-			<div class="col-sm-6" id="chooseCar"></div>
+			<div class="col-md-6 text-center" id="chooseCar"></div>
 		</div>
 		<section id="portfolio" >
 		<div class="row" id="svesall"></div>
@@ -240,14 +240,14 @@ label {
 				<div class="form-group">
 					<label for="datepicker" class="col-sm-2 control-label">選擇預約日期</label>
 					<div class="col-sm-6">
-						<div id="datepicker"></div>
+						<div id="datepicker" ></div>
 						<input type="hidden" name="selectedDate" id="selectedDate" 
 							class="form-control" value="${param.selectedDate}"
 							placeholder="選擇日期">
 					</div>
 				</div>
 				
-				<table class="table" id="timeline">
+				<table class="table text-center" id="timeline">
 <!-- 				<tr> -->
 <!-- 					<td>9:00</td> -->
 <!-- 					<td>9:30</td> -->
@@ -540,7 +540,7 @@ label {
 		   						var myd = $("<div></div>").addClass("portfolio-caption");
 		   			   			
 		   						var hword = $("<h4></h4>").text(servName);
-		   						var pword = $("<p></p>").addClass("text-muted").text("Graphic Design");
+		   						var pword = $("<p></p>").addClass("text-muted").text("未選擇");
 		   						
 		   						myd.append([hword,pword]);
 		   						
@@ -596,12 +596,17 @@ label {
 // 		 	   							thisrbtn = $(this);
 										rbtn.hide();
 										bbp.show();
+										//刪除OK
+										pword.removeClass().addClass("text-muted").empty().text("未選擇");
 			   						});
 			   						mb.append(rbtn);
 		   							}
 		   							
 		   							if (services.servNo >= 2000)  //單選按下
+		   								//設定hidden欄位值
 		   								$("#service").val(services.servNo);
+		   								//取消其他單選	好難FK
+// 		   								$("button[id^='btn2']").
 		   							else {						  //多選按下
 // 		   								var plus = $("<input>").attr({"type":"text","name":"plus","value":services.servNo})
 // 		   								$("#plus").append(plus);
@@ -611,9 +616,12 @@ label {
 		   								
 		   							}
 		   							//選擇按下的共通事件
-		   							bbp.hide();
-		   							rbtn.show(); 
 		   							
+		   							bbp.hide();
+		   							rbtn.show();
+		   							//出現OK icon
+		   							var okicon = $("<i></i>").addClass("fa fa-check-square");
+		   							pword.text("已選擇").removeClass().addClass("text-success").append(okicon);
 		   						});
 // 		   						rbtn.hide();
 		   						var fft = $("<i></i>").addClass("fa fa-check").text("選擇");
