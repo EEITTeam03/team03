@@ -54,7 +54,7 @@ public class ProgressService {
 			List<Map> innerlist = new ArrayList<>();
 			
 			map.put("reservDateTime", reservDateTime);
-			map.put("endTime", reservEndTime);
+			map.put("reservEndTime", reservEndTime);
 			map.put("servNo", servNo);		//服務代號
 			map.put("servName", servName);	//服務名
 			map.put("servTime", servTime);

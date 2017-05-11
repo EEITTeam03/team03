@@ -530,7 +530,7 @@
                                     <h4 style="font-family:Noto Sans TC; class="subheading">不斷努力與學習</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">我一直渴望將卡氏成功打造成為全球汽車美容業的明星品牌，我堅持信念且持續努力，我知道我已帶領所有的卡氏人走在正確的道路上，這個願景指日可待！</p>
+                                    <p class="text-muted">我一直渴望將美容中心打造成全球汽車美容業的明星品牌，我堅持信念且持續努力，我知道我已帶領所有的員工走在正確的道路上，這個願景指日可待！</p>
                                 </div>
                             </div>
                         </li>
