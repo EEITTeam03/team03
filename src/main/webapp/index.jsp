@@ -359,7 +359,7 @@
                         <a class="page-scroll ff-word" href="#contact">聯絡我們</a>
                     </li>
 						<!--	未登入	-->
-				<c:if test="${empty Code}">                    
+				<c:if test="${empty memberInfo}">                    
                     <li id="nav-log-in" class="">                    
 	                    <button class="page-scroll ff-word btn btn-xs fun-btn" onclick="location.href='login.jsp'">
 	   		
@@ -377,7 +377,7 @@
 				</c:if>
 
 						<!--	已登入	-->
-				<c:if test="${!empty Code}"> 
+				<c:if test="${!empty memberInfo}"> 
 					<li id="nav-log-in" class="dropdown">     
 						<button class="page-scroll ff-word dropdown-toggle mem-btn" data-toggle="dropdown">
 							<li class="glyphicon glyphicon-user"></li>&nbsp;&nbsp;&nbsp;${memberInfo.memberName}
