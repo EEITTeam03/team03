@@ -596,8 +596,9 @@ label {
 // 		 	   							thisrbtn = $(this);
 										rbtn.hide();
 										bbp.show();
-										//刪除OK
+										//刪除OK icon
 										pword.removeClass().addClass("text-muted").empty().text("未選擇");
+										myd.removeAttr("style");
 			   						});
 			   						mb.append(rbtn);
 		   							}
@@ -622,6 +623,7 @@ label {
 		   							//出現OK icon
 		   							var okicon = $("<i></i>").addClass("fa fa-check-square");
 		   							pword.text("已選擇").removeClass().addClass("text-success").append(okicon);
+		   							myd.css("background-color","#84B57E");
 		   						});
 // 		   						rbtn.hide();
 		   						var fft = $("<i></i>").addClass("fa fa-check").text("選擇");
