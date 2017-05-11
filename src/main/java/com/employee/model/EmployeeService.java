@@ -59,4 +59,8 @@ public class EmployeeService {
 		}
 		return mapList;
 	}
+	
+	public List<EmployeeVO> findNoByName(String employeeName) {
+		return dao.findNoByName(employeeName);
+	}
 }
