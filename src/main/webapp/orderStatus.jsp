@@ -300,7 +300,7 @@
   	    		var retshr = (new Date(reservEndTime)).getHours();//結束日期取出小時
   	    		var retsmin = (new Date(reservEndTime)).getMinutes();//結束日期取出分鐘
   	    		var retssec = (new Date(reservEndTime)).getSeconds();//結束日期取出毫秒
-  	    		rets = rets + (retshr*60*60) + (retsmin*60) + retssec;//預約日期加總換算成毫秒
+  	    		rets = rets + (retshr*60*60) + (retsmin*60) + retssec;//結束日期加總換算成毫秒
   	    		
 //   	    		console.log("現在時間"+cts);
 //   	    		console.log("預約日期"+rdts);
@@ -416,19 +416,19 @@
                         <a class="page-scroll ff-word" href="start_reserve.jsp">進行預約</a>                    	
                     </li>                    
                     <li>
-                        <a class="page-scroll ff-word" href="#services">各類服務0</a>
+                        <a class="page-scroll ff-word" href="#services">各類服務</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#portfolio">美容項0目</a>
+                        <a class="page-scroll ff-word" href="#portfolio">美容項目</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#about">關於我們0</a>
+                        <a class="page-scroll ff-word" href="#about">關於我們</a>
                     </li>
                     <li>
                         <a class="page-scroll ff-word" href="#team">團隊成員</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#contact">聯絡我0們</a>
+                        <a class="page-scroll ff-word" href="#contact">聯絡我們</a>
                     </li>
                     
 						<!--	未登入	-->
