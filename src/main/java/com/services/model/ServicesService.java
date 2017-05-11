@@ -99,6 +99,7 @@ public class ServicesService {
 				continue;
 			}
 			Map map = new LinkedHashMap<>();
+			map.put("servNo", asvo.getServNo());
 			map.put("servDesc", asvo.getServDesc().replace("\n", "").replace("\r", ""));
 			map.put("servName", asvo.getServName());
 			map.put("servPhoto", Base64.getEncoder().encodeToString(asvo.getServPhoto()));
