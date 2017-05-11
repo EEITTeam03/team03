@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 
 <!--[if IE 6]>
 <html id="ie6" dir="ltr" lang="zh-TW">
@@ -173,33 +174,44 @@
 									<form id="cmxform" class="form-signin" role="form" action="MemberNext" method="post">
 									
 										<br>
-										
+										<c:if test="${!empty FBName}">
+											<input id="name" type="hidden" name="name" value='${FBName}'>
+										</c:if>
+										<c:if test="${empty FBName}">
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										  	<span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-user"></i></span>
 
 										  	<input id="name" type="text" class="form-control required" name="name" placeholder="輸入您的姓名" value='${param.name}'>
 											<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>
 										</div>										
-										
 										<br>
-										
+										</c:if>
+										<c:if test="${!empty FBAccount}">
+										  	<input id="email" type="hidden" name="email" value='${FBAccount}'>
+										</c:if>
+										<c:if test="${empty FBAccount}">
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										  	<span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-envelope"></i></span>
 
 										  	<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件" value='${param.email}'>
 											<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>
 										</div>
-										
 										<br>
+										</c:if>
 										
+										<c:if test="${!empty FBId}">
+										  	<input id="password" type="hidden" name="password" value='${FBId}'>
+										</c:if>
+										<c:if test="${empty FBId}">
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-lock"></i></span>
 
 										    <input id="password" type="password" class="form-control required" name="password" placeholder="輸入您的密碼" value='${param.password}'>
 										    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>										
 										</div>
-										
 										<br>
+										</c:if>
+										
 										
 										<div class="input-group" style="border:1px solid #FFB6C1">
 										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-phone"></i></span>

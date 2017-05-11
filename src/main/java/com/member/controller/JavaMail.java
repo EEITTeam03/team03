@@ -63,7 +63,8 @@ public class JavaMail extends HttpServlet {
 		SendEmail se = new SendEmail();	
 			  MemberService ms = new MemberService();
 			  String str = ms.randomPswd();
-			  ms.updateMem(mem.getMemberNo(), mem.getEmail(), str, mem.getMemberName(), mem.getPhone(), mem.getBirthday(), mem.getAddress(), mem.getEffectiveDate());
+			  //System.out.println(str);
+			  ms.updateMem(mem.getMemberNo(), mem.getMemberName(), mem.getEmail(), str, mem.getPhone(), mem.getBirthday(), mem.getAddress(), mem.getEffectiveDate());
 			  //ms.getOneByEmail(userId);	
 		   se.sendPassword(userId, subject, userName, str);
 		   RequestDispatcher rd = request.getRequestDispatcher("success.jsp");

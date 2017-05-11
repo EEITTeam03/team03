@@ -37,6 +37,7 @@ public class ServicesInsert extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8"); // 文字資料轉內碼
 		String action = request.getParameter("action");
+		String updatePath = request.getServletPath();
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		Map<String, String> msgOK = new HashMap<String, String>();
 
@@ -132,19 +133,14 @@ public class ServicesInsert extends HttpServlet {
 				boolean xx = sdao.servNoExists(servNo);
 				if (xx) {
 					errorMsg.put("errorIDDups1", "此服務編號號已存在，請換新代號");
-					// RequestDispatcher rd =
-					// request.getRequestDispatcher("ServicesInsert.jsp");
-					// rd.forward(request, response);
-					// return;
 				} else {
 
 					System.out.println("filename:" + fileName);
 
 					sdao.insert(svo);
 					if (sdao.findByPrimaryKey(servNo) != null) {
-						// msgOK.put("InsertOK", "<Font
-						// color='red'>新增成功，請開始使用本系統</Font>");
-						response.sendRedirect("../index.jsp");
+						msgOK.put("InsertOK", "<Font color='red'>新增成功，請開始使用本系統</Font>");
+						response.sendRedirect("../admin/admin_default.jsp");
 						return;
 					} else {
 						errorMsg.put("errorIDDup", "新增此筆資料有誤");
@@ -181,16 +177,16 @@ public class ServicesInsert extends HttpServlet {
 					return;
 				}
 				request.setAttribute("servicesVO", svoForDisplay);
-				if(svoForDisplay.getServStatus()=="1"){
+				if (svoForDisplay.getServStatus() == "1") {
 					String url = "ListOneServicesForUser.jsp";
 					RequestDispatcher successView = request.getRequestDispatcher(url);
 					successView.forward(request, response);
-				}else{
+				} else {
 					String url = "ListOneServices.jsp";
 					RequestDispatcher successView = request.getRequestDispatcher(url);
 					successView.forward(request, response);
 				}
-				
+
 			} catch (Exception e) {
 				errorMsg.put("errorInfo", "無法取得資料");
 				RequestDispatcher fauilerView = request.getRequestDispatcher("SelectServices.jsp");
@@ -290,10 +286,10 @@ public class ServicesInsert extends HttpServlet {
 		if ("offshelf".equals(action)) {
 			try {
 				/***************************
-				 * 1.接收請求參數 
+				 * 1.接收請求參數
 				 **********************/
 				Integer servNo = new Integer(request.getParameter("servNo"));
-				ServicesService ss= new ServicesService();
+				ServicesService ss = new ServicesService();
 				ServicesVO servicesVO = ss.getOneService(servNo);
 				String servTypeNo = servicesVO.getServTypeNo();
 				String servName = servicesVO.getServName();
