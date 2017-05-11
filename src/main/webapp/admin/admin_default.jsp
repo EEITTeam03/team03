@@ -24,29 +24,48 @@
 	<script type="text/javascript">
 		$(document).ready(function () {
 			init();
-		});	
-	
-		function init(){
+
+			//如果沒登入把登出連結藏起來
+			var logging = '${admin}';
+			var logoutUL = $('ul[class*="dropdown-menu"] li:last-child');
+			if (logging == "") {
+				//$(hideLogout).hide();
+				logoutUL.hide();
+			}else
+				logoutUL.show();
+		});
+
+		function init() {
 			initClick();
 		}
-		
-		function initClick(){
-			$('#a_scheduler').click(function(){
+
+		function initClick() {
+			$('#a_scheduler').click(function() {
 				$('#contentDiv').load('${ctx}/scheduleTest3.jsp');
 			});
-			$('#services').click(function(){
+			$('#services').click(function() {
 				//超連結連到xxx.jsp,顯示在contentDiv,如此jQuery.boostrap框架只需載入一次
 				//程式跟框架可分開修改
 				//引用的link.script使用絕對路徑.若資料夾不同servlet的urlpattrens也要注意
 				$('#contentDiv').load('${ctx}/services/SelectServices.jsp');
 			});
-			$('#XXX').click(function(){
+			$('#XXX').click(function() {
 				//超連結連到xxx.jsp,顯示在contentDiv,如此jQuery.boostrap框架只需載入一次
 				//程式跟框架可分開修改
 				//引用的link.script使用絕對路徑.若資料夾不同servlet的urlpattrens也要注意
 				$('#contentDiv').load('${ctx}/XXX.jsp');
 			});
 		}
+
+		// 		var logging = '${memberInfo}';
+		// 		console.log(logging);
+		// 		if(logging==""){
+		// 			var logoutUL =$('ul[class*="dropdown-menu"] li:last-child');
+		// 			var hideLogout = logoutUL+" li:last-child";
+		// 			$(hideLogout).hide();
+		// 			logoutUL.hide();
+		// 			$('li[class*="dropdown"]').hide();
+		// $("#mytest").hide();
 	</script>
 
 <style>
@@ -97,7 +116,7 @@ ul[class*="nav navbar-nav side-nav"] {
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${admin.name} <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" id="mytest">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>

@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 
 import com.employee.model.EmployeeService;
 import com.employee.model.EmployeeVO;
+import com.sun.mail.iap.Response;
 
 @WebServlet("/emp/emp.do")
 @MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 500, maxRequestSize = 1024
@@ -88,10 +89,11 @@ public class EmployeeServlet extends HttpServlet {
 				EmployeeService empSvc = new EmployeeService();
 				empVO = empSvc.addEmp(eNo, ename, photo, exp);
 
-				String url = "/emp/listAllEmp.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); 
-				successView.forward(req, res);
-
+//				String url = "/emp/listAllEmp.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); 
+//				successView.forward(req, res);
+				String url = "listAllEmp.jsp";
+				res.sendRedirect(url);
 				// is.close();
 
 			} catch (Exception e) {
@@ -156,11 +158,12 @@ public class EmployeeServlet extends HttpServlet {
 
 				EmployeeService empSvc = new EmployeeService();
 				empVO = empSvc.updateEmp(eNo, ename, photo, exp);
-
-				String url = "/emp/listAllEmp.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); 
-				successView.forward(req, res);
-
+				
+				String url = "listAllEmp.jsp";
+//				String url = "/emp/listAllEmp.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); 
+//				successView.forward(req, res);
+				res.sendRedirect(url);
 				// is.close();
 
 			} catch (Exception e) {

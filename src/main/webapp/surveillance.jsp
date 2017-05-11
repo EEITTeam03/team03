@@ -160,8 +160,50 @@
 		.dropdown:hover .dropdown-menu {
 			
 			display: block;
-		}
-
+		}       
+        .btn-node-undone{
+        	width:80px;
+			
+			height:80px; 
+			
+			border-radius:99em;			
+         
+			border:0px;
+            
+            background:#999;                     
+        } 
+        .btn-node-completed{
+        	width:80px;
+			
+			height:80px; 
+			
+			border-radius:99em;			
+         
+			border:0px;
+            
+            background:green;                     
+        }        
+        .btn-line-undone{
+        	width:80px;
+			
+			height:10px;
+			
+			border:0px;
+			
+			background:#999;
+        }
+        .btn-line-completed{
+        	width:80px;
+			
+			height:10px;
+			
+			border:0px;
+			
+			background:green;
+        }
+       td{ 
+        width:80px; 
+      }               
 	</style>
 
 
@@ -222,27 +264,110 @@
 	   		  		$("#nav-register").addClass("nav-fut-li"); 
 			}
 		});
-			//結束  	
- 			var timeAll = 0;
-   			$.getJSON('surveillance.json',function(json){   				   				
-   				$.each(json.service_step,function(idx,service_step){
-   		    		//以下開始動態生成團隊成員
- 					timeAll = timeAll + (service_step.servTime / 3 * 60) ;
-   		   			var dline = $("<div style='-webkit-user-select: none;color:rgba(255, 0, 0, 0)'>"+ timeAll +"</div>");
-   		   			var sball = $("<span style='-webkit-user-select: none;color:rgba(255, 0, 0, 0)'>"+ timeAll +"</span>");
+			//結束  
+			
+			var reservNo=$("#no").text();			
+ 			var stageTime = 0;
+   			$.getJSON('ProgressServlet',{"reservNo":reservNo},function(json){   				   				
+   				$.each(json,function(idx,service_step){
    					
-   		   			$("#progressBar").append([dline,sball]);   		   				   			
-   					   				  					
+   					console.log(service_step);	
+   					
+   	  	    		var rdts = Date.parse(service_step.reservDateTime);//預約日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
+   	  	    		var rdtshr = (new Date(service_step.reservDateTime)).getHours();//預約日期取出小時
+   	  	    		var rdtsmin = (new Date(service_step.reservDateTime)).getMinutes();//預約日期取出分鐘
+   	  	    		var rdtssec = (new Date(service_step.reservDateTime)).getSeconds();//預約日期取出毫秒
+   	  	    		rdts = rdts + (rdtshr*60*60) + (rdtsmin*60) + rdtssec;//預約日期加總換算成毫秒
+   	  	    		var rets = Date.parse(service_step.reservEndTime);//結束日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
+   	  	    		var retshr = (new Date(service_step.reservEndTime)).getHours();//結束日期取出小時
+   	  	    		var retsmin = (new Date(service_step.reservEndTime)).getMinutes();//結束日期取出分鐘
+   	  	    		var retssec = (new Date(service_step.reservEndTime)).getSeconds();//結束日期取出毫秒
+   	  	    		rets = rets + (retshr*60*60) + (retsmin*60) + retssec;//結束日期加總換算成毫秒
+   	  	    		
+   	  	    		
+   	  	    		
+   	  	    		
+   	  	    		
+   	  	    		
+   	  	    		
+   	  	    		
+   	  	    		var cts = (+new Date());//現在時間(毫秒)
+   	  	    		var servTime = service_step.servTime;//該服務的總時間
+   					
+   					var operatingTime = cts - rdts ;//已經工作多少時間
+   					
+   					console.log("現在秒數:"+cts);
+   					console.log("開始秒數:"+rdts);
+   					
+   					//每個步驟產生一個節點圓與一個階段線
+   					for( i=0 ; i < service_step.servStep.length ; i++ ){
+   						stageTime = stageTime + servTime/3*60*1000;//該服務總時間依步驟數平均分配時間並換算成毫秒(除3，代表3步驟)，得到階段時間
+   						//已經工作的時間若大於該階段時間，代表完成這個階段，節點圓與階段線就為完成顏色。反之，為未完成顏色
+	   					if(operatingTime > stageTime){
+	   						
+	   						var sec = Math.floor(operatingTime/1000);	   						
+	   						var whr = Math.floor(sec/60/60);
+	   						var wmin = Math.floor((sec - ( whr*60*60 )) /60);
+	   						var wsec = Math.floor(sec - ( whr*60 *60 ) - ( wmin*60 ));
+	   						
+	   						console.log("已經工作多少時間:"+whr+"小時"+wmin+"分"+wsec+"秒");
+	   						console.log("已工作秒數"+Math.floor(operatingTime/1000)+">該階段秒數"+Math.floor(stageTime/1000));
+	   							   				
+		 					var td1 =  $("<td></td>");
+		   		   			var bline = $("<button></button>").addClass("btn-line-completed").attr({"value":stageTime,"disabled":"disabled"});
+		   		   			var td2 =  $("<td></td>");
+		   		   			var bball =$("<button></button>").addClass("btn-node-completed").attr({"value":stageTime,"disabled":"disabled"}); 
+	   			   		   			
+
+	   					}else{
+	   						var sec = Math.floor(operatingTime/1000);	   						
+	   						var whr = Math.floor(sec/60/60);
+	   						var wmin = Math.floor((sec - ( whr*60*60 )) /60);
+	   						var wsec = Math.floor(sec - ( whr*60 *60 ) - ( wmin*60 ));
+	   						
+	   						console.log("已經工作多少時間:"+whr+"小時"+wmin+"分"+wsec+"秒");
+	   						console.log("已工作秒數"+Math.floor(operatingTime/1000)+"<該階段秒數"+Math.floor(stageTime/1000));	   						
+	   						
+	   						
+	   						
+	   	 					var td1 =  $("<td></td>");
+	   	   		   			var bline = $("<button></button>").addClass("btn-line-undone").attr({"value":stageTime,"disabled":"disabled"});
+	   	   		   			var td2 =  $("<td></td>");
+	   	   		   			var bball =$("<button></button>").addClass("btn-node-undone").attr({"value":stageTime,"disabled":"disabled"}); 
+		   			   		 
+	   	   		   			
+	   	   		   			var countSec = ((Math.floor(stageTime/1000))-(Math.floor(operatingTime/1000)))*1000;//多久毫秒後，刷新進度條
+							var cutdTimer = setTimeout("colorUpdate("+stageTime+")",countSec);//自動更新進度條
+							console.log("計時器"+Math.floor(countSec/1000)+"秒後啟動");
+	   					}
+   						var decTd1 =  $("<td>"+service_step.servStep[i].descp+"</td>");
+   						var decTd2 =  $("<td></td>");
+	   					$("table tr:nth-child(1)").append([decTd1,decTd2]);
+   						
+   						
+	   		   			td1.append(bline); 
+	   		   			td2.append(bball); 
+	   		   			$("table tr:nth-child(2)").append([td1,td2]);   						
+   						
+   					}
+   		   			//結束
+   					
+   				   				  					
    				})
    				
-   				var sballend = $("<span></span>");
-   				$("#progressBar").append(sballend);
-   				
    			})			
-			
-   			console.log($("span").attr("value"));	 	
+   			 
+   				 	
 			
 } );
+  
+  function colorUpdate(stageTime){
+// 	  $("button[value="+stageTime+"]").attr("value");
+	  $("button[value="+stageTime+"]:eq(0)").removeClass("btn-line-undone");
+	  $("button[value="+stageTime+"]:eq(1)").removeClass("btn-node-undone");
+	  $("button[value="+stageTime+"]:eq(0)").addClass("btn-line-completed");
+	  $("button[value="+stageTime+"]:eq(1)").addClass("btn-node-completed");
+  }
   
   
   </script>
@@ -330,6 +455,8 @@
 			</div>
 	
 		</div>
+		
+<!-- 		<button type="button" onclick="colorUpdate(12600000)">14444</button> -->
 	</nav>
 
 	<!-- Header -->
@@ -354,26 +481,51 @@
 		</div>
 
 	</header>
-
-
 	<section id="services">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							
 					
-					<div id="progressBar" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<span></span>
-					
-					
-					<%-- 					<h5>${param.reservNo}</h5> --%>
-					</div>
 
 				</div>
 				
 			</div>
 		</div>
 	</section>
+
+	<section id="services">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					
+					<table>
+						<tr>
+							<td></td>
+							
+						</tr>
+						<tr>
+							<td>
+								<button class="btn-node-completed" disabled="disabled"></button>
+							</td>  				          
+						</tr>				      				      				      
+					</table>
+						
+						
+						
+											
+
+					
+
+				</div>
+				
+			</div>
+		</div>
+		
+	</section>
 	
+	<span hidden="hide" id="no">${param.reservNo}</span>
+
 
 
 </body>

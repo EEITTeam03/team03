@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.memberinfo.model.MemberInfoVO;
 import com.memberinfo.model.MemberService;
@@ -40,18 +41,27 @@ public class CheckFBLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("application/json");
+		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String email = request.getParameter("email");
 		String password = request.getParameter("id");
+		String name = request.getParameter("name");
 		MemberService ms = new MemberService();
 		List<MemberInfoVO> list= ms.getMember(email, password);
+//		MemberInfoVO memberInfoVO = list.get(0);
+		HttpSession session = request.getSession();
 		if(list.size()==0){
-			out.println("沒註冊");
+
+			session.setAttribute("FBAccount",email);
+			session.setAttribute("FBId",password);
+			session.setAttribute("FBName", name);
+			out.print("Account Not found");
 			return;
 		}
-		out.println("成功");
+		session.setAttribute("memberInfo", list.get(0));
+		session.setAttribute("Code", "OK");
+		out.print("Logging Success");
 	}
 
 }

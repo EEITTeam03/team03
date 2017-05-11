@@ -38,11 +38,12 @@ textarea { /* Text Area 固定大小*/
 								${(empVO.employeeNo == param.empno)? 'selected':''}>${empVO.employeeName}
 						</c:forEach>
 					</select>
-				</FORM>
-				<br>
 				<div align="center">
 					<button type="submit" class="btn btn-sm btn-primary">確定</button>
 				</div>
+				</FORM>
+				<br>
+				
 				<br>
 				<div>
 					<c:if test="${not empty errorMsgs}">

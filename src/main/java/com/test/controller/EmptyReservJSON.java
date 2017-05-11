@@ -43,6 +43,7 @@ public class EmptyReservJSON extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		String strDate = request.getParameter("selectedDate");
+		String empNo = request.getParameter("empNo");
 		
 		if(strDate == null) {
 			out.print("no input");
@@ -52,8 +53,13 @@ public class EmptyReservJSON extends HttpServlet {
 		Calendar cal = MyUtil.getCalender(strDate);
 		
 		ReservService rsvc = new ReservService();
-		List<ReservVO> list = rsvc.getAllReservByDate(cal);
-		
+		List<ReservVO> list = null;
+		if(empNo == null) 
+			list = rsvc.getAllReservByDate(cal);
+		else if(empNo != null)
+			list = rsvc.getAllReservByDateAndEmp(cal, Integer.parseInt(empNo));
+			
+			
 		List<Map<String,Object>> JSONlist = new ArrayList<>();
 		
 		for(ReservVO aVO :list) {
@@ -64,9 +70,17 @@ public class EmptyReservJSON extends HttpServlet {
 			Integer endm = aVO.getReservEndTime().get(Calendar.MINUTE);
 			Integer emp = aVO.getEmployeeVO().getEmployeeNo();
 			
-			reserve.put("start", startH+":"+startm);
-			reserve.put("end", endH+":"+endm);
+			String startmformat = String.format("%02d", startm);
+			String endmformat = String.format("%02d", endm);
+			
+			
+			reserve.put("start", startH+":"+startmformat);
+			reserve.put("end", endH+":"+endmformat);
 			reserve.put("emp", emp);
+			reserve.put("shh", startH);
+			reserve.put("smm", startmformat);
+			reserve.put("ehh", endH);
+			reserve.put("emm", endmformat);
 			JSONlist.add(reserve);
 		}
 		

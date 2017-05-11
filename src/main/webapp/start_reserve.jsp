@@ -73,6 +73,10 @@
 label {
 	font-size: 150%;
 }
+.img-services{
+	width:360px;
+	height:260px;
+}
 </style>
 </head>
 
@@ -190,10 +194,10 @@ label {
 	
 
 	
-	<div class="container" style="width: 80%;">
+	<div class="container">
 	
 		
-		<span id="no" hidden="hide">${memberInfo.memberNo}</span>
+<%-- 		<span id="no" hidden="hide">${memberInfo.memberNo}</span> --%>
 		
 		<div class="row">
 			<h2 class="col-sm-offset-5">開始預約</h2> 
@@ -202,7 +206,9 @@ label {
 		<div class="row">
 			<div class="col-sm-6" id="chooseCar"></div>
 		</div>
-		
+		<section id="portfolio" >
+		<div class="row" id="svesall"></div>
+		</section>
 		<div class="row col-sm-offset-2">
 
 			<form class="form-horizontal" action="ReserveService">
@@ -214,8 +220,22 @@ label {
 							class="form-control" placeholder="請輸入車牌" value="${param.license}">
 					</div>
 				</div>
-
-
+				
+				<div class="form-group">
+					<label class="col-sm-2 control-label">選擇員工</label>
+					<div class="col-sm-6">
+<!-- 						<label class="radio-inline"><input type="radio" -->
+<!-- 							name="empNo" value="1">1號員工</label> <label class="radio-inline"><input -->
+<!-- 							type="radio" name="empNo" value="2">2號員工</label> <label -->
+<!-- 							class="radio-inline"><input type="radio" name="empNo" -->
+<!-- 							value="3">3號員工</label> -->
+							<select id="empNo" name="empNo" class="form-control">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+					</div>
+				</div>
 
 				<div class="form-group">
 					<label for="datepicker" class="col-sm-2 control-label">選擇預約日期</label>
@@ -226,12 +246,23 @@ label {
 							placeholder="選擇日期">
 					</div>
 				</div>
-
+				
+				<table class="table" id="timeline">
+<!-- 				<tr> -->
+<!-- 					<td>9:00</td> -->
+<!-- 					<td>9:30</td> -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td>10:00</td> -->
+<!-- 					<td>10:30</td> -->
+<!-- 				</tr> -->
+				</table>
+				
 				<div class="form-group">
 					<label for="selectedTime" class="col-sm-2 control-label">時間</label>
-					<div class="col-sm-6" id="divtime">
+					<div class="col-sm-2" id="divtime">
 <!-- 						<div id="timepicker"></div> -->
-						<input id="timepicker" name="selectedTime" value="${param.selectedTime}" class="form-control">
+						<input id="selectedTime" name="selectedTime" value="${param.selectedTime}" class="form-control">
 <!-- 						<input type="text" name="selectedTime" id="selectedTime" -->
 <%-- 							class="form-control" value="${param.selectedTime}" --%>
 <!-- 							placeholder="選擇時間(HH:mm)"> -->
@@ -241,13 +272,8 @@ label {
 				<div class="form-group">
 					<label for="service" class="col-sm-2 control-label">主要服務</label>
 					<div class="col-sm-6">
-						<select name="service" id="service" class="form-control">
-							<option id="2001" value="2001">2001</option>
-							<option id="2002" value="2002">2002</option>
-							<option id="2003" value="2003">2003</option>
-							<option id="2004" value="2004">2004</option>
-							<option id="2005" value="2005">2005</option>
-						</select>
+						<input type="text" name="service" id="service" class="form-control">
+
 					</div>
 				</div>
 
@@ -255,25 +281,13 @@ label {
 					<label for="plus" class="col-sm-2 control-label">加選服務</label>
 					<div class="col-sm-6">
 						<select name="plus" id="plus" class="form-control"
-							multiple="multiple">
-							<option id="1001" value="1001">1001</option>
-							<option id="1002" value="1002">1002</option>
-							<option id="1003" value="1003">1003</option>
-							<option id="1004" value="1004">1004</option>
+							multiple="multiple" >
+							
 						</select>
 					</div>
 				</div>
 
-				<div class="form-group">
-					<label class="col-sm-2 control-label">選擇員工</label>
-					<div class="col-sm-6">
-						<label class="radio-inline"><input type="radio"
-							name="empNo" value="1">1號員工</label> <label class="radio-inline"><input
-							type="radio" name="empNo" value="2">2號員工</label> <label
-							class="radio-inline"><input type="radio" name="empNo"
-							value="3">3號員工</label>
-					</div>
-				</div>
+
 				<div class="form-group">
 					<div class="col-sm-4 col-sm-offset-3">
 						<input type="submit" value="送出預約" class="btn btn-xl">
@@ -385,21 +399,85 @@ label {
 				maxDate: "+3m",
 				minDate : new Date(),
 				onSelect : function(dateText,inst){
-					console.log(dateText);
+					//console.log(inst);
 					$("#selectedDate").val(dateText);
+					//顯示時間軸
+					showtime();
+					//讀出當日已預約時間
+					var empNo = $("#empNo").val();
+					$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){
+						console.log(data);
+						$.each(data,function(idx,obj){
+							//console.log(obj.start);
+							//只做好小時的判斷
+							var x = obj.shh;
+							var y = obj.ehh;
+							for(var i=x;i<=y;i++){
+								var selectedS = "#timeline input[value^='"+i+"']";
+//	 							//console.log(selectedS);
+	 							$(selectedS).prop("disabled",true).removeClass().addClass("btn btn-basic");
+							}
+							
+							
+							//disable開始時間
+// 							var selectedS = "#timeline input[value='"+obj.start+"']";
+// 							//console.log(selectedS);
+// 							$(selectedS).prop("disabled",true).removeClass().addClass("btn btn-basic");
+							
+							
+						});
+					});
 				}
-			});
+			}).css("font-size","175%");
 			
-			$("#timepicker").timepicker({
-				appendTo:$("#divtime"),
-				className:"form-control",
-				timeFormat:'H:i',
-				minTime: new Date(),
-				maxTime:'21:00',
-				step:30,
-				show2400:true,
-				disableTextInput:true
-			});
+			//顯示時間軸
+			function showtime() {
+				$("#timeline").empty();
+				for(var t=9;t<21;t++) {
+					if (t==9) {t="0"+t}
+					var input = $("#selectedTime");
+					var onerow = $("<tr></tr>");
+					var btn00 = $("<input></input>").attr("type","button").val(t+":00").addClass("btn btn-success");
+					var btn30 = $("<input></input>").attr("type","button").val(t+":30").addClass("btn btn-success");
+					var td00 = $("<td></td>");
+					var td30 = $("<td></td>");
+					
+					//建立事件
+					btn00.click(function(){
+						
+						$("#timeline input:enabled").removeClass().addClass("btn btn-success");
+						$(this).removeClass("btn-success").addClass("btn-danger");
+						input.val($(this).val());
+
+					});
+					btn30.click(function(){
+						$("#timeline input:enabled").removeClass().addClass("btn btn-success");
+						$(this).removeClass("btn-success").addClass("btn-danger");
+						input.val($(this).val());
+					});
+					
+					//開始append
+					td00.append(btn00);
+					td30.append(btn30);
+					onerow.append([td00,td30]);
+					$("#timeline").append(onerow);
+					
+					
+					
+				}
+				
+			}
+			
+// 			$("#timepicker").timepicker({
+// 				appendTo:$("#divtime"),
+// 				className:"form-control",
+// 				timeFormat:'H:i',
+// 				minTime: new Date(),
+// 				maxTime:'21:00',
+// 				step:30,
+// 				show2400:true,
+// 				disableTextInput:true
+// 			});
 
 // 			jQuery('#timepicker').datetimepicker({
 // 				 datepicker:false,
@@ -413,7 +491,7 @@ label {
 			//傳會員編號，取得Cars
 			var no = $("#no").text();
 			//console.log(no);
-			$.getJSON('GetCars',{"no":no},function(data){
+			$.getJSON('GetCars',{"no":${memberInfo.memberNo}},function(data){
 				//console.log(data);
 				var row = $("#chooseCar");
 				//show data
@@ -432,6 +510,142 @@ label {
 					row.append(one);
 				})
 			});
+			
+			
+			//動態生成美容項目
+   			var snumber = 0;
+   			
+   			$.getJSON('services/TestGetJsonPic',function(json){
+
+   				$.each(json,function(idx,services){
+						
+		   				//以下開始動態生成美容項目DIV
+		   						var servName = services.servName;
+		   						var servDesc = services.servDesc;
+		   						
+		   			   			var bigd = $("<div></div>").addClass("col-md-4 col-sm-6 portfolio-item");
+		   			   			   			   			
+		   			   			var mya = $("<a></a>").attr({"href":"#portfolioModal"+snumber,"data-toggle":"modal"}).addClass("portfolio-link");
+		   			   			
+		   			   			var smalld = $("<div></div>").addClass("portfolio-hover");
+		   			   			var nd = $("<div></div>").addClass("portfolio-hover-content");
+		   			   			var ii = $("<div></div>").addClass("fa fa-plus fa-3x");
+		   			   			
+		   			   			var smallimg = $("<img>").addClass("img-responsive img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":""});
+		   			   			   			
+		   			   			nd.append(ii);  
+		   			   			smalld.append(nd);
+		   			   			mya.append([smalld,smallimg]);
+		   			   			
+		   						var myd = $("<div></div>").addClass("portfolio-caption");
+		   			   			
+		   						var hword = $("<h4></h4>").text(servName);
+		   						var pword = $("<p></p>").addClass("text-muted").text("Graphic Design");
+		   						
+		   						myd.append([hword,pword]);
+		   						
+		   						bigd.append([mya,myd]);
+		   						
+		   						$("#svesall").append(bigd);
+		   								   		
+		   					//結束動態生成
+		   					
+		   					//以下開始動態生成，美容項目點擊後所彈跳出來的介紹DIV
+		   					
+		   						var pmmf = $("<div></div>").addClass("portfolio-modal modal fade").attr({"id":"portfolioModal"+snumber,"tabindex":"-1","role":"dialog","aria-hidden":"true"});
+		   					
+		   						var md = $("<div></div>").addClass("modal-dialog");
+		   					
+		   						var mc = $("<div></div>").addClass("modal-content");
+		   					
+		   						var cm = $("<div></div>").addClass("close-modal").attr({"data-dismiss":"modal"});
+		   						var lr = $("<div></div>").addClass("lr");
+		   						var rl = $("<div></div>").addClass("rl");
+		   						lr.append(rl);
+		   						cm.append(lr);
+		   						
+		   						var cnt = $("<div></div>").addClass("container");
+		   						var crow = $("<div></div>");
+		   						var cco = $("<div></div>").addClass("col-lg-8 col-lg-offset-2");
+		   						var mb = $("<div></div>").addClass("modal-body");
+		   						var mbh = $("<h2></h2>").text(servName);   		
+		   						var mimg = $("<img>").addClass("img-responsive img-centered big-img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":""});
+		   						var mbp = $("<p></p>").text(servDesc);
+// 		   						var rbtn = $("<button></button>").attr({"type":"button","data-dismiss":"modal","id":"rbtn"+services.servNo}).addClass("btn btn-danger btn-lg").click(function(){
+// 	   								var selector = "#"+services.servNo;
+// 	   								$(selector).prop("selected",false);
+// 									thisrbtn = $(this);
+// 									thisrbtn.hide();
+// 									thisbtn.show();
+									
+// // 									var sel = "#btn"+services.servNo;
+// // 									$(sel).show;
+// 		   						});
+								//產生選擇&取消按鈕
+								//選擇按鈕按下
+		   						var rbtn=null;
+		   						var bbp = $("<button></button>").attr({"type":"button","data-dismiss":"modal","id":"btn"+services.servNo}).addClass("btn btn-primary btn-lg").click(function(){
+// 		   							thisbtn = $(this);
+		   							if(rbtn==null){ 
+		   							rbtn = $("<button></button>").attr({"type":"button","data-dismiss":"modal","id":"rbtn"+services.servNo}).addClass("btn btn-danger btn-lg")
+		   							var rtxt = $("<i></i>").addClass("fa fa-times").text("取消");
+		   							//取消按鈕按下
+			   						rbtn.append(rtxt).click(function(){
+			   							var selector = "#"+services.servNo;
+	 	   								$(selector).prop("selected",false);
+// 		 	   							thisrbtn = $(this);
+										rbtn.hide();
+										bbp.show();
+			   						});
+			   						mb.append(rbtn);
+		   							}
+		   							
+		   							if (services.servNo >= 2000)  //單選按下
+		   								$("#service").val(services.servNo);
+		   							else {						  //多選按下
+// 		   								var plus = $("<input>").attr({"type":"text","name":"plus","value":services.servNo})
+// 		   								$("#plus").append(plus);
+		   								var selector = "#"+services.servNo;
+		   								$(selector).prop("selected",true);
+
+		   								
+		   							}
+		   							//選擇按下的共通事件
+		   							bbp.hide();
+		   							rbtn.show(); 
+		   							
+		   						});
+// 		   						rbtn.hide();
+		   						var fft = $("<i></i>").addClass("fa fa-check").text("選擇");
+// 		   						var rtxt = $("<i></i>").addClass("fa fa-times").text("取消");
+// 		   						rbtn.append(rtxt);
+		   						
+		   						bbp.append(fft);
+		   						mb.append([mbh,mimg,mbp,bbp]);
+		   						cco.append(mb);
+		   						crow.append(cco);
+		   						cnt.append(crow);
+		   						
+		   						mc.append([cm,cnt]);
+		   						
+		   						md.append(mc);
+		   						
+		   						pmmf.append(md);
+		   						
+		   						$("footer").after(pmmf);
+		   					//結束動態生成	
+   					   		
+		   						snumber=snumber+1;
+		   					
+		   						
+		   					//懺生多選option到<select>
+		   					if(services.servNo <2000) {
+		   						$("<option></option>").attr({"id":services.servNo,"value":services.servNo}).text(servName).appendTo($("#plus"));
+		   					}
+ 		   				
+   				})
+   				
+   			})
 			
 		});
 	</script>
