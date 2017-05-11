@@ -44,15 +44,15 @@ public class CheckConflict {
 			long xstart = acal.getTimeInMillis();
 			long xend = acalEnd.getTimeInMillis();
 			if (aReserve.getReservNo() == reservNo) {
-				if (xstart < tstart && xend <= tstart) {
-					// System.out.println("前OK");
-				} else if (xstart > tstart && xstart >= tend) {
-					// System.out.println("後OK");
-				} else if (xstart == tstart) {
-
-				} else {
-					return true;
-				}
+//				if (xstart < tstart && xend <= tstart) {
+//					// System.out.println("前OK");
+//				} else if (xstart > tstart && xstart >= tend) {
+//					// System.out.println("後OK");
+//				} else if (xstart == tstart) {
+//
+//				} else {
+//					return true;
+//				}
 			} else {
 				if (xstart < tstart && xend <= tstart) {
 					// System.out.println("前OK");
