@@ -69,11 +69,11 @@
 					</FORM>
 				</td>
 				<td>
-					<FORM METHOD="post" ACTION="${ctx}/services/services.do">
-						<input type="submit" value="下架"> 
-						<input type="hidden" name="servNo" value="${servicesVO.servNo}"> 
-						<input type="hidden" name="action" value="offshelf">
-					</FORM>
+<%-- 					<FORM METHOD="post" ACTION="${ctx}/services/services.do"> --%>
+<!-- 						<input type="submit" value="下架">  -->
+<%-- 						<input type="hidden" name="servNo" value="${servicesVO.servNo}">  --%>
+<!-- 						<input type="hidden" name="action" value="offshelf"> -->
+<!-- 					</FORM> -->
 				</td>
 			</tr>
 		</c:forEach>

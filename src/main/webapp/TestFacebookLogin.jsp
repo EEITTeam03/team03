@@ -83,7 +83,7 @@
 				statusChangeCallback(response);
 				console.log("回傳值" + response);
 			}, {
-				filed : 'email,user_likes',
+				fileds : 'email,user_likes',
 				return_scopes : true
 			});
 		}

@@ -17,7 +17,37 @@
 <!-- Custom Fonts -->
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
-
+ <!-- ***排程表引用開始*** -->
+   	<link rel="stylesheet" href="${ctx}/scheduleJS/jqwidgets/styles/jqx.base.css" type="text/css" />
+	<script type="text/javascript" src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
+	<!-- ***排程表引用結束*** -->
+	<script type="text/javascript">
+		$(document).ready(function () {
+			init();
+		});	
+	
+		function init(){
+			initClick();
+		}
+		
+		function initClick(){
+			$('#a_scheduler').click(function(){
+				$('#contentDiv').load('${ctx}/scheduleTest3.jsp');
+			});
+			$('#services').click(function(){
+				//超連結連到xxx.jsp,顯示在contentDiv,如此jQuery.boostrap框架只需載入一次
+				//程式跟框架可分開修改
+				//引用的link.script使用絕對路徑.若資料夾不同servlet的urlpattrens也要注意
+				$('#contentDiv').load('${ctx}/services/SelectServices.jsp');
+			});
+			$('#XXX').click(function(){
+				//超連結連到xxx.jsp,顯示在contentDiv,如此jQuery.boostrap框架只需載入一次
+				//程式跟框架可分開修改
+				//引用的link.script使用絕對路徑.若資料夾不同servlet的urlpattrens也要注意
+				$('#contentDiv').load('${ctx}/XXX.jsp');
+			});
+		}
+	</script>
 
 <style>
 .fa {
