@@ -79,17 +79,38 @@ public class scheduleTestServlet2 extends HttpServlet {
 //		System.out.println("-------------------------------------------------");
 		PrintWriter out = response.getWriter();
 		String json = request.getParameter("data");
+		String crudStatus = request.getParameter("status");
 		HashMap<String,String> map = new HashMap<String,String>();
 		map = new Gson().fromJson(json, new TypeToken<HashMap<String,String>>(){}.getType());
 		
-		Integer reservNo= Integer.valueOf(map.get("id")); //取得預約編號
+		String id = map.get("id");
+		Integer reservNo = null;
+		Integer empNo = null;
+		//如果id長度超過6，則為新增訂單 id為系統亂數
+		if(id.length()<6){
+			reservNo= Integer.valueOf(map.get("id"));	//取得預約編號
+			empNo= Integer.valueOf(map.get("empNo"));	//取得員工編號
+			System.out.println("修改時訂單編號: "+reservNo);
+			System.out.println("修改時員工時編號: "+empNo);
+		}else{
+			//設定編號為零的視為新訂單，新單empNo=null，透過師傅名字找編號
+			reservNo=0;		
+			String empName = map.get("calendar");
+			EmployeeService empService = new EmployeeService();
+			List<EmployeeVO>list = empService.findNoByName(empName);
+			for(EmployeeVO emp:list){
+				empNo = emp.getEmployeeNo();
+			}
+			System.out.println("新增時訂單編號: "+reservNo);
+			System.out.println("新增時員工編號: "+empNo);
+		}
+		
 		ReservService rs = new ReservService();
 		//ReservVO rvo= rs.getOneReserv(reservNo);
 		
 		Calendar scalendar = MyUtil.getLocalTimeFromUTC(map.get("start")); //取得預約時間
 		Calendar OldEnd = MyUtil.getLocalTimeFromUTC(map.get("end")); //取得原本的結束時間
 		
-		Integer empNo= Integer.valueOf(map.get("empNo")); //取得員工編號
 		EmployeeService es = new EmployeeService();
 		EmployeeVO eVO = es.getOneEmp(empNo);
 		
@@ -98,7 +119,6 @@ public class scheduleTestServlet2 extends HttpServlet {
 		MemberCarsVO mcv = mcs.getOneByPK(license);
 		
 		String noteC = map.get("description"); //取得noteC
-		
 		String notesE = map.get("noteE"); //取得notesE
 		
 		Integer status =Integer.valueOf( map.get("status")); //取得預約狀態
@@ -144,43 +164,80 @@ public class scheduleTestServlet2 extends HttpServlet {
 		
 		//判端預約有沒有衝突，若沒衝突則update
 		if(cc.checkDateAndEmpUpdate(scalendar, ecalendar, empNo, reservNo)==false){
-			rls.deleteListByNo(reservNo);//先把舊預約的ReservList刪除
-			Set<ReservListVO>reservlists=new HashSet<ReservListVO>();
-			ReservListVO rlVO = new ReservListVO();
-			ServicesVO svo = svs.getOneService(SS);
-			rlVO.setReservVO(rvo);
-			rlVO.setServicesVO(svo);
-			rlVO.setServName(svo.getServName());
-			rlVO.setServPrice(sccVO.getServPrice());
-			rlVO.setServTime(sccVO.getServTime());
-			reservlists.add(rlVO);
-			if(list!=null&&list.size()!=0){
-				for(Integer servNo:list){
-					ReservListVO mrlVO = new ReservListVO();
-					ServicesVO mvo = svs.getOneService(servNo);
-					ServiceCarClassVO mmVO = sccs.getOneServiceCarClass(servNo,carSize );
-					mrlVO.setReservVO(rvo);
-					mrlVO.setServicesVO(mvo);
-					mrlVO.setServName(mvo.getServName());
-					mrlVO.setServPrice(mmVO.getServPrice());
-					mrlVO.setServTime(mmVO.getServTime());
-					reservlists.add(mrlVO);
+			//如果reservNo不為0，則為新增
+			if(reservNo!=0){
+				rls.deleteListByNo(reservNo);//先把舊預約的ReservList刪除
+				Set<ReservListVO>reservlists=new HashSet<ReservListVO>();
+				ReservListVO rlVO = new ReservListVO();
+				ServicesVO svo = svs.getOneService(SS);
+				rlVO.setReservVO(rvo);
+				rlVO.setServicesVO(svo);
+				rlVO.setServName(svo.getServName());
+				rlVO.setServPrice(sccVO.getServPrice());
+				rlVO.setServTime(sccVO.getServTime());
+				reservlists.add(rlVO);
+				if(list!=null&&list.size()!=0){
+					for(Integer servNo:list){
+						ReservListVO mrlVO = new ReservListVO();
+						ServicesVO mvo = svs.getOneService(servNo);
+						ServiceCarClassVO mmVO = sccs.getOneServiceCarClass(servNo,carSize );
+						mrlVO.setReservVO(rvo);
+						mrlVO.setServicesVO(mvo);
+						mrlVO.setServName(mvo.getServName());
+						mrlVO.setServPrice(mmVO.getServPrice());
+						mrlVO.setServTime(mmVO.getServTime());
+						reservlists.add(mrlVO);
+					}
 				}
+				rvo.setEmployeeVO(eVO);
+				rvo.setMembercarsVO(mcv);
+				rvo.setNoteC(noteC);
+				rvo.setNotesE(notesE);
+				rvo.setReservDateTime(scalendar);
+				rvo.setReservEndTime(ecalendar);
+				rvo.setReservlists(reservlists);
+				rvo.setReservNo(reservNo);
+				rvo.setStatus(status);
+				ReservDAO dao = new ReservDAO();
+				if(crudStatus.equals("delete")){
+					//若為刪除，將狀態設為零(畫面不會讀取狀態0的訂單)
+					rvo.setStatus(0);
+				}
+				dao.update(rvo);
+			}else{
+				Set<ReservListVO>reservlists=new HashSet<ReservListVO>();
+				ReservListVO rlVO = new ReservListVO();
+				ServicesVO svo = svs.getOneService(SS);
+				rlVO.setReservVO(rvo);
+				rlVO.setServicesVO(svo);
+				rlVO.setServName(svo.getServName());
+				rlVO.setServPrice(sccVO.getServPrice());
+				rlVO.setServTime(sccVO.getServTime());
+				reservlists.add(rlVO);
+				if(list!=null&&list.size()!=0){
+					for(Integer servNo:list){
+						ReservListVO mrlVO = new ReservListVO();
+						ServicesVO mvo = svs.getOneService(servNo);
+						ServiceCarClassVO mmVO = sccs.getOneServiceCarClass(servNo,carSize );
+						mrlVO.setReservVO(rvo);
+						mrlVO.setServicesVO(mvo);
+						mrlVO.setServName(mvo.getServName());
+						mrlVO.setServPrice(mmVO.getServPrice());
+						mrlVO.setServTime(mmVO.getServTime());
+						reservlists.add(mrlVO);
+					}
+				}
+				rvo.setEmployeeVO(eVO);
+				rvo.setMembercarsVO(mcv);
+				rvo.setNoteC(noteC);
+				rvo.setNotesE(notesE);
+				rvo.setReservDateTime(scalendar);
+				rvo.setReservEndTime(ecalendar);
+				rvo.setReservlists(reservlists);
+				rvo.setStatus(status);
+				ReservDAO dao = new ReservDAO();
+				dao.insert(rvo);
 			}
-			rvo.setEmployeeVO(eVO);
-			rvo.setMembercarsVO(mcv);
-			rvo.setNoteC(noteC);
-			rvo.setNotesE(notesE);
-			rvo.setReservDateTime(scalendar);
-			rvo.setReservEndTime(ecalendar);
-			rvo.setReservlists(reservlists);
-			rvo.setReservNo(reservNo);
-			rvo.setStatus(status);
-			ReservDAO dao = new ReservDAO();
-			dao.update(rvo);
-//			ReservService rsvc =new ReservService();
-			
-			//rs.updateReserv(reservNo, scalendar, noteC, notesE, status, membercarsVO, employeeVO, reservlists)
 		} else{
 			System.out.println("預約時間衝突");
 			out.println("預約時間衝突");
@@ -197,21 +254,5 @@ public class scheduleTestServlet2 extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	/*要寫到Util.java*/
-//	public static Calendar getLocalTimeFromUTC(String timeUTC){
-//		  TimeZone utc = TimeZone.getTimeZone("UTC");
-//		  SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-//		  f.setTimeZone(utc);
-//		  Calendar cal = Calendar.getInstance();
-//		  
-//		  try {
-//		   cal.setTime(f.parse(timeUTC));
-//		  } catch (ParseException e) {
-//		   //日期格式錯誤無法轉換
-//		   e.printStackTrace();
-//		  }
-//		  
-//		  return cal;
-//	}
 }
 
