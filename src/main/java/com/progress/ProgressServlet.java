@@ -29,7 +29,7 @@ public class ProgressServlet extends HttpServlet {
 		response.setHeader("content-type", "text/plain;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-		String reservNoS = request.getParameter("a");
+		String reservNoS = request.getParameter("reservNo");
 		if (reservNoS != null){
 			int reservNo = Integer.valueOf(reservNoS);
 			
