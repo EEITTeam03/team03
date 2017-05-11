@@ -175,7 +175,7 @@
 								<fb:login-button scope="public_profile,email"
 									onlogin="checkLoginState();" size="xlarge">使用FB帳號登入
 								</fb:login-button>
-								<!-- 	<div id="status"></div> -->
+								 	<div id="status"></div>
 							</div>
 							<div style="padding-top: 15px" align="center">
 								<a href="forgetPassWord.jsp" class="btn btn-danger"
@@ -198,60 +198,31 @@
     <!-- Facebook登入 -->
 	<script>
 		// This is called with the results from from FB.getLoginStatus().
-		function statusChangeCallback(response) {
-			console.log('statusChangeCallback');
-			console.log(response);
-			// The response object is returned with a status field that lets the
-			// app know the current login status of the person.
-			// Full docs on the response object can be found in the documentation
-			// for FB.getLoginStatus().
-			if (response.status === 'connected') {
-				// Logged into your app and Facebook.
-				//testAPI();
-				FB.api('/me', function(response) {
-					console.log(JSON.stringify(response));
-					var myJSONText = JSON.stringify(response);
-					var xx = JSON.parse(myJSONText)
-					console.log(xx.id);
-					$.ajax({
-						url : 'CheckFBLogin',
-						type : 'POST',
-						data : {
-							'id' : xx.id,
-							'name' : xx.name,
-							'email' : xx.email
-						},
-						dataType:'text',
-						success : function(data) {
-// 							var account = '${FBAccount}';
-// 							alert('${FBAccount}');
-// 							console.log(data);							
-							if(data=="Account Not found"){
-								window.top.location.href = "register.jsp"
-							}else{
-								window.top.location.href ="index.jsp"
-							}							
-						},
-						error : function(data) {
-							alert("ERROR");
-						}
-					});
-				},{
-					fields : 'id,name,email'
-				});
-			} else {
-				// The person is not logged into your app or we are unable to tell.
-				document.getElementById('status').innerHTML = 'Please log '
-						+ 'into this app.';
-			}
-		}
+
+		// 		function statusChangeCallback(response) {
+// 			console.log('statusChangeCallback');
+// 			console.log(response);
+// 			// The response object is returned with a status field that lets the
+// 			// app know the current login status of the person.
+// 			// Full docs on the response object can be found in the documentation
+// 			// for FB.getLoginStatus().
+// 			if (response.status === 'connected') {
+// 				// Logged into your app and Facebook.
+
+// 			} else {
+// 				// The person is not logged into your app or we are unable to tell.
+// 				document.getElementById('status').innerHTML = 'Please log '
+// 						+ 'into this app.';
+// 			}
+// 		}
 
 		// This function is called when someone finishes with the Login
 		// Button.  See the onlogin handler attached to it in the sample
 		// code below.
 		function checkLoginState() {
 			FB.getLoginStatus(function(response) {
-				statusChangeCallback(response);
+				//statusChangeCallback(response);
+				testAPI(response);
 			});
 		}
 
@@ -276,9 +247,9 @@
 			//
 			// These three cases are handled in the callback function.
 
-			FB.getLoginStatus(function(response) {
-				statusChangeCallback(response);
-			});
+// 			FB.getLoginStatus(function(response) {
+// 				statusChangeCallback(response);
+// 			});
 
 		};
 
@@ -295,17 +266,41 @@
 
 		// Here we run a very simple test of the Graph API after login is
 		// successful.  See statusChangeCallback() for when this call is made.
-		function testAPI() {
-			console.log('Welcome!  Fetching your information.... ');
-			FB
-					.api(
-							'/me',
-							function(response) {
-								console.log('Successful login for: '
-										+ response.name);
-								document.getElementById('status').innerHTML = 'Thanks for logging in, '
-										+ response.name + '!';
-							});
+		function testAPI(response) {
+			if(response.status==='connected'){
+			FB.api('/me', function(response) {
+				console.log(JSON.stringify(response));
+				var myJSONText = JSON.stringify(response);
+				var xx = JSON.parse(myJSONText)
+				console.log(xx.id);
+				$.ajax({
+					url : 'CheckFBLogin',
+					type : 'POST',
+					data : {
+						'id' : xx.id,
+						'name' : xx.name,
+						'email' : xx.email
+					},
+					dataType:'text',
+					success : function(data) {
+//							var account = '${FBAccount}';
+//							alert('${FBAccount}');
+//							console.log(data);							
+						if(data=="Account Not found"){
+							window.top.location.href = "register.jsp"
+						}else{
+							window.top.location.href ="index.jsp"
+						}							
+					},
+					error : function(data) {
+						alert("ERROR");
+					}
+				});
+			},{
+				fields : 'id,name,email'
+			});
+
+			}
 		}
 	</script>
 
