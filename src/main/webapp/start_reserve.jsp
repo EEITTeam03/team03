@@ -270,16 +270,17 @@ label {
 				</div>
 
 				<div class="form-group">
-					<label for="service" class="col-sm-2 control-label">主要服務</label>
+					<label for="service" class="col-sm-2 control-label">主要服務:</label>
 					<div class="col-sm-6">
-						<input type="text" name="service" id="service" class="form-control">
-
+						<input type="hidden" name="service" id="service" class="form-control">
+						<h4 id="showserv" class="col-md-6"></h4>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="plus" class="col-sm-2 control-label">加選服務</label>
-					<div class="col-sm-6">
+					<label for="plus" class="col-sm-2 control-label">加選服務 :</label>
+					<h4 id="showplus" class="col-sm-4"></h4>
+					<div class="col-sm-6" hidden="hidden">
 						<select name="plus" id="plus" class="form-control"
 							multiple="multiple" >
 							
@@ -437,8 +438,8 @@ label {
 					if (t==9) {t="0"+t}
 					var input = $("#selectedTime");
 					var onerow = $("<tr></tr>");
-					var btn00 = $("<input></input>").attr("type","button").val(t+":00").addClass("btn btn-success");
-					var btn30 = $("<input></input>").attr("type","button").val(t+":30").addClass("btn btn-success");
+					var btn00 = $("<input></input>").attr({"type":"button","id":t+"00"}).val(t+":00").addClass("btn btn-success");
+					var btn30 = $("<input></input>").attr({"type":"button","id":t+"30"}).val(t+":30").addClass("btn btn-success");
 					var td00 = $("<td></td>");
 					var td30 = $("<td></td>");
 					
@@ -446,10 +447,48 @@ label {
 					btn00.click(function(){
 						
 						$("#timeline input:enabled").removeClass().addClass("btn btn-success");
+// 						$("#timeline input[id*='00']:enabled").removeClass("btn-success").addClass("btn-danger");
 						$(this).removeClass("btn-success").addClass("btn-danger");
 						input.val($(this).val());
-
-					});
+					});	
+						//滑鼠移上去顯示時間長度
+// 					}).hover(function(){	//<----------------------in
+// 						var license  = $("#inputLicense").val();
+// 						var serviceS = $("#service").val();
+// 						var sm = $("#plus>option:selected");
+// 						//console.log(serviceM);
+// 						var serviceM = "";
+// 						for(var i=0;i<sm.length;i++){
+// 							//console.log(sm[i].value);
+// 							serviceM += sm[i].value +",";
+// 						}
+						
+// 							var thisbtn = $(this).attr("id");
+// 						//console.log(serviceM.substring(0,serviceM.length-1));
+// 						serviceM = serviceM.substring(0,serviceM.length-1);
+// 						$.getJSON('GetTotalTimeJSON',{"license":license,"serviceS":serviceS,"serviceM":serviceM},function(data){
+// 							//console.log(data);
+// 							//console.log(data[0].buttons);
+// 							var buttons = data[0].buttons;
+// 							console.log(thisbtn);
+// // 							console.log(totaltime);
+// 								var id = parseInt(thisbtn);
+// 								console.log(id);
+// 							for (var j=0;j<buttons;j++) {
+								
+// 								var total = "#timeline input[id*='"+id+"']:enabled";
+// 								console.log(total);
+// // 								$("#timeline input[id*='00']:enabled").removeClass("btn-success").addClass("btn-danger");
+// 								$(total).removeClass("btn-success").addClass("btn-danger");
+// 								console.log(id);
+// 								id=0
+// 								id+=50;
+// 							}
+// 						});
+// 					},function(){			//---------------------->out
+// 						$("#timeline input:enabled").removeClass().addClass("btn btn-success");
+// 					});
+					
 					btn30.click(function(){
 						$("#timeline input:enabled").removeClass().addClass("btn btn-success");
 						$(this).removeClass("btn-success").addClass("btn-danger");
@@ -509,6 +548,8 @@ label {
 					one.append(btn);
 					row.append(one);
 				})
+					$("#inputLicense").val(data[0].license);
+					$("#showLicense").text(data[0].license);
 			});
 			
 			
@@ -603,12 +644,13 @@ label {
 			   						mb.append(rbtn);
 		   							}
 		   							
-		   							if (services.servNo >= 2000)  //單選按下
+		   							if (services.servNo >= 2000)  { //單選按下 
 		   								//設定hidden欄位值
 		   								$("#service").val(services.servNo);
+		   								$("#showserv").text(servName);
 		   								//取消其他單選	好難FK
-// 		   								$("button[id^='btn2']").
-		   							else {						  //多選按下
+// 		   								$("button[id^='btn2']")
+		   							} else {						   //多選按下
 // 		   								var plus = $("<input>").attr({"type":"text","name":"plus","value":services.servNo})
 // 		   								$("#plus").append(plus);
 		   								var selector = "#"+services.servNo;
@@ -624,6 +666,7 @@ label {
 		   							var okicon = $("<i></i>").addClass("fa fa-check-square");
 		   							pword.text("已選擇").removeClass().addClass("text-success").append(okicon);
 		   							myd.css("background-color","#84B57E");
+		   							$("#showplus").html($("#plus option:selected").text());
 		   						});
 // 		   						rbtn.hide();
 		   						var fft = $("<i></i>").addClass("fa fa-check").text("選擇");
@@ -648,9 +691,9 @@ label {
 		   						snumber=snumber+1;
 		   					
 		   						
-		   					//懺生多選option到<select>
+		   					//產生多選option到<select>
 		   					if(services.servNo <2000) {
-		   						$("<option></option>").attr({"id":services.servNo,"value":services.servNo}).text(servName).appendTo($("#plus"));
+		   						$("<option></option>").attr({"id":services.servNo,"value":services.servNo}).text(servName+"，").appendTo($("#plus"));
 		   					}
  		   				
    				})
