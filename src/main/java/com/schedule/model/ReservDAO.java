@@ -32,6 +32,7 @@ public class ReservDAO implements ReservDAO_interface {
 	private static final String GET_BY_DATE_EMP="from ReservVO where reservDateTime between ? and ? AND employeeNo=? order by reservDateTime";
 	private static final String ALL_STMT_Time="select min(reservDateTime) from ReservVO where reservDateTime > ? ";
 	private static final String GET_TIME_BY_DATE="from ReservVO where reservDateTime between ? and ? order by reservDateTime";
+	private static final String GET_NO_BY_LICENSE="from ReservVO where carLicense=?";
 	@Override
 	public ReservVO findByPrimaryKey(Integer reservNo) {
 		// TODO Auto-generated method stub
@@ -323,6 +324,23 @@ public class ReservDAO implements ReservDAO_interface {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		return list;
+	}
+
+	@Override
+	public List<ReservVO> fingReservNoByLicense(String memberCar) {
+		List<ReservVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(GET_NO_BY_LICENSE);
+			query.setParameter(0,memberCar);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}	
 		return list;
 	}
 
