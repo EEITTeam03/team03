@@ -23,7 +23,7 @@ BlockListService blsvc = new BlockListService();
 		<th>違反日期</th>
 		<th>預約編號</th>
 	</tr>
-	
+	<c:if test="${list.size()!=0}">
 	<c:forEach var="blkVO" items="${list}" begin="0" end="${list.size()-1}">
 		<tr align='center' valign='middle'>
 			<td>${blkVO.memberInfoVO.memberNo}</td>
@@ -32,6 +32,7 @@ BlockListService blsvc = new BlockListService();
 			<td>${blkVO.reservationNo}</td>
 		</tr>
 	</c:forEach>
+	</c:if>
 </table>
 </body>
 </html>
