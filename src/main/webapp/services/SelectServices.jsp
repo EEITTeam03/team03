@@ -16,10 +16,14 @@
 
 <!--     Custom Fonts -->
     <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+    
+ 	<!-- SweetAlert -->
+    <script src="../admin/SweetAlert/js/sweetalert.min.js"></script> 
+	<link href="../admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
    
 </head>
 <body>
+
 <jsp:include page="../admin/Testhead_nav.jsp"/>
 <div id="wrapper">
 <div id="page-wrapper">
@@ -28,13 +32,10 @@
 		<li><a href='${ctx}/services/ListAllServices.jsp'>查看</a>所有服務 (後台)</li>
 		<br>
 		<li><a href='${ctx}/services/ServicesInsert.jsp'>新增</a>服務 (後台)</li>
+		<font size="-1" color="#FF0000">${MsgOK.ok}</font>
 		<br>
 		<li><a href='${ctx}/services/ListAllServiceStep.jsp'>查看</a>所有服務步驟 (後台)</li>
 		<br>
-<%-- 		<li><a href='${ctx}/services/ListAllServiceStepForUser.jsp'>查看</a>所有服務 (前台)</li> --%>
-<!-- 		<br> -->
-<%-- 		<li><a href='${ctx}/services/ListAllServicesForUser.jsp'>查看</a>所有服務 (前台)</li> --%>
-<!-- 		<br> -->
 		<jsp:useBean id="ss" scope="page"
 			class="com.services.model.ServicesService" />
 		<li>

@@ -8,19 +8,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>服務單筆資料</title>
+<script type="text/javascript"
+	src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
+<!-- Bootstrap Core CSS -->
+<link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="${ctx}/admin/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+	
+	<!-- SweetAlert -->
+    <script src="../admin/SweetAlert/js/sweetalert.min.js"></script> 
+	<link href="../admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
+
 </head>
-<body bgcolor='white'>
-<table border='1' width='800'>
-		<thead align='center' valign='middle'>
-			<tr>
-				<td>所有服務資料</td>
-			</tr>
-		</thead>
-		<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-			<td><a href="SelectServices.jsp">回搜尋服務頁</a></td>
-		</tr>
-	</table>
-	<table border='1' bordercolor='#CCCCFF' width='1600'>
+<body>
+<script>
+swal("修改成功!")
+</script>
+<jsp:include page="../admin/Testhead_nav.jsp"/>
+<div id="wrapper">
+<div id="page-wrapper">
+<div class="table-responsive">
+<table class="table table-bordered table-hover">
 		<tr>
 			<th>服務編號</th>
 			<th>服務類型編號</th>
@@ -50,6 +63,8 @@
 
 		</tr>
 	</table>
-
+</div>
+</div>
+</div>
 </body>
 </html>
