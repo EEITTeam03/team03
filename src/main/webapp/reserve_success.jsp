@@ -70,13 +70,130 @@
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
 
 <style>
+.img-services{
+			width:360px;
+			height:260px;
+		}
+		.big-img-services{
+			width:700px;
+			height:500px;
+		}
+		.nav-fut-li{
+			width: 114px;
+			height: 50px;
+			text-align: center;
+			margin:0px 0px 0px 15px ;
+		}
+		.menu-fut-li{
+			width: 114px;
+			height: 50px;
+			text-align: center;
+			margin:10px 0px 0px 5px ;
+		}		
+		.fun-btn{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: white;
+		    background-color: #fed136;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;					
+		}		
+		.fun-btn:hover{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}
+		.mem-btn{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border:0px;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;					
+		}
+		.mem-btn:hover{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}	
+		.dropdown-menu {
+		    color: #fed136;
+		    background-color: #222222;
+			text-align: center;
+ 		    min-width: 114px; 
+		}				
+		.dropdown:hover .dropdown-menu {
+			
+			display: block;
+		}
 label {
 	font-size: 150%;
 }
 table, th, td {
 	font-size: 120%;
+	text-align: center;
 }
+.table{
+	color: white;
+	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background: #3C3C3C;
+	border-radius:15px;
+	text-align: center;
+	
+}
+#totle{
+	color: black;
+	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	
+}
+.video{
+	z-index:-1;
+	
+}
+.col-sm-offset-5{
+	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #FFD306;
+}
+.divOver{
+ 	background:#fed136;
+	
+	} 
 </style>
+
+<script type="text/javascript">
+	$(function(){
+		
+		$("table > tbody > tr").hover(function(){
+			$(this).addClass("divOver");
+		},function(){
+			$(this).removeClass("divOver");
+		})
+	});
+
+
+</script>
 </head>
 
 <body id="page-top" class="index">
@@ -122,7 +239,8 @@ table, th, td {
 							<span class="glyphicon glyphicon-user"></span> 免費註冊															
                         
                         </button>                    
-                    </li>	                 
+                    </li>	   
+                                  
 				</c:if>
 
 						<!--	已登入	-->
@@ -150,7 +268,7 @@ table, th, td {
 
 	<!-- Header -->
 	<header>
-		<div style="position: absolute; opacity: 0.3">
+		<div class="video" style="position: absolute; opacity:0.8">
 			<video autoplay loop muted class="fillWidth" style="width: 100%;">
 
 				<source src="video/file.mp4" type="video/mp4" />
@@ -185,8 +303,8 @@ table, th, td {
 		<div class="row">
 			<h2 class="col-sm-offset-5">預約成功</h2>
 		</div>
-		<div class="row">
-			<table class="table table-hover">
+		<div class="row col-sm-8 col-sm-offset-2">
+			<table class="table ">
 				<thead>
 					<tr>
 						<th>項目</th>
@@ -227,10 +345,11 @@ table, th, td {
 			</table>
 		</div>
 		<div class="row">
-			<h2 class="col-sm-offset-5">服務明細</h2>
+			
 		</div>
 		<div class="row">
-			<table class="table table-hover">
+			<h2 class="col-sm-offset-5">服務明細</h2>
+			<table class="table">
 				<thead>
 					<tr>
 						<th>服務編號</th>
@@ -252,51 +371,65 @@ table, th, td {
 					</c:forEach>
 
 				</tbody>
+				
 			</table>
-			<div class="col-sm-offset-8">
-				<h3>總金額: ${total} 元</h3>
-				<h3>總時間: ${range/60} 小時</h3>
+			<div class="col-sm-offset-7" id="totle">
+				<table  class="table">
+				<thead>
+					<tr>
+						<th>總金額</th>
+						<th>總時間</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>${total} 元 </td>
+						<td>${range/60} 小時</td>
+					</tr>
+				</tbody>
+<%-- 				<h3>總金額: ${total} 元 ,總時間: ${range/60} 小時</h3> --%>
+				</table>
 			</div>
 		</div>
 	</div>
 
-	<!-- Services Section -->
-	<!-- 	<section id="services"> -->
-	<!-- 		<div class="container"> -->
-	<!-- 			<div class="row"> -->
-	<!-- 				<div class="col-lg-12 text-center"> -->
-	<!-- 					<h2 class="section-heading">各類服務</h2> -->
-	<!-- 					<h3 class="section-subheading text-muted">讓您可依照自身需求，選擇自己最適合的服務種類。</h3> -->
-	<!-- 				</div> -->
-	<!-- 			</div> -->
-	<!-- 			<div class="row text-center"> -->
-	<!-- 				<div class="col-md-4"> -->
-	<!-- 					<span class="fa-stack fa-4x"> <i -->
-	<!-- 						class="fa fa-circle fa-stack-2x text-primary"></i> <i -->
-	<!-- 						class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i> -->
-	<!-- 					</span> -->
-	<!-- 					<h4 class="service-heading">現場服務</h4> -->
-	<!-- 					<p class="text-muted">服務員現場為您安排，讓您聽美好音樂，品嚐美味甜點，悠閒等待您的愛車煥然一新。</p> -->
-	<!-- 				</div> -->
-	<!-- 				<div class="col-md-4"> -->
-	<!-- 					<span class="fa-stack fa-4x"> <i -->
-	<!-- 						class="fa fa-circle fa-stack-2x text-primary"></i> <i -->
-	<!-- 						class="fa fa-laptop fa-stack-1x fa-inverse"></i> -->
-	<!-- 					</span> -->
-	<!-- 					<h4 class="service-heading">預約服務</h4> -->
-	<!-- 					<p class="text-muted">時間就是金錢，透過網路預約美容服務，讓愛車在指定時間內抵達，給予專業團隊立即為您服務。</p> -->
-	<!-- 				</div> -->
-	<!-- 				<div class="col-md-4"> -->
-	<!-- 					<span class="fa-stack fa-4x"> <i -->
-	<!-- 						class="fa fa-circle fa-stack-2x text-primary"></i> <i -->
-	<!-- 						class="fa fa-lock fa-stack-1x fa-inverse"></i> -->
-	<!-- 					</span> -->
-	<!-- 					<h4 class="service-heading">取還車服務</h4> -->
-	<!-- 					<p class="text-muted">讓生活忙碌的您，無需為愛車美容奔波，本公司專業人員，將會前往您指定的地點取車，並在指定時間內完成美容服務送回指定地點。</p> -->
-	<!-- 				</div> -->
-	<!-- 			</div> -->
-	<!-- 		</div> -->
-	<!-- 	</section> -->
+	Services Section
+		<section id="services">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<h2 class="section-heading">各類服務</h2>
+						<h3 class="section-subheading text-muted">讓您可依照自身需求，選擇自己最適合的服務種類。</h3>
+					</div>
+				</div>
+				<div class="row text-center">
+					<div class="col-md-4">
+						<span class="fa-stack fa-4x"> <i
+							class="fa fa-circle fa-stack-2x text-primary"></i> <i
+							class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+						</span>
+						<h4 class="service-heading">現場服務</h4>
+						<p class="text-muted">服務員現場為您安排，讓您聽美好音樂，品嚐美味甜點，悠閒等待您的愛車煥然一新。</p>
+					</div>
+					<div class="col-md-4">
+						<span class="fa-stack fa-4x"> <i
+							class="fa fa-circle fa-stack-2x text-primary"></i> <i
+							class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+						</span>
+						<h4 class="service-heading">預約服務</h4>
+						<p class="text-muted">時間就是金錢，透過網路預約美容服務，讓愛車在指定時間內抵達，給予專業團隊立即為您服務。</p>
+					</div>
+					<div class="col-md-4">
+						<span class="fa-stack fa-4x"> <i
+							class="fa fa-circle fa-stack-2x text-primary"></i> <i
+							class="fa fa-lock fa-stack-1x fa-inverse"></i>
+						</span>
+						<h4 class="service-heading">取還車服務</h4>
+						<p class="text-muted">讓生活忙碌的您，無需為愛車美容奔波，本公司專業人員，將會前往您指定的地點取車，並在指定時間內完成美容服務送回指定地點。</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
 
 

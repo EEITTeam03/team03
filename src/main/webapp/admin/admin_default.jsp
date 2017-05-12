@@ -18,44 +18,44 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
     <!-- ***排程表引用開始*** -->
-   	<link rel="stylesheet" href="${ctx}/scheduleJS/jqwidgets/styles/jqx.base.css" type="text/css" />
-	<script type="text/javascript" src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
+<%--    	<link rel="stylesheet" href="${ctx}/scheduleJS/jqwidgets/styles/jqx.base.css" type="text/css" /> --%>
+<%-- 	<script type="text/javascript" src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script> --%>
 	<!-- ***排程表引用結束*** -->
 	<script type="text/javascript">
-		$(document).ready(function () {
-			init();
+// 		$(document).ready(function () {
+// 			init();
 
-			//如果沒登入把登出連結藏起來
-			var logging = '${admin}';
-			var logoutUL = $('ul[class*="dropdown-menu"] li:last-child');
-			if (logging == "") {
-				//$(hideLogout).hide();
-				logoutUL.hide();
-			}else
-				logoutUL.show();
-		});
+// 			//如果沒登入把登出連結藏起來
+// 			var logging = '${admin}';
+// 			var logoutUL = $('ul[class*="dropdown-menu"] li:last-child');
+// 			if (logging == "") {
+// 				//$(hideLogout).hide();
+// 				logoutUL.hide();
+// 			}else
+// 				logoutUL.show();
+// 		});
 
-		function init() {
-			initClick();
-		}
+// 		function init() {
+// 			initClick();
+// 		}
 
-		function initClick() {
-			$('#a_scheduler').click(function() {
-				$('#contentDiv').load('${ctx}/scheduleTest3.jsp');
-			});
-			$('#services').click(function() {
-				//超連結連到xxx.jsp,顯示在contentDiv,如此jQuery.boostrap框架只需載入一次
-				//程式跟框架可分開修改
-				//引用的link.script使用絕對路徑.若資料夾不同servlet的urlpattrens也要注意
-				$('#contentDiv').load('${ctx}/services/SelectServices.jsp');
-			});
-			$('#XXX').click(function() {
-				//超連結連到xxx.jsp,顯示在contentDiv,如此jQuery.boostrap框架只需載入一次
-				//程式跟框架可分開修改
-				//引用的link.script使用絕對路徑.若資料夾不同servlet的urlpattrens也要注意
-				$('#contentDiv').load('${ctx}/XXX.jsp');
-			});
-		}
+// 		function initClick() {
+// 			$('#a_scheduler').click(function() {
+// 				$('#contentDiv').load('${ctx}/scheduleTest3.jsp');
+// 			});
+// 			$('#services').click(function() {
+// 				//超連結連到xxx.jsp,顯示在contentDiv,如此jQuery.boostrap框架只需載入一次
+// 				//程式跟框架可分開修改
+// 				//引用的link.script使用絕對路徑.若資料夾不同servlet的urlpattrens也要注意
+// 				$('#contentDiv').load('${ctx}/services/SelectServices.jsp');
+// 			});
+// 			$('#XXX').click(function() {
+// 				//超連結連到xxx.jsp,顯示在contentDiv,如此jQuery.boostrap框架只需載入一次
+// 				//程式跟框架可分開修改
+// 				//引用的link.script使用絕對路徑.若資料夾不同servlet的urlpattrens也要注意
+// 				$('#contentDiv').load('${ctx}/XXX.jsp');
+// 			});
+// 		}
 
 		// 		var logging = '${memberInfo}';
 		// 		console.log(logging);
@@ -138,16 +138,16 @@ ul[class*="nav navbar-nav side-nav"] {
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="#" id="a_scheduler" ><i class="fa fa-car"></i> 管理工作排程</a>
+                        <a href="${ctx}/scheduleTest3.jsp" ><i class="fa fa-car"></i> 管理工作排程</a>
                     </li>
                     <li>
-                        <a href="#" id="services"><i class="fa fa-fw fa-table"></i> 維護服務項目</a>
+                        <a href="${ctx}/services/SelectServices.jsp"><i class="fa fa-fw fa-table"></i> 維護服務項目</a>
                     </li>
                     <li>
                         <a href="#" id="a_test"><i class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-edit"></i> 管理黑名單</a>
+                        <a href="${ctx}/admin/maintainBlockList.jsp"><i class="fa fa-fw fa-edit"></i> 管理黑名單</a>
                     </li>
 
                     <li>

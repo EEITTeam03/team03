@@ -12,18 +12,32 @@ BlockListService blsvc = new BlockListService();
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <!-- Bootstrap Core CSS -->
+    <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <title>所有黑名單</title>
 </head>
 <body>
+<jsp:include page="../admin/Testhead_nav.jsp"/>
+<div id="wrapper">
+<div id="page-wrapper">
+<div class="table-responsive">
 	<h1>所有黑名單</h1>
-	<table border='1' bordercolor='#CCCCFF' width='800'>
+	<table class="table table-bordered table-hover">
+	<thead>
 	<tr>
 		<th>會員編號</th>
 		<th>違規規則</th>
 		<th>違反日期</th>
 		<th>預約編號</th>
 	</tr>
-	
+	</thead>
+	<c:if test="${list.size()!=0}">
 	<c:forEach var="blkVO" items="${list}" begin="0" end="${list.size()-1}">
 		<tr align='center' valign='middle'>
 			<td>${blkVO.memberInfoVO.memberNo}</td>
@@ -32,6 +46,10 @@ BlockListService blsvc = new BlockListService();
 			<td>${blkVO.reservationNo}</td>
 		</tr>
 	</c:forEach>
+	</c:if>
 </table>
+</div>
+</div>
+</div>
 </body>
 </html>

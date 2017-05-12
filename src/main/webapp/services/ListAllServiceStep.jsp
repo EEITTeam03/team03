@@ -26,7 +26,11 @@
 <title>服務工法程序</title>
 </head>
 <body>
+<jsp:include page="../admin/Testhead_nav.jsp"/>
+<div id="wrapper">
+<div id="page-wrapper">
 <div class="table-responsive">
+<h2>服務工法程序</h2>
 	<table class="table table-bordered table-hover">
 		<tr>
 			<th>服務編號</th>
@@ -56,7 +60,7 @@
 
 				<td>
 					<FORM METHOD="post" ACTION="servicestep.do">
-						<input type="submit" value="修改"> 
+						<button type="submit" class="btn btn-sm btn-primary">修改</button> 
 						<input type="hidden" name="servStepNo" value="${serviceStepVO.servStepNo}">
 						<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
@@ -64,6 +68,8 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
+	</div>
 	</div>
 </body>
 </html>

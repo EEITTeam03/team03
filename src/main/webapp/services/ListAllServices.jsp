@@ -26,8 +26,11 @@
 
 </head>
 <body>
+<jsp:include page="../admin/Testhead_nav.jsp"/>
+<div id="wrapper">
+<div id="page-wrapper">
 <div class="table-responsive">
-
+<h2>所有服務</h2>
 <table class="table table-bordered table-hover">
 <thead>
 		<tr>
@@ -63,21 +66,23 @@
 
 				<td>
 					<FORM METHOD="post" ACTION="${ctx}/services/services.do">
-						<input type="submit" value="修改"> 
+						<button type="submit" class="btn btn-sm btn-primary">修改</button>
 						<input type="hidden" name="servNo" value="${servicesVO.servNo}"> 
 						<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
 				<td>
-<%-- 					<FORM METHOD="post" ACTION="${ctx}/services/services.do"> --%>
-<!-- 						<input type="submit" value="下架">  -->
-<%-- 						<input type="hidden" name="servNo" value="${servicesVO.servNo}">  --%>
-<!-- 						<input type="hidden" name="action" value="offshelf"> -->
-<!-- 					</FORM> -->
+					<FORM METHOD="post" ACTION="${ctx}/services/services.do">
+						<button type="submit" class="btn btn-sm btn-primary">下架</button>
+						<input type="hidden" name="servNo" value="${servicesVO.servNo}"> 
+						<input type="hidden" name="action" value="offshelf">
+					</FORM>
 				</td>
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
+	</div>
 	</div>
 	
 </body>

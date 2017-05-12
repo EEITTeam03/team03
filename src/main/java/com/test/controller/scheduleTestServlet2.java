@@ -2,19 +2,12 @@ package com.test.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
-import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,24 +34,14 @@ import com.services.model.ServicesVO;
 import myutil.CheckConflict;
 import myutil.MyUtil;
 
-/**
- * Servlet implementation class scheduleTestServlet
- */
+
 @WebServlet(urlPatterns = {"/admin/scheduleTestServlet2","/scheduleTestServlet2"})
 public class scheduleTestServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public scheduleTestServlet2() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		String json = request.getParameter("data");
 //		System.out.println("status:"+request.getParameter("status"));
@@ -101,8 +84,8 @@ public class scheduleTestServlet2 extends HttpServlet {
 			for(EmployeeVO emp:list){
 				empNo = emp.getEmployeeNo();
 			}
-			System.out.println("新增時訂單編號: "+reservNo);
-			System.out.println("新增時員工編號: "+empNo);
+			//System.out.println("新增時訂單編號: "+reservNo);
+			//System.out.println("新增時員工編號: "+empNo);
 		}
 		
 		ReservService rs = new ReservService();
@@ -121,7 +104,15 @@ public class scheduleTestServlet2 extends HttpServlet {
 		String noteC = map.get("description"); //取得noteC
 		String notesE = map.get("noteE"); //取得notesE
 		
-		Integer status =Integer.valueOf( map.get("status")); //取得預約狀態
+		String statusS = map.get("status");
+		Integer status=null;
+		if(statusS.trim().equals("")){		//新增時如忘記輸入status 預設1
+			//System.out.println("沒輸入Status(轉換前):"+status);
+			status = 1;
+		}else{
+			status =Integer.valueOf( map.get("status"));
+		}
+		//System.out.println("Status(轉換後):"+status);
 		
 		String serviceS = map.get("serviceS"); //取得單選的服務
 		Integer SS = Integer.valueOf(serviceS);
