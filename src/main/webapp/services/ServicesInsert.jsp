@@ -24,27 +24,16 @@
 	}
 </script>
 </head>
+
 <body onLoad="setFocusToUserId()">
+<jsp:include page="../admin/Testhead_nav.jsp"/>
+<div id="wrapper">
+<div id="page-wrapper">
 	<div class="table-responsive">
 		<div class="col-lg-6">
+		<h2>新增服務</h2>
 			<c:set var="funcName" value="REG" scope="session" />
-		
 			<Table class="table table-bordered table-hover">
-<!-- 				<TR height="60"> -->
-<!-- 					<TD> -->
-<!-- 						<TABLE cellspacing="1"> -->
-<!-- 							<TR> -->
-<!-- 								<TD align="center"> -->
-<%-- 								<Font color="#006600" size='5' face="標楷體">${AppName}</Font></TD> --%>
-<!-- 							</TR> -->
-<!-- 							<TR> -->
-<!-- 								<TD width="200" align="center"><Font color="#006600" size='4' face="標楷體">加入服務</Font></TD> -->
-<!--此區塊顯示程式執行後的訊息 -->
-<%-- 								<TD width="240" aligh="left"><font size="-1" color="#FF0000">${MsgMap.InsertNG}${MsgMap.errorSaveData}</font></TD> --%>
-<!-- 							</TR> -->
-<!-- 						</TABLE> -->
-<!-- 					</TD> -->
-<!-- 				</TR> -->
 				<TR>
 					<TD colspan="3">
 						<form ENCTYPE="multipart/form-data" method="POST" action="${ctx}/services/services.do" id="${ctx}/services/services.do">
@@ -69,9 +58,9 @@
 							<label class="fontSize">服務照片：</label> <Input Type="file" size="40" class="fieldWidth" style="width: 480px;" name="file1"><BR>
 							<font color="red" size="-1">${MsgMap.errPicture}</font> <br />
 							<div id="btnArea" align="center">
-								<input type="submit" value="送出" /> 
+								<button type="submit" class="btn btn-sm btn-primary">送出</button> 
 								<input type="hidden" name="action" value="insert"> 
-								<input type="reset" name="cancel" id="cancel" value="重填">
+								<button type="reset" name="cancel" id="cancel" class="btn btn-sm btn-primary">重填</button>
 							</div>
 							<br />
 						</form>
@@ -79,6 +68,8 @@
 				</TR>
 			</Table>
 		</div>
+	</div>
+	</div>
 	</div>
 </body>
 </html>
