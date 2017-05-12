@@ -54,6 +54,7 @@ public class MaintainSchedule extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String json = request.getParameter("data");
 		HashMap<String,String> map = new HashMap<String,String>();
 		map = new Gson().fromJson(json, new TypeToken<HashMap<String,String>>(){}.getType());
@@ -82,23 +83,27 @@ public class MaintainSchedule extends HttpServlet {
 		String serviceS = map.get("serviceS");
 		Integer SS = Integer.valueOf(serviceS);
 		
-		String serviceM = map.get("serviceM");
+		
 		String carSize= mcv.getCarTypeVO().getCarClassVO().getCarClass();
 		
 		ServiceCarClassService sccs = new ServiceCarClassService();
 		ServiceCarClassVO sccVO = sccs.getOneServiceCarClass(SS, carSize);
 		Integer sTime=0;
 		if(sccVO.getServTime()!=null) sTime = sccVO.getServTime(); //得到單選服務的時間了
-
-		String[] M= serviceM.split(",");
-		Integer mTime=0;
+		
+		String serviceM = map.get("serviceM");
 		List<Integer> list = new ArrayList<Integer>();
+		Integer mTime=0;
 		Integer MM=null;
-		for(int i=0;i<M.length;i++){
-			MM = Integer.valueOf(M[i]);
-			ServiceCarClassVO mmVO = sccs.getOneServiceCarClass(MM,carSize );
-			mTime += mmVO.getServTime();
-			list.add(MM);
+		if(serviceM.length()!=0){
+			String[] M= serviceM.split(",");
+			
+			for(int i=0;i<M.length;i++){
+				MM = Integer.valueOf(M[i]);
+				ServiceCarClassVO mmVO = sccs.getOneServiceCarClass(MM,carSize );
+				mTime += mmVO.getServTime();
+				list.add(MM);
+			}
 		}
 		
 		Integer TTime = sTime + mTime;
@@ -157,12 +162,6 @@ public class MaintainSchedule extends HttpServlet {
 			System.out.println("預約時間衝突");
 			return;
 		}
-		
-		
-		
-		
-		
-		
 	}
 
 	/**

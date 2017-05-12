@@ -24,7 +24,8 @@ import myutil.SendEmail;
 /**
  * Servlet implementation class Timer
  */
-@WebServlet(value="/Timer.do", loadOnStartup=1)
+//@WebServlet(value="/Timer.do", loadOnStartup=1)
+@WebServlet(value="/Timer.do")
 public class TimerForSchedule extends HttpServlet {
 	Timer timer ; 
 //    int count = 0;        
@@ -57,7 +58,7 @@ public class TimerForSchedule extends HttpServlet {
 //                		mcv.getMemberInfoVO().getMemberName();
 //                		mcv.getMemberInfoVO().getEmail();
 //                		rv.getReservDateTime();
-                		 new SendEmail().setProps(mcv.getMemberInfoVO().getEmail(), mcv.getMemberInfoVO().getMemberName(),rv.getReservDateTime());
+                		new SendEmail().setProps(mcv.getMemberInfoVO().getEmail(), mcv.getMemberInfoVO().getMemberName(),rv.getReservDateTime());
                 	}
                 }
 
