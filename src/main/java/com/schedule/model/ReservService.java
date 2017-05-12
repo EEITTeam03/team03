@@ -330,4 +330,8 @@ public class ReservService {
 	public List<ReservVO> getAllReservByDateAndEmp(Calendar cal, Integer empNo) {
 		return dao.findByDateAndEmp(cal, empNo);
 	}
+	
+	public List<ReservVO> fingReservNoByLicense(String license) {
+		return dao.fingReservNoByLicense(license);
+	}
 }

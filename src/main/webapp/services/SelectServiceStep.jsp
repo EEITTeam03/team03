@@ -7,8 +7,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+  <script type="text/javascript" src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
+  <!-- Bootstrap Core CSS -->
+    <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<jsp:include page="../admin/Testhead_nav.jsp"/>
+<div id="wrapper">
+<div id="page-wrapper">
+<div class="table-responsive">
 	<jsp:useBean id="sss" scope="page" class="com.servicestep.model.ServiceStepService"/>
 	<ul>
 		<li>
@@ -18,11 +31,13 @@
 						<option value="${distInt}">${distInt}
 					</c:forEach>
 				</select> 
-				<input type="submit" value="送出"> 
+				<button type="submit" class="btn btn-sm btn-primary">送出</button> 
 				<input type="hidden" name="action" value="getMany_ServiceStep_ByServNo">
 			</FORM>
 		</li>
 	</ul>
-	
+	</div>
+	</div>
+	</div>
 </body>
 </html>

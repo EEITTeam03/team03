@@ -5,44 +5,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Bootstrap Core CSS -->
+    <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
 
-<script type="text/javascript" src="${ctx}/admin/js/jquery.js"></script>
-<script type="text/javascript">
-		$(document).ready(function () {
-			init();
-		});	
-	
-		function init(){
-			initClick();
-		}
-		
-		function initClick(){
-			$('#a_searchAllService').click(function(){
-				$('#contentDiv').load('${ctx}/services/ListAllServices.jsp');
-			});
-			$('#a_InsertService').click(function(){
-				$('#contentDiv').load('${ctx}/services/ServicesInsert.jsp');
-			});
-			$('#a_searchAllServiceStep').click(function(){
-				$('#contentDiv').load('${ctx}/services/ListAllServiceStep.jsp');
-			});
-		}
-		
-	</script>
+<!--     Custom CSS -->
+    <link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
+
+<!--     Morris Charts CSS -->
+    <link href="${ctx}/admin/css/plugins/morris.css" rel="stylesheet">
+
+<!--     Custom Fonts -->
+    <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+   
 </head>
 <body>
-<div class="row">
+<jsp:include page="../admin/Testhead_nav.jsp"/>
+<div id="wrapper">
+<div id="page-wrapper">
+<h2>項目</h2>
 	<ul>
-		<li><a href='#'  id="a_searchAllService">查看</a>所有服務 (後台)</li>
+		<li><a href='${ctx}/services/ListAllServices.jsp'>查看</a>所有服務 (後台)</li>
 		<br>
-		<li><a href='#'   id="a_InsertService">新增</a>服務 (後台)</li>
+		<li><a href='${ctx}/services/ServicesInsert.jsp'>新增</a>服務 (後台)</li>
 		<br>
-		<li><a href='#'   id="a_searchAllServiceStep">查看</a>所有服務步驟 (後台)</li>
+		<li><a href='${ctx}/services/ListAllServiceStep.jsp'>查看</a>所有服務步驟 (後台)</li>
 		<br>
-		<li><a href='${ctx}/services/ListAllServiceStepForUser.jsp'>查看</a>所有服務 (前台)</li>
-		<br>
-		<li><a href='${ctx}/services/ListAllServicesForUser.jsp'>查看</a>所有服務 (前台)</li>
-		<br>
+<%-- 		<li><a href='${ctx}/services/ListAllServiceStepForUser.jsp'>查看</a>所有服務 (前台)</li> --%>
+<!-- 		<br> -->
+<%-- 		<li><a href='${ctx}/services/ListAllServicesForUser.jsp'>查看</a>所有服務 (前台)</li> --%>
+<!-- 		<br> -->
 		<jsp:useBean id="ss" scope="page"
 			class="com.services.model.ServicesService" />
 		<li>
@@ -59,6 +51,7 @@
 				
 			</FORM>
 		</li>
+		<br>
 		<li>
 			<FORM METHOD="post" ACTION="${ctx}/services/services.do">
 				<b>選擇服務編號(前台):</b> 
@@ -71,10 +64,11 @@
 				<input type="hidden" name="action" value="getOne_For_Display">
 			</FORM>
 		</li>
-	</ul>
+		<br>
+	
 	<jsp:useBean id="sss" scope="page"
 		class="com.servicestep.model.ServiceStepService" />
-	<ul>
+
 		<li>
 			<FORM METHOD="post" ACTION="${ctx}/services/servicestep.do">
 				<b>選擇服務編號(後台):</b> 
@@ -89,5 +83,16 @@
 		</li>
 	</ul>
 	</div>
+	</div>
+	  <!-- jQuery -->
+    <script src="${ctx}admin/js/jquery.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+    <script src="${ctx}/admin/js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="${ctx}/admin/js/plugins/morris/raphael.min.js"></script>
+    <script src="${ctx}/admin/js/plugins/morris/morris.min.js"></script>
+    <script src="${ctx}/admin/js/plugins/morris/morris-data.js"></script>
 </body>
+ 
 </html>
