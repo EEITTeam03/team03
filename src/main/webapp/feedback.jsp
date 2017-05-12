@@ -171,16 +171,37 @@
   
   
   $( function() {
+	  var txtarea = $('textarea[name*="comment"]');
 	  $("#dialog_div").dialog({ 
 	        autoOpen: false, 
 	        show: "blind", 
 	        hide: "explode",
 	        width: 500,
 	        buttons: { 
-	            "Ok": function() { $(this).dialog("close"); }, 
-	            "Cancel": function() { $(this).dialog("close"); }
+	            "Ok": function() { 
+	            	$.ajax({
+	            		type:'POST',
+	            		url:'AddOpinions',
+	            		dataType:'text',
+	            		data : {
+							'opinions' : txtarea.val(),
+						},
+	            		success : function(data) {
+						
+					},
+					error : function(data) {
+
+					}
+	            	})
+	            }, 
+	            "Cancel": function() { $(this).dialog("close"); 
+// 	            console.log(txtarea.val());
+	            }
 	        }
-	    }); 
+	    });
+	  	//宣告textarea元素
+	    
+	  
 	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
 		var wdth = $(window).width();
 		if(wdth<975){					
@@ -478,7 +499,7 @@
 					<div id="div1">請評分</div>
 					<br>
 					<div id="dialog_div" title="Your opinions">
-  						<textarea rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的看法"></textarea>
+  						<textarea rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的看法" name="comment"></textarea>
 					</div>
 					</form>
 				</div>
