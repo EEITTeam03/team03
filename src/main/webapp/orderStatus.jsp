@@ -261,7 +261,7 @@
 			}
  		});
  			//結束  	
-   		
+   		//ReservListJSON
 		$.getJSON('orderStatus.json',function(json){
 			
    			$.each(json.list,function(idx,orderStatus){

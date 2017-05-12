@@ -162,52 +162,113 @@
 			display: block;
 		}       
         .div-node-undone{
-        	width:80px;
+        	width:40px;
 			
-			height:80px; 
+			height:40px; 
 			
 			border-radius:99em;			
          
 			border:0px;
             
-            background:#999;                     
+            background:#999;                                        
         } 
         .div-node-completed{
-        	width:80px;
+        	width:40px;
 			
-			height:80px; 
+			height:40px; 
 			
 			border-radius:99em;			
          
-			border:0px;
+			border-width: 3px;
+			
+			border-color: #ed687c;
             
-            background:green;                     
+            background: #fff;			         
+            
+			color: #ed687c;
+                         
+            border-style: solid;  
+            
+            text-align: center;         
         }        
         .div-line-undone{
-        	width:80px;
+        	width:150px;
 			
 			height:10px;
 			
 			border:0px;
 			
 			background:#999;
+			
+			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
         }
         .div-line-completed{
-        	width:80px;
+        	width:150px;
 			
 			height:10px;
 			
 			border:0px;
 			
-			background:green;
+			background:#ed687c;
+			
+			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
         }
-       td{ 
-			width:80px; 
-      }  
-      .fnt-select{
-      	-webkit-user-select: none;
-      	color:transparent;
-      }             
+		table tr:nth-child(1){ 
+			width:40px;
+			font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size:22px; 
+      	}
+		table tr:nth-child(2){ 
+			width:40px;
+			font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size:22px; 
+      	}
+		table tr:nth-child(3){ 
+			width:40px;
+			font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size:20px; 
+			text-align: left;
+      	}       	        	  
+		.fnt-select{
+	      	-webkit-user-select: none;
+	      	color:transparent;
+      	}
+      
+		.fnt-d{
+			 color:#a52929;
+			 text-shadow: 0 1px 0 #ffffff,
+			 0 2px 0 #c9c9c9,
+			 0 3px 0 #bbb,
+			 0 4px 0 #b9b9b9,
+			 0 5px 0 #aaa,
+			 0 6px 1px rgba(0,0,0,.1),
+			 0 0 5px rgba(0,0,0,.1),
+			 0 1px 3px rgba(0,0,0,.3),
+			 0 3px 5px rgba(0,0,0,.2),
+			 0 5px 10px rgba(0,0,0,.25),
+			 0 10px 10px rgba(0,0,0,.2),
+			 0 20px 20px rgba(0,0,0,.15);
+		}
+		
+		.fnt-t{
+			 color:black;
+			 text-shadow: 0 1px 0 #ffffff,
+			 0 2px 0 #c9c9c9,
+			 0 3px 0 #bbb,
+			 0 4px 0 #b9b9b9,
+			 0 5px 0 #aaa,
+			 0 6px 1px rgba(0,0,0,.1),
+			 0 0 5px rgba(0,0,0,.1),
+			 0 1px 3px rgba(0,0,0,.3),
+			 0 3px 5px rgba(0,0,0,.2),
+			 0 5px 10px rgba(0,0,0,.25),
+			 0 10px 10px rgba(0,0,0,.2),
+			 0 20px 20px rgba(0,0,0,.15);
+		}		      
+		.glyphicon glyphicon-ok{
+			color: #ed687c;
+		}
+     
 	</style>
 
 
@@ -216,7 +277,7 @@
   
   
   $( function() {
-	  
+	  	
 		
 	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
 		var wdth = $(window).width();
@@ -303,6 +364,18 @@
    					console.log("現在秒數:"+cts);
    					console.log("開始秒數:"+rdts);
    					
+	   				//開始時間文字單獨設定	   				
+	   				var gotimehr = new Date(rdts).getHours();
+	   				var gotimemin = new Date(rdts).getMinutes();
+	   				if(gotimemin<10){
+	   					$("table tr:nth-child(3) td:first-child").text(gotimehr+":"+"0"+gotimemin).addClass("fnt-t").attr({"colspan":"2"});
+	   				}else{
+	   					$("table tr:nth-child(3) td:first-child").text(gotimehr+":"+gotimemin).addClass("fnt-t").attr({"colspan":"2"});
+	   				}
+	   				//結束
+   					
+   					
+   					
    					//每個步驟產生一個節點圓與一個階段線
    					for( i=0 ; i < service_step.servStep.length ; i++ ){
    						
@@ -311,23 +384,26 @@
    						//已經工作的時間若大於該階段時間，代表完成這個階段，節點圓與階段線就為完成顏色。反之，為未完成顏色
 	   					if(operatingTime > stageTime){
 	   						
-	   						var sec = Math.floor(operatingTime/1000);	   						
-	   						var whr = Math.floor(sec/60/60);
-	   						var wmin = Math.floor((sec - ( whr*60*60 )) /60);
-	   						var wsec = Math.floor(sec - ( whr*60 *60 ) - ( wmin*60 ));
+	   						//已工作時間換算
+	   						var sec1 = Math.floor(operatingTime/1000);	   						
+	   						var whr = Math.floor(sec1/60/60);
+	   						var wmin = Math.floor((sec1 - ( whr*60*60 )) /60);
+	   						var wsec = Math.floor(sec1 - ( whr*60 *60 ) - ( wmin*60 ));
 	   						
 	   						console.log("已經工作多少時間:"+whr+"小時"+wmin+"分"+wsec+"秒");
 	   						console.log("已工作秒數"+Math.floor(operatingTime/1000)+">該階段秒數"+Math.floor(stageTime/1000));
-	   							   				
+	  						//結束
+	  						
+	   						
+	   						
 		 					var td1 =  $("<td></td>");
-		 					var bdline = $("<div></div>").addClass("progress progress-striped active div-line-completed");
-		   		   			var dline = $("<div>"+stageTime+"</div>").addClass("progress-bar progress-bar-success div-line-completed fnt-select").attr({"role":"progressbar","aria-valuenow":"60","aria-valuemin":"0","aria-valuemax":"100","style":"width:100%;"});
+		   		   			var dline = $("<div>"+stageTime+"</div>").addClass("div-line-completed fnt-select");
 		   		   			var td2 =  $("<td></td>");
-		   		   			var bdball = $("<div></div>").addClass("progress progress-striped active div-node-completed");
-		   		   			var dball =$("<div>"+stageTime+"</div>").addClass("progress-bar progress-bar-success div-node-completed fnt-select").attr({"role":"progressbar","aria-valuenow":"60","aria-valuemin":"0","aria-valuemax":"100","style":"width:100%;"}); 
-		   		   			   		   			
+		   		   			var dball =$("<div>"+stageTime+"</div>").addClass("div-node-completed fnt-select"); 
+		   		   			var ballsp = $("<span style='color:#ed687c'></span>").addClass("glyphicon glyphicon-ok");   		   			
 
 	   					}else{
+	   						//已工作時間換算
 	   						var sec = Math.floor(operatingTime/1000);	   						
 	   						var whr = Math.floor(sec/60/60);
 	   						var wmin = Math.floor((sec - ( whr*60*60 )) /60);
@@ -335,49 +411,69 @@
 	   						
 	   						console.log("已經工作多少時間:"+whr+"小時"+wmin+"分"+wsec+"秒");
 	   						console.log("已工作秒數"+Math.floor(operatingTime/1000)+"<該階段秒數"+Math.floor(stageTime/1000));	   						
-	   						 	   						
+	   						//結束
+   						
 		 					var td1 =  $("<td></td>");
-		 					var bdline = $("<div></div>").addClass("progress progress-striped active div-line-undone");
-		   		   			var dline = $("<div>"+stageTime+"</div>").addClass("div-line-undone fnt-select").attr({"role":"progressbar","aria-valuenow":"60","aria-valuemin":"0","aria-valuemax":"100","style":"width:100%;"});
+		   		   			var dline = $("<div>"+stageTime+"</div>").addClass("div-line-undone fnt-select");
 		   		   			var td2 =  $("<td></td>");
-		   		   			var bdball = $("<div></div>").addClass("progress progress-striped active div-node-undone");
-		   		   			var dball =$("<div>"+stageTime+"</div>").addClass("div-node-undone fnt-select").attr({"role":"progressbar","aria-valuenow":"60","aria-valuemin":"0","aria-valuemax":"100","style":"width:100%;"}); 		   		   			
-	   	   		   			
+		   		   			var dball =$("<div>"+stageTime+"</div>").addClass("div-node-undone fnt-select"); 		   		   			
+		   		   			var ballsp = $("<span style='color:#ed687c'></span>");
+		   		   			
+		   		   			//產生計時器，讓每個未完成的階段，透過計時器去自動更新
 	   	   		   			var countSec = ((Math.floor(stageTime/1000))-(Math.floor(operatingTime/1000)))*1000;//多久毫秒後，刷新進度條
-							var cutdTimer = setTimeout("colorUpdate("+stageTime+")",countSec);//自動更新進度條
+							var cutdTimer = setTimeout("colorUpdate()",countSec);//N秒後，自動更新進度條
 							console.log("計時器"+Math.floor(countSec/1000)+"秒後啟動");
+							//結束
 	   					}
-   						var decTd1 =  $("<td>"+service_step.servStep[i].descp+"</td>");
+   						//階段文字描述
+   						var decTd1 =  $("<td>"+service_step.servStep[i].descp+"</td>").addClass("fnt-d");
    						var decTd2 =  $("<td></td>");
 	   					$("table tr:nth-child(1)").append([decTd1,decTd2]);
+	   					//結束	   					
+	   					
+	   					//階段時間文字設定	   				
+		   				var stagetimehr = new Date(rdts+stageTime).getHours();
+		   				var stagetimemin = new Date(rdts+stageTime).getMinutes();
+
+		   				
+   						var timeTd =  $("<td></td>").addClass("fnt-t").attr({"colspan":"2"});;
    						
-	   					bdline.append(dline);
-	   					bdball.append(dball);
-	   		   			td1.append(bdline); 
-	   		   			td2.append(bdball); 
-	   		   			$("table tr:nth-child(2)").append([td1,td2]);   						
-   						
+		   				if(stagetimemin<10){
+		   					timeTd.text(stagetimehr+":"+"0"+stagetimemin);		   					
+		   				}else{
+		   					timeTd.text(stagetimehr+":"+stagetimemin);		   					
+		   				}
+		   					   					
+	   					$("table tr:nth-child(3)").append([timeTd]);	   					
+	   					//結束	
+	   					
+	   					dball.prepend(ballsp);
+	   		   			td1.append(dline); 
+	   		   			td2.append(dball); 
+	   		   			$("table tr:nth-child(2)").append([td1,td2]); 
+	   		   			
+// 	   		   			console.log($("table span[class!='glyphicon glyphicon-ok']"));//測試
    					}
    		   			//結束
+   		   			
    					
    				   				  					
    				})
    				
    			})			
-   			 
-   				 	
-			
+   			
+				 	
 } );
   
-  function colorUpdate(stageTime){
-// 	  $("button[value="+stageTime+"]").attr("value");
-	  $("div:contains('"+stageTime+"'):eq(0)").removeClass("div-line-undone");
-	  $("div:contains('"+stageTime+"'):eq(1)").removeClass("div-node-undone");
-	  $("div:contains('"+stageTime+"'):eq(0)").addClass("progress-bar progress-bar-success div-line-completed");
-	  $("div:contains('"+stageTime+"'):eq(1)").addClass("progress-bar progress-bar-success div-node-completed");
+  function colorUpdate(){	  
+		$("div[class*='div-line-undone']:first-child").addClass("div-line-completed").removeClass("div-line-undone");
+		$("div[class*='div-node-undone']:first-child").addClass("div-node-completed").removeClass("div-node-undone");
+// 	  $("div[class*='div-node-undone']:first-child span:first-child").addClass("glyphicon glyphicon-ok");
+		$("table span[class!='glyphicon glyphicon-ok']").addClass("glyphicon glyphicon-ok");
   }
   
-  
+//   console.log($("div[class*='div-line-undone']").attr("class"));
+//   console.log($("div").attr("class"));
   </script>
 
 <style>
@@ -514,19 +610,17 @@
 						</tr>
 						<tr>
 							<td>
-								<div class="progress progress-striped active div-node-completed">
-									<div class="progress-bar progress-bar-success div-node-completed" role="progressbar"
-			 							aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-			 						</div>
-			 					</div>
+								<div class="div-node-completed">
+									GO
+								</div>
 							</td>  				          
-						</tr>				      				      				      
+						</tr>
+						<tr>
+							<td></td>
+							
+						</tr>										      				      				      
 					</table>
-						
-						
-						
-											
-					
+		
 
 				</div>
 				
@@ -536,7 +630,7 @@
 	</section>
 	
 	<span hidden="hide" id="no">${param.reservNo}</span>
-
+	
 
 
 </body>
