@@ -84,7 +84,7 @@ public class ServiceStepServlet extends HttpServlet {
 		if ("update".equals(action)) {
 			try {
 				
-				Integer servStepNo = new Integer(request.getParameter("servStepNo"));
+				Integer servStepNo = Integer.valueOf(request.getParameter("servStepNo"));
 				Integer servStep = Integer.valueOf(request.getParameter("servStep"));
 				String stepName = request.getParameter("stepName");
 				String stepDescp = request.getParameter("stepDescp");

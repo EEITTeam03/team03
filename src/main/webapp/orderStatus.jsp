@@ -196,7 +196,10 @@
  		} 
 		table tr:nth-child(2n) {
 			background: #eee;
-		}			
+		}
+		.my-popover {
+			max-width: 600px;
+		}		
 	</style>
 
 
@@ -237,8 +240,8 @@
 			var numlm = null;
 			var numrm =	null;
 
-			console.log(logIn);
-			console.log(regst);				
+// 			console.log(logIn);
+// 			console.log(regst);				
 			
 			if(logIn != undefined){
 				numln =	logIn.indexOf("nav-fut-li");
@@ -255,13 +258,14 @@
 	   		        $("#nav-log-in").removeClass("nav-fut-li");
 	   		  		$("#nav-register").removeClass("nav-fut-li");					
 	   		        $("#nav-log-in").addClass("menu-fut-li");
-	   		  		$("#nav-register").addClass("menu-fut-li");
+	   		  		$("#nav-register").addClass("menu-fut-li");   		  		
+	   		  		
 			}
 			if( (wdth >= 975) && (numlm > -1) && (numrm > -1) ){
 	   		        $("#nav-log-in").removeClass("menu-fut-li");
 	   		  		$("#nav-register").removeClass("menu-fut-li");
 	   		        $("#nav-log-in").addClass("nav-fut-li");
-	   		  		$("#nav-register").addClass("nav-fut-li"); 	   		  		
+	   		  		$("#nav-register").addClass("nav-fut-li"); 
 			}
  		});
  			//結束  	
@@ -280,58 +284,86 @@
   			 	
   			 	
   			 	
-  	    		var tr = $("<tr></tr>")
-  	    		var td1 = $("<td style=vertical-align:middle;>" + reservNo + "</td>");		
-  	    		var td2 = $("<td style=vertical-align:middle;>" + memberName + "</td>");			
-  	    		var td3 = $("<td style=vertical-align:middle;>" + reservDateTime + "</td>");	
-  	    		var td4 = $("<td style=vertical-align:middle;>" + reservEndTime + "</td>");	
-  	    		var td5 = $("<td style=vertical-align:middle;>" + brand + "</td>");	
-  	    		var td6 = $("<td style=vertical-align:middle;>" + carModel + "</td>");
-  	    		var td7 = $("<td style=vertical-align:middle;>" + employeeName + "</td>");  	    		
-  	    		var td8 = $("<td style=vertical-align:middle;></td>");
+  	    		var tr = $("<tr></tr>");
+  	    		var td1 = $("<td style='vertical-align:middle;'>" + reservNo + "</td>");		
+  	    		var td2 = $("<td style='vertical-align:middle;'>" + memberName + "</td>");			
+  	    		var td3 = $("<td style='vertical-align:middle;'>" + reservDateTime + "</td>");	
+  	    		var td4 = $("<td style='vertical-align:middle;'>" + reservEndTime + "</td>");	
+  	    		var td5 = $("<td style='vertical-align:middle;'>" + brand + "</td>");	
+  	    		var td6 = $("<td style='vertical-align:middle;'>" + carModel + "</td>");
+  	    		var td7 = $("<td style='vertical-align:middle;'>" + employeeName + "</td>");  	    		
+  	    		var td8 = $("<td style='vertical-align:middle;'></td>");
+  	    		var td9 = $("<td style='vertical-align:middle;'></td>");
+  	    		//服務明細按鈕
+  	    		var btnServ = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","data-container":"body"});
+  	    		var span1 = $("<span></span>").addClass("glyphicon glyphicon-list-alt");
+  	    		var cts = (+new Date());//現在時間(毫秒)
+  	    		var rdts = Date.parse(reservDateTime);//預約日期毫秒
+  	    		var rets = Date.parse(reservEndTime);//結束日期毫秒
+  	    		//監控按鈕
+  	    		if(cts > rdts && cts < rets){
+	  	    		var btnMit = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button"});	  		    		
+  	    		}else{
+  	    			var btnMit = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","disabled":"true"}); 	    			
+  	    		}
+  	    		var span2 = $("<span></span>").addClass("glyphicon glyphicon-facetime-video");  
+
   	    		
-  	    		var button = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","data-container":"body"});
-  	    		var span = $("<span></span>").addClass("glyphicon glyphicon-th-list");
+  	    		var serTbe = $("<Table style='width:350px;'></Table>");
+  	    		
+  	    		var serThd = $("<thead></thead>");
+  	    		var serTr = $("<tr><th>服務名稱</th><th>服務價格</th><th>服務時間</th></tr>");
+  	    		serThd.append(serTr);
+  	    		
+  	    		var serTbd = $("<tbody></tbody>");
+  	    		
+  	    		var prcTotal = 0;
+  	    		var tmTotal = 0;
+  	    		
+  	    		for(i=0; i <= (orderStatus.reserv_list.length - 1) ;i++){
+  	    			var serTr = $("<tr></tr>");
+  	    			var serTd1 = $("<td>" + orderStatus.reserv_list[i].servName + "</td>");
+  	    			var serTd2 = $("<td>" + orderStatus.reserv_list[i].servPrice + "</td>");
+  	    			var serTd3 = $("<td>" + orderStatus.reserv_list[i].servTime + "</td>");
+  	    			serTr.append([serTd1,serTd2,serTd3]); 	    			
+  	    			serTbd.append(serTr);
+  	    			prcTotal = parseInt(prcTotal) + parseInt(orderStatus.reserv_list[i].servPrice);//服務項目價格累計	    			
+  	    			tmTotal = parseInt(tmTotal) + parseInt(orderStatus.reserv_list[i].servTime);//服務項目時間累計	
+  	    		}
+  	    		var secs = parseInt(tmTotal) * 60;
+				var hr = Math.floor(secs / 3600);
+				var min = Math.floor((secs - (hr * 3600)) / 60);  	    		
+  	    		
+  	    		var serTrp = $("<tr>" + "<td colspan='3' style='text-align:right;'>總金額：" + prcTotal + "元" +"</td>" + "</tr>");//服務項目價格累計的Tr
+  	    		var serTrt = $("<tr>" + "<td colspan='3' style='text-align:right;'>總時間：" + hr + "小時 " + min + "分鐘" +"</td>" + "</tr>");//服務項目時間累計的Tr
+  	    		
+  	    		serTbd.append([serTrp,serTrt]);
   	    		 	    		
+  	    		serTbe.append([serThd,serTbd]);
+
+
+  	    		//設定訂單查詢按鈕，所彈出的提示內容，以及相關參數設定
+				$(btnServ).popover({
+				    trigger:"focus",
+				 	placement:"auto right",
+				    html:true,
+				    template: '<div class="popover my-popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
+				    content:serTbe
+				});
+  	    		//結束 
   	    		
-  	    		button.append(span);
-  	    		td8.append(button);
+  	    		btnServ.append(span1); 	    		
+  	    		td8.append(btnServ);
   	    		
-  	    		tr.append([td1,td2,td3,td4,td5,td6,td7,td8]);
+  	    		btnMit.append(span2);
+  	    		td9.append(btnMit);
+  	    		
+  	    		tr.append([td1,td2,td3,td4,td5,td6,td7,td8,td9]);
   			 	
   	    		$("table > tbody").append(tr);
    			})
-   			
-//    			$(".ser-list").popover({
-//    			    trigger:"focus",
-//    			    placement:"bottom",
-//    			 	placement:"right",
-//    			    html:true,
-//    			    content:'<p style="width: 500px;">html:true会解析html标签哦，<a href="http://www.51xuediannao.com/" target="_blank">懒人建站</a></p><p>你也试试吧！</p>'
-//    			});  			
-   				
-   		}) 			
- 		var tte = 0;
-   	    $(document).on("mouseenter", ".ser-list", function(event){
-   	    	tte=tte+1;
-   	    	
-				$(this).popover({
-			    trigger:"focus",
-			    placement:"bottom",
-			 	placement:"right",
-			    html:true,
-			    content:"<p style='width: 500px;'>"+tte+"</p>"
-			});  		
 			
-   	    	
-   	    });
-//   	    $(document).on('blur', '.ser-list', function(event){
- 	    
-//    	    	$(this).popover("hide");			
-			
-   	    	
-//    	    });  		
-
+   		}) 	   		  	 	
  			
   } );
   
@@ -409,7 +441,7 @@
 						</button>
 						
 						<ul class="dropdown-menu" role="menu">
-						    <li><a href="orderStatus">訂單狀態</a></li>
+						    <li><a href="orderStatus.jsp">訂單狀態</a></li>
 						    <li><a href="#">修改資料</a></li>
 						    <li class="divider"></li>
 						    <li><a href="#">登出</a></li>
@@ -461,40 +493,12 @@
 								<th>廠牌</th>
 								<th>車系</th>
 								<th>服務技師</th>
-								<th>操作</th>
+								<th>服務明細</th>
+								<th>觀看愛車</th>
 							</tr>
 						</thead>																
 						<tbody>
-<!-- 							<tr> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 								<td>測試</td> -->
-<!-- 							</tr>																									 -->
+																								
 						</tbody>
 					</table>
 					
