@@ -1,0 +1,25 @@
+        *{  
+            margin:0;
+            padding:0;
+        }
+        body, html {height: 100%}
+		.s {
+            -webkit-filter: grayscale(1);  /*沒有任何色彩的黑白影像 前綴詞*/
+            
+        }
+        .n {
+            -webkit-filter: grayscale(0);  /*顏色不變*/
+        }
+        #star{
+        	width:420px;
+        	margin:auto;
+        	text-align: center;
+        }
+        #div1{
+        	width:420px;
+        	margin:auto;
+        	color:black;
+        	text-align: center;
+        	font-size: 25px;
+        	font-family:"微軟正黑體";
+        }

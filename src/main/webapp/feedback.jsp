@@ -23,8 +23,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>觀看愛車</title>
-
+<title>意見回饋</title>
+<link rel="stylesheet" href="styles/Lab3.css">
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
 	rel="stylesheet">
@@ -78,8 +78,9 @@
 
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
 
 
 	<style type="text/css">	
@@ -170,8 +171,16 @@
   
   
   $( function() {
-	  
-		
+	  $("#dialog_div").dialog({ 
+	        autoOpen: false, 
+	        show: "blind", 
+	        hide: "explode",
+	        width: 500,
+	        buttons: { 
+	            "Ok": function() { $(this).dialog("close"); }, 
+	            "Cancel": function() { $(this).dialog("close"); }
+	        }
+	    }); 
 	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
 		var wdth = $(window).width();
 		if(wdth<975){					
@@ -222,8 +231,7 @@
 	   		  		$("#nav-register").addClass("nav-fut-li"); 
 			}
 		});
-			//結束  
-					 	
+			//結束  	
 			
 } );
   
@@ -233,8 +241,124 @@
 	
 	
 	
-</style>	
-		
+</style>
+	
+		<script>
+        count = false; //用來固定點擊後星星的顏色
+		goal = 0;
+        window.onload = function () {
+            var imgs = document.querySelectorAll("img.s");
+            var imgslen = imgs.length;
+            //document.getElementById("idstar").onmouseover = mouseOver;
+            //document.getElementById("idstar").onmouseout = mouseOut;
+            for(var i =0;i<imgslen;i++)
+            {
+                imgs[i].onmouseover = function (){ mouseOver(this.id); };
+                imgs[i].onmouseout = function (){ mouseOut(this.id); };
+                imgs[i].onclick = function () { mouseClick(this.id); };
+            }
+        	 grade = $("<span></span>").attr({"name":"grade"}).prop("hidden",true);
+        	 form = $('form[name*="myform"]');
+        	form.append(grade);
+        }
+
+        //滑鼠在星星上
+        function mouseOver(imgid) {
+            var len = imgid.length;
+            var lastchar = imgid.charAt(len - 1); //id名稱的最後一個字元,得知第幾個星,再轉成整數
+            var lastnum = parseInt(lastchar);
+//             document.getElementById("div1").innerHTML = lastnum + "星級"; 
+
+	switch (lastnum) {
+		case 1:
+			document.getElementById("div1").innerHTML = "差"; 
+			break;
+		case 2:
+			document.getElementById("div1").innerHTML = "尚可"; 
+			break;
+		case 3:
+			document.getElementById("div1").innerHTML = "好"; 
+			break;
+		case 4:
+			document.getElementById("div1").innerHTML = "很好"; 
+			break;
+		default:
+			document.getElementById("div1").innerHTML = "極佳"; 
+		}
+		if (count == false) {
+			for (var i = lastnum; i > 0; i--)
+				document.getElementById("id" + imgid.substring(2, 6) + i).className = "n";
+			//count = true;
+		}
+		if (count == true) {
+			for (var i = lastnum; i > 0; i--)
+				document.getElementById("id" + imgid.substring(2, 6) + i).className = "n";
+			//count = true;
+			if (lastnum < goal)
+				for (var i = goal; i > lastnum; i--)
+					document.getElementById("id" + imgid.substring(2, 6) + i).className = "s";
+		}
+	}
+
+	//滑鼠移開星星
+	function mouseOut(imgid) {
+
+		var len = imgid.length;
+		var lastchar = imgid.charAt(len - 1);//id名稱的最後一個字元,得知第幾個星,再轉成整數
+		var lastnum = parseInt(lastchar);
+		if (count == false) {
+			for (var i = lastnum; i > 0; i--) {
+				document.getElementById("id" + imgid.substring(2, 6) + i).className = "s";
+			}
+		}
+		if (count == true) {
+			for (var i = goal; i > 0; i--)
+				document.getElementById("id" + imgid.substring(2, 6) + i).className = "n";
+			if (lastnum > goal) {
+				for (var i = lastnum; i > goal; i--)
+					document.getElementById("id" + imgid.substring(2, 6) + i).className = "s";
+			}
+			//count = true;
+		}
+		if (goal == 0)
+			document.getElementById("div1").innerHTML = "請評分";
+		else{
+			switch (goal) {
+			case 1:
+				document.getElementById("div1").innerHTML = "差"; 
+				break;
+			case 2:
+				document.getElementById("div1").innerHTML = "尚可"; 
+				break;
+			case 3:
+				document.getElementById("div1").innerHTML = "好"; 
+				break;
+			case 4:
+				document.getElementById("div1").innerHTML = "很好"; 
+				break;
+			default:
+				document.getElementById("div1").innerHTML = "極佳"; 
+			}
+		}
+	}
+
+	function mouseClick(imgid) {
+		var len = imgid.length;
+		var lastchar = imgid.charAt(len - 1);
+		var lastnum = parseInt(lastchar);
+		if (count == false) {
+			goal = lastnum;
+			count = true;
+		}
+		if (count == true) {
+			//document.getElementById("div1").innerHTML = "打分數中...";
+			goal = lastnum;
+		}
+		grade.val(goal);
+		//console.log(grade.val());
+		$("#dialog_div").dialog("open");
+	}
+</script>
 </head>
 <body id="page-top" class="index">
 	<!-- Navigation -->
@@ -341,10 +465,22 @@
 	<section id="services">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							
-					
-
+				<div id="div2" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div style="text-align: center;margin:auto;"><h2>告訴我們您的想法</h2></div>
+				<form method="post" action="" name="myform">
+					<div id="star">
+						<img id="idstar1" class="s" src="img/star.png" width="40" />
+						<img id="idstar2" class="s" src="img/star.png" width="40" />
+						<img id="idstar3" class="s" src="img/star.png" width="40" />
+						<img id="idstar4" class="s" src="img/star.png" width="40" />
+						<img id="idstar5" class="s" src="img/star.png" width="40" />
+					</div>
+					<div id="div1">請評分</div>
+					<br>
+					<div id="dialog_div" title="Your opinions">
+  						<textarea rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的看法"></textarea>
+					</div>
+					</form>
 				</div>
 				
 			</div>
