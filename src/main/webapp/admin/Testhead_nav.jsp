@@ -84,7 +84,7 @@ ul[class*="nav navbar-nav side-nav"] {
 					<li><a href="${ctx}/services/SelectServices.jsp"><i class="fa fa-fw fa-table"></i>維護服務項目</a></li>
 					<li><a href="#" id="a_test"><i
 							class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a></li>
-					<li><a href="#"><i class="fa fa-fw fa-edit"></i> 管理黑名單</a></li>
+					<li><a href="${ctx}/admin/maintainBlockList.jsp"><i class="fa fa-fw fa-edit"></i> 管理黑名單</a></li>
 
 					<li><a href="javascript:;" data-toggle="collapse"
 						data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> 維護名單<i
