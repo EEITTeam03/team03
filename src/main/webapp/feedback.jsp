@@ -23,8 +23,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>觀看愛車</title>
-
+<title>意見回饋</title>
+<link rel="stylesheet" href="styles/Lab3.css">
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
 	rel="stylesheet">
@@ -78,8 +78,9 @@
 
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
 
 
 	<style type="text/css">	
@@ -161,53 +162,7 @@
 			
 			display: block;
 		}       
-        .div-node-undone{
-        	width:80px;
-			
-			height:80px; 
-			
-			border-radius:99em;			
-         
-			border:0px;
-            
-            background:#999;                     
-        } 
-        .div-node-completed{
-        	width:80px;
-			
-			height:80px; 
-			
-			border-radius:99em;			
-         
-			border:0px;
-            
-            background:green;                     
-        }        
-        .div-line-undone{
-        	width:80px;
-			
-			height:10px;
-			
-			border:0px;
-			
-			background:#999;
-        }
-        .div-line-completed{
-        	width:80px;
-			
-			height:10px;
-			
-			border:0px;
-			
-			background:green;
-        }
-       td{ 
-			width:80px; 
-      }  
-      .fnt-select{
-      	-webkit-user-select: none;
-      	color:transparent;
-      }             
+             
 	</style>
 
 
@@ -216,8 +171,16 @@
   
   
   $( function() {
-	  
-		
+	  $("#dialog_div").dialog({ 
+	        autoOpen: false, 
+	        show: "blind", 
+	        hide: "explode",
+	        width: 500,
+	        buttons: { 
+	            "Ok": function() { $(this).dialog("close"); }, 
+	            "Cancel": function() { $(this).dialog("close"); }
+	        }
+	    }); 
 	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
 		var wdth = $(window).width();
 		if(wdth<975){					
@@ -268,115 +231,9 @@
 	   		  		$("#nav-register").addClass("nav-fut-li"); 
 			}
 		});
-			//結束  
-			
-			var reservNo=$("#no").text();			
- 			var stageTime = 0;
-   			$.getJSON('ProgressServlet',{"reservNo":reservNo},function(json){   				   				
-   				$.each(json,function(idx,service_step){
-   					
-   					console.log(service_step);	
-   					
-   	  	    		var rdts = Date.parse(service_step.reservDateTime);//預約日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
-   	  	    		var rdtshr = (new Date(service_step.reservDateTime)).getHours();//預約日期取出小時
-   	  	    		var rdtsmin = (new Date(service_step.reservDateTime)).getMinutes();//預約日期取出分鐘
-   	  	    		var rdtssec = (new Date(service_step.reservDateTime)).getSeconds();//預約日期取出毫秒
-   	  	    		rdts = rdts + (rdtshr*60*60) + (rdtsmin*60) + rdtssec;//預約日期加總換算成毫秒
-   	  	    		var rets = Date.parse(service_step.reservEndTime);//結束日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
-   	  	    		var retshr = (new Date(service_step.reservEndTime)).getHours();//結束日期取出小時
-   	  	    		var retsmin = (new Date(service_step.reservEndTime)).getMinutes();//結束日期取出分鐘
-   	  	    		var retssec = (new Date(service_step.reservEndTime)).getSeconds();//結束日期取出毫秒
-   	  	    		rets = rets + (retshr*60*60) + (retsmin*60) + retssec;//結束日期加總換算成毫秒
-   	  	    		
-   	  	    		
-   	  	    		
-   	  	    		
-   	  	    		
-   	  	    		
-   	  	    		
-   	  	    		
-   	  	    		var cts = (+new Date());//現在時間(毫秒)
-   	  	    		var servTime = service_step.servTime;//該服務的總時間
-   					
-   					var operatingTime = cts - rdts ;//已經工作多少時間
-   					
-   					console.log("現在秒數:"+cts);
-   					console.log("開始秒數:"+rdts);
-   					
-   					//每個步驟產生一個節點圓與一個階段線
-   					for( i=0 ; i < service_step.servStep.length ; i++ ){
-   						
-   						stageTime = stageTime + servTime/3*60*1000;//該服務總時間依步驟數平均分配時間並換算成毫秒(除3，代表3步驟)，得到階段時間
-   						
-   						//已經工作的時間若大於該階段時間，代表完成這個階段，節點圓與階段線就為完成顏色。反之，為未完成顏色
-	   					if(operatingTime > stageTime){
-	   						
-	   						var sec = Math.floor(operatingTime/1000);	   						
-	   						var whr = Math.floor(sec/60/60);
-	   						var wmin = Math.floor((sec - ( whr*60*60 )) /60);
-	   						var wsec = Math.floor(sec - ( whr*60 *60 ) - ( wmin*60 ));
-	   						
-	   						console.log("已經工作多少時間:"+whr+"小時"+wmin+"分"+wsec+"秒");
-	   						console.log("已工作秒數"+Math.floor(operatingTime/1000)+">該階段秒數"+Math.floor(stageTime/1000));
-	   							   				
-		 					var td1 =  $("<td></td>");
-		 					var bdline = $("<div></div>").addClass("progress progress-striped active div-line-completed");
-		   		   			var dline = $("<div>"+stageTime+"</div>").addClass("progress-bar progress-bar-success div-line-completed fnt-select").attr({"role":"progressbar","aria-valuenow":"60","aria-valuemin":"0","aria-valuemax":"100","style":"width:100%;"});
-		   		   			var td2 =  $("<td></td>");
-		   		   			var bdball = $("<div></div>").addClass("progress progress-striped active div-node-completed");
-		   		   			var dball =$("<div>"+stageTime+"</div>").addClass("progress-bar progress-bar-success div-node-completed fnt-select").attr({"role":"progressbar","aria-valuenow":"60","aria-valuemin":"0","aria-valuemax":"100","style":"width:100%;"}); 
-		   		   			   		   			
-
-	   					}else{
-	   						var sec = Math.floor(operatingTime/1000);	   						
-	   						var whr = Math.floor(sec/60/60);
-	   						var wmin = Math.floor((sec - ( whr*60*60 )) /60);
-	   						var wsec = Math.floor(sec - ( whr*60 *60 ) - ( wmin*60 ));
-	   						
-	   						console.log("已經工作多少時間:"+whr+"小時"+wmin+"分"+wsec+"秒");
-	   						console.log("已工作秒數"+Math.floor(operatingTime/1000)+"<該階段秒數"+Math.floor(stageTime/1000));	   						
-	   						 	   						
-		 					var td1 =  $("<td></td>");
-		 					var bdline = $("<div></div>").addClass("progress progress-striped active div-line-undone");
-		   		   			var dline = $("<div>"+stageTime+"</div>").addClass("div-line-undone fnt-select").attr({"role":"progressbar","aria-valuenow":"60","aria-valuemin":"0","aria-valuemax":"100","style":"width:100%;"});
-		   		   			var td2 =  $("<td></td>");
-		   		   			var bdball = $("<div></div>").addClass("progress progress-striped active div-node-undone");
-		   		   			var dball =$("<div>"+stageTime+"</div>").addClass("div-node-undone fnt-select").attr({"role":"progressbar","aria-valuenow":"60","aria-valuemin":"0","aria-valuemax":"100","style":"width:100%;"}); 		   		   			
-	   	   		   			
-	   	   		   			var countSec = ((Math.floor(stageTime/1000))-(Math.floor(operatingTime/1000)))*1000;//多久毫秒後，刷新進度條
-							var cutdTimer = setTimeout("colorUpdate("+stageTime+")",countSec);//自動更新進度條
-							console.log("計時器"+Math.floor(countSec/1000)+"秒後啟動");
-	   					}
-   						var decTd1 =  $("<td>"+service_step.servStep[i].descp+"</td>");
-   						var decTd2 =  $("<td></td>");
-	   					$("table tr:nth-child(1)").append([decTd1,decTd2]);
-   						
-	   					bdline.append(dline);
-	   					bdball.append(dball);
-	   		   			td1.append(bdline); 
-	   		   			td2.append(bdball); 
-	   		   			$("table tr:nth-child(2)").append([td1,td2]);   						
-   						
-   					}
-   		   			//結束
-   					
-   				   				  					
-   				})
-   				
-   			})			
-   			 
-   				 	
+			//結束  	
 			
 } );
-  
-  function colorUpdate(stageTime){
-// 	  $("button[value="+stageTime+"]").attr("value");
-	  $("div:contains('"+stageTime+"'):eq(0)").removeClass("div-line-undone");
-	  $("div:contains('"+stageTime+"'):eq(1)").removeClass("div-node-undone");
-	  $("div:contains('"+stageTime+"'):eq(0)").addClass("progress-bar progress-bar-success div-line-completed");
-	  $("div:contains('"+stageTime+"'):eq(1)").addClass("progress-bar progress-bar-success div-node-completed");
-  }
-  
   
   </script>
 
@@ -384,8 +241,124 @@
 	
 	
 	
-</style>	
-		
+</style>
+	
+		<script>
+        count = false; //用來固定點擊後星星的顏色
+		goal = 0;
+        window.onload = function () {
+            var imgs = document.querySelectorAll("img.s");
+            var imgslen = imgs.length;
+            //document.getElementById("idstar").onmouseover = mouseOver;
+            //document.getElementById("idstar").onmouseout = mouseOut;
+            for(var i =0;i<imgslen;i++)
+            {
+                imgs[i].onmouseover = function (){ mouseOver(this.id); };
+                imgs[i].onmouseout = function (){ mouseOut(this.id); };
+                imgs[i].onclick = function () { mouseClick(this.id); };
+            }
+        	 grade = $("<span></span>").attr({"name":"grade"}).prop("hidden",true);
+        	 form = $('form[name*="myform"]');
+        	form.append(grade);
+        }
+
+        //滑鼠在星星上
+        function mouseOver(imgid) {
+            var len = imgid.length;
+            var lastchar = imgid.charAt(len - 1); //id名稱的最後一個字元,得知第幾個星,再轉成整數
+            var lastnum = parseInt(lastchar);
+//             document.getElementById("div1").innerHTML = lastnum + "星級"; 
+
+	switch (lastnum) {
+		case 1:
+			document.getElementById("div1").innerHTML = "差"; 
+			break;
+		case 2:
+			document.getElementById("div1").innerHTML = "尚可"; 
+			break;
+		case 3:
+			document.getElementById("div1").innerHTML = "好"; 
+			break;
+		case 4:
+			document.getElementById("div1").innerHTML = "很好"; 
+			break;
+		default:
+			document.getElementById("div1").innerHTML = "極佳"; 
+		}
+		if (count == false) {
+			for (var i = lastnum; i > 0; i--)
+				document.getElementById("id" + imgid.substring(2, 6) + i).className = "n";
+			//count = true;
+		}
+		if (count == true) {
+			for (var i = lastnum; i > 0; i--)
+				document.getElementById("id" + imgid.substring(2, 6) + i).className = "n";
+			//count = true;
+			if (lastnum < goal)
+				for (var i = goal; i > lastnum; i--)
+					document.getElementById("id" + imgid.substring(2, 6) + i).className = "s";
+		}
+	}
+
+	//滑鼠移開星星
+	function mouseOut(imgid) {
+
+		var len = imgid.length;
+		var lastchar = imgid.charAt(len - 1);//id名稱的最後一個字元,得知第幾個星,再轉成整數
+		var lastnum = parseInt(lastchar);
+		if (count == false) {
+			for (var i = lastnum; i > 0; i--) {
+				document.getElementById("id" + imgid.substring(2, 6) + i).className = "s";
+			}
+		}
+		if (count == true) {
+			for (var i = goal; i > 0; i--)
+				document.getElementById("id" + imgid.substring(2, 6) + i).className = "n";
+			if (lastnum > goal) {
+				for (var i = lastnum; i > goal; i--)
+					document.getElementById("id" + imgid.substring(2, 6) + i).className = "s";
+			}
+			//count = true;
+		}
+		if (goal == 0)
+			document.getElementById("div1").innerHTML = "請評分";
+		else{
+			switch (goal) {
+			case 1:
+				document.getElementById("div1").innerHTML = "差"; 
+				break;
+			case 2:
+				document.getElementById("div1").innerHTML = "尚可"; 
+				break;
+			case 3:
+				document.getElementById("div1").innerHTML = "好"; 
+				break;
+			case 4:
+				document.getElementById("div1").innerHTML = "很好"; 
+				break;
+			default:
+				document.getElementById("div1").innerHTML = "極佳"; 
+			}
+		}
+	}
+
+	function mouseClick(imgid) {
+		var len = imgid.length;
+		var lastchar = imgid.charAt(len - 1);
+		var lastnum = parseInt(lastchar);
+		if (count == false) {
+			goal = lastnum;
+			count = true;
+		}
+		if (count == true) {
+			//document.getElementById("div1").innerHTML = "打分數中...";
+			goal = lastnum;
+		}
+		grade.val(goal);
+		//console.log(grade.val());
+		$("#dialog_div").dialog("open");
+	}
+</script>
 </head>
 <body id="page-top" class="index">
 	<!-- Navigation -->
@@ -492,10 +465,22 @@
 	<section id="services">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							
-					
-
+				<div id="div2" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div style="text-align: center;margin:auto;"><h2>告訴我們您的想法</h2></div>
+				<form method="post" action="" name="myform">
+					<div id="star">
+						<img id="idstar1" class="s" src="img/star.png" width="40" />
+						<img id="idstar2" class="s" src="img/star.png" width="40" />
+						<img id="idstar3" class="s" src="img/star.png" width="40" />
+						<img id="idstar4" class="s" src="img/star.png" width="40" />
+						<img id="idstar5" class="s" src="img/star.png" width="40" />
+					</div>
+					<div id="div1">請評分</div>
+					<br>
+					<div id="dialog_div" title="Your opinions">
+  						<textarea rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的看法"></textarea>
+					</div>
+					</form>
 				</div>
 				
 			</div>
@@ -508,19 +493,8 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					
 					<table>
-						<tr>
-							<td></td>
-							
-						</tr>
-						<tr>
-							<td>
-								<div class="progress progress-striped active div-node-completed">
-									<div class="progress-bar progress-bar-success div-node-completed" role="progressbar"
-			 							aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-			 						</div>
-			 					</div>
-							</td>  				          
-						</tr>				      				      				      
+					
+				      				      				      
 					</table>
 						
 						
@@ -533,11 +507,7 @@
 			</div>
 		</div>
 		
-	</section>
-	
-	<span hidden="hide" id="no">${param.reservNo}</span>
-
-
+	</section>	
 
 </body>
 </html>

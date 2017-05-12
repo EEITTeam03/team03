@@ -6,49 +6,27 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONValue;
+
 import com.membercars.model.MemberCarsVO;
 import com.membercars.model.MembercarsService;
 import com.memberinfo.model.MemberInfoVO;
+import com.memberinfo.model.MemberService;
+import com.reservlist.model.ReservListService;
+import com.reservlist.model.ReservListVO;
 import com.schedule.model.ReservService;
 import com.schedule.model.ReservVO;
-import com.services.model.ServicesVO;
+import com.servicestep.model.ServiceStepService;
+import com.servicestep.model.ServiceStepVO;
 
-public class ReservListService {
+public class ReservListTest {
 	
-	private ReservListDAO dao;
-	
-	public ReservListService(){
-		dao = new ReservListHibernateDAO();
-	}
-	
-	public ReservListVO addReservList(ReservVO reservVO,ServicesVO servicesVO,Integer servPrice, Integer servTime,String servName){
-		
-		ReservListVO reservListVO = new ReservListVO();
-		reservListVO.setReservVO(reservVO);
-		reservListVO.setServicesVO(servicesVO);
-		reservListVO.setServPrice(servPrice);
-		reservListVO.setServTime(servTime);
-		reservListVO.setServName(servName);
-		
-		dao.insert(reservListVO);
-		return reservListVO;
-	}
-	
-	public void deleteListByNo(Integer reservNo){
-		dao.delete(reservNo);
-	}
-	
-	public List<ReservListVO> findByReservNo(Integer reservNo){
-		return dao.findByReservNo(reservNo);
-	}
-	
-	public Map getReservListForJSON(Integer memberNo) {
+	public Map getReservListForJSON() {
 		
 		Map mapOuter = new LinkedHashMap<>();
 		
 		MembercarsService mcs = new MembercarsService();
-//		Integer member = Integer.valueOf(memberNo);
-		List<MemberCarsVO> carList = mcs.getListByMember(memberNo);
+		List<MemberCarsVO> carList = mcs.getListByMember(11);
 		
 		List<Map> list2 = new ArrayList<Map>();
 		
@@ -118,4 +96,16 @@ public class ReservListService {
 		return mapOuter;
 	}
 	
+	
+	public static void main (String args[]){
+		
+		ReservListTest rsTest = new ReservListTest();
+		Map mapOuter = new LinkedHashMap<>();
+		mapOuter = rsTest.getReservListForJSON();
+		
+		String jsonString = JSONValue.toJSONString(mapOuter);
+		System.out.println(jsonString);
+		
+		
+	}
 }
