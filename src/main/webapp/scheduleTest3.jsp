@@ -675,7 +675,7 @@ ul[class*="nav navbar-nav side-nav"] {
                         <a href="#" id="a_test"><i class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-edit"></i> 管理黑名單</a>
+                        <a href="${ctx}/admin/maintainBlockList.jsp"><i class="fa fa-fw fa-edit"></i> 管理黑名單</a>
                     </li>
 
                     <li>

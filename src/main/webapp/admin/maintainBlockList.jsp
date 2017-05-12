@@ -12,29 +12,68 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Bootstrap Core CSS -->
+    <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
+<jsp:include page="../admin/Testhead_nav.jsp"/>
+<div id="wrapper">
+<div id="page-wrapper">
+<div class="table-responsive">
+
+	<h2>管理黑名單</h2>
+	
 		<form action="maintain.do" method="post">
-			車牌:<input type="text" name="license" size='40'
-				value='${param.license}' />  <small><Font
-				color='red'>${ErrorMsgKey.LicenseError}</Font></small> <br /> 
-			違反規則:<select size="1" name="blockRuleNo">
+		<table class="table table-bordered table-hover">
+		<tr>
+		<td>車牌:</td>
+			<td>
+				<input type="text" name="license" size='40' value='${param.license}' />  
+				<small><Font color='red'>${ErrorMsgKey.LicenseError}</Font></small> <br />
+			</td>
+		</tr>
+		
+		<tr>
+			<td>違反規則:</td>
+			<td>
+			<select size="1" name="blockRuleNo">
 				<c:forEach var="blockRuleVO" items="${list}">
 					<option value="${blockRuleVO.blockRuleNo}">${blockRuleVO.blockRule}
 				</c:forEach>
 			</select> <small><Font color='red'>${ErrorMsgKey.BlockRuleNoError}</Font></small>
-			<br /> 違反日期:<input type="date" name="violationDate" size='40'
+			</td>
+			</tr>
+			<br> 
+			<tr>
+			<td>違反日期:
+			<td><input type="date" name="violationDate" size='40'
 				value='${param.violationDate}' />  <small><Font
 				color='red'>${ErrorMsgKey.ViolationDateError}</Font></small> <br />
-			預約編號:<input type="text" name="reservationNo" size='40'
-				value='${param.reservationNo}' />  <small><Font
-				color='red'>${ErrorMsgKey.ReservationNoError}</Font></small> <br /> <small><Font
-				color='red'>${ErrorMsgKey.MaintainError}</Font></small> <br /> 
+			</td>
+			</tr>
+			<br>
+			<tr>
+			<td>預約編號:</td>
+			<td>
+			<input type="text" name="reservationNo" size='40'value='${param.reservationNo}' />  
+			<small><Font color='red'>${ErrorMsgKey.ReservationNoError}</Font></small> <br /> 
+			<small><Font color='red'>${ErrorMsgKey.MaintainError}</Font></small> <br /> 
+				</td>
+				</tr>
+				</table>
 				<input type="hidden" name="action" value="insert">
-				<input type="submit" value="送出" /> <br />
+				<button type="submit" class="btn btn-sm btn-primary">送出</button>
 		</form>
+		
+	</div>
+	</div>
 	</div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.services.model.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	ServicesVO servicesVO = (ServicesVO) request.getAttribute("servicesVO");
 %>
@@ -17,6 +18,10 @@
 
     <!-- Custom Fonts -->
     <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+ 	
+ 	<!-- SweetAlert -->
+    <script src="../admin/SweetAlert/js/sweetalert.min.js"></script> 
+	<link href="../admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <jsp:include page="../admin/Testhead_nav.jsp"/>

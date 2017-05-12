@@ -37,12 +37,13 @@ public class ServicesInsert extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8"); // 文字資料轉內碼
 		String action = request.getParameter("action");
-		String updatePath = request.getServletPath();
+		
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		Map<String, String> msgOK = new HashMap<String, String>();
 
 		if ("insert".equals(action)) {
 			HttpSession session = request.getSession();
+			
 			request.setAttribute("MsgMap", errorMsg); // 顯示錯誤訊息
 			session.setAttribute("MsgOK", msgOK); // 顯示正常訊息
 			Integer servNo = 0;
@@ -138,9 +139,10 @@ public class ServicesInsert extends HttpServlet {
 					System.out.println("filename:" + fileName);
 
 					sdao.insert(svo);
+					msgOK.put("ok", "新增成功!");
 					if (sdao.findByPrimaryKey(servNo) != null) {
-						msgOK.put("InsertOK", "<Font color='red'>新增成功，請開始使用本系統</Font>");
-						response.sendRedirect("../admin/admin_default.jsp");
+						
+						response.sendRedirect("SelectServices.jsp");
 						return;
 					} else {
 						errorMsg.put("errorIDDup", "新增此筆資料有誤");
@@ -196,6 +198,8 @@ public class ServicesInsert extends HttpServlet {
 		}
 		if ("getOne_For_Update".equals(action)) {
 			try {
+				String Path = request.getServletPath();
+				request.setAttribute("xx", Path);
 				Integer servNo = new Integer(request.getParameter("servNo"));
 				ServicesService ss = new ServicesService();
 				ServicesVO servicesVO = ss.getOneService(servNo);
@@ -203,6 +207,7 @@ public class ServicesInsert extends HttpServlet {
 				String url = "/services/UpdateService.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);
 				successView.forward(request, response);
+				return;
 			} catch (Exception e) {
 				e.printStackTrace();
 				RequestDispatcher failureView = request.getRequestDispatcher("/services/UpdateService.jsp");
@@ -273,9 +278,10 @@ public class ServicesInsert extends HttpServlet {
 				 *************/
 				request.setAttribute("servicesVO", servicesVO);
 				String url = "ListAllServices.jsp";
-				String url1 = "ListOneServices.jsp";
+				String url1 = "ListOneServicesForUser.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url1);
 				successView.forward(request, response);
+//				response.sendRedirect(url1);
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMsg.put("errorservPhoto", "修改資料失敗:" + e.getMessage());
