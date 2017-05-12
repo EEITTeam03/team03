@@ -156,4 +156,18 @@ public class MemberInfoHibernateDAO implements MemberInfoDAO {
 		return memberInfoVO;
 	}
 
+	@Override
+	public void merge(MemberInfoVO memberInfoVO) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.merge(memberInfoVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		
+	}
+
 }
