@@ -155,101 +155,113 @@
 	
 		</div>
 	</nav>
+	
+	<!-- Header -->
+	<header>
+		<div style="position: absolute;opacity:0.3">
+			<video autoplay loop muted class="fillWidth" style="width: 100%;">
 
+				<source src="video/file.mp4" type="video/mp4" />
+				Your browser does not support the video tag. I suggest you upgrade
+				your browser.
+				<source src="video/video_preview_h264.wmv" type="video/wmv" />
+				Your browser does not support the video tag. I suggest you upgrade
+				your browser.
+				<!-- object標籤內解決 -->
+				<object>
+					<embed src="video/video_preview_h264.mp4"
+						type="application/x-shockwave-flash" allowfullscreen="false"
+						allowscriptaccess="always"
+						style="width: 100%; height: 100%; z-index: -1" loop="true" />
+				</object>
+			</video>
+		</div>
+
+	</header>
+	
 	<section id="services">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
 	
 				<div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
-					<div class="panel panel-danger" style="border-color:salmon">
-						<div class="panel-heading" style="background-color:salmon;border-color:salmon;color:white;">
-							<h3 class="panel-title">註冊會員</h3>
-						</div>
-						
-						<div class="panel-body">
-							<div class="flot-chart">
-								<div class="flot-chart-content" id="flot-bar-chart">
+				
+					<form id="cmxform" class="form-signin" role="form" action="MemberNext" method="post">													
+																		
+						<br>												
+						<c:if test="${!empty FBName}">												
+							<input id="name" type="hidden" name="name" value='${FBName}'>											
+						</c:if>												
+						<c:if test="${empty FBName}">												
+						<div class="input-group" style="border:1px solid #FFB6C1">												
+						  	<span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-user"></i></span>											
+																		
+						  	<input id="name" type="text" class="form-control required" name="name" placeholder="輸入您的姓名" value='${param.name}'>											
+							<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>											
+						</div>												
+						<br>												
+						</c:if>												
+						<c:if test="${!empty FBAccount}">												
+						  	<input id="email" type="hidden" name="email" value='${FBAccount}'>											
+						</c:if>												
+						<c:if test="${empty FBAccount}">												
+						<div class="input-group" style="border:1px solid #FFB6C1">												
+						  	<span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-envelope"></i></span>											
+																		
+						  	<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件" value='${param.email}'>											
+							<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>											
+						</div>												
+						<br>												
+						</c:if>												
+																		
+						<c:if test="${!empty FBId}">												
+						  	<input id="password" type="hidden" name="password" value='${FBId}'>											
+						</c:if>												
+						<c:if test="${empty FBId}">												
+						<div class="input-group" style="border:1px solid #FFB6C1">												
+						    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-lock"></i></span>												
+																		
+						    <input id="password" type="password" class="form-control required" name="password" placeholder="輸入您的密碼" value='${param.password}'>												
+						    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>												
+						</div>												
+						<br>												
+						</c:if>												
+																		
+																		
+						<div class="input-group" style="border:1px solid #FFB6C1">												
+						    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-phone"></i></span>												
+																		
+						    <input id="phone" class="form-control required" name="phone" placeholder="輸入您的電話" value='${param.phone}'>												
+						    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>												
+																		
+						</div>												
+																		
+						<br>												
+																		
+						<div class="input-group" style="border:1px solid #FFB6C1">												
+						    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>												
+																		
+						    <input id="datepicker" class="form-control required dateISO" name="datepicker" placeholder="輸入您的出生年月日" value='${param.birthday}'>												
+						    <small><Font color='red' >${ErrorMsgKey.BirthdayEmptyError}</Font></small><br>												
+						</div>												
+																		
+						<br>												
+																		
+						<div class="input-group" style="border:1px solid #FFB6C1">												
+						    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>												
+						    <input id="address" type="text" class="form-control required" name="address" placeholder="輸入您的地址" value='${param.address}'>												
+						    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>												
+						</div>												
+																		
+						<br>												
+																		
+						<input type="hidden" name="action" value="insert">												
+						<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >下一步</button>												
+																		
+					</form>													
 
-									<form id="cmxform" class="form-signin" role="form" action="MemberNext" method="post">
-									
-										<br>
-										<c:if test="${!empty FBName}">
-											<input id="name" type="hidden" name="name" value='${FBName}'>
-										</c:if>
-										<c:if test="${empty FBName}">
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										  	<span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-user"></i></span>
-
-										  	<input id="name" type="text" class="form-control required" name="name" placeholder="輸入您的姓名" value='${param.name}'>
-											<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>
-										</div>										
-										<br>
-										</c:if>
-										<c:if test="${!empty FBAccount}">
-										  	<input id="email" type="hidden" name="email" value='${FBAccount}'>
-										</c:if>
-										<c:if test="${empty FBAccount}">
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										  	<span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-envelope"></i></span>
-
-										  	<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件" value='${param.email}'>
-											<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>
-										</div>
-										<br>
-										</c:if>
-										
-										<c:if test="${!empty FBId}">
-										  	<input id="password" type="hidden" name="password" value='${FBId}'>
-										</c:if>
-										<c:if test="${empty FBId}">
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-lock"></i></span>
-
-										    <input id="password" type="password" class="form-control required" name="password" placeholder="輸入您的密碼" value='${param.password}'>
-										    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>										
-										</div>
-										<br>
-										</c:if>
-										
-										
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-phone"></i></span>
-
-										    <input id="phone" class="form-control required" name="phone" placeholder="輸入您的電話" value='${param.phone}'>
-										    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>
-
-										</div>
-										
-										<br>										
-
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>
-
-										    <input id="datepicker" class="form-control required dateISO" name="datepicker" placeholder="輸入您的出生年月日" value='${param.birthday}'>
-										    <small><Font color='red' >${ErrorMsgKey.BirthdayEmptyError}</Font></small><br>
-										</div>
-										
-										<br>
-										
-										<div class="input-group" style="border:1px solid #FFB6C1">
-										    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-time"></i></span>
-										    <input id="address" type="text" class="form-control required" name="address" placeholder="輸入您的地址" value='${param.address}'>
-										    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>
-										</div>
-										
-										<br>																																			
-
-										<input type="hidden" name="action" value="insert">
-										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >下一步</button>
-										
-									</form>	
-								</div>
-							</div>
-						</div>
-						
-					</div>	
-				</div>
+				</div>	
+				
 				
 				<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
 	
