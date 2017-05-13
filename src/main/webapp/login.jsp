@@ -289,7 +289,12 @@
 						if(data=="Account Not found"){
 							window.top.location.href = "register.jsp"
 						}else{
+							var mytarget= '${target}';
+							console.log(mytarget);
+							if(mytarget==''){
 							window.top.location.href ="index.jsp"
+							}else
+								window.top.location.href= mytarget;
 						}							
 					},
 					error : function(data) {

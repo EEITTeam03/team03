@@ -1,14 +1,22 @@
 package com.feedback.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class FeedbackVO {
+public class FeedbackVO implements Serializable{
 private Calendar feedbackDate;
 private String memberName;
-private Integer reservNo;
+private Integer memberNo;
 private String feedback;
 private String reply;
 private Integer readState;
+private Integer feedbackNo;
+public Integer getFeedbackNo() {
+	return feedbackNo;
+}
+public void setFeedbackNo(Integer feedbackNo) {
+	this.feedbackNo = feedbackNo;
+}
 public Calendar getFeedbackDate() {
 	return feedbackDate;
 }
@@ -21,11 +29,12 @@ public String getMemberName() {
 public void setMemberName(String memberName) {
 	this.memberName = memberName;
 }
-public Integer getReservNo() {
-	return reservNo;
+
+public Integer getMemberNo() {
+	return memberNo;
 }
-public void setReservNo(Integer reservNo) {
-	this.reservNo = reservNo;
+public void setMemberNo(Integer memberNo) {
+	this.memberNo = memberNo;
 }
 public String getFeedback() {
 	return feedback;

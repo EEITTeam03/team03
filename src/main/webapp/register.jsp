@@ -91,10 +91,7 @@
     
     $("#cmxform").validate();
     
-  } );
-  
- 
-  
+  } );   
   </script>
 
 
