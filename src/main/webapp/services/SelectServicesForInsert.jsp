@@ -23,11 +23,9 @@
    
 </head>
 <body>
-<c:if test="${!empty path}">
 <script>
-swal("修改成功!")
+swal("新增成功!")
 </script>
-</c:if>
 <jsp:include page="../admin/Testhead_nav.jsp"/>
 <div id="wrapper">
 <div id="page-wrapper">
