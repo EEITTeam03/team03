@@ -231,7 +231,7 @@
 						<div class="input-group" style="border:1px solid #FFB6C1">												
 						    <span class="input-group-addon" style="border-right:1px solid #FFB6C1"><i class="glyphicon glyphicon-phone"></i></span>												
 																		
-						    <input id="phone" class="form-control required" name="phone" placeholder="輸入您的電話" value='${param.phone}'>												
+						    <input id="phone" class="form-control required" name="phone" placeholder="輸入您的電話" value='${param.phone}' autocomplete="off">												
 						    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>												
 																		
 						</div>												
