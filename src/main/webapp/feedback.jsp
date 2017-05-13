@@ -172,6 +172,9 @@
   
   $( function() {
 	  var txtarea = $('textarea[name*="comment"]');
+	  count = false; //用來固定點擊後星星的顏色
+	  goal = 0;
+	  
 	  $("#dialog_div").dialog({ 
 	        autoOpen: false, 
 	        show: "blind", 
@@ -179,23 +182,26 @@
 	        width: 500,
 	        buttons: { 
 	            "Ok": function() { 
+	            	//把意見送進DB
 	            	$.ajax({
 	            		type:'POST',
 	            		url:'AddOpinions',
 	            		dataType:'text',
 	            		data : {
 							'opinions' : txtarea.val(),
+							'goal':goal
 						},
 	            		success : function(data) {
-						
+	            			
 					},
 					error : function(data) {
-
+						alert("error");
 					}
 	            	})
+	            	$(this).dialog("close");
 	            }, 
-	            "Cancel": function() { $(this).dialog("close"); 
-// 	            console.log(txtarea.val());
+	            "Cancel": function() { 
+	            	$(this).dialog("close"); 
 	            }
 	        }
 	    });
@@ -252,38 +258,22 @@
 	   		  		$("#nav-register").addClass("nav-fut-li"); 
 			}
 		});
-			//結束  	
-			
-} );
-  
-  </script>
-
-<style>
-	
-	
-	
-</style>
-	
-		<script>
-        count = false; //用來固定點擊後星星的顏色
-		goal = 0;
-        window.onload = function () {
-            var imgs = document.querySelectorAll("img.s");
-            var imgslen = imgs.length;
-            //document.getElementById("idstar").onmouseover = mouseOver;
-            //document.getElementById("idstar").onmouseout = mouseOut;
-            for(var i =0;i<imgslen;i++)
-            {
-                imgs[i].onmouseover = function (){ mouseOver(this.id); };
-                imgs[i].onmouseout = function (){ mouseOut(this.id); };
-                imgs[i].onclick = function () { mouseClick(this.id); };
-            }
-        	 grade = $("<span></span>").attr({"name":"grade"}).prop("hidden",true);
-        	 form = $('form[name*="myform"]');
-        	form.append(grade);
+			//結束  
+		//夜空中最亮的星
+		 
+		var imgs = document.querySelectorAll("img.s");
+        var imgslen = imgs.length;
+        //document.getElementById("idstar").onmouseover = mouseOver;
+        //document.getElementById("idstar").onmouseout = mouseOut;
+        for(var i =0;i<imgslen;i++)
+        {
+            imgs[i].onmouseover = function (){ mouseOver(this.id); };
+            imgs[i].onmouseout = function (){ mouseOut(this.id); };
+            imgs[i].onclick = function () { mouseClick(this.id); };
         }
-
-        //滑鼠在星星上
+    	 
+    	
+    	//滑鼠在星星上
         function mouseOver(imgid) {
             var len = imgid.length;
             var lastchar = imgid.charAt(len - 1); //id名稱的最後一個字元,得知第幾個星,再轉成整數
@@ -375,11 +365,19 @@
 			//document.getElementById("div1").innerHTML = "打分數中...";
 			goal = lastnum;
 		}
-		grade.val(goal);
-		//console.log(grade.val());
+		
 		$("#dialog_div").dialog("open");
 	}
-</script>
+			
+} );
+  
+  </script>
+
+<style>
+	
+	
+	
+</style>
 </head>
 <body id="page-top" class="index">
 	<!-- Navigation -->
@@ -447,8 +445,9 @@
 						<ul class="dropdown-menu" role="menu">
 						    <li><a href="orderStatus.jsp">訂單狀態</a></li>
 						    <li><a href="#">修改資料</a></li>
+						    <li>意見回饋</li>
 						    <li class="divider"></li>
-						    <li><a href="#">登出</a></li>
+						    <li><a href="LogOut">登出</a></li>
 						</ul>				              
 	 				</li>
 				</c:if>                    
@@ -488,7 +487,7 @@
 			<div class="row">
 				<div id="div2" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div style="text-align: center;margin:auto;"><h2>告訴我們您的想法</h2></div>
-				<form method="post" action="" name="myform">
+				
 					<div id="star">
 						<img id="idstar1" class="s" src="img/star.png" width="40" />
 						<img id="idstar2" class="s" src="img/star.png" width="40" />
@@ -499,9 +498,13 @@
 					<div id="div1">請評分</div>
 					<br>
 					<div id="dialog_div" title="Your opinions">
-  						<textarea rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的看法" name="comment"></textarea>
+  						<textarea rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的想法" name="comment" style="resize:none"></textarea>
 					</div>
-					</form>
+					<br>
+					<br>
+					<br>
+					<div style="text-align: center;margin:auto;"><input type="button" value="回首頁" onclick="location.href='index.jsp'" class="btn btn-lg btn-info">
+					</div>
 				</div>
 				
 			</div>

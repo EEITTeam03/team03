@@ -1,90 +1,89 @@
-package com.carclass.model;
+package com.feedback.model;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
+
 import hibernate.util.HibernateUtil;
-import com.cartype.model.CarTypeVO;
 
-public class CarClassHibernateDAO implements CarClassDAO {
-
-	private static final String GET_ALL_STMT = "from CarClassVO";
-	
+public class FeedbackDAO implements FeedbackDAO_interface {
+	private static final String GET_ALL_STMT = "from FeedbackVO";
 	@Override
-	public void insert(CarClassVO carClassVO) {
+	public void insert(FeedbackVO fVO) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
+		try{
 			session.beginTransaction();
-			session.saveOrUpdate(carClassVO);
+			session.saveOrUpdate(fVO);
 			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
+		}catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
 	}
 
 	@Override
-	public void update(CarClassVO carClassVO) {
+	public void update(FeedbackVO fVO) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
+		try{
 			session.beginTransaction();
-			session.saveOrUpdate(carClassVO);
+			session.saveOrUpdate(fVO);
 			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
+		}catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
 	}
 
 	@Override
-	public void delete(String carClass) {
+	public void delete(Integer feedbackNo) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
+		try{
 			session.beginTransaction();
-			CarClassVO carClassVO = (CarClassVO) session.get(CarClassVO.class, carClass);
-			session.delete(carClassVO);
+			FeedbackVO fVO = (FeedbackVO)session.get(FeedbackVO.class, feedbackNo);
+			session.delete(fVO);
 			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
+		}catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
 	}
 
 	@Override
-	public CarClassVO findByPK(String carClass) {
-		CarClassVO carClassVO = null;
+	public FeedbackVO findByPK(Integer feedbackNo) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
+		FeedbackVO fVO = null;
+		try{
 			session.beginTransaction();
-			carClassVO = (CarClassVO) session.get(CarClassVO.class, carClass);
+			fVO = (FeedbackVO)session.get(FeedbackVO.class, feedbackNo);
 			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
+		}catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return carClassVO;
+		return fVO;
 	}
 
 	@Override
-	public List<CarClassVO> listAll() {
-		List<CarClassVO> list = null;
+	public List<FeedbackVO> listAll() {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
+		List<FeedbackVO> list = null;
+		try{
 			session.beginTransaction();
 			Query query = session.createQuery(GET_ALL_STMT);
 			list = query.list();
 			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
+		}catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
 		return list;
 	}
 
-	@Override
-	public Set<CarTypeVO> findTypesByClass(String carClass) {
-			Set<CarTypeVO> set = findByPK(carClass).getCarTypes();
-		return set;
-	}
 }

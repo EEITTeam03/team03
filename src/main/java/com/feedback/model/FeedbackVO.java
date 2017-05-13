@@ -1,8 +1,9 @@
 package com.feedback.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class FeedbackVO {
+public class FeedbackVO implements Serializable{
 private Calendar feedbackDate;
 private String memberName;
 private Integer memberNo;
