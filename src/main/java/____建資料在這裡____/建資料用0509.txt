@@ -892,7 +892,6 @@ REFERENCES [dbo].[services] ([servNo])
 GO
 ALTER TABLE [dbo].[services_carClass] CHECK CONSTRAINT [FK_services_carClass_services]
 GO
-USE [master]
-GO
+
 ALTER DATABASE [Team3] SET  READ_WRITE 
 GO
