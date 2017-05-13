@@ -248,7 +248,7 @@ public class scheduleTestServlet2 extends HttpServlet {
 				rvo.setStatus(status);
 				ReservDAO dao = new ReservDAO();
 				dao.insert(rvo);
-				/*---------------insert新預約單，增加監視器觀看權限給------------------*/
+				/*---------------insert新預約單，增加監視器觀看權限------------------*/
 				AutoSetTodayReservList autoSet = new AutoSetTodayReservList();
 				ServletContext application = request.getServletContext();
 				for(Calendar startTime= scalendar;MyUtil.getHHmmFormat(ecalendar).compareTo(MyUtil.getHHmmFormat(startTime))>0;startTime.add(Calendar.MINUTE,30)){
