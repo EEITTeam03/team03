@@ -5,13 +5,13 @@
 <head>
 <!-- 增加的內容 -->
 	<!-- Bootstrap Core CSS -->
-    <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="admin/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
+    <link href="admin/css/sb-admin.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <!-- 增加的內容 -->
 
     <title id='Description'>水膜汽車美容-預約排程表 </title>
