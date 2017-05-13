@@ -8,7 +8,15 @@
 	<!--***************************要使用的時候要記得把另外一個註解掉喔************************-->
 	
         <!-- JNDI連線池 (Apache Tomcat 連線池DBCP)設定 -->
+			<!--本地端JNDI -->
 		<property name="hibernate.connection.datasource">java:/comp/env/jdbc/localteam3</property>
+		
+			<!-- 雲端JNDI_柏元 -->
+<!-- 		<property name="hibernate.connection.datasource">java:/comp/env/jdbc/cloudteam3</property> -->
+		
+			<!-- 雲端JNDI_鷹神 -->
+<!-- 		<property name="hibernate.connection.datasource">java:/comp/env/cloud/eeit9306</property> -->
+        
          
         <!-- 連線池c3p0設定-->
 <!-- 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property> -->
