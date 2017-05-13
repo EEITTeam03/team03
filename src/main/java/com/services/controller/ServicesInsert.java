@@ -135,14 +135,15 @@ public class ServicesInsert extends HttpServlet {
 				if (xx) {
 					errorMsg.put("errorIDDups1", "此服務編號號已存在，請換新代號");
 				} else {
-
+				
 					System.out.println("filename:" + fileName);
 
 					sdao.insert(svo);
 					msgOK.put("ok", "新增成功!");
 					if (sdao.findByPrimaryKey(servNo) != null) {
-						
-						response.sendRedirect("SelectServices.jsp");
+//						String insertPath=request.getContextPath();
+//						request.setAttribute("path", insertPath);
+						response.sendRedirect("SelectServicesForInsert.jsp");
 						return;
 					} else {
 						errorMsg.put("errorIDDup", "新增此筆資料有誤");

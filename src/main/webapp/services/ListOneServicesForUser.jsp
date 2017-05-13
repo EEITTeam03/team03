@@ -33,6 +33,7 @@ swal("修改成功!")
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
+<h2>修改成功</h2>
 <table class="table table-bordered table-hover">
 		<tr>
 			<th>服務編號</th>

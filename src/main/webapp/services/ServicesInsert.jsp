@@ -23,9 +23,15 @@
 		document.forms[0].servNo.focus(); // 將游標放在mid欄位內
 	}
 </script>
+
+<!-- SweetAlert -->
+    <script src="../admin/SweetAlert/js/sweetalert.min.js"></script> 
+	<link href="../admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
 </head>
 
+
 <body onLoad="setFocusToUserId()">
+
 <jsp:include page="../admin/Testhead_nav.jsp"/>
 <div id="wrapper">
 <div id="page-wrapper">
@@ -58,7 +64,7 @@
 							<label class="fontSize">服務照片：</label> <Input Type="file" size="40" class="fieldWidth" style="width: 480px;" name="file1"><BR>
 							<font color="red" size="-1">${MsgMap.errPicture}</font> <br />
 							<div id="btnArea" align="center">
-								<button type="submit" class="btn btn-sm btn-primary">送出</button> 
+								<button type="submit" class="btn btn-sm btn-primary" name="submit">送出</button> 
 								<input type="hidden" name="action" value="insert"> 
 								<button type="reset" name="cancel" id="cancel" class="btn btn-sm btn-primary">重填</button>
 							</div>

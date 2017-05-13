@@ -63,6 +63,7 @@ public class ReservListService {
 				Map map = new LinkedHashMap<>();
 				
 				Integer reservNo = rList.getReservNo();
+				String memberName = rList.getMembercarsVO().getMemberInfoVO().getMemberName();
 				System.out.println(reservNo);
 				System.out.println(rList.getMembercarsVO().getMemberInfoVO().getMemberName());
 				int startY = rList.getReservDateTime().get(Calendar.YEAR);
@@ -88,6 +89,7 @@ public class ReservListService {
 				
 				List<Map> innerlist = new ArrayList<>();
 				map.put("reservNo", ""+reservNo);
+				map.put("memberName", memberName);
 				map.put("reservDateTime", reservDateTime);
 				map.put("reservEndTime", reservEndTime);		//服務代號
 				map.put("brand", brand);	//服務名
