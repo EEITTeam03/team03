@@ -192,7 +192,7 @@
 							'goal':goal
 						},
 	            		success : function(data) {
-	            			
+	            			console.log("success");
 					},
 					error : function(data) {
 						alert("error");
@@ -258,8 +258,8 @@
 	   		  		$("#nav-register").addClass("nav-fut-li"); 
 			}
 		});
-			//結束  
-		//夜空中最亮的星
+			
+		/*-------------夜空中最亮的星------------------*/
 		 
 		var imgs = document.querySelectorAll("img.s");
         var imgslen = imgs.length;

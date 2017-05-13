@@ -22,7 +22,7 @@ public class LogOut extends HttpServlet {
 		
 		request.getSession().removeAttribute("Code");
 		request.getSession().removeAttribute("memberInfo");
-		
+		request.getSession().removeAttribute("target");
 		response.sendRedirect(getServletContext().getContextPath()+"/index.jsp");
 		
 	}
