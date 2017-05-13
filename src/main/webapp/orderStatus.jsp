@@ -262,10 +262,10 @@
  		});
  			//結束  	
    		//ReservListJSON
-		$.getJSON('orderStatus.json',function(json){
+		$.getJSON('ReservListJSON',function(json){
 			
    			$.each(json.list,function(idx,orderStatus){
-   				
+   			console.log(orderStatus);	
   			 	var reservNo = orderStatus.reservNo;//JSON第N筆拿到的預約編號	
   			 	var memberName = orderStatus.memberName;//JSON第N筆拿到的預約人名字	
   			 	var reservDateTime = orderStatus.reservDateTime;//JSON第N筆拿到的預約日期	
