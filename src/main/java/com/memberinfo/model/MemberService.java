@@ -70,7 +70,7 @@ public class MemberService {
 			memberCars.add(membercarsVO);
 		}
 		
-		dao.insert(memberinfoVO);
+		dao.merge(memberinfoVO);
 
 		return memberinfoVO;
 	}
