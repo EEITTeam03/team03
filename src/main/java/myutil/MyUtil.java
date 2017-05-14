@@ -36,7 +36,7 @@ public class MyUtil {
 		try {
 			cal.setTime(sdf.parse(strDate+" "+strTime));
 		} catch (ParseException e) {
-			throw new RuntimeException("日期格式錯誤!");
+			throw new RuntimeException("日期或時間格式錯誤!");
 		}
 		return cal;
 	}

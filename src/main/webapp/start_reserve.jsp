@@ -120,7 +120,7 @@ label {
 <!-- 							免費註冊 -->
 <!-- 					</a></li> -->
 						<!--	未登入	-->
-				<c:if test="${empty Code}">                    
+				<c:if test="${empty memberInfo}">                    
                     <li id="nav-log-in" class="">                    
 	                    <button class="page-scroll ff-word btn btn-xs fun-btn" onclick="location.href='login.jsp'">
 	   		
@@ -138,7 +138,7 @@ label {
 				</c:if>
 
 						<!--	已登入	-->
-				<c:if test="${!empty Code}"> 
+				<c:if test="${!empty memberInfo}"> 
 					<li id="nav-log-in" class="dropdown">     
 						<button class="page-scroll ff-word dropdown-toggle mem-btn" data-toggle="dropdown">
 							<li class="glyphicon glyphicon-user"></li>&nbsp;&nbsp;&nbsp;${memberInfo.memberName}
@@ -201,6 +201,12 @@ label {
 		
 		<div class="row">
 			<h2 class="service-heading text-center">開始預約</h2> 
+		</div>
+		
+		<div class="row">
+			<c:forEach var="msg" items="${errorMsg}">
+				<h3 class="text-danger">${msg}</h3>
+			</c:forEach>
 		</div>
 		
 		<div class="row">
@@ -295,9 +301,7 @@ label {
 					</div>
 				</div>
 			</form>
-			<c:forEach var="msg" items="${errorMsg}">
-				<h3 class="col-sm-6 col-sm-offset-3" style="color: red">${msg}</h3>
-			</c:forEach>
+
 		</div>
 	</div>
 

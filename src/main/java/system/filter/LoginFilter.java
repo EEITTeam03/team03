@@ -11,10 +11,11 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.admin.model.AdminVO;
 import com.memberinfo.model.MemberInfoVO;
 
 
-@WebFilter(urlPatterns={"/start_reserve.jsp"})
+@WebFilter(urlPatterns={"/start_reserve.jsp","/admin/*"})
 public class LoginFilter implements Filter {
 
 
@@ -33,15 +34,30 @@ public class LoginFilter implements Filter {
 		HttpServletRequest httpReq =(HttpServletRequest) request;
 		HttpServletResponse httpResp = (HttpServletResponse) response;
 		
-		MemberInfoVO member = (MemberInfoVO) httpReq.getSession().getAttribute("memberInfo");
+		//System.out.println(httpReq.getServletPath());
+		String path = httpReq.getServletPath();
+		String loginPath = "/adminLogin/adminLogin.jsp";
 		
-		//判斷他是否有登入，如果沒有---->導向登入頁面
-		if(member==null) {
-			httpReq.getSession().setAttribute("target", httpReq.getContextPath()+"/start_reserve.jsp");
-			httpResp.sendRedirect(httpReq.getContextPath()+"/login.jsp");
+		//判斷是否要求後台資源
+		if(path.startsWith("/admin/") ) {
+			AdminVO	adminVO	 = (AdminVO) httpReq.getSession().getAttribute("admin");
+			//判斷是否有登入
+			//沒登入-->NULL
+			if (adminVO==null) {
+				//httpReq.getSession().setAttribute("adminTarget", httpReq.getRequestURI());
+				httpResp.sendRedirect(httpReq.getContextPath()+loginPath);
+				return;
+			} 
+		} else {
+		
+			MemberInfoVO member = (MemberInfoVO) httpReq.getSession().getAttribute("memberInfo");
+			//判斷他是否有登入，如果沒有---->導向登入頁面
+			if(member==null) {
+				httpReq.getSession().setAttribute("target", httpReq.getContextPath()+"/start_reserve.jsp");
+				httpResp.sendRedirect(httpReq.getContextPath()+"/login.jsp");
+			}
+	//		httpReq.getSession().setAttribute("orginURL", httpReq.getRequestURI());
 		}
-//		httpReq.getSession().setAttribute("orginURL", httpReq.getRequestURI());
-		
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 		

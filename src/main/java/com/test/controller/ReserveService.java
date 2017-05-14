@@ -56,11 +56,42 @@ public class ReserveService extends HttpServlet {
 		String ckbox[] = request.getParameterValues("plus");
 		String empNo = request.getParameter("empNo");
 		
+		if(license.equals(""))
+			errmsg.add("未選擇車牌!");
+		
+		if(selectedDate.equals("")) 
+			errmsg.add("未選擇日期!");
+		
+		if(selectedTime.equals(""))
+			errmsg.add("未選擇時間!");
+		
+		if(singleService.equals(""));
+			errmsg.add("至少要選擇一種主要服務!");
+		
+		if(empNo.equals("")) 
+			errmsg.add("請選擇服務的技師");
+		
+		//****************失敗*******************
+		if (errmsg.size() != 0) {
+			request.getRequestDispatcher("/start_reserve.jsp")
+			.forward(request, response);
+			return;
+		}
 		
 		//日期-字串轉Calendar
-		Calendar cal = MyUtil.getCalender(selectedDate,selectedTime);
+		Calendar cal = null;
+		try {
+			cal = MyUtil.getCalender(selectedDate,selectedTime);
+		} catch (RuntimeException e) {
+			errmsg.add("日期格式錯誤，你再亂打什麼啦");
+		}
 		
-
+		//****************失敗*******************
+		if (errmsg.size() != 0) {
+			request.getRequestDispatcher("/start_reserve.jsp")
+			.forward(request, response);
+			return;
+		}
 		
 		// 全新的訂單物件
 		ReservVO reservVO = new ReservVO();
@@ -101,22 +132,25 @@ public class ReserveService extends HttpServlet {
 		end += sccVO.getServTime();
 		reservSet.add(singlerlvo);
 
-		// 加入多筆多選服務VO
-		for (int i = 0; i < ckbox.length; i++) {
-			Integer serviceNo = Integer.parseInt(ckbox[i]);
-			ServicesVO servicesVO = sdao.findByPrimaryKey(serviceNo);
-			ReservListVO rlvo = new ReservListVO();
-			rlvo.setReservVO(reservVO);
-			rlvo.setServicesVO(servicesVO);
-			ServiceCarClassVO sccvo = svc.getOneServiceCarClass(serviceNo, size);
-			rlvo.setServPrice(sccvo.getServPrice());
-			rlvo.setServTime(sccvo.getServTime());
-			rlvo.setServName(servicesVO.getServName());
-			end += sccvo.getServTime();
-			
-			reservSet.add(rlvo);
-		}
+		//判斷有沒有選多選
+		if (ckbox != null) {
 		
+		// 加入多筆多選服務VO (如果有選的話)
+			for (int i = 0; i < ckbox.length; i++) {
+				Integer serviceNo = Integer.parseInt(ckbox[i]);
+				ServicesVO servicesVO = sdao.findByPrimaryKey(serviceNo);
+				ReservListVO rlvo = new ReservListVO();
+				rlvo.setReservVO(reservVO);
+				rlvo.setServicesVO(servicesVO);
+				ServiceCarClassVO sccvo = svc.getOneServiceCarClass(serviceNo, size);
+				rlvo.setServPrice(sccvo.getServPrice());
+				rlvo.setServTime(sccvo.getServTime());
+				rlvo.setServName(servicesVO.getServName());
+				end += sccvo.getServTime();
+				
+				reservSet.add(rlvo);
+			}
+		}
 		//加入結束時間
 		long endms = end*60*1000;
 		calEnd.setTimeInMillis(cal.getTimeInMillis() + endms);

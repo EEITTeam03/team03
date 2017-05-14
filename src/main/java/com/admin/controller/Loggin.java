@@ -21,7 +21,7 @@ import com.admin.model.AdminVO;
 /**
  * Servlet implementation class Loggin
  */
-@WebServlet("/admin/Loggin.do")
+@WebServlet("/adminLogin/Loggin.do")
 public class Loggin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -68,7 +68,7 @@ public class Loggin extends HttpServlet {
 			errorMsgMap.put("PasswordEmptyError", "密碼欄必須輸入");
 		}
 		if (!errorMsgMap.isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("adminLogin.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/adminLogin/adminLogin.jsp");
 			rd.forward(request, response);
 			return;
 		}
@@ -90,7 +90,7 @@ public class Loggin extends HttpServlet {
 					"LoginServlet->NamingException:" + e.getMessage());
 		}
 		
-		String requestURI = (String)session.getAttribute("target");
+		String requestURI = (String)session.getAttribute("adminTarget");
 		if (errorMsgMap.isEmpty()) {
 			if (requestURI != null) {
 				requestURI = (requestURI.length() == 0 ? request
@@ -104,7 +104,7 @@ public class Loggin extends HttpServlet {
 			}
 		} else {
 			// 如果errorMsgMap不是空的，表示有錯誤，交棒給adminLogin.jsp
-			RequestDispatcher rd = request.getRequestDispatcher("adminLogin.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/adminLogin/adminLogin.jsp");
 			rd.forward(request, response);
 			return;
 		}

@@ -23,6 +23,7 @@ public class AdminLogout extends HttpServlet {
 		
 		request.getSession().removeAttribute("adminLogin");
 		request.getSession().removeAttribute("admin");
+		request.getSession().removeAttribute("adminTarget");
 		
 		response.sendRedirect(getServletContext().getContextPath()+"/admin/admin_default.jsp");
 	}
