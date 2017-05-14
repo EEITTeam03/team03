@@ -25,7 +25,8 @@ public class ServicesService {
 	public ServicesService() {
 		dao = new ServicesDAO_Hibernate();
 	}
-
+	
+	//我還是要把歷史遺跡留下，顆顆
 	public ServicesVO addService(Integer servNo, String servTypeNo, String servName, String servDesc, byte[] servPhoto,
 			Date servEffectiveDate, String servStatus) {
 		ServicesVO servicesVO = new ServicesVO();
@@ -57,6 +58,19 @@ public class ServicesService {
 
 			e.printStackTrace();
 		}
+		return servicesVO;
+	}
+	public ServicesVO newAddService(Integer servNo, String servTypeNo, String servName, String servDesc, byte[] servPhoto,
+			Date servEffectiveDate, String servStatus){
+		ServicesVO servicesVO = new ServicesVO();
+		servicesVO.setServNo(servNo);
+		servicesVO.setServName(servName);
+		servicesVO.setServDesc(servDesc);
+		servicesVO.setServEffectiveDate(servEffectiveDate);
+		servicesVO.setServPhoto(servPhoto);
+		servicesVO.setServStatus(servStatus);
+		servicesVO.setServTypeNo(servTypeNo);
+		dao.insert(servicesVO);
 		return servicesVO;
 	}
 
