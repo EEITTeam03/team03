@@ -17,6 +17,9 @@
 <!-- Custom Fonts -->
 <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
+	
+	<!-- 中文字型 CSS -->
+<link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css" rel="stylesheet">
 
 <style>
 .fa {
@@ -25,6 +28,14 @@
 
 ul[class*="nav navbar-nav side-nav"] {
 	font-size: 125%;
+}
+body,button,h1{
+ font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	    text-transform: uppercase;
+	    font-weight: 400;
+	    font-size:16px;
+	    letter-spacing: 1px;
+	    color: black;
 }
 </style>
 </head>
@@ -41,7 +52,7 @@ ul[class*="nav navbar-nav side-nav"] {
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="admin.jsp">汽車美容後台管理</a>
+				<a class="navbar-brand" href="admin_default.jsp">汽車美容後台管理</a>
 			</div>
 			<!-- Top Menu Items -->
 			<ul class="nav navbar-right top-nav">
