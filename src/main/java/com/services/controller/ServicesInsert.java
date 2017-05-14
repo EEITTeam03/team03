@@ -194,7 +194,6 @@ public class ServicesInsert extends HttpServlet {
 				// long sizeInBytes = 0;
 				InputStream is = null;
 				Part parts = request.getPart("servPhoto");
-				// ServicesService.exploreParts(parts, request);
 				try {
 					fileName = parts.getName();
 					fileName = ServicesService.getFileName(parts);
@@ -208,7 +207,6 @@ public class ServicesInsert extends HttpServlet {
 				} catch (Exception e) {
 					errorMsg.put("errPicture", "必須挑選圖片檔");
 				}
-				
 				if (servTypeNo == null || servTypeNo.trim().length() == 0) {
 					errorMsg.put("errorservTypeNoEmpty", "服務類型編號欄必須輸入");
 				}
@@ -218,6 +216,7 @@ public class ServicesInsert extends HttpServlet {
 				if (servDesc == null || servName.trim().length() == 0) {
 					errorMsg.put("errorservDesc", "服務描述欄必須輸入");
 				}
+				
 				if (servStatus == null || servStatus.trim().length() == 0) {
 					errorMsg.put("errorservStatus", "服務狀態欄必須輸入");
 				}
@@ -234,6 +233,7 @@ public class ServicesInsert extends HttpServlet {
 					String url = "ServicesInsert.jsp";
 					RequestDispatcher failerView = request.getRequestDispatcher(url);
 					failerView.forward(request, response);
+					return;
 				}
 
 				ServicesService ss = new ServicesService();

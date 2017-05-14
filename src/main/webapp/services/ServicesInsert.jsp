@@ -22,6 +22,40 @@
 	function setFocusToUserId() {
 		document.forms[0].servNo.focus(); // 將游標放在mid欄位內
 	}
+	//顯示所選的圖片
+	$(function (){
+	    function format_float(num, pos)
+	    {
+	        var size = Math.pow(10, pos);
+	        return Math.round(num * size) / size;
+	    }
+	 
+	    function preview(input) {
+	 
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            
+	            reader.onload = function (e) {
+	                $('.preview').attr('src', e.target.result);
+	                var KB = format_float(e.total / 1024, 2);
+	                $('.size').text("檔案大小：" + KB + " KB");
+	            }
+	 
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	 
+	    $("body").on("change", ".fieldWidth", function (){
+	        preview(this);
+	    })
+	    
+	})
+	
+	function format_float(num, pos)
+{
+    var size = Math.pow(10, pos);
+    return Math.round(num * size) / size;
+}
 </script>
 
 <!-- SweetAlert -->
@@ -42,14 +76,13 @@
 			
 			<!-- 改寫版本 -->
 			<form enctype="multipart/form-data" method="post" action="${ctx}/services/services.do">
-<%-- 			<form method="post" action="${ctx}/services/services.do"> --%>
 			<table class="table table-bordered table-hover">
 				<tr>
 					<td>
 						服務編號：
 					</td>
 					<td>
-						<input type="text" name="servNo" value="${servicesVO.servNo}" class="fieldWidth" style="width: 180px;">
+						<input type="text" name="servNo" value="${servicesVO.servNo}" style="width: 180px;">
 						<font size="-1" color="#FF0000">${MsgMap.errorservNoEmpty}</font>
 						<font size="-1" color="#FF0000">${MsgMap.errorIDDups1}</font>
 					</td>
@@ -60,7 +93,7 @@
 						服務類型編號：
 					</td>
 					<td>
-						<input type="text" name="servTypeNo" value="${servicesVO.servTypeNo}" class="fieldWidth"style="width: 200px;"> 
+						<input type="text" name="servTypeNo" value="${servicesVO.servTypeNo}" style="width: 200px;"> 
 						<font color="red" size="-1">${MsgMap.errorservTypeNoEmpty}</font>
 					</td>
 				</tr>
@@ -69,7 +102,7 @@
 						服務名稱:
 					</td>
 					<td>
-						<input type="text" name="servName" value="${servicesVO.servName}" class="fieldWidth" style="width: 200px;"> 
+						<input type="text" name="servName" value="${servicesVO.servName}" style="width: 200px;"> 
 						<font color="red" size="-1">${MsgMap.errorservNameEmpty}</font>
 					</td>
 				</tr>
@@ -79,7 +112,7 @@
 						服務描述：
 					</td>
 					<td>
-						<input type="text" name="servDesc" value="${servicesVO.servDesc}" class="fieldWidth" style="width: 180px;"> 
+						<input type="text" name="servDesc" value="${servicesVO.servDesc}" style="width: 180px;"> 
 						<font color="red" size="-1">${MsgMap.errorservDesc}</font>
 					</td>
 				</tr>
@@ -89,7 +122,7 @@
 						服務有效日期：
 					</td>
 					<td>
-					<input type="date" name="servEffectiveDate" value="${servicesVO.servEffectiveDate}" class="fieldWidth" style="width: 320px;"> 
+					<input type="date" name="servEffectiveDate" value="${servicesVO.servEffectiveDate}" style="width: 320px;"> 
 					<font color="red" size="-1">${MsgMap.errorservEffectiveDate}</font>
 					</td>
 				</tr>
@@ -98,7 +131,7 @@
 						服務狀態：
 					</td>
 					<td>
-						<input type="text"name="servStatus" value="${servicesVO.servStatus}" class="fieldWidth" style="width: 120px;"> 
+						<input type="text"name="servStatus" value="${servicesVO.servStatus}" style="width: 120px;"> 
 						<font color="red" size="-1">${MsgMap.errorservStatus}</font>
 					</td>
 				</tr>
@@ -107,8 +140,13 @@
 						服務照片：
 					</td>
 					<td>
-					<Input Type="file" size="40" name="servPhoto" class="fieldWidth" style="width: 480px;" name="file1">
+					<input Type="file" size="40" name="servPhoto" class="fieldWidth" style="width: 480px;" name="file1">
 					<font color="red" size="-1">${MsgMap.errPicture}</font>
+					
+					<div>
+						<img class="preview" style="max-width: 150px; max-height: 150px;">
+        				<div class="size"></div>
+					</div>
 					</td>
 				</tr>
 
