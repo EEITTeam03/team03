@@ -79,7 +79,7 @@
 <!-- 驗證 -->
 <script src="js/jquery.validate.js" type="text/javascript"></script>
 
-  <script>
+<script>
   $( function() {
 	  
     $( "#datepicker" ).datepicker({
@@ -89,7 +89,10 @@
     	yearRange: '-90:+0'
     });
     
-    $("#cmxform").validate();
+    $("#cmxform").validate({
+//     	onfocusout:true,
+    	
+    });
     
     
     //chrome瀏覽器的 User agent stylesheet，設定當input自動載入記憶的文字時，backgound的顏色會改變，導致整體版面顏色不協調
@@ -97,43 +100,69 @@
     //3.替input增加一個陰影顏色(-webkit-box-shadow)，來掩蓋過原本的顏色(原本顏色依然存在)。有效，但無法使用透明色
     //4.input的name屬性刪除，則關閉元素的記憶功能，但會導致輸入值送出去後端時，無KEY值可以抓，因此新增一個隱藏input來把值送去後端 
     //使用方法4，執行資料送出行為前，把使用者輸入的資料，轉移到隱藏要輸出的input元素
-    $("form button").on('click', function(event){
-    	//以下用HTML DOM方式來實作
+//     $("form button").on('click', function(event){
+//     	//以下用HTML DOM方式來實作
     	
-    	//使用創建屬性節點方式    	
-    	//轉移name
-    	var userInputName = document.getElementById("name").getAttribute("value");//找到ID為Name的元素，並讀出value值
-    	var nameValue = document.createAttribute("value");//創建一個屬性節點，屬性為value
-    	nameValue.nodeValue = userInputName;//設定該屬性節點的值
-    	var userOutputName = document.getElementsByName("name");//找到name為name的元素
-    	userOutputName.setAttribute(nameValue);//給予設定好的屬性節點
+//     	//使用創建屬性節點方式    	
+//     	//轉移name
+//     	var userInputName = document.getElementById("name").getAttribute("value");//找到ID為Name的元素，並讀出value值
+//     	var nameValue = document.createAttribute("value");//創建一個屬性節點，屬性為value
+//     	nameValue.nodeValue = userInputName;//設定該屬性節點的值
+//     	var userOutputName = document.getElementsByName("name");//找到name為name的元素
+//     	userOutputName.setAttribute(nameValue);//給予設定好的屬性節點
     	
-    	//使用直接設定屬性值的方式
-    	//轉移email
-    	var userInputEmail = document.getElementById("email").getAttribute("value");//找到ID為email的元素，並讀出value值
-    	var userOutputEmail = document.getElementsByName("email");//找到name為email的元素
-    	userOutputEmail.setAttribute("value",userInputEmail);//設定該元素的value屬性值
+//     	//使用直接設定屬性值的方式
+//     	//轉移email
+//     	var userInputEmail = document.getElementById("email").getAttribute("value");//找到ID為email的元素，並讀出value值
+//     	var userOutputEmail = document.getElementsByName("email");//找到name為email的元素
+//     	userOutputEmail.setAttribute("value",userInputEmail);//設定該元素的value屬性值
     	
-    	//轉移password
-    	var userInputPassword = document.getElementById("password").getAttribute("value");//找到ID為password的元素，並讀出value值
-    	var userOutputPassword = document.getElementsByName("password");//找到name為password的元素
-    	userOutputPassword.setAttribute("value",userInputPassword);//設定該元素的value屬性值    	
+//     	//轉移password
+//     	var userInputPassword = document.getElementById("password").getAttribute("value");//找到ID為password的元素，並讀出value值
+//     	var userOutputPassword = document.getElementsByName("password");//找到name為password的元素
+//     	userOutputPassword.setAttribute("value",userInputPassword);//設定該元素的value屬性值    	
     	
-    	//轉移phone
-    	var userInputPhone = document.getElementById("phone").getAttribute("value");//找到ID為phone的元素，並讀出value值
-    	var userOutputPhone = document.getElementsByName("phone");//找到name為phone的元素
-    	userOutputPhone.setAttribute("value",userInputPhone);//設定該元素的value屬性值        	
+//     	//轉移phone
+//     	var userInputPhone = document.getElementById("phone").getAttribute("value");//找到ID為phone的元素，並讀出value值
+//     	var userOutputPhone = document.getElementsByName("phone");//找到name為phone的元素
+//     	userOutputPhone.setAttribute("value",userInputPhone);//設定該元素的value屬性值        	
 
-    	//轉移address
-    	var userInputAddress = document.getElementById("address").getAttribute("value");//找到ID為address元素，並讀出value值
-    	var userOutputAddress = document.getElementsByName("address");//找到name為address的元素
-    	userOutputAddress.setAttribute("value",userInputAddress);//設定該元素的value屬性值        	
+//     	//轉移address
+//     	var userInputAddress = document.getElementById("address").getAttribute("value");//找到ID為address元素，並讀出value值
+//     	var userOutputAddress = document.getElementsByName("address");//找到name為address的元素
+//     	userOutputAddress.setAttribute("value",userInputAddress);//設定該元素的value屬性值        	
     	       	
     	
-	});
+// 	});
 	
-  } );   
-  </script>
+// console.log($("button[type*='submit']"));
+//     console.log($("#password-error"));
+  } );
+  
+
+// 	$(document).on("focus", "body", function () {
+	   
+// 		$("input[type*='password']").attr({"name":"password"});
+// 	 });
+	
+// 	$(document).on("click","#sb" ,function () {
+		   
+// 		var pasd = $("input[type*='password']").text();
+		
+// 		if(pasd.trim() == ""){			
+// 			$("#password-error").text("這是必填欄位");			
+// 		}
+	
+
+// 		console.log($("input[type*='password']").text());
+// 		console.log("00");
+	 });
+
+
+	
+
+	
+</script>
 
 
 <style>
@@ -259,53 +288,51 @@ input:focus {
 	
 				<div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
 				
-					<form id="cmxform" class="form-signin" role="form" action="MemberNext" method="post" autocomplete="off">													
+					<form class="form-signin" role="form" action="MemberNext" method="post" autocomplete="off">													
 																		
 						<br>												
 						<c:if test="${!empty FBName}">												
-							<input id="name" type="hidden" name="name" value='${FBName}'>											
+							<input type="hidden" name="name" value='${FBName}'>											
 						</c:if>
 																		
 						<c:if test="${empty FBName}">												
 							<div class="input-group">	
-								<input id="name" type="text" class="form-control required" placeholder="輸入您的姓名" value='${param.name}'>																													
-							  	<input type="hidden" name="name">											
+								<input type="text" class="form-control required" placeholder="輸入您的姓名" value='${param.name}'>																													
 								<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>											
 							</div>
 							<br>																												
 						</c:if>
 																		
 						<c:if test="${!empty FBAccount}">												
-						  	<input id="email" type="hidden" name="email" value='${FBAccount}'>											
+						  	<input type="hidden" name="email" value='${FBAccount}'>											
 						</c:if>	
 																	
 						<c:if test="${empty FBAccount}">												
 							<div class="input-group">
-								<input id="email" type="text" class="form-control required email" placeholder="輸入您的電子郵件" value='${param.email}'>												
-							  	<input type="hidden" name="email">				
+								<input type="text" name="email" class="form-control required email" placeholder="輸入您的電子郵件" value='${param.email}'>												
 								<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>											
 							</div>												
 							<br>												
 						</c:if>												
 																		
 						<c:if test="${!empty FBId}">												
-						  	<input id="password" type="hidden" name="password" value='${FBId}'>											
+						  	<input type="hidden" name="password" value='${FBId}'>											
 						</c:if>
 																		
 						<c:if test="${empty FBId}">												
 							<div class="input-group">
-								<input id="password" type="password" class="form-control required" placeholder="輸入您的密碼" value='${param.password}'>	
-							    <input type="hidden" name="password">												
+								<input type="password" class="form-control required" placeholder="輸入您的密碼" value='${param.password}'>
+								<input name="password" type="hidden" placeholder="輸入您的密碼">
+								<label id="password-error" class="error"></label>	
 							    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>												
 							</div>												
 							<br>												
 						</c:if>												
 																		
 																		
-						<div class="input-group">												
-						   											
-							<input id="phone" type="text" class="form-control required" placeholder="輸入您的電話" value='${param.phone}'>												
-						    <input type="hidden" name="phone">												
+						<div class="input-group">
+																			
+							<input name="phone" type="text" class="form-control required" placeholder="輸入您的電話" value='${param.phone}'>												
 						    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>												
 																		
 						</div>												
@@ -320,17 +347,38 @@ input:focus {
 						<br>												
 																		
 						<div class="input-group">												
-						   	<input id="address" type="text" class="form-control required" placeholder="輸入您的地址" value='${param.address}'>										
-						    <input type="hidden" name="address">												
+						   	<input name="address" type="text" class="form-control required" placeholder="輸入您的地址" value='${param.address}'>										
 						    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>												
 						</div>												
 																		
 						<br>												
 																		
 						<input type="hidden" name="action" value="insert">												
-						<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >下一步</button>												
+						<button id="sb" class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >下一步</button>												
 						
-															
+<!-- 						<button type="button" onclick="test()">test</button> -->
+<!-- 		<p> -->
+<!-- 			<label for="cname">姓名(*)</label> -->
+<!-- 			<input id="cname" name="name" class="required" minlength="2" /> -->
+<!-- 		<p> -->
+<!-- 			<label for="cemail">Email(*)</label> -->
+<!-- 			<input id="cemail" name="email" class="required email" /> -->
+<!-- 		</p> -->
+<!-- 		<p> -->
+<!-- 			<label for="curl">URL</label> -->
+<!-- 			<input id="curl" name="url" class="url" value="" /> -->
+<!-- 		</p>		 -->
+<!-- 		<p> -->
+<!-- 			<label for="phone">聯絡電話</label> -->
+<!-- 			<input id="phone" name="phone" class="digits" value="" /> -->
+<!-- 		</p>		 -->
+<!-- 		<p> -->
+<!-- 			<label for="ccomment">回應 (*)</label> -->
+<!-- 		  <textarea id="ccomment" name="comment" class="required"></textarea> -->
+<!-- 		</p> -->
+<!-- 		<p> -->
+<!-- 			<input class="submit" type="submit" value="送出"/> -->
+<!-- 		</p>															 -->
 																		
 					</form>													
 					
