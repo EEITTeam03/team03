@@ -22,6 +22,40 @@
 	function setFocusToUserId() {
 		document.forms[0].servNo.focus(); // 將游標放在mid欄位內
 	}
+	//顯示所選的圖片
+	$(function (){
+	    function format_float(num, pos)
+	    {
+	        var size = Math.pow(10, pos);
+	        return Math.round(num * size) / size;
+	    }
+	 
+	    function preview(input) {
+	 
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            
+	            reader.onload = function (e) {
+	                $('.preview').attr('src', e.target.result);
+	                var KB = format_float(e.total / 1024, 2);
+	                $('.size').text("檔案大小：" + KB + " KB");
+	            }
+	 
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	 
+	    $("body").on("change", ".fieldWidth", function (){
+	        preview(this);
+	    })
+	    
+	})
+	
+	function format_float(num, pos)
+{
+    var size = Math.pow(10, pos);
+    return Math.round(num * size) / size;
+}
 </script>
 
 <!-- SweetAlert -->
@@ -39,40 +73,90 @@
 		<div class="col-lg-6">
 		<h2>新增服務</h2>
 			<c:set var="funcName" value="REG" scope="session" />
-			<Table class="table table-bordered table-hover">
-				<TR>
-					<TD colspan="3">
-						<form ENCTYPE="multipart/form-data" method="POST" action="${ctx}/services/services.do" id="${ctx}/services/services.do">
-							<label class="fontSize">服務編號：</label> 
-							<input type="text" name="servNo" value="${param.servNo}" class="fieldWidth" style="width: 180px;">
-							<!--注意value屬性的內容以及顯示錯誤訊息的寫法-->
-							<font size="-1" color="#FF0000">${MsgMap.errorservNoEmpty}</font>
-							<font size="-1" color="#FF0000">${MsgMap.errorIDDups1}</font> <br />
-							<label class="fontSize">服務類型編號：</label> 
-							<input type="text" name="servTypeNo" value="${param.servTypeNo}" class="fieldWidth"style="width: 200px;"> <font color="red" size="-1">${MsgMap.errorservTypeNoEmpty}</font>
-							<br /> 
-							<label class="fontSize">服務名稱：</label> 
-							<input type="text" name="servName" value="${param.servName}" class="fieldWidth" style="width: 200px;"> <font color="red" size="-1">${MsgMap.errorservNameEmpty}</font>
-							<br /> 
-							<label class="fontSize">服務描述：</label> <input type="text" name="servDesc" value="${param.servDesc}" class="fieldWidth" style="width: 180px;"> <font color="red" size="-1">${MsgMap.errorservDesc}</font>
-							<br /> 
-							<label class="fontSize">服務有效日期：</label> 
-							<input type="date" name="servEffectiveDate" value="${param.servEffectiveDate}" class="fieldWidth" style="width: 320px;"> <font color="red" size="-1">${MsgMap.errorservEffectiveDate}</font>
-							<br /> 
-							<label class="fontSize">服務狀態：</label> <input type="text"name="servStatus" value="${param.servStatus}" class="fieldWidth" style="width: 120px;"> <font color="red" size="-1">${MsgMap.errorservStatus}</font>
-							<br /> 
-							<label class="fontSize">服務照片：</label> <Input Type="file" size="40" class="fieldWidth" style="width: 480px;" name="file1"><BR>
-							<font color="red" size="-1">${MsgMap.errPicture}</font> <br />
-							<div id="btnArea" align="center">
-								<button type="submit" class="btn btn-sm btn-primary" name="submit">送出</button> 
-								<input type="hidden" name="action" value="insert"> 
-								<button type="reset" name="cancel" id="cancel" class="btn btn-sm btn-primary">重填</button>
-							</div>
-							<br />
-						</form>
-					</TD>
-				</TR>
-			</Table>
+			
+			<!-- 改寫版本 -->
+			<form enctype="multipart/form-data" method="post" action="${ctx}/services/services.do">
+			<table class="table table-bordered table-hover">
+				<tr>
+					<td>
+						服務編號：
+					</td>
+					<td>
+						<input type="text" name="servNo" value="${servicesVO.servNo}" style="width: 180px;">
+						<font size="-1" color="#FF0000">${MsgMap.errorservNoEmpty}</font>
+						<font size="-1" color="#FF0000">${MsgMap.errorIDDups1}</font>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						服務類型編號：
+					</td>
+					<td>
+						<input type="text" name="servTypeNo" value="${servicesVO.servTypeNo}" style="width: 200px;"> 
+						<font color="red" size="-1">${MsgMap.errorservTypeNoEmpty}</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						服務名稱:
+					</td>
+					<td>
+						<input type="text" name="servName" value="${servicesVO.servName}" style="width: 200px;"> 
+						<font color="red" size="-1">${MsgMap.errorservNameEmpty}</font>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						服務描述：
+					</td>
+					<td>
+						<input type="text" name="servDesc" value="${servicesVO.servDesc}" style="width: 180px;"> 
+						<font color="red" size="-1">${MsgMap.errorservDesc}</font>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						服務有效日期：
+					</td>
+					<td>
+					<input type="date" name="servEffectiveDate" value="${servicesVO.servEffectiveDate}" style="width: 320px;"> 
+					<font color="red" size="-1">${MsgMap.errorservEffectiveDate}</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						服務狀態：
+					</td>
+					<td>
+						<input type="text"name="servStatus" value="${servicesVO.servStatus}" style="width: 120px;"> 
+						<font color="red" size="-1">${MsgMap.errorservStatus}</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						服務照片：
+					</td>
+					<td>
+					<input Type="file" size="40" name="servPhoto" class="fieldWidth" style="width: 480px;" name="file1">
+					<font color="red" size="-1">${MsgMap.errPicture}</font>
+					
+					<div>
+						<img class="preview" style="max-width: 150px; max-height: 150px;">
+        				<div class="size"></div>
+					</div>
+					</td>
+				</tr>
+
+			</table>
+			<div id="btnArea" align="center">
+				<button type="submit" class="btn btn-sm btn-primary" name="submit">送出</button> 
+				<input type="hidden" name="action" value="insert"> 
+				<button type="reset" name="cancel" id="cancel" class="btn btn-sm btn-primary">重填</button>
+			</div>
+			</form>
 		</div>
 	</div>
 	</div>
