@@ -79,7 +79,7 @@
 <!-- 驗證 -->
 <script src="js/jquery.validate.js" type="text/javascript"></script>
 
-  <script>
+<script>
   $( function() {
 	  
     $( "#datepicker" ).datepicker({
@@ -90,50 +90,23 @@
     });
     
     $("#cmxform").validate();
-    
-    
-    //chrome瀏覽器的 User agent stylesheet，設定當input自動載入記憶的文字時，backgound的顏色會改變，導致整體版面顏色不協調
-    //為解決該問題，嘗試了1.關閉元素的記憶功能(元素加上該屬性autocomplete)。2.強制更改User agent stylesheet的設定顏色。兩者都都無效
-    //3.替input增加一個陰影顏色(-webkit-box-shadow)，來掩蓋過原本的顏色(原本顏色依然存在)。有效，但無法使用透明色
-    //4.input的name屬性刪除，則關閉元素的記憶功能，但會導致輸入值送出去後端時，無KEY值可以抓，因此新增一個隱藏input來把值送去後端 
-    //使用方法4，執行資料送出行為前，把使用者輸入的資料，轉移到隱藏要輸出的input元素
-    $("form button").on('click', function(event){
-    	//以下用HTML DOM方式來實作
-    	
-    	//使用創建屬性節點方式    	
-    	//轉移name
-    	var userInputName = document.getElementById("name").getAttribute("value");//找到ID為Name的元素，並讀出value值
-    	var nameValue = document.createAttribute("value");//創建一個屬性節點，屬性為value
-    	nameValue.nodeValue = userInputName;//設定該屬性節點的值
-    	var userOutputName = document.getElementsByName("name");//找到name為name的元素
-    	userOutputName.setAttribute(nameValue);//給予設定好的屬性節點
-    	
-    	//使用直接設定屬性值的方式
-    	//轉移email
-    	var userInputEmail = document.getElementById("email").getAttribute("value");//找到ID為email的元素，並讀出value值
-    	var userOutputEmail = document.getElementsByName("email");//找到name為email的元素
-    	userOutputEmail.setAttribute("value",userInputEmail);//設定該元素的value屬性值
-    	
-    	//轉移password
-    	var userInputPassword = document.getElementById("password").getAttribute("value");//找到ID為password的元素，並讀出value值
-    	var userOutputPassword = document.getElementsByName("password");//找到name為password的元素
-    	userOutputPassword.setAttribute("value",userInputPassword);//設定該元素的value屬性值    	
-    	
-    	//轉移phone
-    	var userInputPhone = document.getElementById("phone").getAttribute("value");//找到ID為phone的元素，並讀出value值
-    	var userOutputPhone = document.getElementsByName("phone");//找到name為phone的元素
-    	userOutputPhone.setAttribute("value",userInputPhone);//設定該元素的value屬性值        	
 
-    	//轉移address
-    	var userInputAddress = document.getElementById("address").getAttribute("value");//找到ID為address元素，並讀出value值
-    	var userOutputAddress = document.getElementsByName("address");//找到name為address的元素
-    	userOutputAddress.setAttribute("value",userInputAddress);//設定該元素的value屬性值        	
-    	       	
-    	
-	});
+    //chrome強制記憶密碼，導致input背景顏色被chrome的瀏覽器預設樣式，強制更換成黃色，造成整體版面顏色不和諧，解決步驟如下。
+    //1.初始，密碼name設為空，可關閉強制記憶密碼
+	$(document).on("focus", "body", function(event){
+		$("input[type*='password']").attr({"name":""});
+	});     
+    //2.表單送出前，把密碼的name設定回來，否則密碼資料不會送到後端
+    $("#sb").on("click",function(){
+    	$("input[type*='password']").attr({"name":"password"});
+    });	       	
+ 
+    
+ });
+
+
 	
-  } );   
-  </script>
+</script>
 
 
 <style>
@@ -154,10 +127,8 @@
 		color:red;
 	}
 	.input-group{
-		width:300px;	
-	}
-	
-	
+		width:300px;		
+	}		
 	.form-control{
 	    padding-top: 15px;
 	    background: rgba(0, 0, 0, 0.5);	    
@@ -165,9 +136,90 @@
 	    border: none;
 	    color: white;
 	    padding: 10px 15px;
-	    border-radius: 50px;
 	    font-size: 16px;
+
 	}
+	#cmxform div input{
+		border-radius: 50px;
+		border-top-right-radius: 50px;
+    	border-bottom-right-radius: 50px;
+	}
+
+/* 	.light-orange{ */
+/* 		color:white; */
+/* 	    transition:all 0.2s ease-in-out 0s; */
+/* 	    background-color: #e65d4f; */
+/* 	    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);	     */
+/* 	} */
+
+.btn:hover, .btn:focus{
+    outline: none;
+    color:#fff;
+}
+.btn{
+    text-transform: capitalize;
+    color:#fff;
+    padding: 14px 20px;
+    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.btn:hover{
+    color:#fff;
+}
+.btn-sm{
+    padding: 11px 16px;
+    border-radius: 5px;
+}
+.btn-lg{
+    font-size: 15px;
+}
+.button-left > i{
+    margin-left: 7px;
+}
+.button-right > i{
+    margin-right: 7px;
+}  
+
+.blue,
+.light-brown,
+.light-green,
+.light-orange{
+    background: #0088cc;
+    box-shadow:0 4px 0 #006394;
+    transition:all 0.1s ease-in-out 0s;
+    position: relative;
+    top:0;
+}
+.light-brown{
+    background: #cec2ab;
+    box-shadow: 0 4px 0 #b9a888;
+}
+.light-green{
+    background: #75d69c;
+    box-shadow:0 4px 0 #4ac97d;
+    border-radius: 25px;
+}
+.light-orange{
+    background: #fed136;
+    box-shadow:0 4px 0 rgb(228, 183, 54);
+} 
+
+.blue:hover,
+.light-brown:hover,
+.light-green:hover,
+.light-orange:hover{
+    top:2px;
+    box-shadow:0 2px 0 #006394;
+}
+.light-brown:hover{
+    box-shadow: 0 2px 0 #b9a888;
+}
+.light-green:hover{
+    box-shadow:0 2px 0 #4ac97d;
+}
+.light-orange:hover{
+    box-shadow: 0 2px 0 #fed136;
+}	
+	
 /* 	input:-webkit-autofill { */
 /* /* 	  -webkit-box-shadow:0 0 0 50px black inset; */ */
 /* 	  -webkit-box-shadow:0 0 0 50px rgba(0,0,0,0.75) inset; */
@@ -182,9 +234,6 @@
 /* 	  font-color:red; */
 /* 	} */
 
-input:focus {
-    background-position: 0 0;
-}
 
 	
 </style>	
@@ -255,57 +304,53 @@ input:focus {
 	<section id="services">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
 	
-				<div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 				
 					<form id="cmxform" class="form-signin" role="form" action="MemberNext" method="post" autocomplete="off">													
 																		
 						<br>												
 						<c:if test="${!empty FBName}">												
-							<input id="name" type="hidden" name="name" value='${FBName}'>											
+							<input type="hidden" name="name" value='${FBName}'>											
 						</c:if>
 																		
 						<c:if test="${empty FBName}">												
 							<div class="input-group">	
-								<input id="name" type="text" class="form-control required" placeholder="輸入您的姓名" value='${param.name}'>																													
-							  	<input type="hidden" name="name">											
+								<input type="text" name="name" class="form-control required" placeholder="輸入您的姓名" value='${param.name}'>																													
 								<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>											
 							</div>
 							<br>																												
 						</c:if>
 																		
 						<c:if test="${!empty FBAccount}">												
-						  	<input id="email" type="hidden" name="email" value='${FBAccount}'>											
+						  	<input type="hidden" name="email" value='${FBAccount}'>											
 						</c:if>	
 																	
 						<c:if test="${empty FBAccount}">												
 							<div class="input-group">
-								<input id="email" type="text" class="form-control required email" placeholder="輸入您的電子郵件" value='${param.email}'>												
-							  	<input type="hidden" name="email">				
+								<input type="text" name="email" class="form-control email required" placeholder="輸入您的電子郵件" value='${param.email}'>												
 								<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>											
 							</div>												
 							<br>												
 						</c:if>												
 																		
 						<c:if test="${!empty FBId}">												
-						  	<input id="password" type="hidden" name="password" value='${FBId}'>											
+						  	<input type="hidden" name="password" value='${FBId}'>											
 						</c:if>
 																		
 						<c:if test="${empty FBId}">												
 							<div class="input-group">
-								<input id="password" type="password" class="form-control required" placeholder="輸入您的密碼" value='${param.password}'>	
-							    <input type="hidden" name="password">												
+								<input type="password" class="form-control required" placeholder="輸入您的密碼" value='${param.password}'>
 							    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>												
 							</div>												
 							<br>												
 						</c:if>												
 																		
 																		
-						<div class="input-group">												
-						   											
-							<input id="phone" type="text" class="form-control required" placeholder="輸入您的電話" value='${param.phone}'>												
-						    <input type="hidden" name="phone">												
+						<div class="input-group">
+																			
+							<input name="phone" type="text" class="form-control required" placeholder="輸入您的電話" value='${param.phone}'>												
 						    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>												
 																		
 						</div>												
@@ -320,25 +365,23 @@ input:focus {
 						<br>												
 																		
 						<div class="input-group">												
-						   	<input id="address" type="text" class="form-control required" placeholder="輸入您的地址" value='${param.address}'>										
-						    <input type="hidden" name="address">												
+						   	<input name="address" type="text" class="form-control required" placeholder="輸入您的地址" value='${param.address}'>										
 						    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>												
 						</div>												
 																		
 						<br>												
-																		
-						<input type="hidden" name="action" value="insert">												
-						<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >下一步</button>												
-						
-															
-																		
+						<div class="input-group">												
+							<input type="hidden" name="action" value="insert">												
+							<button id="sb" class="btn btn-lg light-orange btn-block" type="submit">下一步</button>												
+						</div>
+<!-- 						<button id="test" type="button">test</button>												 -->
 					</form>													
 					
 					
 				</div>	
 				
 				
-				<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
 				
 			</div>
 		</div>

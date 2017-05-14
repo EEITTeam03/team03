@@ -2,7 +2,6 @@ package com.progress;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -69,19 +68,15 @@ public class AutoSetTodayReservList {
 	//新增預約時 請加做
 	public void TodayReservListInsert(ServletContext application,String time,String member){
 		List<String> list = (List<String>)application.getAttribute(time);
-		list.add(member);
+		if(null != list)
+			list.add(member);
 	}
 	
 	//取消預約時 請加做
 	public void TodayReservListDelete(ServletContext application,String time,String member){
 		List<String> list = (List<String>)application.getAttribute(time);
-		list.remove(member);
+		if(null != list)
+			list.remove(member);
 	}
-	
-	
-//	public void TodayReservListUpdate(ServletContext application,String time,String member){
-//		List<String> list = (List<String>)application.getAttribute(time);
-//		list.remove(member);
-//	}
 
 }

@@ -91,7 +91,7 @@ ul[class*="nav navbar-nav side-nav"] {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="admin.jsp">汽車美容後台管理</a>
+                <a class="navbar-brand" href="admin_default.jsp">汽車美容後台管理</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">

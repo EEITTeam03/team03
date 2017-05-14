@@ -4,7 +4,7 @@
 <%@ page import="com.services.model.*"%>
 <!DOCTYPE html>
 <%
-	ServiceStepVO serviceStepVO=(ServiceStepVO)request.getAttribute("serviceStepVO");
+// 	ServiceStepVO serviceStepVO=(ServiceStepVO)request.getAttribute("serviceStepVO");
 %>
 <html>
 <head>

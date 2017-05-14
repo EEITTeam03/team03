@@ -12,6 +12,11 @@
 
     <!-- Custom Fonts -->
     <link href="admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+	<!-- 中文字型 CSS -->
+<link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css" rel="stylesheet">
+
 <!-- 增加的內容 -->
 
     <title id='Description'>水膜汽車美容-預約排程表 </title>
@@ -47,7 +52,14 @@
 ul[class*="nav navbar-nav side-nav"] {
 	font-size: 125%;
 }
-
+body,button,h1{
+ font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	    text-transform: uppercase;
+	    font-weight: 400;
+	    font-size:16px;
+	    letter-spacing: 1px;
+	    color: black;
+}
 </style>
     <script type="text/javascript">   
     	var globalView = "weekView";
@@ -619,7 +631,7 @@ ul[class*="nav navbar-nav side-nav"] {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="admin.jsp">汽車美容後台管理</a>
+                <a class="navbar-brand" href="${ctx}/admin/admin_default.jsp">汽車美容後台管理</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -700,8 +712,8 @@ ul[class*="nav navbar-nav side-nav"] {
 		<div id="page-wrapper">
 		<div id="contentDiv">
 		<h2>查看排程</h2>
-		<input type="button" id="btn_search" value="查詢" />
-		<input type="button" value="匯出至Excel" id='excelExport' />
+		<button type="submit" id="btn_search" class="btn btn-sm btn-primary">查詢</button>
+		<button type="submit" value="匯出至Excel" id='excelExport' class="btn btn-sm btn-primary">匯出至Excel</button>
     	<div><img id="loading_data" src="${ctx}/img/loading/ajax-loader.gif" /></div>
     		<div id="scheduler_body" >
         	<div id="scheduler"></div>
