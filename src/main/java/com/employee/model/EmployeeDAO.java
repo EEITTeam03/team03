@@ -123,20 +123,22 @@ public class EmployeeDAO implements EmployeeDAO_interface {
 	}
 
 	@Override
-	public List<EmployeeVO> findNoByName(String employeeName) {
+	public EmployeeVO findNoByName(String employeeName) {
 		List<EmployeeVO> list = null;
+		EmployeeVO empNo;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
 			Query query = session.createQuery(GET_EMPNO_STMT);
 			query.setParameter(0,employeeName);
 			list = query.list();
+			empNo = list.get(0);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}	
-		return list;
+		return empNo;
 	}
 
 }

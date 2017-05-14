@@ -70,24 +70,19 @@ public class scheduleTestServlet2 extends HttpServlet {
 		
 		String id = map.get("id");
 		Integer reservNo = null;
-		Integer empNo = null;
+		//透過師傅名字找編號(新單empNo=null，修改時empNo為原來的 calendar師傅名才有依修改變動)
+		String empName = map.get("calendar");
+		EmployeeService empService = new EmployeeService();
+		EmployeeVO emp = empService.findNoByName(empName);
+		Integer empNo = emp.getEmployeeNo();
 		//如果id長度超過6，則為新增訂單 id為系統亂數
 		if(id.length()<6){
 			reservNo= Integer.valueOf(map.get("id"));	//取得預約編號
-			empNo= Integer.valueOf(map.get("empNo"));	//取得員工編號
 			System.out.println("修改時訂單編號: "+reservNo);
-			System.out.println("修改時員工時編號: "+empNo);
 		}else{
-			//設定編號為零的視為新訂單，新單empNo=null，透過師傅名字找編號
+			//設定編號為零的視為新訂單
 			reservNo=0;		
-			String empName = map.get("calendar");
-			EmployeeService empService = new EmployeeService();
-			List<EmployeeVO>list = empService.findNoByName(empName);
-			for(EmployeeVO emp:list){
-				empNo = emp.getEmployeeNo();
-			}
 			//System.out.println("新增時訂單編號: "+reservNo);
-			//System.out.println("新增時員工編號: "+empNo);
 		}
 		
 		ReservService rs = new ReservService();
@@ -160,13 +155,18 @@ public class scheduleTestServlet2 extends HttpServlet {
 			//如果reservNo不為0，則為新增
 			if(reservNo!=0){
 				/*---------------update或delete預約單時，修改或刪除其監視器觀看權限時段------------------*/
-				AutoSetTodayReservList autoSet = new AutoSetTodayReservList();
-				ServletContext application = request.getServletContext();
-				for(Calendar startTime= rs.getOneReserv(reservNo).getReservDateTime();MyUtil.getHHmmFormat(OldEnd).compareTo(MyUtil.getHHmmFormat(startTime))>0;startTime.add(Calendar.MINUTE,30)){
-					String memberNo = ""+mcv.getMemberInfoVO().getMemberNo();
-					autoSet.TodayReservListDelete(application,MyUtil.getHHmmFormat(startTime),memberNo);
-					System.out.print("今日修改的時段及會員編號(先刪/delete則無後增): "+MyUtil.getHHmmFormat(startTime)+",");
-					System.out.println(memberNo);
+				//新刪修訂單的預約日期為今天，才會更新觀看權限
+				if(MyUtil.formatCalender(scalendar).equals(MyUtil.formatCalender(Calendar.getInstance()))){
+					//System.out.println("新增:"+MyUtil.formatCalender(scalendar));
+					//System.out.println(MyUtil.formatCalender(Calendar.getInstance()));
+					AutoSetTodayReservList autoSet = new AutoSetTodayReservList();
+					ServletContext application = request.getServletContext();
+					for(Calendar startTime= rs.getOneReserv(reservNo).getReservDateTime();MyUtil.getHHmmFormat(OldEnd).compareTo(MyUtil.getHHmmFormat(startTime))>0;startTime.add(Calendar.MINUTE,30)){
+						String memberNo = ""+mcv.getMemberInfoVO().getMemberNo();
+						autoSet.TodayReservListDelete(application,MyUtil.getHHmmFormat(startTime),memberNo);
+						System.out.print("今日修改的時段及會員編號(先刪/delete則無後增): "+MyUtil.getHHmmFormat(startTime)+",");
+						System.out.println(memberNo);
+					}
 				}
 				/*-----------------------------------------------------------------------*/
 				rls.deleteListByNo(reservNo);//先把舊預約的ReservList刪除
@@ -207,12 +207,16 @@ public class scheduleTestServlet2 extends HttpServlet {
 					rvo.setStatus(0);
 				}
 				dao.update(rvo);
-				/*---------------update預約單時，修改其監視器觀看權限時段------------------*/				
-				for(Calendar startTime= scalendar;MyUtil.getHHmmFormat(ecalendar).compareTo(MyUtil.getHHmmFormat(startTime))>0;startTime.add(Calendar.MINUTE,30)){
-					String memberNo = ""+mcv.getMemberInfoVO().getMemberNo();
-					autoSet.TodayReservListInsert(application,MyUtil.getHHmmFormat(startTime),memberNo);
-					System.out.print("今日修改的時段及會員編號(後增): "+MyUtil.getHHmmFormat(startTime)+",");
-					System.out.println(memberNo);
+				/*---------------update預約單時，修改其監視器觀看權限時段------------------*/
+				if(MyUtil.formatCalender(scalendar).equals(MyUtil.formatCalender(Calendar.getInstance())) && crudStatus.equals("update")){
+						AutoSetTodayReservList autoSet = new AutoSetTodayReservList();
+						ServletContext application = request.getServletContext();
+						for(Calendar startTime= scalendar;MyUtil.getHHmmFormat(ecalendar).compareTo(MyUtil.getHHmmFormat(startTime))>0;startTime.add(Calendar.MINUTE,30)){
+							String memberNo = ""+mcv.getMemberInfoVO().getMemberNo();
+							autoSet.TodayReservListInsert(application,MyUtil.getHHmmFormat(startTime),memberNo);
+							System.out.print("今日修改的時段及會員編號(後增): "+MyUtil.getHHmmFormat(startTime)+",");
+							System.out.println(memberNo);
+						}
 				}
 				/*------------------------------------------------------------*/
 			}else{
@@ -249,13 +253,15 @@ public class scheduleTestServlet2 extends HttpServlet {
 				ReservDAO dao = new ReservDAO();
 				dao.insert(rvo);
 				/*---------------insert新預約單，增加監視器觀看權限------------------*/
-				AutoSetTodayReservList autoSet = new AutoSetTodayReservList();
-				ServletContext application = request.getServletContext();
-				for(Calendar startTime= scalendar;MyUtil.getHHmmFormat(ecalendar).compareTo(MyUtil.getHHmmFormat(startTime))>0;startTime.add(Calendar.MINUTE,30)){
-					String memberNo = ""+mcv.getMemberInfoVO().getMemberNo();
-					autoSet.TodayReservListInsert(application,MyUtil.getHHmmFormat(startTime),memberNo);
-					System.out.print("今日新增的時段及會員編號: "+MyUtil.getHHmmFormat(startTime)+",");
-					System.out.println(memberNo);
+				if(MyUtil.formatCalender(scalendar).equals(MyUtil.formatCalender(Calendar.getInstance()))){
+					AutoSetTodayReservList autoSet = new AutoSetTodayReservList();
+					ServletContext application = request.getServletContext();
+					for(Calendar startTime= scalendar;MyUtil.getHHmmFormat(ecalendar).compareTo(MyUtil.getHHmmFormat(startTime))>0;startTime.add(Calendar.MINUTE,30)){
+						String memberNo = ""+mcv.getMemberInfoVO().getMemberNo();
+						autoSet.TodayReservListInsert(application,MyUtil.getHHmmFormat(startTime),memberNo);
+						System.out.print("今日新增的時段及會員編號: "+MyUtil.getHHmmFormat(startTime)+",");
+						System.out.println(memberNo);
+					}
 				}
 				/*---------------------------------------------------------*/
 			}

@@ -41,6 +41,17 @@ public class MyUtil {
 		return cal;
 	}
 	
+	public static String formatCalender(Calendar calDate) {
+		String calToString;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			calToString = (sdf.format(calDate.getTime()));
+		} catch (Exception e) {
+			throw new RuntimeException("日期格式錯誤!");
+		}
+		return calToString;
+	}
+	
 	/*scheduler for admin*/
 	public static Calendar getLocalTimeFromUTC(String timeUTC){
 		  TimeZone utc = TimeZone.getTimeZone("UTC");

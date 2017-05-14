@@ -8,5 +8,5 @@ public interface EmployeeDAO_interface {
 	public List<EmployeeVO> getAll();
 	public EmployeeVO findByPrimaryKey(Integer employeeNo);
 	public void delete(Integer employeeNo);
-	public List<EmployeeVO> findNoByName(String employeeName);
+	public EmployeeVO findNoByName(String employeeName);
 }
