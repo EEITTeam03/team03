@@ -52,7 +52,7 @@ body,button,h1{
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="admin_default.jsp">汽車美容後台管理</a>
+				<a class="navbar-brand" href="${ctx}/admin/admin_default.jsp">汽車美容後台管理</a>
 			</div>
 			<!-- Top Menu Items -->
 			<ul class="nav navbar-right top-nav">
