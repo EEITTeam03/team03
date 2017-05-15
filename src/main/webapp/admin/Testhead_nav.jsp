@@ -71,7 +71,7 @@ body,button,h1{
                         <c:if test="${list.size()>0}">
                         <c:forEach var="fVO" items="${list}" begin="0" end="${list.size()-1}">
                         <li class="message-preview">
-                            <a href="#">
+                            <a href="${ctx}/admin/ListOneFeedback.jsp?feedbackNO=${fVO.feedbackNo}">
                                 <div class="media">
 <!--                                     <span class="pull-left"> -->
 <!--                                         <img class="media-object" src="http://placehold.it/50x50" alt=""> -->
@@ -105,7 +105,7 @@ body,button,h1{
 					<ul class="dropdown-menu">
 						<li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
 						</li>
-						<li><a href="#"><i class="fa fa-fw fa-envelope"></i>
+						<li><a href="${ctx}/admin/ListAllfeedback.jsp"><i class="fa fa-fw fa-envelope"></i>
 								Inbox</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
 						</li>
