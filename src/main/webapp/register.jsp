@@ -125,10 +125,7 @@
 	}
 	.error{
 		color:red;
-	}
-	.input-group{
-		width:300px;		
-	}		
+	}	
 	.form-control{
 	    padding-top: 15px;
 	    background: rgba(0, 0, 0, 0.5);	    
@@ -140,9 +137,27 @@
 
 	}
 	#cmxform div input{
-		border-radius: 50px;
-		border-top-right-radius: 50px;
-    	border-bottom-right-radius: 50px;
+		font-size: 22px;
+	    display: block;
+	    width: 100%;
+	    height: 100%;
+	    padding: 5px 10px;
+	    background: none;
+	    background-image: none;
+	    border: 1px solid #a0b3b0;
+	    color: black;
+	    border-radius: 0;
+	    -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+	    transition: border-color .25s ease, box-shadow .25s ease;
+}
+	#cmxform div input:focus{
+		outline: 0;
+		border-color: #1ab188;
+}
+
+
+    	
+    	
 	}
 
 /* 	.light-orange{ */
@@ -170,7 +185,7 @@
     border-radius: 5px;
 }
 .btn-lg{
-    font-size: 15px;
+    font-size: 20px;
 }
 .button-left > i{
     margin-left: 7px;
@@ -219,6 +234,18 @@
 .light-orange:hover{
     box-shadow: 0 2px 0 #fed136;
 }	
+form{
+	background-repeat: no-repeat;
+	width:945px;
+    background: rgba(255, 255, 255, 0.45);
+    max-width: 600px;
+    margin: 40px auto;
+    border-radius: 4px;
+    box-shadow:0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+#cmxform input::-webkit-input-placeholder{ 	
+	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 	
 /* 	input:-webkit-autofill { */
 /* /* 	  -webkit-box-shadow:0 0 0 50px black inset; */ */
@@ -304,84 +331,93 @@
 	<section id="services">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
 	
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 				
 					<form id="cmxform" class="form-signin" role="form" action="MemberNext" method="post" autocomplete="off">													
-																		
-						<br>												
-						<c:if test="${!empty FBName}">												
-							<input type="hidden" name="name" value='${FBName}'>											
-						</c:if>
-																		
-						<c:if test="${empty FBName}">												
-							<div class="input-group">	
-								<input type="text" name="name" class="form-control required" placeholder="輸入您的姓名" value='${param.name}'>																													
-								<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>											
-							</div>
-							<br>																												
-						</c:if>
-																		
-						<c:if test="${!empty FBAccount}">												
-						  	<input type="hidden" name="email" value='${FBAccount}'>											
-						</c:if>	
-																	
-						<c:if test="${empty FBAccount}">												
-							<div class="input-group">
-								<input type="text" name="email" class="form-control email required" placeholder="輸入您的電子郵件" value='${param.email}'>												
-								<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>											
-							</div>												
-							<br>												
-						</c:if>												
-																		
-						<c:if test="${!empty FBId}">												
-						  	<input type="hidden" name="password" value='${FBId}'>											
-						</c:if>
-																		
-						<c:if test="${empty FBId}">												
-							<div class="input-group">
-								<input type="password" class="form-control required" placeholder="輸入您的密碼" value='${param.password}'>
-							    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>												
-							</div>												
-							<br>												
-						</c:if>												
-																		
-																		
-						<div class="input-group">
+						<div class="row">
+							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">																		
+								<br>
+								<br>
+								<div class="input-group" style="max-width:500px;">	
+									<img class="img-circle img-responsive" src="img/register/logo.png" alt="">
+								</div>
+								<br>														
+								<c:if test="${!empty FBName}">												
+									<input type="hidden" name="name" value='${FBName}'>											
+								</c:if>
+																				
+								<c:if test="${empty FBName}">												
+									<div class="input-group" style="max-width:200px;">	
+										<input id="inp1" type="text" name="name" class="form-control required" placeholder="輸入您的姓名" value='${param.name}'>																													
+										<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>											
+									</div>
+									<br>																															
+								</c:if>
+																				
+								<c:if test="${!empty FBAccount}">												
+								  	<input type="hidden" name="email" value='${FBAccount}'>											
+								</c:if>	
 																			
-							<input name="phone" type="text" class="form-control required" placeholder="輸入您的電話" value='${param.phone}'>												
-						    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>												
-																		
-						</div>												
-																		
-						<br>												
-																		
-						<div class="input-group">												
-					    	<input id="datepicker" class="form-control required dateISO" name="datepicker" placeholder="輸入您的出生年月日" value='${param.birthday}'>												
-						    <small><Font color='red' >${ErrorMsgKey.BirthdayEmptyError}</Font></small><br>												
-						</div>												
-																		
-						<br>												
-																		
-						<div class="input-group">												
-						   	<input name="address" type="text" class="form-control required" placeholder="輸入您的地址" value='${param.address}'>										
-						    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>												
-						</div>												
-																		
-						<br>												
-						<div class="input-group">												
-							<input type="hidden" name="action" value="insert">												
-							<button id="sb" class="btn btn-lg light-orange btn-block" type="submit">下一步</button>												
+								<c:if test="${empty FBAccount}">												
+									<div class="input-group">
+										<input id="inp2" type="text" name="email" class="form-control email required" placeholder="輸入您的電子郵件" value='${param.email}' style="width:500px;">												
+										<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>											
+									</div>												
+									<br>												
+								</c:if>												
+																				
+								<c:if test="${!empty FBId}">												
+								  	<input type="hidden" name="password" value='${FBId}'>											
+								</c:if>
+																				
+								<c:if test="${empty FBId}">												
+									<div class="input-group" style="max-width:250px;">
+										<input type="password" class="form-control required" placeholder="輸入您的密碼" value='${param.password}'>
+									    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>												
+									</div>												
+									<br>												
+								</c:if>												
+																				
+																				
+								<div class="input-group"  style="max-width:250px;">
+									<input name="phone" type="text" class="form-control required" placeholder="輸入您的電話" value='${param.phone}'>												
+								    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>												
+																				
+								</div>												
+																				
+								<br>												
+																				
+								<div class="input-group" style="max-width:250px;">												
+							    	<input id="datepicker" class="form-control required dateISO" name="datepicker" placeholder="輸入您的出生年月日" value='${param.birthday}'>												
+								    <small><Font color='red' >${ErrorMsgKey.BirthdayEmptyError}</Font></small><br>												
+								</div>												
+																				
+								<br>												
+																				
+								<div class="input-group">												
+								   	<input name="address" type="text" class="form-control required" placeholder="輸入您的地址" value='${param.address}' style="width:500px;">										
+								    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>												
+								</div>												
+																				
+								<br>												
+								<div class="input-group">												
+									<input type="hidden" name="action" value="insert">												
+									<button id="sb" class="btn btn-lg light-orange btn-block" type="submit"  style="width:500px;">下一步</button>												
+									<br>
+									<br>
+									<br>
+								</div>
+							</div>		
 						</div>
-<!-- 						<button id="test" type="button">test</button>												 -->
 					</form>													
 					
 					
 				</div>	
 				
 				
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
 				
 			</div>
 		</div>

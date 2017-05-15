@@ -65,7 +65,7 @@ public class ReserveService extends HttpServlet {
 		if(selectedTime.equals(""))
 			errmsg.add("未選擇時間!");
 		
-		if(singleService.equals(""));
+		if(singleService.equals(""))
 			errmsg.add("至少要選擇一種主要服務!");
 		
 		if(empNo.equals("")) 
@@ -205,7 +205,7 @@ public class ReserveService extends HttpServlet {
 		// 準備轉交
 		request.setAttribute("reserve", reservVO);
 		request.getRequestDispatcher("/reserve_success.jsp").forward(request, response);
-
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

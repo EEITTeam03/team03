@@ -589,9 +589,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							
-					
-
+					<img style="-webkit-user-select: none;" src="http://localhost:8080/maven-archetype-webapp-servlet3/VideoServlet" width="800px" height="600px">		
 				</div>
 				
 			</div>
