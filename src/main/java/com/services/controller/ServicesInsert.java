@@ -175,17 +175,36 @@ public class ServicesInsert extends HttpServlet {
 				String carClassXXL = "XXL";
 				
 				//新增服務步驟的部分
-//				Integer servStepOne=Integer.valueOf(request.getParameter("servStepOne"));
-//				Integer servStepTwo=Integer.valueOf(request.getParameter("servStepTwo"));
-//				Integer servStepThree=Integer.valueOf(request.getParameter("servStepThree"));
-//				
-//				String stepNameOne=request.getParameter("stepNameOne");
-//				String stepNameTwo=request.getParameter("stepNameTwo");
-//				String stepNameThree=request.getParameter("stepNameThree");
-//				
-//				String stepDescpOne=request.getParameter("stepDescpOne");
-//				String stepDescpTwo=request.getParameter("stepDescpTwo");
-//				String stepDescpThree=request.getParameter("stepDescpThree");
+				Integer servStepOne=Integer.valueOf(request.getParameter("servStepOne"));
+				Integer servStepTwo=Integer.valueOf(request.getParameter("servStepTwo"));
+				Integer servStepThree=Integer.valueOf(request.getParameter("servStepThree"));
+				
+				String stepNameOne=request.getParameter("stepNameOne");
+				String stepNameTwo=request.getParameter("stepNameTwo");
+				String stepNameThree=request.getParameter("stepNameThree");
+				if(stepNameOne==null ||stepNameOne.trim().length()==0){
+					errorMsg.put("errorstepNameOneEmpty", "服務步驟名稱必須輸入");
+				}
+				if(stepNameTwo==null ||stepNameTwo.trim().length()==0){
+					errorMsg.put("errorstepNameTwoEmpty", "服務步驟名稱必須輸入");
+				}
+				if(stepNameThree==null ||stepNameThree.trim().length()==0){
+					errorMsg.put("errorstepNameThreeEmpty", "服務步驟名稱必須輸入");
+				}
+				
+				
+				String stepDescpOne=request.getParameter("stepDescpOne");
+				String stepDescpTwo=request.getParameter("stepDescpTwo");
+				String stepDescpThree=request.getParameter("stepDescpThree");
+				if(stepDescpOne==null ||stepDescpOne.trim().length()==0){
+					errorMsg.put("errorstepDescpOneEmpty", "服務步驟描述必須輸入");
+				}
+				if(stepDescpTwo==null ||stepDescpTwo.trim().length()==0){
+					errorMsg.put("errorstepDescpTwoEmpty", "服務步驟描述必須輸入");
+				}
+				if(stepDescpThree==null ||stepDescpThree.trim().length()==0){
+					errorMsg.put("errorstepDescpThreeEmpty", "服務步驟描述必須輸入");
+				}
 				
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				//新增服務的部分
@@ -240,21 +259,21 @@ public class ServicesInsert extends HttpServlet {
 				sccvoXXL.setServTime(servTimeXXL);
 				
 				//新增服務步驟
-//				ServiceStepVO ssvoOne=new ServiceStepVO();
-//				ssvoOne.setServicesVO(svo);
-//				ssvoOne.setServStep(servStepOne);
-//				ssvoOne.setStepName(stepNameOne);
-//				ssvoOne.setStepName(stepNameOne);
-//				ServiceStepVO ssvoTwo=new ServiceStepVO();
-//				ssvoTwo.setServicesVO(svo);
-//				ssvoTwo.setServStep(servStepTwo);
-//				ssvoTwo.setStepName(stepNameTwo);
-//				ssvoOne.setStepName(stepNameTwo);
-//				ServiceStepVO ssvoThree=new ServiceStepVO();
-//				ssvoThree.setServicesVO(svo);
-//				ssvoThree.setServStep(servStepThree);
-//				ssvoThree.setStepName(stepNameThree);
-//				ssvoOne.setStepName(stepNameThree);
+				ServiceStepVO ssvoOne=new ServiceStepVO();
+				ssvoOne.setServicesVO(svo);
+				ssvoOne.setServStep(servStepOne);
+				ssvoOne.setStepName(stepNameOne);
+				ssvoOne.setStepName(stepNameOne);
+				ServiceStepVO ssvoTwo=new ServiceStepVO();
+				ssvoTwo.setServicesVO(svo);
+				ssvoTwo.setServStep(servStepTwo);
+				ssvoTwo.setStepName(stepNameTwo);
+				ssvoOne.setStepName(stepNameTwo);
+				ServiceStepVO ssvoThree=new ServiceStepVO();
+				ssvoThree.setServicesVO(svo);
+				ssvoThree.setServStep(servStepThree);
+				ssvoThree.setStepName(stepNameThree);
+				ssvoOne.setStepName(stepNameThree);
 				
 				if (!errorMsg.isEmpty()) {
 					request.setAttribute("servicesVO", svo);
@@ -263,9 +282,9 @@ public class ServicesInsert extends HttpServlet {
 					request.setAttribute("serviceCarClassVOS",sccvoS);
 					request.setAttribute("serviceCarClassVOXL",sccvoXL);
 					request.setAttribute("serviceCarClassVOXXL",sccvoXXL);
-//					request.setAttribute("servStepVOOne", ssvoOne);
-//					request.setAttribute("servStepVOTwo", ssvoTwo);
-//					request.setAttribute("servStepVOThree", ssvoThree);
+					request.setAttribute("servStepVOOne", ssvoOne);
+					request.setAttribute("servStepVOTwo", ssvoTwo);
+					request.setAttribute("servStepVOThree", ssvoThree);
 					String url = "ServicesInsert.jsp";
 					RequestDispatcher failerView = request.getRequestDispatcher(url);
 					failerView.forward(request, response);
@@ -289,16 +308,17 @@ public class ServicesInsert extends HttpServlet {
 				sccvoXXL=sccsXXL.addServiceCarClassAndCarClass(svo, ccvoXXL, servPriceXXL, servTimeXXL);
 				
 				//服務步驟的部分
-//				ServiceStepService sssOne=new ServiceStepService();
-//				ServiceStepService sssTwo=new ServiceStepService();
-//				ServiceStepService sssThree=new ServiceStepService();
-//				ssvoOne=sssOne.addServiceStepForInsert(svo, servStepOne, stepNameOne, stepDescpOne);
-//				ssvoTwo=sssTwo.addServiceStepForInsert(svo, servStepOne, stepNameOne, stepDescpOne);
-//				ssvoThree=sssThree.addServiceStepForInsert(svo, servStepOne, stepNameOne, stepDescpOne);
+				ServiceStepService sssOne=new ServiceStepService();
+				ServiceStepService sssTwo=new ServiceStepService();
+				ServiceStepService sssThree=new ServiceStepService();
+				ssvoOne=sssOne.addServiceStepForInsert(svo, servStepOne, stepNameOne, stepDescpOne);
+				ssvoTwo=sssTwo.addServiceStepForInsert(svo, servStepOne, stepNameOne, stepDescpTwo);
+				ssvoThree=sssThree.addServiceStepForInsert(svo, servStepOne, stepNameOne, stepDescpThree);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "SelectServicesForInsert.jsp";
-				RequestDispatcher successView = request.getRequestDispatcher(url);
-				successView.forward(request, response);
+//				RequestDispatcher successView = request.getRequestDispatcher(url);
+//				successView.forward(request, response);
+				response.sendRedirect(url);
 
 			} catch (Exception e) {
 				String url = "ServicesInsert.jsp";

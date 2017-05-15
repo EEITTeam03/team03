@@ -18,6 +18,7 @@ public class ServiceCarClassDAO_Hibernate implements ServiceCarClassDAO_interfac
 	private static final String GET_SERs_BYSerNo_STMT = "SELECT servNo,servTypeNo,servName,servDesc,servPhoto,servEffectiveDate,servStatus FROM services WHERE servNo=? order by servNo ";
 	private static final String DELETE = "DELETE ServiceCarClassVO WHERE ServNo=?";
 	private static final String GET_ONE = "FROM ServiceCarClassVO WHERE servicesVO=? AND carClassVO=?";
+	private static final String GET_FK_STMT = "From ServiceCarClassVO WHERE ServNo=?";
 	@Override
 	public void insert(ServiceCarClassVO serCarVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -139,11 +140,20 @@ public class ServiceCarClassDAO_Hibernate implements ServiceCarClassDAO_interfac
 		return serCarVO;
 	}
 
-//	@Override
-//	public Set<ServicesVO> getSerBySerNo(Integer ServNo) {
-//		Set<ServicesVO> set =findByPrimaryKey(ServNo).getCarClassNo();
-//	//TODO 要做從ServCarClass去找到所有的服務;
-//		return null;
-//	}
+	@Override
+	public List<ServiceCarClassVO> findByForeignKey(Integer servNo) {
+		List<ServiceCarClassVO> list=null;
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query=session.createQuery(GET_FK_STMT);
+			query.setParameter(0, servNo);
+			list=query.list();
+			session.getTransaction().commit();;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+		}
+		return list;
+	}
 
 }

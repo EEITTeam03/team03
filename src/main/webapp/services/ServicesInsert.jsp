@@ -149,8 +149,10 @@
 					</div>
 					</td>
 				</tr>
-				</table>
-				<h2>服務車輛等級</h2>
+
+			</table>
+			
+			<h2>服務車輛等級</h2>
 				<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
@@ -165,11 +167,11 @@
 						大型車(L)
 					</td>
 					<td>
-						<input type="text"name="servPriceL" value="${serviceCarClassVOL.servPriceL}" style="width: 120px;">
+						<input type="text"name="servPriceL" value="${serviceCarClassVOL.servPrice}" style="width: 120px;">
 						<font size="-1" color="#FF0000">${MsgMap.errorservPriceLEmpty}</font>
 					</td>
 					<td>
-						<input type="text"name="servTimeL" value="${serviceCarClassVOL.servTimeL}" style="width: 120px;">
+						<input type="text"name="servTimeL" value="${serviceCarClassVOL.servTime}" style="width: 120px;">
 						<font size="-1" color="#FF0000">${MsgMap.errorservTimeLEmpty}</font>
 					</td>
 				</tr>
@@ -178,11 +180,11 @@
 						中型車(M)
 					</td>
 					<td>
-						<input type="text"name="servPriceM" value="${serviceCarClassVOM.servPriceM}" style="width: 120px;">
+						<input type="text"name="servPriceM" value="${serviceCarClassVOM.servPrice}" style="width: 120px;">
 						<font size="-1" color="#FF0000">${MsgMap.errorservPriceMEmpty}</font>
 					</td>
 					<td>
-						<input type="text"name="servTimeM" value="${serviceCarClassVOM.servTimeM}" style="width: 120px;">
+						<input type="text"name="servTimeM" value="${serviceCarClassVOM.servTime}" style="width: 120px;">
 						<font size="-1" color="#FF0000">${MsgMap.errorservTimeMEmpty}</font>
 					</td>
 				</tr>
@@ -191,12 +193,12 @@
 						小型車(S)
 					</td>
 					<td>
-						<input type="text"name="servPriceS" value="${serviceCarClassVOS.servPriceS}" style="width: 120px;">
+						<input type="text"name="servPriceS" value="${serviceCarClassVOS.servPrice}" style="width: 120px;">
 						<font size="-1" color="#FF0000">${MsgMap.errorservPriceSEmpty}</font>
 					</td>
 					<td>
 						
-						<input type="text"name="servTimeS" value="${serviceCarClassVOS.servTimeS}" style="width: 120px;">
+						<input type="text"name="servTimeS" value="${serviceCarClassVOS.servTime}" style="width: 120px;">
 						<font size="-1" color="#FF0000">${MsgMap.errorservTimeSEmpty}</font>
 					</td>
 				</tr>
@@ -205,11 +207,11 @@
 						休旅車(XL)
 					</td>
 					<td>
-						<input type="text"name="servPriceXL" value="${serviceCarClassVOXL.servPriceXL}" style="width: 120px;">
+						<input type="text"name="servPriceXL" value="${serviceCarClassVOXL.servPrice}" style="width: 120px;">
 						<font size="-1" color="#FF0000">${MsgMap.errorservPriceXLEmpty}</font>
 					</td>
 					<td>
-						<input type="text"name="servTimeXL" value="${serviceCarClassVOXL.servTimeXL}" style="width: 120px;">
+						<input type="text"name="servTimeXL" value="${serviceCarClassVOXL.servTime}" style="width: 120px;">
 						<font size="-1" color="#FF0000">${MsgMap.errorservTimeXLEmpty}</font>
 					</td>
 				</tr>
@@ -218,64 +220,70 @@
 						商旅車(XXL)
 					</td>
 					<td>
-						<input type="text"name="servPriceXXL" value="${serviceCarClassVOXXL.servPriceXXL}" style="width: 120px;">
+						<input type="text"name="servPriceXXL" value="${serviceCarClassVOXXL.servPrice}" style="width: 120px;">
 						<font size="-1" color="#FF0000">${MsgMap.errorservPriceXXLEmpty}</font>
 					</td>
 					<td>
-						<input type="text"name="servTimeXXL" value="${serviceCarClassVOXXL.servTimeXXL}" style="width: 120px;">
+						<input type="text"name="servTimeXXL" value="${serviceCarClassVOXXL.servTime}" style="width: 120px;">
 						<font size="-1" color="#FF0000">${MsgMap.errorservTimeXXLEmpty}</font>
 					</td>
 				</tr>
 				</table>.
-<!-- 				<h2>服務步驟</h2> -->
-<!-- 				<table class="table table-bordered table-hover"> -->
-<!-- 				<thead> -->
-<!-- 					<tr> -->
-<!-- 						<th>服務步驟</th> -->
-<!-- 						<th>服務步驟名稱</th> -->
-<!-- 						<th>服務步驟描述</th> -->
-<!-- 					</tr> -->
-<!-- 				</thead> -->
-<!-- 					<tr> -->
-<!-- 						<td> -->
-<!-- 							服務步驟-1 -->
-<!-- 						</td> -->
-<!-- 						<td> -->
-<!-- 							<input type="hidden"name="servStepOne" value="1"> -->
-<%-- 							<input type="text" name="stepNameOne" value="${servStepVOOne.stepNameOne}" style="width: 120px;"/> --%>
-<!-- 						</td> -->
-<!-- 						<td> -->
-<%-- 							<input type="text" name="stepDescpOne" value="${servStepVOOne.stepNameOne}" style="width: 120px;"/> --%>
-<!-- 						</td> -->
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td> -->
-<!-- 							服務步驟-2 -->
-<!-- 						</td> -->
-<!-- 						<td> -->
-<!-- 							<input type="hidden"name="servStepTwo" value="2"> -->
-<%-- 							<input type="text" name="stepNameTwo" value="${servStepVOTwo.servTimeXXL}" style="width: 120px;"/> --%>
-<!-- 						</td> -->
-<!-- 						<td> -->
-<%-- 							<input type="text" name="stepDescpTwo" value="${servStepVOOne.stepNameOne}" style="width: 120px;"/> --%>
-<!-- 						</td> -->
+				<h2>服務步驟</h2>
+				<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>服務步驟</th>
+						<th>服務步驟名稱</th>
+						<th>服務步驟描述</th>
+					</tr>
+				</thead>
+					<tr>
+						<td>
+							服務步驟-1
+						</td>
+						<td>
+							<input type="hidden"name="servStepOne" value="1">
+							<input type="text" name="stepNameOne" value="${servStepVOOne.stepName}" style="width: 120px;"/>
+							<font size="-1" color="#FF0000">${MsgMap.errorstepNameOneEmpty}</font>
+						</td>
+						<td>
+							<input type="text" name="stepDescpOne" value="${servStepVOOne.stepDescp}" style="width: 120px;"/>
+							<font size="-1" color="#FF0000">${MsgMap.errorstepDescpOneEmpty}</font>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							服務步驟-2
+						</td>
+						<td>
+							<input type="hidden"name="servStepTwo" value="2">
+							<input type="text" name="stepNameTwo" value="${servStepVOTwo.stepName}" style="width: 120px;"/>
+							<font size="-1" color="#FF0000">${MsgMap.errorstepNameTwoEmpty}</font>
+						</td>
+						<td>
+							<input type="text" name="stepDescpTwo" value="${servStepVOOne.stepDescp}" style="width: 120px;"/>
+							<font size="-1" color="#FF0000">${MsgMap.errorstepDescpTwoEmpty}</font>
+						</td>
 						
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td> -->
-<!-- 							服務步驟-3 -->
-<!-- 						</td> -->
-<!-- 						<td> -->
-<!-- 							<input type="hidden"name="servStepThree" value="3"> -->
-<%-- 							<input type="text" name="stepNameThree" value="${servStepVOThree.servTimeXXL}" style="width: 120px;"/> --%>
-<!-- 						</td> -->
-<!-- 						<td> -->
-<%-- 							<input type="text" name="stepDescpThree" value="${servStepVOOne.stepNameOne}" style="width: 120px;"/> --%>
-<!-- 						</td> -->
+					</tr>
+					<tr>
+						<td>
+							服務步驟-3
+						</td>
+						<td>
+							<input type="hidden"name="servStepThree" value="3">
+							<input type="text" name="stepNameThree" value="${servStepVOThree.stepName}" style="width: 120px;"/>
+							<font size="-1" color="#FF0000">${MsgMap.errorstepNameThreeEmpty}</font>
+						</td>
+						<td>
+							<input type="text" name="stepDescpThree" value="${servStepVOOne.stepDescp}" style="width: 120px;"/>
+							<font size="-1" color="#FF0000">${MsgMap.errorstepDescpThreeEmpty}</font>
+						</td>
 						
-<!-- 					</tr> -->
-<!-- 				</table> -->
-			
+					</tr>
+				</table>
+				
 				<div id="btnArea" align="center">
 				<button type="submit" class="btn btn-sm btn-primary" name="submit">送出</button> 
 				<input type="hidden" name="action" value="insert"> 

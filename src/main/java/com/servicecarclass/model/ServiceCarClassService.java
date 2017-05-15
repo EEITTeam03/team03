@@ -24,15 +24,6 @@ public class ServiceCarClassService {
 		return serviceCarClassVO;
 	}
 
-//	public ServiceCarClassVO addServiceCarClass(ServicesVO servicesVO,String carClass, Integer servPrice, Integer servTime) {
-//		ServiceCarClassVO serviceCarClassVO = new ServiceCarClassVO();
-//		serviceCarClassVO.setServicesVO(servicesVO);
-//		serviceCarClassVO.setServPrice(servPrice);
-//		serviceCarClassVO.setServTime(servTime);
-//		serviceCarClassVO.setCarClass(carClass);
-//		dao.insert(serviceCarClassVO);
-//		return serviceCarClassVO;
-//	}
 
 	public ServiceCarClassVO updateServiceCarClass(ServicesVO servicesVO, CarClassVO carClassVO, Integer servPrice,
 			Integer servTime) {
@@ -47,6 +38,11 @@ public class ServiceCarClassService {
 
 	public ServiceCarClassVO getOneServiceCarClass(Integer servNo, String carClass) {
 		return dao.findByServAndClass(servNo, carClass);
+	}
+	
+	public List<ServiceCarClassVO> getMorePriceAndTimeByFK(Integer servNo){
+		return dao.findByForeignKey(servNo);
+		
 	}
 
 	public List<ServiceCarClassVO> getAll() {

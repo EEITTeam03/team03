@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.carclass.model.CarClassVO;
 import com.services.model.ServicesVO;
+import com.servicestep.model.ServiceStepVO;
 
 public interface ServiceCarClassDAO_interface {
 	public void insert(ServiceCarClassVO serCarVO);
@@ -13,5 +14,6 @@ public interface ServiceCarClassDAO_interface {
 	public ServiceCarClassVO findByServAndClass(Integer servNo,String carClass);
 	public List<ServiceCarClassVO> getAll();
 	public Set<ServicesVO> getSerBySerNo(Integer servNo);
+	public List<ServiceCarClassVO> findByForeignKey(Integer servNo);
 	public ServiceCarClassVO findOne(ServicesVO servicesVO,CarClassVO carClassVO);
 }
