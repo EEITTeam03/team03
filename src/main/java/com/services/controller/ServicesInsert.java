@@ -20,12 +20,15 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.carclass.model.CarClassHibernateDAO;
+import com.carclass.model.CarClassService;
 import com.carclass.model.CarClassVO;
 import com.cartype.model.CarTypeVO;
 import com.servicecarclass.model.ServiceCarClassService;
 import com.servicecarclass.model.ServiceCarClassVO;
 import com.services.model.ServicesService;
 import com.services.model.ServicesVO;
+import com.servicestep.model.ServiceStepService;
+import com.servicestep.model.ServiceStepVO;
 
 @MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 500, maxRequestSize = 1024
 		* 1024 * 500 * 5)
@@ -45,7 +48,6 @@ public class ServicesInsert extends HttpServlet {
 
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		Map<String, String> msgOK = new HashMap<String, String>();
-		Map<CarClassVO,String> carClassMap = new HashMap<CarClassVO, String>();
 		// 改成吳神版本
 		if ("insert".equals(action)) {
 			HttpSession session = request.getSession();
@@ -103,74 +105,88 @@ public class ServicesInsert extends HttpServlet {
 				if (servStatus == null || servStatus.trim().length() == 0) {
 					errorMsg.put("errorservStatus", "服務狀態欄必須輸入");
 				}
-				//新增服務步驟價格的部分
+				//新增服務車級價格的部分
 				Integer servPriceL=null;
 				try{
 					servPriceL =Integer.valueOf(request.getParameter("servPriceL").trim());
 				}catch(IllegalArgumentException e){
-					errorMsg.put("errorservPriceEmpty", "服務價格必須輸入");
+					errorMsg.put("errorservPriceLEmpty", "服務價格必須輸入");
 				}
 				Integer servPriceM=null;
 				try{
 					servPriceM =Integer.valueOf(request.getParameter("servPriceM").trim());
 				}catch(IllegalArgumentException e){
-					errorMsg.put("errorservPriceEmpty", "服務價格必須輸入");
+					errorMsg.put("errorservPriceMEmpty", "服務價格必須輸入");
 				}
 				Integer servPriceS=null;
 				try{
 					servPriceS =Integer.valueOf(request.getParameter("servPriceS").trim());
 				}catch(IllegalArgumentException e){
-					errorMsg.put("errorservPriceEmpty", "服務價格必須輸入");
+					errorMsg.put("errorservPriceSEmpty", "服務價格必須輸入");
 				}
 				Integer servPriceXL=null;
 				try{
 					servPriceXL =Integer.valueOf(request.getParameter("servPriceXL").trim());
 				}catch(IllegalArgumentException e){
-					errorMsg.put("errorservPriceEmpty", "服務價格必須輸入");
+					errorMsg.put("errorservPriceXLEmpty", "服務價格必須輸入");
 				}
 				Integer servPriceXXL=null;
 				try{
 					servPriceXXL =Integer.valueOf(request.getParameter("servPriceXXL").trim());
 				}catch(IllegalArgumentException e){
-					errorMsg.put("errorservPriceEmpty", "服務價格必須輸入");
+					errorMsg.put("errorservPriceXXLEmpty", "服務價格必須輸入");
 				}
-				//新增服務步驟時間的部分
+				//新增服務車級時間的部分
 				Integer servTimeL =null;
 				try{
 					servTimeL=Integer.valueOf(request.getParameter("servTimeL").trim());
 				}catch(IllegalArgumentException e){
-					errorMsg.put("errorservTimeEmpty", "服務價格必須輸入");
+					errorMsg.put("errorservTimeLEmpty", "服務價格必須輸入");
 				}
 				Integer servTimeM =null;
 				try{
 					servTimeM=Integer.valueOf(request.getParameter("servTimeM").trim());
 				}catch(IllegalArgumentException e){
-					errorMsg.put("errorservTimeEmpty", "服務價格必須輸入");
+					errorMsg.put("errorservTimeMEmpty", "服務價格必須輸入");
 				}
 				Integer servTimeS =null;
 				try{
 					servTimeS=Integer.valueOf(request.getParameter("servTimeS").trim());
 				}catch(IllegalArgumentException e){
-					errorMsg.put("errorservTimeEmpty", "服務價格必須輸入");
+					errorMsg.put("errorservTimeSEmpty", "服務價格必須輸入");
 				}
 				Integer servTimeXL =null;
 				try{
 					servTimeXL=Integer.valueOf(request.getParameter("servTimeXL").trim());
 				}catch(IllegalArgumentException e){
-					errorMsg.put("errorservTimeEmpty", "服務價格必須輸入");
+					errorMsg.put("errorservTimeXLEmpty", "服務價格必須輸入");
 				}
 				Integer servTimeXXL =null;
 				try{
 					servTimeXXL=Integer.valueOf(request.getParameter("servTimeXXL").trim());
 				}catch(IllegalArgumentException e){
-					errorMsg.put("errorservTimeEmpty", "服務價格必須輸入");
+					errorMsg.put("errorservTimeXXLEmpty", "服務價格必須輸入");
 				}
-				//新增服務步驟車子等級的部分
-				String carClassL = request.getParameter("carClassL");
-				String carClassM = request.getParameter("carClassM");
-				String carClassS = request.getParameter("carClassS");
-				String carClassXL = request.getParameter("carClassXL");
-				String carClassXXL = request.getParameter("carClassXXL");
+				//新增服務車級的部分
+				String carClassL = "L";
+				String carClassM = "M";
+				String carClassS = "S";
+				String carClassXL = "XL";
+				String carClassXXL = "XXL";
+				
+				//新增服務步驟的部分
+//				Integer servStepOne=Integer.valueOf(request.getParameter("servStepOne"));
+//				Integer servStepTwo=Integer.valueOf(request.getParameter("servStepTwo"));
+//				Integer servStepThree=Integer.valueOf(request.getParameter("servStepThree"));
+//				
+//				String stepNameOne=request.getParameter("stepNameOne");
+//				String stepNameTwo=request.getParameter("stepNameTwo");
+//				String stepNameThree=request.getParameter("stepNameThree");
+//				
+//				String stepDescpOne=request.getParameter("stepDescpOne");
+//				String stepDescpTwo=request.getParameter("stepDescpTwo");
+//				String stepDescpThree=request.getParameter("stepDescpThree");
+				
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				//新增服務的部分
 				ServicesVO svo = new ServicesVO();
@@ -184,35 +200,61 @@ public class ServicesInsert extends HttpServlet {
 				
 				//新增服務價格和時間(L)的部分
 				ServiceCarClassVO sccvoL=new ServiceCarClassVO();
+				CarClassService ccsL= new CarClassService();
+				CarClassVO ccvoL=ccsL.findByPrimaryKey(carClassL);
 				sccvoL.setServicesVO(svo);
 				sccvoL.setServPrice(servPriceL);
-				sccvoL.setCarClass(carClassL);
+				sccvoL.setCarClassVO(ccvoL);
 				sccvoL.setServTime(servTimeL);
 				//新增服務價格和時間(M)的部分
 				ServiceCarClassVO sccvoM=new ServiceCarClassVO();
+				CarClassService ccsM= new CarClassService();
+				CarClassVO ccvoM=ccsM.findByPrimaryKey(carClassM);
 				sccvoM.setServicesVO(svo);
 				sccvoM.setServPrice(servPriceM);
-				sccvoM.setCarClass(carClassM);
+				sccvoM.setCarClassVO(ccvoM);
 				sccvoM.setServTime(servTimeM);
 				//新增服務價格和時間(S)的部分
 				ServiceCarClassVO sccvoS=new ServiceCarClassVO();
+				CarClassService ccsS= new CarClassService();
+				CarClassVO ccvoS=ccsS.findByPrimaryKey(carClassS);
 				sccvoS.setServicesVO(svo);
 				sccvoS.setServPrice(servPriceS);
-				sccvoS.setCarClass(carClassS);
+				sccvoS.setCarClassVO(ccvoS);
 				sccvoS.setServTime(servTimeS);
 				//新增服務價格和時間(XL)的部分
 				ServiceCarClassVO sccvoXL=new ServiceCarClassVO();
+				CarClassService ccsXL= new CarClassService();
+				CarClassVO ccvoXL=ccsXL.findByPrimaryKey(carClassXL);
 				sccvoXL.setServicesVO(svo);
 				sccvoXL.setServPrice(servPriceXL);
-				sccvoXL.setCarClass(carClassXL);
+				sccvoXL.setCarClassVO(ccvoXL);
 				sccvoXL.setServTime(servTimeXL);
 				//新增服務價格和時間(XXL)的部分
 				ServiceCarClassVO sccvoXXL=new ServiceCarClassVO();
+				CarClassService ccsXXL= new CarClassService();
+				CarClassVO ccvoXXL=ccsXXL.findByPrimaryKey(carClassXXL);
 				sccvoXXL.setServicesVO(svo);
 				sccvoXXL.setServPrice(servPriceXXL);
-				sccvoXXL.setCarClass(carClassXXL);
+				sccvoXXL.setCarClassVO(ccvoXXL);
 				sccvoXXL.setServTime(servTimeXXL);
 				
+				//新增服務步驟
+//				ServiceStepVO ssvoOne=new ServiceStepVO();
+//				ssvoOne.setServicesVO(svo);
+//				ssvoOne.setServStep(servStepOne);
+//				ssvoOne.setStepName(stepNameOne);
+//				ssvoOne.setStepName(stepNameOne);
+//				ServiceStepVO ssvoTwo=new ServiceStepVO();
+//				ssvoTwo.setServicesVO(svo);
+//				ssvoTwo.setServStep(servStepTwo);
+//				ssvoTwo.setStepName(stepNameTwo);
+//				ssvoOne.setStepName(stepNameTwo);
+//				ServiceStepVO ssvoThree=new ServiceStepVO();
+//				ssvoThree.setServicesVO(svo);
+//				ssvoThree.setServStep(servStepThree);
+//				ssvoThree.setStepName(stepNameThree);
+//				ssvoOne.setStepName(stepNameThree);
 				
 				if (!errorMsg.isEmpty()) {
 					request.setAttribute("servicesVO", svo);
@@ -221,13 +263,16 @@ public class ServicesInsert extends HttpServlet {
 					request.setAttribute("serviceCarClassVOS",sccvoS);
 					request.setAttribute("serviceCarClassVOXL",sccvoXL);
 					request.setAttribute("serviceCarClassVOXXL",sccvoXXL);
+//					request.setAttribute("servStepVOOne", ssvoOne);
+//					request.setAttribute("servStepVOTwo", ssvoTwo);
+//					request.setAttribute("servStepVOThree", ssvoThree);
 					String url = "ServicesInsert.jsp";
 					RequestDispatcher failerView = request.getRequestDispatcher(url);
 					failerView.forward(request, response);
 					return;//程式中斷
 				}
 				/***************************2.開始查詢資料*****************************************/
-				//服務
+				//服務的部分
 				ServicesService ss = new ServicesService();
 				svo = ss.newAddService(servNo, servTypeNo, servName, servDesc, servPhoto, servEffectiveDate,
 						servStatus);
@@ -237,11 +282,19 @@ public class ServicesInsert extends HttpServlet {
 				ServiceCarClassService sccsS=new ServiceCarClassService();
 				ServiceCarClassService sccsXL=new ServiceCarClassService();
 				ServiceCarClassService sccsXXL=new ServiceCarClassService();
-				sccvoL=sccsL.addServiceCarClass(svo, carClassL, servPriceL, servTimeL);		
-				sccvoM=sccsM.addServiceCarClass(svo, carClassM, servPriceM, servTimeM);		
-				sccvoS=sccsS.addServiceCarClass(svo, carClassS, servPriceS, servTimeS);		
-				sccvoXL=sccsXL.addServiceCarClass(svo, carClassXL, servPriceXL, servTimeXL);		
-				sccvoXXL=sccsXXL.addServiceCarClass(svo, carClassXXL, servPriceXXL, servTimeXXL);		
+				sccvoL=sccsL.addServiceCarClassAndCarClass(svo, ccvoL, servPriceL, servTimeL);		
+				sccvoM=sccsM.addServiceCarClassAndCarClass(svo, ccvoM, servPriceM, servTimeM);		
+				sccvoS=sccsS.addServiceCarClassAndCarClass(svo, ccvoS, servPriceS, servTimeS);		
+				sccvoXL=sccsXL.addServiceCarClassAndCarClass(svo, ccvoXL, servPriceXL, servTimeXL);		
+				sccvoXXL=sccsXXL.addServiceCarClassAndCarClass(svo, ccvoXXL, servPriceXXL, servTimeXXL);
+				
+				//服務步驟的部分
+//				ServiceStepService sssOne=new ServiceStepService();
+//				ServiceStepService sssTwo=new ServiceStepService();
+//				ServiceStepService sssThree=new ServiceStepService();
+//				ssvoOne=sssOne.addServiceStepForInsert(svo, servStepOne, stepNameOne, stepDescpOne);
+//				ssvoTwo=sssTwo.addServiceStepForInsert(svo, servStepOne, stepNameOne, stepDescpOne);
+//				ssvoThree=sssThree.addServiceStepForInsert(svo, servStepOne, stepNameOne, stepDescpOne);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "SelectServicesForInsert.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);

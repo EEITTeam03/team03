@@ -52,7 +52,7 @@ body,button,h1{
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="admin_default.jsp">汽車美容後台管理</a>
+				<a class="navbar-brand" href="${ctx}/admin/admin_default.jsp">汽車美容後台管理</a>
 			</div>
 			<!-- Top Menu Items -->
 			<ul class="nav navbar-right top-nav">
@@ -83,7 +83,7 @@ body,button,h1{
 						<li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
 						</li>
 						<li class="divider"></li>
-						<li><a href="AdminLogout"><i
+						<li><a href="admin_default.jsp"><i
 								class="fa fa-fw fa-power-off"></i> Log Out</a></li>
 					</ul></li>
 			</ul>
