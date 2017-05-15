@@ -28,7 +28,7 @@
 <div id="page-wrapper">
 <div class="table-responsive">
 
-	<h2>管理黑名單</h2>
+	<h2>新增黑名單</h2>
 	
 		<form action="maintain.do" method="post">
 		<table class="table table-bordered table-hover">
