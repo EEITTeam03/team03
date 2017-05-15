@@ -66,7 +66,7 @@
 
 				<td>
 					<FORM METHOD="post" ACTION="${ctx}/services/services.do">
-						<button type="submit" class="btn btn-sm btn-primary">修改</button>
+						<button type="submit" class="btn btn-sm btn-warning">修改</button>
 						<input type="hidden" name="servNo" value="${servicesVO.servNo}"> 
 						<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
@@ -82,7 +82,7 @@
 				
 				<td>
 					<FORM METHOD="post" ACTION="${ctx}/services/services.do">
-						<button type="submit" class="btn btn-sm btn-primary">下架</button>
+						<button type="submit" class="btn btn-sm btn-danger">下架</button>
 						<input type="hidden" name="servNo" value="${servicesVO.servNo}"> 
 						<input type="hidden" name="action" value="offshelf">
 					</FORM>

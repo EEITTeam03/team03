@@ -11,6 +11,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Member</title>
+
+ 	<!-- SweetAlert -->
+<script src="SweetAlert/js/sweetalert.min.js"></script> 
+<link href="SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
+   
+
 </head>
 <body>
 	<jsp:include page="Testhead_nav.jsp" />
@@ -46,7 +52,7 @@
 								<form action="${ctx}/MemberServlet" method="post">
 									<input type="hidden" name="action" value="getOne_For_Update">
 									<input type="hidden" value="${member.memberNo}" name="memberNo">
-									<input type="submit" value="修改" class="btn btn-sm btn-danger">
+									<input type="submit" value="修改" class="btn btn-sm btn-warning">
 								</form>
 								</td>
 							</tr>
@@ -59,6 +65,13 @@
 	
 	<script type="text/javascript">
 		$(function() {
+			
+			if("${OKalert}"=="updateOK") {
+				swal("修改成功!", "會員資料已更新", "success");
+				<% session.removeAttribute("OKalert"); %>
+			}
+			
+			
 			$("input[name='checkcar']").click(function() {
 				console.log($(this).parent().parent().children("td:first-child").text());
 				var id = $(this).parent().parent().children("td:first-child").text();
@@ -68,6 +81,8 @@
 					
 				});
 			});
+			
+			
 		});
 	</script>
 </body>

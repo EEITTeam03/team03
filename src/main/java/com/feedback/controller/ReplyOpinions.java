@@ -54,6 +54,7 @@ public class ReplyOpinions extends HttpServlet {
 				 FeedbackService fs = new FeedbackService();
 				 FeedbackVO fVO = fs.getOneFeedFeedback(feedbackNo);
 				 fs.updateFeedFeedback(feedbackNo, fVO.getFeedbackDate(), fVO.getMemberName(), fVO.getMemberNo(), fVO.getFeedback(),txt, fVO.getReadState());
+				 request.getSession().setAttribute("feedbackOK", "OK");
 				 String url = "/admin/ListAllfeedback.jsp";
 				response.sendRedirect(getServletContext().getContextPath()+url);
 				 //response.sendRedirect(url);
