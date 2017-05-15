@@ -30,21 +30,21 @@ textarea { /* Text Area 固定大小*/
 			<div>
 				<h1 style='text-align: center'>修改員工資料</h1>
 
-				<h4 style='text-align: center'>選一個員工</h4>
-				<FORM METHOD="get" ACTION="updateEmp.jsp" name="chooseEmp">
-					<select size="1" name="empno" class="form-control">
-						<c:forEach var="empVO" items="${list}">
-							<option value="${empVO.employeeNo}"
-								${(empVO.employeeNo == param.empno)? 'selected':''}>${empVO.employeeName}
-						</c:forEach>
-					</select>
-				<div align="center">
-					<button type="submit" class="btn btn-sm btn-primary">確定</button>
-				</div>
-				</FORM>
-				<br>
+<!-- 				<h4 style='text-align: center'>選一個員工</h4> -->
+<!-- 				<FORM METHOD="get" ACTION="updateEmp.jsp" name="chooseEmp"> -->
+<!-- 					<select size="1" name="empno" class="form-control"> -->
+<%-- 						<c:forEach var="empVO" items="${list}"> --%>
+<%-- 							<option value="${empVO.employeeNo}" --%>
+<%-- 								${(empVO.employeeNo == param.empno)? 'selected':''}>${empVO.employeeName} --%>
+<%-- 						</c:forEach> --%>
+<!-- 					</select> -->
+<!-- 				<div align="center"> -->
+<!-- 					<button type="submit" class="btn btn-sm btn-primary">確定</button> -->
+<!-- 				</div> -->
+<!-- 				</FORM> -->
+<!-- 				<br> -->
 				
-				<br>
+<!-- 				<br> -->
 				<div>
 					<c:if test="${not empty errorMsgs}">
 						<font color='red'>請修正以下錯誤:
@@ -56,7 +56,7 @@ textarea { /* Text Area 固定大小*/
 						</font>
 					</c:if>
 				</div>
-				<FORM METHOD="post" ACTION="emp.do" name="form2" enctype="multipart/form-data">
+ 				<FORM METHOD="post" ACTION="emp.do" name="form2" enctype="multipart/form-data"> 
 
 					<div>
 						員工編號:<font color=red><b>*</b></font> ${param.empno}
@@ -75,12 +75,12 @@ textarea { /* Text Area 固定大小*/
 					<div>
 						照片: 
 						<input type="file" name="upfile1"> 
-						<input type="hidden" name="empno" value="${param.empno}"> 
-						<input type="hidden" name="action" value="update">
 					</div>
 					<br>
 					<div align="center">
-						<button type="submit" class="btn btn-sm btn-primary" >送出修改</button>
+						<input type="hidden" name="empno" value="${param.empno}">
+						<input type="hidden" name="action" value="update">
+						<button type="submit" class="btn btn-sm btn-primary">送出修改</button>
 					</div>
 				</FORM>
 

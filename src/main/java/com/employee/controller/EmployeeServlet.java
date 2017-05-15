@@ -172,8 +172,22 @@ public class EmployeeServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-//		if("chooseEmp".equals(action)){
-//			
+		
+//		if ("delete".equals(action)) {
+//			List<String> errorMsgs = new LinkedList<String>();
+//			req.setAttribute("errorMsgs", errorMsgs);
+//			try {
+//				Integer empno = new Integer(req.getParameter("empno"));
+//				EmployeeService es = new EmployeeService();
+//				es.deleteEmp(empno);
+//				String url = "listAllEmp.jsp";
+//				res.sendRedirect(url);
+//			} catch (Exception e) {
+//				errorMsgs.add(e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("url");
+//				failureView.forward(req, res);
+//			}
 //		}
+		
 	}
 }

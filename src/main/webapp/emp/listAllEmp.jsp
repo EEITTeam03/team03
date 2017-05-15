@@ -26,10 +26,11 @@
 <table border='1'class="table table-bordered table-hover">
 	<thead>
 		<tr>
-			<td style='text-align:center' width='200'>員工編號</td>
-			<td style='text-align:center' width='200'>員工姓名</td>
-			<td style='text-align:center' width='200'>員工描述</td>
-			<td style='text-align:center' width='200'>照片</td>
+			<th style='text-align:center' width='200'>員工編號</th>
+			<th style='text-align:center' width='200'>員工姓名</th>
+			<th style='text-align:center' width='200'>員工描述</th>
+			<th style='text-align:center' width='200'>照片</th>
+			<th style='text-align:center' width='200'>修改</th>
 		</tr>
 	</thead>
 	
@@ -40,7 +41,12 @@
 			<td>${empVO.employeeDesc}</td>
 			<c:if test="${empVO.employeePhoto==null}"><td></td></c:if>
 			<c:if test="${empVO.employeePhoto!=null}"><td><img src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(empVO.employeePhoto)}" width="150"/></td></c:if>
-		</tr>
+							<td><FORM METHOD="get" ACTION="updateEmp.jsp">
+									<input type="submit" value="修改"> 
+									<input type="hidden" name="empno" value="${empVO.employeeNo}">
+									<input type="hidden"  name="ename" value="${empVO.employeeName}">
+								</FORM></td>
+						</tr>
 	</c:forEach>
 </table>
 </div>

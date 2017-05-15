@@ -37,10 +37,10 @@ import myutil.CheckConflict;
 import myutil.MyUtil;
 
 
-@WebServlet(urlPatterns = {"/admin/scheduleTestServlet2","/scheduleTestServlet2"})
-public class scheduleTestServlet2 extends HttpServlet {
+@WebServlet(urlPatterns = {"/admin/scheduleTestServlet3","/scheduleTestServlet3"})
+public class scheduleTestServlet3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public scheduleTestServlet2() {
+    public scheduleTestServlet3() {
         super();
     }
 
@@ -88,8 +88,8 @@ public class scheduleTestServlet2 extends HttpServlet {
 		ReservService rs = new ReservService();
 		//ReservVO rvo= rs.getOneReserv(reservNo);
 		
-		Calendar scalendar = MyUtil.getLocalTimeFromGMT(map.get("start")); //取得預約時間
-		Calendar OldEnd = MyUtil.getLocalTimeFromGMT(map.get("end")); //取得原本的結束時間
+		Calendar scalendar = MyUtil.getCalenderDH(map.get("start")); //取得預約時間
+		Calendar OldEnd = MyUtil.getCalenderDH(map.get("end")); //取得原本的結束時間
 		
 		EmployeeService es = new EmployeeService();
 		EmployeeVO eVO = es.getOneEmp(empNo);

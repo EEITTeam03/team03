@@ -53,6 +53,21 @@ public class MyUtil {
 	}
 	
 	/*scheduler for admin*/
+	public static Calendar getLocalTimeFromGMT(String timeGMT){
+		  TimeZone gmt = TimeZone.getTimeZone("GMT");
+		  SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		  f.setTimeZone(gmt);
+		  Calendar cal = Calendar.getInstance();
+		  
+		  try {
+		   cal.setTime(f.parse(timeGMT));
+		  } catch (ParseException e) {
+		   //日期格式錯誤無法轉換
+		   e.printStackTrace();
+		  }
+		  
+		  return cal;
+	}
 	public static Calendar getLocalTimeFromUTC(String timeUTC){
 		  TimeZone utc = TimeZone.getTimeZone("UTC");
 		  SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -67,6 +82,17 @@ public class MyUtil {
 		  }
 		  
 		  return cal;
+	}
+	
+	public static Calendar getCalenderDH(String strDate) {
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		try {
+			cal.setTime(sdf.parse(strDate));
+		} catch (ParseException e) {
+			throw new RuntimeException("日期或時間格式錯誤!");
+		}
+		return cal;
 	}
 	
 	/*系統排程for TodayReservList*/
