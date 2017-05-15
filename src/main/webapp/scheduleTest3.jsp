@@ -237,7 +237,7 @@ body,button,h1{
                 	isSave=false;
                 	fields.repeatContainer.hide();
                 	fields.repeatLabel.hide();
-                	fields.timeZoneContainer.hide();
+//                 	fields.timeZoneContainer.hide();
                     fields.locationContainer.hide();
                     fields.statusContainer.hide();
                     fields.allDayContainer.hide();
