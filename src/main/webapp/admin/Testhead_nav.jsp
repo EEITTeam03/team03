@@ -12,7 +12,7 @@
 <link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
 
 <!-- Morris Charts CSS -->
-<link href="${ctx}/admin/css/plugins/morris.css" rel="stylesheet">
+<%-- <link href="${ctx}/admin/css/plugins/morris.css" rel="stylesheet"> --%>
 
 <!-- Custom Fonts -->
 <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet"
@@ -104,7 +104,7 @@ body,button,h1{
 							<li><a href="#">會員</a></li>
 							<li><a href="#">員工</a></li>
 						</ul></li>
-					<li><a href="#"><i class="fa fa-comments-o"></i> 查看意見</a></li>
+					<li><a href="ListAllfeedback.jsp"><i class="fa fa-comments-o"></i> 查看意見</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
