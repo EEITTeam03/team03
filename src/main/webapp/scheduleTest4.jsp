@@ -87,7 +87,7 @@ body,button,h1{
         	changeEvent();
             editEvent();
             var box = new Date();
-			alert("設timeZone:'Taipei Standard Time',無使用getLocalTimeFromUTC")
+			alert("設timeZone:'Taipei Standard Time',無使用getLocalTimeFromGMT")
             alert("以特定的格式顯示星期幾、月、日和年: "+box.toDateString()); //以特定的格式顯示星期幾、月、日和年
             alert("以特定的格式顯示時、分、秒和時區: "+box.toTimeString()); //以特定的格式顯示時、分、秒和時區
             alert("以特定地區格式顯示星期幾、月、日和年: "+box.toLocaleDateString()); //以特定地區格式顯示星期幾、月、日和年
@@ -237,7 +237,7 @@ body,button,h1{
                 	isSave=false;
                 	fields.repeatContainer.hide();
                 	fields.repeatLabel.hide();
-                	fields.timeZoneContainer.hide();
+//                 	fields.timeZoneContainer.hide();
                     fields.locationContainer.hide();
                     fields.statusContainer.hide();
                     fields.allDayContainer.hide();
