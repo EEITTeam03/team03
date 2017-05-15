@@ -39,6 +39,134 @@
 
 <link href="css/revision.css" rel="stylesheet">
 
+<style>
+	.error {
+		color: red;
+	}
+
+	.form-control{
+	    padding-top: 15px;
+	    background: rgba(0, 0, 0, 0.5);	    
+	    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+	    border: none;
+	    color: white;
+	    padding: 10px 15px;
+	    font-size: 16px;
+	}
+	form{
+		background-repeat: no-repeat;
+		width:945px;
+	    background: rgba(255, 255, 255, 0.45);
+	    max-width: 600px;
+	    margin: 40px auto;
+	    border-radius: 4px;
+	    box-shadow:0 4px 10px 4px rgba(19, 35, 47, 0.3);
+	}
+	#cmxform input::-webkit-input-placeholder{ 	
+		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}	
+	#cmxform div input{
+		font-size: 22px;
+	    display: block;
+	    width: 100%;
+	    height: 100%;
+	    padding: 5px 10px;
+	    background: rgba(255, 255, 255, 0.75);
+	    background-image: none;
+	    border: 1px solid #a0b3b0;
+	    color: black;
+	    border-radius: 0;
+	    -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+	    transition: border-color .25s ease, box-shadow .25s ease;
+	}
+	#cmxform div input:focus{
+		outline: 0;
+		border-color: #1ab188;
+	}
+	#cmxform div input[type='checkbox']{
+		display:inline;
+		width:50px;
+		margin: 0 auto;
+	}
+	#cmxform div a{ 
+		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		color:black;
+	    position: relative;
+	    left:330px;
+		bottom:5px;
+	}
+	#cmxform div a:hover{ 
+		color:blue;
+	}	
+	.btn:hover, .btn:focus{
+	    outline: none;
+	    color:#fff;
+	}
+	.btn{
+	    text-transform: capitalize;
+	    color:#fff;
+	    padding: 14px 20px;
+	    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+	.btn:hover{
+	    color:#fff;
+	}
+	.btn-lg{
+	    font-size: 20px;
+	} 	
+	.blue,
+	.light-brown,
+	.light-green,
+	.light-orange{
+	    background: #0088cc;
+	    box-shadow:0 4px 0 #006394;
+	    transition:all 0.1s ease-in-out 0s;
+	    position: relative;
+	    top:0;
+	}
+	.light-brown{
+	    background: #cec2ab;
+	    box-shadow: 0 4px 0 #b9a888;
+	}
+	.light-green{
+	    background: #75d69c;
+	    box-shadow:0 4px 0 #4ac97d;
+	    border-radius: 25px;
+	}
+	.light-orange{
+	    background: #fed136;
+	    box-shadow:0 4px 0 rgb(228, 183, 54);
+	} 
+	
+	.blue:hover,
+	.light-brown:hover,
+	.light-green:hover,
+	.light-orange:hover{
+	    top:2px;
+	    box-shadow:0 2px 0 #006394;
+	}
+	.light-brown:hover{
+	    box-shadow: 0 2px 0 #b9a888;
+	}
+	.light-green:hover{
+	    box-shadow:0 2px 0 #4ac97d;
+	}
+	.light-orange:hover{
+	    box-shadow: 0 2px 0 #fed136;
+	}	
+
+	input:-webkit-autofill {
+	  -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
+	  -webkit-text-fill-color: #333;
+	}
+	
+	input:-webkit-autofill:focus {
+	  -webkit-box-shadow:0 0 0 50px white inset;
+	  -webkit-text-fill-color: #333;
+	}
+
+</style>
+
 </head>
 <body id="page-top" class="index">
 	<!-- Navigation -->
@@ -63,7 +191,7 @@
 				<li class="hidden"><a href="#page-top"></a></li>
 				<li><a class="page-scroll ff-word btn btn-primary btn-xs"
 					style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px"
-					href="#"> <span class="glyphicon glyphicon-log-in"></span> 登入
+					href="login.jsp"> <span class="glyphicon glyphicon-log-in"></span> 登入
 				</a></li>
 				<li><a class="page-scroll ff-word btn btn-primary btn-xs"
 					style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;"
@@ -74,52 +202,64 @@
 		</div>
 	</div>
 	</nav>
+	<!-- Header -->
+	<header>
+		<div style="position: absolute;opacity:0.3">
+			<video autoplay loop muted class="fillWidth" style="width: 100%;">
+
+				<source src="video/file.mp4" type="video/mp4" />
+				Your browser does not support the video tag. I suggest you upgrade
+				your browser.
+				<source src="video/video_preview_h264.wmv" type="video/wmv" />
+				Your browser does not support the video tag. I suggest you upgrade
+				your browser.
+				<!-- object標籤內解決 -->
+				<object>
+					<embed src="video/video_preview_h264.mp4"
+						type="application/x-shockwave-flash" allowfullscreen="false"
+						allowscriptaccess="always"
+						style="width: 100%; height: 100%; z-index: -1" loop="true" />
+				</object>
+			</video>
+		</div>
+
+	</header>	
 	<section id="services">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
 			<div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">忘記密碼</h3>
-					</div>
-					<div class="panel-body">
-						<div class="flot-chart-content" id="flot-bar-chart">
-							<form action="reCaptcha.do" method="post">
+				<div class="flot-chart-content" id="flot-bar-chart">																	
+					<form id="cmxform" class="form-signin" role="form" action="reCaptcha.do" method="post">
+						<div class="row">
+							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">												
 								<br>
-								<div class="input-group" style="border: 1px solid #5bc0de">
-									<span class="input-group-addon"
-										style="border-right: 1px solid #5bc0de"><i
-										class="glyphicon glyphicon-envelope"></i></span> <input id="email"
-										type="text" class="form-control required email" name="email"
-										placeholder="輸入您的電子郵件" value='${param.email}'
-										aria-required="true"> <small><font color="red">${ErrorMsgKey.AccountError}</font></small>
-
+								<br>
+								<div class="input-group" style="max-width:500px;">	
+									<img class="img-circle img-responsive" src="img/register/logo.png" alt="">
 								</div>
-								<br>
-								<div class="input-group" style="border: 1px solid #5bc0de">
-									<span class="input-group-addon"
-										style="border-right: 1px solid #5bc0de"><i
-										class="glyphicon glyphicon-phone"></i></span> <input id="phone"
-										type="text" class="form-control required email" name="phone"
-										placeholder="輸入您的電話號碼" value='${param.phone}'
-										aria-required="true"> <small><font color="red">${ErrorMsgKey.PhoneError}</font></small>
-								</div>
-								<br>
-								<div class="g-recaptcha"
-									data-sitekey="6Lejoh8UAAAAADgia1z4Q_N9Cd2TwPa9K_uMHnzH"></div>
-								<br>
-								<button class="btn btn-lg btn-info btn-block" type="submit">送出</button>
-								<small><Font color='red'>${ErrorMsgKey.RobotFail}</Font></small>
-								<br /> <small><Font color='red'>${ErrorMsgKey.Error}</Font></small>
+								<br>																																										
+								<div class="input-group">															
+									<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件" value='${param.email}' aria-required="true" style="width:500px;">														
+									<small><font color="red">${ErrorMsgKey.AccountError}</font></small>														
+								</div>															
+								<br>															
+								<div class="input-group">															
+									<input id="phone" type="text" class="form-control required email" name="phone" placeholder="輸入您的電話號碼" value='${param.phone}' aria-required="true" style="width:500px;">														
+									<small><font color="red">${ErrorMsgKey.PhoneError}</font></small>														
+								</div>															
+								<br>															
+								<div class="g-recaptcha" data-sitekey="6Lejoh8UAAAAADgia1z4Q_N9Cd2TwPa9K_uMHnzH"></div>															
+								<br>															
+								<button class="btn btn-lg light-orange btn-block" type="submit">送出</button>															
+								<small><Font color='red'>${ErrorMsgKey.RobotFail}</Font></small>															
+								<br /> <small><Font color='red'>${ErrorMsgKey.Error}</Font></small>															
 								<br />
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+							</div>
+						</div>																		
+					</form>																
+				</div>																			
+			</div>	
 	</section>
 	<script>
 		function check() {
