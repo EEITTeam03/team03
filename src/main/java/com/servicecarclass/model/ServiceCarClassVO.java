@@ -9,8 +9,15 @@ public class ServiceCarClassVO implements java.io.Serializable {
 	private Integer servPrice;
 	private Integer servTime;
 	private Integer carClassNo;
+	private String carClass;
 	
 	
+	public String getCarClass() {
+		return carClass;
+	}
+	public void setCarClass(String carClass) {
+		this.carClass = carClass;
+	}
 	public ServicesVO getServicesVO() {
 		return servicesVO;
 	}

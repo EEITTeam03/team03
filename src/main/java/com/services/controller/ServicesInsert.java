@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.carclass.model.CarClassHibernateDAO;
+import com.carclass.model.CarClassVO;
+import com.cartype.model.CarTypeVO;
+import com.servicecarclass.model.ServiceCarClassService;
+import com.servicecarclass.model.ServiceCarClassVO;
 import com.services.model.ServicesService;
 import com.services.model.ServicesVO;
 
@@ -39,139 +45,15 @@ public class ServicesInsert extends HttpServlet {
 
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		Map<String, String> msgOK = new HashMap<String, String>();
-
-		// if ("insert".equals(action)) {
-		// HttpSession session = request.getSession();
-		//
-		// request.setAttribute("MsgMap", errorMsg); // 顯示錯誤訊息
-		// session.setAttribute("MsgOK", msgOK); // 顯示正常訊息
-		// Integer servNo = 0;
-		// String servTypeNo = "";
-		// String servName = "";
-		// String servDesc = "";
-		// byte[] servPhoto = null;
-		// Date servEffectiveDate = null;
-		// String servStatus = "";
-		// String fileName = "";
-		// long sizeInBytes = 0;
-		// InputStream is = null;
-		// Collection<Part> parts = request.getParts(); // 取出HTTP multipart
-		// // request內所有的parts
-		// ServicesService.exploreParts(parts, request);
-		// // 由parts != null來判斷此上傳資料是否為HTTP multipart request
-		// if (parts != null) {
-		// for (Part p : parts) {
-		// String fldName = p.getName();
-		// String value = request.getParameter(fldName);
-		//
-		// // 1. 讀取使用者輸入資料
-		// if (p.getContentType() == null) {
-		// if (fldName.equals("servNo")) {
-		// if (value != null && value.length() != 0)
-		// servNo = Integer.valueOf(value);
-		//
-		// } else if (fldName.equalsIgnoreCase("servTypeNo")) {
-		// servTypeNo = value;
-		// } else if (fldName.equalsIgnoreCase("servName")) {
-		// servName = value;
-		// } else if (fldName.equalsIgnoreCase("servDesc")) {
-		// servDesc = value;
-		// } else if (fldName.equalsIgnoreCase("servEffectiveDate")) {
-		// if (value != null && value.length() != 0)
-		// servEffectiveDate = Date.valueOf(value);
-		// // servEffectiveDate = MyUtil.getSqlDate(value,
-		// // "-");
-		//
-		// } else if (fldName.equalsIgnoreCase("servStatus")) {
-		// servStatus = value;
-		// }
-		// } else {
-		// fileName = ServicesService.getFileName(p); // 此為圖片檔的檔名
-		// fileName = ServicesService.adjustFileName(fileName,
-		// ServicesService.IMAGE_FILENAME_LENGTH);
-		// if (fileName != null && fileName.trim().length() > 0) {
-		// sizeInBytes = p.getSize();
-		// is = p.getInputStream();
-		// servPhoto = new byte[is.available()];
-		// is.read(servPhoto);
-		// is.close();
-		// } else {
-		// errorMsg.put("errPicture", "必須挑選圖片檔");
-		// }
-		//
-		// }
-		// }
-		// }
-		// // 2. 進行必要的資料轉換
-		// if (servNo == 0) {
-		// errorMsg.put("errorservNoEmpty", "服務編號欄必須輸入");
-		// }
-		// if (servTypeNo == null || servTypeNo.trim().length() == 0) {
-		// errorMsg.put("errorservTypeNoEmpty", "服務類型編號欄必須輸入");
-		// }
-		// if (servName == null || servName.trim().length() == 0) {
-		// errorMsg.put("errorservNameEmpty", "服務名稱欄必須輸入");
-		// }
-		// if (servDesc == null || servName.trim().length() == 0) {
-		// errorMsg.put("errorservDesc", "服務描述欄必須輸入");
-		// }
-		// if (servEffectiveDate == null) {
-		// errorMsg.put("errorservEffectiveDate", "服務有效日期必須輸入");
-		// }
-		// if (servStatus == null || servStatus.trim().length() == 0) {
-		// errorMsg.put("errorservStatus", "服務狀態欄必須輸入");
-		// }
-		//
-		// try {
-		// // 4. 進行Business Logic運算
-		// // RegisterServiceFile類別的功能：
-		// // 1.檢查服務編號是否已經存在
-		// // 2.儲存服務編號的資料
-		// ServicesDAO_Hibernate sdao = new ServicesDAO_Hibernate();
-		// // ServicesService ss = new ServicesService();
-		// ServicesVO svo = new ServicesVO(servNo, servTypeNo, servName,
-		// servDesc, servPhoto, servEffectiveDate,
-		// servStatus);
-		// boolean xx = sdao.servNoExists(servNo);
-		// if (xx) {
-		// errorMsg.put("errorIDDups1", "此服務編號號已存在，請換新代號");
-		// } else {
-		//
-		// System.out.println("filename:" + fileName);
-		//
-		// sdao.insert(svo);
-		// msgOK.put("ok", "新增成功!");
-		// if (sdao.findByPrimaryKey(servNo) != null) {
-		//// String insertPath=request.getContextPath();
-		//// request.setAttribute("path", insertPath);
-		// response.sendRedirect("SelectServicesForInsert.jsp");
-		// return;
-		// } else {
-		// errorMsg.put("errorIDDup", "新增此筆資料有誤");
-		// }
-		// }
-		// // 5.依照 Business Logic 運算結果來挑選適當的畫面
-		// if (!errorMsg.isEmpty()) {
-		// // 導向原來輸入資料的畫面，這次會顯示錯誤訊息
-		// RequestDispatcher rd =
-		// request.getRequestDispatcher("ServicesInsert.jsp");
-		// rd.forward(request, response);
-		// return;
-		// }
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// errorMsg.put("errorIDDups", e.getMessage());
-		// RequestDispatcher rd =
-		// request.getRequestDispatcher("ServicesInsert.jsp");
-		// rd.forward(request, response);
-		// }
-		// }
+		Map<CarClassVO,String> carClassMap = new HashMap<CarClassVO, String>();
 		// 改成吳神版本
 		if ("insert".equals(action)) {
 			HttpSession session = request.getSession();
 			request.setAttribute("MsgMap", errorMsg); // 顯示錯誤訊息
 			session.setAttribute("MsgOK", msgOK); // 顯示正常訊息
 			try {
+				//新增服務的部分
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				Integer servNo =null;
 				try{
 					servNo = Integer.valueOf(request.getParameter("servNo").trim());
@@ -193,6 +75,7 @@ public class ServicesInsert extends HttpServlet {
 				String fileName = null;
 				// long sizeInBytes = 0;
 				InputStream is = null;
+				
 				Part parts = request.getPart("servPhoto");
 				try {
 					fileName = parts.getName();
@@ -220,6 +103,76 @@ public class ServicesInsert extends HttpServlet {
 				if (servStatus == null || servStatus.trim().length() == 0) {
 					errorMsg.put("errorservStatus", "服務狀態欄必須輸入");
 				}
+				//新增服務步驟價格的部分
+				Integer servPriceL=null;
+				try{
+					servPriceL =Integer.valueOf(request.getParameter("servPriceL").trim());
+				}catch(IllegalArgumentException e){
+					errorMsg.put("errorservPriceEmpty", "服務價格必須輸入");
+				}
+				Integer servPriceM=null;
+				try{
+					servPriceM =Integer.valueOf(request.getParameter("servPriceM").trim());
+				}catch(IllegalArgumentException e){
+					errorMsg.put("errorservPriceEmpty", "服務價格必須輸入");
+				}
+				Integer servPriceS=null;
+				try{
+					servPriceS =Integer.valueOf(request.getParameter("servPriceS").trim());
+				}catch(IllegalArgumentException e){
+					errorMsg.put("errorservPriceEmpty", "服務價格必須輸入");
+				}
+				Integer servPriceXL=null;
+				try{
+					servPriceXL =Integer.valueOf(request.getParameter("servPriceXL").trim());
+				}catch(IllegalArgumentException e){
+					errorMsg.put("errorservPriceEmpty", "服務價格必須輸入");
+				}
+				Integer servPriceXXL=null;
+				try{
+					servPriceXXL =Integer.valueOf(request.getParameter("servPriceXXL").trim());
+				}catch(IllegalArgumentException e){
+					errorMsg.put("errorservPriceEmpty", "服務價格必須輸入");
+				}
+				//新增服務步驟時間的部分
+				Integer servTimeL =null;
+				try{
+					servTimeL=Integer.valueOf(request.getParameter("servTimeL").trim());
+				}catch(IllegalArgumentException e){
+					errorMsg.put("errorservTimeEmpty", "服務價格必須輸入");
+				}
+				Integer servTimeM =null;
+				try{
+					servTimeM=Integer.valueOf(request.getParameter("servTimeM").trim());
+				}catch(IllegalArgumentException e){
+					errorMsg.put("errorservTimeEmpty", "服務價格必須輸入");
+				}
+				Integer servTimeS =null;
+				try{
+					servTimeS=Integer.valueOf(request.getParameter("servTimeS").trim());
+				}catch(IllegalArgumentException e){
+					errorMsg.put("errorservTimeEmpty", "服務價格必須輸入");
+				}
+				Integer servTimeXL =null;
+				try{
+					servTimeXL=Integer.valueOf(request.getParameter("servTimeXL").trim());
+				}catch(IllegalArgumentException e){
+					errorMsg.put("errorservTimeEmpty", "服務價格必須輸入");
+				}
+				Integer servTimeXXL =null;
+				try{
+					servTimeXXL=Integer.valueOf(request.getParameter("servTimeXXL").trim());
+				}catch(IllegalArgumentException e){
+					errorMsg.put("errorservTimeEmpty", "服務價格必須輸入");
+				}
+				//新增服務步驟車子等級的部分
+				String carClassL = request.getParameter("carClassL");
+				String carClassM = request.getParameter("carClassM");
+				String carClassS = request.getParameter("carClassS");
+				String carClassXL = request.getParameter("carClassXL");
+				String carClassXXL = request.getParameter("carClassXXL");
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				//新增服務的部分
 				ServicesVO svo = new ServicesVO();
 				svo.setServNo(servNo);
 				svo.setServName(servName);
@@ -228,17 +181,68 @@ public class ServicesInsert extends HttpServlet {
 				svo.setServPhoto(servPhoto);
 				svo.setServStatus(servStatus);
 				svo.setServEffectiveDate(servEffectiveDate);
+				
+				//新增服務價格和時間(L)的部分
+				ServiceCarClassVO sccvoL=new ServiceCarClassVO();
+				sccvoL.setServicesVO(svo);
+				sccvoL.setServPrice(servPriceL);
+				sccvoL.setCarClass(carClassL);
+				sccvoL.setServTime(servTimeL);
+				//新增服務價格和時間(M)的部分
+				ServiceCarClassVO sccvoM=new ServiceCarClassVO();
+				sccvoM.setServicesVO(svo);
+				sccvoM.setServPrice(servPriceM);
+				sccvoM.setCarClass(carClassM);
+				sccvoM.setServTime(servTimeM);
+				//新增服務價格和時間(S)的部分
+				ServiceCarClassVO sccvoS=new ServiceCarClassVO();
+				sccvoS.setServicesVO(svo);
+				sccvoS.setServPrice(servPriceS);
+				sccvoS.setCarClass(carClassS);
+				sccvoS.setServTime(servTimeS);
+				//新增服務價格和時間(XL)的部分
+				ServiceCarClassVO sccvoXL=new ServiceCarClassVO();
+				sccvoXL.setServicesVO(svo);
+				sccvoXL.setServPrice(servPriceXL);
+				sccvoXL.setCarClass(carClassXL);
+				sccvoXL.setServTime(servTimeXL);
+				//新增服務價格和時間(XXL)的部分
+				ServiceCarClassVO sccvoXXL=new ServiceCarClassVO();
+				sccvoXXL.setServicesVO(svo);
+				sccvoXXL.setServPrice(servPriceXXL);
+				sccvoXXL.setCarClass(carClassXXL);
+				sccvoXXL.setServTime(servTimeXXL);
+				
+				
 				if (!errorMsg.isEmpty()) {
 					request.setAttribute("servicesVO", svo);
+					request.setAttribute("serviceCarClassVOL",sccvoL);
+					request.setAttribute("serviceCarClassVOM",sccvoM);
+					request.setAttribute("serviceCarClassVOS",sccvoS);
+					request.setAttribute("serviceCarClassVOXL",sccvoXL);
+					request.setAttribute("serviceCarClassVOXXL",sccvoXXL);
 					String url = "ServicesInsert.jsp";
 					RequestDispatcher failerView = request.getRequestDispatcher(url);
 					failerView.forward(request, response);
-					return;
+					return;//程式中斷
 				}
-
+				/***************************2.開始查詢資料*****************************************/
+				//服務
 				ServicesService ss = new ServicesService();
 				svo = ss.newAddService(servNo, servTypeNo, servName, servDesc, servPhoto, servEffectiveDate,
 						servStatus);
+				//服務價格的部分
+				ServiceCarClassService sccsL=new ServiceCarClassService();
+				ServiceCarClassService sccsM=new ServiceCarClassService();
+				ServiceCarClassService sccsS=new ServiceCarClassService();
+				ServiceCarClassService sccsXL=new ServiceCarClassService();
+				ServiceCarClassService sccsXXL=new ServiceCarClassService();
+				sccvoL=sccsL.addServiceCarClass(svo, carClassL, servPriceL, servTimeL);		
+				sccvoM=sccsM.addServiceCarClass(svo, carClassM, servPriceM, servTimeM);		
+				sccvoS=sccsS.addServiceCarClass(svo, carClassS, servPriceS, servTimeS);		
+				sccvoXL=sccsXL.addServiceCarClass(svo, carClassXL, servPriceXL, servTimeXL);		
+				sccvoXXL=sccsXXL.addServiceCarClass(svo, carClassXXL, servPriceXXL, servTimeXXL);		
+				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "SelectServicesForInsert.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);
 				successView.forward(request, response);

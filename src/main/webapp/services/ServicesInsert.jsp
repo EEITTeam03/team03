@@ -149,9 +149,134 @@
 					</div>
 					</td>
 				</tr>
-
-			</table>
-			<div id="btnArea" align="center">
+				</table>
+				<h2>服務車輛等級</h2>
+				<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>車種</th>
+						<th>價格</th>
+						<th>服務時間</th>
+					</tr>
+				</thead>
+				<tr >
+					<td>
+						大型車(L)
+					</td>
+					<td>
+						<input type="text"name="servPriceL" value="${serviceCarClassVOL.servPriceL}" style="width: 120px;">
+						<input type="hidden"name="carClassL" value="L">
+						<font size="-1" color="#FF0000">${MsgMap.errorservPriceEmpty}</font>
+					</td>
+					<td>
+						<input type="text"name="servTimeL" value="${serviceCarClassVOL.servTimeL}" style="width: 120px;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						中型車(M)
+					</td>
+					<td>
+						<input type="text"name="servPriceM" value="${serviceCarClassVOM.servPriceM}" style="width: 120px;">
+						<input type="hidden"name="carClassM" value="M">
+						<font size="-1" color="#FF0000">${MsgMap.errorservPriceEmpty}</font>
+					</td>
+					<td>
+						<input type="text"name="servTimeM" value="${serviceCarClassVOM.servTimeM}" style="width: 120px;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						小型車(S)
+					</td>
+					<td>
+						<input type="text"name="servPriceS" value="${serviceCarClassVOS.servPriceS}" style="width: 120px;">
+						<input type="hidden"name="carClassS" value="S">
+						<font size="-1" color="#FF0000">${MsgMap.errorservPriceEmpty}</font>
+					</td>
+					<td>
+						<input type="text"name="servTimeS" value="${serviceCarClassVOS.servTimeS}" style="width: 120px;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						休旅車(XL)
+					</td>
+					<td>
+						<input type="text"name="servPriceXL" value="${serviceCarClassVOXL.servPriceXL}" style="width: 120px;">
+						<input type="hidden"name="carClassXL" value="XL">
+						<font size="-1" color="#FF0000">${MsgMap.errorservPriceEmpty}</font>
+					</td>
+					<td>
+						<input type="text"name="servTimeXL" value="${serviceCarClassVOXL.servTimeXL}" style="width: 120px;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						商旅車(XXL)
+					</td>
+					<td>
+						<input type="text"name="servPriceXXL" value="${serviceCarClassVOXXL.servPriceXXL}" style="width: 120px;">
+						<input type="hidden"name="carClassXXL" value="XXL">
+						<font size="-1" color="#FF0000">${MsgMap.errorservPriceEmpty}</font>
+					</td>
+					<td>
+						<input type="text"name="servTimeXXL" value="${serviceCarClassVOXXL.servTimeXXL}" style="width: 120px;">
+					</td>
+				</tr>
+				</table>.
+				<h2>服務步驟</h2>
+				<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>服務步驟</th>
+						<th>服務步驟名稱</th>
+						<th>服務步驟描述</th>
+						<th>服務步驟圖片</th>
+					</tr>
+				</thead>
+					<tr>
+						<td>
+							服務步驟-1
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							服務步驟-2
+						</td>
+						
+						<td>
+						</td>
+						
+						<td>
+						</td>
+						
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							服務步驟-3
+						</td>
+						
+						<td>
+						</td>
+						
+						<td>
+						</td>
+						
+						<td>
+						</td>
+					</tr>
+				</table>
+			
+				<div id="btnArea" align="center">
 				<button type="submit" class="btn btn-sm btn-primary" name="submit">送出</button> 
 				<input type="hidden" name="action" value="insert"> 
 				<button type="reset" name="cancel" id="cancel" class="btn btn-sm btn-primary">重填</button>
