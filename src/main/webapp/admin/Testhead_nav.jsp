@@ -101,7 +101,7 @@ body,button,h1{
 						data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> 維護名單<i
 							class="fa fa-fw fa-caret-down"></i></a>
 						<ul id="demo" class="collapse">
-							<li><a href="#">會員</a></li>
+							<li><a href="${ctx}/admin/member.jsp">會員</a></li>
 							<li><a href="#">員工</a></li>
 						</ul></li>
 					<li><a href="#"><i class="fa fa-comments-o"></i> 查看意見</a></li>
