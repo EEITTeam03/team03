@@ -709,7 +709,7 @@ body,button,h1{
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-comments-o"></i> 查看意見</a>
+                        <a href="${ctx}/admin/ListAllfeedback.jsp"><i class="fa fa-comments-o"></i> 查看意見</a>
                     </li>
                 </ul>
             </div>

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +21,7 @@ import com.membercars.model.MemberCarsDAO;
 import com.membercars.model.MemberCarsHibernateDAO;
 import com.membercars.model.MemberCarsVO;
 import com.memberinfo.model.MemberInfoVO;
+import com.progress.AutoSetTodayReservList;
 import com.reservlist.model.ReservListVO;
 import com.schedule.model.ReservDAO;
 import com.schedule.model.ReservVO;
@@ -201,7 +203,22 @@ public class ReserveService extends HttpServlet {
 		 se.reserveOK(reservVO);
 		//預約即將到期寄信通知
 		 MemberInfoVO mivo = memberCarsVO.getMemberInfoVO();
-		 se.setProps(mivo.getEmail(), mivo.getMemberName(), cal);	
+		 se.setProps(mivo.getEmail(), mivo.getMemberName(), cal);
+		 
+			/*---------------insert新預約單，增加監視器觀看權限------------------*/
+			if(MyUtil.formatCalender(cal).equals(MyUtil.formatCalender(Calendar.getInstance()))){
+				AutoSetTodayReservList autoSet = new AutoSetTodayReservList();
+				ServletContext application = request.getServletContext();
+				for(Calendar startTime= cal;MyUtil.getHHmmFormat(calEnd).compareTo(MyUtil.getHHmmFormat(startTime))>0;startTime.add(Calendar.MINUTE,30)){
+					String memberNo = ""+mivo.getMemberNo();
+					autoSet.TodayReservListInsert(application,MyUtil.getHHmmFormat(startTime),memberNo);
+					System.out.print("今日新增的時段及會員編號: "+MyUtil.getHHmmFormat(startTime)+",");
+					System.out.println(memberNo);
+				}
+			}
+		 
+		 
+		 
 		// 準備轉交
 		request.setAttribute("reserve", reservVO);
 		request.getRequestDispatcher("/reserve_success.jsp").forward(request, response);
