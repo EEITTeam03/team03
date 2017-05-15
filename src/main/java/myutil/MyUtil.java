@@ -69,6 +69,17 @@ public class MyUtil {
 		  return cal;
 	}
 	
+	public static Calendar getCalenderDH(String strDate) {
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		try {
+			cal.setTime(sdf.parse(strDate));
+		} catch (ParseException e) {
+			throw new RuntimeException("日期或時間格式錯誤!");
+		}
+		return cal;
+	}
+	
 	/*系統排程for TodayReservList*/
 /*	public static String getNowTimeFormat(){
 		Calendar now = Calendar.getInstance();

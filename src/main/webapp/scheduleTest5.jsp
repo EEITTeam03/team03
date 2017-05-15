@@ -87,7 +87,7 @@ body,button,h1{
         	changeEvent();
             editEvent();
             var box = new Date();
-			alert("設timeZone:'Taipei Standard Time',使用getLocalTimeFromUTC")
+			alert("設timeZone:'Tokyo Standard Time',使用getLocalTimeFromUTC")
             alert("以特定的格式顯示星期幾、月、日和年: "+box.toDateString()); //以特定的格式顯示星期幾、月、日和年
             alert("以特定的格式顯示時、分、秒和時區: "+box.toTimeString()); //以特定的格式顯示時、分、秒和時區
             alert("以特定地區格式顯示星期幾、月、日和年: "+box.toLocaleDateString()); //以特定地區格式顯示星期幾、月、日和年
@@ -164,7 +164,7 @@ body,button,h1{
     		var date = new Date();
     		var adapter = new $.jqx.dataAdapter(getSource());
             $("#scheduler").jqxScheduler({
-             	timeZone:'Taipei Standard Time',
+             	timeZone:'Tokyo Standard Time',
             	date: new $.jqx.date(date.getFullYear(), date.getMonth()+1, date.getDate()),
                 width: 850,
                 height: 600,
@@ -554,7 +554,7 @@ body,button,h1{
         		data:{'date':date,'view':view},
         		method:"POST",
         		success:function(data){
-        			//alert(JSON.stringify(data));
+        			alert(JSON.stringify(data));
         			showData(data);
         			$('#loading_data').hide();//關掉loading
         			if(view=='monthView'){

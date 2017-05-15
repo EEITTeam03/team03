@@ -87,7 +87,7 @@ body,button,h1{
         	changeEvent();
             editEvent();
             var box = new Date();
-			alert("設timeZone:'Taipei Standard Time',使用getLocalTimeFromUTC")
+			alert("設timeZone:'Taipei Standard Time',無使用getLocalTimeFromUTC")
             alert("以特定的格式顯示星期幾、月、日和年: "+box.toDateString()); //以特定的格式顯示星期幾、月、日和年
             alert("以特定的格式顯示時、分、秒和時區: "+box.toTimeString()); //以特定的格式顯示時、分、秒和時區
             alert("以特定地區格式顯示星期幾、月、日和年: "+box.toLocaleDateString()); //以特定地區格式顯示星期幾、月、日和年
@@ -524,7 +524,7 @@ body,button,h1{
     	function editToServlet(data,action,addDate){
     		$('#loading_data').show();			//顯示loading圖
     		$.ajax({
-        		url: "scheduleTestServlet2",
+        		url: "scheduleTestServlet3",
         		dataType: "text",	//server端回傳至client端型態
         		data: {'data':data,'status':action},
         		method:"POST",
@@ -554,7 +554,7 @@ body,button,h1{
         		data:{'date':date,'view':view},
         		method:"POST",
         		success:function(data){
-        			//alert(JSON.stringify(data));
+        			alert(JSON.stringify(data));
         			showData(data);
         			$('#loading_data').hide();//關掉loading
         			if(view=='monthView'){
