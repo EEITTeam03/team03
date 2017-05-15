@@ -172,5 +172,3 @@ body,button,h1{
 <%-- 	<script src="${ctx}/admin/js/plugins/morris/morris-data.js"></script> --%>
 
 
-</body>
-</html>

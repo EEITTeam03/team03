@@ -187,7 +187,85 @@ public class MemberServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgMap.put(e.getMessage(), "其他錯誤");
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("Update.jsp");
+						.getRequestDispatcher("/admin/member_update.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("adminupdate".equals(action)) {
+			Map<String, String> errorMsgMap = new HashMap<String, String>();
+			req.setAttribute("ErrorMsgKey", errorMsgMap);
+			
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				Integer memberNo = new Integer(req.getParameter("memberNo"));
+				String memberName = req.getParameter("name");
+				String email = req.getParameter("email");
+				String password = req.getParameter("password");
+				String phone = req.getParameter("phone");
+				String address = req.getParameter("address");
+				String birthday = req.getParameter("datepicker");
+				String effectiveDate = req.getParameter("effectiveDate");
+				
+				if (memberName == null || memberName.trim().length() == 0) {
+					errorMsgMap.put("NameEmptyError", "請輸入您的姓名");
+				}
+				if (email == null || email.trim().length() == 0) {
+					errorMsgMap.put("EmailEmptyError", "請輸入電子郵件");
+				}
+				if (password == null || password.trim().length() == 0) {
+					errorMsgMap.put("PasswordEmptyError", "請輸入密碼");
+				}
+				if (phone == null || phone.trim().length() == 0) {
+					errorMsgMap.put("PhoneEmptyError", "請輸入電話");
+				}
+//				java.sql.Date birthday = null;
+				if (birthday == null || birthday.trim().length() == 0) {
+					errorMsgMap.put("BirthdayEmptyError", "請輸入生日");
+				}
+				if (address == null || address.trim().length() == 0) {
+					errorMsgMap.put("AddressEmptyError", "請輸入地址");
+				}
+				
+				
+				java.sql.Date bday = Date.valueOf(birthday);
+				java.sql.Date eday = Date.valueOf(effectiveDate);
+				
+//				MemberInfoVO memberinfoVO = null;
+				
+				MemberInfoVO memberinfoVO = new MemberInfoVO();
+				memberinfoVO.setMemberNo(memberNo);
+				memberinfoVO.setMemberName(memberName);
+				memberinfoVO.setEmail(email);
+				memberinfoVO.setPassword(password);
+				memberinfoVO.setPhone(phone);
+				memberinfoVO.setBirthday(bday);
+				memberinfoVO.setAddress(address);
+				memberinfoVO.setEffectiveDate(eday);
+				// Send the use back to the form, if there were errors
+				if (!errorMsgMap.isEmpty()) {
+					req.setAttribute("memberInfoVO", memberinfoVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/admin/member_update.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				/***************************2.開始新增資料***************************************/
+				MemberService memberSvc = new MemberService();
+				memberinfoVO = memberSvc.updateMem(memberNo, memberName, email, password, phone, bday, address, eday);
+				
+				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				String url = "/admin/member.jsp";
+				res.sendRedirect(getServletContext().getContextPath()+url);
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+//				successView.forward(req, res);				
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgMap.put(e.getMessage(), "其他錯誤");
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/admin/member_update.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -270,8 +348,8 @@ public class MemberServlet extends HttpServlet {
 				MemberInfoVO memberinfoVO = memberSvc.getOneMem(memberNo);
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)***********/
-				req.setAttribute("memberinfoVO", memberinfoVO);
-				String url = "Update.jsp";
+				req.setAttribute("memberInfoVO", memberinfoVO);
+				String url = "/admin/member_update.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
@@ -279,7 +357,7 @@ public class MemberServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgMap.put(e.getMessage(), "無法取得要修改的資料:");
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("MemberUpdate.jsp");
+						.getRequestDispatcher("/admin/member.jsp");
 				failureView.forward(req, res);
 			}
 		}
