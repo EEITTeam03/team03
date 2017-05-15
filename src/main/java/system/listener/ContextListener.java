@@ -1,6 +1,7 @@
 package system.listener;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.concurrent.ScheduledExecutorService;
 
 import javax.servlet.ServletContext;
@@ -40,6 +41,7 @@ public class ContextListener implements ServletContextListener {
 
     	/**********塞入今日預約名單(for VideoServlet)----------------開始*************/
     	/**********ApplicationListener伺服器啟動時呼叫排程任務ScheduleTask*************/
+    	TimeZone.setDefault(TimeZone.getTimeZone("Asia/Taipei"));
     	Calendar reSetTime = Calendar.getInstance();
     	//隔天的半夜一點
     	reSetTime.add(Calendar.DATE, 1);
