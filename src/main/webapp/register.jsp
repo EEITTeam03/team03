@@ -134,132 +134,99 @@
 	    color: white;
 	    padding: 10px 15px;
 	    font-size: 16px;
-
 	}
+	form{
+		background-repeat: no-repeat;
+		width:945px;
+	    background: rgba(255, 255, 255, 0.45);
+	    max-width: 600px;
+	    margin: 40px auto;
+	    border-radius: 4px;
+	    box-shadow:0 4px 10px 4px rgba(19, 35, 47, 0.3);
+	}
+	#cmxform input::-webkit-input-placeholder{ 	
+		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}	
 	#cmxform div input{
 		font-size: 22px;
 	    display: block;
 	    width: 100%;
 	    height: 100%;
 	    padding: 5px 10px;
-	    background: none;
+	    background: rgba(255, 255, 255, 0.75);
 	    background-image: none;
 	    border: 1px solid #a0b3b0;
 	    color: black;
 	    border-radius: 0;
 	    -webkit-transition: border-color .25s ease, box-shadow .25s ease;
 	    transition: border-color .25s ease, box-shadow .25s ease;
-}
+	}
 	#cmxform div input:focus{
 		outline: 0;
 		border-color: #1ab188;
-}
-
-
-    	
-    	
 	}
 
-/* 	.light-orange{ */
-/* 		color:white; */
-/* 	    transition:all 0.2s ease-in-out 0s; */
-/* 	    background-color: #e65d4f; */
-/* 	    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);	     */
-/* 	} */
+	.btn:hover, .btn:focus{
+	    outline: none;
+	    color:#fff;
+	}
+	.btn{
+	    text-transform: capitalize;
+	    color:#fff;
+	    padding: 14px 20px;
+	    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+	.btn:hover{
+	    color:#fff;
+	}
 
-.btn:hover, .btn:focus{
-    outline: none;
-    color:#fff;
-}
-.btn{
-    text-transform: capitalize;
-    color:#fff;
-    padding: 14px 20px;
-    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.btn:hover{
-    color:#fff;
-}
-.btn-sm{
-    padding: 11px 16px;
-    border-radius: 5px;
-}
-.btn-lg{
-    font-size: 20px;
-}
-.button-left > i{
-    margin-left: 7px;
-}
-.button-right > i{
-    margin-right: 7px;
-}  
-
-.blue,
-.light-brown,
-.light-green,
-.light-orange{
-    background: #0088cc;
-    box-shadow:0 4px 0 #006394;
-    transition:all 0.1s ease-in-out 0s;
-    position: relative;
-    top:0;
-}
-.light-brown{
-    background: #cec2ab;
-    box-shadow: 0 4px 0 #b9a888;
-}
-.light-green{
-    background: #75d69c;
-    box-shadow:0 4px 0 #4ac97d;
-    border-radius: 25px;
-}
-.light-orange{
-    background: #fed136;
-    box-shadow:0 4px 0 rgb(228, 183, 54);
-} 
-
-.blue:hover,
-.light-brown:hover,
-.light-green:hover,
-.light-orange:hover{
-    top:2px;
-    box-shadow:0 2px 0 #006394;
-}
-.light-brown:hover{
-    box-shadow: 0 2px 0 #b9a888;
-}
-.light-green:hover{
-    box-shadow:0 2px 0 #4ac97d;
-}
-.light-orange:hover{
-    box-shadow: 0 2px 0 #fed136;
-}	
-form{
-	background-repeat: no-repeat;
-	width:945px;
-    background: rgba(255, 255, 255, 0.45);
-    max-width: 600px;
-    margin: 40px auto;
-    border-radius: 4px;
-    box-shadow:0 4px 10px 4px rgba(19, 35, 47, 0.3);
-}
-#cmxform input::-webkit-input-placeholder{ 	
-	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
+	.btn-lg{
+	    font-size: 20px;
+	} 
 	
-/* 	input:-webkit-autofill { */
-/* /* 	  -webkit-box-shadow:0 0 0 50px black inset; */ */
-/* 	  -webkit-box-shadow:0 0 0 50px rgba(0,0,0,0.75) inset; */
-/* 	  -webkit-text-fill-color: red; */
-/* 	  font-color:red; */
-/* 	} */
+	.blue,
+	.light-brown,
+	.light-green,
+	.light-orange{
+	    background: #0088cc;
+	    box-shadow:0 4px 0 #006394;
+	    transition:all 0.1s ease-in-out 0s;
+	    position: relative;
+	    top:0;
+	}
+	.light-brown{
+	    background: #cec2ab;
+	    box-shadow: 0 4px 0 #b9a888;
+	}
+	.light-green{
+	    background: #75d69c;
+	    box-shadow:0 4px 0 #4ac97d;
+	    border-radius: 25px;
+	}
+	.light-orange{
+	    background: #fed136;
+	    box-shadow:0 4px 0 rgb(228, 183, 54);
+	} 
 	
-/* 	input:-webkit-autofill:focus { */
-/* /* 	  -webkit-box-shadow:0 0 0 50px black inset; */ */
-/* 	  -webkit-box-shadow:0 0 0 50px rgba(0,0,0,0.75) inset; */
-/* 	  -webkit-text-fill-color: red; */
-/* 	  font-color:red; */
-/* 	} */
+	.blue:hover,
+	.light-brown:hover,
+	.light-green:hover,
+	.light-orange:hover{
+	    top:2px;
+	    box-shadow:0 2px 0 #006394;
+	}
+	.light-brown:hover{
+	    box-shadow: 0 2px 0 #b9a888;
+	}
+	.light-green:hover{
+	    box-shadow:0 2px 0 #4ac97d;
+	}
+	.light-orange:hover{
+	    box-shadow: 0 2px 0 #fed136;
+	}	
+
+	
+
 
 
 	
@@ -350,7 +317,7 @@ form{
 																				
 								<c:if test="${empty FBName}">												
 									<div class="input-group" style="max-width:200px;">	
-										<input id="inp1" type="text" name="name" class="form-control required" placeholder="輸入您的姓名" value='${param.name}'>																													
+										<input type="text" name="name" class="form-control required" placeholder="輸入您的姓名" value='${param.name}'>																													
 										<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>											
 									</div>
 									<br>																															
@@ -362,7 +329,7 @@ form{
 																			
 								<c:if test="${empty FBAccount}">												
 									<div class="input-group">
-										<input id="inp2" type="text" name="email" class="form-control email required" placeholder="輸入您的電子郵件" value='${param.email}' style="width:500px;">												
+										<input type="text" name="email" class="form-control email required" placeholder="輸入您的電子郵件" value='${param.email}' style="width:500px;">												
 										<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>											
 									</div>												
 									<br>												
@@ -404,7 +371,7 @@ form{
 								<br>												
 								<div class="input-group">												
 									<input type="hidden" name="action" value="insert">												
-									<button id="sb" class="btn btn-lg light-orange btn-block" type="submit"  style="width:500px;">下一步</button>												
+									<button id="sb" class="btn btn-lg light-orange btn-block" type="submit" style="width:500px;">下一步</button>												
 									<br>
 									<br>
 									<br>

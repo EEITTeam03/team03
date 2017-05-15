@@ -73,9 +73,131 @@
 </script>
 
 <style>
-.error {
-	color: red;
-}
+	.error {
+		color: red;
+	}
+
+	.form-control{
+	    padding-top: 15px;
+	    background: rgba(0, 0, 0, 0.5);	    
+	    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+	    border: none;
+	    color: white;
+	    padding: 10px 15px;
+	    font-size: 16px;
+	}
+	form{
+		background-repeat: no-repeat;
+		width:945px;
+	    background: rgba(255, 255, 255, 0.45);
+	    max-width: 600px;
+	    margin: 40px auto;
+	    border-radius: 4px;
+	    box-shadow:0 4px 10px 4px rgba(19, 35, 47, 0.3);
+	}
+	#cmxform input::-webkit-input-placeholder{ 	
+		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}	
+	#cmxform div input{
+		font-size: 22px;
+	    display: block;
+	    width: 100%;
+	    height: 100%;
+	    padding: 5px 10px;
+	    background: rgba(255, 255, 255, 0.75);
+	    background-image: none;
+	    border: 1px solid #a0b3b0;
+	    color: black;
+	    border-radius: 0;
+	    -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+	    transition: border-color .25s ease, box-shadow .25s ease;
+	}
+	#cmxform div input:focus{
+		outline: 0;
+		border-color: #1ab188;
+	}
+	#cmxform div input[type='checkbox']{
+		display:inline;
+		width:50px;
+		margin: 0 auto;
+	}
+	#cmxform div a{ 
+		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		color:black;
+	    position: relative;
+	    left:330px;
+		bottom:5px;
+	}
+	#cmxform div a:hover{ 
+		color:blue;
+	}	
+	.btn:hover, .btn:focus{
+	    outline: none;
+	    color:#fff;
+	}
+	.btn{
+	    text-transform: capitalize;
+	    color:#fff;
+	    padding: 14px 20px;
+	    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+	.btn:hover{
+	    color:#fff;
+	}
+	.btn-lg{
+	    font-size: 20px;
+	} 	
+	.blue,
+	.light-brown,
+	.light-green,
+	.light-orange{
+	    background: #0088cc;
+	    box-shadow:0 4px 0 #006394;
+	    transition:all 0.1s ease-in-out 0s;
+	    position: relative;
+	    top:0;
+	}
+	.light-brown{
+	    background: #cec2ab;
+	    box-shadow: 0 4px 0 #b9a888;
+	}
+	.light-green{
+	    background: #75d69c;
+	    box-shadow:0 4px 0 #4ac97d;
+	    border-radius: 25px;
+	}
+	.light-orange{
+	    background: #fed136;
+	    box-shadow:0 4px 0 rgb(228, 183, 54);
+	} 
+	
+	.blue:hover,
+	.light-brown:hover,
+	.light-green:hover,
+	.light-orange:hover{
+	    top:2px;
+	    box-shadow:0 2px 0 #006394;
+	}
+	.light-brown:hover{
+	    box-shadow: 0 2px 0 #b9a888;
+	}
+	.light-green:hover{
+	    box-shadow:0 2px 0 #4ac97d;
+	}
+	.light-orange:hover{
+	    box-shadow: 0 2px 0 #fed136;
+	}	
+
+	input:-webkit-autofill {
+	  -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
+	  -webkit-text-fill-color: #333;
+	}
+	
+	input:-webkit-autofill:focus {
+	  -webkit-box-shadow:0 0 0 50px white inset;
+	  -webkit-text-fill-color: #333;
+	}
+
 </style>
 
 
@@ -121,76 +243,93 @@
 
 	</div>
 	</nav>
+	<!-- Header -->
+	<header>
+		<div style="position: absolute;opacity:0.3">
+			<video autoplay loop muted class="fillWidth" style="width: 100%;">
 
-	<section id="services">
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
-
-			<div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">會員登入</h3>
-					</div>
-
-					<div class="panel-body">
-						<div class="flot-chart-content" id="flot-bar-chart">
-
-							<form id="cmxform" class="form-signin" role="form"
-								action='login.do'>
-
-								<br>
-
-								<div class="input-group" style="border: 1px solid #5bc0de">
-									<span class="input-group-addon"
-										style="border-right: 1px solid #5bc0de"><i
-										class="glyphicon glyphicon-envelope"></i></span> <input id="email"
-										type="text" class="form-control required email" name="email"
-										placeholder="輸入您的電子郵件" value='${param.email}'> <small><Font
-										color='red'>${ErrorMsgKey.AccountEmptyError}</Font></small>
-
-								</div>
-
-								<br>
-
-								<div class="input-group" style="border: 1px solid #5bc0de">
-									<span class="input-group-addon"
-										style="border-right: 1px solid #5bc0de"><i
-										class="glyphicon glyphicon-lock"></i></span> <input id="password"
-										type="password" class="form-control required" name="password"
-										placeholder="輸入您的密碼" value='${param.password}'> <small><Font
-										color='red'>${ErrorMsgKey.PasswordEmptyError}</Font></small>
-
-								</div>
-
-								<div class="checkbox">
-									<label> <input type="checkbox" value="remember-me">記住密碼
-									</label>
-								</div>
-
-								<button class="btn btn-lg btn-info btn-block" type="submit">登入</button>
-								<small><Font color='red'>${ErrorMsgKey.LoginError}</Font></small>
-							</form>
-							<div style="padding-top: 15px" align="center">
-								<fb:login-button scope="public_profile,email"
-									onlogin="checkLoginState();" size="xlarge">使用FB帳號登入
-								</fb:login-button>
-								 	<div id="status"></div>
-							</div>
-							<div style="padding-top: 15px" align="center">
-								<a href="forgetPassWord.jsp" class="btn btn-danger"
-									role="button">忘記密碼</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
+				<source src="video/file.mp4" type="video/mp4" />
+				Your browser does not support the video tag. I suggest you upgrade
+				your browser.
+				<source src="video/video_preview_h264.wmv" type="video/wmv" />
+				Your browser does not support the video tag. I suggest you upgrade
+				your browser.
+				<!-- object標籤內解決 -->
+				<object>
+					<embed src="video/video_preview_h264.mp4"
+						type="application/x-shockwave-flash" allowfullscreen="false"
+						allowscriptaccess="always"
+						style="width: 100%; height: 100%; z-index: -1" loop="true" />
+				</object>
+			</video>
 		</div>
 
-		<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
+	</header>
+	<section id="services">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
+	
+				<div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
+					<form id="cmxform" class="form-signin" role="form" action='login.do'>												
+						<div class="row">
+							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">												
+								<br>
+								<br>
+								<div class="input-group" style="max-width:500px;">	
+									<img class="img-circle img-responsive" src="img/register/logo.png" alt="">
+								</div>
+								<br>										
+								<div class="input-group">											
+									<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件" value='${param.email}' style="width:500px;"> 										
+									<small><Font color='red'>${ErrorMsgKey.AccountEmptyError}</Font></small>										
+								</div>											
+																			
+								<br>											
+																			
+								<div class="input-group">											
+									<input id="password" type="password" class="form-control required" name="password" placeholder="輸入您的密碼" value='${param.password}' style="width:500px;">										
+									<small><Font color='red'>${ErrorMsgKey.PasswordEmptyError}</Font></small>										
+								</div>
+																			
+								<br>
+																			
+								<div class="checkbox">												
+									<span>記住密碼 </span>										
+									<input type="checkbox" value="remember-me">									
+																			
+								</div>											
+								
+								<br>
+								
+								<div class="input-group">												
+									<button class="btn btn-lg light-orange btn-block" type="submit"  style="width:500px;">登入</button>											
+									<small><Font color='red'>${ErrorMsgKey.LoginError}</Font></small>
 
-	</div>
+								</div>
+								<br>
+								<br>
+								
+								<div class="input-group" style="width:500px;">												
+									<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size="xlarge"></fb:login-button>
+									<a href="forgetPassWord.jsp" style="margin-left: auto;">忘記密碼?</a>
+									<div id="status"></div>																																														
+								</div>
+								<br>																											
+							</div>
+						</div>												
+					</form>												
+	
+
+								
+									
+								
+								
+			</div>
+	
+			<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
+	
+		</div>
 	</section>
 
 	<!-- Bootstrap Core JavaScript -->

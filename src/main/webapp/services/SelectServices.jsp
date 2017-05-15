@@ -17,18 +17,16 @@
 <!--     Custom Fonts -->
     <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
- 	<!-- SweetAlert -->
-    <script src="../admin/SweetAlert/js/sweetalert.min.js"></script> 
-	<link href="../admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
+ 
    
 </head>
 <body>
+<jsp:include page="/admin/Testhead_nav.jsp"/>
 <c:if test="${!empty path}">
 <script>
-swal("修改成功!")
+swal("修改成功!","服務已更新","success");
 </script>
 </c:if>
-<jsp:include page="../admin/Testhead_nav.jsp"/>
 <div id="wrapper">
 <div id="page-wrapper">
 <h2>項目</h2>

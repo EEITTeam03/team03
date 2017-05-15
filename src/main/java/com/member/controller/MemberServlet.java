@@ -256,6 +256,7 @@ public class MemberServlet extends HttpServlet {
 				memberinfoVO = memberSvc.updateMem(memberNo, memberName, email, password, phone, bday, address, eday);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				req.getSession().setAttribute("OKalert", "updateOK");
 				String url = "/admin/member.jsp";
 				res.sendRedirect(getServletContext().getContextPath()+url);
 //				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp

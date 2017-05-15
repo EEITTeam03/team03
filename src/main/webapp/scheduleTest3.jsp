@@ -739,7 +739,7 @@ body,button,h1{
 		<div id="contentDiv">
 		<h2>查看排程</h2>
 		<button type="submit" id="btn_search" class="btn btn-sm btn-primary">查詢</button>
-		<button type="submit" value="匯出至Excel" id='excelExport' class="btn btn-sm btn-primary">匯出至Excel</button>
+		<button type="submit" value="匯出至Excel" id='excelExport' class="btn btn-sm btn-success">匯出至Excel</button>
     	<div><img id="loading_data" src="${ctx}/img/loading/ajax-loader.gif" /></div>
     		<div id="scheduler_body" >
         	<div id="scheduler"></div>

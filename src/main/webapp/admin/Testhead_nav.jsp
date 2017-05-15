@@ -29,6 +29,11 @@ FeedbackService fsvc = new FeedbackService();
 	<!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css" rel="stylesheet">
 
+ 	<!-- SweetAlert -->
+    <script src="../admin/SweetAlert/js/sweetalert.min.js"></script> 
+	<link href="../admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
+   
+
 <style>
 .fa {
 	font-size: 200%;

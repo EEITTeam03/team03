@@ -23,12 +23,18 @@ FeedbackService fsvc = new FeedbackService();
 <title>List all opinions</title>
 </head>
 <body>
-<jsp:include page="../admin/Testhead_nav.jsp"/>
+<jsp:include page="/admin/Testhead_nav.jsp"/>
+<c:if test="${!empty feedbackOK}">
+<script>
+swal("完成回覆!","","info");
+</script>
+<%session.removeAttribute("feedbackOK"); %>
+</c:if>
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
 	<h1>所有意見</h1>
-	<table class="table table-bordered table-hover">
+	<table class="table table-bordered">
 	<thead>
 	<tr>
 	<th>意見編號</th>
@@ -43,7 +49,8 @@ FeedbackService fsvc = new FeedbackService();
 	<tbody>
 	<c:if test="${list.size()!=0}">
 	<c:forEach var="fVO" items="${list}" begin="0" end="${list.size()-1}">
-		<tr >
+	<c:if test="${fVO.reply!=null}"><tr class="bg-success"></c:if>
+	<c:if test="${fVO.reply==null}"><tr></c:if>
 			<td>${fVO.feedbackNo}</td>
 			<td>${fVO.feedbackDate.time}</td>
 			<td>${fVO.memberName}</td>
