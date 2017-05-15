@@ -24,6 +24,16 @@ public class ServiceStepService {
 		dao.update(serviceStepVO);
 		return serviceStepVO;
 	}
+	
+	public ServiceStepVO addServiceStepForInsert(ServicesVO servicesVO,Integer servStep,String stepName,String stepDescp){
+		ServiceStepVO serviceStepVO = new ServiceStepVO();
+		serviceStepVO.setServicesVO(servicesVO);
+		serviceStepVO.setServStep(servStep);
+		serviceStepVO.setStepName(stepName);
+		serviceStepVO.setStepDescp(stepDescp);
+		dao.insert(serviceStepVO);
+		return serviceStepVO;
+	}
 
 	public ServiceStepVO UpdateServiceStep(Integer servStepNo, Integer servStep, String stepName, String stepDescp,
 			byte[] stepPic, ServicesVO servicesVO) {

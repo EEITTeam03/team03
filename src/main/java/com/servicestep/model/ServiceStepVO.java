@@ -3,13 +3,14 @@ package com.servicestep.model;
 import com.services.model.ServicesVO;
 
 public class ServiceStepVO implements java.io.Serializable {
-//	private Integer servNo;
+	// private Integer servNo;
 	private Integer servStep;
 	private String stepName;
 	private String stepDescp;
 	private byte[] stepPic;
 	private Integer stepPercent;
 	private Integer carClassNo;
+	// 流水號
 	private Integer servStepNo;
 	// many-to-one-> Services
 	private ServicesVO servicesVO;
@@ -38,13 +39,13 @@ public class ServiceStepVO implements java.io.Serializable {
 		this.servicesVO = servicesVO;
 	}
 
-//	public Integer getServNo() {
-//		return servNo;
-//	}
-//
-//	public void setServNo(Integer servNo) {
-//		this.servNo = servNo;
-//	}
+	// public Integer getServNo() {
+	// return servNo;
+	// }
+	//
+	// public void setServNo(Integer servNo) {
+	// this.servNo = servNo;
+	// }
 
 	public Integer getServStep() {
 		return servStep;

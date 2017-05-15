@@ -41,7 +41,7 @@
 								<td>${member.birthday}</td>
 								<td>${member.address}</td>
 								<td>${member.effectiveDate}</td>
-								<td><input type="button" value="查看車輛" class="btn btn-sm btn-primary"></td>
+								<td><input name="checkcar" type="button" value="查看車輛" class="btn btn-sm btn-primary"></td>
 								<td><input type="button" value="修改" class="btn btn-sm btn-danger"></td>
 							</tr>
 						</c:forEach>
@@ -50,5 +50,15 @@
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		$(function() {
+			$("input[name='checkcar']").click(function() {
+				console.log($(this).parent().parent().children());
+				
+// 				$.getJSON
+			});
+		});
+	</script>
 </body>
 </html>
