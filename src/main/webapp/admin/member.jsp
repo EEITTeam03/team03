@@ -42,7 +42,13 @@
 								<td>${member.address}</td>
 								<td>${member.effectiveDate}</td>
 								<td><input name="checkcar" type="button" value="查看車輛" class="btn btn-sm btn-primary"></td>
-								<td><input type="button" value="修改" class="btn btn-sm btn-danger"></td>
+								<td>
+								<form action="${ctx}/MemberServlet" method="post">
+									<input type="hidden" name="action" value="getOne_For_Update">
+									<input type="hidden" value="${member.memberNo}" name="memberNo">
+									<input type="submit" value="修改" class="btn btn-sm btn-danger">
+								</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -54,9 +60,13 @@
 	<script type="text/javascript">
 		$(function() {
 			$("input[name='checkcar']").click(function() {
-				console.log($(this).parent().parent().children());
-				
-// 				$.getJSON
+				console.log($(this).parent().parent().children("td:first-child").text());
+				var id = $(this).parent().parent().children("td:first-child").text();
+				var root = "${ctx}"+"/GetCars";
+				$.getJSON(root,{"no":id},function(data){
+					console.log(data);
+					
+				});
 			});
 		});
 	</script>

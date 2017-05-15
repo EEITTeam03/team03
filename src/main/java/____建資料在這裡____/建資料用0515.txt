@@ -24,52 +24,52 @@ ALTER TABLE [dbo].[block_list] DROP CONSTRAINT [FK_block_list_member_info]
 GO
 ALTER TABLE [dbo].[block_list] DROP CONSTRAINT [FK_block_list_block_rule]
 GO
-/****** Object:  Table [dbo].[services_carClass]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[services_carClass]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[services_carClass]
 GO
-/****** Object:  Table [dbo].[services]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[services]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[services]
 GO
-/****** Object:  Table [dbo].[service_step]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[service_step]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[service_step]
 GO
-/****** Object:  Table [dbo].[reserv_list]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[reserv_list]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[reserv_list]
 GO
-/****** Object:  Table [dbo].[reserv_history]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[reserv_history]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[reserv_history]
 GO
-/****** Object:  Table [dbo].[reserv]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[reserv]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[reserv]
 GO
-/****** Object:  Table [dbo].[member_info]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[member_info]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[member_info]
 GO
-/****** Object:  Table [dbo].[member_cars]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[member_cars]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[member_cars]
 GO
-/****** Object:  Table [dbo].[feedback]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[feedback]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[feedback]
 GO
-/****** Object:  Table [dbo].[employee]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[employee]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[employee]
 GO
-/****** Object:  Table [dbo].[car_type]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[car_type]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[car_type]
 GO
-/****** Object:  Table [dbo].[car_class]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[car_class]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[car_class]
 GO
-/****** Object:  Table [dbo].[block_rule]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[block_rule]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[block_rule]
 GO
-/****** Object:  Table [dbo].[block_list]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[block_list]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[block_list]
 GO
-/****** Object:  Table [dbo].[admin]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[admin]    Script Date: 2017/5/15 下午 07:45:31 ******/
 DROP TABLE [dbo].[admin]
 GO
-/****** Object:  Table [dbo].[admin]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[admin]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -86,7 +86,7 @@ CREATE TABLE [dbo].[admin](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[block_list]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[block_list]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -104,7 +104,7 @@ CREATE TABLE [dbo].[block_list](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[block_rule]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[block_rule]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -121,7 +121,7 @@ CREATE TABLE [dbo].[block_rule](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[car_class]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[car_class]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -136,7 +136,7 @@ CREATE TABLE [dbo].[car_class](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[car_type]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[car_type]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -157,7 +157,7 @@ CREATE TABLE [dbo].[car_type](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[employee]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[employee]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -178,13 +178,13 @@ CREATE TABLE [dbo].[employee](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[feedback]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[feedback]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[feedback](
-	[feedbackDate] [date] NOT NULL,
+	[feedbackDate] [datetime] NOT NULL,
 	[memberName] [nvarchar](15) NOT NULL,
 	[memberNo] [int] NOT NULL,
 	[feedback] [nvarchar](200) NULL,
@@ -198,7 +198,7 @@ CREATE TABLE [dbo].[feedback](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[member_cars]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[member_cars]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -218,7 +218,7 @@ CREATE TABLE [dbo].[member_cars](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[member_info]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[member_info]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -243,7 +243,7 @@ CREATE TABLE [dbo].[member_info](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[reserv]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[reserv]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -268,7 +268,7 @@ CREATE TABLE [dbo].[reserv](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[reserv_history]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[reserv_history]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -280,7 +280,7 @@ CREATE TABLE [dbo].[reserv_history](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[reserv_list]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[reserv_list]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -299,7 +299,7 @@ CREATE TABLE [dbo].[reserv_list](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[service_step]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[service_step]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -323,7 +323,7 @@ CREATE TABLE [dbo].[service_step](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[services]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[services]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -347,7 +347,7 @@ CREATE TABLE [dbo].[services](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[services_carClass]    Script Date: 2017/5/13 下午 10:50:24 ******/
+/****** Object:  Table [dbo].[services_carClass]    Script Date: 2017/5/15 下午 07:45:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -738,6 +738,10 @@ INSERT [dbo].[car_type] ([modelNo], [brand], [carModel], [carClass]) VALUES (N'5
 INSERT [dbo].[employee] ([employeeNo], [employeeName], [employeeDesc], [employeePhoto]) VALUES (N'1', N'周柏元', N'入行年資：5年多，具有日本鍍膜協會（Japan Coating Association)專業技術認證', NULL)
 INSERT [dbo].[employee] ([employeeNo], [employeeName], [employeeDesc], [employeePhoto]) VALUES (N'2', N'陳致鈞', N'入行年資：3年多，具有丙級車輛塗裝技術士證照', NULL)
 INSERT [dbo].[employee] ([employeeNo], [employeeName], [employeeDesc], [employeePhoto]) VALUES (N'3', N'蕭天怡', N'入行年資：4年多，具有汽車檢驗員證照', NULL)
+SET IDENTITY_INSERT [dbo].[feedback] ON 
+
+INSERT [dbo].[feedback] ([feedbackDate], [memberName], [memberNo], [feedback], [reply], [readState], [feedbackNo]) VALUES (CAST(0x0000A77400000000 AS DateTime), N'洪鷹皓', 12, N'蕭美女也太正了吧 下次也要找他', NULL, 5, 1)
+SET IDENTITY_INSERT [dbo].[feedback] OFF
 INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (9, N'0536-XB', N'1406')
 INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (3, N'2113-JL', N'2102')
 INSERT [dbo].[member_cars] ([memberNo], [carLicense], [modelNo]) VALUES (2, N'2S-1485', N'1501')

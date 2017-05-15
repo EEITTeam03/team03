@@ -158,8 +158,6 @@ table, th, td {
 .table{
 	color: white;
 	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	background: #3C3C3C;
-	border-radius:15px;
 	text-align: center;
 	
 }
@@ -179,21 +177,24 @@ table, th, td {
 .divOver{
  	background:#fed136;
 	
-	} 
+}
+thead{
+	background: #000000;
+	
+}
+tbody tr:nth-child(2n-1) { 
+ 	background: #515151; 
+ } 
+tr:nth-child(2n) {
+	background: #3C3C3C;
+}
+/* 調整滑入table資料時，所顯示的顏色 */
+.table-hover tbody tr:hover th,tr:hover td{
+	background: #fed136;
+}
 </style>
 
-<script type="text/javascript">
-	$(function(){
-		
-		$("table > tbody > tr").hover(function(){
-			$(this).addClass("divOver");
-		},function(){
-			$(this).removeClass("divOver");
-		})
-	});
 
-
-</script>
 </head>
 
 <body id="page-top" class="index">
@@ -301,10 +302,11 @@ table, th, td {
 
 	<div class="container" style="width: 80%;">
 		<div class="row">
-			<h2 class="col-sm-offset-5">預約成功</h2>
+			
 		</div>
 		<div class="row col-sm-8 col-sm-offset-2">
-			<table class="table ">
+			<h2 class="col-sm-offset-5">預約成功</h2>
+			<table class="table table-hover" >
 				<thead>
 					<tr>
 						<th>項目</th>
@@ -347,9 +349,9 @@ table, th, td {
 		<div class="row">
 			
 		</div>
-		<div class="row">
+		<div class="row col-sm-8 col-sm-offset-2">
 			<h2 class="col-sm-offset-5">服務明細</h2>
-			<table class="table">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>服務編號</th>
@@ -374,7 +376,7 @@ table, th, td {
 				
 			</table>
 			<div class="col-sm-offset-7" id="totle">
-				<table  class="table">
+				<table  class="table table-hover">
 				<thead>
 					<tr>
 						<th>總金額</th>
