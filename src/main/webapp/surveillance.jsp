@@ -268,6 +268,9 @@
 		.glyphicon glyphicon-ok{
 			color: #ed687c;
 		}
+		img{
+			box-shadow:0 4px 10px 4px rgba(19, 35, 47, 0.3);
+		}
      
 	</style>
 
@@ -465,11 +468,10 @@
 				 	
 } );
   
-  function colorUpdate(){	  
-		$("div[class*='div-line-undone']:first-child").addClass("div-line-completed").removeClass("div-line-undone");
-		$("div[class*='div-node-undone']:first-child").addClass("div-node-completed").removeClass("div-node-undone");
-// 	  $("div[class*='div-node-undone']:first-child span:first-child").addClass("glyphicon glyphicon-ok");
-		$("table span[class!='glyphicon glyphicon-ok']").addClass("glyphicon glyphicon-ok");
+	function colorUpdate(){			
+		$("div[class*='div-line-undone']:first").addClass("div-line-completed").removeClass("div-line-undone");
+		$("div[class*='div-node-undone']:first").addClass("div-node-completed").removeClass("div-node-undone");
+		$("table span[class!='glyphicon glyphicon-ok']:first").addClass("glyphicon glyphicon-ok");
   }
   
 //   console.log($("div[class*='div-line-undone']").attr("class"));
@@ -549,6 +551,7 @@
 						<ul class="dropdown-menu" role="menu">
 						    <li><a href="orderStatus.jsp">訂單狀態</a></li>
 						    <li><a href="#">修改資料</a></li>
+						    <li><a href="feedback.jsp">意見回饋</a></li>
 						    <li class="divider"></li>
 						    <li><a href="#">登出</a></li>
 						</ul>				              
@@ -585,42 +588,43 @@
 		</div>
 
 	</header>
-	<section id="services">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							
-					
-
-				</div>
-				
-			</div>
-		</div>
-	</section>
-
-	<section id="services">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					
-					<table>
-						<tr>
-							<td></td>
-							
-						</tr>
-						<tr>
-							<td>
-								<div class="div-node-completed">
-									GO
-								</div>
-							</td>  				          
-						</tr>
-						<tr>
-							<td></td>
-							
-						</tr>										      				      				      
-					</table>
+<!-- 	<section id="services"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> -->
 		
+<!-- 				</div> -->
+				
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</section> -->
+
+	<section id="services">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div style="width:100%;height:651px;">
+						<img style="-webkit-user-select: none;" src="http://localhost:8080/maven-archetype-webapp-servlet3/VideoServlet" width="100%" height="100%">
+					</div>
+					<div class="table-responsive">
+						<table>
+							<tr>
+								<td></td>
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="div-node-completed">
+										GO
+									</div>
+								</td>  				          
+							</tr>
+							<tr>
+								<td></td>
+								
+							</tr>										      				      				      
+						</table>
+					</div>
 
 				</div>
 				
