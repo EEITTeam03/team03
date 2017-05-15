@@ -28,6 +28,7 @@
 					</table >
 					<textarea placeholder="回覆客戶意見" name="comment" style="width:1674px;height:150px;resize:none;">${param.reply}</textarea>
 					<input type="submit" value="送出">
+					<input type="reset" value="清除">
 					<input type="hidden" name="feedbackNo" value="${param.feedbackNo}">
 					<input type="hidden" name="action" value="reply">  
 				</form>
