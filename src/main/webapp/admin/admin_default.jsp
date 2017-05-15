@@ -68,15 +68,7 @@
 		// $("#mytest").hide();
 	</script>
 
-<style>
-.fa {
-    font-size: 200%;
-}
-ul[class*="nav navbar-nav side-nav"] {
-	font-size: 125%;
-}
 
-</style>
 </head>
 <body>
  <div id="wrapper">
