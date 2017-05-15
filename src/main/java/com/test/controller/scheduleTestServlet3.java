@@ -88,8 +88,8 @@ public class scheduleTestServlet3 extends HttpServlet {
 		ReservService rs = new ReservService();
 		//ReservVO rvo= rs.getOneReserv(reservNo);
 		
-		Calendar scalendar = MyUtil.getCalenderDH(map.get("start")); //取得預約時間
-		Calendar OldEnd = MyUtil.getCalenderDH(map.get("end")); //取得原本的結束時間
+		Calendar scalendar = MyUtil.getLocalTimeFromGMT(map.get("start")); //取得預約時間
+		Calendar OldEnd = MyUtil.getLocalTimeFromGMT(map.get("end")); //取得原本的結束時間
 		
 		EmployeeService es = new EmployeeService();
 		EmployeeVO eVO = es.getOneEmp(empNo);

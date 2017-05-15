@@ -54,13 +54,17 @@ public class MyUtil {
 	
 	/*scheduler for admin*/
 	public static Calendar getLocalTimeFromGMT(String timeGMT){
-		  TimeZone gmt = TimeZone.getTimeZone("GMT");
+		  TimeZone gmt = TimeZone.getTimeZone("GMT+8");
+		  System.out.println("GMT+8 -gmt: "+gmt);
 		  SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		  f.setTimeZone(gmt);
 		  Calendar cal = Calendar.getInstance();
 		  
 		  try {
 		   cal.setTime(f.parse(timeGMT));
+		   System.out.println("GMT+8 -DATE: "+cal.get(Calendar.DATE));
+		   System.out.println("GMT+8 -HOUR: "+cal.get(Calendar.HOUR_OF_DAY));
+		   System.out.println("GMT+8 -MM: "+cal.get(Calendar.MINUTE));
 		  } catch (ParseException e) {
 		   //日期格式錯誤無法轉換
 		   e.printStackTrace();
@@ -69,13 +73,18 @@ public class MyUtil {
 		  return cal;
 	}
 	public static Calendar getLocalTimeFromUTC(String timeUTC){
-		  TimeZone utc = TimeZone.getTimeZone("UTC");
+		  System.out.println("UTC+8 -utc: "+timeUTC);
+		  TimeZone utc = TimeZone.getTimeZone("UTC+8");
+		  System.out.println("UTC+8 -utc: "+utc);
 		  SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		  f.setTimeZone(utc);
 		  Calendar cal = Calendar.getInstance();
 		  
 		  try {
 		   cal.setTime(f.parse(timeUTC));
+		   System.out.println("UTC+8  -DATE: "+cal.get(Calendar.DATE));
+		   System.out.println("UTC+8 -HOUR: "+cal.get(Calendar.HOUR_OF_DAY));
+		   System.out.println("UTC+8 -MM: "+cal.get(Calendar.MINUTE));
 		  } catch (ParseException e) {
 		   //日期格式錯誤無法轉換
 		   e.printStackTrace();
