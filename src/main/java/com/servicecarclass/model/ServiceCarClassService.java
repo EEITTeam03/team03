@@ -12,8 +12,8 @@ public class ServiceCarClassService {
 		dao = new ServiceCarClassDAO_Hibernate();
 	}
 
-	public ServiceCarClassVO addServiceCarClass(ServicesVO servicesVO, CarClassVO carClassVO, Integer servPrice, Integer servTime
-			) {
+	public ServiceCarClassVO addServiceCarClassAndCarClass(ServicesVO servicesVO, CarClassVO carClassVO, Integer servPrice,
+			Integer servTime) {
 		ServiceCarClassVO serviceCarClassVO = new ServiceCarClassVO();
 		serviceCarClassVO.setCarClassVO(carClassVO);
 		// serviceCarClassVO.setCarClassNo(carClassNo);
@@ -24,8 +24,18 @@ public class ServiceCarClassService {
 		return serviceCarClassVO;
 	}
 
-	public ServiceCarClassVO updateServiceCarClass(ServicesVO servicesVO, CarClassVO carClassVO, Integer servPrice, Integer servTime
-			) {
+//	public ServiceCarClassVO addServiceCarClass(ServicesVO servicesVO,String carClass, Integer servPrice, Integer servTime) {
+//		ServiceCarClassVO serviceCarClassVO = new ServiceCarClassVO();
+//		serviceCarClassVO.setServicesVO(servicesVO);
+//		serviceCarClassVO.setServPrice(servPrice);
+//		serviceCarClassVO.setServTime(servTime);
+//		serviceCarClassVO.setCarClass(carClass);
+//		dao.insert(serviceCarClassVO);
+//		return serviceCarClassVO;
+//	}
+
+	public ServiceCarClassVO updateServiceCarClass(ServicesVO servicesVO, CarClassVO carClassVO, Integer servPrice,
+			Integer servTime) {
 		ServiceCarClassVO serviceCarClassVO = new ServiceCarClassVO();
 		serviceCarClassVO.setCarClassVO(carClassVO);
 		serviceCarClassVO.setServicesVO(servicesVO);
@@ -34,12 +44,12 @@ public class ServiceCarClassService {
 		dao.update(serviceCarClassVO);
 		return serviceCarClassVO;
 	}
-	
-	public ServiceCarClassVO getOneServiceCarClass(Integer servNo, String carClass){
+
+	public ServiceCarClassVO getOneServiceCarClass(Integer servNo, String carClass) {
 		return dao.findByServAndClass(servNo, carClass);
 	}
-	
-	public List<ServiceCarClassVO> getAll(){
+
+	public List<ServiceCarClassVO> getAll() {
 		return dao.getAll();
 	}
 

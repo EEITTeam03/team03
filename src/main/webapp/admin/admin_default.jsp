@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.feedback.model.*"%>
+<%@ page import = "java.util.*" %>
+<%
+FeedbackService fsvc = new FeedbackService();
+    List<FeedbackVO> list = fsvc.getTop3();
+    pageContext.setAttribute("list",list);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,12 +97,37 @@
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu message-dropdown">
-			<!-- 上方BAR的訊息 -->
-                        <li class="message-footer">
-                            <a href="#">Read All New Messages</a>
+<!--                     <ul class="dropdown-menu message-dropdown"> -->
+<!-- 			<!-- 上方BAR的訊息 --> -->
+<!--                         <li class="message-footer"> -->
+<!--                             <a href="#">Read All New Messages</a> -->
+<!--                         </li> -->
+<!--                     </ul> -->
+<ul class="dropdown-menu message-dropdown">
+                        <c:if test="${list.size()>0}">
+                        <c:forEach var="fVO" items="${list}" begin="0" end="${list.size()-1}">
+                        <li class="message-preview">
+                            <a href="${ctx}/admin/ListOneFeedback.jsp?feedbackNO=${fVO.feedbackNo}">
+                                <div class="media">
+<!--                                     <span class="pull-left"> -->
+<!--                                         <img class="media-object" src="http://placehold.it/50x50" alt=""> -->
+<!--                                     </span> -->
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>${fVO.memberName}</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i>${fVO.feedbackDate.time}</p>
+                                        <p>${fVO.feedback}</p>
+                                    </div>
+                                </div>
+                            </a>
                         </li>
+                        </c:forEach>
+                        <li class="message-footer">
+                            <a href="${ctx}/admin/ListAllfeedback.jsp">Read All New Messages</a>
+                        </li>
+                        </c:if>
                     </ul>
+			<!--**************************意見下拉選單結束************************ -->
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
@@ -113,7 +146,7 @@
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                            <a href="${ctx}/admin/ListAllfeedback.jsp"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
@@ -156,7 +189,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-comments-o"></i> 查看意見</a>
+                        <a href="${ctx}/admin/ListAllfeedback.jsp"><i class="fa fa-comments-o"></i> 查看意見</a>
                     </li>
                 </ul>
             </div>
@@ -212,9 +245,9 @@
     <script src="js/bootstrap.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
+<!--     <script src="js/plugins/morris/raphael.min.js"></script> -->
+<!--     <script src="js/plugins/morris/morris.min.js"></script> -->
+<!--     <script src="js/plugins/morris/morris-data.js"></script> -->
 
 
 </body>

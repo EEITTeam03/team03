@@ -10,6 +10,7 @@ import hibernate.util.HibernateUtil;
 
 public class FeedbackDAO implements FeedbackDAO_interface {
 	private static final String GET_ALL_STMT = "from FeedbackVO";
+	private static final String GET_TOP3 = "from FeedbackVO order by feedbackDate desc";
 	@Override
 	public void insert(FeedbackVO fVO) {
 		// TODO Auto-generated method stub
@@ -86,4 +87,30 @@ public class FeedbackDAO implements FeedbackDAO_interface {
 		return list;
 	}
 
+	@Override
+	public List<FeedbackVO> listTOP3() {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<FeedbackVO> list = null;
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(GET_TOP3);
+			query.setFirstResult(0);
+			query.setMaxResults(3);
+			list = query.list();
+			session.getTransaction().commit();
+		}catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+//	public static void main(String[] args){
+//		FeedbackDAO fd = new FeedbackDAO();
+//		List<FeedbackVO> list = fd.listTOP3();
+//		for(FeedbackVO fVO:list){
+//			System.out.println(fVO.getFeedbackDate().getTime());
+//		}
+//		
+//	}
 }

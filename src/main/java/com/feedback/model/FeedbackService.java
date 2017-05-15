@@ -40,4 +40,8 @@ public class FeedbackService {
 	public List<FeedbackVO> getAll(){
 		return dao.listAll();
 	}
+	
+	public List<FeedbackVO> getTop3(){
+		return dao.listTOP3();
+	}
 }
