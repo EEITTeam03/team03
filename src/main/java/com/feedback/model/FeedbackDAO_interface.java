@@ -12,4 +12,7 @@ public interface FeedbackDAO_interface {
 	public FeedbackVO findByPK(Integer feedbackNo);
 
 	public List<FeedbackVO> listAll();
+
+	public List<FeedbackVO> listTOP3();
+	
 }

@@ -58,26 +58,13 @@ swal("修改成功!")
 			</FORM>
 		</li>
 		<br>
-<!-- 		<li> -->
-<%-- 			<FORM METHOD="post" ACTION="${ctx}/services/services.do"> --%>
-<!-- 				<b>選擇服務編號(前台):</b>  -->
-<!-- 				<select size="1" name="servNo" class="form-control"> -->
-<%-- 					<c:forEach var="servicesVO" items="${ss.allForUser}"> --%>
-<%-- 						<option value="${servicesVO.servNo}">${servicesVO.servNo} --%>
-<%-- 					</c:forEach> --%>
-<!-- 				</select>  -->
-<!-- 				<button type="submit" class="btn btn-sm btn-primary">送出</button> -->
-<!-- 				<input type="hidden" name="action" value="getOne_For_Display"> -->
-<!-- 			</FORM> -->
-<!-- 		</li> -->
-<!-- 		<br> -->
 	
 	<jsp:useBean id="sss" scope="page"
 		class="com.servicestep.model.ServiceStepService" />
 
 		<li>
 			<FORM METHOD="post" ACTION="${ctx}/services/servicestep.do">
-				<b>選擇服務編號(後台):</b> 
+				<b>選擇服務編號的所有步驟(後台):</b> 
 				<select size="1" name="servNo" class="form-control">
 					<c:forEach var="distInt" items="${sss.dist}">
 						<option value="${distInt}">${distInt}

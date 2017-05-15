@@ -5,8 +5,9 @@
 <%@ page import = "java.util.*" %>
 <%
 FeedbackService fsvc = new FeedbackService();
-    List<FeedbackVO> list = fsvc.getAll();
-    pageContext.setAttribute("list",list);
+	Integer fNO= Integer.valueOf(request.getParameter("feedbackNO"));
+    FeedbackVO fVO = fsvc.getOneFeedFeedback(fNO);
+    pageContext.setAttribute("fVO",fVO);
 %>
 <!DOCTYPE html>
 <html>
@@ -20,15 +21,14 @@ FeedbackService fsvc = new FeedbackService();
 
     <!-- Custom Fonts -->
     <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<title>List all opinions</title>
+<title>List one opinion</title>
 </head>
 <body>
 <jsp:include page="../admin/Testhead_nav.jsp"/>
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
-	<h1>所有意見</h1>
-	<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover">
 	<thead>
 	<tr>
 	<th>意見編號</th>
@@ -41,8 +41,8 @@ FeedbackService fsvc = new FeedbackService();
 	</tr>
 	</thead>
 	<tbody>
-	<c:if test="${list.size()!=0}">
-	<c:forEach var="fVO" items="${list}" begin="0" end="${list.size()-1}">
+	<c:if test="${fVO!=null}">
+<%-- 	<c:forEach var="fVO" items="${list}" begin="0" end="${list.size()-1}"> --%>
 		<tr >
 			<td>${fVO.feedbackNo}</td>
 			<td>${fVO.feedbackDate.time}</td>
@@ -66,11 +66,11 @@ FeedbackService fsvc = new FeedbackService();
 			<c:if test="${fVO.reply!=null}"><td>已回</td></c:if>
 			<c:if test="${fVO.reply==null}"><td>未回</td></c:if>
 		</tr>
-	</c:forEach>
+<%-- 	</c:forEach> --%>
 	</c:if>
 	</tbody>
 	</table>
-	</div>
+</div>
 </div>
 </div>
 </body>

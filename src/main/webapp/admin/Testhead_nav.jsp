@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.feedback.model.*"%>
+<%@ page import = "java.util.*" %>
+<%
+FeedbackService fsvc = new FeedbackService();
+    List<FeedbackVO> list = fsvc.getTop3();
+    pageContext.setAttribute("list",list);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,10 +68,29 @@ body,button,h1{
 					data-toggle="dropdown"><i class="fa fa-envelope"></i> <b
 						class="caret"></b></a>
 					<ul class="dropdown-menu message-dropdown">
-						<!-- 上方BAR的訊息 -->
-						<li class="message-footer"><a href="#">Read All New
-								Messages</a></li>
-					</ul></li>
+                        <c:if test="${list.size()>0}">
+                        <c:forEach var="fVO" items="${list}" begin="0" end="${list.size()-1}">
+                        <li class="message-preview">
+                            <a href="${ctx}/admin/ListOneFeedback.jsp?feedbackNO=${fVO.feedbackNo}">
+                                <div class="media">
+<!--                                     <span class="pull-left"> -->
+<!--                                         <img class="media-object" src="http://placehold.it/50x50" alt=""> -->
+<!--                                     </span> -->
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>${fVO.memberName}</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i>${fVO.feedbackDate.time}</p>
+                                        <p>${fVO.feedback}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        </c:forEach>
+                        <li class="message-footer">
+                            <a href="${ctx}/admin/ListAllfeedback.jsp">Read All New Messages</a>
+                        </li>
+                        </c:if>
+                    </ul>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"><i class="fa fa-bell"></i> <b
 						class="caret"></b></a>
@@ -78,7 +105,7 @@ body,button,h1{
 					<ul class="dropdown-menu">
 						<li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
 						</li>
-						<li><a href="#"><i class="fa fa-fw fa-envelope"></i>
+						<li><a href="${ctx}/admin/ListAllfeedback.jsp"><i class="fa fa-fw fa-envelope"></i>
 								Inbox</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
 						</li>
@@ -104,7 +131,7 @@ body,button,h1{
 							<li><a href="${ctx}/admin/member.jsp">會員</a></li>
 							<li><a href="#">員工</a></li>
 						</ul></li>
-					<li><a href="ListAllfeedback.jsp"><i class="fa fa-comments-o"></i> 查看意見</a></li>
+					<li><a href="${ctx}/admin/ListAllfeedback.jsp"><i class="fa fa-comments-o"></i> 查看意見</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -145,5 +172,3 @@ body,button,h1{
 <%-- 	<script src="${ctx}/admin/js/plugins/morris/morris-data.js"></script> --%>
 
 
-</body>
-</html>
