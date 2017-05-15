@@ -156,4 +156,19 @@ public class ServiceCarClassDAO_Hibernate implements ServiceCarClassDAO_interfac
 		return list;
 	}
 
+	@Override
+	public ServiceCarClassVO findByPrimaryKey(Integer carClassNo) {
+		ServiceCarClassVO serviceCarClassVO=null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			serviceCarClassVO=(ServiceCarClassVO)session.get(ServiceCarClassVO.class, carClassNo);
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return serviceCarClassVO;
+	}
+
 }

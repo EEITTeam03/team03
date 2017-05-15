@@ -25,15 +25,16 @@ public class ServiceCarClassService {
 	}
 
 
-	public ServiceCarClassVO updateServiceCarClass(ServicesVO servicesVO, CarClassVO carClassVO, Integer servPrice,
+	public ServiceCarClassVO updateServiceCarClass(Integer carClassNo,ServicesVO servicesVO, CarClassVO carClassVO, Integer servPrice,
 			Integer servTime) {
 		ServiceCarClassVO serviceCarClassVO = new ServiceCarClassVO();
+		serviceCarClassVO.setCarClassNo(carClassNo);
 		serviceCarClassVO.setCarClassVO(carClassVO);
 		serviceCarClassVO.setServicesVO(servicesVO);
 		serviceCarClassVO.setServPrice(servPrice);
 		serviceCarClassVO.setServTime(servTime);
 		dao.update(serviceCarClassVO);
-		return serviceCarClassVO;
+		return dao.findByPrimaryKey(carClassNo);
 	}
 
 	public ServiceCarClassVO getOneServiceCarClass(Integer servNo, String carClass) {
@@ -44,7 +45,11 @@ public class ServiceCarClassService {
 		return dao.findByForeignKey(servNo);
 		
 	}
-
+	
+	public ServiceCarClassVO getOneByServiceCarClassNo(Integer carClassNo){
+		return dao.findByPrimaryKey(carClassNo);
+	}
+	
 	public List<ServiceCarClassVO> getAll() {
 		return dao.getAll();
 	}

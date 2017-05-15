@@ -73,7 +73,7 @@
 				</td>
 				
 				<td>
-					<FORM METHOD="post" ACTION="${ctx}/servicecarclass/servicecarclass.do">
+					<FORM METHOD="post" ACTION="${ctx}/services/servicecarclass.do">
 						<button type="submit" class="btn btn-sm btn-primary">查詢</button>
 						<input type="hidden" name="servNo" value="${servicesVO.servNo}"> 
 						<input type="hidden" name="action" value="getMany_ServiceCarClass_ByServNo">
