@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<!DOCTYPE html>
 <!--[if IE 6]>
 <html id="ie6" dir="ltr" lang="zh-TW">
 <![endif]-->
@@ -232,7 +231,7 @@
 	form{
 		background-repeat: no-repeat;
 		width:945px;
-	    background: rgba(255, 255, 255, 0.45);
+	    background: rgba(255, 255, 255, 0.61);
 	    max-width: 600px;
 	    margin: 40px auto;
 	    border-radius: 4px;
