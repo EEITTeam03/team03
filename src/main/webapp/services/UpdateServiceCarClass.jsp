@@ -42,6 +42,13 @@
 			<td>服務時間:</td>
 			<td>
 				<input type="TEXT" name="servTime" value="${serviceCarClassVO.servTime}">
+<!-- 				<select> -->
+<!-- 					<option value="30">30分鐘</option> -->
+<!-- 					<option value="45">45分鐘</option> -->
+<!-- 					<option value="60">60分鐘</option> -->
+<!-- 					<option value="75">75分鐘</option> -->
+<!-- 					<option value="90">90分鐘</option> -->
+<!-- 				</select> -->
 			</td>
 		</tr>
 		</table> 
