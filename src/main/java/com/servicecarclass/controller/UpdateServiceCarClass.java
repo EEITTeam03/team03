@@ -114,6 +114,8 @@ public class UpdateServiceCarClass extends HttpServlet {
 				failerView.forward(request, response);
 			}
 			
+		}else{
+			System.out.println("根本不近迴圈");
 		}
 	}
 

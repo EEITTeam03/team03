@@ -20,7 +20,7 @@
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
-<FORM METHOD="post" ACTION="servicecarclass.do" enctype="multipart/form-data">
+<FORM METHOD="post" ACTION="servicecarclass.do">
 	<h2>更新服務車種價格與時間</h2>
 	<table class="table table-bordered table-hover">
 		<tr>
@@ -45,8 +45,7 @@
 			</td>
 		</tr>
 		</table> 
-		
-		<input type="hidden" name="action" value="updateForServiceCarClass">
+			<input type="hidden" name="action" value="updateForServiceCarClass">
 		<input type="hidden" name="carClassNo" value="${serviceCarClassVO.carClassNo}"> 
 		<button type="submit" class="btn btn-sm btn-primary">送出修改</button>
 	</FORM>
