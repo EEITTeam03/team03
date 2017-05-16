@@ -129,12 +129,25 @@ body,button,h1{
 							class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a></li>
 					<li><a href="${ctx}/admin/maintainBlockList.jsp"><i class="fa fa-fw fa-edit"></i> 管理黑名單</a></li>
 
-					<li><a href="javascript:;" data-toggle="collapse"
-						data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> 維護名單<i
-							class="fa fa-fw fa-caret-down"></i></a>
+					<li>
+						<a href="javascript:;" data-toggle="collapse" data-target="#demo">
+							<i class="fa fa-fw fa-arrows-v"></i> 
+								維護名單<i class="fa fa-fw fa-caret-down"></i>
+						</a>
 						<ul id="demo" class="collapse">
-							<li><a href="${ctx}/admin/member.jsp">會員</a></li>
-							<li><a href="#">員工</a></li>
+							<li>
+								<a href="${ctx}/admin/member.jsp">會員</a>
+							</li>
+							<li>
+							<a href="#" data-toggle="collapse" data-target="#demoemp">
+									員工
+								<i class="fa fa-fw fa-caret-down"></i>
+							</a>
+								<ul id="demoemp" class="collapse nav navbar-nav">
+									<li><a href="#">名單維護</a></li>
+									<li><a href="#">新增名單</a></li>
+								</ul>
+							</li>
 						</ul></li>
 					<li><a href="${ctx}/admin/ListAllfeedback.jsp"><i class="fa fa-comments-o"></i> 查看意見</a></li>
 				</ul>
