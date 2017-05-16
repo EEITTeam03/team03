@@ -62,16 +62,7 @@
 <script src="js/jquery.js"></script>
 
 
-
-	<style type="text/css">	
-		.img-services{
-			width:360px;
-			height:260px;
-		}
-		.big-img-services{
-			width:700px;
-			height:500px;
-		}
+<style type="text/css">	
 		.nav-fut-li{
 			width: 114px;
 			height: 50px;
@@ -142,45 +133,6 @@
 			
 			display: block;
 		}
-		/* 調整滑入table資料時，所顯示的顏色 */
-		.table-hover tbody tr:hover td {
-		    background-color: rgba(245,152,157,.25);
-		}				
-		/* Table Head */
-		table thead th {
-			background-color: #9E0039;
-			color: #fff;
-			border-bottom-width: 0;
-			background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.25) 100%);
-		}
-		
-		/* Column Style */
-		table td {
-			color: #000;
-		}
-		/* Heading and Column Style */
-		table tr, table th {
-			border-width: 0px;
-			text-align: center;
-			vertical-align:middle;			
-		}
-		
-		/* Padding and font style */
-		table td, table th {
-			font-size: 15px;
-			font-family: Noto Sans TC;
-			font-weight: bold;			
-		}		
-		
-		tbody tr:nth-child(2n-1) { 
- 			background: #fff; 
- 		} 
-		table tr:nth-child(2n) {
-			background: #eee;
-		}
-		.my-popover {
-			max-width: 600px;
-		}		
 	</style>
 
 
@@ -242,136 +194,13 @@
 			}
  		});
  			//結束  	
-   		//ReservListJSON
-		$.getJSON('ReservListJSON',function(json){
-			
-   			$.each(json.list,function(idx,orderStatus){
-   			console.log(orderStatus);	
-  			 	var reservNo = orderStatus.reservNo;//JSON第N筆拿到的預約編號	
-  			 	var memberName = orderStatus.memberName;//JSON第N筆拿到的預約人名字	
-  			 	var reservDateTime = orderStatus.reservDateTime;//JSON第N筆拿到的預約日期	
-  			 	var reservEndTime = orderStatus.reservEndTime;//JSON第N筆拿到的結束時間
-  			 	var brand = orderStatus.brand;//JSON第N筆拿到的廠牌
-  			 	var carModel = orderStatus.carModel;//JSON第N筆拿到的車系
-  			 	var employeeName = orderStatus.employeeName;//JSON第N筆拿到的員工姓名
-  			 	
-  			 	
-  			 	
-  	    		var tr = $("<tr></tr>");
-  	    		var td1 = $("<td style='vertical-align:middle;'>" + reservNo + "</td>");		
-  	    		var td2 = $("<td style='vertical-align:middle;'>" + memberName + "</td>");			
-  	    		var td3 = $("<td style='vertical-align:middle;'>" + reservDateTime + "</td>");	
-  	    		var td4 = $("<td style='vertical-align:middle;'>" + reservEndTime + "</td>");	
-  	    		var td5 = $("<td style='vertical-align:middle;'>" + brand + "</td>");	
-  	    		var td6 = $("<td style='vertical-align:middle;'>" + carModel + "</td>");
-  	    		var td7 = $("<td style='vertical-align:middle;'>" + employeeName + "</td>");  	    		
-  	    		var td8 = $("<td style='vertical-align:middle;'></td>");
-  	    		var td9 = $("<td style='vertical-align:middle;'></td>");
-  	    		//服務明細按鈕
-  	    		var btnServ = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","data-container":"body"});
-  	    		var span1 = $("<span></span>").addClass("glyphicon glyphicon-list-alt");
-  	    		var cts = (+new Date());//現在時間(毫秒)
-  	    		
-  	    		var rdts = Date.parse(reservDateTime);//預約日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
-  	    		var rdtshr = (new Date(reservDateTime)).getHours();//預約日期取出小時
-  	    		var rdtsmin = (new Date(reservDateTime)).getMinutes();//預約日期取出分鐘
-  	    		var rdtssec = (new Date(reservDateTime)).getSeconds();//預約日期取出毫秒
-  	    		rdts = rdts + (rdtshr*60*60) + (rdtsmin*60) + rdtssec;//預約日期加總換算成毫秒
-  	    		var rets = Date.parse(reservEndTime);//結束日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
-  	    		var retshr = (new Date(reservEndTime)).getHours();//結束日期取出小時
-  	    		var retsmin = (new Date(reservEndTime)).getMinutes();//結束日期取出分鐘
-  	    		var retssec = (new Date(reservEndTime)).getSeconds();//結束日期取出毫秒
-  	    		rets = rets + (retshr*60*60) + (retsmin*60) + retssec;//結束日期加總換算成毫秒
-  	    		
-//   	    		console.log("現在時間"+cts);
-//   	    		console.log("預約日期"+rdts);
-//   	    		console.log("預約日期小時"+rdtshr);
-//   	    		console.log("預約日期分"+rdtsmin);
-//   	    		console.log("預約日期秒"+rdtssec);
-//   	    			console.log("window.open(surveillance.jsp?a="+reservNo+",觀看愛車)");
-  	    		//監控按鈕
-  	    		if(cts > rdts && cts < rets){
-	  	    		var btnMit = $("<button onclick='opsurveillance(this.value)'></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","value":reservNo});	
-  	    		}else{
-  	    			var btnMit = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","disabled":"true"}); 	    			
-  	    		}
-  	    		var span2 = $("<span></span>").addClass("glyphicon glyphicon-facetime-video");  
-
-  	    		
-  	    		var serTbe = $("<Table style='width:350px;'></Table>");
-  	    		
-  	    		var serThd = $("<thead></thead>");
-  	    		var serTr = $("<tr><th>服務名稱</th><th>服務價格</th><th>服務時間</th></tr>");
-  	    		serThd.append(serTr);
-  	    		
-  	    		var serTbd = $("<tbody></tbody>");
-  	    		
-  	    		var prcTotal = 0;
-  	    		var tmTotal = 0;
-  	    		
-  	    		for(i=0; i <= (orderStatus.reserv_list.length - 1) ;i++){
-  	    			var serTr = $("<tr></tr>");
-  	    			var serTd1 = $("<td>" + orderStatus.reserv_list[i].servName + "</td>");
-  	    			var serTd2 = $("<td>" + orderStatus.reserv_list[i].servPrice + "</td>");
-  	    			var serTd3 = $("<td>" + orderStatus.reserv_list[i].servTime + "</td>");
-  	    			serTr.append([serTd1,serTd2,serTd3]); 	    			
-  	    			serTbd.append(serTr);
-  	    			prcTotal = parseInt(prcTotal) + parseInt(orderStatus.reserv_list[i].servPrice);//服務項目價格累計	    			
-  	    			tmTotal = parseInt(tmTotal) + parseInt(orderStatus.reserv_list[i].servTime);//服務項目時間累計	
-  	    		}
-  	    		var secs = parseInt(tmTotal) * 60;
-				var hr = Math.floor(secs / 3600);
-				var min = Math.floor((secs - (hr * 3600)) / 60);  	    		
-  	    		
-  	    		var serTrp = $("<tr>" + "<td colspan='3' style='text-align:right;'>總金額：" + prcTotal + "元" +"</td>" + "</tr>");//服務項目價格累計的Tr
-  	    		var serTrt = $("<tr>" + "<td colspan='3' style='text-align:right;'>總時間：" + hr + "小時 " + min + "分鐘" +"</td>" + "</tr>");//服務項目時間累計的Tr
-  	    		
-  	    		serTbd.append([serTrp,serTrt]);
-  	    		 	    		
-  	    		serTbe.append([serThd,serTbd]);
-
-
-  	    		//設定訂單查詢按鈕，所彈出的提示內容，以及相關參數設定
-				$(btnServ).popover({
-				    trigger:"focus",
-				 	placement:"auto right",
-				    html:true,
-				    template: '<div class="popover my-popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
-				    content:serTbe
-				});
-  	    		//結束 
-  	    		
-  	    		btnServ.append(span1); 	    		
-  	    		td8.append(btnServ);
-  	    		
-  	    		btnMit.append(span2);
-  	    		td9.append(btnMit);
-  	    		
-  	    		tr.append([td1,td2,td3,td4,td5,td6,td7,td8,td9]);
-  			 	
-  	    		$("table > tbody").append(tr);
-   			})
-			
-   		}) 	   		  	 	
  	
-
-   		
-   		
    		
   } );
   
-	function opsurveillance(value){		
-		window.open("surveillance.jsp?reservNo="+value,"觀看愛車");
-	}
-  
-  
-  </script>
 
-<style>
+  </script>
 	
-	
-	
-</style>	
 		
 </head>
 <body id="page-top" class="index">
@@ -484,28 +313,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>預約編號</th>
-								<th>預約人</th>
-								<th>預約日期</th>
-								<th>結束時間</th>
-								<th>廠牌</th>
-								<th>車系</th>
-								<th>服務技師</th>
-								<th>服務明細</th>
-								<th>觀看愛車</th>
-							</tr>
-						</thead>																
-						<tbody>
-																								
-						</tbody>
-					</table>
-					
-					
+						
 				</div>
-				
 			</div>
 		</div>
 	</section>
