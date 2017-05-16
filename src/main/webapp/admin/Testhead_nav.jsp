@@ -127,7 +127,17 @@ body,button,h1{
 					<li><a href="${ctx}/services/SelectServices.jsp"><i class="fa fa-fw fa-table"></i>維護服務項目</a></li>
 					<li><a href="#" id="a_test"><i
 							class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a></li>
-					<li><a href="${ctx}/admin/maintainBlockList.jsp"><i class="fa fa-fw fa-edit"></i> 管理黑名單</a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#blocklist">
+							<i class="fa fa-fw fa-edit"></i> 
+								黑名單<i class="fa fa-fw fa-caret-down"></i>
+						</a>
+							<ul id="blocklist" class="collapse nav navbar-nav">
+								<li><a href="${ctx}/admin/maintainBlockList.jsp">新增黑名單</a></li>
+								<li><a href="${ctx}/admin/listAllBlockList.jsp">列出黑名單</a></li>
+<!-- 								<li><a href="">c</a></li> -->
+							</ul>
+						
+					</li>
 
 					<li>
 						<a href="javascript:;" data-toggle="collapse" data-target="#demo">
