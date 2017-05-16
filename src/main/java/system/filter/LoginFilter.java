@@ -1,6 +1,9 @@
 package system.filter;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.Calendar;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -55,8 +58,18 @@ public class LoginFilter implements Filter {
 			if(member==null) {
 				httpReq.getSession().setAttribute("target", httpReq.getContextPath()+"/start_reserve.jsp");
 				httpResp.sendRedirect(httpReq.getContextPath()+"/login.jsp");
+				return;
 			}
 	//		httpReq.getSession().setAttribute("orginURL", httpReq.getRequestURI());
+			else {
+				Long eff = member.getEffectiveDate().getTime();
+				Long now = new java.util.Date().getTime();
+				if(eff>now) {
+					httpResp.sendRedirect(httpReq.getContextPath()+"/feedback.jsp");
+					return;
+				}
+					
+			}
 		}
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
