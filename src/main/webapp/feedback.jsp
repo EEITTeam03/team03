@@ -505,11 +505,10 @@
 			</div>
 			<br>
 			<br>
-			<div class="col-xs-12 col-md-offset-1" style="height:580px;overflow-x:hidden;overflow-y:auto;">
+			<div class="col-xs-12 col-md-offset-0" style="height:580px;overflow-x:hidden;overflow-y:auto;">
 			<jsp:include page="messageBoard.jsp"/>
 			</div>
 		</div>
 	</section>
-
 </body>
 </html>
