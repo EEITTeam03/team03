@@ -67,12 +67,154 @@
 <script>
   $(function(){
     
-    $("#cmxform").validate();
+    $("#cmxform").validate();  
+    
+  //進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
+	var wdth = $(window).width();
+	if(wdth<975){					
+		$("#nav-log-in").addClass("menu-fut-li");
+		$("#nav-register").addClass("menu-fut-li");
+	}
+	if(wdth>=975){
+		$("#nav-log-in").addClass("nav-fut-li");
+		$("#nav-register").addClass("nav-fut-li"); 
+	}
+	//結束
+	
+	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕的排版
+	if( wdth < 751){
+  		$(".navbar-nav li").css("float","none");
+	}
+	if( wdth >= 751){
+	  	$(".navbar-nav li").css("float","left");
+	}
+	//結束		
+	
+	//不斷監控(監聽)螢幕大小，藉此判斷登入、註冊按鈕是在nav上或者在menu內，來設定不同的樣式
+	$(window).resize(function() {
+		var wdth = $(window).width();
+		var logIn = $("#nav-log-in").attr("class");
+		var regst = $("#nav-register").attr("class");
+		var numln = null;
+		var numrn = null;
+		var numlm = null;
+		var numrm =	null;
+
+// 		console.log(wdth);
+			
+		
+		if(logIn != undefined){
+			numln =	logIn.indexOf("nav-fut-li");
+			numlm =	logIn.indexOf("menu-fut-li");
+		}				
+		
+		//當會員登入後，註冊按鈕會不存在，所以不用去比對註冊按鈕的class
+		if(regst != undefined){
+			numrn =	regst.indexOf("nav-fut-li");
+			numrm =	regst.indexOf("menu-fut-li");
+		}
+
+		if( (wdth < 975) && (numln > -1) && (numrn > -1) ){
+		        $("#nav-log-in").removeClass("nav-fut-li");
+		  		$("#nav-register").removeClass("nav-fut-li");					
+		        $("#nav-log-in").addClass("menu-fut-li");
+		  		$("#nav-register").addClass("menu-fut-li");
+		}
+		if( (wdth >= 975) && (numlm > -1) && (numrm > -1) ){
+		        $("#nav-log-in").removeClass("menu-fut-li");
+		  		$("#nav-register").removeClass("menu-fut-li");
+		        $("#nav-log-in").addClass("nav-fut-li");
+		  		$("#nav-register").addClass("nav-fut-li");
+		}
+		if( wdth < 751){
+	  		$(".navbar-nav li").css("float","none");
+		}
+		if( wdth >= 751){
+		  	$(".navbar-nav li").css("float","left");
+		}		
+		
+	});
+	//結束  
+    
     
   });
+  
+				  
+  
 </script>
 
 <style>
+		.nav-fut-li{
+			width: 114px;
+			height: 50px;
+			text-align: center;
+			margin:0px 0px 0px 15px ;
+		}
+		.menu-fut-li{
+			width: 114px;
+			height: 50px;
+			text-align: center;
+			margin:10px 0px 0px 5px ;
+		}
+		.fun-btn{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: white;
+		    background-color: #fed136;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;					
+		}		
+		.fun-btn:hover{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}
+		.mem-btn{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border:0px;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;					
+		}
+		.mem-btn:hover{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}	
+		.dropdown-menu {
+		    color: #fed136;
+		    background-color: #222222;
+			text-align: center;
+ 		    min-width: 114px; 
+		}				
+		.dropdown:hover .dropdown-menu {
+			
+			display: block;
+		}
+
 	.error {
 		color: red;
 	}
@@ -131,69 +273,60 @@
 	#cmxform div a:hover{ 
 		color:blue;
 	}	
-	.btn:hover, .btn:focus{
+	#cmxform .btn:hover, .btn:focus{
 	    outline: none;
 	    color:#fff;
 	}
-	.btn{
+	#cmxform .btn{
 	    text-transform: capitalize;
 	    color:#fff;
 	    padding: 14px 20px;
 	    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	}
-	.btn:hover{
-	    color:#fff;
-	}
-	.btn-lg{
+	#cmxform .btn-lg{
 	    font-size: 20px;
 	} 	
-	.blue,
-	.light-brown,
-	.light-green,
-	.light-orange{
+	#cmxform  .blue,.light-brown,.light-green,.light-orange{
 	    background: #0088cc;
 	    box-shadow:0 4px 0 #006394;
 	    transition:all 0.1s ease-in-out 0s;
 	    position: relative;
 	    top:0;
 	}
-	.light-brown{
+	#cmxform  .light-brown{
 	    background: #cec2ab;
 	    box-shadow: 0 4px 0 #b9a888;
 	}
-	.light-green{
+	#cmxform  .light-green{
 	    background: #75d69c;
 	    box-shadow:0 4px 0 #4ac97d;
 	    border-radius: 25px;
 	}
-	.light-orange{
+	#cmxform  .light-orange{
 	    background: #fed136;
 	    box-shadow:0 4px 0 rgb(228, 183, 54);
 	} 
 	
-	.blue:hover,
-	.light-brown:hover,
-	.light-green:hover,
-	.light-orange:hover{
+	#cmxform  .blue:hover,.light-brown:hover,.light-green:hover,.light-orange:hover{
 	    top:2px;
 	    box-shadow:0 2px 0 #006394;
 	}
-	.light-brown:hover{
+	#cmxform .light-brown:hover{
 	    box-shadow: 0 2px 0 #b9a888;
 	}
-	.light-green:hover{
+	#cmxform .light-green:hover{
 	    box-shadow:0 2px 0 #4ac97d;
 	}
-	.light-orange:hover{
+	#cmxform .light-orange:hover{
 	    box-shadow: 0 2px 0 #fed136;
 	}	
 
-	input:-webkit-autofill {
+	#cmxform input:-webkit-autofill {
 	  -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
 	  -webkit-text-fill-color: #333;
 	}
 	
-	input:-webkit-autofill:focus {
+	#cmxform input:-webkit-autofill:focus {
 	  -webkit-box-shadow:0 0 0 50px white inset;
 	  -webkit-text-fill-color: #333;
 	}
@@ -229,15 +362,24 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
-				<li><a class="page-scroll ff-word btn btn-primary btn-xs"
-					style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px"
-					href="#"> <span class="glyphicon glyphicon-log-in"></span> 登入
-				</a></li>
-				<li><a class="page-scroll ff-word btn btn-primary btn-xs"
-					style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;"
-					href="register.jsp"> <span class="glyphicon glyphicon-user"></span>
-						免費註冊
-				</a></li>
+						
+						<!--	未登入	-->
+				<c:if test="${empty memberInfo}">                    
+                    <li id="nav-log-in" class="">                    
+	                    <button class="page-scroll ff-word btn btn-xs fun-btn" onclick="location.href='login.jsp'">
+	   		
+							<span class="glyphicon glyphicon-log-in"></span> 登入															
+	                        
+	                    </button>
+	                </li>
+                    <li id="nav-register" class="">
+                    	<button class="page-scroll ff-word btn btn-xs fun-btn" onclick="location.href='register.jsp'">
+   		
+							<span class="glyphicon glyphicon-user"></span> 免費註冊															
+                        
+                        </button>                    
+                    </li>	                 
+				</c:if>							
 			</ul>
 		</div>
 
@@ -453,5 +595,6 @@
   the JavaScript SDK to present a graphical Login button that triggers
   the FB.login() function when clicked.
 -->
+
 </body>
 </html>
