@@ -213,7 +213,7 @@ public class scheduleTestServlet2 extends HttpServlet {
 					BlockRuleService BRS = new BlockRuleService();
 					String violationDate = MyUtil.formatCalender(Calendar.getInstance());
 					bls.addBlockList(violationDate, reservNo, "", BRS.getOneByPK((short)1), mcv.getMemberInfoVO());
-//					bls.checkTimesForBlock(mcv.getMemberInfoVO(),violationDate);
+					bls.checkTimesForBlock(mcv.getMemberInfoVO(),violationDate);//未完成 未測試0517
 				}
 				dao.update(rvo);
 				/*---------------update預約單時，修改其監視器觀看權限時段------------------*/

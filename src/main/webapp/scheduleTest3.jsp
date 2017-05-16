@@ -53,9 +53,7 @@ FeedbackService fsvc = new FeedbackService();
     <script type="text/javascript" src="${ctx}/scheduleJS/jqwidgets/jqxinput.js"></script>
     <script type="text/javascript" src="${ctx}/scheduleJS/jqwidgets/globalization/globalize.js"></script>
     <script type="text/javascript" src="${ctx}/scheduleJS/jqwidgets/globalization/globalize.culture.de-DE.js"></script>
-    <script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
-    <script src="${ctx}/admin/SweetAlert/js/sweetalert.min.js"></script> 
-	<link href="${ctx}/admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">  
+    <script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script> 
     <style>
 .fa {
     font-size: 200%;
@@ -83,42 +81,19 @@ div.growlUI h1, div.growlUI h2 {
     	var AddData = {};
         $(document).ready(function () {
         	init();
-        	//$('#loading_data').hide();		//隱藏loading圖
         	$('#btn_search').click(function(){
         		var today = new Date();
         		var formatDay = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()
 //         		alert(formatDay);
         		dataClean();
         		dataSearch(formatDay,globalView); //weekly
-//         		growlUIAlert();
-//         		$.growlUI('Growl Notification', 'Have a nice day!'); 
         	});
         	$("#excelExport").click(function () {
                 $("#scheduler").jqxScheduler('exportData', 'xls');
             });
-        	$("#testGrowl").click(function () {
-        		$.blockUI({ 
-                    message: $('div.growlUI'), 
-                    fadeIn: 700, 
-                    fadeOut: 700, 
-                    timeout: 2000, 
-                    showOverlay: false, 
-                    centerY: false, 
-                    css: { 
-                        width: '350px', 
-                        top: '75px', 
-                        left: '', 
-                        right: ($(window).width() - 400) /2 + 'px', 
-                        border: 'none', 
-                        padding: '25px', 
-                        backgroundColor: '#000', 
-                        '-webkit-border-radius': '10px', 
-                        '-moz-border-radius': '10px', 
-                        opacity: .6, 
-                        color: '#fff' 
-                    }
-                });
-            });
+//         	$("#test").click(function () {
+//         		growlUIError();
+//             });
         });
   
         function init(){
@@ -132,11 +107,18 @@ div.growlUI h1, div.growlUI h2 {
         
         function loadingBlock(){
         	 $.blockUI({ 
-        		 message: '<img src="${ctx}/img/loading/ajax-loader.gif" width="30%" height="30%" />',
+//         		 message: '<img src="${ctx}/img/loading/loading_gearwheal.gif" width="20%" height="20%" />',
+				message: $('div.blockUI'),
+        		 //overlayCSS: { backgroundColor: '#808080' },
         		 css: { 
-//                      top:  ($(window).height() - 400) /2 + 'px', 
-//                      left: ($(window).width() - 400) /2 + 'px', 
-                     width: '400px' 
+        			 border: 'none',
+                     left: ($(window).width() - 133) /2 + 'px', 
+					'-webkit-border-radius': '10px', 
+                    '-moz-border-radius': '10px', 
+                    padding: '25px',
+                     opacity: 0.7,
+                      width: '133px',
+                      height: '133px'
                  },
         		 fadeIn: 0, 
                  onBlock: function() { 
@@ -153,7 +135,30 @@ div.growlUI h1, div.growlUI h2 {
                 message: $('div.growlUI'), 
                 fadeIn: 700, 
                 fadeOut: 700, 
-                timeout: 10000, 
+                timeout: 2000, 
+                showOverlay: false, 
+                centerY: false, 
+                css: { 
+                    width: '250px', 
+                    top: '75px', 
+                    left: '', 
+                    right: ($(window).width() - 400) /2 + 'px', 
+                    border: 'none', 
+                    padding: '25px', 
+                    backgroundColor: '#000', 
+                    '-webkit-border-radius': '10px', 
+                    '-moz-border-radius': '10px', 
+                    opacity: .6, 
+                    color: '#fff' 
+                }
+            });
+        }
+        function growlUIError(){
+        	$.blockUI({ 
+                message: $('div.growlUIError'), 
+                fadeIn: 700, 
+                fadeOut: 700, 
+                timeout: 2000, 
                 showOverlay: false, 
                 centerY: false, 
                 css: { 
@@ -175,7 +180,7 @@ div.growlUI h1, div.growlUI h2 {
         function addNewFields(){
         	newFields = [];
         	newFields.push({'fieldID':'empNo','fieldName':'empNo','type':'text','hidden':'hidden'});
-        	newFields.push({'fieldID':'status','fieldName':'狀態(0刪單)','type':'text'});
+        	newFields.push({'fieldID':'status','fieldName':'狀態(0刪單)','type':'text','hidden':'hidden'});
         	newFields.push({'fieldID':'serviceS','fieldName':'綜合服務(單選)','type':'radio','values':searchXXX1Date()});
         	newFields.push({'fieldID':'serviceM','fieldName':'單一服務(多選)','type':'checkbox','values':searchXXX2Date()});
         	newFields.push({'fieldID':'noteE','fieldName':'員工備註','type':'text'});
@@ -200,8 +205,9 @@ div.growlUI h1, div.growlUI h2 {
                 	}
         		},
         		error:function(data){
-        			alert("ERROR");
+        			//alert("ERROR");
         			//alert(JSON.stringify(data));
+        			growlUIError();
         		}
         	});	
         	//[{'servNo':'1001','servName':'引擎室清洗護理'},{'servNo':'1002','servName':'內裝清洗護理'},{'servNo':'1003','servName':'玻璃清潔拋光'},{'servNo':'1004','servName':'車燈霧化處理'}];
@@ -225,8 +231,9 @@ div.growlUI h1, div.growlUI h2 {
                 	}
         		},
         		error:function(data){
-        			alert("ERROR");
+        			//alert("ERROR");
         			//alert(JSON.stringify(data));
+        			growlUIError();
         		}
         	});	
 			//[{'name':'測試CheckBox1','value':'1'},{'name':'測試CheckBox2','value':'2'},{'name':'測試CheckBox3','value':'3'},{'name':'測試CheckBox4','value':'4'}];
@@ -259,7 +266,7 @@ div.growlUI h1, div.growlUI h2 {
 		/*-----------------------------Dialog 與 在地化設定----------------------------------------------------*/
                 // called when the dialog is craeted.
                 editDialogCreate: function (dialog, fields, editAppointment) {
-                    fields.subjectLabel.html("預約項目");
+                    fields.subjectLabel.html("車牌");
                     fields.fromLabel.html("起始時間");
                     fields.toLabel.html("結束時間");
                     fields.resourceLabel.html("師傅");
@@ -413,7 +420,7 @@ div.growlUI h1, div.growlUI h2 {
                     editDialogCreateTitleString: "加入新預約單",
                     contextMenuEditAppointmentString: "修改預約單",
                     contextMenuCreateAppointmentString: "加入新預約單",
-                    editDialogDescriptionString: "描述",
+                    editDialogDescriptionString: "客戶備註",
                     editDialogStatusString: "狀態",
                     editDialogColorString: "顏色",
                     editDialogColorPlaceHolderString: "選擇顏色",
@@ -438,7 +445,7 @@ div.growlUI h1, div.growlUI h2 {
                     resourceId: "calendar",	
 //                     status: "status",
 //                     readOnly: "readOnly",		/* 1. */	//設唯讀，不可點兩下修改資料
-//                     resizable: "resizable",					//設不可調方框大小(更動起始.結束時間)
+                    resizable: "resizable",					//設不可調方框大小(更動起始.結束時間)
 //                     draggable: "draggable",					//設不可拖曳
                     borderColor:"addSys"
                 },
@@ -480,7 +487,7 @@ div.growlUI h1, div.growlUI h2 {
                         { name: 'end', type: 'date' },
 //                         { name: 'status', type: 'string' },
 //                         { name: 'readOnly', type: 'boolean' },		/* 2. */
-//                         { name: 'resizable', type: 'boolean' },
+                        { name: 'resizable', type: 'boolean' },
 //                         { name: 'draggable', type: 'boolean' },
                         { name: 'addSys', type: 'string' }
                     ],
@@ -505,7 +512,8 @@ div.growlUI h1, div.growlUI h2 {
 	        				calendars.push({'calendar':""+fromAjax[i].empName});
 	                	}
 	        		},
-	        		error:function(data){	
+	        		error:function(data){
+	        			growlUIError();
 	        		}
 	        	});
     		return calendars;
@@ -599,8 +607,7 @@ div.growlUI h1, div.growlUI h2 {
     	
     	/*-------人工在畫面值皆新增預約時觸發事件(寫入資料庫後會同步刷新頁面資料)-------*/
     	function editToServlet(data,action,addDate){
-//     		loadingBlock(); 
-    		//$('#loading_data').show();			//顯示loading圖
+    		loadingBlock(); 
     		$.ajax({
         		url: "scheduleTestServlet2",
         		dataType: "text",	//server端回傳至client端型態
@@ -608,32 +615,25 @@ div.growlUI h1, div.growlUI h2 {
         		method:"POST",
         		success: function(data){
 //         			alert("success");
-//         			growlUIAlert();
-// 					$.growlUI('Growl Notification', 'Have a nice day!'); 
 //         			if(action == 'insert'){
         				dataClean();
-        				dataSearch(addDate,globalView);
+        				dataSearch(addDate,globalView,true);
 //         			}else{
-        				//$('#loading_data').hide();
-//         				loadingUnblock();
-						
-// 						growlUIAlert();
-						swal({title:"資料異動成功" ,text:"",imageUrl: '${ctx}/img/loading/check.png'});
+        				//loadingUnblock();
 //         			}
         		},        		
         		error:function(data){
         			//alert("ERROR");
-        			//$('#loading_data').hide();		//關掉loading圖
         			loadingUnblock();
+        			growlUIError();
         			//alert(JSON.stringify(data));
         		}
         	});
     	}
     	
     	/*-------(上下週.上下月.週檢視.月檢視.人工異動預約單  時觸發),傳日期'date'跟區間'view'至servlet-------*/
-    	function dataSearch(date,view){
+    	function dataSearch(date,view,isEdit){
     		loadingBlock();
-    		//$('#loading_data').show();
         	$.ajax({
         		url: "MyJSON",
         		dataType: "json",
@@ -642,18 +642,20 @@ div.growlUI h1, div.growlUI h2 {
         		success:function(data){
         			//alert(JSON.stringify(data));
         			showData(data);
-        			//$('#loading_data').hide();//關掉loading
         			if(view=='monthView'){
         				$('tr',$('tbody',$('#tablescheduler'))).each(function(){
         					$('td',$(this)).eq(5).prop('class','jqx-cell jqx-grid-cell jqx-item jqx-center-align jqx-top-align');
         				});
         			}
         			loadingUnblock();
+        			if(isEdit){
+        				growlUIAlert();
+        			}
         		},
         		error:function(data){
-        			alert("ERROR");
-        			//$('#loading_data').hide();
+        			//alert("ERROR");
         			loadingUnblock();
+        			growlUIError();
         			//alert(JSON.stringify(data));
         		}
         	});	
@@ -679,7 +681,7 @@ div.growlUI h1, div.growlUI h2 {
                     start: new Date(data[i].Year, data[i].Month-1, data[i].Day, parseInt(startTime[0]), parseInt(startTime[1]), 0),
                     end: new Date(data[i].Year, data[i].Month-1, data[i].Day, parseInt(endTime[0]), parseInt(endTime[1]), 0),
 //                     readOnly: true,			/* 3. */
-//                     resizable: false,
+                    resizable: false,
 //                     draggable: false,
                     addSys:data[i].ReservNo
                 };
@@ -828,12 +830,17 @@ div.growlUI h1, div.growlUI h2 {
 		
 		<button type="submit" id="btn_search" class="btn btn-sm btn-primary">查詢</button>
 		<button type="submit" value="匯出至Excel" id='excelExport' class="btn btn-sm btn-success">匯出至Excel</button>
-		<button type="submit" id="testGrowl" class="btn btn-sm btn-primary">Test</button>
+<!-- 		<button type="submit" id='test' class="btn btn-sm btn-primary">Test</button> -->
 		<div class="growlUI" style="display: none">
 			<img src="${ctx}/img/loading/check.png" />
-    		<p>資料異動成功</p>
+    		<p>訂單異動成功</p>
 		</div>
-<%--     	<div><img id="loading_data" src="${ctx}/img/loading/ajax-loader.gif" /></div> --%>
+		<div class="growlUIError" style="display: none">
+    		<p>重新載入</p>
+		</div>
+		<div class="blockUI" style="display: none">
+			<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
+		</div>
     		<div id="scheduler_body" >
         	<div id="scheduler"></div>
     </div>
