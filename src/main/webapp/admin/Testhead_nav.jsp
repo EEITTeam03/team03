@@ -149,7 +149,7 @@ body,button,h1{
 						</a>
 						<ul id="demo" class="collapse">
 							<li>
-								<a href="#">會員</a>
+								<a href="${ctx}/admin/member.jsp">會員</a>
 							</li>
 							<li>
 							<a href="#" data-toggle="collapse" data-target="#demoemp">
