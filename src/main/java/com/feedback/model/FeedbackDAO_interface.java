@@ -15,4 +15,6 @@ public interface FeedbackDAO_interface {
 
 	public List<FeedbackVO> listTOP3();
 	
+	public List<FeedbackVO> listOneMemberFb(Integer memberNo);
+	
 }
