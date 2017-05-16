@@ -372,7 +372,7 @@
                     </div>
                 </div>
                 <!-- /.row -->
-
+			<div id="placeholder"></div>
             </div>
             <!-- /.container-fluid -->
 
@@ -401,6 +401,9 @@
     <script src="js/plugins/flot/jquery.flot.pie.js"></script>
     <script src="js/plugins/flot/flot-data.js"></script>
 
+<script type="text/javascript">
+$.plot($("#placeholder"), [ [[0, 0], [1, 1]] ], { yaxis: { max: 1 } });
+</script>
 </body>
 
 </html>

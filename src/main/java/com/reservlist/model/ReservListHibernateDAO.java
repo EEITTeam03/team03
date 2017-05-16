@@ -12,6 +12,8 @@ public class ReservListHibernateDAO implements ReservListDAO{
 	private static final String DEL_BY_NO = "delete ReservListVO where reservNo=?";
 	private static final String GET_ALL_STMT = "from ReservListVO order by reservNo";
 	private static final String GET_BY_NO = "from ReservListVO where reservNo=?";
+	private static final String GET_ALL_BY_SERV = "from ReservListVO where servNo=? order by servNo";
+	private static final String GET_ALL_GROUP_BY_SERV = "select servicesVO.servNo,count(*) from ReservListVO group by servicesVO.servNo";
 	
 	@Override
 	public void insert(ReservListVO reservListVO) {
@@ -87,7 +89,40 @@ public class ReservListHibernateDAO implements ReservListDAO{
 		return list;
 	}
 
+	@Override
+	public List<ReservListVO> listAllByServ(String servNo) {
+		List<ReservListVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query= session.createQuery(GET_ALL_BY_SERV);
+			query.setParameter(0, servNo);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
 
+	@Override
+	public List<Object[]> listAllCount() {
+		List<Object[]> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query= session.createQuery(GET_ALL_GROUP_BY_SERV);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+
+	
 	
 	
 	

@@ -2,6 +2,7 @@ package com.reservlist.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import com.membercars.model.MembercarsService;
 import com.memberinfo.model.MemberInfoVO;
 import com.schedule.model.ReservService;
 import com.schedule.model.ReservVO;
+import com.services.model.ServicesService;
 import com.services.model.ServicesVO;
 
 public class ReservListService {
@@ -120,4 +122,32 @@ public class ReservListService {
 		return mapOuter;
 	}
 	
+	public List<Map<String,Object>> getReservListByServForJSON(){
+		List<Map<String,Object>> JSONlist = new ArrayList<>();
+		Map<String,Object> map = new HashMap<>();
+		List<ReservListVO> list = dao.listAll();
+		
+		map.put("number", list.size());
+		
+		return JSONlist;
+	}
+	
+	public List<Map<String,Object>> getCountByServ(){
+		List<Map<String,Object>> JSONlist = new ArrayList<>();
+		List<Object[]> list = dao.listAllCount();
+		
+		ServicesService svc = new ServicesService();
+		
+		for(Object[] obj:list){
+			Map<String,Object> map = new HashMap<>();
+			String servNo =String.valueOf(obj[0]);
+			Long count = (Long)obj[1];
+			ServicesVO servVO = svc.getOneService((Integer)obj[0]);
+			map.put("label", servVO.getServName());
+			map.put("data", count);
+			JSONlist.add(map);
+		}
+		
+		return JSONlist;
+	}
 }

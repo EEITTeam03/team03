@@ -11,7 +11,7 @@
 	<div id="wrapper">
 		<div id="page-wrapper">
 			<div class="container-fluid">
-				<div class="col-lg-4">
+				<div class="row col-lg-4">
 				
 					<form role="form" action="${ctx}/MemberServlet" method="post">
 						<div class="form-group">
