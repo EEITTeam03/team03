@@ -158,7 +158,7 @@ body,button,h1{
 							</a>
 								<ul id="demoemp" class="collapse nav navbar-nav">
 									<li><a href="${ctx}/emp/listAllEmp.jsp">員工清單</a></li>
-									<li><a href="${ctx}/emp/updateEmp.jsp">名單維護</a></li>
+<%-- 									<li><a href="${ctx}/emp/updateEmp.jsp">名單維護</a></li> --%>
 									<li><a href="${ctx}/emp/insertEmp.jsp">新增名單</a></li>
 								</ul>
 							</li>
