@@ -78,6 +78,8 @@
 
 <!-- 驗證 -->
 <script src="js/jquery.validate.js" type="text/javascript"></script>
+<!-- 驗證 繁體中文包-->
+<script src="js/messages_zh_TW.js" type="text/javascript"></script>
 
 <script>
   $( function() {
@@ -86,11 +88,42 @@
       	changeMonth: true,
       	changeYear: true,
       	dateFormat: 'yy-mm-dd',
-    	yearRange: '-90:+0'
+    	yearRange: '-90:+0',
+    	monthNamesShort: [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ]
     });
     
     $("#cmxform").validate();
 
+	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕的排版
+	var wdth = $(window).width();
+	if( wdth < 751 ){
+		$(".nav li a").css("display","inline");
+		$(".nav li").css("float","left");
+	}
+	if( wdth >= 751 ){
+		$(".nav li a").css("display","block");
+		$(".nav li").removeAttr("float");
+	}
+	//結束		
+	
+	//不斷監控(監聽)螢幕大小，藉此判斷登入、註冊按鈕是在nav上或者在menu內，來設定不同的樣式
+	$(window).resize(function() {
+		var wdth = $(window).width();
+// 		console.log(wdth);
+								
+		if( wdth < 751 ){
+			$(".nav li a").css("display","inline");
+			$(".nav li").css("float","left");
+		}
+		if( wdth >= 751 ){
+			$(".nav li a").css("display","block");
+			$(".nav li").removeAttr("float");
+		}	
+		
+	});
+	//結束      
+        
+    
     //chrome強制記憶密碼，導致input背景顏色被chrome的瀏覽器預設樣式，強制更換成黃色，造成整體版面顏色不和諧，解決步驟如下。
     //1.初始，密碼name設為空，可關閉強制記憶密碼
 	$(document).on("focus", "body", function(event){
@@ -100,7 +133,7 @@
     $("#sb").on("click",function(){
     	$("input[type*='password']").attr({"name":"password"});
     });	       	
- 
+  
     
  });
 
@@ -199,7 +232,7 @@
 	form{
 		background-repeat: no-repeat;
 		width:945px;
-	    background: rgba(255, 255, 255, 0.45);
+	    background: rgba(255, 255, 255, 0.61);
 	    max-width: 600px;
 	    margin: 40px auto;
 	    border-radius: 4px;
@@ -287,10 +320,6 @@
 	}	
 
 	
-
-
-
-	
 </style>	
 	
 </head>
@@ -311,10 +340,9 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll ff-word btn btn-primary btn-xs"
-						style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px"
-						href="#"> 基本資料
-					</a></li>
+					<li class="page-scroll ff-word" >
+						<a class="page-scroll ff-word btn btn-primary btn-xs" style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px" href="#"> 基本資料 </a>
+					</li>
 					<li class="page-scroll ff-word" style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;color:white;">
 						<span class="glyphicon glyphicon-arrow-right"></span>
 					</li>
@@ -359,11 +387,11 @@
 	<section id="services">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+				<div class="col-sm-1 col-md-2 col-lg-3"></div>
 	
-				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+				<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
 				
-					<form id="cmxform" class="form-signin" role="form" action="MemberNext" method="post" autocomplete="off">													
+					<form id="cmxform" class="form-horizontal form-signin col-xs-12 col-sm-12 col-md-12 col-lg-12" role="form" action="MemberNext" method="post" autocomplete="off">													
 						<div class="row">
 							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">																		
 								<br>
@@ -389,8 +417,8 @@
 								</c:if>	
 																			
 								<c:if test="${empty FBAccount}">												
-									<div class="input-group">
-										<input type="text" name="email" class="form-control email required" placeholder="輸入您的電子郵件" value='${param.email}' style="width:500px;">												
+									<div class="input-group" style="width:100%;">
+										<input type="text" name="email" class="form-control email required" placeholder="輸入您的電子郵件" value='${param.email}'>												
 										<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>											
 									</div>												
 									<br>												
@@ -401,7 +429,7 @@
 								</c:if>
 																				
 								<c:if test="${empty FBId}">												
-									<div class="input-group" style="max-width:250px;">
+									<div class="input-group"  style="width:100%;">
 										<input type="password" class="form-control required" placeholder="輸入您的密碼" value='${param.password}'>
 									    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>												
 									</div>												
@@ -424,15 +452,15 @@
 																				
 								<br>												
 																				
-								<div class="input-group">												
-								   	<input name="address" type="text" class="form-control required" placeholder="輸入您的地址" value='${param.address}' style="width:500px;">										
+								<div class="input-group" style="width:100%;">												
+								   	<input name="address" type="text" class="form-control required" placeholder="輸入您的地址" value='${param.address}'>										
 								    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>												
 								</div>												
 																				
 								<br>												
-								<div class="input-group">												
+								<div class="input-group" style="width:100%;">												
 									<input type="hidden" name="action" value="insert">												
-									<button id="sb" class="btn btn-lg light-orange btn-block" type="submit" style="width:500px;">下一步</button>												
+									<button id="sb" class="btn btn-lg light-orange btn-block" type="submit">下一步</button>												
 									<br>
 									<br>
 									<br>
@@ -445,7 +473,7 @@
 				</div>	
 				
 				
-				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+				<div class="col-sm-1 col-md-2 col-lg-3"></div>
 				
 			</div>
 		</div>

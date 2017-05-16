@@ -166,31 +166,37 @@ table, th, td {
 	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	
 }
-.video{
-	z-index:-1;
+/* .video{ */
+/* 	z-index:-1; */
 	
-}
+/* } */
 .col-sm-offset-5{
 	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: #FFD306;
+	color: #131109;
 }
 .divOver{
  	background:#fed136;
 	
 }
 thead{
-	background: #000000;
+	background: rgba(80, 128, 190, 0.7);
 	
 }
 tbody tr:nth-child(2n-1) { 
- 	background: #515151; 
+ 	background: rgba(208, 215, 231, 0.7); 
  } 
 tr:nth-child(2n) {
-	background: #3C3C3C;
+	background: rgba(234, 239, 243, 0.7);
 }
 /* 調整滑入table資料時，所顯示的顏色 */
 .table-hover tbody tr:hover th,tr:hover td{
-	background: #fed136;
+	background: rgba(254, 209, 54, 0.3);
+}
+tbody tr th{
+	color: black;
+}
+tbody tr td{
+	color: black;
 }
 </style>
 
@@ -269,7 +275,7 @@ tr:nth-child(2n) {
 
 	<!-- Header -->
 	<header>
-		<div class="video" style="position: absolute; opacity:0.8">
+		<div class="video" style="position: absolute; opacity:0.3">
 			<video autoplay loop muted class="fillWidth" style="width: 100%;">
 
 				<source src="video/file.mp4" type="video/mp4" />

@@ -16,6 +16,8 @@ FeedbackService fsvc = new FeedbackService();
 <!-- Bootstrap Core CSS -->
 <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
 
+
+
 <!-- Custom CSS -->
 <link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
 
@@ -32,7 +34,8 @@ FeedbackService fsvc = new FeedbackService();
  	<!-- SweetAlert -->
     <script src="../admin/SweetAlert/js/sweetalert.min.js"></script> 
 	<link href="../admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
-   
+
+ 
 
 <style>
 .fa {
@@ -125,16 +128,40 @@ body,button,h1{
 				<ul class="nav navbar-nav side-nav">
 					<li><a href="${ctx}/scheduleTest3.jsp"><i class="fa fa-car"></i> 管理工作排程</a></li>
 					<li><a href="${ctx}/services/SelectServices.jsp"><i class="fa fa-fw fa-table"></i>維護服務項目</a></li>
-					<li><a href="#" id="a_test"><i
+					<li><a href="chart.jsp" id="a_test"><i
 							class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a></li>
-					<li><a href="${ctx}/admin/maintainBlockList.jsp"><i class="fa fa-fw fa-edit"></i> 管理黑名單</a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#blocklist">
+							<i class="fa fa-fw fa-edit"></i> 
+								黑名單<i class="fa fa-fw fa-caret-down"></i>
+						</a>
+							<ul id="blocklist" class="collapse nav navbar-nav">
+								<li><a href="${ctx}/admin/maintainBlockList.jsp">新增黑名單</a></li>
+								<li><a href="${ctx}/admin/listAllBlockList.jsp">列出黑名單</a></li>
+<!-- 								<li><a href="">c</a></li> -->
+							</ul>
+						
+					</li>
 
-					<li><a href="javascript:;" data-toggle="collapse"
-						data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> 維護名單<i
-							class="fa fa-fw fa-caret-down"></i></a>
+					<li>
+						<a href="javascript:;" data-toggle="collapse" data-target="#demo">
+							<i class="fa fa-fw fa-arrows-v"></i> 
+								維護名單<i class="fa fa-fw fa-caret-down"></i>
+						</a>
 						<ul id="demo" class="collapse">
-							<li><a href="${ctx}/admin/member.jsp">會員</a></li>
-							<li><a href="#">員工</a></li>
+							<li>
+								<a href="#">會員</a>
+							</li>
+							<li>
+							<a href="#" data-toggle="collapse" data-target="#demoemp">
+									員工
+								<i class="fa fa-fw fa-caret-down"></i>
+							</a>
+								<ul id="demoemp" class="collapse nav navbar-nav">
+									<li><a href="${ctx}/emp/listAllEmp.jsp">員工清單</a></li>
+									<li><a href="${ctx}/emp/updateEmp.jsp">名單維護</a></li>
+									<li><a href="${ctx}/emp/insertEmp.jsp">新增名單</a></li>
+								</ul>
+							</li>
 						</ul></li>
 					<li><a href="${ctx}/admin/ListAllfeedback.jsp"><i class="fa fa-comments-o"></i> 查看意見</a></li>
 				</ul>

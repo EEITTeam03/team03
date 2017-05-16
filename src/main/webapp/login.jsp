@@ -61,7 +61,8 @@
 
 <!-- 驗證 -->
 <script src="js/jquery.validate.js" type="text/javascript"></script>
-
+<!-- 驗證 繁體中文包-->
+<script src="js/messages_zh_TW.js" type="text/javascript"></script>
 
 <script>
   $(function(){
@@ -230,7 +231,7 @@
 	form{
 		background-repeat: no-repeat;
 		width:945px;
-	    background: rgba(255, 255, 255, 0.45);
+	    background: rgba(255, 255, 255, 0.61);
 	    max-width: 600px;
 	    margin: 40px auto;
 	    border-radius: 4px;
@@ -262,12 +263,16 @@
 		width:50px;
 		margin: 0 auto;
 	}
+	.pr{
+		position: relative;
+	}
 	#cmxform div a{ 
 		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 		color:black;
-	    position: relative;
-	    left:330px;
-		bottom:5px;
+		position:absolute;
+		right:0;
+		bottom:0;
+		margin:1px;
 	}
 	#cmxform div a:hover{ 
 		color:blue;
@@ -409,10 +414,10 @@
 	<section id="services">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
+				<div class="col-sm-1 col-md-2 col-lg-3"></div>
 	
-				<div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
-					<form id="cmxform" class="form-signin" role="form" action='login.do'>												
+				<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
+					<form id="cmxform" class="form-signin col-xs-12 col-sm-12 col-md-12 col-lg-12" role="form" action='login.do'>												
 						<div class="row">
 							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">												
 								<br>
@@ -421,15 +426,15 @@
 									<img class="img-circle img-responsive" src="img/register/logo.png" alt="">
 								</div>
 								<br>										
-								<div class="input-group">											
-									<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件" value='${param.email}' style="width:500px;"> 										
+								<div class="input-group" style="width:100%;">											
+									<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件" value='${param.email}'> 										
 									<small><Font color='red'>${ErrorMsgKey.AccountEmptyError}</Font></small>										
 								</div>											
 																			
 								<br>											
 																			
-								<div class="input-group">											
-									<input id="password" type="password" class="form-control required" name="password" placeholder="輸入您的密碼" value='${param.password}' style="width:500px;">										
+								<div class="input-group" style="width:100%;">											
+									<input id="password" type="password" class="form-control required" name="password" placeholder="輸入您的密碼" value='${param.password}'>										
 									<small><Font color='red'>${ErrorMsgKey.PasswordEmptyError}</Font></small>										
 								</div>
 																			
@@ -443,17 +448,17 @@
 								
 								<br>
 								
-								<div class="input-group">												
-									<button class="btn btn-lg light-orange btn-block" type="submit"  style="width:500px;">登入</button>											
+								<div class="input-group" style="width:100%;">												
+									<button class="btn btn-lg light-orange btn-block" type="submit">登入</button>											
 									<small><Font color='red'>${ErrorMsgKey.LoginError}</Font></small>
 
 								</div>
 								<br>
 								<br>
 								
-								<div class="input-group" style="width:500px;">												
+								<div class="input-group pr" style="width:100%;">												
 									<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size="xlarge"></fb:login-button>
-									<a href="forgetPassWord.jsp" style="margin-left: auto;">忘記密碼?</a>
+									<a href="forgetPassWord.jsp" >忘記密碼?</a>
 									<div id="status"></div>																																														
 								</div>
 								<br>																											

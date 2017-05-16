@@ -9,5 +9,6 @@ public interface ReservListDAO {
 	public void delete(Integer reservNo);
 	public List<ReservListVO> findByReservNo(Integer reservNo);
 	public List<ReservListVO> listAll();
-
+	public List<ReservListVO> listAllByServ(String servNo);
+	public List<Object[]> listAllCount();
 }

@@ -17,7 +17,7 @@
 		<Font color='red'>${ErrorMsgKey.AccountEmptyError}</Font>
 		<br />
 		<br />
-		<input type="text" name="password" size='40' value='${param.password}' placeholder="請輸入密碼"/> <br> <small><Font
+		<input type="password" name="password" size='40' value='${param.password}' placeholder="請輸入密碼"/> <br> <small><Font
 			color='red'>${ErrorMsgKey.PasswordEmptyError}</Font></small> <br /> 
 			<Font color='red'>${ErrorMsgKey.LoginError}</Font>
 			<button type="submit" class="btn btn-primary btn-block btn-large">登入</button>

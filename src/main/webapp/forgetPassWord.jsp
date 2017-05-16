@@ -56,7 +56,7 @@
 	form{
 		background-repeat: no-repeat;
 		width:945px;
-	    background: rgba(255, 255, 255, 0.45);
+	    background: rgba(255, 255, 255, 0.61);
 	    max-width: 600px;
 	    margin: 40px auto;
 	    border-radius: 4px;

@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-
 <!--[if IE 6]>
 <html id="ie6" dir="ltr" lang="zh-TW">
 <![endif]-->
@@ -23,7 +22,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>水膜汽車美容</title>
+<title>訂單狀態</title>
 
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
@@ -56,19 +55,12 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
     <![endif]-->
 
-<link href="css/video.css" rel="stylesheet">
 <link href="css/revision.css" rel="stylesheet">
-
+ 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.css" />
-<!-- <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"> -->
 
-<!--[if lt IE 9]>
-	<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css">
+
 <style>
 label {
 	font-size: 150%;
@@ -81,50 +73,52 @@ label {
 </head>
 
 <body id="page-top" class="index">
-
 	<!-- Navigation -->
 	<nav id="mainNav"
-		class="navbar navbar-default navbar-custom navbar-fixed-top">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header page-scroll">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span> Menu <i
-						class="fa fa-bars"></i>
-				</button>
-				<a class="navbar-brand page-scroll" href="index.jsp">Car
-					Detailing</a>
-			</div>
-
+		class="navbar navbar-default navbar-custom navbar-fixed-top affix">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header page-scroll">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span> Menu <i
+					class="fa fa-bars"></i>
+			</button>
+			<a class="navbar-brand page-scroll" href="index.jsp">Car
+				Detailing</a>
+		</div>
+	
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll ff-word" href="#">進行預約</a></li>
-					<li><a class="page-scroll ff-word" href="#services">各類服務</a></li>
-					<li><a class="page-scroll ff-word" href="#portfolio">美容項目</a>
-					</li>
-					<li><a class="page-scroll ff-word" href="#about">關於我們</a></li>
-					<li><a class="page-scroll ff-word" href="#team">團隊成員</a></li>
-					<li><a class="page-scroll ff-word" href="#contact">聯絡我們</a></li>
-<!-- 					<li><a class="page-scroll ff-word btn btn-primary btn-xs" -->
-<!-- 						style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px" -->
-<!-- 						href="login.jsp"> <span class="glyphicon glyphicon-log-in"></span> -->
-<!-- 							登入 -->
-<!-- 					</a></li> -->
-<!-- 					<li><a class="page-scroll ff-word btn btn-primary btn-xs" -->
-<!-- 						style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;" -->
-<!-- 						href="register.jsp"> <span class="glyphicon glyphicon-user"></span> -->
-<!-- 							免費註冊 -->
-<!-- 					</a></li> -->
+                   <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll ff-word" href="start_reserve.jsp">進行預約</a>                    	
+                    </li>                    
+                    <li>
+                        <a class="page-scroll ff-word" href="#services">各類服務</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll ff-word" href="#portfolio">美容項目</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll ff-word" href="#about">關於我們</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll ff-word" href="#team">團隊成員</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll ff-word" href="#contact">聯絡我們</a>
+                    </li>
+                    
 						<!--	未登入	-->
-				<c:if test="${empty memberInfo}">                    
+				<c:if test="${empty Code}">                    
                     <li id="nav-log-in" class="">                    
 	                    <button class="page-scroll ff-word btn btn-xs fun-btn" onclick="location.href='login.jsp'">
 	   		
-							<span class="glyphicon glyphicon-log-in"></span> 登入															
+							<span class="glyphicon glyphicon-log-in"></span> 登入														
 	                        
 	                    </button>
 	                </li>
@@ -138,27 +132,26 @@ label {
 				</c:if>
 
 						<!--	已登入	-->
-				<c:if test="${!empty memberInfo}"> 
+				<c:if test="${!empty Code}"> 
 					<li id="nav-log-in" class="dropdown">     
 						<button class="page-scroll ff-word dropdown-toggle mem-btn" data-toggle="dropdown">
 							<li class="glyphicon glyphicon-user"></li>&nbsp;&nbsp;&nbsp;${memberInfo.memberName}
 						</button>
 						
 						<ul class="dropdown-menu" role="menu">
-						    <li><a href="orderStatus.jsp">訂單狀態</a></li>
+						    <li>訂單狀態</li>
 						    <li><a href="#">修改資料</a></li>
+						    <li><a href="feedback.jsp">意見回饋</a></li>
 						    <li class="divider"></li>
 						    <li><a href="LogOut">登出</a></li>
 						</ul>				              
 	 				</li>
-				</c:if>
-
+				</c:if>                    
+                    										
 				</ul>
-
 			</div>
-			<!-- /.navbar-collapse -->
+	
 		</div>
-		<!-- /.container-fluid -->
 	</nav>
 
 	<!-- Header -->
@@ -179,16 +172,8 @@ label {
 						allowscriptaccess="always"
 						style="width: 100%; height: 100%; z-index: -1" loop="true" />
 				</object>
-
-
 			</video>
 		</div>
-	
-	<div class="container">
-	<div style="height:10em">
-	</div>
-	</div>
-
 
 	</header>
 	
@@ -393,6 +378,79 @@ label {
 	<!-- Theme JavaScript -->
 	<script src="js/agency.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
+<style type="text/css">	
+	.nav-fut-li{
+			width: 114px;
+			height: 50px;
+			text-align: center;
+			margin:0px 0px 0px 15px ;
+		}
+		.menu-fut-li{
+			width: 114px;
+			height: 50px;
+			text-align: center;
+			margin:10px 0px 0px 5px ;
+		}		
+		.fun-btn{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: white;
+		    background-color: #fed136;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;					
+		}		
+		.fun-btn:hover{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}
+		.mem-btn{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border:0px;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;					
+		}
+		.mem-btn:hover{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}	
+		.dropdown-menu {
+		    color: #fed136;
+		    background-color: #222222;
+			text-align: center;
+ 		    min-width: 114px; 
+		}				
+		.dropdown:hover .dropdown-menu {
+			
+			display: block;
+		}	
+</style>	
+	
 	<script>
 		$(function() {
 			$("#datepicker").datepicker({
@@ -413,6 +471,7 @@ label {
 					$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){
 						console.log(data);
 						$.each(data,function(idx,obj){
+							console.log(obj);
 							//console.log(obj.start);
 							//只做好小時的判斷
 							var x = obj.shh;
@@ -421,6 +480,7 @@ label {
 								var selectedS = "#timeline input[value^='"+i+"']";
 //	 							//console.log(selectedS);
 	 							$(selectedS).prop("disabled",true).removeClass().addClass("btn btn-basic");
+	 							
 							}
 							
 							

@@ -12,18 +12,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
-
+ <!-- Bootstrap Core CSS -->
+    <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
+<!-- Custom Fonts -->
+<link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+	<!-- 中文字型 CSS -->
+<link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css" rel="stylesheet">	
 <style type="text/css">
 </style>
 <title>全部員工</title>
 </head>
 <body>
-<div class="row">
-<div class="col-lg-6">
+<jsp:include page="../admin/Testhead_nav.jsp"/>
+<div id="wrapper">
+<div id="page-wrapper">
 <div class="table-responsive">
+<div class="col-lg-6">
 <h1 style='text-align:center'>所有員工資料</h1>
-<table border='1'class="table table-bordered table-hover">
+<table class="table table-bordered table-hover">
 	<thead>
 		<tr>
 			<th style='text-align:center' width='200'>員工編號</th>
@@ -49,6 +58,7 @@
 						</tr>
 	</c:forEach>
 </table>
+</div>
 </div>
 </div>
 </div>
