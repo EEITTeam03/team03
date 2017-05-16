@@ -170,7 +170,10 @@ body,button,h1{
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="${ctx}/admin/js/bootstrap.min.js"></script>
-
+	<!-- 偷用瑋倫的js來做表單驗證 -->
+	<script src="${ctx}/js/jquery.validate.js"></script>
+	<script src="${ctx}/js/messages_zh_TW.js"></script>
+	
 	<!-- Morris Charts JavaScript -->
 <%-- 	<script src="${ctx}/admin/js/plugins/morris/raphael.min.js"></script> --%>
 <%-- 	<script src="${ctx}/admin/js/plugins/morris/morris.min.js"></script> --%>

@@ -356,7 +356,7 @@ $.extend( $.validator, {
 		date: "&nbsp&nbsp&nbsp日期格式不符",
 		dateISO: "&nbsp&nbsp&nbsp日期格式需為	年/月/日或年-月-日",
 		number: "Please enter a valid number.",
-		digits: "Please enter only digits.",
+		digits: "請輸入整數!",
 		equalTo: "Please enter the same value again.",
 		maxlength: $.validator.format( "Please enter no more than {0} characters." ),
 		minlength: $.validator.format( "Please enter at least {0} characters." ),

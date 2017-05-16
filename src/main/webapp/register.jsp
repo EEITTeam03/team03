@@ -110,6 +110,67 @@
 
 
 <style>
+		.fun-btn{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: white;
+		    background-color: #fed136;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;					
+		}		
+		.fun-btn:hover{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}
+		.mem-btn{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border:0px;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;					
+		}
+		.mem-btn:hover{
+			width: 100%;
+			height: 100%;
+			padding:0px;
+			margin:0px auto;
+		    color: #fed136;
+		    background-color: transparent;
+		    border-color: #fed136;
+		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		    text-transform: uppercase;
+		    font-weight: 700;						
+		}	
+		.dropdown-menu {
+		    color: #fed136;
+		    background-color: #222222;
+			text-align: center;
+ 		    min-width: 114px; 
+		}				
+		.dropdown:hover .dropdown-menu {
+			
+			display: block;
+		}
+
+
+
 	.ui-datepicker-month{
 		color:black;
 	}
