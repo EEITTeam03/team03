@@ -51,5 +51,13 @@ BlockListService blsvc = new BlockListService();
 </div>
 </div>
 </div>
+<script type="text/javascript">
+	$(function(){
+		if("${OKalert}"=="updateOK"){
+			swal("新增成功!", "已加入黑名單", "success");
+			<% session.removeAttribute("OKalert"); %>
+		}
+	});
+</script>
 </body>
 </html>

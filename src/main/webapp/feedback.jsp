@@ -192,7 +192,7 @@
 							'goal':goal
 						},
 	            		success : function(data) {
-	            			alert("success");
+	            			location.reload();
 					},
 					error : function(data) {
 						alert("error");
@@ -486,7 +486,7 @@
 		<div class="container">
 			<div class="row">
 				<div id="div2" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div style="text-align: center;margin:auto;"><h2>告訴我們您的想法</h2></div>
+				<div style="text-align: center;margin:auto;"><h1>告訴我們您的想法</h1></div>
 				
 					<div id="star">
 						<img id="idstar1" class="s" src="img/star.png" width="40" />
@@ -501,37 +501,14 @@
   						<textarea rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的想法，最多輸入200字" name="comment" style="resize:none"></textarea>
 					</div>
 					<br>
-					<br>
-					<br>
-					<div style="text-align: center;margin:auto;"><input type="button" value="回首頁" onclick="location.href='index.jsp'" class="btn btn-lg btn-info">
-					</div>
 				</div>
-				
+			</div>
+			<br>
+			<br>
+			<div class="col-xs-12 col-md-offset-0" style="height:580px;overflow-x:hidden;overflow-y:auto;">
+			<jsp:include page="messageBoard.jsp"/>
 			</div>
 		</div>
 	</section>
-
-	<section id="services">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					
-					<table>
-					
-				      				      				      
-					</table>
-						
-						
-						
-											
-					
-
-				</div>
-				
-			</div>
-		</div>
-		
-	</section>	
-
 </body>
 </html>

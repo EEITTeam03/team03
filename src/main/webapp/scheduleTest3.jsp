@@ -53,6 +53,9 @@ FeedbackService fsvc = new FeedbackService();
     <script type="text/javascript" src="${ctx}/scheduleJS/jqwidgets/jqxinput.js"></script>
     <script type="text/javascript" src="${ctx}/scheduleJS/jqwidgets/globalization/globalize.js"></script>
     <script type="text/javascript" src="${ctx}/scheduleJS/jqwidgets/globalization/globalize.culture.de-DE.js"></script>
+    <script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
+    <script src="${ctx}/admin/SweetAlert/js/sweetalert.min.js"></script> 
+	<link href="${ctx}/admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">  
     <style>
 .fa {
     font-size: 200%;
@@ -68,6 +71,10 @@ body,button,h1{
 	    letter-spacing: 1px;
 	    color: black;
 }
+div.growlUI { background: url(check48.png) no-repeat 10px 10px }
+div.growlUI h1, div.growlUI h2 {
+    color: white; padding: 50px 50px 50px 125px; text-align: right
+}
 </style>
     <script type="text/javascript">   
     	var globalView = "weekView";
@@ -76,24 +83,93 @@ body,button,h1{
     	var AddData = {};
         $(document).ready(function () {
         	init();
-        	$('#loading_data').hide();		//隱藏loading圖
+        	//$('#loading_data').hide();		//隱藏loading圖
         	$('#btn_search').click(function(){
         		var today = new Date();
         		var formatDay = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()
 //         		alert(formatDay);
         		dataClean();
         		dataSearch(formatDay,globalView); //weekly
+//         		growlUIAlert();
+//         		$.growlUI('Growl Notification', 'Have a nice day!'); 
         	});
         	$("#excelExport").click(function () {
                 $("#scheduler").jqxScheduler('exportData', 'xls');
             });
+        	$("#testGrowl").click(function () {
+        		$.blockUI({ 
+                    message: $('div.growlUI'), 
+                    fadeIn: 700, 
+                    fadeOut: 700, 
+                    timeout: 2000, 
+                    showOverlay: false, 
+                    centerY: false, 
+                    css: { 
+                        width: '350px', 
+                        top: '75px', 
+                        left: '', 
+                        right: ($(window).width() - 400) /2 + 'px', 
+                        border: 'none', 
+                        padding: '25px', 
+                        backgroundColor: '#000', 
+                        '-webkit-border-radius': '10px', 
+                        '-moz-border-radius': '10px', 
+                        opacity: .6, 
+                        color: '#fff' 
+                    }
+                });
+            });
         });
   
         function init(){
+        	loadingBlock();
         	addNewFields();
         	createScheduler();
         	changeEvent();
             editEvent();
+            loadingUnblock();
+        }
+        
+        function loadingBlock(){
+        	 $.blockUI({ 
+        		 message: '<img src="${ctx}/img/loading/ajax-loader.gif" width="30%" height="30%" />',
+        		 css: { 
+//                      top:  ($(window).height() - 400) /2 + 'px', 
+//                      left: ($(window).width() - 400) /2 + 'px', 
+                     width: '400px' 
+                 },
+        		 fadeIn: 0, 
+                 onBlock: function() { 
+//                      alert('Page is now blocked'); 
+                 } 
+             }); 
+        }
+        function loadingUnblock(){
+        	$.unblockUI();
+//         	alert("close block");
+        }
+        function growlUIAlert(){
+        	$.blockUI({ 
+                message: $('div.growlUI'), 
+                fadeIn: 700, 
+                fadeOut: 700, 
+                timeout: 10000, 
+                showOverlay: false, 
+                centerY: false, 
+                css: { 
+                    width: '350px', 
+                    top: '75px', 
+                    left: '', 
+                    right: ($(window).width() - 400) /2 + 'px', 
+                    border: 'none', 
+                    padding: '25px', 
+                    backgroundColor: '#000', 
+                    '-webkit-border-radius': '10px', 
+                    '-moz-border-radius': '10px', 
+                    opacity: .6, 
+                    color: '#fff' 
+                }
+            });
         }
         
         function addNewFields(){
@@ -465,23 +541,23 @@ body,button,h1{
 				var args = event.args; var appointment = args.appointment; 
 				isSave = true;
 				$('#scheduler').jqxScheduler('closeDialog');
-				alert("Save");
+// 				alert("Save");
 				appointment.id = appointment.originalData.addSys;
 				addDate = appointment.originalData.start.toISOString().substring(0, 10);
 // 				var jsonFinal = JSON.parse(JSON.stringify(appointment.originalData));
 // 				jsonFinal.id = (appointment.id);
-				alert("修改資料:"+JSON.stringify(getFinalJson(appointment)));
+// 				alert("修改資料:"+JSON.stringify(getFinalJson(appointment)));
 				editToServlet(JSON.stringify(getFinalJson(appointment)),"update",addDate);
 			});
 			//刪除事件
 			$('#scheduler').on('appointmentDelete', function (event) { 
 				var args = event.args; var appointment = args.appointment;
 				if(!$('#scheduler').jqxScheduler('getAppointmentProperty', appointment.originalData.id, "delSys")){ //沒有delSys=true時
-					alert("Delete");
+// 					alert("Delete");
 // 					var jsonFinal = JSON.parse(JSON.stringify(appointment.originalData));
 // 					jsonFinal.id = (appointment.id);
 					addDate = appointment.originalData.end.toISOString().substring(0, 10);
-					alert("刪除資料"+JSON.stringify(getFinalJson(appointment)));
+// 					alert("刪除資料"+JSON.stringify(getFinalJson(appointment)));
 					editToServlet(JSON.stringify(getFinalJson(appointment)),"delete",addDate);
 				}
 			});
@@ -491,9 +567,9 @@ body,button,h1{
 				isSave = true;
 				if(appointment.originalData.addSys == null || "" == appointment.originalData.addSys ){ //沒有addSys=true時
 					$('#scheduler').jqxScheduler('closeDialog');
-					alert("Add");
+// 					alert("Add");
 					appointment.id = appointment.originalData.id;
-					alert("新增資料:"+JSON.stringify(getFinalJson(appointment,'A')));
+// 					alert("新增資料:"+JSON.stringify(getFinalJson(appointment,'A')));
 					addDate = appointment.originalData.end.toISOString().substring(0, 10);
 // 					var jsonFinal = JSON.parse(JSON.stringify(appointment.originalData));
 // 					jsonFinal.id = (appointment.id);
@@ -523,24 +599,32 @@ body,button,h1{
     	
     	/*-------人工在畫面值皆新增預約時觸發事件(寫入資料庫後會同步刷新頁面資料)-------*/
     	function editToServlet(data,action,addDate){
-    		$('#loading_data').show();			//顯示loading圖
+//     		loadingBlock(); 
+    		//$('#loading_data').show();			//顯示loading圖
     		$.ajax({
         		url: "scheduleTestServlet2",
         		dataType: "text",	//server端回傳至client端型態
         		data: {'data':data,'status':action},
         		method:"POST",
         		success: function(data){
-        			alert("success");
+//         			alert("success");
+//         			growlUIAlert();
+// 					$.growlUI('Growl Notification', 'Have a nice day!'); 
 //         			if(action == 'insert'){
         				dataClean();
         				dataSearch(addDate,globalView);
 //         			}else{
-//         				$('#loading_data').hide();
+        				//$('#loading_data').hide();
+//         				loadingUnblock();
+						
+// 						growlUIAlert();
+						swal({title:"資料異動成功" ,text:"",imageUrl: '${ctx}/img/loading/check.png'});
 //         			}
         		},        		
         		error:function(data){
         			//alert("ERROR");
-        			$('#loading_data').hide();		//關掉loading圖
+        			//$('#loading_data').hide();		//關掉loading圖
+        			loadingUnblock();
         			//alert(JSON.stringify(data));
         		}
         	});
@@ -548,7 +632,8 @@ body,button,h1{
     	
     	/*-------(上下週.上下月.週檢視.月檢視.人工異動預約單  時觸發),傳日期'date'跟區間'view'至servlet-------*/
     	function dataSearch(date,view){
-    		$('#loading_data').show();
+    		loadingBlock();
+    		//$('#loading_data').show();
         	$.ajax({
         		url: "MyJSON",
         		dataType: "json",
@@ -557,16 +642,18 @@ body,button,h1{
         		success:function(data){
         			//alert(JSON.stringify(data));
         			showData(data);
-        			$('#loading_data').hide();//關掉loading
+        			//$('#loading_data').hide();//關掉loading
         			if(view=='monthView'){
         				$('tr',$('tbody',$('#tablescheduler'))).each(function(){
         					$('td',$(this)).eq(5).prop('class','jqx-cell jqx-grid-cell jqx-item jqx-center-align jqx-top-align');
         				});
         			}
+        			loadingUnblock();
         		},
         		error:function(data){
         			alert("ERROR");
-        			$('#loading_data').hide();
+        			//$('#loading_data').hide();
+        			loadingUnblock();
         			//alert(JSON.stringify(data));
         		}
         	});	
@@ -738,9 +825,15 @@ body,button,h1{
 		<div id="page-wrapper">
 		<div id="contentDiv">
 		<h2>查看排程</h2>
+		
 		<button type="submit" id="btn_search" class="btn btn-sm btn-primary">查詢</button>
 		<button type="submit" value="匯出至Excel" id='excelExport' class="btn btn-sm btn-success">匯出至Excel</button>
-    	<div><img id="loading_data" src="${ctx}/img/loading/ajax-loader.gif" /></div>
+		<button type="submit" id="testGrowl" class="btn btn-sm btn-primary">Test</button>
+		<div class="growlUI" style="display: none">
+			<img src="${ctx}/img/loading/check.png" />
+    		<p>資料異動成功</p>
+		</div>
+<%--     	<div><img id="loading_data" src="${ctx}/img/loading/ajax-loader.gif" /></div> --%>
     		<div id="scheduler_body" >
         	<div id="scheduler"></div>
     </div>
