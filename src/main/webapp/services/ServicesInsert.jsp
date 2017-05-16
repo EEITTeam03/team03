@@ -101,7 +101,7 @@
 	<div class="table-responsive">
 		<div class="col-lg-6">
 		<h2>新增服務</h2>
-		<input type="button" onclick="ch();" value="我就是一鍵輸入啦幹"> 
+		<input type="button" onclick="ch();" value="一鍵輸入"> 
 			<c:set var="funcName" value="REG" scope="session" />
 			<!-- 改寫版本 -->
 			<form enctype="multipart/form-data" id="commentform" method="post" action="${ctx}/services/services.do">
@@ -122,7 +122,7 @@
 						服務類型編號：
 					</td>
 					<td>
-						<input type="text" id="ForservTypeNo" name="servTypeNo" value="${servicesVO.servTypeNo}" style="width: 200px;"> 
+						<input type="text" id="ForservTypeNo" name="servTypeNo" value="${servicesVO.servTypeNo}" class="enString" style="width: 200px;"> 
 						<font color="red" size="-1">${MsgMap.errorservTypeNoEmpty}</font>
 					</td>
 				</tr>

@@ -136,7 +136,7 @@ body,button,h1{
 						</a>
 						<ul id="demo" class="collapse">
 							<li>
-								<a href="${ctx}/admin/member.jsp">會員</a>
+								<a href="#">會員</a>
 							</li>
 							<li>
 							<a href="#" data-toggle="collapse" data-target="#demoemp">
@@ -144,8 +144,9 @@ body,button,h1{
 								<i class="fa fa-fw fa-caret-down"></i>
 							</a>
 								<ul id="demoemp" class="collapse nav navbar-nav">
-									<li><a href="#">名單維護</a></li>
-									<li><a href="#">新增名單</a></li>
+									<li><a href="${ctx}/emp/listAllEmp.jsp">員工清單</a></li>
+									<li><a href="${ctx}/emp/updateEmp.jsp">名單維護</a></li>
+									<li><a href="${ctx}/emp/insertEmp.jsp">新增名單</a></li>
 								</ul>
 							</li>
 						</ul></li>

@@ -27,8 +27,12 @@
 swal("修改成功!","服務已更新","success");
 </script>
 </c:if>
+
 <div id="wrapper">
+
 <div id="page-wrapper">
+<div  class="table-responsive">
+<div class="col-lg-4">
 <h2>項目</h2>
 	<ul>
 		<li><a href='${ctx}/services/ListAllServices.jsp'>查看</a>所有服務 (後台)</li>
@@ -73,6 +77,8 @@ swal("修改成功!","服務已更新","success");
 			</FORM>
 		</li>
 	</ul>
+	</div>
+	</div>
 	</div>
 	</div>
 </body>
