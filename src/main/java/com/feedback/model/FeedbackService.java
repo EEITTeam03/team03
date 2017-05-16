@@ -44,4 +44,8 @@ public class FeedbackService {
 	public List<FeedbackVO> getTop3(){
 		return dao.listTOP3();
 	}
+	
+	public List<FeedbackVO> getByMem(Integer memberNo){
+		return dao.listOneMemberFb(memberNo);
+	}
 }
