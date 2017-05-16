@@ -136,7 +136,7 @@ public class Maintain extends HttpServlet {
 						MemberService msvc = new MemberService();
 						msvc.updateMem(miv.getMemberNo(), miv.getMemberName(), miv.getEmail(), miv.getPassword(), miv.getPhone(), miv.getBirthday(), miv.getAddress(), sqlDate);
 					};
-					
+					request.getSession().setAttribute("OKalert","updateOK");
 					String url = "listAllBlockList.jsp";
 //					RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交listAllBlockList.jsp
 //					successView.forward(request, response);

@@ -11,6 +11,7 @@ import hibernate.util.HibernateUtil;
 public class FeedbackDAO implements FeedbackDAO_interface {
 	private static final String GET_ALL_STMT = "from FeedbackVO";
 	private static final String GET_TOP3 = "from FeedbackVO order by feedbackDate desc";
+	private static final String GET_BY_MEM = "from FeedbackVO where memberNo=? order by feedbackDate desc";
 	@Override
 	public void insert(FeedbackVO fVO) {
 		// TODO Auto-generated method stub
@@ -113,4 +114,21 @@ public class FeedbackDAO implements FeedbackDAO_interface {
 //		}
 //		
 //	}
+
+	@Override
+	public List<FeedbackVO> listOneMemberFb(Integer memberNo) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<FeedbackVO> list = null;
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(GET_BY_MEM);
+			query.setParameter(0,memberNo);
+			list = query.list();
+			session.getTransaction().commit();
+		}catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
 }

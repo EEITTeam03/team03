@@ -61,9 +61,10 @@
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 
+<!-- Bootstrap Core JavaScript -->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-
-	<style type="text/css">	
+<style type="text/css">	
 		.img-services{
 			width:360px;
 			height:260px;
@@ -142,45 +143,6 @@
 			
 			display: block;
 		}
-		/* 調整滑入table資料時，所顯示的顏色 */
-		.table-hover tbody tr:hover td {
-		    background-color: rgba(245,152,157,.25);
-		}				
-		/* Table Head */
-		table thead th {
-			background-color: #9E0039;
-			color: #fff;
-			border-bottom-width: 0;
-			background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.25) 100%);
-		}
-		
-		/* Column Style */
-		table td {
-			color: #000;
-		}
-		/* Heading and Column Style */
-		table tr, table th {
-			border-width: 0px;
-			text-align: center;
-			vertical-align:middle;			
-		}
-		
-		/* Padding and font style */
-		table td, table th {
-			font-size: 15px;
-			font-family: Noto Sans TC;
-			font-weight: bold;			
-		}		
-		
-		tbody tr:nth-child(2n-1) { 
- 			background: #fff; 
- 		} 
-		table tr:nth-child(2n) {
-			background: #eee;
-		}
-		.my-popover {
-			max-width: 600px;
-		}		
 	</style>
 
 
@@ -189,7 +151,88 @@
   
   
   $( function() {
-		
+
+   			var snumber = 0;
+   			
+   			$.getJSON('services/TestGetJsonPic',function(json){
+
+   				$.each(json,function(idx,services){
+						console.log(services);
+		   				//以下開始動態生成美容項目DIV
+		   						var servName = services.servName;
+		   						var servDesc = services.servDesc;
+		   						
+		   			   			var bigd = $("<div></div>").addClass("col-md-4 col-sm-6 portfolio-item");
+		   			   			   			   			
+		   			   			var mya = $("<a></a>").attr({"href":"#portfolioModal"+snumber,"data-toggle":"modal"}).addClass("portfolio-link");
+		   			   			
+		   			   			var smalld = $("<div></div>").addClass("portfolio-hover");
+		   			   			var nd = $("<div></div>").addClass("portfolio-hover-content");
+		   			   			var ii = $("<div></div>").addClass("fa fa-plus fa-3x");
+		   			   			
+		   			   			var smallimg = $("<img>").addClass("img-responsive img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":""});
+		   			   			   			
+		   			   			nd.append(ii);  
+		   			   			smalld.append(nd);
+		   			   			mya.append([smalld,smallimg]);
+		   			   			
+		   						var myd = $("<div></div>").addClass("portfolio-caption");
+		   			   			
+		   						var hword = $("<h4></h4>").text(servName);
+		   						var pword = $("<p></p>").addClass("text-muted").text("Graphic Design");
+		   						
+		   						myd.append([hword,pword]);
+		   						
+		   						bigd.append([mya,myd]);
+		   						
+		   						$("#svesall").append(bigd);
+		   								   		
+		   					//結束動態生成
+		   					
+		   					//以下開始動態生成，美容項目點擊後所彈跳出來的介紹DIV
+		   					
+		   						var pmmf = $("<div></div>").addClass("portfolio-modal modal fade").attr({"id":"portfolioModal"+snumber,"tabindex":"-1","role":"dialog","aria-hidden":"true"});
+		   					
+		   						var md = $("<div></div>").addClass("modal-dialog");
+		   					
+		   						var mc = $("<div></div>").addClass("modal-content");
+		   					
+		   						var cm = $("<div></div>").addClass("close-modal").attr({"data-dismiss":"modal"});
+		   						var lr = $("<div></div>").addClass("lr");
+		   						var rl = $("<div></div>").addClass("rl");
+		   						lr.append(rl);
+		   						cm.append(lr);
+		   						
+		   						var cnt = $("<div></div>").addClass("container");
+		   						var crow = $("<div></div>");
+		   						var cco = $("<div></div>").addClass("col-lg-8 col-lg-offset-2");
+		   						var mb = $("<div></div>").addClass("modal-body");
+		   						var mbh = $("<h2></h2>").text(servName);   		
+		   						var mimg = $("<img>").addClass("img-responsive img-centered big-img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":""});
+		   						var mbp = $("<p></p>").text(servDesc);
+		   						var bbp = $("<button></button>").attr({"type":"button","data-dismiss":"modal"}).addClass("btn btn-primary");
+		   						var fft = $("<i></i>").addClass("fa fa-times").text("離開");
+		   						
+		   						
+		   						bbp.append(fft);
+		   						mb.append([mbh,mimg,mbp,bbp]);
+		   						cco.append(mb);
+		   						crow.append(cco);
+		   						cnt.append(crow);
+		   						
+		   						mc.append([cm,cnt]);
+		   						
+		   						md.append(mc);
+		   						
+		   						pmmf.append(md);
+		   						
+		   						$("footer").after(pmmf);
+		   					//結束動態生成	
+   					   		
+		   						snumber=snumber+1;
+   				})
+   				
+   			})	  
 		
 	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
 		var wdth = $(window).width();
@@ -241,137 +284,16 @@
 	   		  		$("#nav-register").addClass("nav-fut-li"); 
 			}
  		});
- 			//結束  	
-   		//ReservListJSON
-		$.getJSON('ReservListJSON',function(json){
-			
-   			$.each(json.list,function(idx,orderStatus){
-   			console.log(orderStatus);	
-  			 	var reservNo = orderStatus.reservNo;//JSON第N筆拿到的預約編號	
-  			 	var memberName = orderStatus.memberName;//JSON第N筆拿到的預約人名字	
-  			 	var reservDateTime = orderStatus.reservDateTime;//JSON第N筆拿到的預約日期	
-  			 	var reservEndTime = orderStatus.reservEndTime;//JSON第N筆拿到的結束時間
-  			 	var brand = orderStatus.brand;//JSON第N筆拿到的廠牌
-  			 	var carModel = orderStatus.carModel;//JSON第N筆拿到的車系
-  			 	var employeeName = orderStatus.employeeName;//JSON第N筆拿到的員工姓名
-  			 	
-  			 	
-  			 	
-  	    		var tr = $("<tr></tr>");
-  	    		var td1 = $("<td style='vertical-align:middle;'>" + reservNo + "</td>");		
-  	    		var td2 = $("<td style='vertical-align:middle;'>" + memberName + "</td>");			
-  	    		var td3 = $("<td style='vertical-align:middle;'>" + reservDateTime + "</td>");	
-  	    		var td4 = $("<td style='vertical-align:middle;'>" + reservEndTime + "</td>");	
-  	    		var td5 = $("<td style='vertical-align:middle;'>" + brand + "</td>");	
-  	    		var td6 = $("<td style='vertical-align:middle;'>" + carModel + "</td>");
-  	    		var td7 = $("<td style='vertical-align:middle;'>" + employeeName + "</td>");  	    		
-  	    		var td8 = $("<td style='vertical-align:middle;'></td>");
-  	    		var td9 = $("<td style='vertical-align:middle;'></td>");
-  	    		//服務明細按鈕
-  	    		var btnServ = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","data-container":"body"});
-  	    		var span1 = $("<span></span>").addClass("glyphicon glyphicon-list-alt");
-  	    		var cts = (+new Date());//現在時間(毫秒)
-  	    		
-  	    		var rdts = Date.parse(reservDateTime);//預約日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
-  	    		var rdtshr = (new Date(reservDateTime)).getHours();//預約日期取出小時
-  	    		var rdtsmin = (new Date(reservDateTime)).getMinutes();//預約日期取出分鐘
-  	    		var rdtssec = (new Date(reservDateTime)).getSeconds();//預約日期取出毫秒
-  	    		rdts = rdts + (rdtshr*60*60) + (rdtsmin*60) + rdtssec;//預約日期加總換算成毫秒
-  	    		var rets = Date.parse(reservEndTime);//結束日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
-  	    		var retshr = (new Date(reservEndTime)).getHours();//結束日期取出小時
-  	    		var retsmin = (new Date(reservEndTime)).getMinutes();//結束日期取出分鐘
-  	    		var retssec = (new Date(reservEndTime)).getSeconds();//結束日期取出毫秒
-  	    		rets = rets + (retshr*60*60) + (retsmin*60) + retssec;//結束日期加總換算成毫秒
-  	    		
-//   	    		console.log("現在時間"+cts);
-//   	    		console.log("預約日期"+rdts);
-//   	    		console.log("預約日期小時"+rdtshr);
-//   	    		console.log("預約日期分"+rdtsmin);
-//   	    		console.log("預約日期秒"+rdtssec);
-//   	    			console.log("window.open(surveillance.jsp?a="+reservNo+",觀看愛車)");
-  	    		//監控按鈕
-  	    		if(cts > rdts && cts < rets){
-	  	    		var btnMit = $("<button onclick='opsurveillance(this.value)'></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","value":reservNo});	
-  	    		}else{
-  	    			var btnMit = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","disabled":"true"}); 	    			
-  	    		}
-  	    		var span2 = $("<span></span>").addClass("glyphicon glyphicon-facetime-video");  
-
-  	    		
-  	    		var serTbe = $("<Table style='width:350px;'></Table>");
-  	    		
-  	    		var serThd = $("<thead></thead>");
-  	    		var serTr = $("<tr><th>服務名稱</th><th>服務價格</th><th>服務時間</th></tr>");
-  	    		serThd.append(serTr);
-  	    		
-  	    		var serTbd = $("<tbody></tbody>");
-  	    		
-  	    		var prcTotal = 0;
-  	    		var tmTotal = 0;
-  	    		
-  	    		for(i=0; i <= (orderStatus.reserv_list.length - 1) ;i++){
-  	    			var serTr = $("<tr></tr>");
-  	    			var serTd1 = $("<td>" + orderStatus.reserv_list[i].servName + "</td>");
-  	    			var serTd2 = $("<td>" + orderStatus.reserv_list[i].servPrice + "</td>");
-  	    			var serTd3 = $("<td>" + orderStatus.reserv_list[i].servTime + "</td>");
-  	    			serTr.append([serTd1,serTd2,serTd3]); 	    			
-  	    			serTbd.append(serTr);
-  	    			prcTotal = parseInt(prcTotal) + parseInt(orderStatus.reserv_list[i].servPrice);//服務項目價格累計	    			
-  	    			tmTotal = parseInt(tmTotal) + parseInt(orderStatus.reserv_list[i].servTime);//服務項目時間累計	
-  	    		}
-  	    		var secs = parseInt(tmTotal) * 60;
-				var hr = Math.floor(secs / 3600);
-				var min = Math.floor((secs - (hr * 3600)) / 60);  	    		
-  	    		
-  	    		var serTrp = $("<tr>" + "<td colspan='3' style='text-align:right;'>總金額：" + prcTotal + "元" +"</td>" + "</tr>");//服務項目價格累計的Tr
-  	    		var serTrt = $("<tr>" + "<td colspan='3' style='text-align:right;'>總時間：" + hr + "小時 " + min + "分鐘" +"</td>" + "</tr>");//服務項目時間累計的Tr
-  	    		
-  	    		serTbd.append([serTrp,serTrt]);
-  	    		 	    		
-  	    		serTbe.append([serThd,serTbd]);
-
-
-  	    		//設定訂單查詢按鈕，所彈出的提示內容，以及相關參數設定
-				$(btnServ).popover({
-				    trigger:"focus",
-				 	placement:"auto right",
-				    html:true,
-				    template: '<div class="popover my-popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
-				    content:serTbe
-				});
-  	    		//結束 
-  	    		
-  	    		btnServ.append(span1); 	    		
-  	    		td8.append(btnServ);
-  	    		
-  	    		btnMit.append(span2);
-  	    		td9.append(btnMit);
-  	    		
-  	    		tr.append([td1,td2,td3,td4,td5,td6,td7,td8,td9]);
-  			 	
-  	    		$("table > tbody").append(tr);
-   			})
-			
-   		}) 	   		  	 	
+ 			//結束  
+ 			
+ 			
  	
-
-   		
-   		
    		
   } );
   
-	function opsurveillance(value){		
-		window.open("surveillance.jsp?reservNo="+value,"觀看愛車");
-	}
-  
-  
-  </script>
 
-<style>
+  </script>
 	
-	
-	
-</style>	
 		
 </head>
 <body id="page-top" class="index">
@@ -484,34 +406,57 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>預約編號</th>
-								<th>預約人</th>
-								<th>預約日期</th>
-								<th>結束時間</th>
-								<th>廠牌</th>
-								<th>車系</th>
-								<th>服務技師</th>
-								<th>服務明細</th>
-								<th>觀看愛車</th>
-							</tr>
-						</thead>																
-						<tbody>
-																								
-						</tbody>
-					</table>
-					
-					
+					000	
 				</div>
-				
 			</div>
 		</div>
 	</section>
+
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio" class="bg-light-gray">
+        <div class="container">
+        
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">美容項目</h2>
+                    <h3 class="section-subheading text-muted">請選擇服務</h3>
+                </div>
+            </div>
+            
+            <div class="row" id="svesall"></div>                                               
+            
+        </div>
+    </section>
+
 		
-		<!-- Bootstrap Core JavaScript -->
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; Your Website 2016</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+               	
+                <div class="col-md-4">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Privacy Policy</a>
+                        </li>
+                        <li><a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>                            
+    </footer> 
 
 
 </body>
