@@ -23,6 +23,7 @@ import com.membercars.model.MembercarsService;
 import com.memberinfo.model.MemberInfoVO;
 import com.memberinfo.model.MemberService;
 import com.schedule.model.ReservService;
+import com.schedule.model.ReservVO;
 
 import myutil.MyUtil;
 
@@ -59,14 +60,14 @@ public class Maintain extends HttpServlet {
 			Map<String, String> errorMsgMap = new HashMap<String, String>();
 			request.setAttribute("ErrorMsgKey", errorMsgMap);
 			try{
-				String license = request.getParameter("license");
+//				String license = request.getParameter("license");
 				String blockRuleNo = request.getParameter("blockRuleNo");
 				String violationDate = request.getParameter("violationDate");
 				String reservationNo = request.getParameter("reservationNo");
 				
-				if(license==null|| license.length()==0){
-					errorMsgMap.put("LicenseError", "請輸入車牌");
-				}
+//				if(license==null|| license.length()==0){
+//					errorMsgMap.put("LicenseError", "請輸入車牌");
+//				}
 				if(blockRuleNo==null|| blockRuleNo.length()==0){
 					errorMsgMap.put("BlockRuleNoError", "請輸入違規規則");
 				}
@@ -84,20 +85,16 @@ public class Maintain extends HttpServlet {
 					return;
 				}
 				
-				MembercarsService ms = new MembercarsService();
-				MemberCarsVO mc = ms.getOneByPK(license);
+				//MembercarsService ms = new MembercarsService();
+				//MemberCarsVO mc = ms.getOneByPK(license);
 				MemberInfoVO miv = null;
 				BlockListVO blv = new BlockListVO();
-				if(mc!=null){
-					miv = mc.getMemberInfoVO();
-					blv.setMemberInfoVO(miv);
-				}else{
-					errorMsgMap.put("LicenseError", "沒有這個車牌號碼");
-//					RequestDispatcher failureView = request
-//							.getRequestDispatcher("maintainBlockList.jsp");
-//					failureView.forward(request, response);
-//					return;
-				}
+//				if(mc!=null){
+//					miv = mc.getMemberInfoVO();
+//					blv.setMemberInfoVO(miv);
+//				}else{
+//					errorMsgMap.put("LicenseError", "沒有這個車牌號碼");
+//				}
 					Short RuleNo = Short.valueOf(blockRuleNo);
 					BlockRuleService BRS = new BlockRuleService();
 					BlockRuleVO brv= BRS.getOneByPK(RuleNo);
@@ -109,8 +106,13 @@ public class Maintain extends HttpServlet {
 					Integer reservNo=null;
 					try {
 						reservNo = Integer.valueOf(reservationNo);
-						if(rs.getOneReserv(reservNo)!=null)
+						ReservVO rsv= rs.getOneReserv(reservNo);
+						if(rsv!=null){
+							MemberCarsVO mc = rsv.getMembercarsVO();
+							miv = mc.getMemberInfoVO();
+							blv.setMemberInfoVO(miv);
 							blv.setReservationNo(reservNo);
+						}
 						else 
 							errorMsgMap.put("ReservationNoError", "查不到此編號");
 					} catch (IllegalArgumentException e) {

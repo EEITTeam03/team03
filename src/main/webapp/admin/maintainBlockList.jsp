@@ -32,14 +32,13 @@
 	
 		<form action="maintain.do" method="post">
 		<table class="table table-bordered table-hover">
-		<tr>
-		<td>車牌:</td>
+					<tr>
+			<td>預約編號:</td>
 			<td>
-				<input type="text" name="license" size='40' value='${param.license}' />  
-				<small><Font color='red'>${ErrorMsgKey.LicenseError}</Font></small> <br />
-			</td>
-		</tr>
-		
+			<input type="text" name="reservationNo" size='13'value='${param.reservationNo}' /> <small><Font color='red'>${ErrorMsgKey.ReservationNoError}</Font></small> <br /> 
+				</td>
+				</tr>
+				<br>
 		<tr>
 			<td>違反規則:</td>
 			<td>
@@ -58,15 +57,7 @@
 				color='red'>${ErrorMsgKey.ViolationDateError}</Font></small> <br />
 			</td>
 			</tr>
-			<br>
-			<tr>
-			<td>預約編號:</td>
-			<td>
-			<input type="text" name="reservationNo" size='40'value='${param.reservationNo}' />  
-			<small><Font color='red'>${ErrorMsgKey.ReservationNoError}</Font></small> <br /> 
-			<small><Font color='red'>${ErrorMsgKey.MaintainError}</Font></small> <br /> 
-				</td>
-				</tr>
+
 				</table>
 				<input type="hidden" name="action" value="insert">
 				<button type="submit" class="btn btn-sm btn-primary">送出</button>
