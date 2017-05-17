@@ -47,7 +47,7 @@
 								<td>${member.birthday}</td>
 								<td>${member.address}</td>
 								<td>${member.effectiveDate}</td>
-								<td><input name="checkcar" type="button" value="查看車輛" class="btn btn-sm btn-primary"></td>
+								<td><input name="checkcar" type="button" value="查看車輛" class="btn btn-sm btn-primary" onclick="location.href='listMemberCars.jsp?memberNo=${member.memberNo}'"></td>
 								<td>
 								<form action="${ctx}/MemberServlet" method="post">
 									<input type="hidden" name="action" value="getOne_For_Update">
