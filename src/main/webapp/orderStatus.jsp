@@ -483,6 +483,16 @@
 	<section id="services">
 		<div class="container">
 			<div class="row">
+				<div class="col-xs-12 text-center">
+				<form action="${ctx}/Cancel">
+					<h2>請輸入預約編號</h2>
+					<input type="text" name="reservNo">
+					<input type="hidden" name="action" value="cancel">
+					<input type="submit" value="取消" class="btn btn-danger">
+				</form>
+				</div>
+			</div>
+			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
 					<table class="table table-hover">
 						<thead>

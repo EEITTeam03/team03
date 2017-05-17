@@ -158,6 +158,11 @@ public class ReserveService extends HttpServlet {
 		calEnd.setTimeInMillis(cal.getTimeInMillis() + endms);
 		reservVO.setReservEndTime(calEnd);
 		
+		Integer endint = Calendar.HOUR_OF_DAY;
+		 if(endint>21||cal.get(Calendar.DATE)!=calEnd.get(Calendar.DATE)) {
+				errmsg.add("所選的時段超過營業時間!");
+			}
+		
 		// 查他選的員工
 		int emp = Integer.parseInt(empNo); 
 		EmployeeService esvc = new EmployeeService();

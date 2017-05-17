@@ -59,7 +59,9 @@
  
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
-
+<!-- SweetAlert -->
+<script src="admin/SweetAlert/js/sweetalert.min.js"></script> 
+<link href="admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
 
 <style>
 label {
@@ -70,6 +72,9 @@ label {
 	height:260px;
 }
 </style>
+
+	 	
+
 </head>
 
 <body id="page-top" class="index">
@@ -178,9 +183,24 @@ label {
 	</header>
 	
 
+
 	
 	<div class="container">
-	
+			
+			<c:if test="${!empty errorMsg}">
+			<script type="text/javascript">
+				var errstr = "${errorMsg}".substring(1,"${errorMsg}".length-1);
+				console.log(errstr);
+				swal({
+					title:"無法預約",
+					text: errstr,
+					type: "warning",
+					confirmButtonColor: "#D9B300",
+				});
+				
+			</script>
+			</c:if>
+			
 		
 <%-- 		<span id="no" hidden="hide">${memberInfo.memberNo}</span> --%>
 		
@@ -453,6 +473,11 @@ label {
 	
 	<script>
 		$(function() {
+			
+			
+			//swal("無法預約","","error");
+			
+			
 			$("#datepicker").datepicker({
 				changeMonth : true,
 				changeYear : false,
