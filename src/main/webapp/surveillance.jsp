@@ -78,7 +78,7 @@
 
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
 
 
 
@@ -277,7 +277,31 @@
 
 
   <script>
-  
+  function loadingBlock(){
+	 	 $.blockUI({ 
+				message: $('div.blockUI'),
+	 		 //overlayCSS: { backgroundColor: '#808080' },
+	 		 css: { 
+	 			 border: 'none',
+	 			 //backgroundColor:'#f7f7f7',
+	              left: ($(window).width() - 228) /2 + 'px', 
+					'-webkit-border-radius': '10px', 
+	             '-moz-border-radius': '10px', 
+	             padding: '25px',
+	              opacity: 0.8,
+	               width: '228px',
+	               height: '228px'
+	          },
+	 		 fadeIn: 0, 
+	          onBlock: function() { 
+	              //alert('Page is now blocked'); 
+	          } 
+	      }); 
+	 }
+	 function loadingUnblock(){
+	 	$.unblockUI();
+	 	//alert("close block");
+	 }
   
   $( function() {
 	  	
@@ -336,7 +360,8 @@
 			
 			var reservNo=$("#no").text();			
  			var stageTime = 0;
-   			$.getJSON('ProgressServlet',{"reservNo":reservNo},function(json){   				   				
+   			$.getJSON('ProgressServlet',{"reservNo":reservNo},function(json){
+   				loadingBlock();
    				$.each(json,function(idx,service_step){
    					
    					console.log(service_step);	
@@ -462,7 +487,7 @@
    					
    				   				  					
    				})
-   				
+   				loadingUnblock();
    			})			
    			
 				 	
@@ -602,9 +627,12 @@
 	<section id="services">
 		<div class="container">
 			<div class="row">
+				<div class="blockUI" style="display: none">
+						<img src="${ctx}/img/loading/reservlist_loading.gif" width="170px" height="170px" style="box-shadow:none"/>
+				</div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div style="width:100%;height:651px;">
-						<img style="-webkit-user-select: none;" src="http://localhost:8080/maven-archetype-webapp-servlet3/VideoServlet" width="100%" height="100%">
+						<img style="-webkit-user-select: none;" src="${ctx}/VideoServlet" width="100%" height="100%">
 					</div>
 					<div class="table-responsive">
 						<table>

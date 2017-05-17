@@ -60,18 +60,9 @@
  
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
-<script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
 
 
-	<style type="text/css">	
-		.img-services{
-			width:360px;
-			height:260px;
-		}
-		.big-img-services{
-			width:700px;
-			height:500px;
-		}
+<style type="text/css">	
 		.nav-fut-li{
 			width: 114px;
 			height: 50px;
@@ -137,80 +128,91 @@
 		    background-color: #222222;
 			text-align: center;
  		    min-width: 114px; 
-		}				
-		.dropdown:hover .dropdown-menu {
-			
-			display: block;
-		}
-		/* 調整滑入table資料時，所顯示的顏色 */
-		.table-hover tbody tr:hover td {
-		    background-color: rgba(245,152,157,.25);
-		}				
-		/* Table Head */
-		table thead th {
-			background-color: #9E0039;
-			color: #fff;
-			border-bottom-width: 0;
-			background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.25) 100%);
-		}
+		}	
+	.input-group .btn:hover, .btn:focus{
+	    outline: none;
+	    color:#fff;
+	}
+	.input-group .btn{
+	    text-transform: capitalize;
+	    color:#fff;
+	    padding: 14px 20px;
+	    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+	.input-group .btn-lg{
+	    font-size: 20px;
+	} 	
+	.input-group .blue,.light-brown,.light-green,.light-orange{
+	    background: #0088cc;
+	    box-shadow:0 4px 0 #006394;
+	    transition:all 0.1s ease-in-out 0s;
+	    position: relative;
+	    top:0;
+	}
+	.input-group .light-brown{
+	    background: #cec2ab;
+	    box-shadow: 0 4px 0 #b9a888;
+	}
+	.input-group .light-green{
+	    background: #75d69c;
+	    box-shadow:0 4px 0 #4ac97d;
+	    border-radius: 25px;
+	}
+	.input-group .light-orange{
+	    background: #fed136;
+	    box-shadow:0 4px 0 rgb(228, 183, 54);
+	} 
+	
+	.input-group .blue:hover,.light-brown:hover,.light-green:hover,.light-orange:hover{
+	    top:2px;
+	    box-shadow:0 2px 0 #006394;
+	}
+	.input-group .light-brown:hover{
+	    box-shadow: 0 2px 0 #b9a888;
+	}
+	.input-group .light-green:hover{
+	    box-shadow:0 2px 0 #4ac97d;
+	}
+	.input-group .light-orange:hover{
+	    box-shadow: 0 2px 0 #fed136;
+	}	
+
+	.input-group input:-webkit-autofill {
+	  -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
+	  -webkit-text-fill-color: #333;
+	}
+	
+	.input-group input:-webkit-autofill:focus {
+	  -webkit-box-shadow:0 0 0 50px white inset;
+	  -webkit-text-fill-color: #333;
+	}		
 		
-		/* Column Style */
-		table td {
-			color: #000;
-		}
-		/* Heading and Column Style */
-		table tr, table th {
-			border-width: 0px;
-			text-align: center;
-			vertical-align:middle;			
-		}
-		
-		/* Padding and font style */
-		table td, table th {
-			font-size: 15px;
-			font-family: Noto Sans TC;
-			font-weight: bold;			
-		}		
-		
-		tbody tr:nth-child(2n-1) { 
- 			background: #fff; 
- 		} 
-		table tr:nth-child(2n) {
-			background: #eee;
-		}
-		.my-popover {
-			max-width: 600px;
-		}		
+					
+	.dropdown:hover .dropdown-menu {		
+		display: block;
+	}
+	#test{
+		display:none;
+	}		
+	.spline{
+		color:white;
+		padding-left:30px;
+		padding-right:30px;		
+	}
+	.seldiv{
+		color:white;
+		background:white;
+		margin-top:10px;
+		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		width:100%;
+		height:60px;
+	}		
 	</style>
 
 
 
   <script>
-  function loadingBlock(){
- 	 $.blockUI({ 
-			message: $('div.blockUI'),
- 		 //overlayCSS: { backgroundColor: '#808080' },
- 		 css: { 
- 			 border: 'none',
- 			 //backgroundColor:'#f7f7f7',
-              left: ($(window).width() - 228) /2 + 'px', 
-				'-webkit-border-radius': '10px', 
-             '-moz-border-radius': '10px', 
-             padding: '25px',
-              opacity: 0.8,
-               width: '228px',
-               height: '228px'
-          },
- 		 fadeIn: 0, 
-          onBlock: function() { 
-              //alert('Page is now blocked'); 
-          } 
-      }); 
- }
- function loadingUnblock(){
- 	$.unblockUI();
- 	//alert("close block");
- }
+  
   
   $( function() {
 		
@@ -265,140 +267,35 @@
 	   		  		$("#nav-register").addClass("nav-fut-li"); 
 			}
  		});
- 			//結束  	
-   		//ReservListJSON
-		$.getJSON('ReservListJSON',function(json){
-			loadingBlock();
-			if(null != json.list){
-	   			$.each(json.list,function(idx,orderStatus){
-	   			console.log(orderStatus);	
-	  			 	var reservNo = orderStatus.reservNo;//JSON第N筆拿到的預約編號	
-	  			 	var memberName = orderStatus.memberName;//JSON第N筆拿到的預約人名字	
-	  			 	var reservDateTime = orderStatus.reservDateTime;//JSON第N筆拿到的預約日期	
-	  			 	var reservEndTime = orderStatus.reservEndTime;//JSON第N筆拿到的結束時間
-	  			 	var brand = orderStatus.brand;//JSON第N筆拿到的廠牌
-	  			 	var carModel = orderStatus.carModel;//JSON第N筆拿到的車系
-	  			 	var employeeName = orderStatus.employeeName;//JSON第N筆拿到的員工姓名
-	  			 	
-	  			 	
-	  			 	
-	  	    		var tr = $("<tr></tr>");
-	  	    		var td1 = $("<td style='vertical-align:middle;'>" + reservNo + "</td>");		
-	  	    		var td2 = $("<td style='vertical-align:middle;'>" + memberName + "</td>");			
-	  	    		var td3 = $("<td style='vertical-align:middle;'>" + reservDateTime + "</td>");	
-	  	    		var td4 = $("<td style='vertical-align:middle;'>" + reservEndTime + "</td>");	
-	  	    		var td5 = $("<td style='vertical-align:middle;'>" + brand + "</td>");	
-	  	    		var td6 = $("<td style='vertical-align:middle;'>" + carModel + "</td>");
-	  	    		var td7 = $("<td style='vertical-align:middle;'>" + employeeName + "</td>");  	    		
-	  	    		var td8 = $("<td style='vertical-align:middle;'></td>");
-	  	    		var td9 = $("<td style='vertical-align:middle;'></td>");
-	  	    		//服務明細按鈕
-	  	    		var btnServ = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","data-container":"body"});
-	  	    		var span1 = $("<span></span>").addClass("glyphicon glyphicon-list-alt");
-	  	    		var cts = (+new Date());//現在時間(毫秒)
-	  	    		
-	  	    		var rdts = Date.parse(reservDateTime);//預約日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
-	  	    		var rdtshr = (new Date(reservDateTime)).getHours();//預約日期取出小時
-	  	    		var rdtsmin = (new Date(reservDateTime)).getMinutes();//預約日期取出分鐘
-	  	    		var rdtssec = (new Date(reservDateTime)).getSeconds();//預約日期取出毫秒
-	  	    		rdts = rdts + (rdtshr*60*60) + (rdtsmin*60) + rdtssec;//預約日期加總換算成毫秒
-	  	    		var rets = Date.parse(reservEndTime);//結束日期毫秒(該方法只到日期，其他的小時、分鐘、毫秒要另做計算，在加回去)
-	  	    		var retshr = (new Date(reservEndTime)).getHours();//結束日期取出小時
-	  	    		var retsmin = (new Date(reservEndTime)).getMinutes();//結束日期取出分鐘
-	  	    		var retssec = (new Date(reservEndTime)).getSeconds();//結束日期取出毫秒
-	  	    		rets = rets + (retshr*60*60) + (retsmin*60) + retssec;//結束日期加總換算成毫秒
-	  	    		
-	//   	    		console.log("現在時間"+cts);
-	//   	    		console.log("預約日期"+rdts);
-	//   	    		console.log("預約日期小時"+rdtshr);
-	//   	    		console.log("預約日期分"+rdtsmin);
-	//   	    		console.log("預約日期秒"+rdtssec);
-	//   	    			console.log("window.open(surveillance.jsp?a="+reservNo+",觀看愛車)");
-	  	    		//監控按鈕
-	  	    		if(cts > rdts && cts < rets){
-		  	    		var btnMit = $("<button onclick='opsurveillance(this.value)'></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","value":reservNo});	
-	  	    		}else{
-	  	    			var btnMit = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","disabled":"true"}); 	    			
-	  	    		}
-	  	    		var span2 = $("<span></span>").addClass("glyphicon glyphicon-facetime-video");  
-	
-	  	    		
-	  	    		var serTbe = $("<Table style='width:350px;'></Table>");
-	  	    		
-	  	    		var serThd = $("<thead></thead>");
-	  	    		var serTr = $("<tr><th>服務名稱</th><th>服務價格</th><th>服務時間</th></tr>");
-	  	    		serThd.append(serTr);
-	  	    		
-	  	    		var serTbd = $("<tbody></tbody>");
-	  	    		
-	  	    		var prcTotal = 0;
-	  	    		var tmTotal = 0;
-	  	    		
-	  	    		for(i=0; i <= (orderStatus.reserv_list.length - 1) ;i++){
-	  	    			var serTr = $("<tr></tr>");
-	  	    			var serTd1 = $("<td>" + orderStatus.reserv_list[i].servName + "</td>");
-	  	    			var serTd2 = $("<td>" + orderStatus.reserv_list[i].servPrice + "</td>");
-	  	    			var serTd3 = $("<td>" + orderStatus.reserv_list[i].servTime + "</td>");
-	  	    			serTr.append([serTd1,serTd2,serTd3]); 	    			
-	  	    			serTbd.append(serTr);
-	  	    			prcTotal = parseInt(prcTotal) + parseInt(orderStatus.reserv_list[i].servPrice);//服務項目價格累計	    			
-	  	    			tmTotal = parseInt(tmTotal) + parseInt(orderStatus.reserv_list[i].servTime);//服務項目時間累計	
-	  	    		}
-	  	    		var secs = parseInt(tmTotal) * 60;
-					var hr = Math.floor(secs / 3600);
-					var min = Math.floor((secs - (hr * 3600)) / 60);  	    		
-	  	    		
-	  	    		var serTrp = $("<tr>" + "<td colspan='3' style='text-align:right;'>總金額：" + prcTotal + "元" +"</td>" + "</tr>");//服務項目價格累計的Tr
-	  	    		var serTrt = $("<tr>" + "<td colspan='3' style='text-align:right;'>總時間：" + hr + "小時 " + min + "分鐘" +"</td>" + "</tr>");//服務項目時間累計的Tr
-	  	    		
-	  	    		serTbd.append([serTrp,serTrt]);
-	  	    		 	    		
-	  	    		serTbe.append([serThd,serTbd]);
-	
-	
-	  	    		//設定訂單查詢按鈕，所彈出的提示內容，以及相關參數設定
-					$(btnServ).popover({
-					    trigger:"focus",
-					 	placement:"auto right",
-					    html:true,
-					    template: '<div class="popover my-popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
-					    content:serTbe
-					});
-	  	    		//結束 
-	  	    		
-	  	    		btnServ.append(span1); 	    		
-	  	    		td8.append(btnServ);
-	  	    		
-	  	    		btnMit.append(span2);
-	  	    		td9.append(btnMit);
-	  	    		
-	  	    		tr.append([td1,td2,td3,td4,td5,td6,td7,td8,td9]);
-	  			 	
-	  	    		$("table > tbody").append(tr);
-	  	    		
-	   			})
-   			}
-   			loadingUnblock();
-   		}) 	   		  	 	
- 	
-
-   		
-   		
+ 			//結束  
+ 			
+		$("#liesel").click(function(){
+			
+			//下拉DIV開關
+			$(".seldiv").slideToggle("slow");
+			//結束
+			
+			
+			
+			
+			//按鈕箭頭符號改變
+			var mark = $("#liesel span:last-child").attr("class");
+			if( mark == "glyphicon glyphicon-chevron-down" ){
+				$("#liesel span:last-child").removeClass("glyphicon glyphicon-chevron-down");
+				$("#liesel span:last-child").addClass("glyphicon glyphicon-chevron-up");
+			}else{
+				$("#liesel span:last-child").removeClass("glyphicon glyphicon-chevron-up");
+				$("#liesel span:last-child").addClass("glyphicon glyphicon-chevron-down");				
+			}
+			//結束
+			
+		});
    		
   } );
   
-	function opsurveillance(value){		
-		window.open("surveillance.jsp?reservNo="+value,"觀看愛車");
-	}
-  
-  
-  </script>
 
-<style>
+  </script>
 	
-	
-	
-</style>	
 		
 </head>
 <body id="page-top" class="index">
@@ -510,41 +407,21 @@
 	<section id="services">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 text-center">
-				<form action="${ctx}/Cancel">
-					<h2>請輸入預約編號</h2>
-					<input type="text" name="reservNo">
-					<input type="hidden" name="action" value="cancel">
-					<input type="submit" value="取消" class="btn btn-danger">
-				</form>
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
+	
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>預約編號</th>
-								<th>預約人</th>
-								<th>預約日期</th>
-								<th>結束時間</th>
-								<th>廠牌</th>
-								<th>車系</th>
-								<th>服務技師</th>
-								<th>服務明細</th>
-								<th>觀看愛車</th>
-							</tr>
-						</thead>																
-						<tbody>
-																								
-						</tbody>
-					</table>
-					<div class="blockUI" style="display: none">
-						<img src="${ctx}/img/loading/reservlist_loading.gif" width="170px" height="170px"/>
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
+					<div class="input-group" style="width:100%;">												
+						<button id="liesel" class="btn btn-lg light-orange btn-block" type="button">
+							<span>請選擇您的愛車車牌</span><span class="spline">│</span><span class="glyphicon glyphicon-chevron-down"></span>
+						</button>
+						<div id="test" class="seldiv">我是測試</div>											
 					</div>
-					
+												
 				</div>
-				
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
+	
+				</div>							
 			</div>
 		</div>
 	</section>

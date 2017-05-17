@@ -27,20 +27,20 @@ public class BlockListService {
 	public Long countBlockListVO(MemberInfoVO memberInfoVO){
 		return dao.countBlockList(memberInfoVO);
 	}
-	//未完成 未測試0517
+
 	public void checkTimesForBlock(MemberInfoVO memberInfoVO,String violationDate){
 		BlockListService bls = new BlockListService();
 		if((bls.countBlockListVO(memberInfoVO)%3)==0){
-			//java.util.Date date = DateFormat.getDateInstance().parse(violationDate);
 			java.util.Calendar calendar = MyUtil.getCalender(violationDate);
 			calendar.add(Calendar.MONTH,3);
-			//java.sql.Date sqlDate= (java.sql.Date)calendar.getInstance().getTime();
 			java.sql.Date sqlDate = new java.sql.Date(calendar.getTimeInMillis());
 			MemberService msvc = new MemberService();
-			msvc.updateMem(memberInfoVO.getMemberNo(), memberInfoVO.getMemberName(), memberInfoVO.getEmail(), memberInfoVO.getPassword(), memberInfoVO.getPhone(), memberInfoVO.getBirthday(), memberInfoVO.getAddress(), sqlDate);
-			System.out.println("懲處: "+memberInfoVO.getMemberName());
-			System.out.println("違規日String: "+violationDate);
-			System.out.println("違規日sqlDate: "+violationDate);
+			MemberInfoVO memberInfo =msvc.updateMem(memberInfoVO.getMemberNo(), memberInfoVO.getMemberName(), memberInfoVO.getEmail(), memberInfoVO.getPassword(), memberInfoVO.getPhone(), memberInfoVO.getBirthday(), memberInfoVO.getAddress(), sqlDate);
+//			System.out.println("懲處: "+memberInfoVO.getMemberName());
+//			System.out.println("違規日String: "+violationDate);
+//			System.out.println("生效日sqlDate: "+sqlDate);
+//			System.out.println("懲處: "+memberInfo.getMemberName());
+//			System.out.println("生效: "+memberInfo.getEffectiveDate());
 		};
 	}
 	
