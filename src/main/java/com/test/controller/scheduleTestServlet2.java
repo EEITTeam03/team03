@@ -24,6 +24,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.membercars.model.MemberCarsVO;
 import com.membercars.model.MembercarsService;
+import com.memberinfo.model.MemberInfoVO;
+import com.memberinfo.model.MemberService;
 import com.progress.AutoSetTodayReservList;
 import com.reservlist.model.ReservListService;
 import com.reservlist.model.ReservListVO;
@@ -47,23 +49,6 @@ public class scheduleTestServlet2 extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		String json = request.getParameter("data");
-//		System.out.println("status:"+request.getParameter("status"));
-//		System.out.println("-------------------------------------------------");
-//		
-//		HashMap<String,String> map = new HashMap<String,String>();
-//		map = new Gson().fromJson(json, new TypeToken<HashMap<String,String>>() {}.getType());
-//		System.out.println("reservNo:"+map.get("id"));		//update.delete會收到原預約編號，save新增會收到系統產生的亂數ex:2025-25-30-21-22
-//		System.out.println("師傅:"+map.get("calendar"));
-//		System.out.println("起始時間:"+getLocalTimeFromUTC(map.get("start")).getTime());	//從頁面得到的資料與預約訂單有時差8小時
-//		System.out.println("結束時間:"+getLocalTimeFromUTC(map.get("end")).getTime());		//從頁面得到的資料與預約訂單有時差8小時
-//		System.out.println("車牌:"+map.get("subject"));
-//		System.out.println("NoteC與NoteE: "+map.get("description"));
-//		
-//		System.out.println("Status:"+map.get("status"));	//update.delete會收到原預約單的Status代碼，save新增會收到空的""
-//		System.out.println("綜合服務(單選):"+map.get("serviceS"));
-//		System.out.println("單一服務(多選):"+map.get("serviceM"));
-//		System.out.println("-------------------------------------------------");
 		PrintWriter out = response.getWriter();
 		String json = request.getParameter("data");
 		String crudStatus = request.getParameter("status");
@@ -205,29 +190,31 @@ public class scheduleTestServlet2 extends HttpServlet {
 				rvo.setReservNo(reservNo);
 				rvo.setStatus(status);
 				ReservDAO dao = new ReservDAO();
+
 				if(crudStatus.equals("delete")){
-					//若為刪除，將狀態設為零(畫面不會讀取狀態0的訂單)
 					rvo.setStatus(0);
+					dao.update(rvo);
 					//刪除自動加入黑名單(違反:1.取消預約)
 					BlockListService bls = new BlockListService();
 					BlockRuleService BRS = new BlockRuleService();
 					String violationDate = MyUtil.formatCalender(Calendar.getInstance());
 					bls.addBlockList(violationDate, reservNo, "", BRS.getOneByPK((short)1), mcv.getMemberInfoVO());
-					bls.checkTimesForBlock(mcv.getMemberInfoVO(),violationDate);//未完成 未測試0517
+					bls.checkTimesForBlock(mcv.getMemberInfoVO(),violationDate);
+				}else{
+					dao.update(rvo);
+					/*---------------update預約單時，修改其監視器觀看權限時段------------------*/
+					if(MyUtil.formatCalender(scalendar).equals(MyUtil.formatCalender(Calendar.getInstance()))){
+							AutoSetTodayReservList autoSet = new AutoSetTodayReservList();
+							ServletContext application = request.getServletContext();
+							for(Calendar startTime= scalendar;MyUtil.getHHmmFormat(ecalendar).compareTo(MyUtil.getHHmmFormat(startTime))>0;startTime.add(Calendar.MINUTE,30)){
+								//String memberNo = ""+mcv.getMemberInfoVO().getMemberNo();
+								autoSet.TodayReservListInsert(application,MyUtil.getHHmmFormat(startTime),memberNo);
+								System.out.print("今日修改的時段及會員編號(後增): "+MyUtil.getHHmmFormat(startTime)+",");
+								System.out.println(memberNo);
+							}
+					}
+					/*------------------------------------------------------------*/
 				}
-				dao.update(rvo);
-				/*---------------update預約單時，修改其監視器觀看權限時段------------------*/
-				if(MyUtil.formatCalender(scalendar).equals(MyUtil.formatCalender(Calendar.getInstance())) && crudStatus.equals("update")){
-						AutoSetTodayReservList autoSet = new AutoSetTodayReservList();
-						ServletContext application = request.getServletContext();
-						for(Calendar startTime= scalendar;MyUtil.getHHmmFormat(ecalendar).compareTo(MyUtil.getHHmmFormat(startTime))>0;startTime.add(Calendar.MINUTE,30)){
-							//String memberNo = ""+mcv.getMemberInfoVO().getMemberNo();
-							autoSet.TodayReservListInsert(application,MyUtil.getHHmmFormat(startTime),memberNo);
-							System.out.print("今日修改的時段及會員編號(後增): "+MyUtil.getHHmmFormat(startTime)+",");
-							System.out.println(memberNo);
-						}
-				}
-				/*------------------------------------------------------------*/
 			}else{
 				Set<ReservListVO>reservlists=new HashSet<ReservListVO>();
 				ReservListVO rlVO = new ReservListVO();

@@ -439,14 +439,7 @@
 								</div>
 																			
 								<br>
-																			
-								<div class="checkbox">												
-									<span>記住密碼 </span>										
-									<input type="checkbox" value="remember-me">									
-																			
-								</div>											
-								
-								<br>
+																													
 								
 								<div class="input-group" style="width:100%;">												
 									<button class="btn btn-lg light-orange btn-block" type="submit">登入</button>											

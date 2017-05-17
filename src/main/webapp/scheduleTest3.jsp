@@ -650,6 +650,7 @@ div.growlUI h1, div.growlUI h2 {
         			loadingUnblock();
         			if(isEdit){
         				growlUIAlert();
+//         				location.reload();
         			}
         		},
         		error:function(data){
