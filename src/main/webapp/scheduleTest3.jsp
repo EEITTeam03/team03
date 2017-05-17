@@ -800,7 +800,7 @@ div.growlUI h1, div.growlUI h2 {
                         <a href="${ctx}/services/SelectServices.jsp" id="services"><i class="fa fa-fw fa-table"></i> 維護服務項目</a>
                     </li>
                     <li>
-                        <a href="#" id="a_test"><i class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a>
+                        <a href="${ctx}/admin/chart.jsp" id="a_test"><i class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a>
                     </li>
                     <li>
                         <a href="${ctx}/admin/maintainBlockList.jsp"><i class="fa fa-fw fa-edit"></i> 管理黑名單</a>
