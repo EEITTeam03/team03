@@ -29,22 +29,23 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Multiple Axes Line Graph Example with Tooltips and Raw Data</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="flot-chart">
-                                    <div class="flot-chart-content" id="flot-multiple-axes-chart"></div>
-                                </div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
+						<table class="table table-bordered table-hover" id="showcount">
+							<thead>
+								<tr>
+									<th>服務名稱</th>
+									<th>總共被預約的次數</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
                     </div>
                 </div>
                 <!-- /.row -->
+                <div class="row">
+                	
+                </div>
 			</div>
 		</div>
 	</div>
@@ -84,6 +85,7 @@
 	        series: {
 	            pie: {
 	                show: true
+	              
 	            }
 	        },
 	        grid: {
@@ -98,6 +100,17 @@
 	            },
 	            defaultTheme: false
 	        }
+	    });
+	    
+	    
+	    var tbody = $("#showcount > tbody");
+	    $.each(data,function(idx,serv){
+	    	
+	    var tr = $("<tr></tr>");
+	    var td1 = $("<td></td>").text(serv.label);
+	    var td2 = $("<td></td>").text(serv.data);
+	    tr.append([td1,td2]);
+	    tbody.append(tr);
 	    });
 	});
 	});
