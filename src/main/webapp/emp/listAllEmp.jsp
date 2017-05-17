@@ -51,7 +51,7 @@
 			<c:if test="${empVO.employeePhoto==null}"><td></td></c:if>
 			<c:if test="${empVO.employeePhoto!=null}"><td><img src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(empVO.employeePhoto)}" width="150"/></td></c:if>
 							<td><FORM METHOD="get" ACTION="updateEmp.jsp">
-									<input type="submit" value="修改"> 
+									<button type="submit" class="btn btn-sm btn-primary">修改</button> 
 									<input type="hidden" name="empno" value="${empVO.employeeNo}">
 									<input type="hidden"  name="ename" value="${empVO.employeeName}">
 								</FORM></td>
