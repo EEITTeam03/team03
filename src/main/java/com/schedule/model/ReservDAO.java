@@ -199,6 +199,7 @@ public class ReservDAO implements ReservDAO_interface {
 			
 			cal3.get(Calendar.DATE);
 			cal3.set(Calendar.DAY_OF_MONTH, cal3.getActualMaximum(Calendar.DAY_OF_MONTH));
+			cal3.add(Calendar.DATE, 1);
 			System.out.println(cal3.get(Calendar.DAY_OF_MONTH));
 
 			query.setParameter(1, cal3);
