@@ -69,10 +69,6 @@ body,button,h1{
 	    letter-spacing: 1px;
 	    color: black;
 }
-div.growlUI { background: url(check48.png) no-repeat 10px 10px }
-div.growlUI h1, div.growlUI h2 {
-    color: white; padding: 50px 50px 50px 125px; text-align: right
-}
 </style>
     <script type="text/javascript">   
     	var globalView = "weekView";
@@ -107,9 +103,8 @@ div.growlUI h1, div.growlUI h2 {
         
         function loadingBlock(){
         	 $.blockUI({ 
-//         		 message: '<img src="${ctx}/img/loading/loading_gearwheal.gif" width="20%" height="20%" />',
+        		//message: '<img src="${ctx}/img/loading/loading_gearwheal.gif" width="20%" height="20%" />',
 				message: $('div.blockUI'),
-        		 //overlayCSS: { backgroundColor: '#808080' },
         		 css: { 
         			 border: 'none',
                      left: ($(window).width() - 133) /2 + 'px', 
@@ -120,15 +115,22 @@ div.growlUI h1, div.growlUI h2 {
                       width: '133px',
                       height: '133px'
                  },
-        		 fadeIn: 0, 
-                 onBlock: function() { 
+        		 fadeIn: 0//, 
+//                 onBlock: function() { 
 //                      alert('Page is now blocked'); 
-                 } 
+//                 } 
              }); 
         }
-        function loadingUnblock(){
-        	$.unblockUI();
-//         	alert("close block");
+        function loadingUnblock(isEdit){
+        	if(isEdit){
+        		$.unblockUI({
+           		 onUnblock: function () {
+           			 growlUIAlert();
+           		 }
+           		});
+        	}else{
+        		$.unblockUI();
+        	}
         }
         function growlUIAlert(){
         	$.blockUI({ 
@@ -208,6 +210,7 @@ div.growlUI h1, div.growlUI h2 {
         			//alert("ERROR");
         			//alert(JSON.stringify(data));
         			growlUIError();
+        			loadingUnblock();
         		}
         	});	
         	//[{'servNo':'1001','servName':'引擎室清洗護理'},{'servNo':'1002','servName':'內裝清洗護理'},{'servNo':'1003','servName':'玻璃清潔拋光'},{'servNo':'1004','servName':'車燈霧化處理'}];
@@ -234,6 +237,7 @@ div.growlUI h1, div.growlUI h2 {
         			//alert("ERROR");
         			//alert(JSON.stringify(data));
         			growlUIError();
+        			loadingUnblock();
         		}
         	});	
 			//[{'name':'測試CheckBox1','value':'1'},{'name':'測試CheckBox2','value':'2'},{'name':'測試CheckBox3','value':'3'},{'name':'測試CheckBox4','value':'4'}];
@@ -514,6 +518,7 @@ div.growlUI h1, div.growlUI h2 {
 	        		},
 	        		error:function(data){
 	        			growlUIError();
+	        			loadingUnblock();
 	        		}
 	        	});
     		return calendars;
@@ -615,17 +620,16 @@ div.growlUI h1, div.growlUI h2 {
         		method:"POST",
         		success: function(data){
 //         			alert("success");
-//         			if(action == 'insert'){
         				dataClean();
         				dataSearch(addDate,globalView,true);
-//         			}else{
-        				//loadingUnblock();
-//         			}
         		},        		
         		error:function(data){
         			//alert("ERROR");
-        			loadingUnblock();
-        			growlUIError();
+        			$.unblockUI({
+        				onUnblock: function () {
+        					growlUIError();
+              		 	}
+              		});
         			//alert(JSON.stringify(data));
         		}
         	});
@@ -633,7 +637,9 @@ div.growlUI h1, div.growlUI h2 {
     	
     	/*-------(上下週.上下月.週檢視.月檢視.人工異動預約單  時觸發),傳日期'date'跟區間'view'至servlet-------*/
     	function dataSearch(date,view,isEdit){
-    		loadingBlock();
+    		if(!isEdit){
+    			loadingBlock();
+    		}
         	$.ajax({
         		url: "MyJSON",
         		dataType: "json",
@@ -647,16 +653,22 @@ div.growlUI h1, div.growlUI h2 {
         					$('td',$(this)).eq(5).prop('class','jqx-cell jqx-grid-cell jqx-item jqx-center-align jqx-top-align');
         				});
         			}
-        			loadingUnblock();
+        			
         			if(isEdit){
-        				growlUIAlert();
+        				//growlUIAlert();
 //         				location.reload();
+        				loadingUnblock(true);
+        			}else{
+        				loadingUnblock();
         			}
         		},
         		error:function(data){
         			//alert("ERROR");
-        			loadingUnblock();
-        			growlUIError();
+        			$.unblockUI({
+        				onUnblock: function () {
+        					growlUIError();
+              		 	}
+              		});
         			//alert(JSON.stringify(data));
         		}
         	});	
@@ -852,7 +864,7 @@ div.growlUI h1, div.growlUI h2 {
 <!-- 		<button type="submit" id='test' class="btn btn-sm btn-primary">Test</button> -->
 		<div class="growlUI" style="display: none">
 			<img src="${ctx}/img/loading/check.png" />
-    		<p>訂單異動成功</p>
+    		<p>預約異動成功</p>
 		</div>
 		<div class="growlUIError" style="display: none">
     		<p>重新載入</p>
