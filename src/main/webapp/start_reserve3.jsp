@@ -139,6 +139,16 @@
 	    padding: 14px 20px;
 	    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	}
+	.input-group .btn[class*='seldiv']{
+	    text-transform: capitalize;
+	    color:#bcbcbc;
+	    padding: 14px 20px;
+	    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+	.input-group .btn[class*='seldiv']:hover{
+		background: #f9df85;
+		color:white;
+	}			
 	.input-group .btn-lg{
 	    font-size: 20px;
 	} 	
@@ -191,22 +201,88 @@
 	.dropdown:hover .dropdown-menu {		
 		display: block;
 	}
-	#test{
-		display:none;
-	}		
-	.spline{
-		color:white;
-		padding-left:30px;
-		padding-right:30px;		
+	#liesel{
+		width:75%;
+		display:inline;
+	}			
+	#liesel span:nth-child(1){
+		margin-left:5%;
+		margin-right:5%;		
 	}
-	.seldiv{
+	#liesel span:nth-child(2){
+		margin-left:5%;
+		margin-right:5%;			
+	}
+	#liesel span:nth-child(3){
+		margin-left:5%;
+		margin-right:5%;		
+	}
+	#continue{
+		display:none;
+		-moz-box-shadow:inset 0px 1px 0px 0px #fff6af;
+		-webkit-box-shadow:inset 0px 1px 0px 0px #fff6af;
+		box-shadow:inset 0px 1px 0px 0px #fff6af;
+		background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));
+		background:-moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+		background:-webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+		background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+		background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+		background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
+		background-color:#ffec64;
+		-moz-border-radius:30px;
+		-webkit-border-radius:30px;
+		border-radius:30px;
+		border:1px solid #ffaa22;
+		display:inline-block;
+		cursor:pointer;
 		color:white;
-		background:white;
+		font-family:Arial;
+		font-size:20px;
+		font-weight:bold;
+		padding:10px;
+		text-decoration:none;
+		text-shadow:0px 1px 0px #ffee66;
+		margin:10px;		
+	}
+	#continue:hover{
+		background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));
+		background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+		background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+		background:-o-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+		background:-ms-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+		background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
+		background-color:#ffab23;
+	}
+	#continue:active {
+		position:relative;
+		top:1px;
+	}	
+	
+	#continue span{
+		font-size:40px;
+		width:40px;
+		height:40px;
+	}						
+	.seldiv{
+		display:none;
+		background:rgba(255, 248, 223, 0.91);
 		margin-top:10px;
 		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		width:100%;
+		width:75%;
 		height:60px;
-	}		
+		box-shadow:0 3px 20px rgba(246, 255, 251, 0.59);
+		border-radius:6px;
+		border:0px;
+	}
+	i{
+		margin-right:20%;	
+	}
+	h1{
+		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;	
+	}
+		
 	</style>
 
 
@@ -274,10 +350,7 @@
 			//下拉DIV開關
 			$(".seldiv").slideToggle("slow");
 			//結束
-			
-			
-			
-			
+					
 			//按鈕箭頭符號改變
 			var mark = $("#liesel span:last-child").attr("class");
 			if( mark == "glyphicon glyphicon-chevron-down" ){
@@ -290,6 +363,62 @@
 			//結束
 			
 		});
+ 			
+ 			
+		//讀取會員的車種資料
+  		var no=$("#no").text();
+		$.getJSON("GetCars",{"no":no},function(json){
+			$.each(json,function(idx,GetCars){
+				var bt = $("<button></button>").addClass("btn seldiv").attr({"type":"button"});
+				var i = $("<i></i>").addClass("fa fa-car fa-2x");
+				var sp = $("<span></span>").text(GetCars.license);
+			
+				bt.append([i,sp]);
+				$("#continue").after(bt);
+				
+//  				console.log(json);				
+			});				
+		}); 			
+		//結束   		
+ 		
+		$(document).on('click', '.seldiv', function(event){
+			
+			$("#liesel span:first-child").text($(this).text());
+			
+			//下拉DIV開關
+			$(".seldiv").slideToggle("slow");
+			//結束
+
+			//下一步按扭打開			
+			$("#continue").slideDown();
+			//結束			
+			
+			//按鈕箭頭符號改變
+			var mark = $("#liesel span:last-child").attr("class");
+			if( mark == "glyphicon glyphicon-chevron-down" ){
+				$("#liesel span:last-child").removeClass("glyphicon glyphicon-chevron-down");
+				$("#liesel span:last-child").addClass("glyphicon glyphicon-chevron-up");
+			}else{
+				$("#liesel span:last-child").removeClass("glyphicon glyphicon-chevron-up");
+				$("#liesel span:last-child").addClass("glyphicon glyphicon-chevron-down");				
+			}
+			//結束			
+		}); 
+		
+		//點擊後換下一頁
+	    $("#continue").on('click', function(event){
+			//第二頁打開
+			$(".page2").slideToggle("slow");
+			//第一頁關閉
+			$(".page1").slideToggle("slow");			
+			//結束					     	
+	    });  		
+// 		//離開下一步按紐時觸發事件，改變樣式
+// 	    $("#continue").on('mouseleave', function(event){
+// 	        $(this).css("background","rgba(247, 57, 125, 0.51)");
+// 	     	$("#continue span").css("color","white");
+// 	    });		
+				
    		
   } );
   
@@ -403,28 +532,73 @@
 
 	</header>
 
-
-	<section id="services">
+	<section id="services" class="page1">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
+				<div class="col-xs-1 col-sm-2 col-md-3 col-lg-3 ">
 	
 				</div>
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
-					<div class="input-group" style="width:100%;">												
+				<div class="col-xs-10 col-sm-8 col-md-6 col-lg-6 " >
+					<br>
+					<br>
+					<h1>第一步：選擇您的汽車</h1>	
+					<br>
+					
+					<div class="input-group" style="width:100%; ">
+																	
 						<button id="liesel" class="btn btn-lg light-orange btn-block" type="button">
-							<span>請選擇您的愛車車牌</span><span class="spline">│</span><span class="glyphicon glyphicon-chevron-down"></span>
+							<span>車牌號碼</span><span>│</span><span class="glyphicon glyphicon-chevron-down"></span>
 						</button>
-						<div id="test" class="seldiv">我是測試</div>											
+						<button id="continue" class="btn btn-lg" type="button" style="display:none;">
+							<span class="glyphicon glyphicon-circle-arrow-right"></span>
+						</button>
+																					
 					</div>
-												
+											
 				</div>
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
-	
+				
+				<div class="col-xs-1 col-sm-2 col-md-3 col-lg-3 ">
+
 				</div>							
 			</div>
 		</div>
 	</section>
+	
+	<section id="services" class="page2" style="display:none;">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-1 col-sm-2 col-md-3 col-lg-3 ">
+	
+				</div>
+				<div class="col-xs-10 col-sm-8 col-md-6 col-lg-6 " >
+					<br>
+					<br>
+					<h1>第二步：選擇ef您的美容00服務</h1>	
+					<br>																
+				</div>
+				
+				<div class="col-xs-1 col-sm-2 col-md-3 col-lg-3 ">
+
+				</div>							
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-1 col-sm-2 col-md-1">
+	
+				</div>
+				<div class="col-xs-10 col-sm-8 col-md-10 col-lg-12" >
+																
+				</div>
+				
+				<div class="col-xs-1 col-sm-2 col-md-1">
+
+				</div>							
+			</div>			
+		</div>
+	</section>	
+	
+	
+	<span id="no" hidden="hide">${memberInfo.memberNo}</span>
 		
 		<!-- Bootstrap Core JavaScript -->
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
