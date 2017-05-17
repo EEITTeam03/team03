@@ -60,7 +60,7 @@
  
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
-
+<script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
 
 
 	<style type="text/css">	
@@ -186,7 +186,31 @@
 
 
   <script>
-  
+  function loadingBlock(){
+ 	 $.blockUI({ 
+			message: $('div.blockUI'),
+ 		 //overlayCSS: { backgroundColor: '#808080' },
+ 		 css: { 
+ 			 border: 'none',
+ 			 //backgroundColor:'#f7f7f7',
+              left: ($(window).width() - 228) /2 + 'px', 
+				'-webkit-border-radius': '10px', 
+             '-moz-border-radius': '10px', 
+             padding: '25px',
+              opacity: 0.8,
+               width: '228px',
+               height: '228px'
+          },
+ 		 fadeIn: 0, 
+          onBlock: function() { 
+              //alert('Page is now blocked'); 
+          } 
+      }); 
+ }
+ function loadingUnblock(){
+ 	$.unblockUI();
+ 	//alert("close block");
+ }
   
   $( function() {
 		
@@ -244,7 +268,7 @@
  			//結束  	
    		//ReservListJSON
 		$.getJSON('ReservListJSON',function(json){
-			
+			loadingBlock();
    			$.each(json.list,function(idx,orderStatus){
    			console.log(orderStatus);	
   			 	var reservNo = orderStatus.reservNo;//JSON第N筆拿到的預約編號	
@@ -351,7 +375,7 @@
   			 	
   	    		$("table > tbody").append(tr);
    			})
-			
+   			loadingUnblock();
    		}) 	   		  	 	
  	
 
@@ -502,7 +526,9 @@
 																								
 						</tbody>
 					</table>
-					
+					<div class="blockUI" style="display: none">
+						<img src="${ctx}/img/loading/reservlist_loading.gif" width="170px" height="170px"/>
+					</div>
 					
 				</div>
 				
