@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.servicestep.model.*" %>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,14 +45,13 @@ swal("修改成功!","服務已更新","success");
 		<br>
 		<li><a href='${ctx}/services/ListAllServiceStep.jsp'>查看</a>所有服務步驟 (後台)</li>
 		<br>
-		<jsp:useBean id="ss" scope="page"
-			class="com.services.model.ServicesService" />
+		<jsp:useBean id="ss" scope="page" class="com.services.model.ServicesService" />
 		<li>
 			<FORM METHOD="post" ACTION="${ctx}/services/services.do">
 				<b>選擇服務編號(後台):</b> 
 				<select size="1" name="servNo" class="form-control">
 					<c:forEach var="servicesVO" items="${ss.all}">
-						<option value="${servicesVO.servNo}">${servicesVO.servNo}
+						<option value="${servicesVO.servNo}">${servicesVO.servNo}-${servicesVO.servName}
 					</c:forEach>
 				</select>
 	
@@ -61,15 +62,22 @@ swal("修改成功!","服務已更新","success");
 		</li>
 		<br>
 	
-	<jsp:useBean id="sss" scope="page"
-		class="com.servicestep.model.ServiceStepService" />
+<% 
+	ServiceStepService sss = new ServiceStepService();
+    List<Integer> list= sss.getDist();
+    List<ServiceStepVO>sslist = new ArrayList<ServiceStepVO>();
+    for(Integer servNO:list){
+    	sslist.add(sss.getMoreServiceStepbyFK(servNO).get(0));
+    }
+    pageContext.setAttribute("list",sslist);
+%>
 
 		<li>
 			<FORM METHOD="post" ACTION="${ctx}/services/servicestep.do">
 				<b>選擇服務編號的所有步驟(後台):</b> 
 				<select size="1" name="servNo" class="form-control">
-					<c:forEach var="distInt" items="${sss.dist}">
-						<option value="${distInt}">${distInt}
+					<c:forEach var="distlist" items="${list}">
+						<option value="${distlist.servicesVO.servNo}">${distlist.servicesVO.servNo}-${distlist.stepName}
 					</c:forEach>
 				</select> 
 				<button type="submit" class="btn btn-sm btn-primary">送出</button>

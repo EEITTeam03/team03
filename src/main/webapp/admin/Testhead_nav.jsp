@@ -128,7 +128,7 @@ body,button,h1{
 				<ul class="nav navbar-nav side-nav">
 					<li><a href="${ctx}/scheduleTest3.jsp"><i class="fa fa-car"></i> 管理工作排程</a></li>
 					<li><a href="${ctx}/services/SelectServices.jsp"><i class="fa fa-fw fa-table"></i>維護服務項目</a></li>
-					<li><a href="chart.jsp" id="a_test"><i
+					<li><a href="${ctx}/admin/chart.jsp" id="a_test"><i
 							class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a></li>
 					<li><a href="#" data-toggle="collapse" data-target="#blocklist">
 							<i class="fa fa-fw fa-edit"></i> 
@@ -149,7 +149,7 @@ body,button,h1{
 						</a>
 						<ul id="demo" class="collapse">
 							<li>
-								<a href="#">會員</a>
+								<a href="${ctx}/admin/member.jsp">會員</a>
 							</li>
 							<li>
 							<a href="#" data-toggle="collapse" data-target="#demoemp">
@@ -158,7 +158,7 @@ body,button,h1{
 							</a>
 								<ul id="demoemp" class="collapse nav navbar-nav">
 									<li><a href="${ctx}/emp/listAllEmp.jsp">員工清單</a></li>
-									<li><a href="${ctx}/emp/updateEmp.jsp">名單維護</a></li>
+<%-- 									<li><a href="${ctx}/emp/updateEmp.jsp">名單維護</a></li> --%>
 									<li><a href="${ctx}/emp/insertEmp.jsp">新增名單</a></li>
 								</ul>
 							</li>
