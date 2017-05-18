@@ -29,10 +29,10 @@ public class TestHB {
 		//System.out.println(list);
 		
 		for(Object[] obj:list){
-//			System.out.println(obj[0].getClass().getName());
-//			System.out.println(obj[1].getClass().getName());
-			System.out.println(String.valueOf(obj[0]));
-			System.out.println(obj[1]);
+			System.out.println(obj[0].getClass().getName());
+			System.out.println(obj[1].getClass().getName());
+//			System.out.println(String.valueOf(obj[0]));
+//			System.out.println(obj[1]);
 		}
 	}
 

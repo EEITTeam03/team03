@@ -83,6 +83,13 @@
                                 <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Bar Graph Example</h3>
                             </div>
                             <div class="panel-body">
+                            	<select id="barselect">
+                            		<option value="2017-01">1</option>
+                            		<option value="2017-02">2</option>
+                            		<option value="2017-03">3</option>
+                            		<option value="2017-04">4</option>
+                            		<option value="2017-05">5</option>
+                            	</select>
                                 <div id="morris-bar-chart"></div>
                                 <div class="text-right">
                                     <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
@@ -208,36 +215,30 @@
 	}
 			
 		    // Bar Chart
-		    Morris.Bar({
-		        element: 'morris-bar-chart',
-		        data: [{
-		            device: 'iPhone',
-		            geekbench: 136
-		        }, {
-		            device: 'iPhone 3G',
-		            geekbench: 137
-		        }, {
-		            device: 'iPhone 3GS',
-		            geekbench: 275
-		        }, {
-		            device: 'iPhone 4',
-		            geekbench: 380
-		        }, {
-		            device: 'iPhone 4S',
-		            geekbench: 655
-		        }, {
-		            device: 'iPhone 5',
-		            geekbench: 1571
-		        }],
-		        xkey: 'device',
-		        ykeys: ['geekbench'],
-		        labels: ['Geekbench'],
-		        barRatio: 0.4,
-		        xLabelAngle: 35,
-		        hideHover: 'auto',
-		        resize: true
+		    
+		    $("#barselect").change(function(){
+		    	
+		    	var month2 = $(this).val();
+		    	
+			    $.getJSON('${ctx}/EmpProfit',{'month':month2},function(data){
+			    	showbar (data);
+			    });
 		    });
-			
+		    
+		    
+		    function showbar (data) {
+			    Morris.Bar({
+			        element: 'morris-bar-chart',
+			        data: data,
+			        xkey: 'device',
+			        ykeys: ['geekbench'],
+			        labels: ['Geekbench'],
+			        barRatio: 0.4,
+			        xLabelAngle: 35,
+			        hideHover: 'auto',
+			        resize: true
+			    });
+		    }
 	loadingUnblock();		
 });
 	</script>

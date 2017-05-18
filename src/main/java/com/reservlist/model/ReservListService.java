@@ -7,9 +7,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.employee.model.EmployeeService;
 import com.membercars.model.MemberCarsVO;
 import com.membercars.model.MembercarsService;
-import com.memberinfo.model.MemberInfoVO;
 import com.schedule.model.ReservService;
 import com.schedule.model.ReservVO;
 import com.services.model.ServicesService;
@@ -145,6 +145,25 @@ public class ReservListService {
 			ServicesVO servVO = svc.getOneService((Integer)obj[0]);
 			map.put("label", servVO.getServName());
 			map.put("data", count);
+			JSONlist.add(map);
+		}
+		
+		return JSONlist;
+	}
+	
+	public List<Map<String,Object>> getProfitByMonth(String month){
+		List<Map<String,Object>> JSONlist = new ArrayList<>();
+		List<Object[]> list = dao.listAllMoney(month);
+		
+		EmployeeService esvc = new EmployeeService();
+		
+		for(Object[] obj:list){
+			Map<String,Object> map = new HashMap<>();
+			Integer emp =(Integer)obj[0];
+			String empName = esvc.getOneEmp(emp).getEmployeeName();
+			Long profit = (Long)obj[1];
+			map.put("device", empName);
+			map.put("geekbench", profit);
 			JSONlist.add(map);
 		}
 		
