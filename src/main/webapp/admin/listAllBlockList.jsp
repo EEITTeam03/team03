@@ -60,7 +60,19 @@ BlockListService blsvc = new BlockListService();
 	$(function(){
 		loadingBlock();
 		if("${OKalert}"=="updateOK"){
-			swal("新增成功!", "已加入黑名單", "success");
+// 			swal("新增成功!", "已加入黑名單", "success");
+			swal({
+				  title: "新增成功!",
+				  text: "已加入黑名單",
+				  imageUrl: "${ctx}/img/loading/check.png",
+				  type: "",
+				  timer: 700,
+				  //animation: "slide-from-top",
+				  showConfirmButton: false,
+				  confirmButtonText: "確定刪除",
+				  cancelButtonText:"取消",
+				  allowOutsideClick: true
+			});
 			<% session.removeAttribute("OKalert"); %>
 		}
 		loadingUnblock();
