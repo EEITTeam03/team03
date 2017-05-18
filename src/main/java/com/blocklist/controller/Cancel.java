@@ -141,8 +141,8 @@ request.setCharacterEncoding("UTF-8");
 					rsvc.updateReserv(rVO.getReservNo(), rVO.getReservDateTime(), rVO.getNoteC(), rVO.getNotesE(), rVO.getStatus(), rVO.getMembercarsVO(), rVO.getEmployeeVO(), rVO.getReservlists());
 					
 //					request.getSession().setAttribute("OKalert","updateOK");
-					String url = "/orderStatus.jsp";
-					response.sendRedirect(getServletContext().getContextPath()+url);
+//					String url = "/orderStatus.jsp";
+//					response.sendRedirect(getServletContext().getContextPath()+url);
 					
 			}catch (Exception e) {
 				errorMsgMap.put(e.getMessage(), "其他錯誤");

@@ -61,6 +61,8 @@
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
+<script src="${ctx}/admin/SweetAlert/js/sweetalert.min.js"></script> 
+<link href="${ctx}/admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
 
 
 	<style type="text/css">	
@@ -292,6 +294,8 @@
 	  	    		var td7 = $("<td style='vertical-align:middle;'>" + employeeName + "</td>");  	    		
 	  	    		var td8 = $("<td style='vertical-align:middle;'></td>");
 	  	    		var td9 = $("<td style='vertical-align:middle;'></td>");
+	  	    		var td10 = $("<td style='vertical-align:middle;'></td>");
+	  	    		
 	  	    		//服務明細按鈕
 	  	    		var btnServ = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","data-container":"body"});
 	  	    		var span1 = $("<span></span>").addClass("glyphicon glyphicon-list-alt");
@@ -354,7 +358,20 @@
 	  	    		serTbd.append([serTrp,serTrt]);
 	  	    		 	    		
 	  	    		serTbe.append([serThd,serTbd]);
-	
+					
+	  	    		//取消訂單按鈕
+	  	    		if(cts > rets){
+	  	    			var btnCancle = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","disabled":"true"});
+	  	    		}else{
+	  	    			var btnCancle = $("<button onclick='cancleReservList(this.value)'></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","value":reservNo});
+	  	    		}
+	  	    		var span3 = $("<span></span>").addClass("glyphicon glyphicon-remove");
+	  	    		
+// 	  	    		if(cts > rdts && cts < rets){
+// 		  	    		var btnMit = $("<button onclick='opsurveillance(this.value)'></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","value":reservNo});	
+// 	  	    		}else{
+// 	  	    			var btnMit = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","disabled":"true"}); 	    			
+// 	  	    		}
 	
 	  	    		//設定訂單查詢按鈕，所彈出的提示內容，以及相關參數設定
 					$(btnServ).popover({
@@ -372,7 +389,10 @@
 	  	    		btnMit.append(span2);
 	  	    		td9.append(btnMit);
 	  	    		
-	  	    		tr.append([td1,td2,td3,td4,td5,td6,td7,td8,td9]);
+	  	    		btnCancle.append(span3);
+	  	    		td10.append(btnCancle);
+	  	    		
+	  	    		tr.append([td1,td2,td3,td4,td5,td6,td7,td8,td9,td10]);
 	  			 	
 	  	    		$("table > tbody").append(tr);
 	  	    		
@@ -391,7 +411,39 @@
 		window.open("surveillance.jsp?reservNo="+value,"觀看愛車");
 	}
   
-  
+	function cancleReservList(reservNo){
+		swal({
+			  title: "確定要取消預約?",
+			  text: "注意: 取消預約超過三次，此帳號將會被停權三個月",
+			  imageUrl: "img/alert/cancelRer.png",
+			  type: "",
+			  showCancelButton: true,
+			  confirmButtonColor: "#DD6B55",
+			  confirmButtonText: "確定刪除",
+			  cancelButtonText:"取消",
+			  closeOnConfirm: false
+			},
+			function(){
+				$.ajax({
+		    		url: "Cancel",
+		    		dataType: "text",
+		    		data: {'action':'cancel','reservNo':reservNo},
+		    		method:"GET",
+		    		success:function(data){
+		    			swal({
+		  				  title: "預約單已刪除!",
+		  				  text: "", 
+		  				  imageUrl:"img/loading/check.png"},function(){location.reload();});
+		    			
+		    		},
+		    		error:function(data){
+		    			swal({title: "取消失敗",
+			  				  text: "請來電取消，謝謝!", 
+			  				  imageUrl:"img/alert/cancelRer.png"});
+		    		}
+		    	});
+		});
+	}
   </script>
 
 <style>
@@ -509,16 +561,16 @@
 
 	<section id="services">
 		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 text-center">
-				<form action="${ctx}/Cancel">
-					<h2>請輸入預約編號</h2>
-					<input type="text" name="reservNo">
-					<input type="hidden" name="action" value="cancel">
-					<input type="submit" value="取消" class="btn btn-danger">
-				</form>
-				</div>
-			</div>
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-xs-12 text-center"> -->
+<%-- 				<form action="${ctx}/Cancel"> --%>
+<!-- 					<h2>請輸入預約編號</h2> -->
+<!-- 					<input type="text" name="reservNo"> -->
+<!-- 					<input type="hidden" name="action" value="cancel"> -->
+<!-- 					<input type="submit" value="取消" class="btn btn-danger"> -->
+<!-- 				</form> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
 					<table class="table table-hover">
@@ -533,6 +585,7 @@
 								<th>服務技師</th>
 								<th>服務明細</th>
 								<th>觀看愛車</th>
+								<th>取消預約</th>
 							</tr>
 						</thead>																
 						<tbody>
