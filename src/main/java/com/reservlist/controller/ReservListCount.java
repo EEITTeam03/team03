@@ -38,10 +38,15 @@ public class ReservListCount extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-
+		
+		String month = request.getParameter("month");
+		if(month==null){
+			out.println("no input");
+			return;
+		}
 		
 		ReservListService svc= new ReservListService();
-		List<Map<String,Object>> list = svc.getCountByServ();
+		List<Map<String,Object>> list = svc.getCountByServ(month);
 		String jsonString = JSONValue.toJSONString(list);
 		out.print(jsonString);
 	}

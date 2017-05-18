@@ -29,6 +29,17 @@ public class MyUtil {
 		return cal;
 	}
 	
+	public static Calendar getCalenderMonth(String month) {
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		try {
+			cal.setTime(sdf.parse(month));
+		} catch (ParseException e) {
+			throw new RuntimeException("日期格式錯誤!");
+		}
+		return cal;
+	}
+	
 	
 	public static Calendar getCalender(String strDate , String strTime) {
 		Calendar cal = Calendar.getInstance();

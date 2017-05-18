@@ -1,14 +1,16 @@
 package com.reservlist.model;
 
+import java.util.Calendar;
 import java.util.List;
 
-import com.schedule.model.ReservService;
-import com.services.model.ServicesService;
-import com.services.model.ServicesVO;
+import myutil.MyUtil;
 
 public class TestHB {
 
 	public static void main(String[] args) {
+		
+//		Calendar cal = MyUtil.getCalenderMonth("2017-5");
+//		System.out.println(cal);
 		
 //		ReservService rsvc = new ReservService();
 //		ServicesService ssvc = new ServicesService();
@@ -19,7 +21,9 @@ public class TestHB {
 //		System.out.println(svc.findByReservNo(25));
 		
 		ReservListHibernateDAO dao = new ReservListHibernateDAO();
-		List<Object[]> list = dao.listAllCount();
+//		List<Object[]> list = dao.listAllCount();
+//		List<Object[]> list = dao.listAllCount("2017-7");
+		List<Object[]> list = dao.listAllMoney("2017-5");
 //		System.out.println(dao.listAllByServ("2001"));
 		
 		//System.out.println(list);

@@ -43,7 +43,7 @@ swal("完成回覆!","","info");
 	<th>意見</th>
 	<th>評價</th>
 	<th>回覆意見</th>
-	<th>回覆狀態</th>
+	<th>查看回覆</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -65,13 +65,14 @@ swal("完成回覆!","","info");
 			</c:choose>
 			</td>
 			<td><FORM METHOD="get" ACTION="replyFeedback.jsp">
-									<input type="submit" value="回覆"> 
+						<c:if test="${fVO.reply!=null}">已回覆 </c:if>
+						<c:if test="${fVO.reply==null}"><input type="submit" value="回覆"></c:if>
 									<input type="hidden" name="feedbackNo" value="${fVO.feedbackNo}">
 									<input type="hidden"  name="memberName" value="${fVO.memberName}">
 									<input type="hidden"  name="reply" value="${fVO.reply}">
 								</FORM></td>
-			<c:if test="${fVO.reply!=null}"><td>已回</td></c:if>
-			<c:if test="${fVO.reply==null}"><td>未回</td></c:if>
+			<td><button class="btn btn-primary" onclick="swal('${fVO.reply}')">查看</button></td>
+
 		</tr>
 	</c:forEach>
 	</c:if>

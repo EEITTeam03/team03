@@ -132,9 +132,9 @@ public class ReservListService {
 		return JSONlist;
 	}
 	
-	public List<Map<String,Object>> getCountByServ(){
+	public List<Map<String,Object>> getCountByServ(String month){
 		List<Map<String,Object>> JSONlist = new ArrayList<>();
-		List<Object[]> list = dao.listAllCount();
+		List<Object[]> list = dao.listAllCount(month);
 		
 		ServicesService svc = new ServicesService();
 		
