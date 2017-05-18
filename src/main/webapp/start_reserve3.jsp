@@ -61,229 +61,260 @@
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 
+<!-- Bootstrap Core JavaScript -->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <style type="text/css">	
-		.nav-fut-li{
-			width: 114px;
-			height: 50px;
-			text-align: center;
-			margin:0px 0px 0px 15px ;
-		}
-		.menu-fut-li{
-			width: 114px;
-			height: 50px;
-			text-align: center;
-			margin:10px 0px 0px 5px ;
-		}		
-		.fun-btn{
-			width: 100%;
-			height: 100%;
-			padding:0px;
-			margin:0px auto;
-		    color: white;
-		    background-color: #fed136;
-		    border-color: #fed136;
-		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		    text-transform: uppercase;
-		    font-weight: 700;					
-		}		
-		.fun-btn:hover{
-			width: 100%;
-			height: 100%;
-			padding:0px;
-			margin:0px auto;
-		    color: #fed136;
-		    background-color: transparent;
-		    border-color: #fed136;
-		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		    text-transform: uppercase;
-		    font-weight: 700;						
-		}
-		.mem-btn{
-			width: 100%;
-			height: 100%;
-			padding:0px;
-			margin:0px auto;
-		    color: #fed136;
-		    background-color: transparent;
-		    border:0px;
-		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		    text-transform: uppercase;
-		    font-weight: 700;					
-		}
-		.mem-btn:hover{
-			width: 100%;
-			height: 100%;
-			padding:0px;
-			margin:0px auto;
-		    color: #fed136;
-		    background-color: transparent;
-		    border-color: #fed136;
-		    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		    text-transform: uppercase;
-		    font-weight: 700;						
-		}	
-		.dropdown-menu {
-		    color: #fed136;
-		    background-color: #222222;
-			text-align: center;
- 		    min-width: 114px; 
-		}	
-	.input-group .btn:hover, .btn:focus{
-	    outline: none;
-	    color:#fff;
-	}
-	.input-group .btn{
-	    text-transform: capitalize;
-	    color:#fff;
-	    padding: 14px 20px;
-	    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	}
-	.input-group .btn[class*='seldiv']{
-	    text-transform: capitalize;
-	    color:#bcbcbc;
-	    padding: 14px 20px;
-	    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	}
-	.input-group .btn[class*='seldiv']:hover{
-		background: #f9df85;
-		color:white;
-	}			
-	.input-group .btn-lg{
-	    font-size: 20px;
-	} 	
-	.input-group .blue,.light-brown,.light-green,.light-orange{
-	    background: #0088cc;
-	    box-shadow:0 4px 0 #006394;
-	    transition:all 0.1s ease-in-out 0s;
-	    position: relative;
-	    top:0;
-	}
-	.input-group .light-brown{
-	    background: #cec2ab;
-	    box-shadow: 0 4px 0 #b9a888;
-	}
-	.input-group .light-green{
-	    background: #75d69c;
-	    box-shadow:0 4px 0 #4ac97d;
-	    border-radius: 25px;
-	}
-	.input-group .light-orange{
-	    background: #fed136;
-	    box-shadow:0 4px 0 rgb(228, 183, 54);
-	} 
-	
-	.input-group .blue:hover,.light-brown:hover,.light-green:hover,.light-orange:hover{
-	    top:2px;
-	    box-shadow:0 2px 0 #006394;
-	}
-	.input-group .light-brown:hover{
-	    box-shadow: 0 2px 0 #b9a888;
-	}
-	.input-group .light-green:hover{
-	    box-shadow:0 2px 0 #4ac97d;
-	}
-	.input-group .light-orange:hover{
-	    box-shadow: 0 2px 0 #fed136;
-	}	
+.img-services{						
+	width:360px;					
+	height:260px;					
+}						
+.big-img-services{						
+	width:700px;					
+	height:500px;					
+}						
+.nav-fut-li{						
+	width: 114px;					
+	height: 50px;					
+	text-align: center;					
+	margin:0px 0px 0px 15px ;					
+}						
+.menu-fut-li{						
+	width: 114px;					
+	height: 50px;					
+	text-align: center;					
+	margin:10px 0px 0px 5px ;					
+}						
+.fun-btn{						
+	width: 100%;					
+	height: 100%;					
+	padding:0px;					
+	margin:0px auto;					
+    color: white;						
+    background-color: #fed136;						
+    border-color: #fed136;						
+    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;						
+    text-transform: uppercase;						
+    font-weight: 700;						
+}						
+.fun-btn:hover{						
+	width: 100%;					
+	height: 100%;					
+	padding:0px;					
+	margin:0px auto;					
+    color: #fed136;						
+    background-color: transparent;						
+    border-color: #fed136;						
+    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;						
+    text-transform: uppercase;						
+    font-weight: 700;						
+}						
+.mem-btn{						
+	width: 100%;					
+	height: 100%;					
+	padding:0px;					
+	margin:0px auto;					
+    color: #fed136;						
+    background-color: transparent;						
+    border:0px;						
+    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;						
+    text-transform: uppercase;						
+    font-weight: 700;						
+}						
+.mem-btn:hover{						
+	width: 100%;					
+	height: 100%;					
+	padding:0px;					
+	margin:0px auto;					
+    color: #fed136;						
+    background-color: transparent;						
+    border-color: #fed136;						
+    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;						
+    text-transform: uppercase;						
+    font-weight: 700;						
+}						
+.dropdown-menu {						
+    color: #fed136;						
+    background-color: #222222;						
+	text-align: center;					
+    min-width: 114px; 						
+}						
+.dropdown:hover .dropdown-menu {						
+						
+	display: block;					
+}									
+							
+.input-group .btn:hover, .btn:focus{							
+    outline: none;							
+    color:#fff;							
+}							
+.input-group .btn{							
+    text-transform: capitalize;							
+    color:#fff;							
+    padding: 14px 20px;							
+    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;							
+}							
+.input-group .btn[class*='seldiv']{							
+    text-transform: capitalize;							
+    color:#bcbcbc;							
+    padding: 14px 20px;							
+    font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;							
+}							
+.input-group .btn[class*='seldiv']:hover{							
+	background: #f9df85;						
+	color:white;						
+}							
+.input-group .btn-lg{							
+    font-size: 20px;							
+} 							
+.input-group .blue,.light-brown,.light-green,.light-orange{							
+    background: #0088cc;							
+    box-shadow:0 4px 0 #006394;							
+    transition:all 0.1s ease-in-out 0s;							
+    position: relative;							
+    top:0;							
+}							
+.input-group .light-brown{							
+    background: #cec2ab;							
+    box-shadow: 0 4px 0 #b9a888;							
+}							
+.input-group .light-green{							
+    background: #75d69c;							
+    box-shadow:0 4px 0 #4ac97d;							
+    border-radius: 25px;							
+}							
+.input-group .light-orange{							
+    background: #fed136;							
+    box-shadow:0 4px 0 rgb(228, 183, 54);							
+} 							
+							
+.input-group .blue:hover,.light-brown:hover,.light-green:hover,.light-orange:hover{							
+    top:2px;							
+    box-shadow:0 2px 0 #006394;							
+}							
+.input-group .light-brown:hover{							
+    box-shadow: 0 2px 0 #b9a888;							
+}							
+.input-group .light-green:hover{							
+    box-shadow:0 2px 0 #4ac97d;							
+}							
+.input-group .light-orange:hover{							
+    box-shadow: 0 2px 0 #fed136;							
+}							
+							
+.input-group input:-webkit-autofill {							
+  -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */							
+  -webkit-text-fill-color: #333;							
+}							
+							
+.input-group input:-webkit-autofill:focus {							
+  -webkit-box-shadow:0 0 0 50px white inset;							
+  -webkit-text-fill-color: #333;							
+}							
+							
+							
+.dropdown:hover .dropdown-menu {							
+	display: block;						
+}							
+#liesel{							
+	width:75%;						
+	display:inline;						
+}							
+#liesel span:nth-child(1){							
+	margin-left:5%;						
+	margin-right:5%;						
+}							
+#liesel span:nth-child(2){							
+	margin-left:5%;						
+	margin-right:5%;						
+}							
+#liesel span:nth-child(3){							
+	margin-left:5%;						
+	margin-right:5%;						
+}							
+#selcar .continue,#portfolio .continue{							
+	display:none;						
+	-moz-box-shadow:inset 0px 1px 0px 0px #fff6af;						
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fff6af;						
+	box-shadow:inset 0px 1px 0px 0px #fff6af;						
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));						
+	background:-moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);						
+	background:-webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);						
+	background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);						
+	background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);						
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);						
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);						
+	background-color:#ffec64;						
+	-moz-border-radius:30px;						
+	-webkit-border-radius:30px;						
+	border-radius:30px;						
+	border:1px solid #ffaa22;						
+	display:inline-block;						
+	cursor:pointer;						
+	color:white;						
+	font-family:Arial;						
+	font-size:20px;						
+	font-weight:bold;						
+	padding:10px;						
+	text-decoration:none;						
+	text-shadow:0px 1px 0px #ffee66;						
+	margin:10px;						
+}							
+#selcar .continue:hover,#portfolio .continue:hover{							
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));						
+	background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);						
+	background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);						
+	background:-o-linear-gradient(top, #ffab23 5%, #ffec64 100%);						
+	background:-ms-linear-gradient(top, #ffab23 5%, #ffec64 100%);						
+	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);						
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);						
+	background-color:#ffab23;						
+}							
+#selcar .continue:active,#portfolio .continue:active{							
+	position:relative;						
+	top:1px;						
+}							
+							
+#selcar .continue span,#portfolio .continue span{							
+	font-size:40px;						
+	width:40px;						
+	height:40px;						
+}							
+.seldiv{							
+	display:none;						
+	background:rgba(255, 248, 223, 0.91);						
+	margin-top:10px;						
+	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;						
+	width:75%;						
+	height:60px;						
+	box-shadow:0 3px 20px rgba(246, 255, 251, 0.59);						
+	border-radius:6px;						
+	border:0px;						
+}							
+i{							
+	margin-right:20%;						
+}							
+h1,h2{							
+	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;						
+}
+h1{
+	color: red;
+	text-shadow: rgb(255, 255, 255) 0px -1px 4px, rgb(255, 255, 0) 0px -2px 10px, rgb(255, 128, 0) 0px -10px 20px, rgb(255, 0, 0) 0px -18px 40px
+}
+h2{
+	color: white;
+	text-shadow: rgb(204, 204, 204) 0px 1px 0px, rgb(201, 201, 201) 0px 2px 0px, rgb(187, 187, 187) 0px 3px 0px, rgb(185, 185, 185) 0px 4px 0px, rgb(170, 170, 170) 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 6px 1px, rgba(0, 0, 0, 0.1) 0px 0px 5px, rgba(0, 0, 0, 0.3) 0px 1px 3px, rgba(0, 0, 0, 0.15) 0px 3px 5px, rgba(0, 0, 0, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.2) 0px 10px 10px, rgba(0, 0, 0, 0.1) 0px 20px 20px;
+}							
+#portfolio .portfolio-item .portfolio-caption{
+	padding:5px;
+}
+.serv-price{
+	padding-left:30px;
+	padding-right:30px;
+}
 
-	.input-group input:-webkit-autofill {
-	  -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
-	  -webkit-text-fill-color: #333;
-	}
-	
-	.input-group input:-webkit-autofill:focus {
-	  -webkit-box-shadow:0 0 0 50px white inset;
-	  -webkit-text-fill-color: #333;
-	}		
 		
-					
-	.dropdown:hover .dropdown-menu {		
-		display: block;
-	}
-	#liesel{
-		width:75%;
-		display:inline;
-	}			
-	#liesel span:nth-child(1){
-		margin-left:5%;
-		margin-right:5%;		
-	}
-	#liesel span:nth-child(2){
-		margin-left:5%;
-		margin-right:5%;			
-	}
-	#liesel span:nth-child(3){
-		margin-left:5%;
-		margin-right:5%;		
-	}
-	#continue{
-		display:none;
-		-moz-box-shadow:inset 0px 1px 0px 0px #fff6af;
-		-webkit-box-shadow:inset 0px 1px 0px 0px #fff6af;
-		box-shadow:inset 0px 1px 0px 0px #fff6af;
-		background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));
-		background:-moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);
-		background:-webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);
-		background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);
-		background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);
-		background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
-		background-color:#ffec64;
-		-moz-border-radius:30px;
-		-webkit-border-radius:30px;
-		border-radius:30px;
-		border:1px solid #ffaa22;
-		display:inline-block;
-		cursor:pointer;
-		color:white;
-		font-family:Arial;
-		font-size:20px;
-		font-weight:bold;
-		padding:10px;
-		text-decoration:none;
-		text-shadow:0px 1px 0px #ffee66;
-		margin:10px;		
-	}
-	#continue:hover{
-		background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));
-		background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);
-		background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);
-		background:-o-linear-gradient(top, #ffab23 5%, #ffec64 100%);
-		background:-ms-linear-gradient(top, #ffab23 5%, #ffec64 100%);
-		background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
-		background-color:#ffab23;
-	}
-	#continue:active {
-		position:relative;
-		top:1px;
-	}	
-	
-	#continue span{
-		font-size:40px;
-		width:40px;
-		height:40px;
-	}						
-	.seldiv{
-		display:none;
-		background:rgba(255, 248, 223, 0.91);
-		margin-top:10px;
-		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		width:75%;
-		height:60px;
-		box-shadow:0 3px 20px rgba(246, 255, 251, 0.59);
-		border-radius:6px;
-		border:0px;
-	}
-	i{
-		margin-right:20%;	
-	}
-	h1{
-		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;	
-	}
-		
-	</style>
+</style>
 
 
 
@@ -374,7 +405,7 @@
 				var sp = $("<span></span>").text(GetCars.license);
 			
 				bt.append([i,sp]);
-				$("#continue").after(bt);
+				$("#pg1").after(bt);
 				
 //  				console.log(json);				
 			});				
@@ -390,7 +421,7 @@
 			//結束
 
 			//下一步按扭打開			
-			$("#continue").slideDown();
+			$("#pg1").slideDown();
 			//結束			
 			
 			//按鈕箭頭符號改變
@@ -403,23 +434,149 @@
 				$("#liesel span:last-child").addClass("glyphicon glyphicon-chevron-down");				
 			}
 			//結束			
-		}); 
+		});
+		
+		//網頁讀取完畢後，第一頁打開
+		$(".page1").slideToggle("slow");
+		//結束
 		
 		//點擊後換下一頁
-	    $("#continue").on('click', function(event){
+	    $("#pg1").on('click', function(event){
 			//第二頁打開
-			$(".page2").slideToggle("slow");
+			$(".page2").slideToggle("slow");			
 			//第一頁關閉
 			$(".page1").slideToggle("slow");			
 			//結束					     	
-	    });  		
-// 		//離開下一步按紐時觸發事件，改變樣式
-// 	    $("#continue").on('mouseleave', function(event){
-// 	        $(this).css("background","rgba(247, 57, 125, 0.51)");
-// 	     	$("#continue span").css("color","white");
-// 	    });		
+	    }); 
+		
+		
+		//服務項目文字區塊點擊後，自動選擇該服務並更換樣式
+	    $(document).on('click','.portfolio-caption',function(event){
+	    	
+	    	var dvalue = $(this).attr("value");
+	    	$("#svesall1 div:gt(0) div").attr({"style":"background-color:white;"});
+			$(this).attr({"style":"background-color:#84B57E;"});
+			
+	    	if(dvalue <= 2000){
+	    		if($("#"+dvalue).prop("checked")){
+					$("#"+dvalue).removeAttr("checked");
+					$(this).attr({"style":"background-color:white;"});
+	    		}else{
+	    			$("#"+dvalue).prop({"checked":"true"});
+	    		}
+	    	}else{
+				$("#svesall1:radio").removeAttr("checked");
+				$("#"+dvalue).prop({"checked":"true"});
+	    	}
+	    }); 		
+			
+	  
+
+		var snumber = 0;
+   			
+		$.getJSON('services/TestGetJsonPic',function(json){
+
+			$.each(json,function(idx,services){
+				console.log(services);
+				//以下開始動態生成美容項目DIV
+				var servName = services.servName;													
+				var servDesc = services.servDesc;													
+				var servNo = services.servNo;
 				
-   		
+				var bigd = $("<div></div>").addClass("col-xs-12 col-sm-6 col-md-4 col-lg-3 portfolio-item").attr("style","height:210px;");													
+				   			   										
+				var mya = $("<a></a>").attr({"href":"#portfolioModal"+snumber,"data-toggle":"modal"}).addClass("portfolio-link");													
+																	
+				var smalld = $("<div></div>").addClass("portfolio-hover");													
+				var nd = $("<div></div>").addClass("portfolio-hover-content");													
+				var ii = $("<div></div>").addClass("fa fa-plus fa-3x");													
+																	
+				var smallimg = $("<img>").addClass("img-responsive img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":"","style":"height:160px;"});													
+				   													
+				nd.append(ii);  													
+				smalld.append(nd);													
+				mya.append([smalld,smallimg]);													
+																	
+				var myd = $("<div></div>").addClass("portfolio-caption").attr({"value":servNo});													
+																	
+				var hword = $("<h4></h4>").text(servName);													
+				var pword = $("<p></p>").addClass("text-muted");													
+				var prcsp = $("<span></span>").addClass("serv-price").text("Graphic Design");
+				pword.append(prcsp);
+				
+				var selsp = $("<span></span>");
+				var lb = $("<label></label>").attr({"for":servNo}).text("選擇");				
+				if( servNo <= 2000 ){
+					var rad = $("<input type='checkbox' name='checkbox'></input>").attr({"id":servNo}); 
+					selsp.append(rad,lb);
+					pword.append(selsp);
+					myd.append([hword,pword]);													
+					bigd.append([mya,myd]);						
+					$("#svesall2").append(bigd);									
+				}else{					
+					var rad = $("<input type='radio' name='radio'></input>").attr({"id":servNo}); 
+					selsp.append(rad,lb);
+					pword.append(selsp);					
+					myd.append([hword,pword]);													
+					bigd.append([mya,myd]);						
+					$("#svesall1").append(bigd);
+				}																	
+						   											
+			//結束動態生成														
+																	
+			//以下開始動態生成，美容項目點擊後所彈跳出來的介紹DIV														
+																	
+				var pmmf = $("<div></div>").addClass("portfolio-modal modal fade").attr({"id":"portfolioModal"+snumber,"tabindex":"-1","role":"dialog","aria-hidden":"true"});													
+																	
+				var md = $("<div></div>").addClass("modal-dialog");													
+																	
+				var mc = $("<div></div>").addClass("modal-content");													
+																	
+				var cm = $("<div></div>").addClass("close-modal").attr({"data-dismiss":"modal"});													
+				var lr = $("<div></div>").addClass("lr");													
+				var rl = $("<div></div>").addClass("rl");													
+				lr.append(rl);													
+				cm.append(lr);													
+																	
+				var cnt = $("<div></div>").addClass("container");													
+				var crow = $("<div></div>");													
+				var cco = $("<div></div>").addClass("col-lg-8 col-lg-offset-2");													
+				var mb = $("<div></div>").addClass("modal-body");													
+				var mbh = $("<h2></h2>").text(servName);   													
+				var mimg = $("<img>").addClass("img-responsive img-centered big-img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":""});													
+				var mbp = $("<p></p>").text(servDesc);													
+				var bbp = $("<button></button>").attr({"type":"button","data-dismiss":"modal"}).addClass("btn btn-primary");													
+				var fft = $("<i></i>").addClass("fa fa-times").text("離開");													
+																	
+																	
+				bbp.append(fft);													
+				mb.append([mbh,mimg,mbp,bbp]);													
+				cco.append(mb);													
+				crow.append(cco);													
+				cnt.append(crow);													
+																	
+				mc.append([cm,cnt]);													
+																	
+				md.append(mc);													
+																	
+				pmmf.append(md);													
+																	
+				$("#no").after(pmmf);													
+			//結束動態生成														
+																	
+				snumber=snumber+1;													
+
+   			})   			
+   			//網頁載入時，讓第一筆服務已被選取
+   			var rf = $(":radio:first");
+			rf.prop({"checked":"true"});
+			var rfId = rf.attr("id");
+			$("#svesall1 div[value*='"+rfId+"']").attr({"style":"background-color:#84B57E;"});
+			//結束
+   		})			
+		
+		
+				
   } );
   
 
@@ -532,13 +689,13 @@
 
 	</header>
 
-	<section id="services" class="page1">
+	<section id="selcar" class="page1" style="display:none;">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-1 col-sm-2 col-md-3 col-lg-3 ">
+				<div class="col-xs-1 col-sm-2 col-md-3 col-lg-3">
 	
 				</div>
-				<div class="col-xs-10 col-sm-8 col-md-6 col-lg-6 " >
+				<div class="col-xs-10 col-sm-8 col-md-6 col-lg-6" >
 					<br>
 					<br>
 					<h1>第一步：選擇您的汽車</h1>	
@@ -549,7 +706,7 @@
 						<button id="liesel" class="btn btn-lg light-orange btn-block" type="button">
 							<span>車牌號碼</span><span>│</span><span class="glyphicon glyphicon-chevron-down"></span>
 						</button>
-						<button id="continue" class="btn btn-lg" type="button" style="display:none;">
+						<button id="pg1" class="btn btn-lg continue" type="button" style="display:none;">
 							<span class="glyphicon glyphicon-circle-arrow-right"></span>
 						</button>
 																					
@@ -563,45 +720,48 @@
 			</div>
 		</div>
 	</section>
-	
-	<section id="services" class="page2" style="display:none;">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-1 col-sm-2 col-md-3 col-lg-3 ">
-	
-				</div>
-				<div class="col-xs-10 col-sm-8 col-md-6 col-lg-6 " >
-					<br>
-					<br>
-					<h1>第二步：選擇ef您的美容00服務</h1>	
-					<br>																
-				</div>
-				
-				<div class="col-xs-1 col-sm-2 col-md-3 col-lg-3 ">
 
-				</div>							
-			</div>
-			
-			<div class="row">
-				<div class="col-xs-1 col-sm-2 col-md-1">
-	
-				</div>
-				<div class="col-xs-10 col-sm-8 col-md-10 col-lg-12" >
-																
-				</div>
-				
-				<div class="col-xs-1 col-sm-2 col-md-1">
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio" class="bg-light-gray page2" style="display:none;">
+        <div class="container">
+        	<form action="ReserveService">
+	            <div class="row">
+					<div class="col-xs-1 col-sm-2 col-md-2 col-lg-1 col-md-offset-2">
+						<button id="pg2_pg1" class="btn btn-lg continue" type="button">
+							<span class="glyphicon glyphicon-circle-arrow-right"></span>
+						</button>				
+					</div>            
+	                <div class="col-xs-10 col-sm-8 col-md-8 col-lg-5">
+	                    <h1 style="text-align:center;">第二步：選擇您要的美容服務</h1>
+	                    <br>
+	                </div>
+					<div class="col-xs-1 col-sm-2 col-md-2 col-lg-1">
+						<button id="pg2_pg3" class="btn btn-lg continue" type="button">
+							<span class="glyphicon glyphicon-circle-arrow-right"></span>
+						</button>	
+					</div>	                
+	            </div>
+	            
+	            <div class="row" id="svesall1">
+	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	                    <h2>綜合服務項目(單選)</h2>	                    	                    
+	                </div>
+	            </div> 
+	            <div class="row" id="svesall2">
+	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	                    <h2>加選服務項目(多選)</h2>	                    	                    
+	                </div>								          	            	            
+	            </div>
 
-				</div>							
-			</div>			
-		</div>
-	</section>	
+	                                                          
+        	</form>    
+        </div>
+    </section>
 	
 	
 	<span id="no" hidden="hide">${memberInfo.memberNo}</span>
 		
-		<!-- Bootstrap Core JavaScript -->
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+ 
 
 
 </body>
