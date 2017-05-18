@@ -73,8 +73,8 @@
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/blitzer/theme.css" id="THEME_CSS"/>
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -170,206 +170,7 @@
   <script>
   
   
-  $( function() {
-	  var txtarea = $('textarea[name*="comment"]');
-	  count = false; //用來固定點擊後星星的顏色
-	  goal = 0;
-	  
-	  $("#dialog_div").dialog({ 
-	        autoOpen: false, 
-	        show: "blind", 
-	        hide: "explode",
-	        width: 500,
-	        buttons: { 
-	            "Ok": function() { 
-	            	//把意見送進DB
-	            	$.ajax({
-	            		type:'POST',
-	            		url:'AddOpinions',
-	            		dataType:'text',
-	            		data : {
-							'opinions' : txtarea.val(),
-							'goal':goal
-						},
-	            		success : function(data) {
-	            			 window.setTimeout('location.reload()', 300);
-					},
-					error : function(data) {
-						alert("error");
-					}
-	            	})
-	            	$(this).dialog("close");
-	            }, 
-	            "Cancel": function() { 
-	            	$(this).dialog("close"); 
-	            }
-	        }
-	    });
-	  	//宣告textarea元素
-	    
-	  
-	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
-		var wdth = $(window).width();
-		if(wdth<975){					
-		        $("#nav-log-in").addClass("menu-fut-li");
-		  		$("#nav-register").addClass("menu-fut-li");
-		}
-		if(wdth>=975){
-		        $("#nav-log-in").addClass("nav-fut-li");
-		  		$("#nav-register").addClass("nav-fut-li"); 
-		}
-		//結束
-		
-		//不斷監控(監聽)螢幕大小，藉此判斷登入、註冊按鈕是在nav上或者在menu內，來設定不同的樣式
-		$(window).resize(function() {
-			var wdth = $(window).width();
-			var logIn = $("#nav-log-in").attr("class");
-			var regst = $("#nav-register").attr("class");
-			var numln = null;
-			var numrn = null;
-			var numlm = null;
-			var numrm =	null;
-
-//			console.log(logIn);
-//			console.log(regst);				
-			
-			if(logIn != undefined){
-				numln =	logIn.indexOf("nav-fut-li");
-				numlm =	logIn.indexOf("menu-fut-li");
-			}				
-			
-			//當會員登入後，註冊按鈕會不存在，所以不用去比對註冊按鈕的class
-			if(regst != undefined){
-				numrn =	regst.indexOf("nav-fut-li");
-				numrm =	regst.indexOf("menu-fut-li");
-			}
-
-			if( (wdth < 975) && (numln > -1) && (numrn > -1) ){
-	   		        $("#nav-log-in").removeClass("nav-fut-li");
-	   		  		$("#nav-register").removeClass("nav-fut-li");					
-	   		        $("#nav-log-in").addClass("menu-fut-li");
-	   		  		$("#nav-register").addClass("menu-fut-li");   		  		
-	   		  		
-			}
-			if( (wdth >= 975) && (numlm > -1) && (numrm > -1) ){
-	   		        $("#nav-log-in").removeClass("menu-fut-li");
-	   		  		$("#nav-register").removeClass("menu-fut-li");
-	   		        $("#nav-log-in").addClass("nav-fut-li");
-	   		  		$("#nav-register").addClass("nav-fut-li"); 
-			}
-		});
-			
-		/*-------------夜空中最亮的星------------------*/
-		 
-		var imgs = document.querySelectorAll("img.s");
-        var imgslen = imgs.length;
-        //document.getElementById("idstar").onmouseover = mouseOver;
-        //document.getElementById("idstar").onmouseout = mouseOut;
-        for(var i =0;i<imgslen;i++)
-        {
-            imgs[i].onmouseover = function (){ mouseOver(this.id); };
-            imgs[i].onmouseout = function (){ mouseOut(this.id); };
-            imgs[i].onclick = function () { mouseClick(this.id); };
-        }
-    	 
-    	
-    	//滑鼠在星星上
-        function mouseOver(imgid) {
-            var len = imgid.length;
-            var lastchar = imgid.charAt(len - 1); //id名稱的最後一個字元,得知第幾個星,再轉成整數
-            var lastnum = parseInt(lastchar);
-//             document.getElementById("div1").innerHTML = lastnum + "星級"; 
-
-	switch (lastnum) {
-		case 1:
-			document.getElementById("div1").innerHTML = "差"; 
-			break;
-		case 2:
-			document.getElementById("div1").innerHTML = "尚可"; 
-			break;
-		case 3:
-			document.getElementById("div1").innerHTML = "好"; 
-			break;
-		case 4:
-			document.getElementById("div1").innerHTML = "很好"; 
-			break;
-		default:
-			document.getElementById("div1").innerHTML = "極佳"; 
-		}
-		if (count == false) {
-			for (var i = lastnum; i > 0; i--)
-				document.getElementById("id" + imgid.substring(2, 6) + i).className = "n";
-			//count = true;
-		}
-		if (count == true) {
-			for (var i = lastnum; i > 0; i--)
-				document.getElementById("id" + imgid.substring(2, 6) + i).className = "n";
-			//count = true;
-			if (lastnum < goal)
-				for (var i = goal; i > lastnum; i--)
-					document.getElementById("id" + imgid.substring(2, 6) + i).className = "s";
-		}
-	}
-
-	//滑鼠移開星星
-	function mouseOut(imgid) {
-
-		var len = imgid.length;
-		var lastchar = imgid.charAt(len - 1);//id名稱的最後一個字元,得知第幾個星,再轉成整數
-		var lastnum = parseInt(lastchar);
-		if (count == false) {
-			for (var i = lastnum; i > 0; i--) {
-				document.getElementById("id" + imgid.substring(2, 6) + i).className = "s";
-			}
-		}
-		if (count == true) {
-			for (var i = goal; i > 0; i--)
-				document.getElementById("id" + imgid.substring(2, 6) + i).className = "n";
-			if (lastnum > goal) {
-				for (var i = lastnum; i > goal; i--)
-					document.getElementById("id" + imgid.substring(2, 6) + i).className = "s";
-			}
-			//count = true;
-		}
-		if (goal == 0)
-			document.getElementById("div1").innerHTML = "請評分";
-		else{
-			switch (goal) {
-			case 1:
-				document.getElementById("div1").innerHTML = "差"; 
-				break;
-			case 2:
-				document.getElementById("div1").innerHTML = "尚可"; 
-				break;
-			case 3:
-				document.getElementById("div1").innerHTML = "好"; 
-				break;
-			case 4:
-				document.getElementById("div1").innerHTML = "很好"; 
-				break;
-			default:
-				document.getElementById("div1").innerHTML = "極佳"; 
-			}
-		}
-	}
-
-	function mouseClick(imgid) {
-		var len = imgid.length;
-		var lastchar = imgid.charAt(len - 1);
-		var lastnum = parseInt(lastchar);
-		if (count == false) {
-			goal = lastnum;
-			count = true;
-		}
-		if (count == true) {
-			//document.getElementById("div1").innerHTML = "打分數中...";
-			goal = lastnum;
-		}
-		
-		$("#dialog_div").dialog("open");
-	}
-			
-} );
+  
   
   </script>
 
@@ -497,10 +298,13 @@
 					</div>
 					<div id="div1" >請評分</div>
 					<br>
-					<div id="dialog_div" title="Your opinions">
+					<div id="dialog_div" title="Your opinions" style="display:none">
   						<textarea rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的想法，最多輸入200字" name="comment" style="resize:none"></textarea>
 					</div>
 					<br>
+				</div>
+				<div class="blockUI" style="display: none">
+					<img src="${ctx}/img/loading/loading_car.gif" width="170px" height="170px"/>
 				</div>
 			</div>
 			<br>
@@ -510,5 +314,238 @@
 			</div>
 		</div>
 	</section>
+<script src="js/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>	
+<script type="text/javascript">
+$( function() {
+// 	  loadingBlock();
+	  var txtarea = $('textarea[name*="comment"]');
+	  count = false; //用來固定點擊後星星的顏色
+	  goal = 0;
+	  
+	  $("#dialog_div").dialog({ 
+	        autoOpen: false, 
+	        show: "blind", 
+	        hide: "explode",
+	        width: 500,
+	        buttons: { 
+	            "Ok": function() { 
+	            	loadingBlock();
+	            	//把意見送進DB
+	            	$.ajax({
+	            		type:'POST',
+	            		url:'AddOpinions',
+	            		dataType:'text',
+	            		data : {
+							'opinions' : txtarea.val(),
+							'goal':goal
+						},
+	            		success : function(data) {
+// 	            			loadingUnblock();
+	            			 window.setTimeout('location.reload()', 300);
+					},
+					error : function(data) {
+						alert("error");
+					}
+	            	})
+	            	$(this).dialog("close");
+	            }, 
+	            "Cancel": function() { 
+	            	$(this).dialog("close"); 
+	            }
+	        }
+	    });
+	  	//宣告textarea元素
+	    
+	  
+	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
+		var wdth = $(window).width();
+		if(wdth<975){					
+		        $("#nav-log-in").addClass("menu-fut-li");
+		  		$("#nav-register").addClass("menu-fut-li");
+		}
+		if(wdth>=975){
+		        $("#nav-log-in").addClass("nav-fut-li");
+		  		$("#nav-register").addClass("nav-fut-li"); 
+		}
+		//結束
+		
+		//不斷監控(監聽)螢幕大小，藉此判斷登入、註冊按鈕是在nav上或者在menu內，來設定不同的樣式
+		$(window).resize(function() {
+			var wdth = $(window).width();
+			var logIn = $("#nav-log-in").attr("class");
+			var regst = $("#nav-register").attr("class");
+			var numln = null;
+			var numrn = null;
+			var numlm = null;
+			var numrm =	null;
+
+//			console.log(logIn);
+//			console.log(regst);				
+			
+			if(logIn != undefined){
+				numln =	logIn.indexOf("nav-fut-li");
+				numlm =	logIn.indexOf("menu-fut-li");
+			}				
+			
+			//當會員登入後，註冊按鈕會不存在，所以不用去比對註冊按鈕的class
+			if(regst != undefined){
+				numrn =	regst.indexOf("nav-fut-li");
+				numrm =	regst.indexOf("menu-fut-li");
+			}
+
+			if( (wdth < 975) && (numln > -1) && (numrn > -1) ){
+	   		        $("#nav-log-in").removeClass("nav-fut-li");
+	   		  		$("#nav-register").removeClass("nav-fut-li");					
+	   		        $("#nav-log-in").addClass("menu-fut-li");
+	   		  		$("#nav-register").addClass("menu-fut-li");   		  		
+	   		  		
+			}
+			if( (wdth >= 975) && (numlm > -1) && (numrm > -1) ){
+	   		        $("#nav-log-in").removeClass("menu-fut-li");
+	   		  		$("#nav-register").removeClass("menu-fut-li");
+	   		        $("#nav-log-in").addClass("nav-fut-li");
+	   		  		$("#nav-register").addClass("nav-fut-li"); 
+			}
+		});
+			
+		/*-------------夜空中最亮的星------------------*/
+		 
+		var imgs = document.querySelectorAll("img.s");
+      var imgslen = imgs.length;
+      //document.getElementById("idstar").onmouseover = mouseOver;
+      //document.getElementById("idstar").onmouseout = mouseOut;
+      for(var i =0;i<imgslen;i++)
+      {
+          imgs[i].onmouseover = function (){ mouseOver(this.id); };
+          imgs[i].onmouseout = function (){ mouseOut(this.id); };
+          imgs[i].onclick = function () { mouseClick(this.id); };
+      }
+  	 
+  	
+  	//滑鼠在星星上
+      function mouseOver(imgid) {
+          var len = imgid.length;
+          var lastchar = imgid.charAt(len - 1); //id名稱的最後一個字元,得知第幾個星,再轉成整數
+          var lastnum = parseInt(lastchar);
+//           document.getElementById("div1").innerHTML = lastnum + "星級"; 
+
+	switch (lastnum) {
+		case 1:
+			document.getElementById("div1").innerHTML = "差"; 
+			break;
+		case 2:
+			document.getElementById("div1").innerHTML = "尚可"; 
+			break;
+		case 3:
+			document.getElementById("div1").innerHTML = "好"; 
+			break;
+		case 4:
+			document.getElementById("div1").innerHTML = "很好"; 
+			break;
+		default:
+			document.getElementById("div1").innerHTML = "極佳"; 
+		}
+		if (count == false) {
+			for (var i = lastnum; i > 0; i--)
+				document.getElementById("id" + imgid.substring(2, 6) + i).className = "n";
+			//count = true;
+		}
+		if (count == true) {
+			for (var i = lastnum; i > 0; i--)
+				document.getElementById("id" + imgid.substring(2, 6) + i).className = "n";
+			//count = true;
+			if (lastnum < goal)
+				for (var i = goal; i > lastnum; i--)
+					document.getElementById("id" + imgid.substring(2, 6) + i).className = "s";
+		}
+	}
+
+	//滑鼠移開星星
+	function mouseOut(imgid) {
+
+		var len = imgid.length;
+		var lastchar = imgid.charAt(len - 1);//id名稱的最後一個字元,得知第幾個星,再轉成整數
+		var lastnum = parseInt(lastchar);
+		if (count == false) {
+			for (var i = lastnum; i > 0; i--) {
+				document.getElementById("id" + imgid.substring(2, 6) + i).className = "s";
+			}
+		}
+		if (count == true) {
+			for (var i = goal; i > 0; i--)
+				document.getElementById("id" + imgid.substring(2, 6) + i).className = "n";
+			if (lastnum > goal) {
+				for (var i = lastnum; i > goal; i--)
+					document.getElementById("id" + imgid.substring(2, 6) + i).className = "s";
+			}
+			//count = true;
+		}
+		if (goal == 0)
+			document.getElementById("div1").innerHTML = "請評分";
+		else{
+			switch (goal) {
+			case 1:
+				document.getElementById("div1").innerHTML = "差"; 
+				break;
+			case 2:
+				document.getElementById("div1").innerHTML = "尚可"; 
+				break;
+			case 3:
+				document.getElementById("div1").innerHTML = "好"; 
+				break;
+			case 4:
+				document.getElementById("div1").innerHTML = "很好"; 
+				break;
+			default:
+				document.getElementById("div1").innerHTML = "極佳"; 
+			}
+		}
+	}
+
+	function mouseClick(imgid) {
+		var len = imgid.length;
+		var lastchar = imgid.charAt(len - 1);
+		var lastnum = parseInt(lastchar);
+		if (count == false) {
+			goal = lastnum;
+			count = true;
+		}
+		if (count == true) {
+			//document.getElementById("div1").innerHTML = "打分數中...";
+			goal = lastnum;
+		}
+		
+		$("#dialog_div").dialog("open");
+	}
+	loadingUnblock();
+} );
+function loadingBlock(){
+	 $.blockUI({ 
+		message: $('div.blockUI'),
+		 css: { 
+			 border: 'none',
+			 //backgroundColor:'#f7f7f7',
+            left: ($(window).width() - 228) /2 + 'px', 
+			'-webkit-border-radius': '10px', 
+           '-moz-border-radius': '10px', 
+           padding: '25px',
+           opacity: 0.8,
+           width: '228px',
+           height: '228px'
+       },
+		fadeIn: 0
+    }); 
+}
+function loadingUnblock(){
+	$.unblockUI();
+	//alert("close block");
+}
+
+</script>
+
+</script>
 </body>
 </html>
