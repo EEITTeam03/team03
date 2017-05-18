@@ -192,7 +192,7 @@
 							'goal':goal
 						},
 	            		success : function(data) {
-	            			location.reload();
+	            			 window.setTimeout('location.reload()', 300);
 					},
 					error : function(data) {
 						alert("error");
@@ -486,7 +486,7 @@
 		<div class="container">
 			<div class="row">
 				<div id="div2" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div style="text-align: center;margin:auto;"><h1>告訴我們您的想法</h1></div>
+				<div style="text-align: center;margin:auto;"><h1 style="font-family:微軟正黑體;">告訴我們您的想法</h1></div>
 				
 					<div id="star">
 						<img id="idstar1" class="s" src="img/star.png" width="40" />
@@ -495,7 +495,7 @@
 						<img id="idstar4" class="s" src="img/star.png" width="40" />
 						<img id="idstar5" class="s" src="img/star.png" width="40" />
 					</div>
-					<div id="div1">請評分</div>
+					<div id="div1" >請評分</div>
 					<br>
 					<div id="dialog_div" title="Your opinions">
   						<textarea rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的想法，最多輸入200字" name="comment" style="resize:none"></textarea>
