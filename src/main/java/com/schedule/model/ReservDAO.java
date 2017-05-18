@@ -236,6 +236,7 @@ public class ReservDAO implements ReservDAO_interface {
 			//System.out.println(cal.get(Calendar.DATE));
 			cal.get(Calendar.DATE);
 			cal.set(Calendar.DAY_OF_WEEK, cal.getActualMinimum(Calendar.DAY_OF_WEEK));						
+			cal.add(Calendar.DATE, 1);
 			
 			System.out.println(cal.get(Calendar.DATE));
 			query.setParameter(0, cal);
@@ -244,7 +245,7 @@ public class ReservDAO implements ReservDAO_interface {
 			//System.out.println(cal3.get(Calendar.DATE));
 			cal3.get(Calendar.DATE);
 			cal3.set(Calendar.DAY_OF_WEEK, cal3.getActualMaximum(Calendar.DAY_OF_WEEK));
-			cal3.add(Calendar.DATE, 1);
+			cal3.add(Calendar.DATE, 2);
 			System.out.println(cal3.get(Calendar.DATE));
 			
 			query.setParameter(1, cal3);

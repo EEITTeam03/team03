@@ -401,7 +401,6 @@ tbody tr td{
 		</div>
 	</div>
 
-	Services Section
 		<section id="services">
 			<div class="container">
 				<div class="row">

@@ -20,7 +20,7 @@ FeedbackService fsvc = new FeedbackService();
 
     <!-- Custom Fonts -->
     <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<title>List all opinions</title>
+<title>所有意見</title>
 </head>
 <body>
 <jsp:include page="/admin/Testhead_nav.jsp"/>
@@ -79,7 +79,40 @@ swal("完成回覆!","","info");
 	</tbody>
 	</table>
 	</div>
+	<div class="blockUI" style="display: none">
+		<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
+	</div>
 </div>
 </div>
+<script src="${ctx}/js/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
+<script type="text/javascript">
+	$(function(){
+		loadingBlock();
+	})
+	$(window).load(function(){
+		loadingUnblock();
+	});
+	function loadingBlock(){
+	 	 $.blockUI({ 
+	 		message: $('div.blockUI'),
+ 		 	css: { 
+ 				border: 'none',
+				left: ($(window).width() - 133) /2 + 'px', 
+				'-webkit-border-radius': '10px', 
+         		'-moz-border-radius': '10px', 
+				padding: '25px',
+				opacity: 0.7,
+				width: '133px',
+				height: '133px'
+			},
+ 		 	fadeIn: 0
+ 		 }); 
+	 }
+	 function loadingUnblock(){
+	 	$.unblockUI();
+	 	//alert("close block");
+	 }
+</script>
 </body>
 </html>

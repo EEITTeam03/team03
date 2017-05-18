@@ -49,15 +49,54 @@ BlockListService blsvc = new BlockListService();
 	</c:if>
 </table>
 </div>
+<div class="blockUI" style="display: none">
+	<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
 </div>
 </div>
+</div>
+<script src="${ctx}/js/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
 <script type="text/javascript">
 	$(function(){
+		loadingBlock();
 		if("${OKalert}"=="updateOK"){
-			swal("新增成功!", "已加入黑名單", "success");
+// 			swal("新增成功!", "已加入黑名單", "success");
+			swal({
+				  title: "新增成功!",
+				  text: "已加入黑名單",
+				  imageUrl: "${ctx}/img/loading/check.png",
+				  type: "",
+				  timer: 700,
+				  //animation: "slide-from-top",
+				  showConfirmButton: false,
+				  confirmButtonText: "確定刪除",
+				  cancelButtonText:"取消",
+				  allowOutsideClick: true
+			});
 			<% session.removeAttribute("OKalert"); %>
 		}
+		loadingUnblock();
 	});
+	function loadingBlock(){
+	 	 $.blockUI({ 
+	 		message: $('div.blockUI'),
+ 		 	css: { 
+ 				border: 'none',
+              left: ($(window).width() - 133) /2 + 'px', 
+				'-webkit-border-radius': '10px', 
+         		'-moz-border-radius': '10px', 
+          	padding: '25px',
+              opacity: 0.7,
+          	width: '133px',
+          	height: '133px'
+          },
+ 		 	fadeIn: 0
+ 		 }); 
+	 }
+	 function loadingUnblock(){
+	 	$.unblockUI();
+	 	//alert("close block");
+	 }
 </script>
 </body>
 </html>
