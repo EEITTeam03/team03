@@ -45,6 +45,7 @@ List<MemberCarsVO> list= msvc.getListByMember(memberNo);
 						</c:forEach>
 					</tbody>
 				</table>
+				<div class="text-center"><button type="button" class="btn btn-lg btn-info" onclick="location.href='member.jsp'" style="margin:auto;">回上頁</button></div>
 			</div>
 		</div>
 	</div>
