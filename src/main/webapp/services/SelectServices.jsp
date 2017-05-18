@@ -41,8 +41,6 @@ swal("修改成功!","服務已更新","success");
 		<br>
 		<li><a href='${ctx}/services/ServicesInsert.jsp'>新增</a>服務 (後台)</li>
 		<br>
-		<li><a href='${ctx}/services/ServicesInsert.jsp'>新增</a>服務 (後台)</li>
-		<br>
 		<li><a href='${ctx}/services/ListAllServicesPriceAndTime.jsp'>查看</a>所有服務價格與時間</li>
 		<br>
 		<li><a href='${ctx}/services/ListAllServiceStep.jsp'>查看</a>所有服務步驟 (後台)</li>
