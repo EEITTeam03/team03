@@ -360,8 +360,18 @@
 	  	    		serTbe.append([serThd,serTbd]);
 					
 	  	    		//取消訂單按鈕
-	  	    		var btnCancle = $("<button onclick='cancleReservList(this.value)'></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","value":reservNo});
+	  	    		if(cts > rets){
+	  	    			var btnCancle = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","disabled":"true"});
+	  	    		}else{
+	  	    			var btnCancle = $("<button onclick='cancleReservList(this.value)'></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","value":reservNo});
+	  	    		}
 	  	    		var span3 = $("<span></span>").addClass("glyphicon glyphicon-remove");
+	  	    		
+// 	  	    		if(cts > rdts && cts < rets){
+// 		  	    		var btnMit = $("<button onclick='opsurveillance(this.value)'></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","value":reservNo});	
+// 	  	    		}else{
+// 	  	    			var btnMit = $("<button></button>").addClass("btn btn-sm btn-danger ser-list").attr({"type":"button","disabled":"true"}); 	    			
+// 	  	    		}
 	
 	  	    		//設定訂單查詢按鈕，所彈出的提示內容，以及相關參數設定
 					$(btnServ).popover({
@@ -551,16 +561,16 @@
 
 	<section id="services">
 		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 text-center">
-				<form action="${ctx}/Cancel">
-					<h2>請輸入預約編號</h2>
-					<input type="text" name="reservNo">
-					<input type="hidden" name="action" value="cancel">
-					<input type="submit" value="取消" class="btn btn-danger">
-				</form>
-				</div>
-			</div>
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-xs-12 text-center"> -->
+<%-- 				<form action="${ctx}/Cancel"> --%>
+<!-- 					<h2>請輸入預約編號</h2> -->
+<!-- 					<input type="text" name="reservNo"> -->
+<!-- 					<input type="hidden" name="action" value="cancel"> -->
+<!-- 					<input type="submit" value="取消" class="btn btn-danger"> -->
+<!-- 				</form> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
 					<table class="table table-hover">
