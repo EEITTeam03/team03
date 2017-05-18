@@ -163,7 +163,7 @@ FeedbackService fsvc = new FeedbackService();
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="${ctx}/scheduler.jsp" ><i class="fa fa-car"></i> 管理工作排程</a>
+                        <a href="${ctx}/admin/scheduler.jsp" ><i class="fa fa-car"></i> 管理工作排程</a>
                     </li>
                     <li> 
                         <a href="${ctx}/services/SelectServices.jsp"><i class="fa fa-fw fa-table"></i> 維護服務項目</a>
