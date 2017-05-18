@@ -408,7 +408,7 @@
 							<img src="img/head.jpg" alt="" />
 							<div class="testimonial-writer">
 								<div class="testimonial-writer-name" style="font-size:25px">${fVO.memberName}</div>
-								<div class="testimonial-writer-designation" style="font-size:20px">
+								<div class="testimonial-writer-designation" style="font-size:20px;">
 									給WASH ME的評價:
 									<c:choose>
 										<c:when test="${fVO.readState==5}">極佳</c:when>
@@ -435,7 +435,7 @@
 									src="img/wash3.jpeg"
 									alt="" />
 								<div class="testimonial-writer">
-									<div class="testimonial-writer-name" style="color:black;font-size:25px">WASH ME客服</div>
+									<div class="testimonial-writer-name" style="color:black;font-size:25px;">WASH ME客服</div>
 								</div>
 							</div>
 						</div>
