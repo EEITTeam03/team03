@@ -154,13 +154,13 @@
     padding: 14px 20px;							
     font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;							
 }							
-.input-group .btn[class*='seldiv']{							
+.input-group .btn[class*='carlicense'],.input-group .btn[class*='empname']{							
     text-transform: capitalize;							
     color:#bcbcbc;							
     padding: 14px 20px;							
     font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;							
 }							
-.input-group .btn[class*='seldiv']:hover{							
+.input-group .btn[class*='carlicense']:hover,.input-group .btn[class*='empname']:hover{							
 	background: #f9df85;						
 	color:white;						
 }							
@@ -216,7 +216,7 @@
 .dropdown:hover .dropdown-menu {							
 	display: block;						
 }							
-#liesel{							
+#liesel,{							
 	width:75%;						
 	display:inline;						
 }							
@@ -232,7 +232,7 @@
 	margin-left:5%;						
 	margin-right:5%;						
 }							
-#selcar .continue,#portfolio .continue{							
+#selcar .continue,#portfolio .continue,#date_technician .continue{							
 	display:none;						
 	-moz-box-shadow:inset 0px 1px 0px 0px #fff6af;						
 	-webkit-box-shadow:inset 0px 1px 0px 0px #fff6af;						
@@ -260,7 +260,7 @@
 	text-shadow:0px 1px 0px #ffee66;						
 	margin:10px;						
 }							
-#selcar .continue:hover,#portfolio .continue:hover{							
+#selcar .continue:hover,#portfolio .continue:hover,#date_technician .continue:hover{							
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));						
 	background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);						
 	background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);						
@@ -270,26 +270,28 @@
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);						
 	background-color:#ffab23;						
 }							
-#selcar .continue:active,#portfolio .continue:active{							
+#selcar .continue:active,#portfolio .continue:active,#date_technician .continue:active{							
 	position:relative;						
 	top:1px;						
 }							
 							
-#selcar .continue span,#portfolio .continue span{							
+#selcar .continue span,#portfolio .continue span,#date_technician .continue span{							
 	font-size:40px;						
 	width:40px;						
 	height:40px;						
 }							
-.seldiv{							
+.carlicense,.empname{							
 	display:none;						
-	background:rgba(255, 248, 223, 0.91);						
-	margin-top:10px;						
+	background:rgba(255, 248, 223, 0.91);												
 	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;						
 	width:75%;						
 	height:60px;						
 	box-shadow:0 3px 20px rgba(246, 255, 251, 0.59);						
 	border-radius:6px;						
-	border:0px;						
+	border:0px;	
+	position: absolute;
+	z-index:100;
+	left:0px;					
 }							
 i{							
 	margin-right:20%;						
@@ -298,10 +300,12 @@ h1,h2{
 	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;						
 }
 h1{
+	text-align:center;
 	color: red;
 	text-shadow: rgb(255, 255, 255) 0px -1px 4px, rgb(255, 255, 0) 0px -2px 10px, rgb(255, 128, 0) 0px -10px 20px, rgb(255, 0, 0) 0px -18px 40px
 }
 h2{
+	text-align:center;
 	color: white;
 	text-shadow: rgb(204, 204, 204) 0px 1px 0px, rgb(201, 201, 201) 0px 2px 0px, rgb(187, 187, 187) 0px 3px 0px, rgb(185, 185, 185) 0px 4px 0px, rgb(170, 170, 170) 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 6px 1px, rgba(0, 0, 0, 0.1) 0px 0px 5px, rgba(0, 0, 0, 0.3) 0px 1px 3px, rgba(0, 0, 0, 0.15) 0px 3px 5px, rgba(0, 0, 0, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.2) 0px 10px 10px, rgba(0, 0, 0, 0.1) 0px 20px 20px;
 }							
@@ -312,7 +316,9 @@ h2{
 	padding-left:30px;
 	padding-right:30px;
 }
-
+#pg2_pg1,#pg2_pg3,#pg3_pg2,#pg3_pg4{
+	padding:0px;
+}
 		
 </style>
 
@@ -376,10 +382,30 @@ h2{
  		});
  			//結束  
  			
+
+ 			
+ 			
+		//page1：讀取會員的車種資料，產生車牌號碼按鈕選項
+  		var no=$("#no").text();
+		$.getJSON("GetCars",{"no":no},function(json){
+			$.each(json,function(idx,GetCars){
+				var top = ((idx+1)*70)+"px" ;
+				var bt = $("<button></button>").addClass("btn carlicense").attr({"type":"button"}).css("top",top);
+				var i = $("<i></i>").addClass("fa fa-car fa-2x");
+				var sp = $("<span></span>").text(GetCars.license);
+			
+				bt.append([i,sp]);
+				$("#liesel").after(bt);
+				
+			});				
+		}); 			
+		//結束
+
+		//page1：點擊車牌號碼按鈕
 		$("#liesel").click(function(){
 			
 			//下拉DIV開關
-			$(".seldiv").slideToggle("slow");
+			$(".carlicense").slideToggle("slow");
 			//結束
 					
 			//按鈕箭頭符號改變
@@ -393,31 +419,15 @@ h2{
 			}
 			//結束
 			
-		});
- 			
- 			
-		//讀取會員的車種資料
-  		var no=$("#no").text();
-		$.getJSON("GetCars",{"no":no},function(json){
-			$.each(json,function(idx,GetCars){
-				var bt = $("<button></button>").addClass("btn seldiv").attr({"type":"button"});
-				var i = $("<i></i>").addClass("fa fa-car fa-2x");
-				var sp = $("<span></span>").text(GetCars.license);
-			
-				bt.append([i,sp]);
-				$("#pg1").after(bt);
-				
-//  				console.log(json);				
-			});				
-		}); 			
-		//結束   		
- 		
-		$(document).on('click', '.seldiv', function(event){
+		});		
+		
+ 		//page1：點擊車牌號碼下拉選項按鈕
+		$(document).on('click', '.carlicense', function(event){
 			
 			$("#liesel span:first-child").text($(this).text());
 			
 			//下拉DIV開關
-			$(".seldiv").slideToggle("slow");
+			$(".carlicense").slideToggle("slow");
 			//結束
 
 			//下一步按扭打開			
@@ -435,12 +445,13 @@ h2{
 			}
 			//結束			
 		});
+		//結束	
 		
 		//網頁讀取完畢後，第一頁打開
 		$(".page1").slideToggle("slow");
 		//結束
 		
-		//點擊後換下一頁
+		//點擊pg1的下一頁按鈕後前往第2頁
 	    $("#pg1").on('click', function(event){
 			//第二頁打開
 			$(".page2").slideToggle("slow");			
@@ -448,10 +459,45 @@ h2{
 			$(".page1").slideToggle("slow");			
 			//結束					     	
 	    }); 
-		
-		
-		//服務項目文字區塊點擊後，自動選擇該服務並更換樣式
-	    $(document).on('click','.portfolio-caption',function(event){
+
+	 	//點擊pg2_pg1的上一頁按鈕後前往第1頁
+	    $("#pg2_pg1").on('click', function(event){
+			//第二頁打開狀態→關閉狀態
+			$(".page2").slideToggle("slow");			
+			//第一頁關閉狀態→打開狀態
+			$(".page1").slideToggle("slow");			
+			//結束					     	
+	    });
+	 	
+	 	//點擊pg2_pg3的下一頁按鈕後前往第3頁
+	    $("#pg2_pg3").on('click', function(event){
+			//第二頁打開狀態→關閉狀態
+			$(".page2").slideToggle("slow");			
+			//第三頁打開
+			$(".page3").slideToggle("slow");			
+			//結束					     	
+	    });
+	 	
+	 	//點擊pg3_pg2的上一頁按鈕後前往第2頁
+	    $("#pg3_pg2").on('click', function(event){
+			//第三頁打開狀態→關閉狀態
+			$(".page3").slideToggle("slow");			
+			//第二頁打開
+			$(".page2").slideToggle("slow");			
+			//結束					     	
+	    });	
+
+	 	//點擊pg3_pg4的上一頁按鈕後前往第2頁
+	    $("#pg3_pg4").on('click', function(event){
+			//第三頁打開狀態→關閉狀態
+			$(".page3").slideToggle("slow");			
+			//第四頁打開
+			$(".page4").slideToggle("slow");			
+			//結束					     	
+	    });	 	
+	 	
+		//page2：服務項目文字區塊點擊後，自動選擇該服務並更換樣式
+	    $(document).on('click','.ptag',function(event){
 	    	
 	    	var dvalue = $(this).attr("value");
 	    	$("#svesall1 div:gt(0) div").attr({"style":"background-color:white;"});
@@ -469,21 +515,19 @@ h2{
 				$("#"+dvalue).prop({"checked":"true"});
 	    	}
 	    }); 		
-			
+		//結束	
 	  
-
-		var snumber = 0;
-   			
+		//page2：產生美容項目DIV及點選後跳出的DIV
+		var snumber = 0;   			
 		$.getJSON('services/TestGetJsonPic',function(json){
 
 			$.each(json,function(idx,services){
-				console.log(services);
 				//以下開始動態生成美容項目DIV
 				var servName = services.servName;													
 				var servDesc = services.servDesc;													
 				var servNo = services.servNo;
 				
-				var bigd = $("<div></div>").addClass("col-xs-12 col-sm-6 col-md-4 col-lg-3 portfolio-item").attr("style","height:210px;");													
+				var bigd = $("<div></div>").addClass("col-xs-6 col-sm-6 col-md-4 col-lg-3 portfolio-item").attr("style","height:210px;");													
 				   			   										
 				var mya = $("<a></a>").attr({"href":"#portfolioModal"+snumber,"data-toggle":"modal"}).addClass("portfolio-link");													
 																	
@@ -497,7 +541,7 @@ h2{
 				smalld.append(nd);													
 				mya.append([smalld,smallimg]);													
 																	
-				var myd = $("<div></div>").addClass("portfolio-caption").attr({"value":servNo});													
+				var myd = $("<div></div>").addClass("portfolio-caption ptag").attr({"value":servNo});													
 																	
 				var hword = $("<h4></h4>").text(servName);													
 				var pword = $("<p></p>").addClass("text-muted");													
@@ -514,7 +558,7 @@ h2{
 					bigd.append([mya,myd]);						
 					$("#svesall2").append(bigd);									
 				}else{					
-					var rad = $("<input type='radio' name='radio'></input>").attr({"id":servNo}); 
+					var rad = $("<input type='radio' name='radio1'></input>").attr({"id":servNo}); 
 					selsp.append(rad,lb);
 					pword.append(selsp);					
 					myd.append([hword,pword]);													
@@ -566,17 +610,101 @@ h2{
 																	
 				snumber=snumber+1;													
 
-   			})   			
-   			//網頁載入時，讓第一筆服務已被選取
-   			var rf = $(":radio:first");
+   			});   			
+   			//網頁載入時，讓第2頁的第一筆服務已被選取
+   			var rf = $(":radio[name*='radio1']:first");
 			rf.prop({"checked":"true"});
 			var rfId = rf.attr("id");
 			$("#svesall1 div[value*='"+rfId+"']").attr({"style":"background-color:#84B57E;"});
 			//結束
-   		})			
+   		});	
 		
-		
+		//page4：動態生成技師DIV
+		$.getJSON('emp/GetEmpJSON.do',function(json){
+
+			$.each(json,function(idx,emp){
+				var empNo = emp.empNo;
+				var empName = emp.empName;
+				var employeeDesc = emp.employeeDesc;		
+				var picnumber = idx+1;
+				var bigd = $("<div></div>").addClass("col-xs-6 col-sm-6 col-md-4 col-lg-3 portfolio-item csschange").attr({"style":"background-color:white;padding:0px;margin:0px 10px 0px 10px;","value":empNo});													
+				   			   																																																																						
+				var smallimg = $("<img>").addClass("img-responsive img-services").attr({"src":"img/team/"+picnumber+".jpg","alt":"","value":empNo});													
+				   																										
+				bigd.append(smallimg);													
+																	
+				var myd = $("<div></div>").addClass("portfolio-caption decsel");													
+																	
+				var hword = $("<h4></h4>").text(empName);													
+				var pword = $("<p></p>").addClass("text-muted");													
 				
+				
+				var selsp = $("<span></span>");
+				var lb = $("<label></label>").attr({"for":empNo}).text("選擇");				
+
+				var rad = $("<input type='radio' name='radio2'></input>").attr({"id":empNo}); 
+				selsp.append(rad,lb);
+				pword.append(selsp);					
+				myd.append([hword,pword]);
+				bigd.append(myd);
+				$("#tccsel").append(bigd);
+// 				console.log($(":radio[name*='radio2']"));
+// 				console.log($(":radio[name*='radio2']").prop("checked"));		   											
+			//結束動態生成														
+
+   			}); 
+			//page4：技師區塊被點選後，自動選擇該技師並更換樣式
+		    $(document).on('click','.csschange',function(event){
+		    	
+		    	var dvalue = $(this).attr("value");
+		    	$("#tccsel:radio").removeAttr("checked");
+		    	$("#tccsel .csschange").css("background-color","white");
+		    	$("#"+dvalue).prop({"checked":"true"});		    	
+				$(this).css("background-color","#84B57E");
+				
+		    }); 		
+			//結束
+				
+			
+
+			//網頁載入時，讓第4頁的第一筆服務已被選取
+			$("#1").prop({"checked":"true"});
+			$("#tccsel div[value*='1']").css("background-color","#84B57E");
+			//結束
+			console.log($(":checked[name*='radio2']").attr("id"));
+   		});	
+		
+//			$("#datepicker").datepicker({
+//			changeMonth : true,
+//			changeYear : false,
+//			dateFormat : 'yy-mm-dd',
+//			yearRange : '-0:+1',
+//			monthNamesShort: [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ],
+//			maxDate: "+3m",
+//			minDate : new Date(),
+//			onSelect : function(dateText,inst){
+//				$("#selectedDate").val(dateText);
+//				//顯示時間軸
+//				showtime();
+//				//讀出當日已預約時間
+//				var empNo = $("#empNo").val();
+//				$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){
+//					console.log(data);
+//					$.each(data,function(idx,obj){
+//						console.log(obj);
+//						//只做好小時的判斷
+//						var x = obj.shh;
+//						var y = obj.ehh;
+//						for(var i=x;i<=y;i++){
+//							var selectedS = "#timeline input[value^='"+i+"']";
+//							$(selectedS).prop("disabled",true).removeClass().addClass("btn btn-basic");
+							
+//						}
+//					});
+//				});
+//			}
+//		}).css("font-size","175%");			
+		
   } );
   
 
@@ -688,76 +816,103 @@ h2{
 		</div>
 
 	</header>
-
-	<section id="selcar" class="page1" style="display:none;">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-1 col-sm-2 col-md-3 col-lg-3">
-	
-				</div>
-				<div class="col-xs-10 col-sm-8 col-md-6 col-lg-6" >
-					<br>
-					<br>
-					<h1>第一步：選擇您的汽車</h1>	
-					<br>
+	<form action="ReserveService">
+		<section id="selcar" class="page1" style="display:none;">
+			<div class="container">
+			
+				<div class="row">
+					<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 col-md-offset-2">
+		
+					</div>
+					<div class="col-xs-8 col-sm-8 col-md-7 col-lg-6">
+						<h1>第一步：選擇您的汽車</h1>	
+						<br>
+						<div class="input-group" style="width:100%;position: absolute;">
+							<button id="liesel" class="btn btn-lg light-orange btn-block" type="button">
+								<span>車牌號碼</span><span>│</span><span class="glyphicon glyphicon-chevron-down"></span>
+							</button>																						
+						</div>																	
+					</div>
 					
-					<div class="input-group" style="width:100%; ">
-																	
-						<button id="liesel" class="btn btn-lg light-orange btn-block" type="button">
-							<span>車牌號碼</span><span>│</span><span class="glyphicon glyphicon-chevron-down"></span>
-						</button>
+					<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
 						<button id="pg1" class="btn btn-lg continue" type="button" style="display:none;">
 							<span class="glyphicon glyphicon-circle-arrow-right"></span>
 						</button>
-																					
-					</div>
-											
-				</div>
-				
-				<div class="col-xs-1 col-sm-2 col-md-3 col-lg-3 ">
-
-				</div>							
+					</div>							
+				</div>												
 			</div>
-		</div>
-	</section>
-
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio" class="bg-light-gray page2" style="display:none;">
-        <div class="container">
-        	<form action="ReserveService">
-	            <div class="row">
-					<div class="col-xs-1 col-sm-2 col-md-2 col-lg-1 col-md-offset-2">
-						<button id="pg2_pg1" class="btn btn-lg continue" type="button">
-							<span class="glyphicon glyphicon-circle-arrow-right"></span>
-						</button>				
-					</div>            
-	                <div class="col-xs-10 col-sm-8 col-md-8 col-lg-5">
-	                    <h1 style="text-align:center;">第二步：選擇您要的美容服務</h1>
-	                    <br>
-	                </div>
-					<div class="col-xs-1 col-sm-2 col-md-2 col-lg-1">
-						<button id="pg2_pg3" class="btn btn-lg continue" type="button">
-							<span class="glyphicon glyphicon-circle-arrow-right"></span>
-						</button>	
-					</div>	                
-	            </div>
-	            
-	            <div class="row" id="svesall1">
-	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	                    <h2>綜合服務項目(單選)</h2>	                    	                    
-	                </div>
-	            </div> 
-	            <div class="row" id="svesall2">
-	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	                    <h2>加選服務項目(多選)</h2>	                    	                    
-	                </div>								          	            	            
-	            </div>
-
-	                                                          
-        	</form>    
-        </div>
-    </section>
+		</section>
 	
+	    <section id="portfolio" class="page2" style="display:none;">
+	        <div class="container">
+	        	
+		            <div class="row">
+						<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 col-md-offset-2">
+							<button id="pg2_pg1" class="btn btn-lg continue" type="button">
+								<span class="glyphicon glyphicon-circle-arrow-left"></span>
+							</button>				
+						</div>            
+		                <div class="col-xs-8 col-sm-8 col-md-7 col-lg-6">
+		                    <h1>第二步：選擇您要的美容服務</h1>
+		                    <br>
+		                </div>
+						<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+							<button id="pg2_pg3" class="btn btn-lg continue" type="button">
+								<span class="glyphicon glyphicon-circle-arrow-right"></span>
+							</button>	
+						</div>	                
+		            </div>
+		            
+		            <div class="row" id="svesall1">
+		                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		                    <h2>綜合服務項目(單選)</h2>	                    	                    
+		                </div>
+		            </div> 
+		            <div class="row" id="svesall2">
+		                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		                    <h2>加選服務項目(多選)</h2>	                    	                    
+		                </div>								          	            	            
+		            </div>
+	        </div>
+	    </section>
+	    
+	    <section id="date_technician" class="page3" style="display:none;">
+	        <div class="container">
+	        
+		            <div class="row">
+						<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 col-md-offset-2">
+							<button id="pg3_pg2" class="btn btn-lg continue" type="button">
+								<span class="glyphicon glyphicon-circle-arrow-left"></span>
+							</button>				
+						</div>            
+		                <div class="col-xs-8 col-sm-8 col-md-7 col-lg-6">
+		                    <h1>第三步：選擇技師與日期</h1>
+		                    <br>
+		                </div>
+						<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+							<button id="pg3_pg4" class="btn btn-lg continue" type="button">
+								<span class="glyphicon glyphicon-circle-arrow-right"></span>
+							</button>	
+						</div>	                
+		            </div>
+		            
+		            <div class="row" id="tccsel">
+		                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		                    <h2>技師名單</h2>	                    	                    
+		                </div>
+		            </div> 
+		            <div class="row" id="datesel">
+		                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		                    <h2>可選日期</h2>	                    	                    
+		                </div>
+		                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div id="datepicker" ></div>
+							<input type="hidden" name="selectedDate" id="selectedDate" class="form-control" value="${param.selectedDate}" placeholder="選擇日期">
+		                </div>		                								          	            	            
+		            </div>
+	        </div>
+	    </section>	    
+	</form> 
 	
 	<span id="no" hidden="hide">${memberInfo.memberNo}</span>
 		
