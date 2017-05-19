@@ -99,7 +99,7 @@ public class Loggin extends HttpServlet {
 				return;
 			} else {
 				response.sendRedirect(response.encodeRedirectURL(
-						request.getContextPath()+"/admin/admin_default.jsp"));
+						request.getContextPath()+"/admin/scheduler.jsp"));
 				return;
 			}
 		} else {
