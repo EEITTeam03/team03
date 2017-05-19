@@ -1,10 +1,15 @@
-<%@page import="myutil.MyUtil"%>
-<%@page import="java.util.Calendar"%>
+<%-- <%@page import="myutil.MyUtil"%> --%>
+<%-- <%@page import="java.util.Calendar"%> --%>
+<%@page import="com.employee.model.EmployeeService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%  
-	pageContext.setAttribute("todayDate", MyUtil.formatCalender(Calendar.getInstance()));
+	//pageContext.setAttribute("todayDate", MyUtil.formatCalender(Calendar.getInstance()));
+
+	EmployeeService es = new EmployeeService();
+	pageContext.setAttribute("empList",es.getAll());
+	pageContext.setAttribute("empList2",es.getAll());	
 %>
 
 <!DOCTYPE html>
@@ -22,27 +27,53 @@
 		<div id="page-wrapper">
 			<div class="table-responsive">
 				<h2 class="text-center">預約清單</h2>
-				<div class="col-lg-6">
+			<div class="row">
+			<div class="col-lg-6">
 				<center>
 				<form action="SchedulerListServlet" method="post">
-<!-- 						<span class="label label-success"><h1>日檢視</h1></span><br> -->
 						<div class="alert alert-success" role="alert">日檢視</div>
 						<label>日期: </label><input type="text" id="searchDate" name="searchDate" value="${param.searchDate}"/><br>
-						<input type="text" id="searchView" name="searchView"/><br><small><Font color='red' >${ErrorMsgKey.NotAcurrateView}</Font></small>
-						<p>view ex: dayView.weekView.monthView</p>
+							<p><Font color='red' >${ErrorMsgKey.DateEmptyError}</Font></p>
+							
+							<!-- <div class="btn-group" data-toggle="buttons"> -->
+							<label class="btn btn-success">
+						    	<input type="radio" name="emps" value="0" autocomplete="off" checked> 所有師傅
+						  	</label>
+							<c:forEach var="empList" items="${empList}">
+								<label class="btn btn-success">
+									<input type="radio" name="emps" value="${empList.employeeNo }" autocomplete="off"> ${empList.employeeName }
+								</label>
+							</c:forEach>
+						<br><br>
 						<input type="hidden" name="action" value="searchDate">
-						<button type="submit" id="btn_searchDate" class="btn btn-sm btn-success">送出</button><br>
-
+						<button type="submit" id="btn_searchDate" class="btn btn-success">送出</button><br>
 				</form></center>
-				</div>
-				<div class="col-lg-6">
+			</div>
+				
+			<div class="col-lg-6">
 				<center>
 				<form action="SchedulerListServlet" method="post">
-					<div class="alert alert-warning" role="alert">週檢視</div>
-					<input type="hidden" name="action" value="searchALL">
-					<button type="submit" id="btn_searchAll" class="btn btn-sm btn-warning">搜尋全部</button><br>
+						<div class="alert alert-warning" role="alert">週檢視</div>
+						<label>日期: </label><input type="text" id="searchWeek" name="searchWeek" value="${param.searchWeek}"/><br>
+							<p><Font color='red' >${ErrorMsgKey.DateEmptyError}</Font></p>
+							
+							<!-- <div class="btn-group" data-toggle="buttons"> -->
+							<label class="btn btn-warning">
+						    	<input type="radio" name="emps" value="0" autocomplete="off" checked> 所有師傅
+						  	</label>
+							<c:forEach var="empList" items="${empList2}">
+								<label class="btn btn-warning">
+									<input type="radio" name="emps" value="${empList.employeeNo }" autocomplete="off"> ${empList.employeeName }
+								</label>
+							</c:forEach>
+						<br><br>
+						<input type="hidden" name="action" value="searchWeek">
+						<button type="submit" id="btn_searchWeek" class="btn btn-warning">送出</button><br>
 				</form></center>
-				</div>
+			</div>
+			</div>
+			<div class="row">
+			<div class="col-lg-12">
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr class="info">
@@ -65,8 +96,8 @@
 								<td>${reserv.reservNo}</td>
 								<td>${reserv.membercarsVO.memberInfoVO.memberName}</td>
 								<td>${reserv.membercarsVO.carLicense}</td>
-								<td>${reserv.reservDateTime.time}</td>
-								<td>${reserv.reservEndTime.time}</td>
+								<td>${reserv.reservDateTimeFormat}</td>
+								<td>${reserv.reservDateTimeFormat}</td>
 
 								<td>
 									<c:forEach var="rservInnerList" items="${reserv.reservlists}">
@@ -90,6 +121,8 @@
 					</tbody>
 				</table>
 			</div>
+			</div>
+		</div>
 			<div class="blockUI" style="display: none">
 				<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
 			</div>
@@ -105,6 +138,15 @@
 		$(function() {
 			loadingBlock();
 			$("#searchDate").datepicker({
+				changeMonth : true,
+				changeYear : true,
+				dateFormat : 'yy-mm-dd',
+				yearRange : '-10:+10',
+				monthNamesShort: [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ]
+				//maxDate: "+3m",
+				//minDate :new Date()
+			});
+			$("#searchWeek").datepicker({
 				changeMonth : true,
 				changeYear : true,
 				dateFormat : 'yy-mm-dd',

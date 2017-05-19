@@ -1,6 +1,5 @@
 package com.schedule.model;
 
-import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +8,8 @@ import com.employee.model.EmployeeVO;
 import com.membercars.model.MemberCarsVO;
 
 import com.reservlist.model.ReservListVO;
+
+import myutil.MyUtil;
 
 
 
@@ -44,6 +45,11 @@ public class ReservVO implements java.io.Serializable{
 	public void setReservNo(Integer reservNo) {
 		this.reservNo = reservNo;
 	}
+	
+	public String getReservDateTimeFormat() {
+		return MyUtil.formatCalenderTime(reservDateTime);
+	}
+	
 	public Calendar getReservDateTime() {
 		return reservDateTime;
 	}
@@ -51,6 +57,10 @@ public class ReservVO implements java.io.Serializable{
 		this.reservDateTime = reservDateTime;
 	}
 
+	public String getReservEndTimeFormat() {
+		return MyUtil.formatCalenderTime(reservEndTime);
+	}
+	
 	public Calendar getReservEndTime() {
 		return reservEndTime;
 	}

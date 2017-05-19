@@ -1,35 +1,18 @@
 package com.schedule.model;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
-import org.hibernate.type.StandardBasicTypes;
-
-
-import com.employee.model.EmployeeVO;
-import com.membercars.model.MemberCarsVO;
-import com.memberinfo.model.MemberInfoVO;
-import com.reservlist.model.ReservListVO;
-
 
 import hibernate.util.HibernateUtil;
-import myutil.MyUtil;
 
 public class ReservDAO implements ReservDAO_interface {
 	private static final String GET_ALL_STMT="from ReservVO order by reservNo";
 	private static final String GET_BY_DATE="from ReservVO where reservDateTime between ? and ? and status>0 order by reservDateTime";
 	private static final String GET_BY_DATE_EMP="from ReservVO where reservDateTime between ? and ? AND employeeNo=? AND status>0 order by reservDateTime";
+	private static final String GET_BY_WEEK_EMP="from ReservVO where reservDateTime between ? and ? AND employeeNo=? AND status>0 order by reservDateTime";
 	private static final String ALL_STMT_Time="select min(reservDateTime) from ReservVO where reservDateTime > ? ";
 	private static final String GET_TIME_BY_DATE="from ReservVO where reservDateTime between ? and ? order by reservDateTime";
 	private static final String GET_NO_BY_LICENSE="from ReservVO where carLicense=? and status>0 order by reservDateTime";
@@ -276,6 +259,43 @@ public class ReservDAO implements ReservDAO_interface {
 			cal2.setTime(cal1.getTime());
 			cal2.add(Calendar.DATE, 1);
 			query.setParameter(1, cal2);
+			query.setParameter(2, empNo);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+	
+	@Override
+	public List<ReservVO> findByWeekAndEmp(Calendar cal, Integer empNo) {
+		List<ReservVO> list = null;
+		Calendar cal3 = Calendar.getInstance();
+		cal3.setTime(cal.getTime());
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			
+			session.beginTransaction();
+
+			Query query = session.createQuery(GET_BY_WEEK_EMP);
+			
+			cal.get(Calendar.DATE);
+			cal.set(Calendar.DAY_OF_WEEK, cal.getActualMinimum(Calendar.DAY_OF_WEEK));						
+			cal.add(Calendar.DATE, 1);
+			
+			System.out.println(cal.get(Calendar.DATE));
+			query.setParameter(0, cal);
+
+			cal3.get(Calendar.DATE);
+			cal3.set(Calendar.DAY_OF_WEEK, cal3.getActualMaximum(Calendar.DAY_OF_WEEK));
+			cal3.add(Calendar.DATE, 2);
+			System.out.println(cal3.get(Calendar.DATE));
+			
+			query.setParameter(1, cal3);
+			
 			query.setParameter(2, empNo);
 			list = query.list();
 			session.getTransaction().commit();

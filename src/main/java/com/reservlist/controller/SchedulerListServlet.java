@@ -2,7 +2,6 @@ package com.reservlist.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -15,10 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.membercars.model.MemberCarsVO;
-import com.membercars.model.MembercarsService;
-import com.memberinfo.model.MemberInfoVO;
-import com.memberinfo.model.MemberService;
 import com.schedule.model.ReservService;
 import com.schedule.model.ReservVO;
 
@@ -49,17 +44,31 @@ public class SchedulerListServlet extends HttpServlet {
 			try {
 				/***************************1.接收請求參數**********************/
 				String searchDate = req.getParameter("searchDate");
-				String searchView = req.getParameter("searchView");
+				if (searchDate == null || searchDate.trim().length() == 0) {
+					errorMsgMap.put("DateEmptyError", "請選擇日期");
+				}
+				if (!errorMsgMap.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/admin/schedulerList.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
 				Calendar cal =  MyUtil.getCalender(searchDate);
 				System.out.println("!!!!!!!!!searchDate: "+searchDate);
-				System.out.println("!!!!!!!!!searchView: "+searchView);
+				
+				//String searchView = req.getParameter("searchView");
+				Integer empNo = Integer.valueOf(req.getParameter("emps"));
 				
 				/***************************2.開始查詢資料***************************************/
 				ReservService rs = new ReservService();
-				List<ReservVO> reservVO = rs.getAllReservByDate(cal);
-				
-				
-				
+				List<ReservVO> reservVO = null;
+				if(empNo==0){
+					reservVO = rs.getAllReservByDate(cal);	
+				}else{
+					reservVO = rs.getAllReservByDateAndEmp(cal,empNo);
+				}
+								
 				/***************************3.查詢完成,準備轉交(Send the Success view)***********/
 				req.setAttribute("rservOuterList", reservVO);
 				String url = "/admin/schedulerList.jsp";
@@ -76,24 +85,37 @@ public class SchedulerListServlet extends HttpServlet {
 		}
 		
 		
-		if ("searchALL".equals(action)) {
+		if ("searchWeek".equals(action)) {
 			Map<String, String> errorMsgMap = new HashMap<String, String>();
 			req.setAttribute("ErrorMsgKey", errorMsgMap);
-			
 			try {
 				/***************************1.接收請求參數**********************/
-//				String searchDate = req.getParameter("searchDate");
-//				String searchView = req.getParameter("searchView");
-//				Calendar cal =  MyUtil.getCalender(searchDate);
-//				System.out.println("!!!!!!!!!searchDate: "+searchDate);
-//				System.out.println("!!!!!!!!!searchView: "+searchView);
+				String searchWeek = req.getParameter("searchWeek");
+				if (searchWeek == null || searchWeek.trim().length() == 0) {
+					errorMsgMap.put("DateEmptyError", "請選擇日期");
+				}
+				if (!errorMsgMap.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/admin/schedulerList.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				Calendar cal =  MyUtil.getCalender(searchWeek);
+				System.out.println("!!!!!!!!!searchWeek: "+searchWeek);
+				
+				//String searchView = req.getParameter("searchView");
+				Integer empNo = Integer.valueOf(req.getParameter("emps"));
 				
 				/***************************2.開始查詢資料***************************************/
 				ReservService rs = new ReservService();
-				List<ReservVO> reservVO = rs.getAll();
-				
-				
-				
+				List<ReservVO> reservVO = null;
+				if(empNo==0){
+					reservVO = rs.getAllReservByWeek(cal);	
+				}else{
+					reservVO = rs.getAllReservByWeekAndEmp(cal,empNo);
+				}
+								
 				/***************************3.查詢完成,準備轉交(Send the Success view)***********/
 				req.setAttribute("rservOuterList", reservVO);
 				String url = "/admin/schedulerList.jsp";

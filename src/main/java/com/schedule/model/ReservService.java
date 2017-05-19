@@ -1,9 +1,7 @@
 package com.schedule.model;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +11,6 @@ import com.employee.model.EmployeeVO;
 import com.membercars.model.MemberCarsVO;
 import com.reservlist.model.ReservListVO;
 
-import myutil.MyUtil;
 
 public class ReservService {
 	private ReservDAO_interface dao;
@@ -326,9 +323,17 @@ public class ReservService {
 	public List<ReservVO> getAllReservByDate(Calendar cal) {
 		return dao.findByDate(cal);
 	}
+	
+	public List<ReservVO> getAllReservByWeek(Calendar cal) {
+		return dao.findByWeek(cal);
+	}
 
 	public List<ReservVO> getAllReservByDateAndEmp(Calendar cal, Integer empNo) {
 		return dao.findByDateAndEmp(cal, empNo);
+	}
+	
+	public List<ReservVO> getAllReservByWeekAndEmp(Calendar cal, Integer empNo) {
+		return dao.findByWeekAndEmp(cal, empNo);
 	}
 	
 	public List<ReservVO> fingReservNoByLicense(String license) {
