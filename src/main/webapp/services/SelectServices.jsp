@@ -63,24 +63,73 @@
 
 							<tr>
 								<td>服務編號的所有步驟</td>
-								<FORM METHOD="post" ACTION="${ctx}/services/servicestep.do">
+<%-- 								<FORM METHOD="post" ACTION="${ctx}/services/servicestep.do"> --%>
 									<td><select size="1" name="servNo" class="form-control">
 											<c:forEach var="distlist" items="${list}">
 												<option value="${distlist.servicesVO.servNo}">${distlist.servicesVO.servNo}-${distlist.stepName}
 											</c:forEach>
 									</select></td>
 									<td>
-										<button type="submit" class="btn btn-sm btn-primary">查詢</button> <input type="hidden" name="action" value="getMany_ServiceStep_ByServNo">
+										<button type="submit" name="button2" class="btn btn-sm btn-primary">查詢</button> 
+<!-- 										<input type="hidden" name="action" value="getMany_ServiceStep_ByServNo"> -->
+										
 									</td>
-								</FORM>
+<!-- 								</FORM> -->
 							</tr>
 						</tbody>
 					</table>
-					
+					<div>
+						<table id="forDistinct" class="table table-bordered table-hover">
+							<thead>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		$(function(){
+// 			var truncate1=$('select[name="servNo"]:eq(0)').val();
+// 			console.log(truncate);
+// 			console.log(truncate1);
+			$('button[name="button2"]').click(function(){
+				var truncate=$('select[name="servNo"]:eq(1)').val();
+				var thead1=$('#forDistinct>thead');
+				var tbody1=$('#forDistinct>tbody');
+				tbody1.empty();
+				thead1.empty();
+				var th1=$("<th></th>").text("服務編號");
+				var th2=$("<th></th>").text("服務步驟");
+				var th3=$("<th></th>").text("步驟名稱");
+				var th4=$("<th></th>").text("步驟描述");
+				var th5=$("<th></th>").text("服務照片");
+				var th6=$("<th></th>").text("選項");
+				thead1.append([th1,th2,th3,th4,th5,th6]);	
+				
+				$.getJSON('${ctx}/ServiceStepJson',{servNo	:truncate},function(json){
+					$.each(json,function(key,value){
+//	 					console.log(key);
+//	 					console.log(value);
+						var td1=$('<td></td>').text(value.servNo);
+						console.log(td1);
+						var td2=$('<td></td>').text(value.servStep);
+						var td3=$('<td></td>').text(value.stepName);
+						var td4=$('<td></td>').text(value.stepDescp);
+						var td5=$('<td></td>').text(value.stepPic);
+						var img1=$('<img></img>').attr("src","data:image/jpeg;base64,${Base64.getEncoder().encodeToString(value.stepPic)}")
+						var tdimg=td5.append(img1);
+						
+						var row=$('<tr></tr>').append([td1,td2,td3,td4,td5,tdimg]);
+						tbody1.append(row);
+					});
+				})
+			})
+			
+		})
+	</script>
 </body>
 
 </html>
