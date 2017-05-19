@@ -186,8 +186,7 @@
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand page-scroll" href="index.jsp">Car
-					Detailing</a>
+				<a class="navbar-brand page-scroll" href="index.jsp">Wash Me</a>
 			</div>
 	
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -242,7 +241,7 @@
 						
 						<ul class="dropdown-menu" role="menu">
 						    <li><a href="orderStatus.jsp">訂單狀態</a></li>
-						    <li><a href="#">修改資料</a></li>
+						    <li><a href="member_update.jsp">修改資料</a></li>
 						    <li>意見回饋</li>
 						    <li class="divider"></li>
 						    <li><a href="LogOut">登出</a></li>
