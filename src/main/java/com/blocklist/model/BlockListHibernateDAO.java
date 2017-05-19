@@ -112,6 +112,17 @@ public class BlockListHibernateDAO implements BlockListDAO_interface{
 //		 MemberInfoVO miv= ms.getOneMem(9);
 //		 BlockListHibernateDAO dao = new BlockListHibernateDAO();
 //		 System.out.println(dao.countBlockList(miv));
-//		 
+//		String a="hello";
+//		String b=a;
+//         a="java";
+//        System.out.println(b);
+//		Double a=1.0;  
+//		 double b=1.0;
+//		 float c=1.0;
+//		 double s=1;
+//		float c = 11.1f; 
+//		int i =6;
+//		String result=((10+20)<5*i++)+" ";
+//		System.out.println(result);
 //	}
 }
