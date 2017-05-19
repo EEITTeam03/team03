@@ -152,24 +152,25 @@ public class MemberServlet extends HttpServlet {
 				}
 				
 				
-
-				MemberInfoVO memberinfoVO = null;
-				
-//				MemberInfoVO memberinfoVO = new MemberInfoVO();
-//				memberinfoVO.setMemberNo(memberNo);
-//				memberinfoVO.setMemberName(memberName);
-//				memberinfoVO.setEmail(email);
-//				memberinfoVO.setPassword(password);
-//				memberinfoVO.setPhone(phone);
-//				memberinfoVO.setBirthday(birthday);
-//				memberinfoVO.setAddress(address);
 				java.sql.Date bday = Date.valueOf(birthday);
 				java.sql.Date eday = Date.valueOf(effectiveDate);
+
+//				MemberInfoVO memberinfoVO = null;
+				
+				MemberInfoVO memberinfoVO = new MemberInfoVO();
+				memberinfoVO.setMemberNo(memberNo);
+				memberinfoVO.setMemberName(memberName);
+				memberinfoVO.setEmail(email);
+				memberinfoVO.setPassword(password);
+				memberinfoVO.setPhone(phone);
+				memberinfoVO.setBirthday(bday);
+				memberinfoVO.setAddress(address);
+				memberinfoVO.setEffectiveDate(eday);
 				// Send the use back to the form, if there were errors
 				if (!errorMsgMap.isEmpty()) {
 					req.setAttribute("memberinfoVO", memberinfoVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("Update.jsp");
+							.getRequestDispatcher("member_update.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -179,15 +180,16 @@ public class MemberServlet extends HttpServlet {
 				memberinfoVO = memberSvc.updateMem(memberNo, memberName, email, password, phone, bday, address, eday);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				req.getSession().setAttribute("memberInfo", memberinfoVO);
 				String url = "/index.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				errorMsgMap.put(e.getMessage(), "其他錯誤");
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/admin/member_update.jsp");
+						.getRequestDispatcher("/member_update.jsp");
 				failureView.forward(req, res);
 			}
 		}

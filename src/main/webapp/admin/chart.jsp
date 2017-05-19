@@ -82,6 +82,7 @@
                                 <h3 class="panel-title"><i class="fa fa-usd"></i>師傅總金額</h3>
                             </div>
                             <div class="panel-body">
+                            <h2>選擇月份</h2>
                             	<select id="barselect">
                             		<option value="2017-01">1</option>
                             		<option value="2017-02">2</option>
