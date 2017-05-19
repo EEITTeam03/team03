@@ -45,26 +45,6 @@
 					<h2>項目</h2>
 					<table class="table">
 						<tbody>
-							<tr>
-								<td>查看所有服務</td>
-								<td>
-								<td><input type="button" class="btn btn-sm btn-primary" onclick="javascript:location.href='${ctx}/services/ListAllServices.jsp'" value="查詢" /></td>
-							</tr>
-							<tr>
-								<td>新增服務</td>
-								<td></td>
-								<td><input type="button" class="btn btn-sm btn-warning" onclick="javascript:location.href='${ctx}/services/ServicesInsert.jsp'" value="新增" /></td>
-							</tr>
-							<tr>
-								<td>查看服務價格</td>
-								<td></td>
-								<td><input type="button" class="btn btn-sm btn-primary" onclick="javascript:location.href='${ctx}/services/ListAllServicesPriceAndTime.jsp'" value="查詢" /></td>
-							</tr>
-							<tr>
-								<td>查看所有服務步驟</td>
-								<td></td>
-								<td><input type="button" class="btn btn-sm btn-primary" onclick="javascript:location.href='${ctx}/services/ListAllServiceStep.jsp'" value="查詢" /></td>
-							</tr>
 
 							<tr>
 								<td>選擇服務編號</td>
@@ -96,27 +76,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
+					
 				</div>
 			</div>
 		</div>
