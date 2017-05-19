@@ -38,29 +38,38 @@ body,button,h1{
 <body>
 <jsp:include page="Testhead_nav.jsp"/>
 <div id="wrapper">
-		<div id="page-wrapper">
+<div id="page-wrapper">
+	<div class="row">
+  		<div class="col-lg-2">
+  			
+  			<h2 style="text-align:center;">查看排程</h2>
+  			<br>
+  			<button type="submit" id="btn_search" class="btn btn-primary btn-lg btn-block">查詢</button><br>
+			<button type="submit" value="匯出至Excel" id='excelExport' class="btn btn-success btn-lg btn-block">匯出至Excel</button><br>
+			<button type="submit" id="btn_reservList" class="btn btn-warning btn-lg btn-block">表列訂單明細</button><br>
+			<!-- <button type="submit" id='test' class="btn btn-sm btn-primary">Test</button> -->
+  		</div>
+  		
+  		<div class="col-lg-10">
 		<div id="contentDiv">
-		<h2>查看排程</h2>
-		
-		<button type="submit" id="btn_search" class="btn btn-sm btn-primary">查詢</button>
-		<button type="submit" value="匯出至Excel" id='excelExport' class="btn btn-sm btn-success">匯出至Excel</button>
-<!-- 		<button type="submit" id='test' class="btn btn-sm btn-primary">Test</button> -->
-		<div class="growlUI" style="display: none">
-			<img src="${ctx}/img/loading/check.png" />
-    		<p>預約異動成功</p>
-		</div>
-		<div class="growlUIError" style="display: none">
-    		<p>重新載入</p>
-		</div>
-		<div class="blockUI" style="display: none">
-			<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
-		</div>
-    		<div id="scheduler_body" >
-        	<div id="scheduler"></div>
-    </div>
-  </div>
-  </div>  
-  </div>
+			<div class="growlUI" style="display: none">
+				<img src="${ctx}/img/loading/check.png" />
+	    		<p>預約異動成功</p>
+			</div>
+			<div class="growlUIError" style="display: none">
+	    		<p>重新載入</p>
+			</div>
+			<div class="blockUI" style="display: none">
+				<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
+			</div>
+	    	<div id="scheduler_body" >
+	        	<div id="scheduler"></div>
+    		</div>
+  		</div>
+  		</div>
+  	</div>
+</div>  
+</div>
 
 
     
@@ -105,6 +114,10 @@ body,button,h1{
         	});
         	$("#excelExport").click(function () {
                 $("#scheduler").jqxScheduler('exportData', 'xls');
+            });
+        	$("#btn_reservList").click(function () {
+        		window.location.replace("schedulerList.jsp");
+        		//window.open("schedulerList.jsp");
             });
 //         	$("#test").click(function () {
 //         		growlUIError();
