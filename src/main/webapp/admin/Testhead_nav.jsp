@@ -127,7 +127,19 @@ body,button,h1{
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
 					<li><a href="${ctx}/admin/scheduler.jsp"><i class="fa fa-car"></i> 管理工作排程</a></li>
-					<li><a href="${ctx}/services/SelectServices.jsp"><i class="fa fa-fw fa-table"></i>維護服務項目</a></li>
+					<li>
+						<a href="#" data-toggle="collapse" data-target="#servicelist">
+							<i class="fa fa-fw fa-table"></i>
+							維護服務<i class="fa fa-fw fa-caret-down"></i>
+						</a>
+							<ul id="servicelist" class="collapse nav navbar-nav">
+								<li><a href="${ctx}/services/ListAllServices.jsp">查看所有服務</a></li>
+								<li><a href="${ctx}/services/ListAllServicesPriceAndTime.jsp">查看服務價格</a></li>
+								<li><a href="${ctx}/services/ListAllServiceStep.jsp">所有服務步驟</a></li>
+								<li><a href="${ctx}/services/SelectServices.jsp">選擇單筆服務步驟</a></li>
+							</ul>
+					
+					</li>
 					<li><a href="${ctx}/admin/chart.jsp" id="a_test"><i
 							class="fa fa-fw fa-bar-chart-o"></i> 報表查詢</a></li>
 					<li><a href="#" data-toggle="collapse" data-target="#blocklist">
