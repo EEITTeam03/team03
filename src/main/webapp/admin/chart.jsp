@@ -39,9 +39,7 @@
                                 <div class="flot-chart">
                                     <div class="flot-chart-content" id="flot-pie-chart" ></div>
                                 </div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -60,13 +58,16 @@
                     </div>
                 </div>
                 <!-- /.row -->
+		        	<div class="blockUI" style="display: none">
+						<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
+					</div>
                 <div class="row">
                 	<div class="col-lg-6">
 						<table class="table table-bordered table-hover" id="showbar">
 							<thead>
 								<tr>
-									<th>XXX</th>
-									<th>XXXXXXX</th>
+									<th>師傅</th>
+									<th>金額</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -74,13 +75,11 @@
 							</tbody>
 						</table>
                 	</div>
-                	<div class="blockUI" style="display: none">
-						<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
-					</div>
-                	 <div class="col-md-offset-6 col-lg-6">
+
+                	 <div class="col-lg-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Bar Graph Example</h3>
+                                <h3 class="panel-title"><i class="fa fa-usd"></i>師傅總金額</h3>
                             </div>
                             <div class="panel-body">
                             	<select id="barselect">
@@ -89,11 +88,16 @@
                             		<option value="2017-03">3</option>
                             		<option value="2017-04">4</option>
                             		<option value="2017-05">5</option>
+                            		<option value="2017-06">6</option>
+                            		<option value="2017-07">7</option>
+                            		<option value="2017-08">8</option>
+                            		<option value="2017-09">9</option>
+                            		<option value="2017-10">10</option>
+                            		<option value="2017-11">11</option>
+                            		<option value="2017-12">12</option>
                             	</select>
                                 <div id="morris-bar-chart"></div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -140,8 +144,9 @@
 		loadingBlock();
 		//var month = "2017-05";
 		var tbody = $("#showcount > tbody");
-		
+		var tbody2 = $("#showbar > tbody");
 		showchart("2017-05");
+		showbar("2017-05");
 		
 		$("#month").change(function(){
 			var month = $(this).val();
@@ -220,13 +225,28 @@
 		    	
 		    	var month2 = $(this).val();
 		    	
-			    $.getJSON('${ctx}/EmpProfit',{'month':month2},function(data){
-			    	showbar (data);
-			    });
+		    	showbar(month2);
 		    });
 		    
 		    
-		    function showbar (data) {
+		    function showbar (month2) {
+			    $.getJSON('${ctx}/EmpProfit',{'month':month2},function(data){
+			    
+					if(data.length==0){
+						
+						swal({
+							  type: "info",
+							  title: "查無資料",
+							  text: "所選的月份無任何預約",
+							  timer: 1000,
+							  showConfirmButton: false
+							});
+					}
+	
+		    	
+		    	$("#morris-bar-chart").empty();
+		    	tbody2.empty();
+		    	
 			    Morris.Bar({
 			        element: 'morris-bar-chart',
 			        data: data,
@@ -234,9 +254,19 @@
 			        ykeys: ['geekbench'],
 			        labels: ['Geekbench'],
 			        barRatio: 0.4,
-			        xLabelAngle: 35,
+			        xLabelAngle: 0,
 			        hideHover: 'auto',
 			        resize: true
+			    });
+			    
+			    $.each(data,function(idx,bar){
+			    	
+				    var tr = $("<tr></tr>");
+				    var td1 = $("<td></td>").text(bar.device);
+				    var td2 = $("<td></td>").text(bar.geekbench+"元");
+				    tr.append([td1,td2]);
+				    tbody2.append(tr);
+				    });
 			    });
 		    }
 	loadingUnblock();		

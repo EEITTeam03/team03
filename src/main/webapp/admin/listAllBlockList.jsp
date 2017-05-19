@@ -32,8 +32,9 @@ BlockListService blsvc = new BlockListService();
 	<thead>
 	<tr>
 		<th>會員編號</th>
-		<th>違規規則</th>
+		<th>會員姓名</th>
 		<th>違反日期</th>
+		<th>違反原因</th>
 		<th>預約編號</th>
 	</tr>
 	</thead>
@@ -43,6 +44,7 @@ BlockListService blsvc = new BlockListService();
 			<td>${blkVO.memberInfoVO.memberNo}</td>
 			<td>${blkVO.memberInfoVO.memberName}</td>
 			<td>${blkVO.violationDate}</td>
+			<td>${blkVO.blockRuleVO.blockRule}</td>
 			<td>${blkVO.reservationNo}</td>
 		</tr>
 	</c:forEach>
