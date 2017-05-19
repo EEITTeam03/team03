@@ -180,8 +180,7 @@
 				<span class="sr-only">Toggle navigation</span> Menu <i
 					class="fa fa-bars"></i>
 			</button>
-			<a class="navbar-brand page-scroll" href="index.jsp">Car
-				Detailing</a>
+			<a class="navbar-brand page-scroll" href="index.jsp">Wash Me</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
