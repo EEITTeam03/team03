@@ -22,13 +22,18 @@ FeedbackService fsvc = new FeedbackService();
     <!-- Custom Fonts -->
     <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <title>List one opinion</title>
+<style type="text/css">
+.swal-wide{
+    width:800px !important;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../admin/Testhead_nav.jsp"/>
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
-<table class="table table-bordered table-hover">
+<table class="table table-bordered ">
 	<thead>
 	<tr>
 	<th>意見編號</th>
@@ -43,7 +48,8 @@ FeedbackService fsvc = new FeedbackService();
 	<tbody>
 	<c:if test="${fVO!=null}">
 <%-- 	<c:forEach var="fVO" items="${list}" begin="0" end="${list.size()-1}"> --%>
-		<tr >
+	<c:if test="${fVO.reply!=null}"><tr class="bg-success"></c:if>
+	<c:if test="${fVO.reply==null}"><tr></c:if>
 			<td>${fVO.feedbackNo}</td>
 			<td>${fVO.feedbackDate.time}</td>
 			<td>${fVO.memberName}</td>
@@ -58,13 +64,13 @@ FeedbackService fsvc = new FeedbackService();
 			</c:choose>
 			</td>
 			<td><FORM METHOD="get" ACTION="replyFeedback.jsp">
-									<input type="submit" value="回覆"> 
+									<c:if test="${fVO.reply!=null}">已回覆 </c:if>
+						<c:if test="${fVO.reply==null}"><input type="submit" value="回覆"></c:if>
 									<input type="hidden" name="feedbackNo" value="${fVO.feedbackNo}">
 									<input type="hidden"  name="memberName" value="${fVO.memberName}">
 									<input type="hidden"  name="reply" value="${fVO.reply}">
 								</FORM></td>
-			<c:if test="${fVO.reply!=null}"><td>已回</td></c:if>
-			<c:if test="${fVO.reply==null}"><td>未回</td></c:if>
+			<td><button class="btn btn-primary" onclick="swal({ title: '你的回覆',text:'${fVO.reply}',customClass: 'swal-wide',closeOnConfirm: true})">查看</button></td>
 		</tr>
 <%-- 	</c:forEach> --%>
 	</c:if>

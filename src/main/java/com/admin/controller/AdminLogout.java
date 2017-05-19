@@ -25,7 +25,7 @@ public class AdminLogout extends HttpServlet {
 		request.getSession().removeAttribute("admin");
 		request.getSession().removeAttribute("adminTarget");
 		
-		response.sendRedirect(getServletContext().getContextPath()+"/admin/admin_default.jsp");
+		response.sendRedirect(getServletContext().getContextPath()+"/adminLogin/index.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

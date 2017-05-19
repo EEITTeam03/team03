@@ -32,7 +32,7 @@ public class ReservDAO implements ReservDAO_interface {
 	private static final String GET_BY_DATE_EMP="from ReservVO where reservDateTime between ? and ? AND employeeNo=? AND status>0 order by reservDateTime";
 	private static final String ALL_STMT_Time="select min(reservDateTime) from ReservVO where reservDateTime > ? ";
 	private static final String GET_TIME_BY_DATE="from ReservVO where reservDateTime between ? and ? order by reservDateTime";
-	private static final String GET_NO_BY_LICENSE="from ReservVO where carLicense=? and status>0";
+	private static final String GET_NO_BY_LICENSE="from ReservVO where carLicense=? and status>0 order by reservDateTime";
 	@Override
 	public ReservVO findByPrimaryKey(Integer reservNo) {
 		// TODO Auto-generated method stub

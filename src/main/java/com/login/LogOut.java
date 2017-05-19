@@ -19,7 +19,9 @@ public class LogOut extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.getSession().removeAttribute("FBAccount");
+		request.getSession().removeAttribute("FBId");
+		request.getSession().removeAttribute("FBName");
 		request.getSession().removeAttribute("Code");
 		request.getSession().removeAttribute("memberInfo");
 		request.getSession().removeAttribute("target");

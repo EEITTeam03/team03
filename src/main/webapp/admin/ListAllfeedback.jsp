@@ -21,6 +21,11 @@ FeedbackService fsvc = new FeedbackService();
     <!-- Custom Fonts -->
     <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <title>所有意見</title>
+<style type="text/css">
+.swal-wide{
+    width:800px !important;
+}
+</style>
 </head>
 <body>
 <jsp:include page="/admin/Testhead_nav.jsp"/>
@@ -71,7 +76,7 @@ swal("完成回覆!","","info");
 									<input type="hidden"  name="memberName" value="${fVO.memberName}">
 									<input type="hidden"  name="reply" value="${fVO.reply}">
 								</FORM></td>
-			<td><button class="btn btn-primary" onclick="swal('${fVO.reply}')">查看</button></td>
+			<td><button class="btn btn-primary" onclick="swal({ title: '你的回覆',text:'${fVO.reply}',customClass: 'swal-wide',closeOnConfirm: true})">查看</button></td>
 
 		</tr>
 	</c:forEach>
