@@ -133,11 +133,18 @@
     $("#sb").on("click",function(){
     	$("input[type*='password']").attr({"name":"password"});
     });	       	
-  
     
  });
 
-
+  //一鍵輸入
+  function ch(){
+  	document.getElementById('r_name').value = "拓海";
+  	document.getElementById('r_email').value = "eeit93team@gmail.com";
+   	document.getElementById('r_password').value = "sa123456";
+   	document.getElementById('r_phone').value = "0919871987";
+   	//document.getElementById('r_birth').value = "1987-08-07";
+   	document.getElementById('r_address').value = "台北市大安區復興南路一段390號";
+  }
 	
 </script>
 
@@ -401,11 +408,11 @@
 								<br>														
 								<c:if test="${!empty FBName}">												
 									<input type="hidden" name="name" value='${FBName}'>											
-								</c:if>
-																				
+								</c:if>									
 								<c:if test="${empty FBName}">												
-									<div class="input-group" style="max-width:200px;">	
-										<input type="text" name="name" class="form-control required" placeholder="輸入您的姓名" value='${param.name}'>																													
+									<div class="input-group" style="max-width:200px;">
+										<input class="btn btn-secondary btn-sm" type="button" onclick="ch();" aria-invalid="false" style="width: 120px;" value="一鍵輸入">		
+										<input type="text" id="r_name" name="name" class="form-control required" placeholder="輸入您的姓名" value='${param.name}'>																										
 										<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>											
 									</div>
 									<br>																															
@@ -417,7 +424,7 @@
 																			
 								<c:if test="${empty FBAccount}">												
 									<div class="input-group" style="width:100%;">
-										<input type="text" name="email" class="form-control email required" placeholder="輸入您的電子郵件" value='${param.email}'>												
+										<input type="text" id="r_email" name="email" class="form-control email required" placeholder="輸入您的電子郵件" value='${param.email}'>												
 										<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>											
 									</div>												
 									<br>												
@@ -429,7 +436,7 @@
 																				
 								<c:if test="${empty FBId}">												
 									<div class="input-group"  style="width:100%;">
-										<input type="password" class="form-control required" placeholder="輸入您的密碼" value='${param.password}'>
+										<input type="password" id="r_password" class="form-control required" placeholder="輸入您的密碼" value='${param.password}'>
 									    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>												
 									</div>												
 									<br>												
@@ -437,7 +444,7 @@
 																				
 																				
 								<div class="input-group"  style="max-width:250px;">
-									<input name="phone" type="text" class="form-control required" placeholder="輸入您的電話" value='${param.phone}'>												
+									<input name="phone" type="text" id="r_phone" class="form-control required" placeholder="輸入您的電話" value='${param.phone}'>												
 								    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>												
 																				
 								</div>												
@@ -445,19 +452,20 @@
 								<br>												
 																				
 								<div class="input-group" style="max-width:250px;">												
-							    	<input id="datepicker" class="form-control required dateISO" name="datepicker" placeholder="輸入您的出生年月日" value='${param.birthday}'>												
+							    	<input id="datepicker" class="form-control required dateISO" id="r_birth" name="datepicker" placeholder="輸入您的出生年月日" value='${param.birthday}'>												
 								    <small><Font color='red' >${ErrorMsgKey.BirthdayEmptyError}</Font></small><br>												
 								</div>												
 																				
 								<br>												
 																				
 								<div class="input-group" style="width:100%;">												
-								   	<input name="address" type="text" class="form-control required" placeholder="輸入您的地址" value='${param.address}'>										
+								   	<input name="address" type="text" class="form-control required"  id="r_address" placeholder="輸入您的地址" value='${param.address}'>										
 								    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>												
 								</div>												
 																				
 								<br>												
-								<div class="input-group" style="width:100%;">												
+								<div class="input-group" style="width:100%;">	
+																			
 									<input type="hidden" name="action" value="insert">												
 									<button id="sb" class="btn btn-lg light-orange btn-block" type="submit">下一步</button>												
 									<br>
