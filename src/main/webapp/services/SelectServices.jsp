@@ -11,9 +11,9 @@
 		sslist.add(sss.getMoreServiceStepbyFK(servNO).get(0));
 	}
 	pageContext.setAttribute("list", sslist);
-	
-	ServicesService ss= new ServicesService();
-	List<ServicesVO> svo=ss.getAll();
+
+	ServicesService ss = new ServicesService();
+	List<ServicesVO> svo = ss.getAll();
 	pageContext.setAttribute("ss", svo);
 %>
 <!DOCTYPE html>
@@ -53,34 +53,32 @@
 
 							<tr>
 								<td>選擇服務編號</td>
-<%-- 								<jsp:useBean id="ss" scope="page" class="com.services.model.ServicesService" /> --%>
-<%-- 								<FORM METHOD="post" ACTION="${ctx}/services/services.do"> --%>
-									<td><select size="1" name="servNo" class="form-control">
-											<c:forEach var="servicesVO" items="${ss}">
-												<option value="${servicesVO.servNo}">${servicesVO.servNo}-${servicesVO.servName}
-											</c:forEach>
-									</select></td>
-									<td>
-										<button type="submit" name="button1" class="btn btn-sm btn-primary">查詢</button> 
-<!-- 										<input type="hidden" name="action" value="getOne_For_Display"> -->
-									</td>
-<!-- 								</FORM> -->
+								<%-- 								<jsp:useBean id="ss" scope="page" class="com.services.model.ServicesService" /> --%>
+								<%-- 								<FORM METHOD="post" ACTION="${ctx}/services/services.do"> --%>
+								<td><select size="1" name="servNo" class="form-control">
+										<c:forEach var="servicesVO" items="${ss}">
+											<option value="${servicesVO.servNo}">${servicesVO.servNo}-${servicesVO.servName}
+										</c:forEach>
+								</select></td>
+								<td>
+									<button type="submit" name="button1" class="btn btn-sm btn-primary">查詢</button> <!-- 										<input type="hidden" name="action" value="getOne_For_Display"> -->
+								</td>
+								<!-- 								</FORM> -->
 							</tr>
 
 							<tr>
 								<td>服務編號的所有步驟</td>
-<%-- 								<FORM METHOD="post" ACTION="${ctx}/services/servicestep.do"> --%>
-									<td><select size="1" name="servNo" class="form-control">
-											<c:forEach var="distlist" items="${list}">
-												<option value="${distlist.servicesVO.servNo}">${distlist.servicesVO.servNo}-${distlist.stepName}
-											</c:forEach>
-									</select></td>
-									<td>
-										<button type="submit" name="button2" class="btn btn-sm btn-primary">查詢</button> 
-<!-- 										<input type="hidden" name="action" value="getMany_ServiceStep_ByServNo"> -->
-										
-									</td>
-<!-- 								</FORM> -->
+								<%-- 								<FORM METHOD="post" ACTION="${ctx}/services/servicestep.do"> --%>
+								<td><select size="1" name="servNo" class="form-control">
+										<c:forEach var="distlist" items="${list}">
+											<option value="${distlist.servicesVO.servNo}">${distlist.servicesVO.servNo}-${distlist.stepName}
+										</c:forEach>
+								</select></td>
+								<td>
+									<button type="submit" name="button2" class="btn btn-sm btn-primary">查詢</button> <!-- 										<input type="hidden" name="action" value="getMany_ServiceStep_ByServNo"> -->
+
+								</td>
+								<!-- 								</FORM> -->
 							</tr>
 						</tbody>
 					</table>
@@ -108,54 +106,26 @@
 		$(function(){
 			$('button[name="button1"]').click(function(){
 				
-// 				console.log(truncate1);
-// 				var thead2=$('#forDistinct1>thead');
-// 				var tbody2=$('#forDistinct1>tbody');
-// 				tbody2.empty();
-// 				thead2.empty();
-// 				var th1=$("<th></th>").text("服務編號");
-// 				var th2=$("<th></th>").text("服務類型編號");
-// 				var th3=$("<th></th>").text("服務名稱");
-// 				var th4=$("<th></th>").text("服務有效日期");
-// 				var th5=$("<th></th>").text("服務狀態");
-// 				var th6=$("<th></th>").text("服務描述");
-// 				var th7=$("<th></th>").text("服務照片");
-// 				var th8=$("<th></th>").text("選項");
-// 				var theadrow=$("<tr></tr>").attr("class","text-center").append([th1,th2,th3,th4,th5,th6,th7,th8])
-// 				thead2.append(theadrow);	
 				var truncate1=$('select[name="servNo"]:eq(0)').val();
-				$.getJSON('${ctx}/ServiceJson',{servNo	:truncate1},function(json){
-					$.each(json,function(i,v){
-						
-	 					alert("in");
-						console.log(i);
-// 	 					console.log(v);
-// 	 					console.log(value);
-// 						var td1=$('<td></td>').text(value1.servNo);
-// 						console.log(td1);
-// 						var td2=$('<td></td>').text(value1.servTypeNo);
-// 						var td3=$('<td></td>').text(value1.servName);
-// 						var td4=$('<td></td>').text(value1.servEffectiveDate);
-// 						var td5=$('<td></td>').text(value1.servStatus);
-// 						var td6=$('<td></td>').text(value1.servDesc);
-// 						var td7=$('<td></td>');
-// 						var img1=$('<img></img>').attr("width","200").attr("src","data:image/jpeg;base64,"+value1.servPhoto);
-// 						var tdimg=td7.append(img1);
-// 						var td6=$('<td></td>')
-// 						var btn=$('<button>查詢</button>').attr("type","submit").attr("class","btn btn-sm btn-primary");
-						
-// 						var form=$('<form></form>').attr("method","post").attr("action","${ctx}/services/servicestep.do");
-						
-						
-// 						var input =$("<input />").attr("type","hidden").attr("name","action").attr("value","getOne_For_Update");
-// 						var input1 =$("<input />").attr("type","hidden").attr("name","servStepNo").attr("value",value.servStepNo);
-// 						td6.append(form.append([btn,input,input1]));
-// 						var row=$('<tr></tr>').append([td1,td2,td3,td4,td5,td6]);
-// 						form.append([row,input,input1]);
-// 						tbody2.append(row);
-					});
-				});
-			});
+				console.log(truncate1);
+// 				$.getJSON('${ctx}/ServiceJson',{servNo	:truncate1},function(json){
+// 					$.each(json,function(i,v){
+// 	 					alert("in");
+// 					});
+// 				});
+			$.ajax({
+				type:'POST',
+				data:{'servNo':truncate1},
+				url:'${ctx}/ServiceJson',
+				dataType:'json'
+			}).done(function(hello){
+				alert('in');
+			}).fail(function(xhr,status,errorThrown){
+				console.log(xhr);
+				alert(status);
+				alert(errorThrown);
+			})
+			
 			
 			$('button[name="button2"]').click(function(){
 				var truncate=$('select[name="servNo"]:eq(1)').val();
@@ -198,10 +168,11 @@
 						tbody1.append(row);
 					});
 				})
-			});
+			})
+		})
 		})
 		</script>
-		
+
 </body>
 
 </html>

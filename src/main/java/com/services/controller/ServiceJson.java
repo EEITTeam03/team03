@@ -24,7 +24,11 @@ public class ServiceJson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json");
+		doPost(request,response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setHeader("content-type", "text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
 		PrintWriter out =response.getWriter();
@@ -42,43 +46,12 @@ public class ServiceJson extends HttpServlet {
 		if(servicesVO.getServPhoto()!=null){
 			map.put("servPhoto",Base64.getEncoder().encodeToString(servicesVO.getServPhoto()));
 		}
-		map.put("servEffectiveDate",servicesVO.getServEffectiveDate());
+		map.put("servEffectiveDate",servicesVO.getServEffectiveDate().toString());
 		map.put("servStatus",servicesVO.getServDesc());
 		list.add(map);
-		String forjson=JSONValue.toJSONString(map);
+		String forjson=JSONValue.toJSONString(list);
+		out.print(forjson);
 		System.out.println(forjson);
-		out.println(forjson);
-		out.close();
-		return;
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
-//		response.setHeader("content-type", "text/html;charset=UTF-8");
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-//		
-//		PrintWriter out =response.getWriter();
-//		String str = request.getParameter("servNo");
-//		Integer servNo=Integer.valueOf(str);
-//		ServicesService ssForDisplay=new ServicesService();
-//		ServicesVO servicesVO=ssForDisplay.getOneService(servNo);
-//		
-//		Map<String,Object> map=new HashMap<String,Object>();
-//		List<Map> list=new ArrayList<>();
-//		map.put("servNo",servicesVO.getServNo());
-//		map.put("servTypeNo",servicesVO.getServTypeNo());
-//		map.put("servName",servicesVO.getServName());
-//		map.put("servDesc",servicesVO.getServDesc());
-//		if(servicesVO.getServPhoto()!=null){
-//			map.put("servPhoto",Base64.getEncoder().encodeToString(servicesVO.getServPhoto()));
-//		}
-//		map.put("servEffectiveDate",servicesVO.getServEffectiveDate());
-//		map.put("servStatus",servicesVO.getServDesc());
-//		list.add(map);
-//		String forjson=JSONValue.toJSONString(list);
-//		out.print(forjson);
-//		System.out.println(forjson);
 	}
 
 }
