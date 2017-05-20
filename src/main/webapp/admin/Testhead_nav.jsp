@@ -88,7 +88,7 @@ body,button,h1{
                                     <div class="media-body">
                                         <h5 class="media-heading"><strong>${fVO.memberName}</strong>
                                         </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i>${fVO.feedbackDate.time}</p>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i>${fVO.feedbackDateStr}</p>
                                         <p>${fVO.feedback}</p>
                                     </div>
                                 </div>
@@ -207,7 +207,6 @@ body,button,h1{
 
 	<!-- jQuery -->
 	<script src="${ctx}/admin/js/jquery.js"></script>
-
 	<!-- Bootstrap Core JavaScript -->
 	<script src="${ctx}/admin/js/bootstrap.min.js"></script>
 	<!-- 偷用瑋倫的js來做表單驗證 -->

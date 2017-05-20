@@ -3,6 +3,8 @@ package com.feedback.model;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import myutil.MyUtil;
+
 public class FeedbackVO implements Serializable{
 private Calendar feedbackDate;
 private String memberName;
@@ -20,6 +22,11 @@ public void setFeedbackNo(Integer feedbackNo) {
 public Calendar getFeedbackDate() {
 	return feedbackDate;
 }
+
+public String getFeedbackDateStr() {
+	return MyUtil.formatCalenderTime(feedbackDate);
+}
+
 public void setFeedbackDate(Calendar feedbackDate) {
 	this.feedbackDate = feedbackDate;
 }
