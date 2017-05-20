@@ -11,6 +11,8 @@
 	<script src="${ctx}/admin/js/bootstrap.min.js"></script>
     <!-- Morris Charts CSS -->
     <link href="css/plugins/morris.css" rel="stylesheet">
+    <!--美美的icon-->
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
     
 </head>
 <body>
@@ -113,9 +115,7 @@
 	</div>
 
 	<!-- jQuery -->
-	<script src="${ctx}/admin/js/jquery.js"></script>
-	<!-- Bootstrap Core JavaScript -->
-	<script src="${ctx}/admin/js/bootstrap.min.js"></script>
+<script src="${ctx}/js/jquery.js"></script>
     <script src="js/plugins/flot/jquery.flot.js"></script>
     <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
 <!--     <script src="js/plugins/flot/jquery.flot.resize.js"></script> -->

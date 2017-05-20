@@ -20,6 +20,8 @@
 
     <!-- Custom Fonts -->
     <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--美美的icon-->
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <title>Insert title here</title>
 </head>
 <body>
