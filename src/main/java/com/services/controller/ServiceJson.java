@@ -47,7 +47,7 @@ public class ServiceJson extends HttpServlet {
 			map.put("servPhoto",Base64.getEncoder().encodeToString(servicesVO.getServPhoto()));
 		}
 		map.put("servEffectiveDate",servicesVO.getServEffectiveDate().toString());
-		map.put("servStatus",servicesVO.getServDesc());
+		map.put("servStatus",servicesVO.getServStatus());
 		list.add(map);
 		String forjson=JSONValue.toJSONString(list);
 		out.print(forjson);

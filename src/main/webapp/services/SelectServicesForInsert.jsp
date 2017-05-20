@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--美美的icon-->
+	<link rel="icon" href="${ctx}/admin/favicon.ico" type="image/x-icon" />
   <!-- Bootstrap Core CSS -->
     <link href="${ctx}/admin/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 
