@@ -30,7 +30,9 @@ public class ServicesDAO_Hibernate implements ServicesDAO_interface {
 	private static final String GET_ONE_MonthDate_STMT = "FROM ServicesVO where DATEPART(mm,servEffectiveDate)=?";
 
 	private static final String DELETE = "DELETE FROM ServicesVO where servNo =?";
-
+	
+	//private static final String GET_ALL_PRICE_TIME = "FROM ServicesVO where servStatus>0 and serviceCarClassVO.carClassVO.carClass=? order by servNo ";
+	
 	private List<ServicesVO> servicesVOList;
 
 	@Override
@@ -233,5 +235,22 @@ public class ServicesDAO_Hibernate implements ServicesDAO_interface {
 		}
 		return list;
 	}
+
+//	@Override
+//	public List<ServicesVO> getAllPriceTime(String size) {
+//		List<ServicesVO> list = null;
+//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//		try {
+//			session.beginTransaction();
+//			Query query = (Query) session.createQuery(GET_ALL_PRICE_TIME);
+//			query.setParameter(0, size);
+//			list = query.list();
+//			session.getTransaction().commit();
+//		} catch (RuntimeException e) {
+//			session.getTransaction().rollback();
+//			throw e;
+//		}
+//		return list;
+//	}
 
 }
