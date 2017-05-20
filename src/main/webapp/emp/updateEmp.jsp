@@ -15,6 +15,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
 <title>員工資料修改</title>
+    <!--美美的icon-->
+	<link rel="icon" href="${ctx}/admin/favicon.ico" type="image/x-icon" />
  <!-- Bootstrap Core CSS -->
     <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
 

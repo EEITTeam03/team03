@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>員工資料新增 </title>
 <%-- <link href="${ctx}/TestAnything/cssForAdminLogin/style.css" rel="stylesheet"> --%>
-
+    <!--美美的icon-->
+	<link rel="icon" href="${ctx}/admin/favicon.ico" type="image/x-icon" />
  <!-- Bootstrap Core CSS -->
     <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
 
