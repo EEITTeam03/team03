@@ -23,7 +23,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>水膜汽車美容</title>
+    <title>Wash me</title>
+	<!--美美的icon-->
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
     
 	<!-- 中文字型 CSS -->
 	<link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css" rel="stylesheet">

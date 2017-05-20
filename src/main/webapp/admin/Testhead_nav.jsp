@@ -13,10 +13,11 @@ FeedbackService fsvc = new FeedbackService();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin</title>
+<!--美美的icon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	
 <!-- Bootstrap Core CSS -->
 <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
-
-
 
 <!-- Custom CSS -->
 <link href="${ctx}/admin/css/sb-admin.css" rel="stylesheet">
