@@ -59,10 +59,14 @@
 <link href="css/revision.css" rel="stylesheet">
  
 <!-- jQuery -->
-<script src="js/jquery.js"></script>
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/vader/theme.css" id="THEME_CSS"/>
 <!-- Bootstrap Core JavaScript -->
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+ 
+
 
 <style type="text/css">	
 .img-services{						
@@ -319,7 +323,9 @@ h2{
 #pg2_pg1,#pg2_pg3,#pg3_pg2,#pg3_pg4{
 	padding:0px;
 }
-		
+#datepicker{
+	display:inline;
+}		
 </style>
 
 
@@ -673,38 +679,53 @@ h2{
 			//結束
 			console.log($(":checked[name*='radio2']").attr("id"));
    		});	
+		//結束
 		
-//			$("#datepicker").datepicker({
-//			changeMonth : true,
-//			changeYear : false,
-//			dateFormat : 'yy-mm-dd',
-//			yearRange : '-0:+1',
-//			monthNamesShort: [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ],
-//			maxDate: "+3m",
-//			minDate : new Date(),
-//			onSelect : function(dateText,inst){
-//				$("#selectedDate").val(dateText);
-//				//顯示時間軸
-//				showtime();
-//				//讀出當日已預約時間
-//				var empNo = $("#empNo").val();
-//				$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){
-//					console.log(data);
-//					$.each(data,function(idx,obj){
-//						console.log(obj);
-//						//只做好小時的判斷
-//						var x = obj.shh;
-//						var y = obj.ehh;
-//						for(var i=x;i<=y;i++){
-//							var selectedS = "#timeline input[value^='"+i+"']";
-//							$(selectedS).prop("disabled",true).removeClass().addClass("btn btn-basic");
+// 		$("#datepicker").datepicker({
+// 			changeMonth : true,
+// 			changeYear : false,
+// 			dateFormat : 'yy-mm-dd',
+// 			yearRange : '-0:+1',
+// 			monthNamesShort: [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ],
+// 			maxDate: "+3m",
+// 			minDate : new Date(),
+// 			onSelect : function(dateText,inst){
+// 				$("#selectedDate").val(dateText);
+// 				//顯示時間軸
+// 				showtime();
+// 				//讀出當日已預約時間
+// 				var empNo = $(":checked[name*='radio2']").attr("id");
+// 				$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){
+// 					console.log(data);
+// 					$.each(data,function(idx,obj){
+// 						console.log(obj);
+// 						//只做好小時的判斷
+// 						var x = obj.shh;
+// 						var y = obj.ehh;
+// 						for(var i=x;i<=y;i++){
+// 							var selectedS = "#timeline input[value^='"+i+"']";
+// 							$(selectedS).prop("disabled",true).removeClass().addClass("btn btn-basic");
 							
-//						}
-//					});
-//				});
-//			}
-//		}).css("font-size","175%");			
-		
+// 						}
+// 					});
+// 				});
+// 			}
+// 		}).css("font-size","175%");			
+		 $("#datepicker").datepicker({
+		      //顯示上個月日期 及下個月日期 ，但是不可選的。
+		      //default:false
+		      showOtherMonths : true,
+		      // 設置當沒有上一個/下一個可選擇的情況下，隱藏掉相應的按鈕。（默認為不可用）
+		      //配合有設定最大最小時使用
+		      //default:false
+		      hideIfNoPrevNext : true,
+		      //設置一個最小的可選日期。可以是Date對象，或者是數字（從今天算起，例如+7），
+		      //或者有效的字符串('y'代表年, 'm'代表月, 'w'代表周, 'd'代表日, 例如：'+1m +7d')。
+		      minDate : "-30d",
+		      //  設置一個最大的可選日期。可以是Date對象，或者是數字（從今天算起，例如+7），
+		      //或者有效的字符串('y'代表年, 'm'代表月, 'w'代表周, 'd'代表日, 例如：'+1m +7d')。
+		      maxDate : "+30d"
+		    });
   } );
   
 
@@ -816,7 +837,7 @@ h2{
 		</div>
 
 	</header>
-	<form action="ReserveService">
+	<form class="form-horizontal" action="ReserveService">
 		<section id="selcar" class="page1" style="display:none;">
 			<div class="container">
 			
@@ -905,13 +926,18 @@ h2{
 		                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		                    <h2>可選日期</h2>	                    	                    
 		                </div>
-		                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div id="datepicker" ></div>
-							<input type="hidden" name="selectedDate" id="selectedDate" class="form-control" value="${param.selectedDate}" placeholder="選擇日期">
-		                </div>		                								          	            	            
+<!-- 		                <div class="form-group"> -->
+<!-- 			                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"> -->
+<!-- 								<div id="datepicker" ></div> -->
+<%-- 								<input type="hidden" name="selectedDate" id="selectedDate" class="form-control" value="${param.selectedDate}" placeholder="選擇日期"> --%>
+<!-- 			                </div>	 -->
+<!-- 		                </div>	                								          	            	             -->
 		            </div>
+		           <div id="datepicker"> </div> 
 	        </div>
-	    </section>	    
+	        
+	    </section>
+	    	    
 	</form> 
 	
 	<span id="no" hidden="hide">${memberInfo.memberNo}</span>
