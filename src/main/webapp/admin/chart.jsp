@@ -5,6 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>報表查詢</title>
+	<!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
     <!-- Morris Charts CSS -->
     <link href="css/plugins/morris.css" rel="stylesheet">
 </head>
@@ -106,8 +108,7 @@
 			</div>
 		</div>
 	</div>
-	 <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+
 	<!-- jQuery -->
 <script src="${ctx}/js/jquery.js"></script>
     <script src="js/plugins/flot/jquery.flot.js"></script>
