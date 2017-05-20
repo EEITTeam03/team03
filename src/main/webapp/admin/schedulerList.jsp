@@ -97,7 +97,7 @@
 								<td>${reserv.membercarsVO.memberInfoVO.memberName}</td>
 								<td>${reserv.membercarsVO.carLicense}</td>
 								<td>${reserv.reservDateTimeFormat}</td>
-								<td>${reserv.reservDateTimeFormat}</td>
+								<td>${reserv.reservEndTimeFormat}</td>
 
 								<td>
 									<c:forEach var="rservInnerList" items="${reserv.reservlists}">
