@@ -60,7 +60,7 @@ textarea{/* Text Area 固定大小*/
 <div id="page-wrapper">
 <div class="table-responsive">
 <div class="col-lg-6">
-	<h1>新增員工資料</h1>
+	<h1>新增員工資料	<input type="button" onclick="ch();" value="一鍵輸入"></h1>
 	<c:if test = "${not empty errorMsgs}">
 	<font color = 'red'>請修正以下錯誤:
 	<ul>
@@ -77,7 +77,7 @@ textarea{/* Text Area 固定大小*/
 				請輸入員工編號
 			</td>
 			<td>
-				<input type="TEXT" name="empNo" size="45" value="${param.empNo}"/>
+				<input type="TEXT" id="empNo" name="empNo" size="45" value="${param.empNo}"/>
 			</td>
 		</tr>
 		<tr>
@@ -85,7 +85,7 @@ textarea{/* Text Area 固定大小*/
 				 請輸入員工姓名
 			</td>
 			<td>
-				<input type="TEXT" name="ename" size="45" value="${param.ename}"/>
+				<input type="TEXT" id="ename" name="ename" size="45" value="${param.ename}"/>
 			</td>
 		</tr>
 		<tr>
@@ -93,7 +93,7 @@ textarea{/* Text Area 固定大小*/
 				經驗
 			</td>
 			<td>
-				<textarea cols="50" rows="5" name="exp" ></textarea>
+				<textarea cols="50" rows="5" id="exp" name="exp" value="${param.exp}"></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -112,5 +112,14 @@ textarea{/* Text Area 固定大小*/
 </div>
 </div>
 </div>
+<!-- <script type="text/javascript" -->
+<%-- 	src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script> --%>
+<script type="text/javascript">
+function ch(){
+	document.getElementById('empNo').value = 4;
+	document.getElementById('ename').value = "洗車辣妹";
+ 	document.getElementById('exp').value = "入行年資：50年，具有美魔女老辣妹稱號";
+}
+</script>
 </body>
 </html>
