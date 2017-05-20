@@ -215,7 +215,7 @@
  }
   
   $( function() {
-		
+	  	loadingBlock();
 		
 	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
 		var wdth = $(window).width();
@@ -270,7 +270,6 @@
  			//結束  	
    		//ReservListJSON
 		$.getJSON('ReservListJSON',function(json){
-			loadingBlock();
 			if(null != json.list){
 	   			$.each(json.list,function(idx,orderStatus){
 	   			console.log(orderStatus);	

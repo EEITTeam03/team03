@@ -304,7 +304,7 @@
 	 }
   
   $( function() {
-	  	
+	  	loadingBlock();
 		
 	  	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕樣式
 		var wdth = $(window).width();
@@ -361,7 +361,6 @@
 			var reservNo=$("#no").text();			
  			var stageTime = 0;
    			$.getJSON('ProgressServlet',{"reservNo":reservNo},function(json){
-   				loadingBlock();
    				$.each(json,function(idx,service_step){
    					
    					console.log(service_step);	
