@@ -73,7 +73,17 @@
 		$(function() {
 			loadingBlock();
 			if("${OKalert}"=="updateOK") {
-				swal("修改成功!", "會員資料已更新", "success");
+				//swal("修改成功!", "會員資料已更新", "success");
+				swal({
+				  title: "修改成功!",
+				  text: "會員資料已更新",
+				  imageUrl: "${ctx}/img/loading/check.png",
+				  type: "",
+				  timer: 700,
+				  //animation: "slide-from-top",
+				  showConfirmButton: false,
+				  allowOutsideClick: true
+			});
 				<% session.removeAttribute("OKalert"); %>
 			}
 			
