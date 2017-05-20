@@ -327,8 +327,7 @@ h2{
 .ui-datepicker-month{
 	color:black;
 }
-
-        .div-node-undone{
+        .inp-node-undone{
         	width:40px;
 			
 			height:40px; 
@@ -339,7 +338,7 @@ h2{
             
             background:#999;                                                                                       
         }         
-        .div-node-op{
+        .inp-node-op{
         	width:40px;
 			
 			height:40px; 
@@ -378,7 +377,7 @@ h2{
 			          
                     
         }
-        .div-node-sel{
+        .inp-node-sel{
         	width:40px;
 			
 			height:40px; 
@@ -416,7 +415,7 @@ h2{
 			text-shadow:0px 1px 0px #810e05;            
                     
         }                          
-        .div-line-undone{
+        .inp-line-undone{
         	width:150px;
 			
 			height:10px;
@@ -427,7 +426,7 @@ h2{
 			
 			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
         }
-        .div-line-op{
+        .inp-line-op{
         	width:150px;
 			
 			height:10px;
@@ -456,7 +455,7 @@ h2{
 			cursor:pointer;
 			text-shadow:0px 1px 0px #5b8a3c;      
         }
-        .div-line-sel{
+        .inp-line-sel{
         	width:150px;
 			
 			height:10px;
@@ -484,7 +483,7 @@ h2{
 			border:1px solid #d02718;
 			cursor:pointer;
 			text-shadow:0px 1px 0px #810e05;        
-        }        
+        }       
 		.op-green-sel-red:active{
 			position:relative;
 			top:1px;
@@ -507,6 +506,7 @@ h2{
 		.fnt-select{
 	      	-webkit-user-select: none;
 	      	color:transparent;
+	      	text-indent:-9999px;
       	}
 		.fnt-t{
 			 color:black;
@@ -875,12 +875,66 @@ h2{
 			$("#1").prop({"checked":"true"});
 			$("#tccsel div[value*='1']").css("background-color","#84B57E");
 			//結束
-			console.log($(":checked[name*='radio2']").attr("id"));
+			
    		});	
 		//結束
-			
+	
+	//自動設定時間節點的value值，早上9點開始至晚上21點，30分鐘為一個區間
+	var tbnode = $("#timeline .inp-node-op");
+	var officehrnode = 900;//小時
+	var officeminnode = 0;//分
+	var Intervalnode = 30;//區間時間
+	var rownode = 5;//每行時間條的節點數目
+	for( i=0 ; i<=tbnode.length ; i++ ){
+		var time = 0;
+		//每到60分就進位1小時
+		if(officeminnode == 60){
+			officehrnode = officehrnode + 100;
+			officeminnode = 0;
+		}
 		
+		time = officehrnode + officeminnode ;
 		
+		//如果小時為個位數，前面補0
+		if(time<1000){
+			tbnode.eq(i).attr({"value":"0"+time});
+		}else{
+			tbnode.eq(i).attr({"value":time});
+		}
+				
+		if((i+1) % rownode !== 0){
+			officeminnode = officeminnode + Intervalnode ;
+		}						
+	}
+	//結束
+
+	//自動設定時間線的value值，早上9點00開始至晚上21點，30分鐘為一個區間
+	var tbline = $("#timeline .inp-line-op");
+	var officehrline = 900;//小時
+	var officeminline = 0;//分
+	var Intervalline = 30;//區間時間
+	for( i=0 ; i<=tbline.length ; i++ ){
+		var time = 0;
+		//每到60分就進位1小時
+		if(officeminline == 60){
+			officehrline = officehrline + 100;
+			officeminline = 0;
+		}
+		
+		time = officehrline + officeminline ;
+		
+		//如果小時為個位數，前面補0
+		if(time<1000){
+			tbline.eq(i).attr({"value":"0"+time});
+		}else{
+			tbline.eq(i).attr({"value":time});
+		}
+				
+		officeminline = officeminline + Intervalline ;
+								
+	}
+	//結束	
+	
 		
 		
 	$("#datepicker").datepicker({
@@ -893,17 +947,88 @@ h2{
 			minDate : new Date(),
 			onSelect : function(dateText,inst){
 				$("#selectedDate").val(dateText);
-								
-				//讀出當日已預約時間
+				console.log($(":checked[name*='radio2']").attr("id"));				
+				
+				var tbnode = $("#timeline .inp-node-op");
+				var tbline = $("#timeline .inp-line-op");
+				tbnode.removeClass().addClass("inp-node-op op-green-sel-red fnt-select");
+				tbline.removeClass().addClass("inp-line-op op-green-sel-red fnt-select");
+				
+				//讀出當日已預約時間			
 				var empNo = $(":checked[name*='radio2']").attr("id");
 				$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){					
 					$.each(data,function(idx,obj){
 						console.log(obj);
-						
-							
-					
+						var minhr = obj.shh;
+						var minmin = obj.smm;
+						var mintime = minhr + minmin;
+						var maxhr = obj.ehh;
+						var maxmin = obj.emm;
+						var maxtime = maxhr + maxmin;	
+						var nodecount = 0;
+						var linecount = 0;
+						for( i=0 ; i <= tbnode.length ; i++){
+							if(tbnode.eq(i).attr("value") >= mintime && tbnode.eq(i).attr("value") <= maxtime){
+								tbnode.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+// 								console.log(tbnode.eq(i));								
+							}
+						}
+						for( i=0 ; i <= tbline.length ; i++){
+							if(tbline.eq(i).attr("value") >= mintime && tbline.eq(i).attr("value") <= maxtime){
+								tbline.eq(i).removeClass().addClass("inp-line-undone fnt-select");
+// 								console.log(tbline.eq(i));
+								linecount = linecount + 1;
+							}
+						}
+						var rule1 = $("#timeline .inp-node-undone[value*='"+mintime+"']");
+						rule1.removeClass().addClass("inp-node-op op-green-sel-red fnt-select");
+						var rule2 = $("#timeline .inp-node-undone[value*='"+maxtime+"']");
+						rule2.removeClass().addClass("inp-node-op op-green-sel-red fnt-select");						
+						var rule3 = $("#timeline .inp-line-undone[value*='"+maxtime+"']");
+						rule3.removeClass().addClass("inp-line-op op-green-sel-red fnt-select");						
+						console.log(rule3);
 					});
+					
+					var tbnodecheck = $("#timeline input");
+					
+					for(i=0;i<=53;i=i+2){
+						if(i == 0 || i == 9 || i == 18 || i == 27 || i == 36 || i == 45){
+							var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
+								console.log("i="+i+" "+check2);
+							if(check2){
+								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+							}else{
+								tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red fnt-select");
+							}
+							
+						}else if(i == 8 || i == 17 || i == 26 || i == 35 || i == 44 || i == 53){
+							var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
+							console.log("i="+i+" "+check1);
+							if(check1){
+								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+							}else{
+								tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red fnt-select");
+							}
+							i = i + 1;
+						}else{
+							var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
+							var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
+								console.log("i="+i+" "+(check1 && check2));
+							if(check1 && check2){
+								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+							}else{
+								tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red fnt-select");
+							}
+							
+						}
+					
+						
+					}
+					
 				});
+				
+								
+				
 				//設定當日時間條，可選不可選的樣式
 				showtime();
 			}
@@ -1199,15 +1324,15 @@ h2{
 							<table id="timeline">
 								<tbody>
 									<tr>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>	
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>																																																		
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>	
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>																																																		
 									</tr>
 									<tr>
 										<td class="fnt-t" colspan="2">09:00</td>
@@ -1218,15 +1343,15 @@ h2{
 																				
 									</tr>
 									<tr>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>	
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>									
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>	
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>									
 									</tr>
 									<tr>
 										<td class="fnt-t" colspan="2">11:00</td>
@@ -1237,15 +1362,15 @@ h2{
 																			
 									</tr>
 									<tr>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>	
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>									
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>	
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>									
 									</tr>
 									<tr>
 										<td class="fnt-t" colspan="2">13:00</td>
@@ -1255,15 +1380,15 @@ h2{
 										<td class="fnt-t" colspan="2">15:00</td>
 									</tr>
 									<tr>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>	
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>									
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>	
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>									
 									</tr>
 									<tr>
 										<td class="fnt-t" colspan="2">15:00</td>
@@ -1273,15 +1398,15 @@ h2{
 										<td class="fnt-t" colspan="2">17:00</td>
 									</tr>
 									<tr>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>	
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>																
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>	
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>																
 									</tr>
 									<tr>
 										<td class="fnt-t" colspan="2">17:00</td>
@@ -1291,15 +1416,15 @@ h2{
 										<td class="fnt-t" colspan="2">19:00</td>
 									</tr>
 									<tr>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>
-										<td><div class="div-line-undone fnt-select"></div></td>	
-										<td><div class="div-node-undone fnt-select"><span style="color:#ed687c;"></span></div></td>												
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>	
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>												
 									</tr>
 									<tr>
 										<td class="fnt-t" colspan="2">19:00</td>
