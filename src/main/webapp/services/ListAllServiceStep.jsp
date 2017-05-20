@@ -30,9 +30,9 @@
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
-<h2>服務工法程序</h2>
+<h2 class='text-center'>服務工法程序</h2>
 	<table class="table table-bordered table-hover">
-		<tr>
+		<tr class='info'>
 			<th>服務編號</th>
 			<th>服務步驟</th>
 			<th>步驟名稱</th>
