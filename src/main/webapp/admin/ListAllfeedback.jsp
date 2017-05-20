@@ -57,7 +57,7 @@ swal("完成回覆!","","info");
 	<c:if test="${fVO.reply!=null}"><tr class="bg-success"></c:if>
 	<c:if test="${fVO.reply==null}"><tr></c:if>
 			<td>${fVO.feedbackNo}</td>
-			<td>${fVO.feedbackDate.time}</td>
+			<td>${fVO.feedbackDateStr}</td>
 			<td>${fVO.memberName}</td>
 			<td>${fVO.feedback}</td>
 			<td>

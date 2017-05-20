@@ -5,10 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>報表查詢</title>
+	<!-- jQuery -->
+	<script src="${ctx}/admin/js/jquery.js"></script>
 	<!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+	<script src="${ctx}/admin/js/bootstrap.min.js"></script>
     <!-- Morris Charts CSS -->
     <link href="css/plugins/morris.css" rel="stylesheet">
+    
 </head>
 <body>
 	<jsp:include page="Testhead_nav.jsp" />
@@ -110,7 +113,9 @@
 	</div>
 
 	<!-- jQuery -->
-<script src="${ctx}/js/jquery.js"></script>
+	<script src="${ctx}/admin/js/jquery.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="${ctx}/admin/js/bootstrap.min.js"></script>
     <script src="js/plugins/flot/jquery.flot.js"></script>
     <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
 <!--     <script src="js/plugins/flot/jquery.flot.resize.js"></script> -->
