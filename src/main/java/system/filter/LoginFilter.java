@@ -65,7 +65,8 @@ public class LoginFilter implements Filter {
 				Long eff = member.getEffectiveDate().getTime();
 				Long now = new java.util.Date().getTime();
 				if(eff>now) {
-					httpResp.sendRedirect(httpReq.getContextPath()+"/feedback.jsp");
+					httpReq.getSession().setAttribute("blocked", "blocked");
+					httpResp.sendRedirect(httpReq.getContextPath()+"/index.jsp");
 					return;
 				}
 					

@@ -86,11 +86,11 @@ textarea { /* Text Area 固定大小*/
 				
 					<tr>
 						<td>
-							經驗:
+							員工描述:
 						</td>
 						
 						<td>
-							<textarea cols="60" rows="5" name="exp" class="form-control"></textarea>
+							<textarea cols="60" rows="5" name="exp" class="form-control">${param.eDesc}</textarea>
 						</td>
 					</tr>
 					

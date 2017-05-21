@@ -53,7 +53,7 @@ FeedbackService fsvc = new FeedbackService();
 	<c:if test="${fVO.reply!=null}"><tr class="bg-success"></c:if>
 	<c:if test="${fVO.reply==null}"><tr></c:if>
 			<td>${fVO.feedbackNo}</td>
-			<td>${fVO.feedbackDate.time}</td>
+			<td>${fVO.feedbackDateStr}</td>
 			<td>${fVO.memberName}</td>
 			<td>${fVO.feedback}</td>
 			<td>
@@ -67,12 +67,33 @@ FeedbackService fsvc = new FeedbackService();
 			</td>
 			<td><FORM METHOD="get" ACTION="replyFeedback.jsp">
 									<c:if test="${fVO.reply!=null}">已回覆 </c:if>
-						<c:if test="${fVO.reply==null}"><input type="submit" value="回覆"></c:if>
+						<c:if test="${fVO.reply==null}"><input type="submit" value="回覆" class="btn btn-success btn-lg"></c:if>
 									<input type="hidden" name="feedbackNo" value="${fVO.feedbackNo}">
 									<input type="hidden"  name="memberName" value="${fVO.memberName}">
 									<input type="hidden"  name="reply" value="${fVO.reply}">
 								</FORM></td>
-			<td><button class="btn btn-primary" onclick="swal({ title: '你的回覆',text:'${fVO.reply}',customClass: 'swal-wide',closeOnConfirm: true})">查看</button></td>
+<%-- 			<td><button class="btn btn-primary" onclick="swal({ title: '你的回覆',text:'${fVO.reply}',customClass: 'swal-wide',closeOnConfirm: true})">查看</button></td> --%>
+				<td>
+					 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">查看回覆</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">你的回覆</h4>
+        </div>
+        <div class="modal-body">
+          <textarea class="form-control" style="width:860px; height:90px;border-style: none;resize: none;font-size:18px">${fVO.reply}</textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+    </div>
+				</td>
 		</tr>
 <%-- 	</c:forEach> --%>
 	</c:if>

@@ -2,10 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<% 
-	MemberService msvc = new MemberService();
-	pageContext.setAttribute("list", msvc.getAll());
-%>
+<c:if test="${empty list}">
+	<% 
+		MemberService msvc = new MemberService();
+		pageContext.setAttribute("list", msvc.getAll());
+	%>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +25,25 @@
 	<jsp:include page="Testhead_nav.jsp" />
 	<div id="wrapper">
 		<div id="page-wrapper">
+			
+			
+			<form action="${ctx}/FindMember">
+				<h3>電話:</h3> 
+				<input type="text" name="phone" >
+				<input type="hidden" name="mode" value="phone">
+				<input type="submit" value="查詢" class="btn btn-primary"> 
+			</form>
+			
+			
+			<form action="${ctx}/FindMember">
+				<h3>email:</h3> 
+				<input type="text" name="email" >
+				<input type="hidden" name="mode" value="email">
+				<input type="submit" value="查詢" class="btn btn-primary"> 
+			</form>
+			
 			<div class="table-responsive">
-				<h2 class="text-center">所有會員</h2>
+				<h2 class="text-center"><a href="${ctx}/admin/member.jsp">所有會員</a></h2>
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr class="info">
@@ -48,7 +67,7 @@
 								<td>${member.birthday}</td>
 								<td>${member.address}</td>
 								<td>${member.effectiveDate}</td>
-								<td><input name="checkcar" type="button" value="查看車輛" class="btn btn-sm btn-primary" onclick="location.href='listMemberCars.jsp?memberNo=${member.memberNo}'"></td>
+								<td><input name="checkcar" type="button" value="查看車輛" class="btn btn-sm btn-primary" onclick="location.href='${ctx}/admin/listMemberCars.jsp?memberNo=${member.memberNo}'"></td>
 								<td>
 								<form action="${ctx}/MemberServlet" method="post">
 									<input type="hidden" name="action" value="getOne_For_Update">

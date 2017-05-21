@@ -56,6 +56,7 @@
 									<button type="submit" class="btn btn-sm btn-primary">修改</button> 
 									<input type="hidden" name="empno" value="${empVO.employeeNo}">
 									<input type="hidden"  name="ename" value="${empVO.employeeName}">
+									<input type="hidden"  name="eDesc" value="${empVO.employeeDesc}">
 								</FORM></td>
 						</tr>
 	</c:forEach>

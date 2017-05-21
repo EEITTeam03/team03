@@ -32,7 +32,7 @@ public class PhoneTest extends HttpServlet {
 		//Integer memberNo = 4;
 		
 		MemberInfoDAO dao = new MemberInfoHibernateDAO();
-		MemberInfoVO aVO = dao.findByPhone(memberPhone);
+		MemberInfoVO aVO = dao.findByPhone(memberPhone).get(0);
 		
 		request.setAttribute("memberPhone", aVO);
 		RequestDispatcher rd = request.getRequestDispatcher("/result.jsp");
