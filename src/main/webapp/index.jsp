@@ -230,27 +230,23 @@
 
     		
 
-   			$.getJSON('teams.json',function(json){
-   				$.each(json.teams,function(idx,teams){
+   			$.getJSON('${ctx}/emp/GetEmpJSON.do',function(json){
+   				$.each(json,function(idx,emp){
    		    		//以下開始動態生成團隊成員
-					var teamName = teams.teamName;
-					var teamDesc = teams.teamDesc;
-					var teamPic = teams.teamPic;
-					console.log(teamPic);
+					var empName=emp.empName;
+					var empDesc = emp.employeeDesc;
+					var empPic = emp.empPhoto;
    		   			var cs = $("<div></div>").addClass("col-sm-4");
    		   			
    		   			var tm = $("<div></div>").addClass("team-member");
    		   			
-   		   			var mimg = $("<img>").addClass("img-responsive img-circle").attr({"src":"img/team/"+teamPic+".jpg","alt":""});
-   		   			var tmh = $("<h4></h4>").text(teamName);
-   		   			var tmp = $("<p></p>").addClass("text-muted").text(teamDesc);
+   		   			var mimg = $("<img>").addClass("img-responsive img-circle").attr({"src":"data:image/jpeg;base64,"+empPic,"alt":empName});
+   		   			var tmh = $("<h4></h4>").text(empName);
+   		   			var tmp = $("<p></p>").addClass("text-muted").text(empDesc);
    		   			
    		   			tm.append([mimg,tmh,tmp]);
    		   			cs.append(tm);
-   		   			$("#teamlist").append(cs);   					
-   					
-   		   			
-   					   				  					
+   		   			$("#teamlist").append(cs);   					   				  					
    				})
    				
    			})

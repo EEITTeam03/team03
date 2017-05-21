@@ -35,7 +35,7 @@ public class GetEmpJSON extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setHeader("content-type", "text/html;charset=UTF-8");
+		response.setHeader("content-type", "application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		EmployeeService empsvc = new EmployeeService();
