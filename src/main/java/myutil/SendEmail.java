@@ -47,7 +47,7 @@ public class SendEmail {
 //		   message.setContent("Dear "+clientName+", <br><br> your password is "+pswd, "text/html;charset=UTF-8");
 		   sbd.append("Dear "+clientName+", <br><br> your password is "+pswd+"<br><br>");
 		   sbd.append("Link to Our Website<br>");
-		   sbd.append("http://car03.azurewebsites.net/team03 <br>");
+		   sbd.append("http://washme03.azurewebsites.net/team03/ <br>");
 		   message.setContent(sbd.toString(), "text/html;charset=UTF-8");
 		   Transport transport = session.getTransport("smtp");
 		   transport.connect(host, port, username, password);
@@ -74,14 +74,14 @@ public class SendEmail {
 				sbd.append("Dear " + clientName + ", <br><br> 您預約的時間是" + m+"月"
 						+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":00<br><br>");
 				sbd.append("Link to Our Website<br>");
-				   sbd.append("http://car03.azurewebsites.net/team03 <br>");
+				   sbd.append("http://washme03.azurewebsites.net/team03/ <br>");
 				   message.setContent(sbd.toString(), "text/html;charset=UTF-8");
 				   //System.out.println("testtest");
 			}else{
 				sbd.append("Dear " + clientName + ", <br><br> 您預約的時間是" + m+"月"
 					+cal.get(Calendar.DATE)+"日"+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+"<br><br>");
 			   sbd.append("Link to Our Website<br>");
-			   sbd.append("http://car03.azurewebsites.net/team03 <br>");
+			   sbd.append("http://washme03.azurewebsites.net/team03/ <br>");
 			   message.setContent(sbd.toString(), "text/html;charset=UTF-8");
 			   //System.out.println("testtest2");
 			}
@@ -134,7 +134,7 @@ public class SendEmail {
 			sbd.append("--------------"+"<br>");
 			sbd.append("<br><br><br>"+"期待您的光臨!");
 			sbd.append("<br><br><br>"+"預約可以隨時在網站查詢 :<br>");
-			sbd.append("http://car03.azurewebsites.net/team03 <br>");
+			sbd.append("http://washme03.azurewebsites.net/team03/ <br>");
 			message.setContent(sbd.toString(), "text/html;charset=UTF-8");
 			
 			Transport transport = session.getTransport("smtp");

@@ -20,6 +20,13 @@
 		maxActive="20" maxIdle="10" maxWait="-1" password="sa123456"
 		type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;Database=Team3"
 		username="sa" />
+		
+	<Resource name="jdbc/cloudteam03" auth="Container"
+		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+		maxActive="20" maxIdle="10" maxWait="-1" password="$eeitteam03"
+		type="javax.sql.DataSource"
+		url="jdbc:sqlserver://team03sql.database.windows.net:1433;database=Team3"
+		username="tina@team03sql" />	
     <!-- Default set of monitored resources. If one of these changes, the -->
 	<!-- web application will be reloaded. -->
 	<WatchedResource>WEB-INF/web.xml</WatchedResource>

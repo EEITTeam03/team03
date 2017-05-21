@@ -5,6 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>忘記密碼</title>
+<!--美美的icon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+
 <script src='https://www.google.com/recaptcha/api.js'></script>
 
 <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">

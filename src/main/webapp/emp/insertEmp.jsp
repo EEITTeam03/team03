@@ -90,7 +90,7 @@ textarea{/* Text Area 固定大小*/
 		</tr>
 		<tr>
 			<td>
-				經驗
+				員工描述
 			</td>
 			<td>
 				<textarea cols="50" rows="5" id="exp" name="exp" value="${param.exp}"></textarea>

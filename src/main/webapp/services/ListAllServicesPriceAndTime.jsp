@@ -42,6 +42,9 @@
 <html>
 <head>
 <title>所有服務項目</title>
+<!--美美的icon-->
+<link rel="icon" href="../admin/favicon.ico" type="image/x-icon" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    <script type="text/javascript" src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
   <!-- Bootstrap Core CSS -->
