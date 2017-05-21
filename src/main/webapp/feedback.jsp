@@ -24,6 +24,9 @@
 <meta name="author" content="">
 
 <title>意見回饋</title>
+<!--美美的icon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+
 <link rel="stylesheet" href="styles/Lab3.css">
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"

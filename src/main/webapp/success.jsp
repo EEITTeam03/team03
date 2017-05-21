@@ -2,6 +2,31 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<<<<<<< HEAD
+=======
+
+<!--[if IE 6]>
+<html id="ie6" dir="ltr" lang="zh-TW">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" dir="ltr" lang="zh-TW">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" dir="ltr" lang="zh-TW">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html dir="ltr" lang="zh-TW">
+<!--<![endif]-->
+<head>
+
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>新密碼已寄出</title>
+>>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
 
 <!--[if IE 6]>
 <html id="ie6" dir="ltr" lang="zh-TW">
@@ -25,6 +50,9 @@
 
 <title>新密碼已寄出</title>
 
+<!--美美的icon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
 	rel="stylesheet">

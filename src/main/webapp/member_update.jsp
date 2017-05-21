@@ -24,7 +24,9 @@
 <meta name="author" content="">
 
 <title>註冊會員</title>
-
+<!--美美的icon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
 	rel="stylesheet">

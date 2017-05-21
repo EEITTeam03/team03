@@ -17,6 +17,7 @@ public class ReservListHibernateDAO implements ReservListDAO{
 	private static final String GET_ALL_BY_SERV = "from ReservListVO where servNo=? order by servNo";
 	private static final String GET_ALL_GROUP_BY_SERV = "select servicesVO.servNo,count(*) from ReservListVO group by servicesVO.servNo";
 	private static final String GET_ALL_GROUP_BY_SERV_MONTH = "select servicesVO.servNo,count(*) from ReservListVO where reservVO.reservDateTime between ? and ? group by servicesVO.servNo";
+	private static final String GET_ALL_GROUP_BY_SERV_MONTH_TYPE = "select servicesVO.servNo,count(*) from ReservListVO where servicesVO.servTypeNo=? and reservVO.reservDateTime between ? and ? group by servicesVO.servNo";
 	private static final String GET_MONEY_GROUP_BY_EMP_MONTH = "select reservVO.employeeVO.employeeNo,SUM(servPrice) from ReservListVO where reservVO.reservDateTime between ? and ? group by reservVO.employeeVO.employeeNo";
 	
 	@Override
@@ -161,6 +162,29 @@ public class ReservListHibernateDAO implements ReservListDAO{
 			Query query= session.createQuery(GET_MONEY_GROUP_BY_EMP_MONTH);
 			query.setParameter(0, cal);
 			query.setParameter(1, cal2);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+
+	@Override
+	public List<Object[]> listAllCount(String month, String type) {
+		List<Object[]> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Calendar cal = MyUtil.getCalenderMonth(month);
+			Calendar cal2 = Calendar.getInstance();
+			cal2.setTime(cal.getTime());
+			cal2.add(Calendar.MONTH, 1);
+			Query query= session.createQuery(GET_ALL_GROUP_BY_SERV_MONTH_TYPE);
+			query.setParameter(0, type);
+			query.setParameter(1, cal);
+			query.setParameter(2, cal2);
 			list = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
