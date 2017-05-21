@@ -24,6 +24,14 @@ public class MemberService {
 		return dao.findMember(email, password);
 	}
 	
+	public List<MemberInfoVO> getMemberEmail(String email) {
+		return dao.findByEmailList(email);
+	}
+	
+	public List<MemberInfoVO> getMemberPhone(String phone){
+		return dao.findByPhone(phone);
+	}
+	
 //	public MemberInfoVO insertmem(String memberName, String password, String email, String phone, java.sql.Date birthday, String address, java.sql.Date effectiveDate) {
 //
 //		MemberInfoVO memberinfoVO = new MemberInfoVO();
@@ -117,6 +125,7 @@ public class MemberService {
 	public MemberInfoVO getOneByEmail(String email){
 		return dao.findByEmail(email);
 	}
+
 	public String randomPswd(){
 		int num=0;
 		char c;

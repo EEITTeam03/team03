@@ -74,22 +74,20 @@ public class MemberInfoHibernateDAO implements MemberInfoDAO {
 	}
 
 	@Override
-	public MemberInfoVO findByPhone(String phone) {
-		MemberInfoVO memberInfoVO = null;
+	public List<MemberInfoVO> findByPhone(String phone) {
+		List<MemberInfoVO> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery(GET_BY_PHONE);
 			query.setParameter(0, phone);
-			List<MemberInfoVO> list = query.list();
-			if(list.size() != 0)
-				memberInfoVO = list.get(0);
+			list = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return memberInfoVO;
+		return list;
 	}
 
 	@Override
@@ -139,21 +137,19 @@ public class MemberInfoHibernateDAO implements MemberInfoDAO {
 
 	@Override
 	public MemberInfoVO findByEmail(String email) {
-		MemberInfoVO memberInfoVO = null;
+		MemberInfoVO mVO = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery(GET_BY_EMAIL);
 			query.setParameter(0, email);
-			List<MemberInfoVO> list = query.list();
-			if(list.size() != 0)
-				memberInfoVO = list.get(0);
+			mVO =(MemberInfoVO) query.list().get(0);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return memberInfoVO;
+		return mVO;
 	}
 
 	@Override
@@ -168,6 +164,23 @@ public class MemberInfoHibernateDAO implements MemberInfoDAO {
 			throw ex;
 		}
 		
+	}
+
+	@Override
+	public List<MemberInfoVO> findByEmailList(String email) {
+		List<MemberInfoVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(GET_BY_EMAIL);
+			query.setParameter(0, email);
+			list =query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
 	}
 
 }
