@@ -17,9 +17,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>預約清單</title>  
-<style type="text/css">
+<!--美美的icon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-</style>
 </head>
 <body>
 	<jsp:include page="Testhead_nav.jsp" />
@@ -97,7 +97,7 @@
 								<td>${reserv.membercarsVO.memberInfoVO.memberName}</td>
 								<td>${reserv.membercarsVO.carLicense}</td>
 								<td>${reserv.reservDateTimeFormat}</td>
-								<td>${reserv.reservDateTimeFormat}</td>
+								<td>${reserv.reservEndTimeFormat}</td>
 
 								<td>
 									<c:forEach var="rservInnerList" items="${reserv.reservlists}">

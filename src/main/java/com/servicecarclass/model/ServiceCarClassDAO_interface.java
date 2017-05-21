@@ -17,4 +17,5 @@ public interface ServiceCarClassDAO_interface {
 	public Set<ServicesVO> getSerBySerNo(Integer servNo);
 	public List<ServiceCarClassVO> findByForeignKey(Integer servNo);
 	public ServiceCarClassVO findOne(ServicesVO servicesVO,CarClassVO carClassVO);
+	public List<ServiceCarClassVO> fnidBySize(String size);
 }

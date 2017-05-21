@@ -17,6 +17,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
+import com.servicecarclass.model.ServiceCarClassVO;
+
 public class ServicesService {
 	private ServicesDAO_interface dao;
 	public static final int IMAGE_FILENAME_LENGTH = 20;
@@ -122,6 +124,34 @@ public class ServicesService {
 		}
 		return list2;
 	}
+	
+//	public List<Map> getServicesJsonPriceTime(String size) {
+//		List<ServicesVO> list = dao.getAllPriceTime(size);
+//		
+//		List<Map> list2 = new ArrayList<Map>();
+//		
+//		for (ServicesVO asvo : list) {
+//			String s = "0";
+//			if (asvo.getServPhoto() == null) {
+//				continue;
+//			} else if (asvo.getServStatus().equals(s)) {
+//				continue;
+//			}
+//			Map map = new LinkedHashMap<>();
+//			map.put("servNo", asvo.getServNo());
+//			map.put("servDesc", asvo.getServDesc().replace("\n", "").replace("\r", ""));
+//			map.put("servName", asvo.getServName());
+//			map.put("servPhoto", Base64.getEncoder().encodeToString(asvo.getServPhoto()));
+//			ServiceCarClassVO vo = asvo.getServiceCarClassVO().iterator().next();
+//			map.put("servPrice",vo.getServPrice());
+//			map.put("servTime", vo.getServTime());
+//			
+//			// map.put(key, value);
+//			list2.add(map);
+//		}
+//		return list2;
+//	}
+	
 
 	// 本方法調整fileName的長度小於或等於maxLength。
 	// 如果fileName的長度小於或等於maxLength，直接傳回fileName
@@ -208,4 +238,7 @@ public class ServicesService {
 		}
 		return list2;
 	}
+	
+		
+	
 }

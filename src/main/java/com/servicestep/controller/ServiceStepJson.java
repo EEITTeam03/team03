@@ -46,6 +46,7 @@ public class ServiceStepJson extends HttpServlet {
 			map.put("servStep", ssvo.getServStep());
 			map.put("stepName", ssvo.getStepName());
 			map.put("stepDescp",ssvo.getStepDescp());
+			map.put("servStepNo", ssvo.getServStepNo());
 			if(ssvo.getStepPic()!=null){
 				map.put("stepPic", Base64.getEncoder().encodeToString(ssvo.getStepPic()));
 			}

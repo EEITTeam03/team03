@@ -19,6 +19,8 @@ public class ServiceCarClassDAO_Hibernate implements ServiceCarClassDAO_interfac
 	private static final String DELETE = "DELETE ServiceCarClassVO WHERE ServNo=?";
 	private static final String GET_ONE = "FROM ServiceCarClassVO WHERE servicesVO=? AND carClassVO=?";
 	private static final String GET_FK_STMT = "From ServiceCarClassVO WHERE ServNo=?";
+	private static final String GET_BY_SIZE = "From ServiceCarClassVO WHERE carClass=?";
+	
 	@Override
 	public void insert(ServiceCarClassVO serCarVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -169,6 +171,22 @@ public class ServiceCarClassDAO_Hibernate implements ServiceCarClassDAO_interfac
 			throw e;
 		}
 		return serviceCarClassVO;
+	}
+
+	@Override
+	public List<ServiceCarClassVO> fnidBySize(String size) {
+		List<ServiceCarClassVO> list=null;
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query=session.createQuery(GET_BY_SIZE);
+			query.setParameter(0, size);
+			list=query.list();
+			session.getTransaction().commit();;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+		}
+		return list;
 	}
 
 }

@@ -33,7 +33,7 @@
 <h2>所有服務</h2>
 <table class="table table-bordered table-hover">
 <thead>
-		<tr>
+		<tr class="info">
 			<th>服務編號</th>
 			<th>服務類型編號</th>
 			<th>服務名稱</th>
@@ -45,7 +45,7 @@
 		</tr>
 		</thead>
 		<c:forEach var="servicesVO" items="${list}">
-			<tr align='center' valign='middle'>
+			<tr align='center' valign='middle' >
 				<td width="200">${servicesVO.servNo}</td>
 				<td width="200">${servicesVO.servTypeNo}</td>
 				<td width="200">${servicesVO.servName}</td>

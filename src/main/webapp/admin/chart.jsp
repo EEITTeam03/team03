@@ -5,8 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>報表查詢</title>
+	<!-- jQuery -->
+	<script src="${ctx}/admin/js/jquery.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="${ctx}/admin/js/bootstrap.min.js"></script>
     <!-- Morris Charts CSS -->
     <link href="css/plugins/morris.css" rel="stylesheet">
+    <!--美美的icon-->
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+    
 </head>
 <body>
 	<jsp:include page="Testhead_nav.jsp" />
@@ -16,7 +23,7 @@
 			<div class="container-fluid">
 			<div class="row">
                     <div class="col-lg-6">
-                        <div class="panel panel-green">
+                        <div class="panel panel-yellow">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="fa fa-check-square-o"></i>每月服務被預約次數</h3>
                             </div>
@@ -27,7 +34,7 @@
                             	<option value="2017-02">2</option>
                             	<option value="2017-03">3</option>
                             	<option value="2017-04">4</option>
-                            	<option value="2017-05">5</option>
+                            	<option value="2017-05" selected="selected">5</option>
                             	<option value="2017-06">6</option>
                             	<option value="2017-07">7</option>
                             	<option value="2017-08">8</option>
@@ -46,7 +53,7 @@
                     <div class="col-lg-6">
 						<table class="table table-bordered table-hover" id="showcount">
 							<thead>
-								<tr>
+								<tr class="bg-primary">
 									<th>服務名稱</th>
 									<th>總共被預約的次數</th>
 								</tr>
@@ -65,7 +72,7 @@
                 	<div class="col-lg-6">
 						<table class="table table-bordered table-hover" id="showbar">
 							<thead>
-								<tr>
+								<tr class="bg-primary">
 									<th>師傅</th>
 									<th>金額</th>
 								</tr>
@@ -77,7 +84,7 @@
                 	</div>
 
                 	 <div class="col-lg-6">
-                        <div class="panel panel-primary">
+                        <div class="panel panel-green">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="fa fa-usd"></i>師傅總金額</h3>
                             </div>
@@ -88,7 +95,7 @@
                             		<option value="2017-02">2</option>
                             		<option value="2017-03">3</option>
                             		<option value="2017-04">4</option>
-                            		<option value="2017-05">5</option>
+                            		<option value="2017-05" selected="selected">5</option>
                             		<option value="2017-06">6</option>
                             		<option value="2017-07">7</option>
                             		<option value="2017-08">8</option>
@@ -106,8 +113,7 @@
 			</div>
 		</div>
 	</div>
-	 <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+
 	<!-- jQuery -->
 <script src="${ctx}/js/jquery.js"></script>
     <script src="js/plugins/flot/jquery.flot.js"></script>

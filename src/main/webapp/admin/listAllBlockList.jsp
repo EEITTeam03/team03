@@ -20,6 +20,9 @@ BlockListService blsvc = new BlockListService();
 
     <!-- Custom Fonts -->
     <link href="${ctx}/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<!--美美的icon-->
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	
 <title>所有黑名單</title>
 </head>
 <body>

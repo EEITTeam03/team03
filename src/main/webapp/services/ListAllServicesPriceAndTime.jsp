@@ -62,7 +62,7 @@
 <h2>所有服務價格</h2>
 <table class="table table-bordered table-hover">
 
-					<tr align='center' >
+					<tr align='center' class="info" >
 						<td width="200">服務類型和編號/車種</td>
 							
 						<c:forEach var="servicesVO" items="${list}">
@@ -127,7 +127,7 @@
 <h2>所有服務時間</h2>
 <table class="table table-bordered table-hover">
 
-					<tr align='center' >
+					<tr align='center' class="success">
 						<td width="200">服務類型和編號/車種</td>
 							
 						<c:forEach var="servicesVO" items="${list}">

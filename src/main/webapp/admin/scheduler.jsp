@@ -34,6 +34,9 @@ body,button,h1{
 }
 </style>
 <title>查看排程</title>
+<!--美美的icon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+
 </head>
 <body>
 <jsp:include page="Testhead_nav.jsp"/>

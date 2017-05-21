@@ -11,7 +11,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>所有會員</title>
-
+    <!--美美的icon-->
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
  	<!-- SweetAlert -->
 <script src="SweetAlert/js/sweetalert.min.js"></script> 
 <link href="SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
@@ -72,7 +73,17 @@
 		$(function() {
 			loadingBlock();
 			if("${OKalert}"=="updateOK") {
-				swal("修改成功!", "會員資料已更新", "success");
+				//swal("修改成功!", "會員資料已更新", "success");
+				swal({
+				  title: "修改成功!",
+				  text: "會員資料已更新",
+				  imageUrl: "${ctx}/img/loading/check.png",
+				  type: "",
+				  timer: 700,
+				  //animation: "slide-from-top",
+				  showConfirmButton: false,
+				  allowOutsideClick: true
+			});
 				<% session.removeAttribute("OKalert"); %>
 			}
 			

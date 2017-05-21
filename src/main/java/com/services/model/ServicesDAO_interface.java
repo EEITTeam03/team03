@@ -36,5 +36,7 @@ public interface ServicesDAO_interface {
 
 	// 新加入的都放這下面--------------
 	public List<ServicesVO> getAllForUser();
+	
+	//public List<ServicesVO> getAllPriceTime(String size);
 
 }

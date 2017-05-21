@@ -12,6 +12,8 @@ FeedbackService fsvc = new FeedbackService();
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--美美的icon-->
+	<link rel="icon" href="${ctx}/admin/favicon.ico" type="image/x-icon" />
  <!-- Bootstrap Core CSS -->
     <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
 
@@ -57,7 +59,7 @@ swal("完成回覆!","","info");
 	<c:if test="${fVO.reply!=null}"><tr class="bg-success"></c:if>
 	<c:if test="${fVO.reply==null}"><tr></c:if>
 			<td>${fVO.feedbackNo}</td>
-			<td>${fVO.feedbackDate.time}</td>
+			<td>${fVO.feedbackDateStr}</td>
 			<td>${fVO.memberName}</td>
 			<td>${fVO.feedback}</td>
 			<td>
