@@ -44,6 +44,11 @@
 			swal("修改成功!", "服務已更新", "success");
 		</script>
 	</c:if>
+	<c:if test="${!empty path}">
+		<script>
+			swal("新增成功!", "服務已更新", "success");
+		</script>
+	</c:if>
 
 	<div id="wrapper">
 		<div id="page-wrapper">

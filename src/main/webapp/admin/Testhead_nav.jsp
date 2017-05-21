@@ -136,6 +136,7 @@ body,button,h1{
 							<ul id="servicelist" class="collapse nav navbar-nav">
 								<li><a href="${ctx}/services/ListAllServices.jsp">查看所有服務</a></li>
 								<li><a href="${ctx}/services/ListAllServicesPriceAndTime.jsp">查看服務價格</a></li>
+								<li><a href="${ctx}/services/ServicesInsert.jsp">新增服務</a></li>
 								<li><a href="${ctx}/services/ListAllServiceStep.jsp">所有服務步驟</a></li>
 								<li><a href="${ctx}/services/SelectServices.jsp">選擇單筆服務步驟</a></li>
 							</ul>
