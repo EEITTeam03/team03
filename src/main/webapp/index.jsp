@@ -321,10 +321,20 @@
     
     </script>    
 	    
+
+	<!-- SweetAlert -->
+<link href="${ctx}/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
+<script src="${ctx}/SweetAlert/js/sweetalert.min.js"></script> 
 </head>
 
 <body id="page-top" class="index">
-
+	
+	<c:if test="${!empty blocked}">
+		<script type="text/javascript">
+		swal("現在無法進行預約","您的帳號在${memberInfo.effectiveDate}之後才可進行預約","warning")
+		</script>
+		<%session.removeAttribute("blocked"); %>
+	</c:if>
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container">
