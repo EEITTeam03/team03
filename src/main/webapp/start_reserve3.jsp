@@ -660,7 +660,11 @@ h2{
 			$(".page2").slideToggle("slow");			
 			//第一頁關閉
 			$(".page1").slideToggle("slow");			
-			//結束					     	
+			//結束
+			var licensename = $("#liesel span:first-child").text();
+			$("#hide_license").attr({"value":licensename});
+			
+			
 	    }); 
 
 	 	//點擊pg2_pg1的上一頁按鈕後前往第1頁
@@ -678,7 +682,30 @@ h2{
 			$(".page2").slideToggle("slow");			
 			//第三頁打開
 			$(".page3").slideToggle("slow");			
-			//結束					     	
+			//結束
+			
+			//page4：抓取所選服務之時間總和
+			var selcarlicense = $("#hide_license").attr("value");
+			var selserv = $("#portfolio input:checked");
+			var totalservtime = 0;
+			$.getJSON('GetServPriceTimeBySize',{"license":selcarlicense},function(json){
+				for(i=0;i<=selserv.length;i++){
+					var id = selserv.eq(i).attr("id");
+					$.each(json,function(idx,serv){
+						if(serv.servNo == id){
+							totalservtime = totalservtime + serv.servTime;
+							console.log(serv.servTime);
+							return false;
+						}
+						
+					});
+				}
+				
+				$("#hide_totalservtime").attr({"value":totalservtime});
+				
+	   		});	
+			//結束			
+			
 	    });
 	 	
 	 	//點擊pg3_pg2的上一頁按鈕後前往第2頁
@@ -703,8 +730,6 @@ h2{
 	    $(document).on('click','.ptag',function(event){
 	    	
 	    	var dvalue = $(this).attr("value");
-	    	$("#svesall1 div:gt(0) div").attr({"style":"background-color:white;"});
-			$(this).attr({"style":"background-color:#84B57E;"});
 			
 	    	if(dvalue <= 2000){
 	    		if($("#"+dvalue).prop("checked")){
@@ -712,8 +737,11 @@ h2{
 					$(this).attr({"style":"background-color:white;"});
 	    		}else{
 	    			$("#"+dvalue).prop({"checked":"true"});
+					$(this).attr({"style":"background-color:#84B57E;"});	
 	    		}
 	    	}else{
+		    	$("#svesall1 div:gt(0) div").attr({"style":"background-color:white;"});
+				$(this).attr({"style":"background-color:#84B57E;"});	    		
 				$("#svesall1:radio").removeAttr("checked");
 				$("#"+dvalue).prop({"checked":"true"});
 	    	}
@@ -868,9 +896,73 @@ h2{
 				
 		    }); 		
 			//結束
-				
 			
-
+		 	//page4：移進時間點，自動判斷所選的服務總時間，是否可在該段時間預約，可以則時間條變換成紅色樣式
+			var linetotalobj = $("#timeline .line-index");
+   		    $(document).on('mouseenter', '.line-index', function(event){
+   		    	var linecount = ($("#hide_totalservtime").attr("value")) / 30;//工作階段次數	
+   		    	var linevalue = $(this).attr("value");//目前的值
+   		    	
+   		    	var okcount = 0;
+   		    	var maxvalue = parseInt(linecount)+parseInt(linevalue);
+   		    	console.log("進入第"+linevalue+"條");
+   		    	console.log("要跑次數"+linecount);
+   		    	console.log("最遠跑到第"+maxvalue+"條");
+   		    	for(i = linevalue;i < maxvalue;i++){
+   		    		var checkval = linetotalobj.eq(i).find("input").hasClass("inp-line-op");
+   		    		console.log(checkval);
+   		    		if(checkval){
+   		    			okcount = okcount + 1;
+   		    			console.log("第"+linevalue+"條OK");
+   		    		}			
+   		    	}
+   		    	if(okcount == linecount){
+   	   		    	for(i = linevalue;i < maxvalue;i++){
+   	   		    		linetotalobj.eq(i).find("input").removeClass().addClass("inp-line-sel op-green-sel-red fnt-select");			
+   	   		    	}
+   	   		    	var nodetotalobj = $("#timeline");
+					var time = $(this).find("input").attr("value");
+					console.log(time);
+					var hr = time.substring(0,2);
+					var min = time.substring(2,4);
+					for(i=0;i<=parseInt(linecount);i++){
+						nodetotalobj.find("input[class*='inp-node-op'][value*='"+time+"']").removeClass().addClass("inp-node-sel op-green-sel-red fnt-select");			
+						console.log("第"+i+"次");
+						console.log(hr);
+						console.log(min);
+						
+						if((parseInt(min) + 30) == 60){
+							hr = parseInt(hr) + 1;
+							min = "00";
+						}else{
+							min = parseInt(min) + 30;
+						}
+						console.log(hr);
+						console.log(min);
+						
+						time = hr + min ;
+						console.log(time);
+						
+						if(time.length < 4){
+							time = "0"+time;
+						}
+					}
+					for(i = 0;i <= 5;i++){
+						$("#timeline tr").eq(i);
+					}
+					
+					
+   		    	}
+   		    	
+   		    	
+   		    });		
+		 	//page4：移出時間點，變回原來樣式
+   		    $(document).on('mouseleave', '.line-index', function(event){
+				$("#timeline .inp-line-sel").removeClass().addClass("inp-line-op op-green-sel-red fnt-select");
+				$("#timeline .inp-node-sel").removeClass().addClass("inp-node-op op-green-sel-red fnt-select");
+   		    });	
+		 	
+		 	
 			//網頁載入時，讓第4頁的第一筆服務已被選取
 			$("#1").prop({"checked":"true"});
 			$("#tccsel div[value*='1']").css("background-color","#84B57E");
@@ -878,6 +970,14 @@ h2{
 			
    		});	
 		//結束
+		
+		
+	//設定每條時間線的Td，擁有檢查用的value	
+	var tdline = $("#timeline .inp-line-op").parent();
+	for(i=0;i<=tdline.length;i++){
+		tdline.eq(i).attr({"value":i}).addClass("line-index");
+	}
+	
 	
 	//自動設定時間節點的value值，早上9點開始至晚上21點，30分鐘為一個區間
 	var tbnode = $("#timeline .inp-node-op");
@@ -994,7 +1094,7 @@ h2{
 					for(i=0;i<=53;i=i+2){
 						if(i == 0 || i == 9 || i == 18 || i == 27 || i == 36 || i == 45){
 							var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
-								console.log("i="+i+" "+check2);
+// 								console.log("i="+i+" "+check2);
 							if(check2){
 								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
 							}else{
@@ -1003,7 +1103,7 @@ h2{
 							
 						}else if(i == 8 || i == 17 || i == 26 || i == 35 || i == 44 || i == 53){
 							var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
-							console.log("i="+i+" "+check1);
+// 							console.log("i="+i+" "+check1);
 							if(check1){
 								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
 							}else{
@@ -1013,7 +1113,7 @@ h2{
 						}else{
 							var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
 							var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
-								console.log("i="+i+" "+(check1 && check2));
+// 								console.log("i="+i+" "+(check1 && check2));
 							if(check1 && check2){
 								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
 							}else{
@@ -1440,6 +1540,9 @@ h2{
 	        </div>
 	        
 	    </section>
+	    
+	    <input id="hide_license" type="text" name="license" hidden="hide" />
+	    <input id="hide_totalservtime" type="text" name="totalservtime" hidden="hide" />
 	    	    
 	</form> 
 	
