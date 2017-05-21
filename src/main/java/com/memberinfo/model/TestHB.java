@@ -10,27 +10,27 @@ public class TestHB {
 	public static void main(String[] args) {
 		MemberInfoDAO dao = new MemberInfoHibernateDAO();
 	
-		MemberInfoVO memberInfoVO = dao.findByPhone("29435588");
+//		MemberInfoVO memberInfoVO = dao.findByPhone("29435588");
 		//MemberInfoVO memberInfoVO = dao.findByPK(5);
-		if (memberInfoVO != null) {
-			System.out.print(memberInfoVO.getMemberNo()+",");
-			System.out.print(memberInfoVO.getEmail()+",");
-			System.out.print(memberInfoVO.getMemberName()+",");
-			System.out.print(memberInfoVO.getPassword()+",");
-			System.out.print(memberInfoVO.getPhone()+",");
-			System.out.print(memberInfoVO.getBirthday()+",");
-			System.out.print(memberInfoVO.getAddress()+",");
-			Set<MemberCarsVO> set = memberInfoVO.getMemberCars();
-			System.out.print("<***");
-			for(MemberCarsVO anVO: set) {
-				System.out.print(anVO.getCarLicense()+"***");
-				System.out.print(anVO.getCarTypeVO().getBrand()+"***");
-				System.out.print(anVO.getCarTypeVO().getCarModel()+"~");
-				System.out.print(anVO.getCarTypeVO().getCarClassVO().getCarClass()+"~");
-				System.out.print(anVO.getCarTypeVO().getCarClassVO().getClassName()+"~");
-			}
-			System.out.println("***>");
-		}
+//		if (memberInfoVO != null) {
+//			System.out.print(memberInfoVO.getMemberNo()+",");
+//			System.out.print(memberInfoVO.getEmail()+",");
+//			System.out.print(memberInfoVO.getMemberName()+",");
+//			System.out.print(memberInfoVO.getPassword()+",");
+//			System.out.print(memberInfoVO.getPhone()+",");
+//			System.out.print(memberInfoVO.getBirthday()+",");
+//			System.out.print(memberInfoVO.getAddress()+",");
+//			Set<MemberCarsVO> set = memberInfoVO.getMemberCars();
+//			System.out.print("<***");
+//			for(MemberCarsVO anVO: set) {
+//				System.out.print(anVO.getCarLicense()+"***");
+//				System.out.print(anVO.getCarTypeVO().getBrand()+"***");
+//				System.out.print(anVO.getCarTypeVO().getCarModel()+"~");
+//				System.out.print(anVO.getCarTypeVO().getCarClassVO().getCarClass()+"~");
+//				System.out.print(anVO.getCarTypeVO().getCarClassVO().getClassName()+"~");
+//			}
+//			System.out.println("***>");
+//		}
 		
 //		List<MemberInfoVO> list = dao.listAll();
 //		for(MemberInfoVO aVO : list) {

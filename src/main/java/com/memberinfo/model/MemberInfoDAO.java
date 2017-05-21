@@ -12,9 +12,10 @@ public interface MemberInfoDAO {
 	public void merge(MemberInfoVO memberInfoVO);
 	public void delete(Integer memberNo);
 	public MemberInfoVO findByPK(Integer memberNo);
-	public MemberInfoVO findByPhone(String phone);
+	public List<MemberInfoVO> findByPhone(String phone);
 	public List<MemberInfoVO> listAll();
 	public List<MemberInfoVO> findMember(String email , String password);
 //	public List<MemberInfoVO> findAddMember(String email, String password, String memberName, String phone, Date birthday, String address, Date effectiveDate);
 	public MemberInfoVO findByEmail(String email);
+	public List<MemberInfoVO> findByEmailList(String email);
 }
