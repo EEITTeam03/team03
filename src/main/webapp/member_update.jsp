@@ -421,20 +421,19 @@
 										<h4>${memberInfo.email}</h4>
 										<input type="hidden" name="email" class="form-control email required" placeholder="輸入您的電子郵件" value='${memberInfo.email}'>												
 										<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>											
-									</div>												
-																					
-											
-																				
-
-																				
-											
+									</div>																							
+									<c:if test="${!empty FBId}">		
+										<input type="hidden" name='password' value='${memberInfo.password}'>
+									</c:if>												
+										
+									<c:if test="${empty FBId}">		
 									<div class="input-group"  style="width:100%;">
 										<h4>密碼:</h4>
 										<input type="password" class="form-control required" placeholder="輸入您的密碼" value='${memberInfo.password}'>
 									    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>												
 									</div>												
 									<br>												
-											
+									</c:if>		
 																				
 																				
 								<div class="input-group"  style="max-width:250px;">

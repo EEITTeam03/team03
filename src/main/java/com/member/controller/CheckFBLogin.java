@@ -51,11 +51,10 @@ public class CheckFBLogin extends HttpServlet {
 		List<MemberInfoVO> list= ms.getMember(email, password);
 //		MemberInfoVO memberInfoVO = list.get(0);
 		HttpSession session = request.getSession();
+		session.setAttribute("FBAccount",email);
+		session.setAttribute("FBId",password);
+		session.setAttribute("FBName", name);
 		if(list.size()==0){
-
-			session.setAttribute("FBAccount",email);
-			session.setAttribute("FBId",password);
-			session.setAttribute("FBName", name);
 			out.print("Account Not found");
 			return;
 		}

@@ -74,7 +74,10 @@ public class MemberServlet extends HttpServlet {
 				if (licenses == null || licenses.length == 0) {
 					errorMsgMap.put("CarLicenseEmptyError", "請輸入車牌號碼");
 				}
-
+//				if (password.matches("^(?=^.{8,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*$)")) {
+//				} else {
+//					errorMsgMap.put("PasswordEmptyError", "密碼長度必須有八碼，並且包含至少一個小寫字母與一個大寫字母和一個數字");
+//				}
 				
 				
 				MemberInfoVO memberinfoVO = new MemberInfoVO();
@@ -298,7 +301,7 @@ public class MemberServlet extends HttpServlet {
 				try {
 					memberNo = new Integer(str);
 				} catch (Exception e) {
-					errorMsgMap.put("ErrorMsgKey", "員工編號格式不正確");
+					errorMsgMap.put("ErrorMsgKey", "會員編號格式不正確");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgMap.isEmpty()) {
