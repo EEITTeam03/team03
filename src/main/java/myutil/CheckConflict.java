@@ -43,7 +43,7 @@ public class CheckConflict {
 			long tend = calEnd.getTimeInMillis();
 			long xstart = acal.getTimeInMillis();
 			long xend = acalEnd.getTimeInMillis();
-			if (aReserve.getReservNo() == reservNo) {
+			if (aReserve.getReservNo().equals(reservNo)) {
 //				if (xstart < tstart && xend <= tstart) {
 //					// System.out.println("前OK");
 //				} else if (xstart > tstart && xstart >= tend) {

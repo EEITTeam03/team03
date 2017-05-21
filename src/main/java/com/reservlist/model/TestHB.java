@@ -23,16 +23,17 @@ public class TestHB {
 		ReservListHibernateDAO dao = new ReservListHibernateDAO();
 //		List<Object[]> list = dao.listAllCount();
 //		List<Object[]> list = dao.listAllCount("2017-7");
-		List<Object[]> list = dao.listAllMoney("2017-5");
+		List<Object[]> list = dao.listAllCount("2017-7","S");
+//		List<Object[]> list = dao.listAllMoney("2017-5");
 //		System.out.println(dao.listAllByServ("2001"));
 		
 		//System.out.println(list);
 		
 		for(Object[] obj:list){
-			System.out.println(obj[0].getClass().getName());
-			System.out.println(obj[1].getClass().getName());
-//			System.out.println(String.valueOf(obj[0]));
-//			System.out.println(obj[1]);
+//			System.out.println(obj[0].getClass().getName());
+//			System.out.println(obj[1].getClass().getName());
+			System.out.println(String.valueOf(obj[0]));
+			System.out.println(obj[1]);
 		}
 	}
 

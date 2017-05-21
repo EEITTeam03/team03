@@ -12,5 +12,6 @@ public interface ReservListDAO {
 	public List<ReservListVO> listAllByServ(String servNo);
 	public List<Object[]> listAllCount();
 	public List<Object[]> listAllCount(String month);
+	public List<Object[]> listAllCount(String month, String type);
 	public List<Object[]> listAllMoney(String month);
 }

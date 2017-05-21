@@ -151,6 +151,25 @@ public class ReservListService {
 		return JSONlist;
 	}
 	
+	public List<Map<String,Object>> getCountByServAndType(String month,String type){
+		List<Map<String,Object>> JSONlist = new ArrayList<>();
+		List<Object[]> list = dao.listAllCount(month,type);
+		
+		ServicesService svc = new ServicesService();
+		
+		for(Object[] obj:list){
+			Map<String,Object> map = new HashMap<>();
+			//String servNo =String.valueOf(obj[0]);
+			Long count = (Long)obj[1];
+			ServicesVO servVO = svc.getOneService((Integer)obj[0]);
+			map.put("label", servVO.getServName());
+			map.put("data", count);
+			JSONlist.add(map);
+		}
+		
+		return JSONlist;
+	}
+	
 	public List<Map<String,Object>> getProfitByMonth(String month){
 		List<Map<String,Object>> JSONlist = new ArrayList<>();
 		List<Object[]> list = dao.listAllMoney(month);
