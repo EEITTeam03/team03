@@ -24,6 +24,8 @@
 <meta name="author" content="">
 
 <title>訂單狀態</title>
+<!--美美的icon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
@@ -61,8 +63,8 @@
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
-<script src="${ctx}/admin/SweetAlert/js/sweetalert.min.js"></script> 
-<link href="${ctx}/admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
+<script src="${ctx}/SweetAlert/js/sweetalert.min.js"></script> 
+<link href="${ctx}/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
 
 
 	<style type="text/css">	
