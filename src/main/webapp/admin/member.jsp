@@ -18,29 +18,34 @@
  	<!-- SweetAlert -->
 <script src="SweetAlert/js/sweetalert.min.js"></script> 
 <link href="SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
-   
 
 </head>
 <body>
 	<jsp:include page="Testhead_nav.jsp" />
+	<c:if test="${!empty notFound}">
+	<script type="text/javascript">
+		swal('查無資料','所查詢的會員不存在\n或輸入錯誤','error');
+	</script>
+	<%session.removeAttribute("notFound"); %>
+	</c:if>   
 	<div id="wrapper">
 		<div id="page-wrapper">
 			
+			<div class="col-lg-4">
+				<form action="${ctx}/FindMember">
+					<h3>電話:</h3> 
+					<input type="text" name="phone" >
+					<input type="hidden" name="mode" value="phone">
+					<input type="submit" value="查詢" class="btn btn-primary"> 
+				</form>
+			</div>
 			
-			<form action="${ctx}/FindMember">
-				<h3>電話:</h3> 
-				<input type="text" name="phone" >
-				<input type="hidden" name="mode" value="phone">
-				<input type="submit" value="查詢" class="btn btn-primary"> 
-			</form>
-			
-			
-			<form action="${ctx}/FindMember">
-				<h3>email:</h3> 
-				<input type="text" name="email" >
-				<input type="hidden" name="mode" value="email">
-				<input type="submit" value="查詢" class="btn btn-primary"> 
-			</form>
+				<form action="${ctx}/FindMember">
+					<h3>email:</h3> 
+					<input type="text" name="email" >
+					<input type="hidden" name="mode" value="email">
+					<input type="submit" value="查詢" class="btn btn-primary"> 
+				</form>
 			
 			<div class="table-responsive">
 				<h2 class="text-center"><a href="${ctx}/admin/member.jsp">所有會員</a></h2>

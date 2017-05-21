@@ -43,6 +43,10 @@
                             	<option value="2017-11">11</option>
                             	<option value="2017-12">12</option>
                             	</select>
+                            	<select id="type">
+                            		<option value="S" selected="selected">綜合</option>
+                            		<option value="M">加選</option>
+                            	</select>
                                 <div class="flot-chart">
                                     <div class="flot-chart-content" id="flot-pie-chart" ></div>
                                 </div>
@@ -152,22 +156,22 @@
 		//var month = "2017-05";
 		var tbody = $("#showcount > tbody");
 		var tbody2 = $("#showbar > tbody");
-		showchart("2017-05");
+		showchart("2017-05","S");
 		showbar("2017-05");
 		
-		$("#month").change(function(){
-			var month = $(this).val();
-			
+		$("#month,#type").change(function(){
+			var month = $("#month").val();
+			var type = $("#type").val();
 			tbody.empty();
 			
-			showchart(month);
+			showchart(month,type);
 		});
 		
-			function showchart(month) {	
-		
-			$.getJSON('${ctx}/ReservListCount',{"month":month},function(data){
-				console.log(data);
+			function showchart(month,type) {	
 			
+			$.getJSON('${ctx}/ReservListCount',{"month":month,"type":type},function(data){
+				//console.log(data);
+				
 				if(data.length==0){
 					
 					swal({
@@ -223,7 +227,9 @@
 		    tr.append([td1,td2]);
 		    tbody.append(tr);
 		    });
+		     
 		});
+		
 	}
 			
 		    // Bar Chart

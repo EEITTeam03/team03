@@ -46,7 +46,7 @@ public class FindMember extends HttpServlet {
 			member = svc.getMemberEmail(email);
 		}
 		
-		if (member!=null) {
+		if (member.size()!=0) {
 			request.setAttribute("list", member);
 			request.getRequestDispatcher("/admin/member.jsp").forward(request, response);
 		}else {
