@@ -59,9 +59,10 @@
 <link href="css/revision.css" rel="stylesheet">
  
 <!-- jQuery -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/vader/theme.css" id="THEME_CSS"/>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/vader/theme.css" id="THEME_CSS"/>
 <!-- Bootstrap Core JavaScript -->
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
@@ -323,9 +324,205 @@ h2{
 #pg2_pg1,#pg2_pg3,#pg3_pg2,#pg3_pg4{
 	padding:0px;
 }
-#datepicker{
-	display:inline;
-}		
+.ui-datepicker-month{
+	color:black;
+}
+        .inp-node-undone{
+        	width:40px;
+			
+			height:40px; 
+			
+			border-radius:99em;			
+         
+			border:0px;
+            
+            background:#999;                                                                                       
+        }         
+        .inp-node-op{
+        	width:40px;
+			
+			height:40px; 
+			
+			border-radius:99em;			
+         
+			border-width: 3px;
+			
+			border-color: #ed687c;
+            
+            background: #fff;			         
+            
+			color: #ed687c;
+                         
+            border-style: solid;  
+            
+            text-align: center; 
+            
+			-moz-box-shadow: 3px 4px 0px 0px #3e7327;
+			-webkit-box-shadow: 3px 4px 0px 0px #3e7327;
+			box-shadow: 3px 4px 0px 0px #3e7327;
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77b55a), color-stop(1, #72b352));
+			background:-moz-linear-gradient(top, #77b55a 5%, #72b352 100%);
+			background:-webkit-linear-gradient(top, #77b55a 5%, #72b352 100%);
+			background:-o-linear-gradient(top, #77b55a 5%, #72b352 100%);
+			background:-ms-linear-gradient(top, #77b55a 5%, #72b352 100%);
+			background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77b55a', endColorstr='#72b352',GradientType=0);
+			background-color:#77b55a;
+			-moz-border-radius:18px;
+			-webkit-border-radius:18px;
+			border-radius:18px;
+			border:1px solid #4b8f29;
+			cursor:pointer;
+			text-shadow:0px 1px 0px #5b8a3c;  
+			          
+                    
+        }
+        .inp-node-sel{
+        	width:40px;
+			
+			height:40px; 
+			
+			border-radius:99em;			
+         
+			border-width: 3px;
+			
+			border-color: #ed687c;
+            
+            background: #fff;			         
+            
+			color: #ed687c;
+                         
+            border-style: solid;  
+            
+            text-align: center; 
+            
+			-moz-box-shadow: 3px 4px 0px 0px #8a2a21;
+			-webkit-box-shadow: 3px 4px 0px 0px #8a2a21;
+			box-shadow: 3px 4px 0px 0px #8a2a21;
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24437));
+			background:-moz-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+			background:-webkit-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+			background:-o-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+			background:-ms-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+			background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24437',GradientType=0);
+			background-color:#c62d1f;
+			-moz-border-radius:18px;
+			-webkit-border-radius:18px;
+			border-radius:18px;
+			border:1px solid #d02718;
+			cursor:pointer;
+			text-shadow:0px 1px 0px #810e05;            
+                    
+        }                          
+        .inp-line-undone{
+        	width:150px;
+			
+			height:10px;
+			
+			border:0px;
+			
+			background:#999;
+			
+			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
+        }
+        .inp-line-op{
+        	width:150px;
+			
+			height:10px;
+			
+			border:0px;
+			
+			background:#ed687c;
+			
+			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
+
+			-moz-box-shadow: 3px 4px 0px 0px #3e7327;
+			-webkit-box-shadow: 3px 4px 0px 0px #3e7327;
+			box-shadow: 3px 4px 0px 0px #3e7327;
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77b55a), color-stop(1, #72b352));
+			background:-moz-linear-gradient(top, #77b55a 5%, #72b352 100%);
+			background:-webkit-linear-gradient(top, #77b55a 5%, #72b352 100%);
+			background:-o-linear-gradient(top, #77b55a 5%, #72b352 100%);
+			background:-ms-linear-gradient(top, #77b55a 5%, #72b352 100%);
+			background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77b55a', endColorstr='#72b352',GradientType=0);
+			background-color:#77b55a;
+			-moz-border-radius:18px;
+			-webkit-border-radius:18px;
+			border-radius:18px;
+			border:1px solid #4b8f29;
+			cursor:pointer;
+			text-shadow:0px 1px 0px #5b8a3c;      
+        }
+        .inp-line-sel{
+        	width:150px;
+			
+			height:10px;
+			
+			border:0px;
+			
+			background:#ed687c;
+			
+			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
+
+			-moz-box-shadow: 3px 4px 0px 0px #8a2a21;
+			-webkit-box-shadow: 3px 4px 0px 0px #8a2a21;
+			box-shadow: 3px 4px 0px 0px #8a2a21;
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24437));
+			background:-moz-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+			background:-webkit-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+			background:-o-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+			background:-ms-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+			background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24437',GradientType=0);
+			background-color:#c62d1f;
+			-moz-border-radius:18px;
+			-webkit-border-radius:18px;
+			border-radius:18px;
+			border:1px solid #d02718;
+			cursor:pointer;
+			text-shadow:0px 1px 0px #810e05;        
+        }       
+		.op-green-sel-red:active{
+			position:relative;
+			top:1px;
+		}        
+        #timeline tr{
+        	padding:0px;
+        	vertical-align:inherit;
+        }
+		table tr:nth-child(1),table tr:nth-child(3),table tr:nth-child(5),table tr:nth-child(7),table tr:nth-child(9),table tr:nth-child(11){ 
+			width:40px;
+			font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size:22px; 
+      	}
+		table tr:nth-child(2),table tr:nth-child(4),table tr:nth-child(6),table tr:nth-child(8),table tr:nth-child(10),table tr:nth-child(12){ 
+			width:40px;
+			font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size:20px; 
+			text-align: left;
+      	}       	        	  
+		.fnt-select{
+	      	-webkit-user-select: none;
+	      	color:transparent;
+	      	text-indent:-9999px;
+      	}
+		.fnt-t{
+			 color:black;
+			 text-shadow: 0 1px 0 #ffffff,
+			 0 2px 0 #c9c9c9,
+			 0 3px 0 #bbb,
+			 0 4px 0 #b9b9b9,
+			 0 5px 0 #aaa,
+			 0 6px 1px rgba(0,0,0,.1),
+			 0 0 5px rgba(0,0,0,.1),
+			 0 1px 3px rgba(0,0,0,.3),
+			 0 3px 5px rgba(0,0,0,.2),
+			 0 5px 10px rgba(0,0,0,.25),
+			 0 10px 10px rgba(0,0,0,.2),
+			 0 20px 20px rgba(0,0,0,.15);
+		}      	        		
 </style>
 
 
@@ -528,6 +725,7 @@ h2{
 		$.getJSON('services/TestGetJsonPic',function(json){
 
 			$.each(json,function(idx,services){
+// 				console.log(services);
 				//以下開始動態生成美容項目DIV
 				var servName = services.servName;													
 				var servDesc = services.servDesc;													
@@ -677,10 +875,164 @@ h2{
 			$("#1").prop({"checked":"true"});
 			$("#tccsel div[value*='1']").css("background-color","#84B57E");
 			//結束
-			console.log($(":checked[name*='radio2']").attr("id"));
+			
    		});	
 		//結束
+	
+	//自動設定時間節點的value值，早上9點開始至晚上21點，30分鐘為一個區間
+	var tbnode = $("#timeline .inp-node-op");
+	var officehrnode = 900;//小時
+	var officeminnode = 0;//分
+	var Intervalnode = 30;//區間時間
+	var rownode = 5;//每行時間條的節點數目
+	for( i=0 ; i<=tbnode.length ; i++ ){
+		var time = 0;
+		//每到60分就進位1小時
+		if(officeminnode == 60){
+			officehrnode = officehrnode + 100;
+			officeminnode = 0;
+		}
 		
+		time = officehrnode + officeminnode ;
+		
+		//如果小時為個位數，前面補0
+		if(time<1000){
+			tbnode.eq(i).attr({"value":"0"+time});
+		}else{
+			tbnode.eq(i).attr({"value":time});
+		}
+				
+		if((i+1) % rownode !== 0){
+			officeminnode = officeminnode + Intervalnode ;
+		}						
+	}
+	//結束
+
+	//自動設定時間線的value值，早上9點00開始至晚上21點，30分鐘為一個區間
+	var tbline = $("#timeline .inp-line-op");
+	var officehrline = 900;//小時
+	var officeminline = 0;//分
+	var Intervalline = 30;//區間時間
+	for( i=0 ; i<=tbline.length ; i++ ){
+		var time = 0;
+		//每到60分就進位1小時
+		if(officeminline == 60){
+			officehrline = officehrline + 100;
+			officeminline = 0;
+		}
+		
+		time = officehrline + officeminline ;
+		
+		//如果小時為個位數，前面補0
+		if(time<1000){
+			tbline.eq(i).attr({"value":"0"+time});
+		}else{
+			tbline.eq(i).attr({"value":time});
+		}
+				
+		officeminline = officeminline + Intervalline ;
+								
+	}
+	//結束	
+	
+		
+		
+	$("#datepicker").datepicker({
+			changeMonth : true,
+			changeYear : false,
+			dateFormat : 'yy-mm-dd',
+			yearRange : '-0:+1',
+			monthNamesShort: [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ],
+			maxDate: "+3m",
+			minDate : new Date(),
+			onSelect : function(dateText,inst){
+				$("#selectedDate").val(dateText);
+				console.log($(":checked[name*='radio2']").attr("id"));				
+				
+				var tbnode = $("#timeline .inp-node-op");
+				var tbline = $("#timeline .inp-line-op");
+				tbnode.removeClass().addClass("inp-node-op op-green-sel-red fnt-select");
+				tbline.removeClass().addClass("inp-line-op op-green-sel-red fnt-select");
+				
+				//讀出當日已預約時間			
+				var empNo = $(":checked[name*='radio2']").attr("id");
+				$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){					
+					$.each(data,function(idx,obj){
+						console.log(obj);
+						var minhr = obj.shh;
+						var minmin = obj.smm;
+						var mintime = minhr + minmin;
+						var maxhr = obj.ehh;
+						var maxmin = obj.emm;
+						var maxtime = maxhr + maxmin;	
+						var nodecount = 0;
+						var linecount = 0;
+						for( i=0 ; i <= tbnode.length ; i++){
+							if(tbnode.eq(i).attr("value") >= mintime && tbnode.eq(i).attr("value") <= maxtime){
+								tbnode.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+// 								console.log(tbnode.eq(i));								
+							}
+						}
+						for( i=0 ; i <= tbline.length ; i++){
+							if(tbline.eq(i).attr("value") >= mintime && tbline.eq(i).attr("value") <= maxtime){
+								tbline.eq(i).removeClass().addClass("inp-line-undone fnt-select");
+// 								console.log(tbline.eq(i));
+								linecount = linecount + 1;
+							}
+						}
+						var rule1 = $("#timeline .inp-node-undone[value*='"+mintime+"']");
+						rule1.removeClass().addClass("inp-node-op op-green-sel-red fnt-select");
+						var rule2 = $("#timeline .inp-node-undone[value*='"+maxtime+"']");
+						rule2.removeClass().addClass("inp-node-op op-green-sel-red fnt-select");						
+						var rule3 = $("#timeline .inp-line-undone[value*='"+maxtime+"']");
+						rule3.removeClass().addClass("inp-line-op op-green-sel-red fnt-select");						
+						console.log(rule3);
+					});
+					
+					var tbnodecheck = $("#timeline input");
+					
+					for(i=0;i<=53;i=i+2){
+						if(i == 0 || i == 9 || i == 18 || i == 27 || i == 36 || i == 45){
+							var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
+								console.log("i="+i+" "+check2);
+							if(check2){
+								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+							}else{
+								tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red fnt-select");
+							}
+							
+						}else if(i == 8 || i == 17 || i == 26 || i == 35 || i == 44 || i == 53){
+							var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
+							console.log("i="+i+" "+check1);
+							if(check1){
+								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+							}else{
+								tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red fnt-select");
+							}
+							i = i + 1;
+						}else{
+							var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
+							var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
+								console.log("i="+i+" "+(check1 && check2));
+							if(check1 && check2){
+								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+							}else{
+								tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red fnt-select");
+							}
+							
+						}
+					
+						
+					}
+					
+				});
+				
+								
+				
+				//設定當日時間條，可選不可選的樣式
+				showtime();
+			}
+		}).css("font-size","150%");			
 // 		$("#datepicker").datepicker({
 // 			changeMonth : true,
 // 			changeYear : false,
@@ -691,6 +1043,8 @@ h2{
 // 			minDate : new Date(),
 // 			onSelect : function(dateText,inst){
 // 				$("#selectedDate").val(dateText);
+// 				console.log(dateText);
+// 				console.log(inst);
 // 				//顯示時間軸
 // 				showtime();
 // 				//讀出當日已預約時間
@@ -702,6 +1056,8 @@ h2{
 // 						//只做好小時的判斷
 // 						var x = obj.shh;
 // 						var y = obj.ehh;
+// 						console.log(obj.shh);
+// 						console.log(obj.ehh);
 // 						for(var i=x;i<=y;i++){
 // 							var selectedS = "#timeline input[value^='"+i+"']";
 // 							$(selectedS).prop("disabled",true).removeClass().addClass("btn btn-basic");
@@ -710,22 +1066,56 @@ h2{
 // 					});
 // 				});
 // 			}
-// 		}).css("font-size","175%");			
-		 $("#datepicker").datepicker({
-		      //顯示上個月日期 及下個月日期 ，但是不可選的。
-		      //default:false
-		      showOtherMonths : true,
-		      // 設置當沒有上一個/下一個可選擇的情況下，隱藏掉相應的按鈕。（默認為不可用）
-		      //配合有設定最大最小時使用
-		      //default:false
-		      hideIfNoPrevNext : true,
-		      //設置一個最小的可選日期。可以是Date對象，或者是數字（從今天算起，例如+7），
-		      //或者有效的字符串('y'代表年, 'm'代表月, 'w'代表周, 'd'代表日, 例如：'+1m +7d')。
-		      minDate : "-30d",
-		      //  設置一個最大的可選日期。可以是Date對象，或者是數字（從今天算起，例如+7），
-		      //或者有效的字符串('y'代表年, 'm'代表月, 'w'代表周, 'd'代表日, 例如：'+1m +7d')。
-		      maxDate : "+30d"
-		    });
+// 		}).css("font-size","150%");	
+		
+		function showtime() {
+// 			$("#timeline").empty();
+			
+				
+				
+				
+				
+			
+			
+		}		
+// 		function showtime() {
+// 			$("#timeline").empty();
+// 			for(var t=9;t<21;t++) {
+// 				if (t==9) {t="0"+t}
+// 				var input = $("#selectedTime");
+// 				var onerow = $("<tr></tr>");
+// 				var btn00 = $("<input></input>").attr({"type":"button","id":t+"00"}).val(t+":00").addClass("btn btn-success");
+// 				var btn30 = $("<input></input>").attr({"type":"button","id":t+"30"}).val(t+":30").addClass("btn btn-success");
+// 				var td00 = $("<td></td>");
+// 				var td30 = $("<td></td>");
+				
+// 				//建立事件
+// 				btn00.click(function(){
+					
+// 					$("#timeline input:enabled").removeClass().addClass("btn btn-success");
+// 					$(this).removeClass("btn-success").addClass("btn-danger");
+// 					input.val($(this).val());
+// 				});	
+
+				
+// 				btn30.click(function(){
+// 					$("#timeline input:enabled").removeClass().addClass("btn btn-success");
+// 					$(this).removeClass("btn-success").addClass("btn-danger");
+// 					input.val($(this).val());
+// 				});
+				
+// 				//開始append
+// 				td00.append(btn00);
+// 				td30.append(btn30);
+// 				onerow.append([td00,td30]);
+// 				$("#timeline").append(onerow);
+				
+				
+				
+// 			}
+			
+// 		}		
+		 
   } );
   
 
@@ -745,8 +1135,7 @@ h2{
 				<span class="sr-only">Toggle navigation</span> Menu <i
 					class="fa fa-bars"></i>
 			</button>
-			<a class="navbar-brand page-scroll" href="index.jsp">Car
-				Detailing</a>
+			<a class="navbar-brand page-scroll" href="index.jsp">Wash Me</a>
 		</div>
 	
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -926,14 +1315,128 @@ h2{
 		                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		                    <h2>可選日期</h2>	                    	                    
 		                </div>
-<!-- 		                <div class="form-group"> -->
-<!-- 			                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"> -->
-<!-- 								<div id="datepicker" ></div> -->
-<%-- 								<input type="hidden" name="selectedDate" id="selectedDate" class="form-control" value="${param.selectedDate}" placeholder="選擇日期"> --%>
-<!-- 			                </div>	 -->
-<!-- 		                </div>	                								          	            	             -->
+		             
+			            <div id="datepicker" class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+							<input type="hidden" name="selectedDate" id="selectedDate" class="form-control" value="${param.selectedDate}" placeholder="選擇日期">
+			            </div>
+			            
+			            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 ">	
+							<table id="timeline">
+								<tbody>
+									<tr>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>	
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>																																																		
+									</tr>
+									<tr>
+										<td class="fnt-t" colspan="2">09:00</td>
+										<td class="fnt-t" colspan="2">09:30</td>
+										<td class="fnt-t" colspan="2">10:00</td>
+										<td class="fnt-t" colspan="2">10:30</td>
+										<td class="fnt-t" colspan="2">11:00</td>																				
+																				
+									</tr>
+									<tr>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>	
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>									
+									</tr>
+									<tr>
+										<td class="fnt-t" colspan="2">11:00</td>
+										<td class="fnt-t" colspan="2">11:30</td>
+										<td class="fnt-t" colspan="2">12:00</td>
+										<td class="fnt-t" colspan="2">12:30</td>
+										<td class="fnt-t" colspan="2">13:00</td>
+																			
+									</tr>
+									<tr>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>	
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>									
+									</tr>
+									<tr>
+										<td class="fnt-t" colspan="2">13:00</td>
+										<td class="fnt-t" colspan="2">13:30</td>
+										<td class="fnt-t" colspan="2">14:00</td>
+										<td class="fnt-t" colspan="2">14:30</td>
+										<td class="fnt-t" colspan="2">15:00</td>
+									</tr>
+									<tr>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>	
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>									
+									</tr>
+									<tr>
+										<td class="fnt-t" colspan="2">15:00</td>
+										<td class="fnt-t" colspan="2">15:30</td>
+										<td class="fnt-t" colspan="2">16:00</td>
+										<td class="fnt-t" colspan="2">16:30</td>
+										<td class="fnt-t" colspan="2">17:00</td>
+									</tr>
+									<tr>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>	
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>																
+									</tr>
+									<tr>
+										<td class="fnt-t" colspan="2">17:00</td>
+										<td class="fnt-t" colspan="2">17:30</td>
+										<td class="fnt-t" colspan="2">18:00</td>
+										<td class="fnt-t" colspan="2">18:30</td>
+										<td class="fnt-t" colspan="2">19:00</td>
+									</tr>
+									<tr>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>
+										<td><input type="number" class="inp-line-op fnt-select" readonly /></td>	
+										<td><input type="number" class="inp-node-op fnt-select" readonly /></td>												
+									</tr>
+									<tr>
+										<td class="fnt-t" colspan="2">19:00</td>
+										<td class="fnt-t" colspan="2">19:30</td>
+										<td class="fnt-t" colspan="2">20:00</td>
+										<td class="fnt-t" colspan="2">20:30</td>
+										<td class="fnt-t" colspan="2">21:00</td>									
+									</tr>																		
+								</tbody>	
+							</table>
+						</div>		                	                								          	            	            
 		            </div>
-		           <div id="datepicker"> </div> 
 	        </div>
 	        
 	    </section>

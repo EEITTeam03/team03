@@ -395,8 +395,13 @@
 	color: #D9534F;
 }
 </style>
+<!-- SweetAlert -->
+
 </head>
 <body>
+	
+
+
 	<c:if test="${list.size()>0}">
 		<c:forEach var="fVO" items="${list}" begin="0" end="${list.size()-1}">
 			<div class="row">

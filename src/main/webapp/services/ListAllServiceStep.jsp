@@ -13,6 +13,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!--美美的icon-->
+	<link rel="icon" href="${ctx}/admin/favicon.ico" type="image/x-icon" />
  <script type="text/javascript" src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
   <!-- Bootstrap Core CSS -->
     <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +44,7 @@
 			<th colspan="2">選項</th>
 		</tr>
 		<c:forEach var="serviceStepVO" items="${list}">
-			<tr align='center' valign='middle'>
+			<tr align='center' valign='middle' >
 				<td width="300">${serviceStepVO.servicesVO.servNo}</td>
 				<td width="300">${serviceStepVO.servStep}</td>
 				<td width="300">${serviceStepVO.stepName}</td>
@@ -60,7 +62,7 @@
 
 				<td>
 					<FORM METHOD="post" ACTION="servicestep.do">
-						<button type="submit" class="btn btn-sm btn-primary">修改</button> 
+						<button type="submit" class="btn btn-sm btn-warning">修改</button> 
 						<input type="hidden" name="servStepNo" value="${serviceStepVO.servStepNo}">
 						<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>

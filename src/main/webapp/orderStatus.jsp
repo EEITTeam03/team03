@@ -61,8 +61,8 @@
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
-<script src="${ctx}/admin/SweetAlert/js/sweetalert.min.js"></script> 
-<link href="${ctx}/admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
+<script src="${ctx}/SweetAlert/js/sweetalert.min.js"></script> 
+<link href="${ctx}/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
 
 
 	<style type="text/css">	

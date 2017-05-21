@@ -32,9 +32,9 @@ FeedbackService fsvc = new FeedbackService();
 	<!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css" rel="stylesheet">
 
- 	<!-- SweetAlert -->
-    <script src="${ctx}/admin/SweetAlert/js/sweetalert.min.js"></script> 
-	<link href="${ctx}/admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
+<!-- SweetAlert -->
+<script src="${ctx}/admin/SweetAlert/js/sweetalert.min.js"></script> 
+<link href="${ctx}/admin/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css">
 
  
 
