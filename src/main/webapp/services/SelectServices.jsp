@@ -15,6 +15,7 @@
 	ServicesService ss = new ServicesService();
 	List<ServicesVO> svo = ss.getAll();
 	pageContext.setAttribute("ss", svo);
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -49,8 +50,9 @@
 		<script>
 			swal("新增成功!", "服務已更新", "success");
 		</script>
+		
 	</c:if>
-
+<% session.removeAttribute("insetComplete"); %>
 	<div id="wrapper">
 		<div id="page-wrapper">
 			<div class="table-responsive">
