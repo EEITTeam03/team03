@@ -47,6 +47,7 @@ public class CheckFBLogin extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("id");
 		String name = request.getParameter("name");
+		System.out.println(password);
 		MemberService ms = new MemberService();
 		List<MemberInfoVO> list= ms.getMember(email, password);
 //		MemberInfoVO memberInfoVO = list.get(0);
