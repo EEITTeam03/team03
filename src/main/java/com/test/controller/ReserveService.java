@@ -54,9 +54,12 @@ public class ReserveService extends HttpServlet {
 		String license = request.getParameter("license");
 		String selectedDate = request.getParameter("selectedDate");
 		String selectedTime = request.getParameter("selectedTime");
-		String singleService = request.getParameter("service");
-		String ckbox[] = request.getParameterValues("plus");
-		String empNo = request.getParameter("empNo");
+//		String singleService = request.getParameter("service");
+		String singleService = request.getParameter("radio1");
+//		String ckbox[] = request.getParameterValues("plus");
+		String ckbox[] = request.getParameterValues("checkbox");
+//		String empNo = request.getParameter("empNo");
+		String empNo = request.getParameter("radio2");
 		
 		if(license.equals(""))
 			errmsg.add("未選擇車牌!");
