@@ -75,12 +75,12 @@
 		document.getElementById('ForservTimeXL').value = 120;
 		document.getElementById('ForservPriceXXL').value = 500;
 		document.getElementById('ForservTimeXXL').value = 150;
-		document.getElementById('ForstepNameOne').value = "洗車比打程式還賺";
-		document.getElementById('ForstepDescpOne').value = "那我還寫程式幹嘛?";
-		document.getElementById('ForstepNameTwo').value = "那你去洗車阿";
-		document.getElementById('ForstepDescpTwo').value = "就不想咩";
-		document.getElementById('ForstepNameThree').value = "這格子真多";
-		document.getElementById('ForstepDescpThree').value = "可是，瑞凡，我回不去了";
+		document.getElementById('ForstepNameOne').value = "清潔";
+		document.getElementById('ForstepDescpOne').value = "車廂清潔";
+		document.getElementById('ForstepNameTwo').value = "保養";
+		document.getElementById('ForstepDescpTwo').value = "車內座椅保養";
+		document.getElementById('ForstepNameThree').value = "外觀整理";
+		document.getElementById('ForstepDescpThree').value = "打蠟修整外觀";
 	}
 	//使用jquery做前端驗證
 	$(function(){
@@ -186,7 +186,7 @@
 			<h2>服務車輛等級</h2>
 				<table class="table table-bordered table-hover">
 				<thead>
-					<tr>
+					<tr  class="info">
 						<th>車種</th>
 						<th>價格</th>
 						<th>服務時間</th>
@@ -298,7 +298,7 @@
 				<h2>服務步驟</h2>
 				<table class="table table-bordered table-hover">
 				<thead>
-					<tr>
+					<tr  class="info">
 						<th>服務步驟</th>
 						<th>服務步驟名稱</th>
 						<th>服務步驟描述</th>

@@ -36,7 +36,7 @@
 <h1 style='text-align:center'>所有員工資料</h1>
 <table class="table table-bordered table-hover">
 	<thead>
-		<tr>
+		<tr class="info">
 			<th style='text-align:center' width='200'>員工編號</th>
 			<th style='text-align:center' width='200'>員工姓名</th>
 			<th style='text-align:center' width='200'>員工描述</th>
