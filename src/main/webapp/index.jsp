@@ -355,7 +355,7 @@
                         <a class="page-scroll ff-word" href="#services">各類服務</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#portfolio">美容項目</a>
+                        <a class="page-scroll ff-word" href="#portfolio" name="one">美容項目</a>
                     </li>
                     <li>
                         <a class="page-scroll ff-word" href="#about">關於我們</a>
