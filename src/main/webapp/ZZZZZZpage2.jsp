@@ -279,19 +279,19 @@ tbody tr td{
                         <a class="page-scroll ff-word" href="start_reserve.jsp">進行預約</a>                    	
                     </li>                    
                     <li>
-                        <a class="page-scroll ff-word" href="#services">各類服務</a>
+                        <a class="page-scroll ff-word" href="${ctx}/#services">各類服務</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#portfolio">美容項目</a>
+                        <a class="page-scroll ff-word" href="${ctx}/#portfolio">美容項目</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#about">關於我們</a>
+                        <a class="page-scroll ff-word" href="${ctx}/#about">關於我們</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#team">團隊成員</a>
+                        <a class="page-scroll ff-word" href="${ctx}/#team">團隊成員</a>
                     </li>
                     <li>
-                        <a class="page-scroll ff-word" href="#contact">聯絡我們</a>
+                        <a class="page-scroll ff-word" href="${ctx}/#contact">聯絡我們</a>
                     </li>
                     
 						<!--	未登入	-->
