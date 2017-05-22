@@ -66,7 +66,9 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
- 
+<!-- SweetAlert -->
+<script src="${ctx}/SweetAlert/js/sweetalert.min.js"></script> 
+<link href="${ctx}/SweetAlert/css/sweetalert.css" rel="stylesheet" type="text/css"> 
 
 
 <style type="text/css">	
@@ -591,7 +593,49 @@ h2{
 			 0 5px 10px rgba(0,0,0,.25),
 			 0 10px 10px rgba(0,0,0,.2),
 			 0 20px 20px rgba(0,0,0,.15);
-		}      	        		
+		}  
+#submit {
+	-moz-box-shadow:inset 0px 1px 0px 0px #fff6af;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fff6af;
+	box-shadow:inset 0px 1px 0px 0px #fff6af;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));
+	background:-moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	background:-webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
+	background-color:#ffec64;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #ffaa22;
+	display:inline-block;
+	cursor:pointer;
+	color:#333333;
+	font-family:Arial;
+	font-size:23px;
+	font-weight:bold;
+	padding:14px 46px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffee66;
+}
+#submit:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));
+	background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	background:-o-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	background:-ms-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
+	background-color:#ffab23;
+}
+#submit:active {
+	position:relative;
+	top:1px;
+}		
+		
+		    	        		
 </style>
 
 
@@ -852,14 +896,14 @@ h2{
 				var selsp = $("<span></span>");
 				var lb = $("<label></label>").attr({"for":servNo}).text("選擇");				
 				if( servNo <= 2000 ){
-					var rad = $("<input type='checkbox' name='checkbox'></input>").attr({"id":servNo}); 
+					var rad = $("<input type='checkbox' name='checkbox'></input>").attr({"id":servNo,"value":servNo}); 
 					selsp.append(rad,lb);
 					pword.append(selsp);
 					myd.append([hword,pword]);													
 					bigd.append([mya,myd]);						
 					$("#svesall2").append(bigd);									
 				}else{					
-					var rad = $("<input type='radio' name='radio1'></input>").attr({"id":servNo}); 
+					var rad = $("<input type='radio' name='radio1'></input>").attr({"id":servNo,"value":servNo}); 
 					selsp.append(rad,lb);
 					pword.append(selsp);					
 					myd.append([hword,pword]);													
@@ -945,7 +989,7 @@ h2{
 				var selsp = $("<span></span>");
 				var lb = $("<label></label>").attr({"for":empNo}).text("選擇");				
 
-				var rad = $("<input type='radio' name='radio2'></input>").attr({"id":empNo}); 
+				var rad = $("<input type='radio' name='radio2'></input>").attr({"id":empNo,"value":empNo}); 
 				selsp.append(rad,lb);
 				pword.append(selsp);					
 				myd.append([hword,pword]);
@@ -993,15 +1037,15 @@ h2{
 	   	   		    		linetotalobj.eq(i).find("input").removeClass().addClass("inp-line-sel op-green-sel-red-confirmed-blue fnt-select");			
 	   	   		    	}
 	   	   		    	var nodetotalobj = $("#timeline");
-						var time = $(this).find("input").attr("value");
+						var time = ($(this).find("input").attr("value"));
 						console.log(time);
 						var hr = time.substring(0,2);
 						var min = time.substring(2,4);
 						for(i=0;i<=parseInt(linecount);i++){
 							nodetotalobj.find("input[class*='inp-node-op'][value*='"+time+"']").removeClass().addClass("inp-node-sel op-green-sel-red-confirmed-blue fnt-select");			
-							console.log("第"+i+"次");
-							console.log(hr);
-							console.log(min);
+// 							console.log("第"+i+"次");
+// 							console.log(hr);
+// 							console.log(min);
 							
 							if((parseInt(min) + 30) == 60){
 								hr = parseInt(hr) + 1;
@@ -1049,20 +1093,64 @@ h2{
 			
    		});	
 		//結束
+// 		function confirmationOk(){
+// 			swal({
+// 				  title: "確定選擇該時段?",
+// 				  text: "",
+// 				  type: "info",
+// 				  showCancelButton: true,
+// 				  confirmButtonClass: "btn-info",
+// 				  confirmButtonText: "確認",
+// 				  cancelButtonText: "取消",
+// 				  closeOnConfirm: false
+// 				},
+// 				function(){
+// 					console.log("我進來了1");
+// 					$("#timeline .inp-line-sel").removeClass().addClass("inp-line-confirmed op-green-sel-red-confirmed-blue fnt-select");
+// 					$("#timeline .inp-node-sel").removeClass().addClass("inp-node-confirmed op-green-sel-red-confirmed-blue fnt-select");
+// 					serswitch = false;
+// 				});		
+// 		}
+// 		function confirmationDelete(){
+// 			swal({
+// 				  title: "確定取消該時段?",
+// 				  text: "",
+// 				  type: "error",
+// 				  showCancelButton: true,
+// 				  confirmButtonClass: "btn-error",
+// 				  confirmButtonText: "確認",
+// 				  cancelButtonText: "取消",
+// 				  closeOnConfirm: false
+// 				},
+// 				function(){
+// 					console.log("我進來了2");
+// 					$("#timeline .inp-line-confirmed").removeClass().addClass("inp-line-op op-green-sel-red-confirmed-blue fnt-select");
+// 					$("#timeline .inp-node-confirmed").removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");							
+// 					serswitch = true;
+// 				});		
+// 		}
 		
 	//page4：可預約狀態下(紅色時間條)，左鍵點擊時間條進行預約
    	$(document).on('click', '.inp-line-sel', function(event){
-   		alert("你成功選取時間");
 		$("#timeline .inp-line-sel").removeClass().addClass("inp-line-confirmed op-green-sel-red-confirmed-blue fnt-select");
 		$("#timeline .inp-node-sel").removeClass().addClass("inp-node-confirmed op-green-sel-red-confirmed-blue fnt-select");
 		serswitch = false;
+		swal("選取時段","", "success");
+		//調整送出的時間為後端要的時間格式HH:mm
+		var time = $(this).attr("value");
+		console.log("是這裡");
+		console.log(time);
+		var hr = time.substring(0,2);
+		var min = time.substring(2,4);
+		$("#hide_time").attr({"value":hr+":"+min});
 	});	
 	//page4：已預約狀態下(藍色時間條)，左鍵點擊時間條可取消預約
    	$(document).on('click', '.inp-line-confirmed', function(event){
-   		alert("你取消預約時間");
 		$("#timeline .inp-line-confirmed").removeClass().addClass("inp-line-op op-green-sel-red-confirmed-blue fnt-select");
-		$("#timeline .inp-node-confirmed").removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
+		$("#timeline .inp-node-confirmed").removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");							
 		serswitch = true;
+		swal("取消時段", "", "success");
+		$("#hide_time").attr({"value":""});//取消預約時間變為空字串
 	});
 		
 	//設定每條時間線的Td，擁有檢查用的value	
@@ -1627,11 +1715,20 @@ h2{
 							</table>
 						</div>		                	                								          	            	            
 		            </div>
+					<br>
+					<br>
+					<br>		            
+	        		<div class="row">
+		                <div class="col-xs-4 col-sm-3 col-md-2 col-lg-1 col-xs-offset-2 col-sm-offset-4 col-md-offset-5">
+		                	<input id="submit" type="submit" value="送出" />    	                    	                    
+		                </div>
+		            </div> 
 	        </div>
 	        
 	    </section>
 	    
 	    <input id="hide_license" type="text" name="license" hidden="hide" />
+	    <input id="hide_time" type="text" name="selectedTime" hidden="hide" />
 	    <input id="hide_totalservtime" type="text" name="totalservtime" hidden="hide" />
 	    	    
 	</form> 
