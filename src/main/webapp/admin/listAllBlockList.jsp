@@ -33,7 +33,7 @@ BlockListService blsvc = new BlockListService();
 	<h1>所有黑名單</h1>
 	<table class="table table-bordered table-hover">
 	<thead>
-	<tr>
+	<tr class="info">
 		<th>會員編號</th>
 		<th>會員姓名</th>
 		<th>違反日期</th>
