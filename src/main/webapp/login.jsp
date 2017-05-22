@@ -551,12 +551,13 @@
 				console.log(JSON.stringify(response));
 				var myJSONText = JSON.stringify(response);
 				var xx = JSON.parse(myJSONText)
-				console.log(xx.id);
+				var password = xx.id+'z';
+				console.log(password);
 				$.ajax({
 					url : 'CheckFBLogin',
 					type : 'POST',
 					data : {
-						'id' : xx.id,
+						'id' : password,
 						'name' : xx.name,
 						'email' : xx.email
 					},
