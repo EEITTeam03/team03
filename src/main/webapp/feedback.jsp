@@ -300,7 +300,7 @@
 					<div id="div1">請評分</div>
 					<br>
 					<div id="dialog_div" title="Your opinions" style="display:none">
-  						<textarea rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的想法，最多輸入200字" name="comment" style="resize:none"></textarea>
+  						<textarea class="form-control" rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的想法，最多輸入200字" name="comment" style="resize:none; border-style: none;"></textarea>
 					</div>
 					<br>
 				</div>

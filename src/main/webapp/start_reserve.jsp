@@ -1411,7 +1411,7 @@ h2{
 						
 						<ul class="dropdown-menu" role="menu">
 						    <li>訂單狀態</li>
-						    <li><a href="#">修改資料</a></li>
+						    <li><a href="${ctx}/member_update.jsp">修改資料</a></li>
 						    <li><a href="feedback.jsp">意見回饋</a></li>
 						    <li class="divider"></li>
 						    <li><a href="LogOut">登出</a></li>
