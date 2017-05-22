@@ -432,13 +432,8 @@
 									<br>												
 								</c:if>												
 																				
-<<<<<<< HEAD
 								<c:if test="${!empty FBId}">												
 								  	<input type="hidden" name="password" value='${FBId}'>											
-=======
-								<c:if test="${!empty FBId}">												
-								  	<input type="hidden" name="password" value='${FBId}'>											
->>>>>>> branch 'master' of https://github.com/EEITTeam03/team03.git
 								</c:if>
 																				
 								<c:if test="${empty FBId}">												
