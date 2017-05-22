@@ -1216,8 +1216,8 @@ h2{
 	}
 	//結束	
 	
-		
-		
+	var today = new Date();	
+	today.setDate(today.getDate()+1);
 	$("#datepicker").datepicker({
 			changeMonth : true,
 			changeYear : false,
@@ -1225,7 +1225,7 @@ h2{
 			yearRange : '-0:+1',
 			monthNamesShort: [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ],
 			maxDate: "+3m",
-			minDate : new Date(),
+			minDate : today,
 			onSelect : function(dateText,inst){
 				$("#selectedDate").val(dateText);
 				reset();//預約時間表，CSS樣式重置
@@ -1237,9 +1237,10 @@ h2{
 				console.log(tbnode.length);
 				//讀出當日已預約時間			
 				var empNo = $(":checked[name*='radio2']").attr("id");
-				$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){					
+				$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){
+					console.log("近來看看"+data);
 					$.each(data,function(idx,obj){
-						console.log(obj);
+						console.log("近來看看");
 						var minhr = obj.shh;
 						var minmin = obj.smm;
 						var mintime = minhr + minmin;
