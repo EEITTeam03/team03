@@ -47,18 +47,18 @@ public class MemberServlet extends HttpServlet {
 				String[] licenses = req.getParameterValues("licenses");
 
 				
-				if (name == null || name.trim().length() == 0) {
-					errorMsgMap.put("NameEmptyError", "請輸入您的姓名");
-				}
-				if (email == null || email.trim().length() == 0) {
-					errorMsgMap.put("EmailEmptyError", "請輸入電子郵件");
-				}
-				if (password == null || password.trim().length() == 0) {
-					errorMsgMap.put("PasswordEmptyError", "請輸入密碼");
-				}
-				if (phone == null || phone.trim().length() == 0) {
-					errorMsgMap.put("PhoneEmptyError", "請輸入電話");
-				}
+//				if (name == null || name.trim().length() == 0) {
+//					errorMsgMap.put("NameEmptyError", "請輸入您的姓名");
+//				}
+//				if (email == null || email.trim().length() == 0) {
+//					errorMsgMap.put("EmailEmptyError", "請輸入電子郵件");
+//				}
+//				if (password == null || password.trim().length() == 0) {
+//					errorMsgMap.put("PasswordEmptyError", "請輸入密碼");
+//				}
+//				if (phone == null || phone.trim().length() == 0) {
+//					errorMsgMap.put("PhoneEmptyError", "請輸入電話");
+//				}
 				java.sql.Date birthday = null;
 				try {
 					birthday = java.sql.Date.valueOf(req.getParameter("datepicker").trim());
@@ -66,17 +66,16 @@ public class MemberServlet extends HttpServlet {
 					birthday = new java.sql.Date(System.currentTimeMillis());
 					errorMsgMap.put("BirthdayEmptyError", "請輸入生日!");
 				}
-				if (address == null || address.trim().length() == 0) {
-					errorMsgMap.put("AddressEmptyError", "請輸入地址");
-				}
+//				if (address == null || address.trim().length() == 0) {
+//					errorMsgMap.put("AddressEmptyError", "請輸入地址");
+//				}
 				java.sql.Date effectiveDate =  new java.sql.Date(System.currentTimeMillis());
 				
-				if (licenses == null || licenses.length == 0) {
-					errorMsgMap.put("CarLicenseEmptyError", "請輸入車牌號碼");
-				}
-//				if (password.matches("^(?=^.{8,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*$)")) {
-//				} else {
-//					errorMsgMap.put("PasswordEmptyError", "密碼長度必須有八碼，並且包含至少一個小寫字母與一個大寫字母和一個數字");
+//				if (licenses == null || licenses.length == 0) {
+//					errorMsgMap.put("CarLicenseEmptyError", "請輸入車牌號碼");
+//				}
+//				if (!password.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{8,30}$")) {
+//					errorMsgMap.put("PasswordEmptyError", "密碼長度必須有八碼，並且包含至少包含一個英文字母和一個數字");
 //				}
 				
 				
@@ -153,7 +152,9 @@ public class MemberServlet extends HttpServlet {
 				if (address == null || address.trim().length() == 0) {
 					errorMsgMap.put("AddressEmptyError", "請輸入地址");
 				}
-				
+				if (!password.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{8,30}$")) {
+					errorMsgMap.put("PasswordEmptyError", "密碼長度必須有八碼，並且包含至少包含一個英文字母和一個數字");
+				}
 				
 				java.sql.Date bday = Date.valueOf(birthday);
 				java.sql.Date eday = Date.valueOf(effectiveDate);
@@ -231,7 +232,9 @@ public class MemberServlet extends HttpServlet {
 				if (address == null || address.trim().length() == 0) {
 					errorMsgMap.put("AddressEmptyError", "請輸入地址");
 				}
-				
+				if (!password.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{8,30}$")) {
+					errorMsgMap.put("PasswordEmptyError", "密碼長度必須有八碼，並且包含至少包含一個英文字母和一個數字");
+				}
 				
 				java.sql.Date bday = Date.valueOf(birthday);
 				java.sql.Date eday = Date.valueOf(effectiveDate);

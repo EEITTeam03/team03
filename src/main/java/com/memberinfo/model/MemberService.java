@@ -130,7 +130,19 @@ public class MemberService {
 		int num=0;
 		char c;
 		String str="";
-		for(int i=0;i<8;i++){
+		//至少一個數字
+		num = (int)(Math.random() * 10);
+		num+=48;
+		c=(char)num;
+		str = c+str;
+		//至少一個英文字母
+		//num=0;
+		num = (int)(Math.random() * 26);
+		num+=65;
+		c=(char)num;
+		str = c+str;
+		//num=0;
+		for(int i=0;i<6;i++){
 			num = (int)(Math.random() * 75);
 			num+=48;
 			c=(char)num;
@@ -138,4 +150,8 @@ public class MemberService {
 		}
 		return str;
 	}
+//	public static void main(String[]arg){
+//		MemberService ms = new MemberService();
+//		System.out.println(ms.randomPswd());
+//	}
 }

@@ -433,7 +433,7 @@
 								</c:if>												
 																				
 								<c:if test="${!empty FBId}">												
-								  	<input type="hidden" name="password" value='${FBId}'>											
+								  	<input type="hidden" name="password" value='${FBId}z'>											
 								</c:if>
 																				
 								<c:if test="${empty FBId}">												

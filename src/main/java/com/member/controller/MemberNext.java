@@ -60,39 +60,43 @@ public class MemberNext extends HttpServlet {
 				String email = req.getParameter("email");
 				String password = req.getParameter("password");
 				String phone = req.getParameter("phone");
-				String birthday = req.getParameter("datepicker");
 				String address = req.getParameter("address");
 				
-//				String carLicense = req.getParameter("carLicense");
+				if (name == null || name.trim().length() == 0) {
+					errorMsgMap.put("NameEmptyError", "請輸入您的姓名");
+				}
+				if (email == null || email.trim().length() == 0) {
+					errorMsgMap.put("EmailEmptyError", "請輸入電子郵件");
+				}
+				if (password == null || password.trim().length() == 0) {
+					errorMsgMap.put("PasswordEmptyError", "請輸入密碼");
+				}
+				if (phone == null || phone.trim().length() == 0) {
+					errorMsgMap.put("PhoneEmptyError", "請輸入電話");
+				}
+				java.sql.Date birthday = null;
+				try {
+					birthday = java.sql.Date.valueOf(req.getParameter("datepicker").trim());
+				} catch (Exception e) {
+					birthday = new java.sql.Date(System.currentTimeMillis());
+					errorMsgMap.put("BirthdayEmptyError", "請輸入生日!");
+				}
+				if (address == null || address.trim().length() == 0) {
+					errorMsgMap.put("AddressEmptyError", "請輸入地址");
+				}
+				java.sql.Date effectiveDate =  new java.sql.Date(System.currentTimeMillis());
 				
-//				String memberinfoVO = (String) req.getAttribute("memberinfoVO");
+				if (!password.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{8,50}$")) {
+					errorMsgMap.put("PasswordEmptyError", "密碼長度必須有八碼，並且包含至少包含一個英文字母和一個數字");
+				}
 				
-//				if (carLicense == null || carLicense.trim().length() == 0) {
-//					errorMsgMap.put("carLicenseEmptyError", "請輸入車牌");
-//				}
-				
-//				java.sql.Date bday = Date.valueOf(birthday);
-//				java.sql.Date eday = Date.valueOf(effectiveDate);
-
-//				MemberInfoVO memberInfoVO = new MemberInfoVO();
-//				
-//				memberInfoVO.setMemberName(name);
-//				memberInfoVO.setEmail(email);
-//				memberInfoVO.setPassword(password);
-//				memberInfoVO.setPhone(phone);
-//				memberInfoVO.setBirthday(bday);
-//				memberInfoVO.setAddress(address);
-				
-				
-				// Send the use back to the form, if there were errors
-//				if (!errorMsgMap.isEmpty()) {
-//					req.setAttribute("memberCarsVO", memberCarsVO); // 含有輸入格式錯誤的empVO物件,也存入req
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("register.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-				
+				if (!errorMsgMap.isEmpty()) {
+//					req.setAttribute("memberinfoVO", memberinfoVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("register.jsp");
+					failureView.forward(req, res);
+					return;
+				}
 				
 				//還差effectiveDate和memberCars沒設
 				/***************************3.設定一半,準備轉交(Send the Success view)***********/

@@ -23,7 +23,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>註冊會員</title>
+<title>修改會員資料</title>
 <!--美美的icon-->
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 	
