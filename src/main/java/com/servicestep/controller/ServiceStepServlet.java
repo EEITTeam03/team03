@@ -120,7 +120,7 @@ public class ServiceStepServlet extends HttpServlet {
 				}
 				ServiceStepVO serviceStepVO = new ServiceStepVO();
 				ServiceStepService servStepservice=new ServiceStepService();
-				ServicesVO servicesVO =servStepservice.getOneSeviceStep(servStep).getServicesVO();
+				ServicesVO servicesVO =servStepservice.getOneSeviceStep(servStepNo).getServicesVO();
 				serviceStepVO.setServStepNo(servStepNo);
 				serviceStepVO.setServStep(servStep);
 				serviceStepVO.setStepName(stepName);
@@ -136,7 +136,7 @@ public class ServiceStepServlet extends HttpServlet {
 					serviceStepVO = servStepservice.UpdateServiceStep(servStepNo, servStep, stepName, stepDescp, stepPic,
 							servicesVO);
 					request.setAttribute("serviceStepVO", serviceStepVO);
-					String url = "ListOneServiceStep.jsp";
+					String url = "/services/ListOneServiceStep.jsp";
 					RequestDispatcher successView = request.getRequestDispatcher(url);
 					successView.forward(request, response);
 				} catch (RuntimeException e) {

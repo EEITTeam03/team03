@@ -118,7 +118,7 @@
 			$('button[name="button1"]').click(function(){
 				
 				var truncate1=$('select[name="servNo"]:eq(0)').val();
-				console.log(truncate1);
+				console.log("forService:"+truncate1);
 				var thead=$('#forDistinct1>thead');
 				var tbody=$('#forDistinct1>tbody');
 				tbody.empty();
@@ -136,7 +136,7 @@
 				
 				$.getJSON('${ctx}/ServiceJson',{servNo	:truncate1},function(json){
 					$.each(json,function(i,v){
-	 					console.log(v);
+// 	 					console.log(v);
 	 					var td_1=$('<td></td>').text(v.servNo);
 	 					var td_2=$('<td></td>').text(v.servTypeNo);
 	 					var td_3=$('<td></td>').text(v.servName);
@@ -187,6 +187,7 @@
 		$(function(){
 			$('button[name="button2"]').click(function(){
 				var truncate=$('select[name="servNo"]:eq(1)').val();
+				console.log("forStep:"+truncate);
 				var thead1=$('#forDistinct>thead');
 				var tbody1=$('#forDistinct>tbody');
 				tbody1.empty();
@@ -202,7 +203,7 @@
 				
 				$.getJSON('${ctx}/ServiceStepJson',{servNo	:truncate},function(json){
 					$.each(json,function(key,value){
-// 	 					console.log(key);
+// 	 					console.log("forStep:"+key);
 //	 					console.log(value);
 						var td1=$('<td></td>').text(value.servNo);
 						var td2=$('<td></td>').text(value.servStep);
@@ -214,11 +215,16 @@
 						var td6=$('<td></td>')
 						var btn=$('<button>查詢</button>').attr("type","submit").attr("class","btn btn-sm btn-primary");
 						
+// 						var form=$('<form></form>').attr("enctype","multipart/form-data").attr("method","post").attr("action","${ctx}/services/servicestep.do");
 						var form=$('<form></form>').attr("method","post").attr("action","${ctx}/services/servicestep.do");
 						
 						
 						var input =$("<input />").attr("type","hidden").attr("name","action").attr("value","getOne_For_Update");
 						var input1 =$("<input />").attr("type","hidden").attr("name","servStepNo").attr("value",value.servStepNo);
+// 						var input2 =$("<input />").attr("type","hidden").attr("name","servStep").attr("value",value.servStep);
+// 						var input3 =$("<input />").attr("type","hidden").attr("name","stepName").attr("value",value.stepName);
+// 						var input4 =$("<input />").attr("type","hidden").attr("name","stepDescp").attr("value",value.stepDescp);
+// 						td6.append(form.append([btn,input,input1,input2,input3,input4]));
 						td6.append(form.append([btn,input,input1]));
 						var row=$('<tr></tr>').append([td1,td2,td3,td4,tdimg,td6]);
 // 						form.append([row,input,input1]);
