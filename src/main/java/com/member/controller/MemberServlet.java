@@ -132,6 +132,8 @@ public class MemberServlet extends HttpServlet {
 				String address = req.getParameter("address");
 				String birthday = req.getParameter("datepicker");
 				String effectiveDate = req.getParameter("effectiveDate");
+				String[] modelNos = req.getParameterValues("modelNo");
+				String[] licenses = req.getParameterValues("licenses");
 				
 				if (memberName == null || memberName.trim().length() == 0) {
 					errorMsgMap.put("NameEmptyError", "請輸入您的姓名");
@@ -181,7 +183,7 @@ public class MemberServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				MemberService memberSvc = new MemberService();
-				memberinfoVO = memberSvc.updateMem(memberNo, memberName, email, password, phone, bday, address, eday);
+				memberinfoVO = memberSvc.updateMemAndCar(memberNo, memberName, email, password, phone, bday, address, eday,modelNos,licenses);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				req.getSession().setAttribute("memberInfo", memberinfoVO);

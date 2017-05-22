@@ -154,4 +154,38 @@ public class MemberService {
 //		MemberService ms = new MemberService();
 //		System.out.println(ms.randomPswd());
 //	}
+	public MemberInfoVO updateMemAndCar
+	(Integer memberNo,String memberName,String email , String password, String phone, java.sql.Date birthday, 
+	 String address, java.sql.Date effectiveDate ,String models[],String[] licenses) {
+	
+	MemberInfoVO memberinfoVO = new MemberInfoVO();
+	Set<MemberCarsVO> memberCars = new HashSet<MemberCarsVO>();
+	
+	memberinfoVO.setMemberNo(memberNo);
+	memberinfoVO.setMemberName(memberName);
+	memberinfoVO.setEmail(email);
+	memberinfoVO.setPassword(password);
+	memberinfoVO.setPhone(phone);
+	memberinfoVO.setBirthday(birthday);
+	memberinfoVO.setAddress(address);
+	memberinfoVO.setEffectiveDate(effectiveDate);
+	memberinfoVO.setMemberCars(memberCars);
+	memberinfoVO.setBlockLists(dao.findByPK(memberNo).getBlockLists());
+	
+	CarTypeHibernateDAO ctdao = new CarTypeHibernateDAO();
+	
+	for (int i=0;i<licenses.length;i++) {
+		MemberCarsVO membercarsVO = new MemberCarsVO();
+		membercarsVO.setMemberInfoVO(memberinfoVO);
+		membercarsVO.setCarLicense(licenses[i]);
+		CarTypeVO cartypeVO = ctdao.findByPK(models[i]);
+		membercarsVO.setCarTypeVO(cartypeVO);
+		
+		memberCars.add(membercarsVO);
+	}
+	
+	dao.merge(memberinfoVO);
+
+	return memberinfoVO;
+}
 }

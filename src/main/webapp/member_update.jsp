@@ -392,7 +392,7 @@
 	
 				<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
 				
-					<form id="cmxform" class="form-horizontal form-signin col-xs-12 col-sm-12 col-md-12 col-lg-12" role="form" action="MemberServlet" method="post" autocomplete="off">													
+					<form id="cmxform" class="form-horizontal form-signin col-xs-12 col-sm-12 col-md-12 col-lg-12" role="form" action="${ctx}/updateCars.jsp" method="get" autocomplete="off">													
 						<div class="row">
 							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">																		
 								<br>
@@ -465,7 +465,7 @@
 									<input type="hidden" name="memberNo" value="${memberInfo.memberNo}">			
 									<input type="hidden" name="effectiveDate" value="${memberInfo.effectiveDate}">									
 									<input type="hidden" name="action" value="update">												
-									<button id="sb" class="btn btn-lg light-orange btn-block" type="submit">修改</button>												
+									<button id="sb" class="btn btn-lg light-orange btn-block" type="submit">下一步</button>												
 									<br>
 									<br>
 									<br>
