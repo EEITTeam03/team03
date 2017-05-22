@@ -332,11 +332,11 @@ tbody tr td{
 					</tr>
 					<tr>
 						<th scope="row">預約日期</th>
-						<td>${reserve.reservDateTime.time}</td>
+						<td>${reserve.reservDateTimeFormat}</td>
 					</tr>
 					<tr>
 						<th scope="row">結束時間</th>
-						<td>${reserve.reservEndTime.time}</td>
+						<td>${reserve.reservEndTimeFormat}</td>
 					</tr>
 					<tr>
 						<th scope="row">品牌</th>
