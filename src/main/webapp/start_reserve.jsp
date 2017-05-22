@@ -307,9 +307,9 @@ h1,h2{
 	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;						
 }
 h1{
-	text-align:center;
-	color: red;
-	text-shadow: rgb(255, 255, 255) 0px -1px 4px, rgb(255, 255, 0) 0px -2px 10px, rgb(255, 128, 0) 0px -10px 20px, rgb(255, 0, 0) 0px -18px 40px
+	color: rgb(222, 133, 37);
+	
+	text-shadow: rgb(255, 252, 168) 2px 2px 0px, rgb(156, 156, 156) 4px 4px 0px;
 }
 h2{
 	text-align:center;
@@ -612,7 +612,7 @@ h2{
 	border:1px solid #ffaa22;
 	display:inline-block;
 	cursor:pointer;
-	color:#333333;
+	color:white;
 	font-family:Arial;
 	font-size:23px;
 	font-weight:bold;
@@ -866,7 +866,7 @@ h2{
 		$.getJSON('services/TestGetJsonPic',function(json){
 
 			$.each(json,function(idx,services){
-// 				console.log(services);
+				//console.log(services);
 				//以下開始動態生成美容項目DIV
 				var servName = services.servName;													
 				var servDesc = services.servDesc;													
@@ -965,6 +965,13 @@ h2{
    		});	
 		
 		var serswitch = false;//預約開關，當時間條為藍色(已進行過一次預約時)，則必須關閉，不可再次進行預約
+
+		//page4：讀出技師圖片，放在全域變數內，供使用
+		var empjson = null;
+			$.getJSON('${ctx}/emp/GetEmpJSON.do',function(json){
+				empjson = json;   				
+   			})		
+		//結束
 		
 		//page4：動態生成技師DIV
 		$.getJSON('emp/GetEmpJSON.do',function(json){
@@ -976,7 +983,7 @@ h2{
 				var picnumber = idx+1;
 				var bigd = $("<div></div>").addClass("col-xs-6 col-sm-6 col-md-4 col-lg-3 portfolio-item csschange").attr({"style":"background-color:white;padding:0px;margin:0px 10px 0px 10px;","value":empNo});													
 				   			   																																																																						
-				var smallimg = $("<img>").addClass("img-responsive img-services").attr({"src":"img/team/"+picnumber+".jpg","alt":"","value":empNo});													
+				var smallimg = $("<img>").addClass("img-responsive img-services").attr({"src":"data:image/jpeg;base64,"+empjson[idx].empPhoto,"alt":empName,"value":empNo});													
 				   																										
 				bigd.append(smallimg);													
 																	
@@ -1000,7 +1007,7 @@ h2{
 			//結束動態生成														
 
    			}); 
-			//page4：技師區塊被點選後，自動選擇該技師並更換樣式
+			//page4：技師區塊被點選後，自動選擇該技師並更換樣式，同時時間條全部改為不可選(灰色)，使用者需重新點選日曆
 		    $(document).on('click','.csschange',function(event){
 		    	
 		    	var dvalue = $(this).attr("value");
@@ -1008,6 +1015,9 @@ h2{
 		    	$("#tccsel .csschange").css("background-color","white");
 		    	$("#"+dvalue).prop({"checked":"true"});		    	
 				$(this).css("background-color","#84B57E");
+				if($("#selectedDate").val() != ""){
+					DatepickerReset($("#selectedDate").val());					
+				}		
 				
 		    }); 		
 			//結束
@@ -1216,8 +1226,9 @@ h2{
 	}
 	//結束	
 	
+	//日曆相關設定
 	var today = new Date();	
-	today.setDate(today.getDate()+1);
+	today.setDate(today.getDate()+1);//可選日期為明天
 	$("#datepicker").datepicker({
 			changeMonth : true,
 			changeYear : false,
@@ -1228,182 +1239,108 @@ h2{
 			minDate : today,
 			onSelect : function(dateText,inst){
 				$("#selectedDate").val(dateText);
-				reset();//預約時間表，CSS樣式重置
-				serswitch = true;//因為每次點擊日曆，之前預約的時間會消除，所以需要重新開啟預約功能，給予使用者重新預約
-				var tbnode = $("#timeline .inp-node-op");
-				var tbline = $("#timeline .inp-line-op");
-				tbnode.removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
-				tbline.removeClass().addClass("inp-line-op op-green-sel-red-confirmed-blue fnt-select");
-				
-				//讀出當日已預約時間			
-				var empNo = $(":checked[name*='radio2']").attr("id");
-				$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){
-					console.log(data);
-					$.each(data,function(idx,obj){
-						
-						var minhr = obj.shh;
-						var minmin = obj.smm;
-						var mintime = minhr + minmin;
-						var maxhr = obj.ehh;
-						var maxmin = obj.emm;
-						var maxtime = maxhr + maxmin;	
-						var nodecount = 0;
-						var linecount = 0;
-						
-						for( i=0 ; i <= tbnode.length ; i++){
-							if(parseInt(tbnode.eq(i).attr("value")) >= mintime && parseInt(tbnode.eq(i).attr("value")) <= maxtime){
-								tbnode.eq(i).removeClass().addClass("inp-node-undone fnt-select");
-
-							}
-// 							console.log("測試-----");
-// 							console.log(parseInt(tbnode.eq(i).attr("value")));
-// 							console.log("mintime="+mintime);
-// 							console.log("測試+++++++");
-// 							console.log(parseInt(tbnode.eq(i).attr("value")));
-// 							console.log("maxtime="+maxtime);							
-						}
-						for( i=0 ; i <= tbline.length ; i++){
-							if(parseInt(tbline.eq(i).attr("value")) >= mintime && parseInt(tbline.eq(i).attr("value")) <= maxtime){
-								tbline.eq(i).removeClass().addClass("inp-line-undone fnt-select");
-// 								console.log(tbline.eq(i));
-								linecount = linecount + 1;
-							}
-						}
-						var rule1 = $("#timeline .inp-node-undone[value*='"+mintime+"']");
-						rule1.removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
-						var rule2 = $("#timeline .inp-node-undone[value*='"+maxtime+"']");
-						rule2.removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");						
-						var rule3 = $("#timeline .inp-line-undone[value*='"+maxtime+"']");
-						rule3.removeClass().addClass("inp-line-op op-green-sel-red-confirmed-blue fnt-select");						
-// 						console.log(rule3);
-					});
-					
-					var tbnodecheck = $("#timeline input");
-					
-					for(i=0;i<=53;i++){
-						if(i == 0 || i == 9 || i == 18 || i == 27 || i == 36 || i == 45){
-							var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
-								console.log("這裡是左邊單個判斷");
-								console.log("i="+(i+1)+check2);
-							if(check2){
-								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
-							}else{
-								tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
-							}
-							
-						}
-					}
-					for(i=0;i<=53;i++){					
-						if(i == 8 || i == 17 || i == 26 || i == 35 || i == 44 || i == 53){
-							var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
-								console.log("這裡是右邊單個判斷");
-								console.log("i="+(i-1)+check1);
-							if(check1){
-								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
-							}else{
-								tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
-							}
-							
-						}
-					}
-					for(i=0;i<=53;i++){						
-						var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
-						var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
-// 								console.log("i="+i+" "+(check1 && check2));
-						if(check1 && check2){
-							tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
-						}
-					}	
-
-					
-				});
-//					else{
-//					tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
-//				}				
-								
-				
+				DatepickerReset(dateText);
 				
 			}
 		}).css("font-size","150%");			
-// 		$("#datepicker").datepicker({
-// 			changeMonth : true,
-// 			changeYear : false,
-// 			dateFormat : 'yy-mm-dd',
-// 			yearRange : '-0:+1',
-// 			monthNamesShort: [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ],
-// 			maxDate: "+3m",
-// 			minDate : new Date(),
-// 			onSelect : function(dateText,inst){
-// 				$("#selectedDate").val(dateText);
-// 				console.log(dateText);
-// 				console.log(inst);
-// 				//顯示時間軸
-// 				showtime();
-// 				//讀出當日已預約時間
-// 				var empNo = $(":checked[name*='radio2']").attr("id");
-// 				$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){
-// 					console.log(data);
-// 					$.each(data,function(idx,obj){
-// 						console.log(obj);
-// 						//只做好小時的判斷
-// 						var x = obj.shh;
-// 						var y = obj.ehh;
-// 						console.log(obj.shh);
-// 						console.log(obj.ehh);
-// 						for(var i=x;i<=y;i++){
-// 							var selectedS = "#timeline input[value^='"+i+"']";
-// 							$(selectedS).prop("disabled",true).removeClass().addClass("btn btn-basic");
-							
-// 						}
-// 					});
-// 				});
-// 			}
-// 		}).css("font-size","150%");	
+
 
 		//每次點擊日曆，重新更換時間表CSS樣式
 		var resnode = $("#timeline input[class*='node']");
 		var resline = $("#timeline input[class*='line']");
-		function reset() {
+		function cssreset() {
 			resnode.removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
 			resline.removeClass().addClass("inp-line-op op-green-sel-red-confirmed-blue fnt-select");
 		}		
-// 		function showtime() {
-// 			$("#timeline").empty();
-// 			for(var t=9;t<21;t++) {
-// 				if (t==9) {t="0"+t}
-// 				var input = $("#selectedTime");
-// 				var onerow = $("<tr></tr>");
-// 				var btn00 = $("<input></input>").attr({"type":"button","id":t+"00"}).val(t+":00").addClass("btn btn-success");
-// 				var btn30 = $("<input></input>").attr({"type":"button","id":t+"30"}).val(t+":30").addClass("btn btn-success");
-// 				var td00 = $("<td></td>");
-// 				var td30 = $("<td></td>");
-				
-// 				//建立事件
-// 				btn00.click(function(){
-					
-// 					$("#timeline input:enabled").removeClass().addClass("btn btn-success");
-// 					$(this).removeClass("btn-success").addClass("btn-danger");
-// 					input.val($(this).val());
-// 				});	
 
-				
-// 				btn30.click(function(){
-// 					$("#timeline input:enabled").removeClass().addClass("btn btn-success");
-// 					$(this).removeClass("btn-success").addClass("btn-danger");
-// 					input.val($(this).val());
-// 				});
-				
-// 				//開始append
-// 				td00.append(btn00);
-// 				td30.append(btn30);
-// 				onerow.append([td00,td30]);
-// 				$("#timeline").append(onerow);
-				
-				
-				
-// 			}
+		function DatepickerReset(dateText) {
+			cssreset();//預約時間表，CSS樣式重置
+			serswitch = true;//因為每次點擊日曆，之前預約的時間會消除，所以需要重新開啟預約功能，給予使用者重新預約
+			var tbnode = $("#timeline .inp-node-op");
+			var tbline = $("#timeline .inp-line-op");
+			tbnode.removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
+			tbline.removeClass().addClass("inp-line-op op-green-sel-red-confirmed-blue fnt-select");
 			
-// 		}		
+			//讀出當日已預約時間			
+			var empNo = $(":checked[name*='radio2']").attr("id");
+			$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){
+				console.log(data);
+				$.each(data,function(idx,obj){
+					
+					var minhr = obj.shh;
+					var minmin = obj.smm;
+					var mintime = minhr + minmin;
+					var maxhr = obj.ehh;
+					var maxmin = obj.emm;
+					var maxtime = maxhr + maxmin;	
+					var nodecount = 0;
+					var linecount = 0;
+					
+					for( i=0 ; i <= tbnode.length ; i++){
+						if(parseInt(tbnode.eq(i).attr("value")) >= mintime && parseInt(tbnode.eq(i).attr("value")) <= maxtime){
+							tbnode.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+
+						}
+//							console.log("測試-----");
+//							console.log(parseInt(tbnode.eq(i).attr("value")));
+//							console.log("mintime="+mintime);
+//							console.log("測試+++++++");
+//							console.log(parseInt(tbnode.eq(i).attr("value")));
+//							console.log("maxtime="+maxtime);							
+					}
+					for( i=0 ; i <= tbline.length ; i++){
+						if(parseInt(tbline.eq(i).attr("value")) >= mintime && parseInt(tbline.eq(i).attr("value")) <= maxtime){
+							tbline.eq(i).removeClass().addClass("inp-line-undone fnt-select");
+							linecount = linecount + 1;
+						}
+					}
+					var rule1 = $("#timeline .inp-node-undone[value*='"+mintime+"']");
+					rule1.removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
+					var rule2 = $("#timeline .inp-node-undone[value*='"+maxtime+"']");
+					rule2.removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");						
+					var rule3 = $("#timeline .inp-line-undone[value*='"+maxtime+"']");
+					rule3.removeClass().addClass("inp-line-op op-green-sel-red-confirmed-blue fnt-select");						
+				});
+				
+				var tbnodecheck = $("#timeline input");
+				
+				for(i=0;i<=53;i++){
+					if(i == 0 || i == 9 || i == 18 || i == 27 || i == 36 || i == 45){
+						var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
+							console.log("這裡是左邊單個判斷");
+							console.log("i="+(i+1)+check2);
+						if(check2){
+							tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+						}else{
+							tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
+						}
+						
+					}
+				}
+				for(i=0;i<=53;i++){					
+					if(i == 8 || i == 17 || i == 26 || i == 35 || i == 44 || i == 53){
+						var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
+							console.log("這裡是右邊單個判斷");
+							console.log("i="+(i-1)+check1);
+						if(check1){
+							tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+						}else{
+							tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
+						}
+						
+					}
+				}
+				for(i=0;i<=53;i++){						
+					var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
+					var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
+					if(check1 && check2){
+						tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+					}
+				}	
+				
+			});
+		}		
+		
 		 
   } );
   

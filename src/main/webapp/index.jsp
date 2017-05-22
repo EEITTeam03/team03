@@ -233,7 +233,7 @@
    			$.getJSON('${ctx}/emp/GetEmpJSON.do',function(json){
    				$.each(json,function(idx,emp){
    		    		//以下開始動態生成團隊成員
-					var empName=emp.empName;
+					var empName = emp.empName;
 					var empDesc = emp.employeeDesc;
 					var empPic = emp.empPhoto;
    		   			var cs = $("<div></div>").addClass("col-sm-4");
