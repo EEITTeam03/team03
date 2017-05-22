@@ -181,16 +181,15 @@
    		    		var td4 = $("<td>" + carTypes.carClass + "</td>");	
    		    		var td5 = $("<td></td>");	
    		    		
-   		    		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
+//    		    		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
    		    		var inp = $("<input></input>").attr({"type":"hidden","value":carTypes.modelNo,"name":"modelNo"});
    		    		var licenses = $("<input></input>").attr({"type":"hidden","value":carTypes.license,"name":"licenses"});
-   		    		var span = $("<span></span>").addClass("glyphicon glyphicon-remove");
+//    		    		var span = $("<span></span>").addClass("glyphicon glyphicon-remove");
    		    		
-   		    		button.append(span);
-   		    		td5.append([button,inp,licenses]);
+//    		    		button.append(span);
+   		    		td5.append([inp,licenses]);
    		    		
    		    		tr.append([td1,td2,td3,td4,td5]);
-   		    		
    		    		
    		    		$("#cardatas > tbody").append(tr);
    				})
