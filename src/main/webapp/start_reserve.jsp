@@ -291,7 +291,7 @@
 	display:none;						
 	background:rgba(255, 248, 223, 0.91);												
 	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;						
-	width:75%;						
+	width:100%;						
 	height:60px;						
 	box-shadow:0 3px 20px rgba(246, 255, 251, 0.59);						
 	border-radius:6px;						
@@ -307,8 +307,8 @@ h1,h2{
 	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;						
 }
 h1{
+	text-align:center;
 	color: rgb(222, 133, 37);
-	
 	text-shadow: rgb(255, 252, 168) 2px 2px 0px, rgb(156, 156, 156) 4px 4px 0px;
 }
 h2{
@@ -777,6 +777,110 @@ h2{
 			var licensename = $("#liesel span:first-child").text();
 			$("#hide_license").attr({"value":licensename});
 			
+			//page2：產生美容項目DIV及點選後跳出的DIV
+			var snumber = 0; 
+			var selcarlicense = $("#hide_license").attr("value");
+			$.getJSON('GetServPriceTimeBySize',{"license":selcarlicense},function(json){
+				console.log(json);
+				$.each(json,function(idx,services){
+					//console.log(services);
+					//以下開始動態生成美容項目DIV
+					var servName = services.servName;													
+					var servDesc = services.servDesc;													
+					var servNo = services.servNo;
+					var servPrice = services.servPrice;
+					
+					var bigd = $("<div></div>").addClass("col-xs-6 col-sm-6 col-md-4 col-lg-3 portfolio-item").attr("style","height:210px;");													
+					   			   										
+					var mya = $("<a></a>").attr({"href":"#portfolioModal"+snumber,"data-toggle":"modal"}).addClass("portfolio-link");													
+																		
+					var smalld = $("<div></div>").addClass("portfolio-hover");													
+					var nd = $("<div></div>").addClass("portfolio-hover-content");													
+					var ii = $("<div></div>").addClass("fa fa-plus fa-3x");													
+																		
+					var smallimg = $("<img>").addClass("img-responsive img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":"","style":"height:160px;"});													
+					   													
+					nd.append(ii);  													
+					smalld.append(nd);													
+					mya.append([smalld,smallimg]);													
+																		
+					var myd = $("<div></div>").addClass("portfolio-caption ptag").attr({"value":servNo});													
+																		
+					var hword = $("<h4></h4>").text(servName);													
+					var pword = $("<p></p>").addClass("text-muted");													
+					var prcsp = $("<span></span>").addClass("serv-price").text(servPrice+"元");
+					pword.append(prcsp);
+					
+					var selsp = $("<span></span>");
+					var lb = $("<label></label>").attr({"for":servNo}).text("選擇");				
+					if( servNo <= 2000 ){
+						var rad = $("<input type='checkbox' name='checkbox'></input>").attr({"id":servNo,"value":servNo}); 
+						selsp.append(rad,lb);
+						pword.append(selsp);
+						myd.append([hword,pword]);													
+						bigd.append([mya,myd]);						
+						$("#svesall2").append(bigd);									
+					}else{					
+						var rad = $("<input type='radio' name='radio1'></input>").attr({"id":servNo,"value":servNo}); 
+						selsp.append(rad,lb);
+						pword.append(selsp);					
+						myd.append([hword,pword]);													
+						bigd.append([mya,myd]);						
+						$("#svesall1").append(bigd);
+					}																	
+							   											
+				//結束動態生成														
+																		
+				//以下開始動態生成，美容項目點擊後所彈跳出來的介紹DIV														
+																		
+					var pmmf = $("<div></div>").addClass("portfolio-modal modal fade").attr({"id":"portfolioModal"+snumber,"tabindex":"-1","role":"dialog","aria-hidden":"true"});													
+																		
+					var md = $("<div></div>").addClass("modal-dialog");													
+																		
+					var mc = $("<div></div>").addClass("modal-content");													
+																		
+					var cm = $("<div></div>").addClass("close-modal").attr({"data-dismiss":"modal"});													
+					var lr = $("<div></div>").addClass("lr");													
+					var rl = $("<div></div>").addClass("rl");													
+					lr.append(rl);													
+					cm.append(lr);													
+																		
+					var cnt = $("<div></div>").addClass("container");													
+					var crow = $("<div></div>");													
+					var cco = $("<div></div>").addClass("col-lg-8 col-lg-offset-2");													
+					var mb = $("<div></div>").addClass("modal-body");													
+					var mbh = $("<h2></h2>").text(servName);   													
+					var mimg = $("<img>").addClass("img-responsive img-centered big-img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":""});													
+					var mbp = $("<p></p>").text(servDesc);													
+					var bbp = $("<button></button>").attr({"type":"button","data-dismiss":"modal"}).addClass("btn btn-primary");													
+					var fft = $("<i></i>").addClass("fa fa-times").text("離開");													
+																		
+																		
+					bbp.append(fft);													
+					mb.append([mbh,mimg,mbp,bbp]);													
+					cco.append(mb);													
+					crow.append(cco);													
+					cnt.append(crow);													
+																		
+					mc.append([cm,cnt]);													
+																		
+					md.append(mc);													
+																		
+					pmmf.append(md);													
+																		
+					$("#no").after(pmmf);													
+				//結束動態生成														
+																		
+					snumber=snumber+1;													
+
+	   			});   			
+	   			//網頁載入時，讓第2頁的第一筆服務已被選取
+	   			var rf = $(":radio[name*='radio1']:first");
+				rf.prop({"checked":"true"});
+				var rfId = rf.attr("id");
+				$("#svesall1 div[value*='"+rfId+"']").attr({"style":"background-color:#84B57E;"});
+				//結束
+	   		});	
 			
 	    }); 
 
@@ -802,6 +906,7 @@ h2{
 			var selserv = $("#portfolio input:checked");
 			var totalservtime = 0;
 			$.getJSON('GetServPriceTimeBySize',{"license":selcarlicense},function(json){
+				console.log(json);
 				for(i=0;i<=selserv.length;i++){
 					var id = selserv.eq(i).attr("id");
 					$.each(json,function(idx,serv){
@@ -829,15 +934,6 @@ h2{
 			$(".page2").slideToggle("slow");			
 			//結束					     	
 	    });	
-
-	 	//點擊pg3_pg4的上一頁按鈕後前往第2頁
-	    $("#pg3_pg4").on('click', function(event){
-			//第三頁打開狀態→關閉狀態
-			$(".page3").slideToggle("slow");			
-			//第四頁打開
-			$(".page4").slideToggle("slow");			
-			//結束					     	
-	    });	 	
 	 	
 		//page2：服務項目文字區塊點擊後，自動選擇該服務並更換樣式
 	    $(document).on('click','.ptag',function(event){
@@ -861,108 +957,7 @@ h2{
 	    }); 		
 		//結束	
 	  
-		//page2：產生美容項目DIV及點選後跳出的DIV
-		var snumber = 0;   			
-		$.getJSON('services/TestGetJsonPic',function(json){
 
-			$.each(json,function(idx,services){
-				//console.log(services);
-				//以下開始動態生成美容項目DIV
-				var servName = services.servName;													
-				var servDesc = services.servDesc;													
-				var servNo = services.servNo;
-				
-				var bigd = $("<div></div>").addClass("col-xs-6 col-sm-6 col-md-4 col-lg-3 portfolio-item").attr("style","height:210px;");													
-				   			   										
-				var mya = $("<a></a>").attr({"href":"#portfolioModal"+snumber,"data-toggle":"modal"}).addClass("portfolio-link");													
-																	
-				var smalld = $("<div></div>").addClass("portfolio-hover");													
-				var nd = $("<div></div>").addClass("portfolio-hover-content");													
-				var ii = $("<div></div>").addClass("fa fa-plus fa-3x");													
-																	
-				var smallimg = $("<img>").addClass("img-responsive img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":"","style":"height:160px;"});													
-				   													
-				nd.append(ii);  													
-				smalld.append(nd);													
-				mya.append([smalld,smallimg]);													
-																	
-				var myd = $("<div></div>").addClass("portfolio-caption ptag").attr({"value":servNo});													
-																	
-				var hword = $("<h4></h4>").text(servName);													
-				var pword = $("<p></p>").addClass("text-muted");													
-				var prcsp = $("<span></span>").addClass("serv-price").text("Graphic Design");
-				pword.append(prcsp);
-				
-				var selsp = $("<span></span>");
-				var lb = $("<label></label>").attr({"for":servNo}).text("選擇");				
-				if( servNo <= 2000 ){
-					var rad = $("<input type='checkbox' name='checkbox'></input>").attr({"id":servNo,"value":servNo}); 
-					selsp.append(rad,lb);
-					pword.append(selsp);
-					myd.append([hword,pword]);													
-					bigd.append([mya,myd]);						
-					$("#svesall2").append(bigd);									
-				}else{					
-					var rad = $("<input type='radio' name='radio1'></input>").attr({"id":servNo,"value":servNo}); 
-					selsp.append(rad,lb);
-					pword.append(selsp);					
-					myd.append([hword,pword]);													
-					bigd.append([mya,myd]);						
-					$("#svesall1").append(bigd);
-				}																	
-						   											
-			//結束動態生成														
-																	
-			//以下開始動態生成，美容項目點擊後所彈跳出來的介紹DIV														
-																	
-				var pmmf = $("<div></div>").addClass("portfolio-modal modal fade").attr({"id":"portfolioModal"+snumber,"tabindex":"-1","role":"dialog","aria-hidden":"true"});													
-																	
-				var md = $("<div></div>").addClass("modal-dialog");													
-																	
-				var mc = $("<div></div>").addClass("modal-content");													
-																	
-				var cm = $("<div></div>").addClass("close-modal").attr({"data-dismiss":"modal"});													
-				var lr = $("<div></div>").addClass("lr");													
-				var rl = $("<div></div>").addClass("rl");													
-				lr.append(rl);													
-				cm.append(lr);													
-																	
-				var cnt = $("<div></div>").addClass("container");													
-				var crow = $("<div></div>");													
-				var cco = $("<div></div>").addClass("col-lg-8 col-lg-offset-2");													
-				var mb = $("<div></div>").addClass("modal-body");													
-				var mbh = $("<h2></h2>").text(servName);   													
-				var mimg = $("<img>").addClass("img-responsive img-centered big-img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":""});													
-				var mbp = $("<p></p>").text(servDesc);													
-				var bbp = $("<button></button>").attr({"type":"button","data-dismiss":"modal"}).addClass("btn btn-primary");													
-				var fft = $("<i></i>").addClass("fa fa-times").text("離開");													
-																	
-																	
-				bbp.append(fft);													
-				mb.append([mbh,mimg,mbp,bbp]);													
-				cco.append(mb);													
-				crow.append(cco);													
-				cnt.append(crow);													
-																	
-				mc.append([cm,cnt]);													
-																	
-				md.append(mc);													
-																	
-				pmmf.append(md);													
-																	
-				$("#no").after(pmmf);													
-			//結束動態生成														
-																	
-				snumber=snumber+1;													
-
-   			});   			
-   			//網頁載入時，讓第2頁的第一筆服務已被選取
-   			var rf = $(":radio[name*='radio1']:first");
-			rf.prop({"checked":"true"});
-			var rfId = rf.attr("id");
-			$("#svesall1 div[value*='"+rfId+"']").attr({"style":"background-color:#84B57E;"});
-			//結束
-   		});	
 		
 		var serswitch = false;//預約開關，當時間條為藍色(已進行過一次預約時)，則必須關閉，不可再次進行預約
 
@@ -1526,9 +1521,7 @@ h2{
 		                    <br>
 		                </div>
 						<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
-							<button id="pg3_pg4" class="btn btn-lg continue" type="button">
-								<span class="glyphicon glyphicon-circle-arrow-right"></span>
-							</button>	
+
 						</div>	                
 		            </div>
 		            
