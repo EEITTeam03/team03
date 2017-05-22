@@ -1234,13 +1234,13 @@ h2{
 				var tbline = $("#timeline .inp-line-op");
 				tbnode.removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
 				tbline.removeClass().addClass("inp-line-op op-green-sel-red-confirmed-blue fnt-select");
-				console.log(tbnode.length);
+				
 				//讀出當日已預約時間			
 				var empNo = $(":checked[name*='radio2']").attr("id");
 				$.getJSON('EmptyReservJSON',{"selectedDate":dateText,"empNo":empNo},function(data){
-					console.log("近來看看"+data);
+					console.log(data);
 					$.each(data,function(idx,obj){
-						console.log("近來看看");
+						
 						var minhr = obj.shh;
 						var minmin = obj.smm;
 						var mintime = minhr + minmin;
@@ -1251,13 +1251,19 @@ h2{
 						var linecount = 0;
 						
 						for( i=0 ; i <= tbnode.length ; i++){
-							if(tbnode.eq(i).attr("value") >= mintime && tbnode.eq(i).attr("value") <= maxtime){
+							if(parseInt(tbnode.eq(i).attr("value")) >= mintime && parseInt(tbnode.eq(i).attr("value")) <= maxtime){
 								tbnode.eq(i).removeClass().addClass("inp-node-undone fnt-select");
-																
+
 							}
+// 							console.log("測試-----");
+// 							console.log(parseInt(tbnode.eq(i).attr("value")));
+// 							console.log("mintime="+mintime);
+// 							console.log("測試+++++++");
+// 							console.log(parseInt(tbnode.eq(i).attr("value")));
+// 							console.log("maxtime="+maxtime);							
 						}
 						for( i=0 ; i <= tbline.length ; i++){
-							if(tbline.eq(i).attr("value") >= mintime && tbline.eq(i).attr("value") <= maxtime){
+							if(parseInt(tbline.eq(i).attr("value")) >= mintime && parseInt(tbline.eq(i).attr("value")) <= maxtime){
 								tbline.eq(i).removeClass().addClass("inp-line-undone fnt-select");
 // 								console.log(tbline.eq(i));
 								linecount = linecount + 1;
@@ -1274,42 +1280,46 @@ h2{
 					
 					var tbnodecheck = $("#timeline input");
 					
-					for(i=0;i<=53;i=i+2){
+					for(i=0;i<=53;i++){
 						if(i == 0 || i == 9 || i == 18 || i == 27 || i == 36 || i == 45){
 							var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
-// 								console.log("i="+i+" "+check2);
+								console.log("這裡是左邊單個判斷");
+								console.log("i="+(i+1)+check2);
 							if(check2){
 								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
 							}else{
 								tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
 							}
 							
-						}else if(i == 8 || i == 17 || i == 26 || i == 35 || i == 44 || i == 53){
+						}
+					}
+					for(i=0;i<=53;i++){					
+						if(i == 8 || i == 17 || i == 26 || i == 35 || i == 44 || i == 53){
 							var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
-// 							console.log("i="+i+" "+check1);
+								console.log("這裡是右邊單個判斷");
+								console.log("i="+(i-1)+check1);
 							if(check1){
-								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
-							}else{
-								tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
-							}
-							i = i + 1;
-						}else{
-							var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
-							var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
-// 								console.log("i="+i+" "+(check1 && check2));
-							if(check1 && check2){
 								tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
 							}else{
 								tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
 							}
 							
 						}
-					
-						
 					}
+					for(i=0;i<=53;i++){						
+						var check1 = tbnodecheck.eq(i-1).hasClass("inp-line-undone");
+						var check2 = tbnodecheck.eq(i+1).hasClass("inp-line-undone");
+// 								console.log("i="+i+" "+(check1 && check2));
+						if(check1 && check2){
+							tbnodecheck.eq(i).removeClass().addClass("inp-node-undone fnt-select");
+						}
+					}	
+
 					
 				});
-				
+//					else{
+//					tbnodecheck.eq(i).removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");
+//				}				
 								
 				
 				
