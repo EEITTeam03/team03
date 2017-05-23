@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="assets/css/main.css" />
+<!--美美的icon-->
+<link rel="icon" href="${ctx}/admin/favicon.ico" type="image/x-icon" />
 <title>後端首頁</title>
 </head>
 <body>
