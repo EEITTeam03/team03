@@ -428,22 +428,25 @@
 												</select>
 												<input id="carSize" type="text" name="carSize" placeholder="車型" readonly="value" style="width:10%;">
 												<label id="brand-error" class="error"></label>												
+												<button class="btn btn-md btn-danger add" type="button" style="color:white;">
+													<span class="glyphicon glyphicon-plus"></span>												
+												</button>
 											</div>											
 										
 										</div>														
 										<br>
-										<div class="row">
-											<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-											</div>
-											<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-												<button class="btn btn-lg btn-danger add" type="button" style="color:white;">
-													<span class="glyphicon glyphicon-plus"></span>												
-												</button>
-											</div>
-											<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-											</div>																						
-										</div>										
-										<br>
+<!-- 										<div class="row"> -->
+<!-- 											<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"> -->
+<!-- 											</div> -->
+<!-- 											<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"> -->
+<!-- 												<button class="btn btn-lg btn-danger add" type="button" style="color:white;"> -->
+<!-- 													<span class="glyphicon glyphicon-plus"></span>												 -->
+<!-- 												</button> -->
+<!-- 											</div> -->
+<!-- 											<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"> -->
+<!-- 											</div>																						 -->
+<!-- 										</div>										 -->
+<!-- 										<br> -->
 										
 										<div class="row">
 											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
