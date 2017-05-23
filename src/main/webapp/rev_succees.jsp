@@ -25,6 +25,8 @@
 
 <title>訂單狀態</title>
 
+<!--美美的icon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
 	rel="stylesheet">
@@ -265,8 +267,7 @@ tbody tr td{
 				<span class="sr-only">Toggle navigation</span> Menu <i
 					class="fa fa-bars"></i>
 			</button>
-			<a class="navbar-brand page-scroll" href="index.jsp">Car
-				Detailing</a>
+			<a class="navbar-brand page-scroll" href="#page-top">Wash Me</a>
 		</div>
 	
 			<!-- Collect the nav links, forms, and other content for toggling -->

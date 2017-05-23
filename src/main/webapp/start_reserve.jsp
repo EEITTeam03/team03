@@ -905,7 +905,7 @@ h2{
 						var crow = $("<div></div>");													
 						var cco = $("<div></div>").addClass("col-lg-8 col-lg-offset-2");													
 						var mb = $("<div></div>").addClass("modal-body");													
-						var mbh = $("<h2></h2>").text(servName);   													
+						var mbh = $("<h2></h2>").text(servName).attr({"style":"color:black"});   													
 						var mimg = $("<img>").addClass("img-responsive img-centered big-img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":""});													
 						var mbp = $("<p></p>").text(servDesc);													
 						var bbp = $("<button></button>").attr({"type":"button","data-dismiss":"modal"}).addClass("btn btn-primary");													
@@ -1468,8 +1468,8 @@ h2{
 						</button>
 						
 						<ul class="dropdown-menu" role="menu">
-						    <li>訂單狀態</li>
-						    <li><a href="${ctx}/member_update.jsp">修改資料</a></li>
+						    <li><a href="orderStatus.jsp">訂單狀態</a></li>
+						    <li><a href="member_update.jsp">修改資料</a></li>
 						    <li><a href="feedback.jsp">意見回饋</a></li>
 						    <li class="divider"></li>
 						    <li><a href="LogOut">登出</a></li>
