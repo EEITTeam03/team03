@@ -56,7 +56,7 @@
 						<div class="form-group">
 							<label>帳號生效日期</label> <input id="effectiveDate" type="text"
 								class="form-control" name="effectiveDate" 
-								value='${memberInfoVO.effectiveDate}' readonly>
+								value='${memberInfoVO.effectiveDate}'>
 						</div>
 						
 						<input type="hidden" name="action" value="adminupdate">
