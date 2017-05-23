@@ -22,6 +22,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+<!--美美的icon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 
 <title>訂單狀態</title>
 
@@ -57,7 +59,6 @@
     <![endif]-->
 
 <link href="css/revision.css" rel="stylesheet">
- 
 <!-- jQuery -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/vader/theme.css" id="THEME_CSS"/>
