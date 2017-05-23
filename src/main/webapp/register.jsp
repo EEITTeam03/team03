@@ -141,7 +141,7 @@
   //一鍵輸入
   function ch(){
   	document.getElementById('r_name').value = "拓海";
-  	document.getElementById('r_email').value = "eeit93team@gmail.com";
+  	document.getElementById('r_email').value = "BabyWashMe@gmail.com";
    	document.getElementById('r_password').value = "sa123456";
    	document.getElementById('r_phone').value = "0919871987";
    	//document.getElementById('r_birth').value = "1987-08-07";
