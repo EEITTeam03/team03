@@ -41,12 +41,12 @@
 	rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Kaushan+Script'
 	rel='stylesheet' type='text/css'>
-<link
-	href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic'
-	rel='stylesheet' type='text/css'>
-<link
-	href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700'
-	rel='stylesheet' type='text/css'>
+<!-- <link -->
+<!-- 	href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' -->
+<!-- 	rel='stylesheet' type='text/css'> -->
+<!-- <link -->
+<!-- 	href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' -->
+<!-- 	rel='stylesheet' type='text/css'> -->
 
 <!-- Theme CSS -->
 <link href="css/agency.css" rel="stylesheet">
@@ -149,7 +149,32 @@
 		/* 調整滑入table資料時，所顯示的顏色 */
 		.table-hover tbody tr:hover td {
 		    background-color: rgba(245,152,157,.25);
-		}				
+		}	
+		
+		#tb1{
+			display: block;
+			height:800px;
+			overflow-y:scroll;
+		}
+		#tb1::-webkit-scrollbar-track
+		{
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+			border-radius: 10px;
+			background-color: #F5F5F5;
+		}
+		
+		#tb1::-webkit-scrollbar
+		{
+			width: 12px;
+			background-color: #F5F5F5;
+		}
+		
+		#tb1::-webkit-scrollbar-thumb
+		{
+			border-radius: 10px;
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+			background-color: #D62929;
+		}					
 		/* Table Head */
 		table thead th {
 			background-color: #9E0039;
@@ -184,7 +209,7 @@
 		}
 		.my-popover {
 			max-width: 600px;
-		}		
+		}				
 	</style>
 
 
@@ -573,7 +598,7 @@
 <!-- 			</div> -->
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
-					<table class="table table-hover">
+					<table id="tb1" class="table table-hover">
 						<thead>
 							<tr>
 								<th>預約編號</th>

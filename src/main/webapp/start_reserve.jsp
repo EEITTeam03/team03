@@ -510,7 +510,7 @@ h2{
                     
         }                                  
         .inp-line-undone{
-        	width:150px;
+        	width:100px;
 			
 			height:10px;
 			
@@ -521,7 +521,7 @@ h2{
 			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
         }
         .inp-line-op{
-        	width:150px;
+        	width:100px;
 			
 			height:10px;
 			
@@ -550,7 +550,7 @@ h2{
 			text-shadow:0px 1px 0px #5b8a3c;      
         }
         .inp-line-sel{
-        	width:150px;
+        	width:100px;
 			
 			height:10px;
 			
@@ -579,7 +579,7 @@ h2{
 			text-shadow:0px 1px 0px #810e05;        
         }
         .inp-line-confirmed{
-        	width:150px;
+        	width:100px;
 			
 			height:10px;
 			
@@ -1597,7 +1597,7 @@ h2{
 							<input type="hidden" name="selectedDate" id="selectedDate" class="form-control" value="${param.selectedDate}" placeholder="選擇日期">
 			            </div>
 			            
-			            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 ">	
+			            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 table-responsive">	
 							<table id="timeline">
 								<tbody>
 									<tr>
