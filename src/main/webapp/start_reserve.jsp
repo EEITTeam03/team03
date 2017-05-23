@@ -22,6 +22,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+<!--美美的icon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 
 <title>訂單狀態</title>
 
@@ -57,7 +59,6 @@
     <![endif]-->
 
 <link href="css/revision.css" rel="stylesheet">
- 
 <!-- jQuery -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/vader/theme.css" id="THEME_CSS"/>
@@ -691,9 +692,7 @@ h2{
 		
 		    	        		
 </style>
-
-
-
+<script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
   <script>
   
   
@@ -1396,8 +1395,23 @@ h2{
 		
 		 
   } );
-  
-
+  function loadingBlock(){
+		 $.blockUI({ 
+			message: $('div.blockUI'),
+			 css: { 
+				 border: 'none',
+				 //backgroundColor:'#f7f7f7',
+	            left: ($(window).width() - 228) /2 + 'px', 
+				'-webkit-border-radius': '10px', 
+	           '-moz-border-radius': '10px', 
+	           padding: '25px',
+	           opacity: 0.8,
+	           width: '228px',
+	           height: '228px'
+	       },
+			fadeIn: 0
+	    }); 
+}
   </script>
 	
 		
@@ -1505,7 +1519,7 @@ h2{
 		</div>
 
 	</header>
-	<form class="form-horizontal" action="ReserveService">
+	<form class="form-horizontal" action="ReserveService" onsubmit="loadingBlock()">
 		<section id="selcar" class="page1" style="display:none;">
 			<div class="container">
 			
@@ -1718,6 +1732,9 @@ h2{
 					<br>
 					<br>		            
 	        		<div class="row">
+	        			<div class="blockUI" style="display: none">
+							<img src="${ctx}/img/loading/loading_car.gif" width="170px" height="170px"/>
+						</div>
 		                <div class="col-xs-4 col-sm-3 col-md-2 col-lg-1 col-xs-offset-2 col-sm-offset-4 col-md-offset-5">
 		                	<input id="submit" type="submit" value="送出" />    	                    	                    
 		                </div>
