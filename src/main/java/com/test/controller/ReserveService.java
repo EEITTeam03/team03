@@ -211,7 +211,7 @@ public class ReserveService extends HttpServlet {
 		 se.reserveOK(reservVO);
 		//預約即將到期寄信通知
 		 MemberInfoVO mivo = memberCarsVO.getMemberInfoVO();
-		 se.setProps(mivo.getEmail(), mivo.getMemberName(), cal);
+//		 se.setProps(mivo.getEmail(), mivo.getMemberName(), cal);
 		 
 			/*---------------insert新預約單，增加監視器觀看權限------------------*/
 			if(MyUtil.formatCalender(cal).equals(MyUtil.formatCalender(Calendar.getInstance()))){

@@ -92,6 +92,7 @@ public class SendEmail {
 			lastDay.set(Calendar.MINUTE,0);
 			lastDay.add(Calendar.DATE, -1);
 			//設定預約前一天寄信
+			System.out.print(lastDay.getTime());
 			message.setSentDate(lastDay.getTime());
 			
 			Transport transport = session.getTransport("smtp");
