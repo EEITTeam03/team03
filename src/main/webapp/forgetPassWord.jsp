@@ -241,7 +241,8 @@
 									<img class="img-circle img-responsive" src="img/register/logo.png" alt="">
 								</div>
 								<br>																																										
-								<div class="input-group">															
+								<div class="input-group">
+									<input class="btn btn-secondary btn-sm" type="button" onclick="ch();" aria-invalid="false" style="width: 120px;" value="一鍵輸入">																	
 									<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件" value='${param.email}' aria-required="true" style="width:500px;">														
 									<small><font color="red">${ErrorMsgKey.AccountError}</font></small>														
 								</div>															
@@ -271,6 +272,12 @@
 				return false;
 			} else
 				return true;
+		}
+		
+		//一鍵輸入
+		function ch(){
+		 	document.getElementById('email').value = "BabyWashme@gmail.com";
+		  	document.getElementById('phone').value = "0919871987";
 		}
 	</script>
 </body>

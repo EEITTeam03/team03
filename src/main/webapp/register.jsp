@@ -147,6 +147,10 @@
    	//document.getElementById('r_birth').value = "1987-08-07";
    	document.getElementById('r_address').value = "台北市大安區復興南路一段390號";
   }
+  function chFB(){
+	   	document.getElementById('r_phone').value = "0919781978";
+	   	document.getElementById('r_address').value = "台北市大安區信義路四段2號";
+  }
 	
 </script>
 
@@ -444,7 +448,10 @@
 									<br>												
 								</c:if>												
 																				
-																				
+								<!-- FB微註冊一鍵輸入 -->
+								<c:if test="${!empty FBAccount}">												
+								  	<input class="btn btn-secondary btn-sm" type="button" onclick="chFB();" aria-invalid="false" style="width: 120px;" value="一鍵輸入">										
+								</c:if>											
 								<div class="input-group"  style="max-width:250px;">
 									<input name="phone" type="text" id="r_phone" class="form-control required" placeholder="輸入您的電話" value='${param.phone}'>												
 								    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>												
