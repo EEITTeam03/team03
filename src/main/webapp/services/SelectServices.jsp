@@ -110,13 +110,17 @@
 					</div>
 				</div>
 			</div>
+			<div class="blockUI" style="display: none">
+				<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
+			</div>
 		</div>
 	</div>
-	
+	<script src="${ctx}/js/jquery.js"></script>
+	<script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
 	<script>
 		$(function(){
 			$('button[name="button1"]').click(function(){
-				
+				loadingBlock();
 				var truncate1=$('select[name="servNo"]:eq(0)').val();
 				console.log("forService:"+truncate1);
 				var thead=$('#forDistinct1>thead');
@@ -165,6 +169,7 @@
 	 					var row=$('<tr></tr>').append([td_1,td_2,td_3,td_4,td_5,td_6,tdimg,td_8,td_9]);
 	 					tbody.append(row);
 					});
+					loadingUnblock();
 				});
 			//抓蟲用
 // 			$.ajax({
@@ -186,6 +191,7 @@
 		<script>
 		$(function(){
 			$('button[name="button2"]').click(function(){
+				loadingBlock();
 				var truncate=$('select[name="servNo"]:eq(1)').val();
 				console.log("forStep:"+truncate);
 				var thead1=$('#forDistinct>thead');
@@ -230,9 +236,31 @@
 // 						form.append([row,input,input1]);
 						tbody1.append(row);
 					});
+					loadingUnblock();
 				})
 			})
 		})
+		
+		function loadingBlock(){
+			 $.blockUI({ 
+				message: $('div.blockUI'),
+				 	css: { 
+						border: 'none',
+		       	left: ($(window).width() - 133) /2 + 'px', 
+					'-webkit-border-radius': '10px', 
+		     		'-moz-border-radius': '10px', 
+		      		padding: '25px',
+		       	opacity: 0.7,
+		      		width: '133px',
+		      		height: '133px'
+		      },
+				 	fadeIn: 0
+				 }); 
+		}
+		function loadingUnblock(){
+			$.unblockUI();
+			//alert("close block");
+		}
 		</script>
 
 </body>
