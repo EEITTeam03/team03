@@ -30,6 +30,9 @@ BlockListService blsvc = new BlockListService();
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
+<div class="row">
+<div class="col-lg-12">
+
 	<h1>所有黑名單</h1>
 	<table class="table table-bordered table-hover">
 	<thead>
@@ -56,6 +59,8 @@ BlockListService blsvc = new BlockListService();
 </div>
 <div class="blockUI" style="display: none">
 	<img src="${ctx}/img/loading/loading_gearwheal.gif" width="85px" height="85px"/>
+</div>
+</div>
 </div>
 </div>
 </div>

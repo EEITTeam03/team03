@@ -32,6 +32,8 @@
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
+<div class="row">
+<div class="col-lg-12">
 <h2 class='text-center'>服務工法程序</h2>
 	<table class="table table-bordered table-hover">
 		<tr class='info'>
@@ -70,6 +72,8 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
+	</div>
 	</div>
 	</div>
 	</div>

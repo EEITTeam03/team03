@@ -93,6 +93,9 @@
 						</tbody>
 					</table>
 					<div>
+						<div class="row">
+						<div class="col-lg-12">
+					
 						<table id="forDistinct" class="table table-bordered table-hover">
 							<thead>
 							</thead>
@@ -100,13 +103,19 @@
 							</tbody>
 						</table>
 					</div>
+					</div>
+					</div>
 					<div>
+					<div class="row">
+						<div class="col-lg-12">
 						<table id="forDistinct1" class="table table-bordered table-hover">
 							<thead>
 							</thead>
 							<tbody>
 							</tbody>
 						</table>
+					</div>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -219,7 +228,7 @@
 						var img1=$('<img></img>').attr("width","200").attr("src","data:image/jpeg;base64,"+value.stepPic);
 						var tdimg=td5.append(img1);
 						var td6=$('<td></td>')
-						var btn=$('<button>查詢</button>').attr("type","submit").attr("class","btn btn-sm btn-primary");
+						var btn=$('<button>修改</button>').attr("type","submit").attr("class","btn btn-sm btn-primary");
 						
 // 						var form=$('<form></form>').attr("enctype","multipart/form-data").attr("method","post").attr("action","${ctx}/services/servicestep.do");
 						var form=$('<form></form>').attr("method","post").attr("action","${ctx}/services/servicestep.do");
