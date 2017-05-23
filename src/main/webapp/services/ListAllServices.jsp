@@ -32,6 +32,9 @@
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
+<div class="row">
+<div class="col-lg-12">
+
 <h2>所有服務</h2>
 <table class="table table-bordered table-hover">
 <thead>
@@ -76,7 +79,7 @@
 				
 				<td>
 					<FORM METHOD="post" ACTION="${ctx}/services/servicecarclass.do">
-						<button type="submit" class="btn btn-sm btn-primary">查詢</button>
+						<button type="submit" class="btn btn-sm btn-primary">修改價格</button>
 						<input type="hidden" name="servNo" value="${servicesVO.servNo}"> 
 						<input type="hidden" name="action" value="getMany_ServiceCarClass_ByServNo">
 					</FORM>
@@ -92,6 +95,8 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
+	</div>
 	</div>
 	</div>
 	</div>

@@ -39,12 +39,12 @@
 	rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Kaushan+Script'
 	rel='stylesheet' type='text/css'>
-<link
-	href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic'
-	rel='stylesheet' type='text/css'>
-<link
-	href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700'
-	rel='stylesheet' type='text/css'>
+<!-- <link -->
+<!-- 	href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' -->
+<!-- 	rel='stylesheet' type='text/css'> -->
+<!-- <link -->
+<!-- 	href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' -->
+<!-- 	rel='stylesheet' type='text/css'> -->
 
 <!-- Theme CSS -->
 <link href="css/agency.css" rel="stylesheet">
@@ -163,7 +163,7 @@
 }							
 .input-group .btn[class*='carlicense'],.input-group .btn[class*='empname']{							
     text-transform: capitalize;							
-    color:#bcbcbc;							
+    color:#970a12;							
     padding: 14px 20px;							
     font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;							
 }							
@@ -223,13 +223,56 @@
 .dropdown:hover .dropdown-menu {							
 	display: block;						
 }							
-#liesel,{							
-	width:75%;						
-	display:inline;						
+#liesel{							
+	width:100%;						
+	display:inline;	
+	-moz-box-shadow:inset 0px 0px 15px 3px #fff6af;
+	-webkit-box-shadow:inset 0px 0px 15px 3px #fff6af;
+	box-shadow:inset 0px 0px 15px 3px #fff6af;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));
+	background:-moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	background:-webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
+	background-color:#ffec64;
+	-moz-border-radius:17px;
+	-webkit-border-radius:17px;
+	border-radius:17px;
+	border:1px solid #ffaa22;
+	display:inline-block;
+	cursor:pointer;
+	color:white;
+	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:28px;
+	padding:6px 0px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffee66;			
+}
+#liesel:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));
+	background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	background:-o-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	background:-ms-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
+	background-color:#ffab23;
+}
+#liesel:active {
+	position:relative;
+	top:1px;
+}
+#liesel:focus{
+    outline: -webkit-focus-ring-color auto 5px;
+    outline-color: none;
+    outline-style: auto;
+    outline-width: 0px;
 }							
 #liesel span:nth-child(1){							
-	margin-left:5%;						
-	margin-right:5%;						
+	margin-left:10%;						
+	margin-right:10%;						
 }							
 #liesel span:nth-child(2){							
 	margin-left:5%;						
@@ -239,33 +282,18 @@
 	margin-left:5%;						
 	margin-right:5%;						
 }							
-#selcar .continue,#portfolio .continue,#date_technician .continue{							
-	display:none;						
-	-moz-box-shadow:inset 0px 1px 0px 0px #fff6af;						
-	-webkit-box-shadow:inset 0px 1px 0px 0px #fff6af;						
-	box-shadow:inset 0px 1px 0px 0px #fff6af;						
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));						
-	background:-moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);						
-	background:-webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);						
-	background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);						
-	background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);						
-	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);						
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);						
-	background-color:#ffec64;						
-	-moz-border-radius:30px;						
-	-webkit-border-radius:30px;						
-	border-radius:30px;						
-	border:1px solid #ffaa22;						
-	display:inline-block;						
-	cursor:pointer;						
-	color:white;						
-	font-family:Arial;						
-	font-size:20px;						
-	font-weight:bold;						
-	padding:10px;						
-	text-decoration:none;						
-	text-shadow:0px 1px 0px #ffee66;						
-	margin:10px;						
+#selcar .continue,#portfolio .continue,#date_technician .continue{													
+	font:bold 20px Verdana, Geneva, sans-serif;
+	color: #822508;
+	background: #ffe001;
+	border:1px solid #bbb;
+	text-shadow:0px 1px 0px #fff;
+	box-shadow:0px -7px 4px #000000;
+	-moz-box-shadow:0px -7px 4px #000000;
+	-webkit-box-shadow:0px -7px 4px #000000;
+	border-radius:29px 0px 30px 15px;
+	-moz-border-radius:29px 0px 30px 15px;
+	-webkit-border-radius:29px 0px 30px 15px;
 }							
 #selcar .continue:hover,#portfolio .continue:hover,#date_technician .continue:hover{							
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));						
@@ -282,14 +310,41 @@
 	top:1px;						
 }							
 							
-#selcar .continue span,#portfolio .continue span,#date_technician .continue span{							
+#selcar .continue span,#selcar .back span,#portfolio .continue span,#portfolio .back span,#date_technician .continue span,#date_technician .back span{							
 	font-size:40px;						
 	width:40px;						
 	height:40px;						
-}							
+}
+#portfolio .back,#date_technician .back{													
+	font:bold 20px Verdana, Geneva, sans-serif;
+	color: #822508;
+	background: #ffe001;
+	border:0px inset #ffffff;
+	text-shadow:0px -1px 1px #222222;
+	box-shadow:4px 4px 2px #000000;
+	-moz-box-shadow:4px 4px 2px #000000;
+	-webkit-box-shadow:4px 4px 2px #000000;
+	border-radius:0px 30px 0px 30px;
+	-moz-border-radius:0px 30px 0px 30px;
+	-webkit-border-radius:0px 30px 0px 30px;
+}
+#portfolio .back:hover,#date_technician .back:hover{							
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));						
+	background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);						
+	background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);						
+	background:-o-linear-gradient(top, #ffab23 5%, #ffec64 100%);						
+	background:-ms-linear-gradient(top, #ffab23 5%, #ffec64 100%);						
+	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);						
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);						
+	background-color:#ffab23;						
+}
+#portfolio .back:active,#date_technician .back:active{							
+	position:relative;						
+	top:1px;						
+}																		
 .carlicense,.empname{							
 	display:none;						
-	background:rgba(255, 248, 223, 0.91);												
+	background:#f9df85;												
 	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;						
 	width:100%;						
 	height:60px;						
@@ -298,7 +353,8 @@
 	border:0px;	
 	position: absolute;
 	z-index:100;
-	left:0px;					
+	left:0px;	
+	font-size:20px;					
 }							
 i{							
 	margin-right:20%;						
@@ -323,9 +379,7 @@ h2{
 	padding-left:30px;
 	padding-right:30px;
 }
-#pg2_pg1,#pg2_pg3,#pg3_pg2,#pg3_pg4{
-	padding:0px;
-}
+
 .ui-datepicker-month{
 	color:black;
 }
@@ -456,7 +510,7 @@ h2{
                     
         }                                  
         .inp-line-undone{
-        	width:150px;
+        	width:100px;
 			
 			height:10px;
 			
@@ -467,7 +521,7 @@ h2{
 			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
         }
         .inp-line-op{
-        	width:150px;
+        	width:100px;
 			
 			height:10px;
 			
@@ -496,7 +550,7 @@ h2{
 			text-shadow:0px 1px 0px #5b8a3c;      
         }
         .inp-line-sel{
-        	width:150px;
+        	width:100px;
 			
 			height:10px;
 			
@@ -525,7 +579,7 @@ h2{
 			text-shadow:0px 1px 0px #810e05;        
         }
         .inp-line-confirmed{
-        	width:150px;
+        	width:100px;
 			
 			height:10px;
 			
@@ -768,6 +822,7 @@ h2{
 		//結束
 		
 		//點擊pg1的下一頁按鈕後前往第2頁
+		var page2switch = true;
 	    $("#pg1").on('click', function(event){
 			//第二頁打開
 			$(".page2").slideToggle("slow");			
@@ -778,109 +833,112 @@ h2{
 			$("#hide_license").attr({"value":licensename});
 			
 			//page2：產生美容項目DIV及點選後跳出的DIV
-			var snumber = 0; 
-			var selcarlicense = $("#hide_license").attr("value");
-			$.getJSON('GetServPriceTimeBySize',{"license":selcarlicense},function(json){
-				console.log(json);
-				$.each(json,function(idx,services){
-					//console.log(services);
-					//以下開始動態生成美容項目DIV
-					var servName = services.servName;													
-					var servDesc = services.servDesc;													
-					var servNo = services.servNo;
-					var servPrice = services.servPrice;
-					
-					var bigd = $("<div></div>").addClass("col-xs-6 col-sm-6 col-md-4 col-lg-3 portfolio-item").attr("style","height:210px;");													
-					   			   										
-					var mya = $("<a></a>").attr({"href":"#portfolioModal"+snumber,"data-toggle":"modal"}).addClass("portfolio-link");													
-																		
-					var smalld = $("<div></div>").addClass("portfolio-hover");													
-					var nd = $("<div></div>").addClass("portfolio-hover-content");													
-					var ii = $("<div></div>").addClass("fa fa-plus fa-3x");													
-																		
-					var smallimg = $("<img>").addClass("img-responsive img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":"","style":"height:160px;"});													
-					   													
-					nd.append(ii);  													
-					smalld.append(nd);													
-					mya.append([smalld,smallimg]);													
-																		
-					var myd = $("<div></div>").addClass("portfolio-caption ptag").attr({"value":servNo});													
-																		
-					var hword = $("<h4></h4>").text(servName);													
-					var pword = $("<p></p>").addClass("text-muted");													
-					var prcsp = $("<span></span>").addClass("serv-price").text(servPrice+"元");
-					pword.append(prcsp);
-					
-					var selsp = $("<span></span>");
-					var lb = $("<label></label>").attr({"for":servNo}).text("選擇");				
-					if( servNo <= 2000 ){
-						var rad = $("<input type='checkbox' name='checkbox'></input>").attr({"id":servNo,"value":servNo}); 
-						selsp.append(rad,lb);
-						pword.append(selsp);
-						myd.append([hword,pword]);													
-						bigd.append([mya,myd]);						
-						$("#svesall2").append(bigd);									
-					}else{					
-						var rad = $("<input type='radio' name='radio1'></input>").attr({"id":servNo,"value":servNo}); 
-						selsp.append(rad,lb);
-						pword.append(selsp);					
-						myd.append([hword,pword]);													
-						bigd.append([mya,myd]);						
-						$("#svesall1").append(bigd);
-					}																	
-							   											
-				//結束動態生成														
-																		
-				//以下開始動態生成，美容項目點擊後所彈跳出來的介紹DIV														
-																		
-					var pmmf = $("<div></div>").addClass("portfolio-modal modal fade").attr({"id":"portfolioModal"+snumber,"tabindex":"-1","role":"dialog","aria-hidden":"true"});													
-																		
-					var md = $("<div></div>").addClass("modal-dialog");													
-																		
-					var mc = $("<div></div>").addClass("modal-content");													
-																		
-					var cm = $("<div></div>").addClass("close-modal").attr({"data-dismiss":"modal"});													
-					var lr = $("<div></div>").addClass("lr");													
-					var rl = $("<div></div>").addClass("rl");													
-					lr.append(rl);													
-					cm.append(lr);													
-																		
-					var cnt = $("<div></div>").addClass("container");													
-					var crow = $("<div></div>");													
-					var cco = $("<div></div>").addClass("col-lg-8 col-lg-offset-2");													
-					var mb = $("<div></div>").addClass("modal-body");													
-					var mbh = $("<h2></h2>").text(servName);   													
-					var mimg = $("<img>").addClass("img-responsive img-centered big-img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":""});													
-					var mbp = $("<p></p>").text(servDesc);													
-					var bbp = $("<button></button>").attr({"type":"button","data-dismiss":"modal"}).addClass("btn btn-primary");													
-					var fft = $("<i></i>").addClass("fa fa-times").text("離開");													
-																		
-																		
-					bbp.append(fft);													
-					mb.append([mbh,mimg,mbp,bbp]);													
-					cco.append(mb);													
-					crow.append(cco);													
-					cnt.append(crow);													
-																		
-					mc.append([cm,cnt]);													
-																		
-					md.append(mc);													
-																		
-					pmmf.append(md);													
-																		
-					$("#no").after(pmmf);													
-				//結束動態生成														
-																		
-					snumber=snumber+1;													
-
-	   			});   			
-	   			//網頁載入時，讓第2頁的第一筆服務已被選取
-	   			var rf = $(":radio[name*='radio1']:first");
-				rf.prop({"checked":"true"});
-				var rfId = rf.attr("id");
-				$("#svesall1 div[value*='"+rfId+"']").attr({"style":"background-color:#84B57E;"});
-				//結束
-	   		});	
+			if(page2switch == true){
+				var snumber = 0; 
+				var selcarlicense = $("#hide_license").attr("value");
+				$.getJSON('GetServPriceTimeBySize',{"license":selcarlicense},function(json){
+					console.log(json);
+					$.each(json,function(idx,services){
+						//console.log(services);
+						//以下開始動態生成美容項目DIV
+						var servName = services.servName;													
+						var servDesc = services.servDesc;													
+						var servNo = services.servNo;
+						var servPrice = services.servPrice;
+						
+						var bigd = $("<div></div>").addClass("col-xs-6 col-sm-6 col-md-4 col-lg-3 portfolio-item").attr("style","height:210px;");													
+						   			   										
+						var mya = $("<a></a>").attr({"href":"#portfolioModal"+snumber,"data-toggle":"modal"}).addClass("portfolio-link");													
+																			
+						var smalld = $("<div></div>").addClass("portfolio-hover");													
+						var nd = $("<div></div>").addClass("portfolio-hover-content");													
+						var ii = $("<div></div>").addClass("fa fa-plus fa-3x");													
+																			
+						var smallimg = $("<img>").addClass("img-responsive img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":"","style":"height:160px;"});													
+						   													
+						nd.append(ii);  													
+						smalld.append(nd);													
+						mya.append([smalld,smallimg]);													
+																			
+						var myd = $("<div></div>").addClass("portfolio-caption ptag").attr({"value":servNo});													
+																			
+						var hword = $("<h4></h4>").text(servName);													
+						var pword = $("<p></p>").addClass("text-muted");													
+						var prcsp = $("<span></span>").addClass("serv-price").text(servPrice+"元");
+						pword.append(prcsp);
+						
+						var selsp = $("<span></span>");
+						var lb = $("<label></label>").attr({"for":servNo}).text("選擇");				
+						if( servNo <= 2000 ){
+							var rad = $("<input type='checkbox' name='checkbox'></input>").attr({"id":servNo,"value":servNo}); 
+							selsp.append(rad,lb);
+							pword.append(selsp);
+							myd.append([hword,pword]);													
+							bigd.append([mya,myd]);						
+							$("#svesall2").append(bigd);									
+						}else{					
+							var rad = $("<input type='radio' name='radio1'></input>").attr({"id":servNo,"value":servNo}); 
+							selsp.append(rad,lb);
+							pword.append(selsp);					
+							myd.append([hword,pword]);													
+							bigd.append([mya,myd]);						
+							$("#svesall1").append(bigd);
+						}																	
+								   											
+					//結束動態生成														
+																			
+					//以下開始動態生成，美容項目點擊後所彈跳出來的介紹DIV														
+																			
+						var pmmf = $("<div></div>").addClass("portfolio-modal modal fade").attr({"id":"portfolioModal"+snumber,"tabindex":"-1","role":"dialog","aria-hidden":"true"});													
+																			
+						var md = $("<div></div>").addClass("modal-dialog");													
+																			
+						var mc = $("<div></div>").addClass("modal-content");													
+																			
+						var cm = $("<div></div>").addClass("close-modal").attr({"data-dismiss":"modal"});													
+						var lr = $("<div></div>").addClass("lr");													
+						var rl = $("<div></div>").addClass("rl");													
+						lr.append(rl);													
+						cm.append(lr);													
+																			
+						var cnt = $("<div></div>").addClass("container");													
+						var crow = $("<div></div>");													
+						var cco = $("<div></div>").addClass("col-lg-8 col-lg-offset-2");													
+						var mb = $("<div></div>").addClass("modal-body");													
+						var mbh = $("<h2></h2>").text(servName);   													
+						var mimg = $("<img>").addClass("img-responsive img-centered big-img-services").attr({"src":"data:image/jpeg;base64,"+services.servPhoto ,"alt":""});													
+						var mbp = $("<p></p>").text(servDesc);													
+						var bbp = $("<button></button>").attr({"type":"button","data-dismiss":"modal"}).addClass("btn btn-primary");													
+						var fft = $("<i></i>").addClass("fa fa-times").text("離開");													
+																			
+																			
+						bbp.append(fft);													
+						mb.append([mbh,mimg,mbp,bbp]);													
+						cco.append(mb);													
+						crow.append(cco);													
+						cnt.append(crow);													
+																			
+						mc.append([cm,cnt]);													
+																			
+						md.append(mc);													
+																			
+						pmmf.append(md);													
+																			
+						$("#no").after(pmmf);													
+					//結束動態生成														
+																			
+						snumber=snumber+1;													
+	
+		   			});   			
+		   			//初始設定，第2頁的第一筆服務已被選取
+		   			var rf = $(":radio[name*='radio1']:first");
+					rf.prop({"checked":"true"});
+					var rfId = rf.attr("id");
+					$("#svesall1 div[value*='"+rfId+"']").attr({"style":"background-color:#84B57E;"});
+					//結束
+		   		});
+				page2switch = false;
+			}
 			
 	    }); 
 
@@ -1410,8 +1468,8 @@ h2{
 						</button>
 						
 						<ul class="dropdown-menu" role="menu">
-						    <li>訂單狀態</li>
-						    <li><a href="${ctx}/member_update.jsp">修改資料</a></li>
+						    <li><a href="orderStatus.jsp">訂單狀態</a></li>
+						    <li><a href="member_update.jsp">修改資料</a></li>
 						    <li><a href="feedback.jsp">意見回饋</a></li>
 						    <li class="divider"></li>
 						    <li><a href="LogOut">登出</a></li>
@@ -1459,7 +1517,7 @@ h2{
 						<h1>第一步：選擇您的汽車</h1>	
 						<br>
 						<div class="input-group" style="width:100%;position: absolute;">
-							<button id="liesel" class="btn btn-lg light-orange btn-block" type="button">
+							<button id="liesel" class="" type="button">
 								<span>車牌號碼</span><span>│</span><span class="glyphicon glyphicon-chevron-down"></span>
 							</button>																						
 						</div>																	
@@ -1467,7 +1525,7 @@ h2{
 					
 					<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
 						<button id="pg1" class="btn btn-lg continue" type="button" style="display:none;">
-							<span class="glyphicon glyphicon-circle-arrow-right"></span>
+							<span class="glyphicon glyphicon-arrow-right"></span>
 						</button>
 					</div>							
 				</div>												
@@ -1479,8 +1537,8 @@ h2{
 	        	
 		            <div class="row">
 						<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 col-md-offset-2">
-							<button id="pg2_pg1" class="btn btn-lg continue" type="button">
-								<span class="glyphicon glyphicon-circle-arrow-left"></span>
+							<button id="pg2_pg1" class="btn btn-lg back" type="button">
+								<span class="glyphicon glyphicon-arrow-left"></span>
 							</button>				
 						</div>            
 		                <div class="col-xs-8 col-sm-8 col-md-7 col-lg-6">
@@ -1489,7 +1547,7 @@ h2{
 		                </div>
 						<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
 							<button id="pg2_pg3" class="btn btn-lg continue" type="button">
-								<span class="glyphicon glyphicon-circle-arrow-right"></span>
+								<span class="glyphicon glyphicon-arrow-right"></span>
 							</button>	
 						</div>	                
 		            </div>
@@ -1512,8 +1570,8 @@ h2{
 	        
 		            <div class="row">
 						<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 col-md-offset-2">
-							<button id="pg3_pg2" class="btn btn-lg continue" type="button">
-								<span class="glyphicon glyphicon-circle-arrow-left"></span>
+							<button id="pg3_pg2" class="btn btn-lg back" type="button">
+								<span class="glyphicon glyphicon-arrow-left"></span>
 							</button>				
 						</div>            
 		                <div class="col-xs-8 col-sm-8 col-md-7 col-lg-6">
@@ -1539,7 +1597,7 @@ h2{
 							<input type="hidden" name="selectedDate" id="selectedDate" class="form-control" value="${param.selectedDate}" placeholder="選擇日期">
 			            </div>
 			            
-			            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 ">	
+			            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 table-responsive">	
 							<table id="timeline">
 								<tbody>
 									<tr>

@@ -22,10 +22,9 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>修改車種資料</title>
+<title>車種資料</title>
 <!--美美的icon-->
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
 	rel="stylesheet">
@@ -171,43 +170,33 @@
    				})
    			 		$("select:eq(0) > option:first-child").attr({"selected":"true"});
    				
+   			})  			
+   			$.getJSON('${ctx}/GetCars',{no:'${param.memberNo}'},function(json){
+   				$.each(json,function(idx,carTypes){
+//    					console.log(carTypes.license);
+   		    		var tr = $("<tr></tr>")
+   		    		var td1 = $("<td>" + carTypes.license + "</td>");		
+   		    		var td2 = $("<td>" + carTypes.brand + "</td>");			
+   		    		var td3 = $("<td>" + carTypes.model + "</td>");	
+   		    		var td4 = $("<td>" + carTypes.carClass + "</td>");	
+   		    		var td5 = $("<td></td>");	
+   		    		
+//    		    		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
+   		    		var inp = $("<input></input>").attr({"type":"hidden","value":carTypes.modelNo,"name":"modelNo"});
+   		    		var licenses = $("<input></input>").attr({"type":"hidden","value":carTypes.license,"name":"licenses"});
+//    		    		var span = $("<span></span>").addClass("glyphicon glyphicon-remove");
+   		    		
+//    		    		button.append(span);
+   		    		td5.append([inp,licenses]);
+   		    		
+   		    		tr.append([td1,td2,td3,td4,td5]);
+   		    		
+   		    		$("#cardatas > tbody").append(tr);
+   				})
    			})
-
-  			//讀取會員的車種資料
-	  		var no=$("#no").text();
-			$.getJSON("GetCars",{"no":no},function(json){
-				$.each(json,function(idx,GetCars){
-					
-		    		var tr = $("<tr></tr>")
-		    		var td1 = $("<td>" + GetCars.license + "</td>");		
-		    		var td2 = $("<td>" + GetCars.brand + "</td>");			
-		    		var td3 = $("<td>" + GetCars.model + "</td>");	
-		    		var td4 = $("<td>" + GetCars.carClass + "</td>");	
-		    		var td5 = $("<td></td>");	
-		    		
-		    		var button = $("<button></button>").addClass("btn btn-sm btn-danger delete").attr({"type":"submit","style":"color:white;"});
-		    		var inp = $("<input></input>").attr({"type":"hidden","value":GetCars.modelNo,"name":"modelNo"});
-		    		var licenses = $("<input></input>").attr({"type":"hidden","value":GetCars.license,"name":"licenses"});
-		    		var span = $("<span></span>").addClass("glyphicon glyphicon-remove");
-		    		
-		    		button.append(span);
-		    		td5.append([button,inp,licenses]);
-		    		
-		    		tr.append([td1,td2,td3,td4,td5]);
-	
-		    		$("#cardatas > tbody").append(tr);
-		    		
-					console.log(GetCars);				
-		    				    		
-				});				
-			}); 			
- 			//結束   			
-   			
-   			
+   				
    		})
 	
-   		
-   		
 	function SelectCarModel(){
 		var str = $("select:eq(0) > option:first-child").text();//得到字串→請選擇您的愛車廠牌
 		var opValue=$("select:eq(0) :selected");
@@ -319,6 +308,7 @@
     		
     		tr.append([td1,td2,td3,td4,td5]);
     		
+    		
     		$("#cardatas > tbody").append(tr);
     		$("#carLicense").val("");//清空車牌			       	
         }
@@ -332,11 +322,8 @@
         	$("#name-error").text("");
         }
     });   		
-	
+ 		
 
-	  		
-			 			
-  
 </script>	
 	
 </head>
@@ -349,8 +336,7 @@
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand page-scroll" href="index.jsp">Car
-					Detailing</a>
+				<a class="navbar-brand page-scroll" href="index.jsp">Wash Me</a>
 			</div>
 	
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -359,7 +345,7 @@
 					<li class="hidden"><a href="#page-top"></a></li>
 					<li><a class="page-scroll ff-word btn btn-primary btn-xs"
 						style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px"
-						href="MemberUpdate.jsp"> 基本資料
+						href="member_update.jsp"> 基本資料
 					</a></li>
 					<li class="page-scroll ff-word" style="text-shadow: black 5px 3px 3px; padding: 10px; margin: 0px 10px 0px 10px;color:white;">
 						<span class="glyphicon glyphicon-arrow-right"></span>
@@ -382,6 +368,14 @@
 
 	<section id="services">
 	
+<!-- 		<div class="container"> -->
+<!-- 			<div id="brandImgs" class="row divBorder"> -->
+			
+	
+<!-- 			</div> -->
+<!-- 		</div> -->
+			
+<!-- 		<br> -->
 		
 		<div class="container">
 			<div class="row">
@@ -390,7 +384,7 @@
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-10">
 					<div class="panel panel-danger" style="border-color:salmon">
 						<div class="panel-heading" style="background-color:salmon;border-color:salmon;color:white;">
-							<h3 class="panel-title">修改車種資料</h3>
+							<h3 class="panel-title">車種資料</h3>
 						</div>
 						
 						<div class="panel-body">
@@ -430,7 +424,7 @@
 												<label id="brand-error" class="error"></label>												
 												<button class="btn btn-md btn-danger add" type="button" style="color:white;">
 													<span class="glyphicon glyphicon-plus"></span>												
-												</button>
+												</button>											
 											</div>											
 										
 										</div>														
@@ -469,13 +463,15 @@
 											</div>																																
 										</div>										
 										<br>
+										<input type="hidden" name="memberNo" value="${param.memberNo}">
 										<input type="hidden" name="name" value="${param.name}">
 										<input type="hidden" name="email" value="${param.email}">
 										<input type="hidden" name="password" value="${param.password}">
 										<input type="hidden" name="phone" value="${param.phone}">
 										<input type="hidden" name="datepicker" value="${param.datepicker}">
 										<input type="hidden" name="address" value="${param.address}">
-										<input type="hidden" name="action" value="insert">									
+										<input type="hidden" name="effectiveDate" value="${param.effectiveDate}">
+										<input type="hidden" name="action" value="update">									
 										<button class="btn btn-lg btn-info btn-block" type="submit" style="background-color:#FFB6C1;border-color:#FFB6C1;color:white;" >完成</button>																				
 
 									</form>	
@@ -493,6 +489,6 @@
 	</section>
 	
 
-	<span hidden="hide" id="no">${memberInfo.memberNo}</span>
+
 </body>
 </html>

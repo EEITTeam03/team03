@@ -62,6 +62,9 @@
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
+<div class="row">
+<div class="col-lg-12">
+
 <h2>所有服務價格</h2>
 <table class="table table-bordered table-hover">
 
@@ -191,6 +194,8 @@
 						</c:forEach>
 					</tr>
 	</table>
+	</div>
+	</div>
 	</div>
 	</div>
 	</div>

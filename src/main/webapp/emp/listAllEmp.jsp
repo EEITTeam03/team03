@@ -32,7 +32,8 @@
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
-<div class="col-lg-6">
+<div class="row">
+<div class="col-lg-12">
 <h1 style='text-align:center'>所有員工資料</h1>
 <table class="table table-bordered table-hover">
 	<thead>
@@ -61,6 +62,7 @@
 						</tr>
 	</c:forEach>
 </table>
+</div>
 </div>
 </div>
 <div class="blockUI" style="display: none">
