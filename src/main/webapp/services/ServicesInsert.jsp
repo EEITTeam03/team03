@@ -101,7 +101,7 @@
 <div id="wrapper">
 <div id="page-wrapper">
 	<div class="table-responsive">
-		<div class="col-lg-6">
+		<div class="col-lg-12">
 		<h2>新增服務</h2>
 		<input type="button" onclick="ch();" value="一鍵輸入"> 
 			<c:set var="funcName" value="REG" scope="session" />
