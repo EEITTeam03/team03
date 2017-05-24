@@ -59,7 +59,7 @@
 }
 	//廢廢的一鍵輸入js
 	function ch(){
-		document.getElementById('ForservNo').value = 101;
+		document.getElementById('ForservNo').value = 1000;
 		document.getElementById('ForservTypeNo').value = "M";
 		document.getElementById('ForservName').value = "微米鍍膜";
 		document.getElementById('ForservDesc').value = "運用微米的技術為您的愛車鍍上一層膜";
