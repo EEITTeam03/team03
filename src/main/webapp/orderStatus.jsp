@@ -302,8 +302,8 @@
 	   			console.log(orderStatus);	
 	  			 	var reservNo = orderStatus.reservNo;//JSON第N筆拿到的預約編號	
 	  			 	var memberName = orderStatus.memberName;//JSON第N筆拿到的預約人名字	
-	  			 	var reservDateTime = orderStatus.reservDateTime;//JSON第N筆拿到的預約日期	
-	  			 	var reservEndTime = orderStatus.reservEndTime;//JSON第N筆拿到的結束時間
+	  			 	var reservDateTime = (orderStatus.reservDateTime).substring(0,16);//JSON第N筆拿到的預約日期	
+	  			 	var reservEndTime = (orderStatus.reservEndTime).substring(0,16);//JSON第N筆拿到的結束時間
 	  			 	var brand = orderStatus.brand;//JSON第N筆拿到的廠牌
 	  			 	var carModel = orderStatus.carModel;//JSON第N筆拿到的車系
 	  			 	var employeeName = orderStatus.employeeName;//JSON第N筆拿到的員工姓名
@@ -603,7 +603,7 @@
 							<tr>
 								<th>預約編號</th>
 								<th>預約人</th>
-								<th>預約日期</th>
+								<th>開始時間</th>
 								<th>結束時間</th>
 								<th>廠牌</th>
 								<th>車系</th>

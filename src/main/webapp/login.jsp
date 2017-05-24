@@ -136,9 +136,8 @@
 		}		
 		
 	});
-	//結束  
-    
-    
+	//結束      
+	
   });
   
 				  
@@ -336,7 +335,10 @@
 	  -webkit-box-shadow:0 0 0 50px white inset;
 	  -webkit-text-fill-color: #333;
 	}
-
+	label{
+		font-size: 24px;
+		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
 </style>
 
 
@@ -427,14 +429,16 @@
 									<img class="img-circle img-responsive" src="img/register/logo.png" alt="">
 								</div>
 								<br>										
-								<div class="input-group" style="width:100%;">											
+								<div class="input-group" style="width:100%;">
+									<label style="display:none;">輸入您的電子郵件：</label>											
 									<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件" value='${param.email}'> 										
 									<small><Font color='red'>${ErrorMsgKey.AccountEmptyError}</Font></small>										
 								</div>											
 																			
 								<br>											
 																			
-								<div class="input-group" style="width:100%;">											
+								<div class="input-group" style="width:100%;">
+									<label style="display:none;">輸入您的密碼：</label>											
 									<input id="password" type="password" class="form-control required" name="password" placeholder="輸入您的密碼" value='${param.password}'>										
 									<small><Font color='red'>${ErrorMsgKey.PasswordEmptyError}</Font></small>										
 								</div>

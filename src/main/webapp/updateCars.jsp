@@ -115,8 +115,7 @@
 												  rgba(255, 255, 255, .2) 75%,
 												  transparent 75%,
 												  transparent)
-	}	
-	
+	}		
 </style>
 
 
@@ -498,7 +497,7 @@
 												          <th>廠牌</th>
 												          <th>車系</th>
 												          <th>車型</th>
-												          <th>操作</th>										          
+												          <th>刪除</th>										          
 												        </tr>
 												      </thead>
 												      <tbody>
