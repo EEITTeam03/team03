@@ -320,7 +320,10 @@
 	.light-orange:hover{
 	    box-shadow: 0 2px 0 #fed136;
 	}	
-
+	label{
+		font-size: 24px;
+		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
 	
 </style>	
 	
@@ -405,7 +408,7 @@
 																				
 												
 									<div class="input-group" style="max-width:200px;">
-										<h4>姓名:</h4>	
+										<label>姓名:</label>	
 										<h4>${memberInfo.memberName}</h4>
 										<input type="hidden" name="name" class="form-control required" placeholder="輸入您的姓名" value='${memberInfo.memberName}'>																													
 										<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>											
@@ -417,7 +420,7 @@
 																			
 										
 									<div class="input-group" style="width:100%;">
-										<h4>e-mail(帳號):</h4>
+										<label>e-mail(帳號):</label>
 										<h4>${memberInfo.email}</h4>
 										<input type="hidden" name="email" class="form-control email required" placeholder="輸入您的電子郵件" value='${memberInfo.email}'>												
 										<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>											
@@ -428,7 +431,7 @@
 										
 									<c:if test="${empty FBId}">		
 									<div class="input-group"  style="width:100%;">
-										<h4>密碼:</h4>
+										<label>密碼:</label>
 										<input type="password" class="form-control required" placeholder="輸入您的密碼" value='${memberInfo.password}'>
 									    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>												
 									</div>												
@@ -437,7 +440,7 @@
 																				
 																				
 								<div class="input-group"  style="max-width:250px;">
-									<h4>電話:</h4>
+									<label>電話:</label>
 									<input name="phone" type="text" class="form-control required" placeholder="輸入您的電話" value='${memberInfo.phone}'>												
 								    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>												
 																				
@@ -446,7 +449,7 @@
 								<br>												
 																				
 								<div class="input-group" style="max-width:250px;">	
-									<h4>生日:</h4>
+									<label>生日:</label>
 									<h4>${memberInfo.birthday}</h4>											
 							    	<input type="hidden" id="datepicker" class="form-control required dateISO" name="datepicker" placeholder="輸入您的出生年月日" value='${memberInfo.birthday}'>												
 								    <small><Font color='red' >${ErrorMsgKey.BirthdayEmptyError}</Font></small><br>												
@@ -455,7 +458,7 @@
 																				
 																				
 								<div class="input-group" style="width:100%;">
-									<h4>地址:</h4>											
+									<label>地址:</label>											
 								   	<input name="address" type="text" class="form-control required" placeholder="輸入您的地址" value='${memberInfo.address}'>										
 								    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>												
 								</div>												

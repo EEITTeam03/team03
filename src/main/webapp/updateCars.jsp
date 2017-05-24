@@ -24,6 +24,8 @@
 <meta name="author" content="">
 
 <title>訂單狀態</title>
+<!--美美的icon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
@@ -115,8 +117,7 @@
 												  rgba(255, 255, 255, .2) 75%,
 												  transparent 75%,
 												  transparent)
-	}	
-	
+	}		
 </style>
 
 
@@ -498,7 +499,7 @@
 												          <th>廠牌</th>
 												          <th>車系</th>
 												          <th>車型</th>
-												          <th>操作</th>										          
+												          <th>刪除</th>										          
 												        </tr>
 												      </thead>
 												      <tbody>

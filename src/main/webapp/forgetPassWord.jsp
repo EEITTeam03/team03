@@ -1,20 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+
+<!--[if IE 6]>
+<html id="ie6" dir="ltr" lang="zh-TW">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" dir="ltr" lang="zh-TW">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" dir="ltr" lang="zh-TW">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html dir="ltr" lang="zh-TW">
+<!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>忘記密碼</title>
+
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>查詢密碼</title>
 <!--美美的icon-->
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
-<script src='https://www.google.com/recaptcha/api.js'></script>
-
-<link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
 <!-- 中文字型 CSS -->
 <link href="http://fonts.googleapis.com/earlyaccess/notosanstc.css"
 	rel="stylesheet">
+
+<!-- Bootstrap Core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
 <link href="vendor/font-awesome/css/font-awesome.min.css"
@@ -41,6 +59,47 @@
     <![endif]-->
 
 <link href="css/revision.css" rel="stylesheet">
+ 
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<script src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script> 
+<!--[if lt IE 9]>
+	<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" /> 	
+
+<!-- Bootstrap Core JavaScript -->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/blitzer/theme.css" id="THEME_CSS"/>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- 驗證 -->
+<script src="js/jquery.validate.js" type="text/javascript"></script>
+<!-- 驗證 繁體中文包-->
+<script src="js/messages_zh_TW.js" type="text/javascript"></script>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<script>
+  $( function() {
+	        
+    $("img").on("click",function(){
+    	if($("label").length == 3){
+    		chFB();
+    	}else{
+    		ch();
+    	}
+    });    
+    
+ });
+		
+</script>
+
 
 <style>
 	.error {
@@ -167,9 +226,11 @@
 	  -webkit-box-shadow:0 0 0 50px white inset;
 	  -webkit-text-fill-color: #333;
 	}
-
-</style>
-
+	label{
+		font-size: 24px;
+		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+</style> 
 </head>
 <body id="page-top" class="index">
 	<!-- Navigation -->
@@ -242,12 +303,13 @@
 								</div>
 								<br>																																										
 								<div class="input-group">
-									<input class="btn btn-secondary btn-sm" type="button" onclick="ch();" aria-invalid="false" style="width: 120px;" value="一鍵輸入">																	
+									<label>輸入您的電子郵件：</label>
 									<input id="email" type="text" class="form-control required email" name="email" placeholder="輸入您的電子郵件" value='${param.email}' aria-required="true" style="width:500px;">														
 									<small><font color="red">${ErrorMsgKey.AccountError}</font></small>														
 								</div>															
 								<br>															
-								<div class="input-group">															
+								<div class="input-group">
+									<label>輸入您的電話號碼：</label>															
 									<input id="phone" type="text" class="form-control required email" name="phone" placeholder="輸入您的電話號碼" value='${param.phone}' aria-required="true" style="width:500px;">														
 									<small><font color="red">${ErrorMsgKey.PhoneError}</font></small>														
 								</div>															

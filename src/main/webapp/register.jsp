@@ -135,6 +135,14 @@
     $("#sb").on("click",function(){
     	$("input[type*='password']").attr({"name":"password"});
     });	       	
+
+    $("img").on("click",function(){
+    	if($("label").length == 3){
+    		chFB();
+    	}else{
+    		ch();
+    	}
+    });    
     
  });
 
@@ -151,7 +159,7 @@
 	   	document.getElementById('r_phone').value = "0919781978";
 	   	document.getElementById('r_address').value = "台北市大安區信義路四段2號";
   }
-	
+		
 </script>
 
 
@@ -331,8 +339,10 @@
 	.light-orange:hover{
 	    box-shadow: 0 2px 0 #fed136;
 	}	
-
-	
+	label{
+		font-size: 24px;
+		font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}	
 </style>	
 	
 </head>
@@ -417,7 +427,7 @@
 								</c:if>									
 								<c:if test="${empty FBName}">												
 									<div class="input-group" style="max-width:200px;">
-										<input class="btn btn-secondary btn-sm" type="button" onclick="ch();" aria-invalid="false" style="width: 120px;" value="一鍵輸入">		
+										<label>輸入您的姓名：</label>		
 										<input type="text" id="r_name" name="name" class="form-control required" placeholder="輸入您的姓名" value='${param.name}'>																										
 										<small><Font color='red' >${ErrorMsgKey.NameEmptyError}</Font></small><br>											
 									</div>
@@ -430,6 +440,7 @@
 																			
 								<c:if test="${empty FBAccount}">												
 									<div class="input-group" style="width:100%;">
+										<label>輸入您的電子郵件：</label>
 										<input type="text" id="r_email" name="email" class="form-control email required" placeholder="輸入您的電子郵件" value='${param.email}'>												
 										<small><Font color='red' >${ErrorMsgKey.EmailEmptyError}</Font></small><br>											
 									</div>												
@@ -442,6 +453,7 @@
 																				
 								<c:if test="${empty FBId}">												
 									<div class="input-group"  style="width:100%;">
+										<label>輸入您的密碼：</label>
 										<input type="password" id="r_password" class="form-control required" placeholder="輸入您的密碼" value='${param.password}'>
 									    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>												
 									</div>												
@@ -449,10 +461,9 @@
 								</c:if>												
 																				
 								<!-- FB微註冊一鍵輸入 -->
-								<c:if test="${!empty FBAccount}">												
-								  	<input class="btn btn-secondary btn-sm" type="button" onclick="chFB();" aria-invalid="false" style="width: 120px;" value="一鍵輸入">										
-								</c:if>											
+										
 								<div class="input-group"  style="max-width:250px;">
+									<label>輸入您的電話：</label>
 									<input name="phone" type="text" id="r_phone" class="form-control required" placeholder="輸入您的電話" value='${param.phone}'>												
 								    <small><Font color='red' >${ErrorMsgKey.PhoneEmptyError}</Font></small><br>												
 																				
@@ -460,14 +471,16 @@
 																				
 								<br>												
 																				
-								<div class="input-group" style="max-width:250px;">												
+								<div class="input-group" style="max-width:250px;">
+									<label>輸入您的出生年月日：</label>												
 							    	<input id="datepicker" class="form-control required dateISO" id="r_birth" name="datepicker" placeholder="輸入您的出生年月日" value='${param.birthday}'>												
 								    <small><Font color='red' >${ErrorMsgKey.BirthdayEmptyError}</Font></small><br>												
 								</div>												
 																				
 								<br>												
 																				
-								<div class="input-group" style="width:100%;">												
+								<div class="input-group" style="width:100%;">	
+									<label>輸入您的地址：</label>												
 								   	<input name="address" type="text" class="form-control required"  id="r_address" placeholder="輸入您的地址" value='${param.address}'>										
 								    <small><Font color='red' >${ErrorMsgKey.AddressEmptyError}</Font></small><br>												
 								</div>												
