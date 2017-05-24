@@ -42,11 +42,11 @@
 			<th>服務編號</th>
 			<th>服務類型編號</th>
 			<th>服務名稱</th>
-			<th>服務有效日期</th>
+			<th>服務生效日期</th>
 			<th>服務狀態</th>
 			<th>服務描述</th>
 			<th>服務照片</th>
-			<th colspan="3">選項</th>
+			<th colspan="2">選項</th>
 		</tr>
 		</thead>
 		<c:forEach var="servicesVO" items="${list}">
@@ -85,13 +85,13 @@
 					</FORM>
 				</td>
 				
-				<td>
-					<FORM METHOD="post" ACTION="${ctx}/services/services.do">
-						<button type="submit" class="btn btn-sm btn-danger">下架</button>
-						<input type="hidden" name="servNo" value="${servicesVO.servNo}"> 
-						<input type="hidden" name="action" value="offshelf">
-					</FORM>
-				</td>
+<!-- 				<td> -->
+<%-- 					<FORM METHOD="post" ACTION="${ctx}/services/services.do"> --%>
+<!-- 						<button type="submit" class="btn btn-sm btn-danger">下架</button> -->
+<%-- 						<input type="hidden" name="servNo" value="${servicesVO.servNo}">  --%>
+<!-- 						<input type="hidden" name="action" value="offshelf"> -->
+<!-- 					</FORM> -->
+<!-- 				</td> -->
 			</tr>
 		</c:forEach>
 	</table>

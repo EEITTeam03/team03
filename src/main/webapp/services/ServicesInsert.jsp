@@ -59,26 +59,26 @@
 }
 	//廢廢的一鍵輸入js
 	function ch(){
-		document.getElementById('ForservNo').value = 2019;
+		document.getElementById('ForservNo').value = 101;
 		document.getElementById('ForservTypeNo').value = "M";
-		document.getElementById('ForservName').value = "不知道要寫啥";
-		document.getElementById('ForservDesc').value = "隨便寫個敘述還好霸";
-		document.getElementById('ForservEffectiveDate').value = "2016-05-30";
+		document.getElementById('ForservName').value = "微米鍍膜";
+		document.getElementById('ForservDesc').value = "運用微米的技術為您的愛車鍍上一層膜";
+		document.getElementById('ForservEffectiveDate').value = "2017-05-26";
 		document.getElementById('ForservStatus').value ="1";
-		document.getElementById('ForservPriceL').value = 100;
-		document.getElementById('ForservTimeL').value = 30;
-		document.getElementById('ForservPriceM').value = 200;
+		document.getElementById('ForservPriceL').value = 3000;
+		document.getElementById('ForservTimeL').value = 90;
+		document.getElementById('ForservPriceM').value = 2000;
 		document.getElementById('ForservTimeM').value = 60;
-		document.getElementById('ForservPriceS').value = 300;
-		document.getElementById('ForservTimeS').value = 90;
-		document.getElementById('ForservPriceXL').value = 400;
+		document.getElementById('ForservPriceS').value = 1000;
+		document.getElementById('ForservTimeS').value = 30;
+		document.getElementById('ForservPriceXL').value = 4000;
 		document.getElementById('ForservTimeXL').value = 120;
-		document.getElementById('ForservPriceXXL').value = 500;
+		document.getElementById('ForservPriceXXL').value = 5000;
 		document.getElementById('ForservTimeXXL').value = 150;
 		document.getElementById('ForstepNameOne').value = "清潔";
-		document.getElementById('ForstepDescpOne').value = "車廂清潔";
-		document.getElementById('ForstepNameTwo').value = "保養";
-		document.getElementById('ForstepDescpTwo').value = "車內座椅保養";
+		document.getElementById('ForstepDescpOne').value = "車體清潔";
+		document.getElementById('ForstepNameTwo').value = "鍍膜";
+		document.getElementById('ForstepDescpTwo').value = "對車子外觀做第一層鍍膜";
 		document.getElementById('ForstepNameThree').value = "外觀整理";
 		document.getElementById('ForstepDescpThree').value = "打蠟修整外觀";
 	}
@@ -150,7 +150,7 @@
 				
 				<tr>
 					<td>
-						服務有效日期：
+						服務開始日期：
 					</td>
 					<td>
 					<input type="date" id="ForservEffectiveDate" name="servEffectiveDate" value="${servicesVO.servEffectiveDate}" style="width: 320px;"> 
@@ -189,28 +189,21 @@
 					<tr  class="info">
 						<th>車種</th>
 						<th>價格</th>
-						<th>服務時間</th>
+						<th>時間長度</th>
 					</tr>
 				</thead>
-				
-				<tr >
+				<tr>
 					<td>
-						大型車(L)
+						小型車(S)
 					</td>
 					<td>
-						<input type="text" id="ForservPriceL" name="servPriceL" value="${serviceCarClassVOL.servPrice}" style="width: 120px;">
-						<font size="-1" color="#FF0000">${MsgMap.errorservPriceLEmpty}</font>
+						<input type="text" id="ForservPriceS" name="servPriceS" value="${serviceCarClassVOS.servPrice}" style="width: 120px;">
+						<font size="-1" color="#FF0000">${MsgMap.errorservPriceSEmpty}</font>
 					</td>
 					<td>
-						<input type="text" id="ForservTimeL" name="servTimeL" value="${serviceCarClassVOL.servTime}" style="width: 120px;">
-<%-- 							<select name="servTimeL" value="${serviceCarClassVOL.servTime}" class="form-control"> --%>
-<!-- 								<option value="30">30分鐘</option> -->
-<!-- 								<option value="45">45分鐘</option> -->
-<!-- 								<option value="60">60分鐘</option> -->
-<!-- 								<option value="75">75分鐘</option> -->
-<!-- 								<option value="90">90分鐘</option> -->
-<!-- 							</select> -->
-						<font size="-1" color="#FF0000">${MsgMap.errorservTimeLEmpty}</font>
+						
+						<input type="text" id ="ForservTimeS"name="servTimeS" value="${serviceCarClassVOS.servTime}" style="width: 120px;">
+						<font size="-1" color="#FF0000">${MsgMap.errorservTimeSEmpty}</font>
 					</td>
 				</tr>
 				<tr>
@@ -223,37 +216,24 @@
 					</td>
 					<td>
 						<input type="text" id ="ForservTimeM"name="servTimeM" value="${serviceCarClassVOM.servTime}" style="width: 120px;">
-<%-- 							<select name="servTimeM" value="${serviceCarClassVOM.servTime}" class="form-control"> --%>
-<!-- 								<option value="30">30分鐘</option> -->
-<!-- 								<option value="45">45分鐘</option> -->
-<!-- 								<option value="60">60分鐘</option> -->
-<!-- 								<option value="75">75分鐘</option> -->
-<!-- 								<option value="90">90分鐘</option> -->
-<!-- 							</select> -->
 						<font size="-1" color="#FF0000">${MsgMap.errorservTimeMEmpty}</font>
 					</td>
 				</tr>
-				<tr>
+				<tr >
 					<td>
-						小型車(S)
+						大型車(L)
 					</td>
 					<td>
-						<input type="text" id="ForservPriceS" name="servPriceS" value="${serviceCarClassVOS.servPrice}" style="width: 120px;">
-						<font size="-1" color="#FF0000">${MsgMap.errorservPriceSEmpty}</font>
+						<input type="text" id="ForservPriceL" name="servPriceL" value="${serviceCarClassVOL.servPrice}" style="width: 120px;">
+						<font size="-1" color="#FF0000">${MsgMap.errorservPriceLEmpty}</font>
 					</td>
 					<td>
-						
-						<input type="text" id ="ForservTimeS"name="servTimeS" value="${serviceCarClassVOS.servTime}" style="width: 120px;">
-<%-- 							<select name="servTimeS" value="${serviceCarClassVOS.servTime}" class="form-control"> --%>
-<!-- 								<option value="30">30分鐘</option> -->
-<!-- 								<option value="45">45分鐘</option> -->
-<!-- 								<option value="60">60分鐘</option> -->
-<!-- 								<option value="75">75分鐘</option> -->
-<!-- 								<option value="90">90分鐘</option> -->
-<!-- 							</select> -->
-						<font size="-1" color="#FF0000">${MsgMap.errorservTimeSEmpty}</font>
+						<input type="text" id="ForservTimeL" name="servTimeL" value="${serviceCarClassVOL.servTime}" style="width: 120px;">
+						<font size="-1" color="#FF0000">${MsgMap.errorservTimeLEmpty}</font>
 					</td>
 				</tr>
+				
+				
 				<tr>
 					<td>
 						休旅車(XL)
