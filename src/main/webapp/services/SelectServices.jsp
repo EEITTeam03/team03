@@ -45,13 +45,7 @@
 			swal("修改成功!", "服務已更新", "success");
 		</script>
 	</c:if>
-<!-- 	感謝柏元的教導 -->
-	<c:if test="${!empty insetComplete}">
-		<script>
-			swal("新增成功!", "服務已更新", "success");
-		</script>
-		
-	</c:if>
+
 <% session.removeAttribute("insetComplete"); %>
 	<div id="wrapper">
 		<div id="page-wrapper">

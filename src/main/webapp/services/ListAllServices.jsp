@@ -34,7 +34,13 @@
 <div class="table-responsive">
 <div class="row">
 <div class="col-lg-12">
-
+<!-- 	感謝柏元的教導 -->
+	<c:if test="${!empty insetComplete}">
+		<script>
+			swal("新增成功!", "服務已更新", "success");
+		</script>
+		
+	</c:if>
 <h2>所有服務</h2>
 <table class="table table-bordered table-hover">
 <thead>

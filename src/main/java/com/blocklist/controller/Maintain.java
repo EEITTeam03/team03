@@ -136,7 +136,8 @@ public class Maintain extends HttpServlet {
 						//java.sql.Date sqlDate= (java.sql.Date)calendar.getInstance().getTime();
 						java.sql.Date sqlDate = new java.sql.Date(calendar.getTimeInMillis());
 						MemberService msvc = new MemberService();
-						msvc.updateMem(miv.getMemberNo(), miv.getMemberName(), miv.getEmail(), miv.getPassword(), miv.getPhone(), miv.getBirthday(), miv.getAddress(), sqlDate);
+						MemberInfoVO mvo = msvc.updateMem(miv.getMemberNo(), miv.getMemberName(), miv.getEmail(), miv.getPassword(), miv.getPhone(), miv.getBirthday(), miv.getAddress(), sqlDate);
+						request.getSession().setAttribute("memberInfo", mvo);
 					}
 					request.getSession().setAttribute("OKalert","updateOK");
 					String url = "listAllBlockList.jsp";

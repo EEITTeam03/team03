@@ -312,15 +312,15 @@ public class ServicesInsert extends HttpServlet {
 				ServiceStepService sssTwo=new ServiceStepService();
 				ServiceStepService sssThree=new ServiceStepService();
 				ssvoOne=sssOne.addServiceStepForInsert(svo, servStepOne, stepNameOne, stepDescpOne);
-				ssvoTwo=sssTwo.addServiceStepForInsert(svo, servStepOne, stepNameOne, stepDescpTwo);
-				ssvoThree=sssThree.addServiceStepForInsert(svo, servStepOne, stepNameOne, stepDescpThree);
+				ssvoTwo=sssTwo.addServiceStepForInsert(svo, servStepTwo, stepNameOne, stepDescpTwo);
+				ssvoThree=sssThree.addServiceStepForInsert(svo, servStepThree, stepNameOne, stepDescpThree);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 //				String insertPath = request.getServletPath();
 				request.getSession().setAttribute("insetComplete", "insertPath");
 //				String url = "SelectServices.jsp";
 //				RequestDispatcher successView = request.getRequestDispatcher(url);
 //				successView.forward(request, response);
-				response.sendRedirect(getServletContext().getContextPath()+"/services/SelectServices.jsp");
+				response.sendRedirect(getServletContext().getContextPath()+"/services/ListAllServices.jsp");
 
 			} catch (Exception e) {
 				String url = "ServicesInsert.jsp";
