@@ -139,7 +139,7 @@
 				var th1=$("<th></th>").attr("width","100").text("服務編號");
 				var th2=$("<th></th>").attr("width","200").text("服務類型編號");
 				var th3=$("<th></th>").attr("width","200").text("服務名稱");
-				var th4=$("<th></th>").attr("width","200").text("服務有效日期");
+				var th4=$("<th></th>").attr("width","200").text("服務生效日期");
 				var th5=$("<th></th>").attr("width","200").text("服務狀態");
 				var th6=$("<th></th>").attr("width","300").text("服務描述");
 				var th7=$("<th></th>").attr("width","200").text("服務照片");
