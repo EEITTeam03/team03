@@ -689,8 +689,13 @@ h2{
 	position:relative;
 	top:1px;
 }		
-		
-		    	        		
+#lbservtime{
+	width:100%;
+	text-align:center;
+	font-size: 24px;
+	font-family: "Noto Sans TC","Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;	
+}	
+	
 </style>
 <script type="text/javascript" src="${ctx}/blockUI/jquery.blockUI.js"></script>
   <script>
@@ -978,6 +983,11 @@ h2{
 				
 				$("#hide_totalservtime").attr({"value":totalservtime});
 				
+				var hr = Math.floor(totalservtime/60);
+				var min = totalservtime - (hr*60);
+				
+				
+				$("#lbservtime").text("服務所需時間："+hr+"小時"+min+"分");
 	   		});	
 			//結束			
 			
@@ -1155,42 +1165,6 @@ h2{
 			
    		});	
 		//結束
-// 		function confirmationOk(){
-// 			swal({
-// 				  title: "確定選擇該時段?",
-// 				  text: "",
-// 				  type: "info",
-// 				  showCancelButton: true,
-// 				  confirmButtonClass: "btn-info",
-// 				  confirmButtonText: "確認",
-// 				  cancelButtonText: "取消",
-// 				  closeOnConfirm: false
-// 				},
-// 				function(){
-// 					console.log("我進來了1");
-// 					$("#timeline .inp-line-sel").removeClass().addClass("inp-line-confirmed op-green-sel-red-confirmed-blue fnt-select");
-// 					$("#timeline .inp-node-sel").removeClass().addClass("inp-node-confirmed op-green-sel-red-confirmed-blue fnt-select");
-// 					serswitch = false;
-// 				});		
-// 		}
-// 		function confirmationDelete(){
-// 			swal({
-// 				  title: "確定取消該時段?",
-// 				  text: "",
-// 				  type: "error",
-// 				  showCancelButton: true,
-// 				  confirmButtonClass: "btn-error",
-// 				  confirmButtonText: "確認",
-// 				  cancelButtonText: "取消",
-// 				  closeOnConfirm: false
-// 				},
-// 				function(){
-// 					console.log("我進來了2");
-// 					$("#timeline .inp-line-confirmed").removeClass().addClass("inp-line-op op-green-sel-red-confirmed-blue fnt-select");
-// 					$("#timeline .inp-node-confirmed").removeClass().addClass("inp-node-op op-green-sel-red-confirmed-blue fnt-select");							
-// 					serswitch = true;
-// 				});		
-// 		}
 		
 	//page4：可預約狀態下(紅色時間條)，左鍵點擊時間條進行預約
    	$(document).on('click', '.inp-line-sel', function(event){
@@ -1609,6 +1583,7 @@ h2{
 		             
 			            <div id="datepicker" class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 							<input type="hidden" name="selectedDate" id="selectedDate" class="form-control" value="${param.selectedDate}" placeholder="選擇日期">
+							<label id="lbservtime"></label>
 			            </div>
 			            
 			            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 table-responsive">	
