@@ -25,7 +25,8 @@
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
-<div>
+<div class="row">
+<div class="col-lg-12">
 <h2>所選擇的單筆服務</h2>
 	<table class="table table-bordered table-hover">
 		<tr>
@@ -71,6 +72,7 @@
 			</td>
 		</tr>
 	</table>
+</div>
 </div>
 </div>
 </div>

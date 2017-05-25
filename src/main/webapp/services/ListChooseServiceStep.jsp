@@ -28,6 +28,8 @@
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
+<div class="row">
+<div class="col-lg-12">
 	<h2>所選擇的服務編號的所有步驟</h2>
 	<table class="table table-bordered table-hover">
 		<tr>
@@ -69,6 +71,8 @@
 
 		</c:forEach>
 	</table>
+</div>
+</div>
 </div>
 </div>
 </div>

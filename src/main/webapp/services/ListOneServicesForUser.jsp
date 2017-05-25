@@ -10,6 +10,8 @@
 <title>服務單筆資料</title>
 <script type="text/javascript"
 	src="${ctx}/scheduleJS/scripts/jquery-1.11.1.min.js"></script>
+	 <!--美美的icon-->
+	<link rel="icon" href="${ctx}/admin/favicon.ico" type="image/x-icon" />
 <!-- Bootstrap Core CSS -->
 <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
 
@@ -30,6 +32,8 @@ swal("修改成功!","服務已更新","success");
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
+<div class="row">
+<div class="col-lg-12">
 <h2>修改成功</h2>
 <table class="table table-bordered table-hover">
 		<tr>
@@ -61,6 +65,8 @@ swal("修改成功!","服務已更新","success");
 
 		</tr>
 	</table>
+</div>
+</div>
 </div>
 </div>
 </div>
