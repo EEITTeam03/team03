@@ -40,7 +40,7 @@
 </head>
 <body>
 	<jsp:include page="/admin/Testhead_nav.jsp" />
-	<c:if test="${!empty insetComplete}">
+	<c:if test="${!empty path}">
 		<script>
 			swal("修改成功!", "服務已更新", "success");
 		</script>
