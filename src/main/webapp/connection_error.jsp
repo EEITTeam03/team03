@@ -24,7 +24,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>新密碼已寄出</title>
+<title>連線中斷</title>
 
 
 <!--美美的icon-->
@@ -318,7 +318,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
-						<h1 style="color:	#666666;font-family:微軟正黑體;">您的新密碼已寄出，請至Email信箱確認</h1>
+						<h1 style="color:	#666666;font-family:微軟正黑體;">網路連線已中斷，請檢查網路連線是否正常!</h1>
 	<br>
 	<input type="button" value="回首頁" onclick="location.href='index.jsp'" class="btn btn-lg btn-primary" style="background-color:#00bfff">
 						
