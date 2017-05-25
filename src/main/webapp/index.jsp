@@ -171,9 +171,9 @@
 		   						var myd = $("<div></div>").addClass("portfolio-caption");
 		   			   			
 		   						var hword = $("<h4></h4>").text(servName);
-		   						var pword = $("<p></p>").addClass("text-muted").text("Graphic Design");
+// 		   						var pword = $("<p></p>").addClass("text-muted").text("Graphic Design");//訪客無車子的相關資訊，首頁的服務項目無法顯示價錢，因為車型大小會影響服務費用。
 		   						
-		   						myd.append([hword,pword]);
+		   						myd.append(hword);
 		   						
 		   						bigd.append([mya,myd]);
 		   						
