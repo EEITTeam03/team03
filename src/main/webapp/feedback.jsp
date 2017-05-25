@@ -299,8 +299,8 @@
 					</div>
 					<div id="div1">請評分</div>
 					<br>
-					<div id="dialog_div" title="Your opinions" style="display:none">
-  						<textarea class="form-control" rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的想法，最多輸入200字" name="comment" style="resize:none; border-style: none;"></textarea>
+					<div id="dialog_div" title="您的想法" style="display:none;font-family:微軟正黑體;">
+  						<textarea class="form-control" rows="10" cols="48" placeholder="告訴我們你對水膜汽車美容的想法，最多輸入200字" name="comment" style="resize:none; border-style: none;font-family:微軟正黑體;"></textarea>
 					</div>
 					<br>
 				</div>
@@ -337,7 +337,7 @@ $( function() {
 	        hide: "explode",
 	        width: 500,
 	        buttons: { 
-	            "Ok": function() { 
+	            "送出": function() { 
 	            	loadingBlock();
 	            	//把意見送進DB
 	            	$.ajax({
@@ -358,7 +358,7 @@ $( function() {
 	            	})
 	            	$(this).dialog("close");
 	            }, 
-	            "Cancel": function() { 
+	            "取消": function() { 
 	            	$(this).dialog("close"); 
 	            }
 	        }
