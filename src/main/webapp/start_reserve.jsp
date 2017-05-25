@@ -376,9 +376,9 @@ h2{
 #portfolio .portfolio-item .portfolio-caption{
 	padding:5px;
 }
-.serv-price{
-	padding-left:30px;
-	padding-right:30px;
+.serv-price,.serv-time{
+	padding-left:15px;
+	padding-right:15px;
 }
 
 .ui-datepicker-month{
@@ -869,7 +869,18 @@ h2{
 						var hword = $("<h4></h4>").text(servName);													
 						var pword = $("<p></p>").addClass("text-muted");													
 						var prcsp = $("<span></span>").addClass("serv-price").text(servPrice+"元");
-						pword.append(prcsp);
+						var servtime = services.servTime;
+						var hr = Math.floor(servtime/60);
+						var min = servtime-(hr*60);
+						if(hr > 0 && min > 0){
+							var time = $("<span></span>").addClass("serv-time").text(hr+"小時"+min+"分");
+						}else if(hr > 0){
+							var time = $("<span></span>").addClass("serv-time").text(hr+"小時");
+						}else if(min > 0){
+							var time = $("<span></span>").addClass("serv-time").text(min+"分");
+						}
+						
+						pword.append([prcsp,time]);
 						
 						var selsp = $("<span></span>");
 						var lb = $("<label></label>").attr({"for":servNo}).text("選擇");				
@@ -985,9 +996,15 @@ h2{
 				
 				var hr = Math.floor(totalservtime/60);
 				var min = totalservtime - (hr*60);
-				
-				
-				$("#lbservtime").text("服務所需時間："+hr+"小時"+min+"分");
+				console.log(hr);
+				console.log(min);
+				if(hr > 0 && min > 0){
+					$("#lbservtime").text("總工作時間："+hr+"小時"+min+"分");
+				}else if(hr > 0){
+					$("#lbservtime").text("總工作時間："+hr+"小時");
+				}else if(min > 0){
+					$("#lbservtime").text("總工作時間："+min+"分");	
+				}				
 	   		});	
 			//結束			
 			
