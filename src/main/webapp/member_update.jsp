@@ -82,7 +82,7 @@
 <script src="js/jquery.validate.js" type="text/javascript"></script>
 <!-- 驗證 繁體中文包-->
 <script src="js/messages_zh_TW.js" type="text/javascript"></script>
-
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script>
   $( function() {
 	  
@@ -94,7 +94,14 @@
     	monthNamesShort: [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ]
     });
     
-    $("#cmxform").validate();
+    $("#cmxform").validate({
+    	  rules: {
+    		    password: "required",
+    		    password_again: {
+    		      equalTo: "#password"
+    		    }
+    		  }
+    		});
 
 	//進入網頁後，判斷螢幕大小，設定登入按鈕及註冊按鈕的排版
 	var wdth = $(window).width();
@@ -126,15 +133,15 @@
 	//結束      
         
     
-    //chrome強制記憶密碼，導致input背景顏色被chrome的瀏覽器預設樣式，強制更換成黃色，造成整體版面顏色不和諧，解決步驟如下。
-    //1.初始，密碼name設為空，可關閉強制記憶密碼
-	$(document).on("focus", "body", function(event){
-		$("input[type*='password']").attr({"name":""});
-	});     
-    //2.表單送出前，把密碼的name設定回來，否則密碼資料不會送到後端
-    $("#sb").on("click",function(){
-    	$("input[type*='password']").attr({"name":"password"});
-    });	       	
+//     //chrome強制記憶密碼，導致input背景顏色被chrome的瀏覽器預設樣式，強制更換成黃色，造成整體版面顏色不和諧，解決步驟如下。
+//     //1.初始，密碼name設為空，可關閉強制記憶密碼
+// 	$(document).on("focus", "body", function(event){
+// 		$("input[type*='password']").attr({"name":""});
+// 	});     
+//     //2.表單送出前，把密碼的name設定回來，否則密碼資料不會送到後端
+//     $("#sb").on("click",function(){
+//     	$("input[type*='password']").attr({"name":"password"});
+//     });	       	
   
     
  });
@@ -432,8 +439,10 @@
 									<c:if test="${empty FBId}">		
 									<div class="input-group"  style="width:100%;">
 										<label>密碼:</label>
-										<input type="password" class="form-control required" placeholder="輸入您的密碼" value='${memberInfo.password}'>
-									    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>												
+										<input id="password" type="password" class="form-control" placeholder="輸入您的密碼" name="password" value='${memberInfo.password}'>
+									    <small><Font color='red' >${ErrorMsgKey.PasswordEmptyError}</Font></small><br>
+									    <label>再次輸入密碼:</label>
+										<input type="password" class="form-control" placeholder="再次輸入您的密碼" name="password_again" />												
 									</div>												
 									<br>												
 									</c:if>		
