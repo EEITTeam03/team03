@@ -13,7 +13,7 @@ import hibernate.util.HibernateUtil;
 
 public class BlockListHibernateDAO implements BlockListDAO_interface{
 
-	private static final String GET_ALL_STMT = "FROM BlockListVO ORDER BY reservationNo";
+	private static final String GET_ALL_STMT = "FROM BlockListVO ORDER BY violationDate";
 	private static final String COUNT_MEMBERNO = "SELECT COUNT (memberInfoVO) FROM BlockListVO where memberInfoVO=?";
 	
 	@Override
