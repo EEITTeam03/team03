@@ -40,12 +40,11 @@
 </head>
 <body>
 	<jsp:include page="/admin/Testhead_nav.jsp" />
-	<c:if test="${!empty path}">
+	<c:if test="${!empty insetComplete}">
 		<script>
 			swal("修改成功!", "服務已更新", "success");
 		</script>
 	</c:if>
-<% session.removeAttribute("insetComplete"); %>
 	<div id="wrapper">
 		<div id="page-wrapper">
 			<div class="table-responsive">
