@@ -387,7 +387,7 @@ tbody tr td{
 						<td>${reserve.reservNo}</td>
 					</tr>
 					<tr>
-						<th scope="row">預約日期</th>
+						<th scope="row">開始時間</th>
 						<td>${reserve.reservDateTimeFormat}</td>
 					</tr>
 					<tr>

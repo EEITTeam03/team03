@@ -8,6 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>服務單筆資料</title>
+ <!--美美的icon-->
+	<link rel="icon" href="${ctx}/admin/favicon.ico" type="image/x-icon" />
   <!-- Bootstrap Core CSS -->
     <link href="${ctx}/admin/css/bootstrap.min.css" rel="stylesheet">
 
@@ -23,7 +25,8 @@
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
-<div>
+<div class="row">
+<div class="col-lg-12">
 <h2>所選擇的單筆服務</h2>
 	<table class="table table-bordered table-hover">
 		<tr>
@@ -69,6 +72,7 @@
 			</td>
 		</tr>
 	</table>
+</div>
 </div>
 </div>
 </div>

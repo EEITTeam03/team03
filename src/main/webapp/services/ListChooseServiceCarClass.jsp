@@ -24,7 +24,8 @@
 <div id="wrapper">
 <div id="page-wrapper">
 <div class="table-responsive">
-
+<div class="row">
+<div class="col-lg-12">
 <h2>所選擇的服務編號的所有價格和時間</h2>
 	<table class="table table-bordered table-hover">
 		<thead>
@@ -54,6 +55,8 @@
 		</c:forEach>
 	</table>
 	
+</div>
+</div>
 </div>
 </div>
 </div>
