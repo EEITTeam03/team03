@@ -154,7 +154,7 @@
 		#tb1{
 			display: block;
 			height:800px;
-			overflow-y:scroll;
+			overflow-y:auto;
 		}
 		#tb1::-webkit-scrollbar-track
 		{
