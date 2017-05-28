@@ -55,8 +55,6 @@
 
 							<tr>
 								<td>選擇服務編號</td>
-								<%-- 								<jsp:useBean id="ss" scope="page" class="com.services.model.ServicesService" /> --%>
-								<%-- 								<FORM METHOD="post" ACTION="${ctx}/services/services.do"> --%>
 								<td><select size="1" name="servNo" class="form-control">
 										<c:forEach var="servicesVO" items="${ss}">
 											<option value="${servicesVO.servNo}">${servicesVO.servNo}-${servicesVO.servName}
